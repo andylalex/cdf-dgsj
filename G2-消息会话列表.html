@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>消息 - 中免导购</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+    .phone-frame { max-width: 414px; margin: 0 auto; min-height: 100vh; background: #f4f5f7; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 顶栏：标题栏（带毛玻璃） */
+    .topbar-bg { background: rgba(255,255,255,0.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .cdf-logo { width: 28px; height: 28px; border-radius: 50%; background: #d8261a; color: #fff; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; font-style: italic; letter-spacing: -0.5px; }
+
+    /* 会话项样式 */
+    .session-item { transition: background 0.15s; }
+    .session-item:active { background: #f5f5f5; }
+
+    /* 未读小红点 */
+    .unread-badge { min-width: 18px; height: 18px; border-radius: 9px; background: #ff3b30; color: #fff; font-size: 10px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; line-height: 1; }
+
+    /* 置顶/免打扰图标盒 */
+    .tag-pill { font-size: 9px; padding: 1px 4px; border-radius: 4px; line-height: 1.4; display: inline-block; vertical-align: middle; }
+
+    /* Home indicator */
+    .home-indicator { width: 134px; height: 5px; border-radius: 3px; background: #1a1a1a; margin: 0 auto 8px; }
+  </style>
+</head>
+<body class="bg-gray-200">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col relative">
+
+    <!-- iOS 状态栏 -->
+    <div class="px-5 pt-2.5 pb-1 flex items-center justify-between shrink-0 status-time">
+      <span class="text-[14px] font-semibold tracking-tight text-gray-900">04:50</span>
+      <div class="flex items-center gap-1.5 text-gray-900">
+        <span class="text-[10px] font-semibold">4G</span>
+        <i class="fas fa-signal text-[11px]"></i>
+        <i class="fas fa-signal text-[11px]"></i>
+        <i class="fas fa-battery-three-quarters text-[16px]"></i>
+        <span class="text-[10px] font-bold ml-0.5">80</span>
+      </div>
+    </div>
+
+    <!-- 店招 + 标题 -->
+    <div class="topbar-bg sticky top-0 z-10 shrink-0">
+      <div class="px-4 pt-1.5 pb-2 flex items-center gap-3">
+        <span class="cdf-logo">cdf</span>
+        <p class="flex-1 text-[15px] font-semibold text-gray-900 truncate leading-tight">cdf 海口日月广场免税店</p>
+        <button class="text-coral-500 text-[13px] flex items-center gap-1">
+          <i class="far fa-circle-check text-[14px]"></i>
+          <span>全部已读</span>
+        </button>
+      </div>
+
+      <!-- 顶部 tab：会话 / 通知 -->
+      <div class="px-4 pb-2 flex items-center gap-5">
+        <button class="text-[15px] font-semibold text-gray-900 relative pb-1">会话
+          <span class="absolute left-0 right-0 -bottom-0.5 h-0.5 bg-coral-500 rounded-full"></span>
+        </button>
+        <button class="text-[14px] text-gray-500 pb-1 flex items-center gap-1">通知
+          <span class="bg-coral-500 text-white text-[9px] px-1.5 rounded-full leading-tight">3</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="px-3 pt-2 pb-1.5 bg-[#f4f5f7] shrink-0">
+      <div class="flex items-center bg-white rounded-xl px-3 py-2 shadow-sm">
+        <i class="fas fa-search text-gray-400 text-sm mr-2"></i>
+        <input type="text" placeholder="搜索客户名称 / 消息内容" class="flex-1 bg-transparent outline-none text-sm placeholder-gray-400 text-gray-700">
+      </div>
+    </div>
+
+    <!-- 会话列表 -->
+    <div class="flex-1 overflow-y-auto hide-scrollbar divide-y divide-gray-100 bg-white">
+
+      <!-- Pin: 系统消息 -->
+      <a href="#" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <div class="w-12 h-12 rounded-xl bg-coral-500 text-white flex items-center justify-center text-xl">
+            <i class="far fa-bell"></i>
+          </div>
+          <span class="absolute -top-1 -right-1 unread-badge">2</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <p class="font-semibold text-gray-900 text-[14.5px] truncate">系统通知</p>
+            <span class="text-[10px] text-gray-400 shrink-0">14:35</span>
+          </div>
+          <p class="text-[12px] text-gray-500 truncate mt-1">您的「七夕甄礼」专题已通过审核，导购端可正常发送</p>
+        </div>
+      </a>
+
+      <!-- 陈女士 -->
+      <a href="G3-导购IM会话页.html" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=chen&backgroundColor=ffdfbf" class="w-12 h-12 rounded-xl bg-coral-50">
+          <span class="absolute -top-1 -right-1 unread-badge">3</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <p class="font-semibold text-gray-900 text-[14.5px] truncate">陈女士</p>
+              <span class="tag-pill bg-rose-100 text-rose-600">高意向</span>
+            </div>
+            <span class="text-[10px] text-gray-400 shrink-0">10:23</span>
+          </div>
+          <p class="text-[12px] text-gray-500 truncate mt-1">Cartier 手镯有现货吗？大小可以现场调整吗</p>
+        </div>
+      </a>
+
+      <!-- 王小姐 -->
+      <a href="G3-导购IM会话页.html" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=wang&backgroundColor=fde2e7" class="w-12 h-12 rounded-xl bg-coral-50">
+          <span class="absolute -top-1 -right-1 unread-badge">5</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <p class="font-semibold text-gray-900 text-[14.5px] truncate">王小姐</p>
+            <span class="text-[10px] text-gray-400 shrink-0">09:45</span>
+          </div>
+          <p class="text-[12px] text-gray-500 truncate mt-1">导购 林小婷：您的订单已创建，请核对后付款 👉</p>
+        </div>
+      </a>
+
+      <!-- 李先生 -->
+      <a href="G3-导购IM会话页.html" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=li&backgroundColor=fff5cc" class="w-12 h-12 rounded-xl bg-coral-50">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <p class="font-medium text-gray-700 text-[14.5px] truncate">李先生</p>
+              <span class="tag-pill bg-amber-100 text-amber-600">老客户</span>
+            </div>
+            <span class="text-[10px] text-gray-400 shrink-0">昨天 18:30</span>
+          </div>
+          <p class="text-[12px] text-gray-400 truncate mt-1">好的，明天上午到店里看一下经典款</p>
+        </div>
+      </a>
+
+      <!-- 张女士 -->
+      <a href="G3-导购IM会话页.html" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=zhang&backgroundColor=e0eaff" class="w-12 h-12 rounded-xl bg-coral-50">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <p class="font-medium text-gray-700 text-[14.5px] truncate">张女士</p>
+            <span class="text-[10px] text-gray-400 shrink-0">昨天 14:12</span>
+          </div>
+          <p class="text-[12px] text-gray-400 truncate mt-1">想给妈妈送个礼物，预算 2 千万左右</p>
+        </div>
+      </a>
+
+      <!-- 刘先生 -->
+      <a href="G3-导购IM会话页.html" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=liu&backgroundColor=d5f5e3" class="w-12 h-12 rounded-xl bg-coral-50">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <p class="font-medium text-gray-700 text-[14.5px] truncate">刘先生</p>
+            <span class="text-[10px] text-gray-400 shrink-0">02-09</span>
+          </div>
+          <p class="text-[12px] text-gray-400 truncate mt-1">[系统] 您的订单已签收，期待您的好评 ⭐</p>
+        </div>
+      </a>
+
+      <!-- 赵女士 - 群组 -->
+      <a href="G3-导购IM会话页.html" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=zhao&backgroundColor=f5d5f5" class="w-12 h-12 rounded-xl bg-coral-50">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <p class="font-medium text-gray-700 text-[14.5px] truncate">赵女士</p>
+            <span class="text-[10px] text-gray-400 shrink-0">02-08</span>
+          </div>
+          <p class="text-[12px] text-gray-400 truncate mt-1">想看看香水，预算 1 千万以内</p>
+        </div>
+      </a>
+
+      <!-- 内部公告 -->
+      <a href="#" class="session-item flex items-start gap-3 px-4 py-3.5">
+        <div class="relative shrink-0">
+          <div class="w-12 h-12 rounded-xl bg-coral-100 text-coral-500 flex items-center justify-center text-xl">
+            <i class="fas fa-store"></i>
+          </div>
+          <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-emerald-500 rounded-full border-2 border-white -mt-0.5 -mr-0.5"></span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <p class="font-medium text-gray-700 text-[14.5px] truncate">店铺公告</p>
+              <span class="tag-pill bg-gray-100 text-gray-500">官方</span>
+            </div>
+            <span class="text-[10px] text-gray-400 shrink-0">02-07</span>
+          </div>
+          <p class="text-[12px] text-gray-400 truncate mt-1">本周爆品：Cartier LOVE 系列七夕限定礼盒已上架</p>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- 底部 4 标签栏 -->
+    <nav class="bg-white border-t border-gray-100 flex shrink-0 relative z-10">
+      <a href="G1-工作台.html" class="flex-1 flex flex-col items-center py-2.5 text-gray-400">
+        <i class="fas fa-table-cells text-[18px] mb-0.5"></i>
+        <span class="text-[10px]">工作台</span>
+      </a>
+      <a href="G2-消息会话列表.html" class="flex-1 flex flex-col items-center py-2.5 text-coral-500">
+        <i class="fas fa-comment text-[18px] mb-0.5"></i>
+        <span class="text-[10px] font-semibold">消息</span>
+      </a>
+      <span class="flex-1 flex flex-col items-center py-2.5 text-gray-300 cursor-not-allowed">
+        <i class="fas fa-scale-balanced text-[18px] mb-0.5"></i>
+        <span class="text-[10px]">经营</span>
+      </span>
+      <a href="#" class="flex-1 flex flex-col items-center py-2.5 text-gray-400">
+        <i class="far fa-user text-[18px] mb-0.5"></i>
+        <span class="text-[10px]">我的</span>
+      </a>
+    </nav>
+
+    <!-- iOS home indicator -->
+    <div class="bg-white pb-1.5">
+      <div class="home-indicator"></div>
+    </div>
+
+  </div>
+</body>
+</html>

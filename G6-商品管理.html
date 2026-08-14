@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>导购端 - 商品管理</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .phone-frame { max-width: 414px; margin: 0 auto; min-height: 100vh; background: #f2f3f5; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .status-bar { font-size: 13px; font-weight: 600; letter-spacing: -0.5px; }
+    .status-icon { font-size: 11px; }
+    .cat-active { background: #fff; color: #ff6b52; font-weight: 500; position: relative; }
+    .cat-active::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; background: #ff6b52; border-radius: 0 2px 2px 0; }
+    .cat-header { color: #999; font-size: 11px; }
+    .chip { padding: 6px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; border: 1px solid #e5e5e5; background: #fff; color: #333; }
+    .chip-active { background: #2b2b2b; color: #fff; border-color: #2b2b2b; }
+    .sort-active { color: #ff6b52; font-weight: 600; }
+    .price { color: #ff6b52; }
+    .gov-tag { background: #e8f7e8; color: #2f9e44; font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+    .manage-btn { background: #ff6b52; color: #fff; border-radius: 16px; padding: 6px 16px; font-size: 12px; font-weight: 500; }
+    .manage-btn-gray { background: #f2f2f2; color: #999; border-radius: 16px; padding: 6px 16px; font-size: 12px; }
+    .stock-out { color: #ff6b52; }
+    .stock-ok { color: #333; }
+    .gallery-panel { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+    .gallery-panel.open { max-height: 220px; }
+  </style>
+</head>
+<body class="bg-gray-200">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#f2f3f5]">
+
+    <!-- 状态栏 -->
+    <div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0">
+      <span>9:32</span>
+      <div class="flex items-center gap-1 status-icon">
+        <i class="fas fa-location-dot text-[10px]"></i>
+        <i class="fas fa-circle text-[8px] text-blue-500"></i>
+        <i class="fas fa-square text-[8px]"></i>
+        <i class="fas fa-record-vinyl text-[8px]"></i>
+        <span class="bg-blue-500 text-white rounded-sm px-1 text-[9px] font-bold ml-0.5">8K</span>
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <span class="border border-black rounded-sm px-1 text-[10px] font-bold">90</span>
+      </div>
+    </div>
+
+    <!-- 顶栏 -->
+    <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative">
+      <a href="G1-工作台.html" class="absolute left-4 w-8 h-8 flex items-center justify-center">
+        <i class="fas fa-chevron-left text-gray-700 text-base"></i>
+      </a>
+      <h1 class="text-base font-semibold text-gray-800">商品管理</h1>
+      <button class="absolute right-4 w-8 h-8 flex items-center justify-center text-gray-700">
+        <i class="fas fa-plus text-base"></i>
+      </button>
+    </div>
+
+    <!-- 顶部筛选区 -->
+    <div class="bg-white shrink-0">
+      <div class="flex items-center pl-3 pr-2 py-2 border-b border-gray-100">
+        <button id="toggleSidebar" class="w-6 h-6 flex items-center justify-center mr-1 text-gray-500">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="flex-1 flex items-center gap-2 overflow-x-auto hide-scrollbar">
+          <button class="chip">全部</button>
+          <button class="chip chip-active">套装</button>
+          <button class="chip">淡香精EDP88</button>
+          <button class="chip">古龙水EDT</button>
+          <button class="chip">香水试用装</button>
+          <button class="chip">小样</button>
+        </div>
+      </div>
+
+      <div class="px-3 py-2 border-b border-gray-100">
+        <div class="flex items-center bg-gray-100 rounded-full px-3 py-2">
+          <i class="fas fa-search text-gray-400 text-sm mr-2"></i>
+          <input type="text" placeholder="搜索商品名称/编号/品牌" class="flex-1 bg-transparent outline-none text-sm placeholder-gray-400">
+          <button class="text-gray-400 text-xs"><i class="fas fa-microphone"></i></button>
+        </div>
+      </div>
+
+      <div class="flex items-center text-sm text-gray-700 border-b border-gray-100">
+        <div class="flex-1 grid grid-cols-4">
+          <button class="py-3 text-center"><span class="sort-active">销量</span></button>
+          <button class="py-3 text-center"><span>价格 <i class="fas fa-sort text-[10px] text-gray-500"></i></span></button>
+          <button class="py-3 text-center"><span>显示有货</span></button>
+          <button class="py-3 text-center"><span>筛选 <i class="fas fa-angle-down text-[10px] text-gray-500"></i></span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主体：左侧分类 + 右侧商品 -->
+    <div class="flex-1 flex overflow-hidden">
+
+      <!-- 左侧分类侧边栏 -->
+      <aside id="sidebar" class="w-24 bg-[#f7f7f7] overflow-y-auto hide-scrollbar shrink-0 border-r border-gray-100">
+        <ul class="text-sm text-gray-700">
+          <li class="px-3 py-3 text-center border-b border-gray-100"><i class="far fa-star text-gray-500"></i><p class="mt-1 text-[12px]">我的收藏</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><i class="fas fa-box text-gray-500"></i><p class="mt-1 text-[12px]">我的柜组</p></li>
+          <li class="cat-active px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女士腕表</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">男包</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">首饰</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">手机</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">红酒</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">精华</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">彩妆</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女包</p></li>
+          <li class="px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">太阳镜</p></li>
+        </ul>
+      </aside>
+
+      <!-- 右侧商品列表 -->
+      <main class="flex-1 overflow-y-auto hide-scrollbar p-2 space-y-2 bg-[#f2f3f5]">
+
+        <!-- 商品 1 -->
+        <div class="product-item">
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+              <button class="text-orange-300 hover:text-orange-500"><i class="far fa-star text-sm"></i></button>
+              <div class="flex-1 mx-2 text-center"><span class="stock-out">总库存：售罄</span></div>
+              <span class="font-mono">C000277</span>
+            </div>
+            <div class="flex gap-3">
+              <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 leading-tight line-clamp-2">兰蔻奇迹香水 100ml</p>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥0.10</span>
+                  <button class="manage-btn" onclick="toggleGallery(this)">图册</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 图册管理块 -->
+          <div class="gallery-panel bg-white mx-1 -mt-1 rounded-b-xl border-x border-b border-gray-100">
+            <div class="p-3">
+                            <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pt-2 pr-2 pb-2">
+                <button class="w-16 h-16 rounded-lg border-2 border-dashed border-coral-300 bg-coral-50 flex flex-col items-center justify-center text-coral-500 shrink-0">
+                  <i class="fas fa-camera text-sm"></i>
+                  <span class="text-[10px] mt-0.5">添加图片</span>
+                </button>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 2 -->
+        <div class="product-item">
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+              <button class="text-orange-400"><i class="fas fa-star text-sm"></i></button>
+              <div class="flex-1 mx-2 text-center space-x-2"><span class="stock-ok">总库存：218</span></div>
+              <span class="font-mono">C001930SY</span>
+            </div>
+            <div class="flex gap-3">
+              <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 leading-tight">香奈儿五号香水 50ml</p>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥745.00</span>
+                  <button class="manage-btn" onclick="toggleGallery(this)">图册</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-panel bg-white mx-1 -mt-1 rounded-b-xl border-x border-b border-gray-100">
+            <div class="p-3">
+                            <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pt-2 pr-2 pb-2">
+                <button class="w-16 h-16 rounded-lg border-2 border-dashed border-coral-300 bg-coral-50 flex flex-col items-center justify-center text-coral-500 shrink-0">
+                  <i class="fas fa-camera text-sm"></i>
+                  <span class="text-[10px] mt-0.5">添加图片</span>
+                </button>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 3 -->
+        <div class="product-item">
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+              <button class="text-orange-300 hover:text-orange-500"><i class="far fa-star text-sm"></i></button>
+              <div class="flex-1 mx-2 text-center space-x-2"><span class="stock-out">总库存：售罄</span></div>
+              <span class="font-mono">C000365</span>
+            </div>
+            <div class="flex gap-3">
+              <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 leading-tight">兰蔻珍爱香水两支装 30ML</p>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥580.00</span>
+                  <button class="manage-btn" onclick="toggleGallery(this)">图册</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-panel bg-white mx-1 -mt-1 rounded-b-xl border-x border-b border-gray-100">
+            <div class="p-3">
+                            <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pt-2 pr-2 pb-2">
+                <button class="w-16 h-16 rounded-lg border-2 border-dashed border-coral-300 bg-coral-50 flex flex-col items-center justify-center text-coral-500 shrink-0">
+                  <i class="fas fa-camera text-sm"></i>
+                  <span class="text-[10px] mt-0.5">添加图片</span>
+                </button>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 4 -->
+        <div class="product-item">
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+              <button class="text-orange-300 hover:text-orange-500"><i class="far fa-star text-sm"></i></button>
+              <div class="flex-1 mx-2 text-center space-x-2"><span class="stock-ok">总库存：270</span></div>
+              <span class="font-mono">C016080</span>
+            </div>
+            <div class="flex gap-3">
+              <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 leading-tight">浪凡光韵女士浓香水50ml</p>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥394.00</span>
+                  <button class="manage-btn" onclick="toggleGallery(this)">图册</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-panel bg-white mx-1 -mt-1 rounded-b-xl border-x border-b border-gray-100">
+            <div class="p-3">
+                            <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pt-2 pr-2 pb-2">
+                <button class="w-16 h-16 rounded-lg border-2 border-dashed border-coral-300 bg-coral-50 flex flex-col items-center justify-center text-coral-500 shrink-0">
+                  <i class="fas fa-camera text-sm"></i>
+                  <span class="text-[10px] mt-0.5">添加图片</span>
+                </button>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 5 -->
+        <div class="product-item">
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+              <button class="text-orange-400"><i class="fas fa-star text-sm"></i></button>
+              <div class="flex-1 mx-2 text-center space-x-2"><span class="stock-ok">总库存：156</span></div>
+              <span class="font-mono">C017002</span>
+            </div>
+            <div class="flex gap-3">
+              <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 leading-tight">迪奥真我香水 EDT 100ml</p>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥1,280.00</span>
+                  <button class="manage-btn" onclick="toggleGallery(this)">图册</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-panel bg-white mx-1 -mt-1 rounded-b-xl border-x border-b border-gray-100">
+            <div class="p-3">
+                            <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pt-2 pr-2 pb-2">
+                <button class="w-16 h-16 rounded-lg border-2 border-dashed border-coral-300 bg-coral-50 flex flex-col items-center justify-center text-coral-500 shrink-0">
+                  <i class="fas fa-camera text-sm"></i>
+                  <span class="text-[10px] mt-0.5">添加图片</span>
+                </button>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="relative w-16 h-16 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=120&h=120&fit=crop" class="w-16 h-16 rounded-lg object-cover" alt="">
+                  <button class="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <script>
+    // 侧边栏切换
+    const sidebar = document.getElementById('sidebar');
+    document.getElementById('toggleSidebar').addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+    });
+
+    // 手风琴：只展开一个图册管理块
+    function toggleGallery(btn) {
+      const item = btn.closest('.product-item');
+      const panel = item.querySelector('.gallery-panel');
+      const isOpen = panel.classList.contains('open');
+
+      // 关闭所有
+      document.querySelectorAll('.gallery-panel').forEach(p => p.classList.remove('open'));
+      document.querySelectorAll('.manage-btn').forEach(b => {
+        if (!b.disabled) b.textContent = '图册';
+      });
+
+      // 切换当前
+      if (!isOpen) {
+        panel.classList.add('open');
+        btn.textContent = '收起';
+      }
+    }
+  </script>
+</body>
+</html>

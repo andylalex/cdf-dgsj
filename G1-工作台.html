@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>工作台 - 中免导购</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+    .phone-frame { max-width: 414px; margin: 0 auto; min-height: 100vh; background: #f4f5f7; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 经营数据 紫色渐变背景 */
+    .biz-data { background: linear-gradient(180deg, #e8e3ff 0%, #cfc6ee 100%); }
+    .biz-metric-value { color: #1f193d; font-weight: 800; letter-spacing: -0.5px; }
+    .biz-pill { background: rgba(255,255,255,0.55); color: #3a3268; border-radius: 999px; padding: 5px 11px; font-size: 12px; }
+    .cdf-logo { width: 28px; height: 28px; border-radius: 50%; background: #d8261a; color: #fff; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; font-style: italic; letter-spacing: -0.5px; }
+
+    /* 折线图样式 */
+    .chart-axis { fill: #9c98ab; font-size: 10px; font-family: 'Noto Sans SC'; }
+    .chart-grid { stroke: #ece9f2; stroke-width: 1; fill: none; }
+    .chart-grid-dash { stroke: #c2bdd8; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+    .chart-line-orange { stroke: #ff8e3a; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+    .chart-line-blue { stroke: #2c6cf6; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+    .chart-dot { stroke: #fff; stroke-width: 1.5; }
+
+    /* iOS 状态栏字体粗细 */
+    .status-time { font-feature-settings: "tnum"; }
+    /* 顶栏背景渐变（小白到透明） */
+    .top-bg { background: linear-gradient(180deg, rgba(248,246,253,1) 0%, rgba(248,246,253,0) 100%); }
+
+    /* Home indicator */
+    .home-indicator { width: 134px; height: 5px; border-radius: 3px; background: #1a1a1a; margin: 0 auto 8px; }
+  </style>
+</head>
+<body class="bg-gray-200">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col relative">
+
+    <!-- iOS 状态栏 -->
+    <div class="px-5 pt-2.5 pb-1 flex items-center justify-between shrink-0 relative z-20 status-time">
+      <span class="text-[14px] font-semibold tracking-tight text-gray-900">04:50</span>
+      <div class="flex items-center gap-1.5 text-gray-900">
+        <span class="text-[10px] font-semibold">4G</span>
+        <i class="fas fa-signal text-[11px]"></i>
+        <i class="fas fa-signal text-[11px]"></i>
+        <div class="ml-0.5 flex items-center gap-0.5 relative">
+          <i class="fas fa-battery-three-quarters text-[16px]"></i>
+        </div>
+        <span class="text-[10px] font-bold ml-0.5">80</span>
+      </div>
+    </div>
+
+    <!-- 顶部店招区 -->
+    <div class="top-bg pt-1.5 pb-3 shrink-0 relative z-10">
+      <div class="px-4 flex items-center gap-3">
+        <span class="cdf-logo">cdf</span>
+        <p class="flex-1 text-[15px] font-semibold text-gray-900 truncate leading-tight">cdf 海口日月广场免税店 <span class="text-gray-400 font-normal ml-0.5">›</span></p>
+        <i class="far fa-bell text-[16px] text-gray-400"></i>
+      </div>
+      <div class="px-4 mt-1.5">
+        <p class="text-[12px] text-gray-500 leading-none">账号名：lizonghao</p>
+      </div>
+    </div>
+
+    <!-- 主滚动区 -->
+    <div class="flex-1 overflow-y-auto hide-scrollbar px-3 pb-3 -mt-1 space-y-3">
+
+      <!-- 经营数据 -->
+      <div class="biz-data rounded-2xl px-4 pt-3 pb-4 shadow-sm relative overflow-hidden">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-[15px] font-semibold text-coral-600 tracking-wide">经营数据</p>
+          <button class="biz-pill flex items-center gap-1 active:scale-95 transition">
+            <span>今日</span>
+            <i class="fas fa-chevron-down text-[9px]"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-4 gap-1 text-center">
+          <div>
+            <p class="text-[11px] text-gray-500">访客数</p>
+            <p class="biz-metric-value text-[20px] mt-1.5 leading-none">113</p>
+            <p class="text-[10px] text-emerald-500 mt-1.5 leading-none">较昨日-42.93%</p>
+          </div>
+          <div>
+            <p class="text-[11px] text-gray-500">支付订单</p>
+            <p class="biz-metric-value text-[20px] mt-1.5 leading-none">17</p>
+            <p class="text-[10px] text-coral-500 mt-1.5 leading-none">较昨日+325.00%</p>
+          </div>
+          <div>
+            <p class="text-[11px] text-gray-500">支付金额</p>
+            <p class="biz-metric-value text-[20px] mt-1.5 leading-none">1.03万</p>
+            <p class="text-[10px] text-coral-500 mt-1.5 leading-none">较昨日+400.04%</p>
+          </div>
+          <div>
+            <p class="text-[11px] text-gray-500">客单价</p>
+            <p class="biz-metric-value text-[20px] mt-1.5 leading-none">1713.58</p>
+            <p class="text-[10px] text-coral-500 mt-1.5 leading-none">较昨日+233.36%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 数据趋势 -->
+      <div class="bg-white rounded-2xl p-3.5 shadow-sm">
+        <p class="text-[14px] font-semibold text-gray-900 mb-2">数据趋势</p>
+        <div class="relative">
+          <svg viewBox="0 0 340 200" class="w-full h-[200px] block">
+            <!-- 横向网格线 -->
+            <line x1="32" y1="20"  x2="335" y2="20"  class="chart-grid"/>
+            <line x1="32" y1="50"  x2="335" y2="50"  class="chart-grid"/>
+            <line x1="32" y1="80"  x2="335" y2="80"  class="chart-grid"/>
+            <line x1="32" y1="110" x2="335" y2="110" class="chart-grid"/>
+            <line x1="32" y1="140" x2="335" y2="140" class="chart-grid"/>
+            <line x1="32" y1="170" x2="335" y2="170" class="chart-grid"/>
+
+            <!-- Y 轴刻度 -->
+            <text x="26" y="23" class="chart-axis" text-anchor="end">5k</text>
+            <text x="26" y="53" class="chart-axis" text-anchor="end">4k</text>
+            <text x="26" y="83" class="chart-axis" text-anchor="end">3k</text>
+            <text x="26" y="113" class="chart-axis" text-anchor="end">2k</text>
+            <text x="26" y="143" class="chart-axis" text-anchor="end">1k</text>
+            <text x="26" y="173" class="chart-axis" text-anchor="end">0</text>
+
+            <!-- 07:00 虚线（提示线） -->
+            <line x1="46" y1="20" x2="46" y2="170" class="chart-grid-dash"/>
+
+            <!-- 今日（蓝）：07:00→10:00→13:00→14:00→16:00→22:00 高低起伏 -->
+            <path d="M 46 113 L 110 80 L 150 30 L 165 110 L 215 145 L 320 95" class="chart-line-blue"/>
+
+            <!-- 昨日（橙）：略高于今日的低位数据 -->
+            <path d="M 46 170 L 110 70 L 150 88 L 165 110 L 215 130 L 320 110" class="chart-line-orange"/>
+
+            <!-- 13:00 高峰蓝点 -->
+            <circle cx="150" cy="30" r="3.5" fill="#2c6cf6" class="chart-dot"/>
+
+            <!-- 数据点 -->
+            <circle cx="46" cy="113" r="2.5" fill="#2c6cf6"/>
+            <circle cx="46" cy="170" r="2.5" fill="#ff8e3a"/>
+
+            <!-- X 轴刻度 -->
+            <text x="46"  y="190" class="chart-axis" text-anchor="middle">07:00</text>
+            <text x="110" y="190" class="chart-axis" text-anchor="middle">10:00</text>
+            <text x="150" y="190" class="chart-axis" text-anchor="middle">13:00</text>
+            <text x="215" y="190" class="chart-axis" text-anchor="middle">16:00</text>
+            <text x="320" y="190" class="chart-axis" text-anchor="middle">22:00</text>
+          </svg>
+
+          <!-- tooltip（07:00 提示） -->
+          <div class="absolute left-[58px] top-[42px] bg-white rounded-lg shadow-lg border border-gray-100 px-3 py-2 text-[11px] min-w-[168px]">
+            <p class="font-semibold text-gray-800 mb-1.5 leading-none">07:00</p>
+            <div class="flex items-center gap-1.5 leading-tight">
+              <span class="inline-block w-2.5 h-0.5 rounded-full" style="background:#ff8e3a"></span>
+              <span class="text-gray-500">— 昨日支付金额：</span>
+              <span class="font-semibold text-gray-700">0.0</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 leading-tight">
+              <span class="inline-block w-2.5 h-0.5 rounded-full" style="background:#2c6cf6"></span>
+              <span class="text-gray-500">— 今日支付金额：</span>
+              <span class="font-semibold text-gray-700">2258.75</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 图例 -->
+        <div class="flex items-center justify-center gap-6 mt-2 text-[11px] text-gray-600">
+          <div class="flex items-center gap-2"><span class="inline-block w-3 h-0.5 rounded-full" style="background:#ff8e3a"></span>昨日支付金额</div>
+          <div class="flex items-center gap-2"><span class="inline-block w-3 h-0.5 rounded-full" style="background:#2c6cf6"></span>今日支付金额</div>
+        </div>
+      </div>
+
+      <!-- 常用功能 -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm">
+        <p class="text-[14px] font-semibold text-gray-900 mb-3.5">常用功能</p>
+        <div class="grid grid-cols-5 gap-1">
+          <a href="G6-商品管理.html" class="flex flex-col items-center gap-1.5 active:scale-95 transition">
+            <span class="w-11 h-11 rounded-full bg-coral-50 flex items-center justify-center text-coral-500">
+              <i class="fas fa-arrow-up text-[18px]"></i>
+            </span>
+            <span class="text-[11px] text-gray-700">商品管理</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-1.5 active:scale-95 transition">
+            <span class="w-11 h-11 rounded-full bg-coral-50 flex items-center justify-center text-coral-500">
+              <i class="fas fa-receipt text-[18px]"></i>
+            </span>
+            <span class="text-[11px] text-gray-700">订单</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-1.5 active:scale-95 transition">
+            <span class="w-11 h-11 rounded-full bg-coral-50 flex items-center justify-center text-coral-500">
+              <i class="fas fa-rotate-left text-[18px]"></i>
+            </span>
+            <span class="text-[11px] text-gray-700">售后</span>
+          </a>
+          <a href="G8-移动端业绩管理.html" class="flex flex-col items-center gap-1.5 active:scale-95 transition">
+            <span class="w-11 h-11 rounded-full bg-coral-50 flex items-center justify-center text-coral-500">
+              <i class="fas fa-chart-line text-[18px]"></i>
+            </span>
+            <span class="text-[11px] text-gray-700">业绩管理</span>
+          </a>
+          <a href="G5-客户管理.html" class="flex flex-col items-center gap-1.5 active:scale-95 transition">
+            <span class="w-11 h-11 rounded-full bg-coral-50 flex items-center justify-center text-coral-500">
+              <i class="fas fa-user-group text-[18px]"></i>
+            </span>
+            <span class="text-[11px] text-gray-700">客户管理</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="h-2"></div>
+    </div>
+
+    <!-- 底部 4 标签栏 -->
+    <nav class="bg-white border-t border-gray-100 flex shrink-0 relative z-10">
+      <a href="G1-工作台.html" class="flex-1 flex flex-col items-center py-2.5 text-coral-500">
+        <i class="fas fa-table-cells text-[18px] mb-0.5"></i>
+        <span class="text-[10px] font-semibold">工作台</span>
+      </a>
+      <a href="G2-消息会话列表.html" class="flex-1 flex flex-col items-center py-2.5 text-gray-400">
+        <i class="far fa-comment text-[18px] mb-0.5"></i>
+        <span class="text-[10px]">消息</span>
+      </a>
+      <span class="flex-1 flex flex-col items-center py-2.5 text-gray-300 cursor-not-allowed">
+        <i class="fas fa-scale-balanced text-[18px] mb-0.5"></i>
+        <span class="text-[10px]">经营</span>
+      </span>
+      <a href="#" class="flex-1 flex flex-col items-center py-2.5 text-gray-400">
+        <i class="far fa-user text-[18px] mb-0.5"></i>
+        <span class="text-[10px]">我的</span>
+      </a>
+    </nav>
+
+    <!-- iOS home indicator -->
+    <div class="bg-white pb-1.5">
+      <div class="home-indicator"></div>
+    </div>
+
+  </div>
+</body>
+</html>

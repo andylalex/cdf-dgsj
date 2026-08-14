@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客户管理（PC）- 中免海南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
+    .sidebar-active { background: #fff5f2; color: #ff6b52; border-right: 3px solid #ff6b52; }
+    .table-row:hover { background: #fff8f7; }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] text-gray-800">
+  <div class="min-h-screen flex">
+
+    <!-- 系统左侧导航 -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex-col hidden md:flex">
+      <div class="h-16 flex items-center px-6 border-b border-gray-100">
+        <div class="w-8 h-8 rounded-lg coral-gradient flex items-center justify-center text-white mr-3"><i class="fas fa-store"></i></div>
+        <span class="font-bold text-gray-800">中免导购管理</span>
+      </div>
+      <nav class="flex-1 py-4 space-y-1 text-sm">
+        <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-chart-pie w-6"></i>数据看板</a>
+        <a href="M1-PC客户管理.html" class="sidebar-active flex items-center px-6 py-3 font-medium"><i class="fas fa-users w-6"></i>客户管理</a>
+        <a href="M2-专题管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-layer-group w-6"></i>专题管理</a>
+        <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-bullhorn w-6"></i>活动管理</a>
+      </nav>
+    </aside>
+
+    <!-- 主体 -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- 顶部栏 -->
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
+        <div class="flex items-center gap-4">
+          <h1 class="text-lg font-bold text-gray-800">客户管理</h1>
+          <span class="text-xs text-gray-400">按导购查询客户归属，支持继承与批量继承</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="w-9 h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-600 transition"><i class="fas fa-bell"></i></button>
+          <div class="flex items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin" class="w-8 h-8 rounded-full bg-gray-100" alt="">
+            <span class="text-sm text-gray-700 hidden sm:inline">平台管理员</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 筛选区 -->
+      <div class="bg-white border-b border-gray-200 px-6 py-4 shrink-0">
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 min-w-[240px]">
+            <i class="fas fa-search text-gray-400 text-sm mr-2"></i>
+            <input type="text" placeholder="搜索客户名称/手机号" class="bg-transparent outline-none text-sm flex-1 text-gray-700">
+          </div>
+          <select class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+            <option value="">全部导购</option>
+            <option value="lin">林小婷</option>
+            <option value="wang">王小丽</option>
+            <option value="zhang">张美琪</option>
+            <option value="liu">刘佳怡</option>
+          </select>
+          <select class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+            <option value="">客户状态</option>
+            <option value="high">高意向</option>
+            <option value="vip">VIP</option>
+            <option value="follow">待跟进</option>
+            <option value="silent">沉默客户</option>
+          </select>
+          <div class="flex-1"></div>
+          <button onclick="openBatchInheritModal()" id="batchBtn" class="hidden bg-coral-500 hover:bg-coral-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-coral-500/20">
+            批量继承 <span id="batchCount" class="ml-1">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 列表区 -->
+      <div class="flex-1 overflow-auto p-6">
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-gray-50 text-gray-500">
+              <tr>
+                <th class="px-5 py-3 w-10">
+                  <input type="checkbox" id="selectAll" class="w-4 h-4 accent-coral-500 rounded cursor-pointer" onchange="toggleSelectAll()">
+                </th>
+                <th class="px-5 py-3 font-medium">客户信息</th>
+                <th class="px-5 py-3 font-medium">归属导购</th>
+                <th class="px-5 py-3 font-medium">最近联系</th>
+                <th class="px-5 py-3 font-medium">累计订单数</th>
+                <th class="px-5 py-3 font-medium">累计消费</th>
+                <th class="px-5 py-3 font-medium text-right">操作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="table-row transition">
+                <td class="px-5 py-4"><input type="checkbox" class="row-checkbox w-4 h-4 accent-coral-500 rounded cursor-pointer" onchange="updateBatch()"></td>
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=chen" class="w-10 h-10 rounded-full bg-gray-100" alt="">
+                    <div>
+                      <p class="font-medium text-gray-800">陈女士</p>
+                      <p class="text-xs text-gray-400">138****8888</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600">林小婷</td>
+                <td class="px-5 py-4 text-gray-500">10 分钟前</td>
+                <td class="px-5 py-4 font-medium text-gray-800">3</td>
+                <td class="px-5 py-4 font-medium text-gray-800">¥86,420</td>
+                <td class="px-5 py-4 text-right">
+                  <button onclick="openInheritModal('陈女士', '林小婷')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">继承给导购</button>
+                </td>
+              </tr>
+              <tr class="table-row transition">
+                <td class="px-5 py-4"><input type="checkbox" class="row-checkbox w-4 h-4 accent-coral-500 rounded cursor-pointer" onchange="updateBatch()"></td>
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=wang" class="w-10 h-10 rounded-full bg-gray-100" alt="">
+                    <div>
+                      <p class="font-medium text-gray-800">王小姐</p>
+                      <p class="text-xs text-gray-400">139****6666</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600">王小丽</td>
+                <td class="px-5 py-4 text-gray-500">2 小时前</td>
+                <td class="px-5 py-4 font-medium text-gray-800">12</td>
+                <td class="px-5 py-4 font-medium text-gray-800">¥245,800</td>
+                <td class="px-5 py-4 text-right">
+                  <button onclick="openInheritModal('王小姐', '王小丽')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">继承给导购</button>
+                </td>
+              </tr>
+              <tr class="table-row transition">
+                <td class="px-5 py-4"><input type="checkbox" class="row-checkbox w-4 h-4 accent-coral-500 rounded cursor-pointer" onchange="updateBatch()"></td>
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=li" class="w-10 h-10 rounded-full bg-gray-100" alt="">
+                    <div>
+                      <p class="font-medium text-gray-800">李先生</p>
+                      <p class="text-xs text-gray-400">137****5555</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600">林小婷</td>
+                <td class="px-5 py-4 text-gray-500">昨天</td>
+                <td class="px-5 py-4 font-medium text-gray-800">1</td>
+                <td class="px-5 py-4 font-medium text-gray-800">¥3,200</td>
+                <td class="px-5 py-4 text-right">
+                  <button onclick="openInheritModal('李先生', '林小婷')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">继承给导购</button>
+                </td>
+              </tr>
+              <tr class="table-row transition">
+                <td class="px-5 py-4"><input type="checkbox" class="row-checkbox w-4 h-4 accent-coral-500 rounded cursor-pointer" onchange="updateBatch()"></td>
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=zhang" class="w-10 h-10 rounded-full bg-gray-100" alt="">
+                    <div>
+                      <p class="font-medium text-gray-800">张女士</p>
+                      <p class="text-xs text-gray-400">136****3333</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600">张美琪</td>
+                <td class="px-5 py-4 text-gray-500">3 天前</td>
+                <td class="px-5 py-4 font-medium text-gray-800">0</td>
+                <td class="px-5 py-4 font-medium text-gray-800">¥0</td>
+                <td class="px-5 py-4 text-right">
+                  <button onclick="openInheritModal('张女士', '张美琪')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">继承给导购</button>
+                </td>
+              </tr>
+              <tr class="table-row transition">
+                <td class="px-5 py-4"><input type="checkbox" class="row-checkbox w-4 h-4 accent-coral-500 rounded cursor-pointer" onchange="updateBatch()"></td>
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=liu" class="w-10 h-10 rounded-full bg-gray-100" alt="">
+                    <div>
+                      <p class="font-medium text-gray-800">刘先生</p>
+                      <p class="text-xs text-gray-400">135****2222</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600">刘佳怡</td>
+                <td class="px-5 py-4 text-gray-500">1 个月前</td>
+                <td class="px-5 py-4 font-medium text-gray-800">5</td>
+                <td class="px-5 py-4 font-medium text-gray-800">¥68,000</td>
+                <td class="px-5 py-4 text-right">
+                  <button onclick="openInheritModal('刘先生', '刘佳怡')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">继承给导购</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 分页 -->
+          <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-500">共 128 位客户，每页 10 条</span>
+            <div class="flex items-center gap-1">
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs"><i class="fas fa-chevron-left"></i></button>
+              <button class="w-8 h-8 rounded-lg bg-coral-500 text-white text-xs font-medium">1</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs">2</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs">3</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 单客户继承弹窗 -->
+  <div id="inheritModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6" onclick="if(event.target===this)closeInheritModal()">
+    <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl">
+      <div class="px-5 pt-5 pb-3 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-coral-100 flex items-center justify-center text-coral-600 shrink-0">
+          <i class="fas fa-user-transfer"></i>
+        </div>
+        <div>
+          <p class="font-semibold text-gray-800 text-sm">继承客户</p>
+          <p class="text-xs text-gray-400 mt-0.5">将该客户转交给其他导购跟进</p>
+        </div>
+      </div>
+      <div class="px-5 pb-4">
+        <p class="text-sm text-gray-600 mb-3">客户 <span id="inheritCustomerName" class="text-coral-600 font-medium">--</span> 当前归属 <span id="inheritCurrentGuide" class="text-gray-800 font-medium">--</span></p>
+        <label class="block text-xs text-gray-500 mb-1.5">选择新导购</label>
+        <select id="inheritGuideSelect" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 outline-none focus:border-coral-400">
+          <option value="">请选择导购</option>
+          <option value="lin">林小婷</option>
+          <option value="wang">王小丽</option>
+          <option value="zhang">张美琪</option>
+          <option value="liu">刘佳怡</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-3 px-5 pb-5">
+        <button onclick="closeInheritModal()" class="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition">取消</button>
+        <button onclick="closeInheritModal()" class="flex-1 bg-coral-500 hover:bg-coral-600 text-white text-center py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-coral-500/25">确认继承</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 批量继承弹窗 -->
+  <div id="batchInheritModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6" onclick="if(event.target===this)closeBatchInheritModal()">
+    <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl">
+      <div class="px-5 pt-5 pb-3 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-coral-100 flex items-center justify-center text-coral-600 shrink-0">
+          <i class="fas fa-users"></i>
+        </div>
+        <div>
+          <p class="font-semibold text-gray-800 text-sm">批量继承客户</p>
+          <p class="text-xs text-gray-400 mt-0.5">将选中的客户统一转交给指定导购</p>
+        </div>
+      </div>
+      <div class="px-5 pb-4">
+        <p class="text-sm text-gray-600 mb-3">已选择 <span id="batchInheritCount" class="text-coral-600 font-medium">0</span> 位客户</p>
+        <label class="block text-xs text-gray-500 mb-1.5">选择新导购</label>
+        <select id="batchInheritGuideSelect" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 outline-none focus:border-coral-400">
+          <option value="">请选择导购</option>
+          <option value="lin">林小婷</option>
+          <option value="wang">王小丽</option>
+          <option value="zhang">张美琪</option>
+          <option value="liu">刘佳怡</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-3 px-5 pb-5">
+        <button onclick="closeBatchInheritModal()" class="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition">取消</button>
+        <button onclick="closeBatchInheritModal()" class="flex-1 bg-coral-500 hover:bg-coral-600 text-white text-center py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-coral-500/25">确认批量继承</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSelectAll() {
+      const checked = document.getElementById('selectAll').checked;
+      document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = checked);
+      updateBatch();
+    }
+    function updateBatch() {
+      const count = document.querySelectorAll('.row-checkbox:checked').length;
+      const batchBtn = document.getElementById('batchBtn');
+      const batchCount = document.getElementById('batchCount');
+      batchCount.textContent = count;
+      if (count > 0) {
+        batchBtn.classList.remove('hidden');
+      } else {
+        batchBtn.classList.add('hidden');
+      }
+    }
+    function openInheritModal(customer, guide) {
+      document.getElementById('inheritCustomerName').textContent = customer;
+      document.getElementById('inheritCurrentGuide').textContent = guide;
+      document.getElementById('inheritModal').classList.remove('hidden');
+    }
+    function closeInheritModal() {
+      document.getElementById('inheritModal').classList.add('hidden');
+    }
+    function openBatchInheritModal() {
+      const count = document.querySelectorAll('.row-checkbox:checked').length;
+      document.getElementById('batchInheritCount').textContent = count;
+      document.getElementById('batchInheritModal').classList.remove('hidden');
+    }
+    function closeBatchInheritModal() {
+      document.getElementById('batchInheritModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

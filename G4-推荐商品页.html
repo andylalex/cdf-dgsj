@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>导购端 - 推荐商品</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .phone-frame { max-width: 414px; margin: 0 auto; min-height: 100vh; background: #f2f3f5; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .status-bar { font-size: 13px; font-weight: 600; letter-spacing: -0.5px; }
+    .status-icon { font-size: 11px; }
+    .cat-active { background: #fff; color: #ff6b52; font-weight: 500; position: relative; }
+    .cat-active::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; background: #ff6b52; border-radius: 0 2px 2px 0; }
+    .cat-item { cursor: pointer; transition: background .15s ease; }
+    .cat-item:hover:not(.cat-active) { background: #fff; }
+    .cat-header { color: #999; font-size: 11px; }
+    .chip { padding: 6px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; border: 1px solid #e5e5e5; background: #fff; color: #333; }
+    .chip-active { background: #2b2b2b; color: #fff; border-color: #2b2b2b; }
+    .sort-active { color: #ff6b52; font-weight: 600; }
+    .price { color: #ff6b52; letter-spacing: -.3px; }
+    .gov-tag { background: #eafaf0; color: #1aa251; font-size: 11px; padding: 2px 6px; border-radius: 6px; display: inline-block; }
+    .manage-btn { background: #ff6b52; color: #fff; border-radius: 16px; padding: 6px 16px; font-size: 12px; font-weight: 500; cursor: pointer; transition: background .15s ease, transform .12s ease; }
+    .manage-btn:hover { background: #ff5a42; }
+    .manage-btn:active { transform: scale(.95); }
+    .manage-btn-gray { background: #f2f2f2; color: #999; border-radius: 16px; padding: 6px 16px; font-size: 12px; cursor: not-allowed; }
+    .stock-out { color: #ff6b52; }
+    .stock-ok { color: #6b7280; }
+    .fav-btn { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; transition: color .15s ease, transform .12s ease; cursor: pointer; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.3)); }
+    .fav-btn:hover { transform: scale(1.15); }
+    .fav-btn:active { transform: scale(.9); }
+    .product-card { box-shadow: 0 1px 2px rgba(16,24,40,.05); transition: box-shadow .2s ease, transform .15s ease; }
+    .product-card:active { transform: scale(.99); }
+    .code-pill { background: #f4f5f7; color: #8a8f99; border-radius: 5px; padding: 1px 6px; font-size: 11px; }
+  </style>
+</head>
+<body class="bg-gray-200">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#f2f3f5]">
+
+    <!-- 状态栏 -->
+    <div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0">
+      <span>9:32</span>
+      <div class="flex items-center gap-1 status-icon">
+        <i class="fas fa-location-dot text-[10px]"></i>
+        <i class="fas fa-circle text-[8px] text-blue-500"></i>
+        <i class="fas fa-square text-[8px]"></i>
+        <i class="fas fa-record-vinyl text-[8px]"></i>
+        <span class="bg-blue-500 text-white rounded-sm px-1 text-[9px] font-bold ml-0.5">8K</span>
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <span class="border border-black rounded-sm px-1 text-[10px] font-bold">90</span>
+      </div>
+    </div>
+
+    <!-- 顶栏 -->
+    <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative">
+      <a href="G3-导购IM会话页.html" class="absolute left-4 w-8 h-8 flex items-center justify-center">
+        <i class="fas fa-chevron-left text-gray-700 text-base"></i>
+      </a>
+      <h1 class="text-base font-semibold text-gray-800">推荐商品</h1>
+    </div>
+
+    <!-- 顶部搜索区 -->
+    <div class="bg-white shrink-0">
+      <div class="px-3 py-2 border-b border-gray-100">
+        <div class="flex items-center gap-2 bg-gray-100 rounded-full px-3 py-2">
+          <i class="fas fa-search text-gray-400 text-sm"></i>
+          <input type="text" placeholder="搜索商品名称/编号/品牌" class="flex-1 bg-transparent outline-none text-sm placeholder-gray-400">
+        </div>
+      </div>
+    </div>
+
+    <!-- 主体：左侧分类 + 右侧商品 -->
+    <div class="flex-1 flex overflow-hidden">
+
+      <!-- 左侧分类侧边栏 -->
+      <aside id="sidebar" class="w-24 bg-[#f7f7f7] overflow-y-auto hide-scrollbar shrink-0 border-r border-gray-100">
+        <ul class="text-sm text-gray-700">
+          <li data-cat="我的收藏" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">我的收藏</p></li>
+          <li data-cat="我的柜组" onclick="selectCat(this)" class="cat-active cat-item px-3 py-3 text-center border-b border-gray-100"><i class="fas fa-box text-gray-500"></i><p class="mt-1 text-[12px]">我的柜组</p></li>
+          <li data-cat="女士腕表" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女士腕表</p></li>
+          <li data-cat="男包" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">男包</p></li>
+          <li data-cat="首饰" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">首饰</p></li>
+          <li data-cat="手机" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">手机</p></li>
+          <li data-cat="红酒" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">红酒</p></li>
+          <li data-cat="精华" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">精华</p></li>
+          <li data-cat="彩妆" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">彩妆</p></li>
+          <li data-cat="女包" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女包</p></li>
+          <li data-cat="太阳镜" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">太阳镜</p></li>
+        </ul>
+      </aside>
+
+      <!-- 右侧商品列表 -->
+      <main class="flex-1 overflow-y-auto hide-scrollbar p-2 space-y-2 bg-[#f2f3f5]">
+
+        <!-- 二级分类（随左导航切换，我的柜组无二级分类） -->
+        <div id="subCatBar" class="sticky top-0 z-10 -mx-2 px-3 py-2 bg-[#f2f3f5] flex items-center gap-2 overflow-x-auto hide-scrollbar shrink-0 hidden"></div>
+
+        <!-- 商品 2（有货） -->
+        <div class="product-item">
+          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
+            <div class="flex gap-3">
+              <div class="relative shrink-0">
+                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
+                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
+                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-coral-500" title="已收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 font-medium leading-tight">香奈儿五号香水 50ml</p>
+                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-ok">总库存：218</span><span class="font-mono code-pill">C001930SY</span></div>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥745.00</span>
+                  <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 4（有货） -->
+        <div class="product-item">
+          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
+            <div class="flex gap-3">
+              <div class="relative shrink-0">
+                <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
+                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
+                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-white/70" title="收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 font-medium leading-tight">浪凡光韵女士浓香水50ml</p>
+                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-ok">总库存：270</span><span class="font-mono code-pill">C016080</span></div>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥394.00</span>
+                  <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 5（有货） -->
+        <div class="product-item">
+          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
+            <div class="flex gap-3">
+              <div class="relative shrink-0">
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
+                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
+                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-coral-500" title="已收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 font-medium leading-tight">迪奥真我香水 EDT 100ml</p>
+                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-ok">总库存：156</span><span class="font-mono code-pill">C017002</span></div>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥1,280.00</span>
+                  <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 1（售罄·沉底·禁用） -->
+        <div class="product-item">
+          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
+            <div class="flex gap-3">
+              <div class="relative shrink-0">
+                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
+                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
+                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-white/70" title="收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 font-medium leading-tight line-clamp-2">兰蔻奇迹香水 100ml</p>
+                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-out">总库存：售罄</span><span class="font-mono code-pill">C000277</span></div>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥0.10</span>
+                  <button class="manage-btn-gray" disabled>推荐</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 3（售罄·沉底·禁用） -->
+        <div class="product-item">
+          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
+            <div class="flex gap-3">
+              <div class="relative shrink-0">
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
+                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
+                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-white/70" title="收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 font-medium leading-tight">兰蔻珍爱香水两支装 30ML</p>
+                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-out">总库存：售罄</span><span class="font-mono code-pill">C000365</span></div>
+                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥580.00</span>
+                  <button class="manage-btn-gray" disabled>推荐</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <script>
+    // 收藏：点击在「空心未收藏 ↔ 实心已收藏」间切换（内联 SVG，不依赖图标字体）
+    function toggleFavorite(btn) {
+      // 两种状态均为实心星标：选中=珊瑚橙，未选中=白色70%透明+灰色边框
+      const favorited = btn.classList.contains('text-coral-500');
+      if (!favorited) {
+        btn.classList.remove('text-white/70');
+        btn.classList.add('text-coral-500');
+        btn.title = '已收藏';
+      } else {
+        btn.classList.remove('text-coral-500');
+        btn.classList.add('text-white/70');
+        btn.title = '收藏';
+      }
+    }
+
+    // 推荐商品：点击后向顾客推送，按钮变为“已推荐”
+    function recommendProduct(btn) {
+      if (btn.disabled) return;
+      btn.disabled = true;
+      btn.textContent = '已推荐';
+      btn.classList.remove('manage-btn');
+      btn.classList.add('manage-btn-gray');
+    }
+
+    // 左导航分类配置：二级分类改为品牌名称（我的柜组为空 → 不显示二级分类）
+    const subCats = {
+      '我的收藏': ['全部', '最近收藏', '价格从高到低', '价格从低到高'],
+      '我的柜组': [],
+      '女士腕表': ['全部', '卡地亚', '欧米茄', '浪琴', '天梭', '雷达'],
+      '男包':     ['全部', '路易威登', '古驰', '普拉达', '蔻驰', '巴宝莉'],
+      '首饰':     ['全部', '卡地亚', '蒂芙尼', '宝格丽', '梵克雅宝', '周大福'],
+      '手机':     ['全部', '苹果', '华为', '三星', '小米', '荣耀'],
+      '红酒':     ['全部', '拉菲', '奔富', '木桐', '作品一号', '黄尾袋鼠'],
+      '精华':     ['全部', '雅诗兰黛', '兰蔻', '海蓝之谜', '修丽可', '资生堂'],
+      '彩妆':     ['全部', '迪奥', '圣罗兰', '香奈儿', '阿玛尼', '魅可'],
+      '女包':     ['全部', '路易威登', '香奈儿', '爱马仕', '古驰', '迪奥'],
+      '太阳镜':   ['全部', '雷朋', '普拉达', '古驰', '宝格丽', '欧克利']
+    };
+
+    // 切换左导航：更新选中态 + 渲染对应二级分类（商品列表保持不变）
+    function selectCat(li) {
+      document.querySelectorAll('#sidebar li[data-cat]').forEach(el => el.classList.remove('cat-active'));
+      li.classList.add('cat-active');
+      const subs = subCats[li.dataset.cat] || [];
+      const bar = document.getElementById('subCatBar');
+      if (subs.length === 0) {
+        bar.classList.add('hidden');
+        bar.innerHTML = '';
+      } else {
+        bar.classList.remove('hidden');
+        bar.innerHTML = subs.map((s, i) =>
+          `<button class="chip ${i === 0 ? 'chip-active' : ''}" onclick="selectChip(this)">${s}</button>`
+        ).join('');
+      }
+    }
+
+    // 二级分类：点击切换高亮（视觉态，不改变商品）
+    function selectChip(btn) {
+      btn.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+      btn.classList.add('chip-active');
+    }
+  </script>
+</body>
+</html>

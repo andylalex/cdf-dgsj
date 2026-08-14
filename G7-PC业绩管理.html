@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>业绩管理（PC）- 中免海南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
+    .sidebar-active { background: #fff5f2; color: #ff6b52; border-right: 3px solid #ff6b52; }
+    .table-row:hover { background: #fff8f7; }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] text-gray-800">
+  <div class="min-h-screen flex">
+
+    <!-- 系统左侧导航 -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex-col hidden md:flex">
+      <div class="h-16 flex items-center px-6 border-b border-gray-100">
+        <div class="w-8 h-8 rounded-lg coral-gradient flex items-center justify-center text-white mr-3"><i class="fas fa-store"></i></div>
+        <span class="font-bold text-gray-800">中免导购管理</span>
+      </div>
+      <nav class="flex-1 py-4 space-y-1 text-sm">
+        <a href="G1-工作台.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-th-large w-6"></i>工作台</a>
+        <a href="G2-消息会话列表.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-comment-dots w-6"></i>消息</a>
+        <a href="G3-导购IM会话页.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-message w-6"></i>IM 会话</a>
+        <a href="G4-推荐商品页.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-thumbs-up w-6"></i>推荐商品</a>
+        <a href="G5-客户管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-users w-6"></i>客户管理</a>
+        <a href="G6-商品管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-box-open w-6"></i>商品管理</a>
+        <a href="G7-PC业绩管理.html" class="sidebar-active flex items-center px-6 py-3 font-medium"><i class="fas fa-chart-line w-6"></i>业绩管理</a>
+        <a href="G8-移动端业绩管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-mobile-screen w-6"></i>业绩管理（移动）</a>
+      </nav>
+    </aside>
+
+    <!-- 主体 -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- 顶部栏 -->
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
+        <div class="flex items-center gap-4">
+          <h1 class="text-lg font-bold text-gray-800">业绩管理</h1>
+          <span class="text-xs text-gray-400">查看业绩概览、订单明细与详情</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="w-9 h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-600 transition"><i class="fas fa-bell"></i></button>
+          <div class="flex items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin" class="w-8 h-8 rounded-full bg-gray-100" alt="">
+            <span class="text-sm text-gray-700 hidden sm:inline">平台管理员</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex-1 overflow-auto p-6 space-y-6">
+
+        <!-- 数据卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-gray-500">接待客户数</span>
+              <div class="w-8 h-8 rounded-lg bg-coral-50 text-coral-600 flex items-center justify-center"><i class="fas fa-users text-sm"></i></div>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800">12</span>
+              <span class="text-xs text-gray-400">今日</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500">累计 <span class="font-medium text-gray-800">1,286</span> 位客户</div>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-gray-500">订单数</span>
+              <div class="w-8 h-8 rounded-lg bg-coral-50 text-coral-600 flex items-center justify-center"><i class="fas fa-shopping-bag text-sm"></i></div>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800">36</span>
+              <span class="text-xs text-gray-400">今日</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500">累计 <span class="font-medium text-gray-800">3,542</span> 笔订单</div>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm text-gray-500">订单总金额</span>
+              <div class="w-8 h-8 rounded-lg bg-coral-50 text-coral-600 flex items-center justify-center"><i class="fas fa-yen-sign text-sm"></i></div>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800">¥128,650</span>
+              <span class="text-xs text-gray-400">今日</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500">累计 <span class="font-medium text-gray-800">¥12,580,420</span></div>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-400">导购业绩 = 已完成订单中「未退款」商品的归因金额；已退款 / 未完成订单整单不计。列表「导购业绩」列按导购聚合，每行展示 门店·柜组·导购·业绩金额（金额始终显示，未完成标「未完结」、退款标「退款不计入」）。</p>
+
+        <!-- 筛选 + 订单列表 -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-100 flex flex-wrap items-center gap-3">
+            <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 min-w-[220px]">
+              <i class="fas fa-search text-gray-400 text-sm mr-2"></i>
+              <input id="fSearch" type="text" placeholder="搜索订单号/商品名称/用户" class="bg-transparent outline-none text-sm flex-1 text-gray-700">
+            </div>
+            <select id="fStatus" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+              <option value="">全部状态</option>
+              <option value="pending">待支付</option>
+              <option value="toshipped">待发货</option>
+              <option value="toreceive">待收货</option>
+              <option value="completed">已完成</option>
+              <option value="refunded">已退款</option>
+              <option value="closed">已关闭</option>
+            </select>
+            <select id="fStore" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+              <option value="">全部门店</option>
+              <option value="sanya">三亚国际免税城</option>
+              <option value="haikou">海口日月广场免税店</option>
+            </select>
+            <select id="fGroup" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+              <option value="">全部柜组</option>
+              <option value="g1">香化一组（68680401）</option>
+              <option value="g2">香化二组（68680402）</option>
+              <option value="g3">香化三组（68680403）</option>
+            </select>
+            <select id="fGuide" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+              <option value="">全部导购</option>
+              <option value="lin">林小婷</option>
+              <option value="wang">王小丽</option>
+              <option value="zhang">张美琪</option>
+              <option value="liu">刘佳怡</option>
+            </select>
+            <input id="fDateFrom" type="date" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+            <span class="text-xs text-gray-400">至</span>
+            <input id="fDateTo" type="date" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400">
+            <div class="flex-1"></div>
+            <button class="bg-coral-500 hover:bg-coral-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-coral-500/20">
+              <i class="fas fa-download mr-1.5"></i>导出订单
+            </button>
+          </div>
+
+          <table class="w-full text-sm text-left">
+            <thead class="bg-gray-50 text-gray-500">
+              <tr>
+                <th class="px-5 py-3 font-medium">订单号</th>
+                <th class="px-5 py-3 font-medium">用户手机号</th>
+                <th class="px-5 py-3 font-medium">订单金额</th>
+                <th class="px-5 py-3 font-medium">导购业绩（计入）</th>
+                <th class="px-5 py-3 font-medium">订单时间</th>
+                <th class="px-5 py-3 font-medium">订单状态</th>
+                <th class="px-5 py-3 font-medium text-right">操作</th>
+              </tr>
+            </thead>
+            <tbody id="orderTableBody" class="divide-y divide-gray-100"></tbody>
+          </table>
+
+          <!-- 分页 -->
+          <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between">
+            <span id="tableSummary" class="text-xs text-gray-500"></span>
+            <div class="flex items-center gap-1">
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs"><i class="fas fa-chevron-left"></i></button>
+              <button class="w-8 h-8 rounded-lg bg-coral-500 text-white text-xs font-medium">1</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs">2</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs">3</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 订单详情弹窗 -->
+  <div id="orderDetailModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6" onclick="if(event.target===this)closeOrderDetail()">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
+        <div>
+          <p class="font-bold text-gray-800">订单详情</p>
+          <p class="text-xs text-gray-400 mt-0.5" id="detailOrderNo">--</p>
+        </div>
+        <button onclick="closeOrderDetail()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-5">
+        <!-- 商品信息 -->
+        <div>
+          <h3 class="text-sm font-bold text-gray-800 mb-3">商品信息（<span id="detailProductCount">1</span>）</h3>
+          <div id="detailProducts" class="space-y-2"></div>
+        </div>
+
+        <!-- 导购业绩归因 -->
+        <div>
+          <h3 class="text-sm font-bold text-gray-800 mb-3">导购业绩归因</h3>
+          <p class="text-xs text-gray-400 mb-2">仅「已完成」订单中未退款商品计入对应导购业绩；已退款 / 未完成订单整单不计入，部分退款商品不计入其归因导购业绩。</p>
+          <div id="detailPerf" class="space-y-2"></div>
+        </div>
+
+        <!-- 用户信息 -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs text-gray-500 mb-1">用户名称</p>
+            <p id="detailUser" class="text-sm font-medium text-gray-800">陈女士</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 mb-1">用户手机号</p>
+            <p id="detailPhone" class="text-sm font-medium text-gray-800">138****8888</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 mb-1">订单时间</p>
+            <p id="detailTime" class="text-sm font-medium text-gray-800">2026-08-11 14:52:18</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 mb-1">订单状态</p>
+            <span id="detailStatus" class="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded">待发货</span>
+          </div>
+        </div>
+
+        <!-- 金额明细 -->
+        <div>
+          <h3 class="text-sm font-bold text-gray-800 mb-3">金额明细</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-500">商品总价</span>
+              <span id="amtSubtotal" class="font-medium text-gray-800">¥42,900</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-500">折扣优惠</span>
+              <span id="amtDiscount" class="font-medium text-coral-600">-¥0</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-500">平台满减</span>
+              <span id="amtPlatform" class="font-medium text-coral-600">-¥500</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-500">商城优惠券</span>
+              <span id="amtCoupon" class="font-medium text-coral-600">-¥500</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-500">积分抵扣</span>
+              <span id="amtPoint" class="font-medium text-coral-600">-¥0</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-500">运费</span>
+              <span id="amtShip" class="font-medium text-gray-800">¥0</span>
+            </div>
+            <div class="border-t border-gray-100 pt-2 flex items-center justify-between">
+              <span class="font-bold text-gray-800">实付金额</span>
+              <span id="amtPaid" class="font-bold text-coral-600 text-lg">¥41,900</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="px-6 py-4 border-t border-gray-100 flex justify-end">
+        <button onclick="closeOrderDetail()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-2 rounded-xl text-sm font-medium transition">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fmt = n => '¥' + n.toLocaleString('zh-CN');
+
+    // 归因规则（不同门店/柜组可能适用不同的导购归因规则）
+    const RULE = { r15last:'15天·末次归因', r1first:'加购1天·首次归因', r7last:'7天·末次归因' };
+
+    // 订单数据：每个商品可独立归属 门店/柜组/导购(guide)，带退款状态(refund) 与 归因规则(attrRule)
+    // 一个订单可跨多个门店/柜组、适用不同规则；导购业绩仅「已完成」订单中 refund=none 的商品计入
+    function uniqueJoin(arr){ return [...new Set(arr)].join(' / '); }
+
+    const orderDetails = {
+      'ORD20260811001': {
+        user:'陈女士', phone:'138****8888', time:'2026-08-11 14:52:18',
+        status:{text:'待发货', cls:'bg-blue-100 text-blue-600'},
+        amount:42680,
+        products:[
+          { icon:'fa-ring', name:'Cartier LOVE 手镯 18K玫瑰金', spec:'17号', qty:1, price:42900, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:1, price:780, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' }
+        ],
+        discount:0, platform:500, coupon:500, point:0, ship:0
+      },
+      'ORD20260811002': {
+        user:'王小姐', phone:'139****6666', time:'2026-08-11 13:28:05',
+        status:{text:'待支付', cls:'bg-coral-100 text-coral-600'},
+        amount:1460,
+        products:[
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'王小丽', refund:'none', attrRule:'r1first' }
+        ],
+        discount:0, platform:100, coupon:0, point:0, ship:0
+      },
+      'ORD20260811003': {
+        user:'李先生', phone:'137****5555', time:'2026-08-11 11:15:42',
+        status:{text:'待收货', cls:'bg-purple-100 text-purple-600'},
+        amount:1980,
+        products:[
+          { icon:'fa-pump-soap', name:'海蓝之谜精粹水 150ml', spec:'修护精萃', qty:1, price:1100, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'none', attrRule:'r15last' },
+          { icon:'fa-pump-soap', name:'雅诗兰黛小棕瓶 50ml', spec:'修护精华', qty:1, price:1080, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'王小丽', refund:'none', attrRule:'r15last' }
+        ],
+        discount:0, platform:200, coupon:0, point:0, ship:0
+      },
+      'ORD20260811004': {
+        user:'张女士', phone:'136****3333', time:'2026-08-11 10:42:30',
+        status:{text:'已完成', cls:'bg-green-100 text-green-600'},
+        amount:15500,
+        products:[
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r7last' }
+        ],
+        discount:0, platform:800, coupon:500, point:0, ship:0
+      },
+      'ORD20260811005': {
+        user:'刘先生', phone:'135****2222', time:'2026-08-11 09:30:11',
+        status:{text:'已退款', cls:'bg-gray-100 text-gray-500'},
+        amount:28500,
+        products:[
+          { icon:'fa-gem', name:'宝格丽 divas\' dream 项链', spec:'玫瑰金白贝母', qty:1, price:28500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last' }
+        ],
+        discount:0, platform:0, coupon:0, point:0, ship:0
+      },
+      'ORD20260811006': {
+        user:'赵女士', phone:'138****1234', time:'2026-08-11 08:20:36',
+        status:{text:'已完成', cls:'bg-green-100 text-green-600'},
+        amount:5000,
+        products:[
+          { icon:'fa-spray-can', name:'迪奥真我香水 50ml', spec:'浓香', qty:1, price:3500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
+          { icon:'fa-pump-soap', name:'兰蔻小黑瓶精华 50ml', spec:'修护', qty:1, price:1800, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'full', attrRule:'r1first' }
+        ],
+        discount:0, platform:300, coupon:0, point:0, ship:0
+      },
+      'ORD20260811007': {
+        user:'孙女士', phone:'137****9999', time:'2026-08-11 07:50:02',
+        status:{text:'已完成', cls:'bg-green-100 text-green-600'},
+        amount:22100,
+        products:[
+          { icon:'fa-ring', name:'Cartier 戒指 18K玫瑰金', spec:'玫瑰金', qty:1, price:12000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:10100, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r1first' }
+        ],
+        discount:0, platform:500, coupon:0, point:0, ship:0
+      }
+    };
+
+    // 列表渲染：导购列支持同一订单多导购（去重后以「 / 」连接）；新增「导购业绩（计入）」列直接展示归因金额
+    // 导购业绩（计入）= 已完成订单中未退款商品的归因金额；非已完成 / 已退款商品整单不计
+    // 导购业绩行：门店 · 柜组 · 导购 ¥金额 [状态注记]，列表与详情共用，保证文案一致
+    function perfLine(store, group, guide, amtHtml, noteHtml) {
+      return '<span class="text-gray-700 font-medium">' + store + '</span> · ' +
+             '<span class="text-gray-700 font-medium">' + group + '</span> · ' +
+             '<span class="text-gray-700 font-medium">' + guide + '</span> ' +
+             amtHtml + (noteHtml ? ' ' + noteHtml : '');
+    }
+
+    // 订单详情：单个商品的导购业绩行（与列表「导购业绩」列同构）
+    function productPerfLine(p, isCompleted) {
+      let amtHtml, note = '';
+      if (isCompleted) {
+        if (p.refund === 'none') {
+          amtHtml = '<span class="text-coral-600 font-bold">' + fmt(p.price) + '</span>';
+        } else {
+          amtHtml = '<span class="text-gray-400 line-through">' + fmt(p.price) + '</span>';
+          note = '<span class="text-[11px] text-gray-400">退款不计入</span>';
+        }
+      } else {
+        amtHtml = '<span class="text-gray-500">' + fmt(p.price) + '</span>';
+        note = '<span class="text-[11px] text-gray-400">未完结</span>';
+      }
+      return '<span class="text-xs leading-5">' + perfLine(p.store, p.group, p.guide, amtHtml, note) + '</span>';
+    }
+
+    // 列表「导购业绩（计入）」列：按导购聚合，每行展示 门店·柜组·导购·业绩金额；金额始终显示
+    function perfCell(o) {
+      const isCompleted = o.status.text === '已完成';
+      const byGuide = {};
+      o.products.forEach(p => {
+        const g = byGuide[p.guide] || (byGuide[p.guide] = { store:new Set(), group:new Set(), total:0, counted:0, hasRefund:false });
+        g.store.add(p.store);
+        g.group.add(p.group);
+        g.total += p.price;
+        if (isCompleted && p.refund === 'none') g.counted += p.price;
+        if (p.refund !== 'none') g.hasRefund = true;
+      });
+      const lines = Object.keys(byGuide).map(g => {
+        const info = byGuide[g];
+        const store = [...info.store].join('/');
+        const group = [...info.group].join('/');
+        let amtHtml, note = '';
+        if (isCompleted) {
+          if (info.counted > 0) {
+            amtHtml = '<span class="text-coral-600 font-bold">' + fmt(info.counted) + '</span>';
+            if (info.hasRefund) note = '<span class="text-[11px] text-gray-400">含退款不计入</span>';
+          } else {
+            amtHtml = '<span class="text-gray-400 line-through">' + fmt(info.total) + '</span>';
+            note = '<span class="text-[11px] text-gray-400">退款不计入</span>';
+          }
+        } else {
+          amtHtml = '<span class="text-gray-500">' + fmt(info.total) + '</span>';
+          note = '<span class="text-[11px] text-gray-400">未完结</span>';
+        }
+        return '<div class="text-xs leading-5">' + perfLine(store, group, g, amtHtml, note) + '</div>';
+      });
+      return lines.join('');
+    }
+
+    // 读取筛选条件，返回 [{no, o}]（让「合计」反映当前查询）
+    function getFiltered() {
+      const kw = (document.getElementById('fSearch').value || '').trim().toLowerCase();
+      const st = document.getElementById('fStatus').value;
+      const store = document.getElementById('fStore').value;
+      const grp = document.getElementById('fGroup').value;
+      const gd = document.getElementById('fGuide').value;
+      const df = document.getElementById('fDateFrom').value;
+      const dt = document.getElementById('fDateTo').value;
+      const STATUS = { pending:'待支付', toshipped:'待发货', toreceive:'待收货', completed:'已完成', refunded:'已退款', closed:'已关闭' };
+      const STORE  = { sanya:'三亚国际免税城', haikou:'海口日月广场免税店' };
+      const GROUP  = { g1:'香化一组（68680401）', g2:'香化二组（68680402）', g3:'香化三组（68680403）' };
+      const GUIDE  = { lin:'林小婷', wang:'王小丽', zhang:'张美琪', liu:'刘佳怡' };
+      const out = [];
+      Object.keys(orderDetails).forEach(no => {
+        const o = orderDetails[no];
+        if (st && o.status.text !== STATUS[st]) return;
+        if (store && !o.products.some(p => p.store === STORE[store])) return;
+        if (grp && !o.products.some(p => p.group === GROUP[grp])) return;
+        if (gd && !o.products.some(p => p.guide === GUIDE[gd])) return;
+        if (kw) {
+          const hay = (no + o.user + o.phone + o.products.map(p => p.name).join('')).toLowerCase();
+          if (!hay.includes(kw)) return;
+        }
+        if (df && o.time.slice(0,10) < df) return;
+        if (dt && o.time.slice(0,10) > dt) return;
+        out.push({ no, o });
+      });
+      return out;
+    }
+
+    function renderTable(list) {
+      const tbody = document.getElementById('orderTableBody');
+      tbody.innerHTML = '';
+      list.forEach(r => {
+        const o = r.o, no = r.no;
+        const tr = document.createElement('tr');
+        tr.className = 'table-row transition';
+        tr.innerHTML =
+          '<td class="px-5 py-4 font-medium text-gray-800">' + no + '</td>' +
+          '<td class="px-5 py-4 text-gray-500">' + o.phone + '</td>' +
+          '<td class="px-5 py-4 font-medium text-gray-800">' + fmt(o.amount) + '</td>' +
+          '<td class="px-5 py-4">' + perfCell(o) + '</td>' +
+          '<td class="px-5 py-4 text-gray-500">' + o.time.slice(0,16) + '</td>' +
+          '<td class="px-5 py-4"><span class="px-2 py-0.5 ' + o.status.cls + ' text-xs rounded">' + o.status.text + '</span></td>' +
+          '<td class="px-5 py-4 text-right"><button onclick="openOrderDetail(\'' + no + '\')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td>';
+        tbody.appendChild(tr);
+      });
+      renderTotal(list);
+    }
+
+    function renderTotal(list) {
+      const count = list.length;
+      const amt = list.reduce((s, r) => s + r.o.amount, 0);
+      let perf = 0;
+      list.forEach(r => {
+        if (r.o.status.text === '已完成') r.o.products.forEach(p => { if (p.refund === 'none') perf += p.price; });
+      });
+      document.getElementById('tableSummary').innerHTML =
+        '共 <span class="font-medium text-gray-800">' + count + '</span> 笔 · ' +
+        '订单金额合计 <span class="font-medium text-gray-800">' + fmt(amt) + '</span> · ' +
+        '计入导购业绩合计 <span class="font-medium text-coral-600">' + fmt(perf) + '</span>';
+    }
+
+    function rerender() { renderTable(getFiltered()); }
+
+    ['fSearch','fStatus','fStore','fGroup','fGuide','fDateFrom','fDateTo'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener(id === 'fSearch' ? 'input' : 'change', rerender);
+    });
+
+    function openOrderDetail(orderNo) {
+      const d = orderDetails[orderNo];
+      document.getElementById('detailOrderNo').textContent = orderNo;
+      document.getElementById('detailUser').textContent = d.user;
+      document.getElementById('detailPhone').textContent = d.phone;
+      document.getElementById('detailTime').textContent = d.time;
+      const st = document.getElementById('detailStatus');
+      st.textContent = d.status.text;
+      st.className = 'px-2 py-0.5 ' + d.status.cls + ' text-xs rounded';
+
+      const isCompleted = d.status.text === '已完成';
+      const box = document.getElementById('detailProducts');
+      box.innerHTML = '';
+      let hasRefund = false;
+      d.products.forEach(p => {
+        if (p.refund !== 'none') hasRefund = true;
+        const el = document.createElement('div');
+        el.className = 'flex items-start gap-3 bg-gray-50 rounded-xl p-3';
+        el.innerHTML =
+          '<div class="w-14 h-14 rounded-lg bg-coral-50 flex items-center justify-center text-coral-600 shrink-0"><i class="fas ' + p.icon + ' text-lg"></i></div>' +
+          '<div class="flex-1"><p class="font-medium text-gray-800 text-sm">' + p.name + '</p>' +
+          '<p class="text-xs text-gray-500 mt-1">规格：' + p.spec + ' · 数量：×' + p.qty + '</p>' +
+          '<div class="mt-1.5">' + productPerfLine(p, isCompleted) + '</div></div>';
+        box.appendChild(el);
+      });
+      document.getElementById('detailProductCount').textContent = d.products.length;
+
+      // 导购业绩归因汇总：仅已完成订单中未退款商品计入
+      const counted = {};
+      if (isCompleted) {
+        d.products.forEach(p => { if (p.refund === 'none') counted[p.guide] = (counted[p.guide] || 0) + p.price; });
+      }
+      const perfBox = document.getElementById('detailPerf');
+      perfBox.innerHTML = '';
+      if (!isCompleted) {
+        perfBox.innerHTML = '<p class="text-xs text-gray-400">本订单状态为「' + d.status.text + '」，整单不计入任何导购业绩。</p>';
+      } else if (Object.keys(counted).length === 0) {
+        perfBox.innerHTML = '<p class="text-xs text-gray-400">本订单已完成，但商品均已退款，无导购业绩计入。</p>';
+      } else {
+        Object.keys(counted).forEach(g => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between text-sm';
+          row.innerHTML = '<span class="text-gray-600">' + g + '</span><span class="font-bold text-coral-600">' + fmt(counted[g]) + '</span>';
+          perfBox.appendChild(row);
+        });
+        if (hasRefund) {
+          const note = document.createElement('p');
+          note.className = 'text-xs text-gray-400 mt-1';
+          note.textContent = '注：本订单含退款商品，对应导购业绩已扣除。';
+          perfBox.appendChild(note);
+        }
+      }
+
+      const subtotal = d.products.reduce((s, p) => s + p.price, 0);
+      const paid = subtotal - d.discount - d.platform - d.coupon - d.point + d.ship;
+      document.getElementById('amtSubtotal').textContent = fmt(subtotal);
+      document.getElementById('amtDiscount').textContent = '-' + fmt(d.discount);
+      document.getElementById('amtPlatform').textContent = '-' + fmt(d.platform);
+      document.getElementById('amtCoupon').textContent = '-' + fmt(d.coupon);
+      document.getElementById('amtPoint').textContent = '-' + fmt(d.point);
+      document.getElementById('amtShip').textContent = fmt(d.ship);
+      document.getElementById('amtPaid').textContent = fmt(paid);
+
+      document.getElementById('orderDetailModal').classList.remove('hidden');
+    }
+    function closeOrderDetail() {
+      document.getElementById('orderDetailModal').classList.add('hidden');
+    }
+
+    rerender();
+  </script>
+</body>
+</html>
