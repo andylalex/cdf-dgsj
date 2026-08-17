@@ -48,6 +48,11 @@
     .product-card { box-shadow: 0 1px 2px rgba(16,24,40,.05); transition: box-shadow .2s ease, transform .15s ease; }
     .product-card:active { transform: scale(.99); }
     .code-pill { background: #f4f5f7; color: #8a8f99; border-radius: 5px; padding: 1px 6px; font-size: 11px; }
+    .stock-pill { padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 500; display: inline-flex; align-items: center; gap: 3px; }
+    .stock-pill.store { background: #ecfdf5; color: #059669; border: 1px solid #d1fae5; }
+    .stock-pill.warehouse { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
+    .stock-pill.out { background: #fff1f2; color: #e11d48; border: 1px solid #ffe4e6; }
+    .stock-pill.zero { background: #f3f4f6; color: #9ca3af; border: 1px solid #e5e7eb; }
   </style>
 </head>
 <body class="bg-gray-200">
@@ -112,28 +117,6 @@
         <!-- 二级分类（随左导航切换，我的柜组无二级分类） -->
         <div id="subCatBar" class="sticky top-0 z-10 -mx-2 px-3 py-2 bg-[#f2f3f5] flex items-center gap-2 overflow-x-auto hide-scrollbar shrink-0 hidden"></div>
 
-        <!-- 商品 2（有货） -->
-        <div class="product-item">
-          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
-            <div class="flex gap-3">
-              <div class="relative shrink-0">
-                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
-                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
-                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-coral-500" title="已收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-[13px] text-gray-800 font-medium leading-tight">香奈儿五号香水 50ml</p>
-                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-ok">总库存：218</span><span class="font-mono code-pill">C001930SY</span></div>
-                <span class="gov-tag mt-1">三亚店政府消费券</span>
-                <div class="mt-2 flex items-center justify-between">
-                  <span class="price text-lg font-bold">¥745.00</span>
-                  <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- 商品 4（有货） -->
         <div class="product-item">
           <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
@@ -145,8 +128,12 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">浪凡光韵女士浓香水50ml</p>
-                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-ok">总库存：270</span><span class="font-mono code-pill">C016080</span></div>
-                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 270</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商仓 88</span>
+                  <span class="font-mono code-pill">C016080</span>
+                </div>
+                <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
                   <span class="price text-lg font-bold">¥394.00</span>
                   <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
@@ -167,8 +154,12 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">迪奥真我香水 EDT 100ml</p>
-                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-ok">总库存：156</span><span class="font-mono code-pill">C017002</span></div>
-                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 156</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商仓 203</span>
+                  <span class="font-mono code-pill">C017002</span>
+                </div>
+                <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
                   <span class="price text-lg font-bold">¥1,280.00</span>
                   <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
@@ -178,7 +169,7 @@
           </div>
         </div>
 
-        <!-- 商品 1（售罄·沉底·禁用） -->
+        <!-- 商品 1（有货） -->
         <div class="product-item">
           <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
             <div class="flex gap-3">
@@ -189,10 +180,40 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight line-clamp-2">兰蔻奇迹香水 100ml</p>
-                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-out">总库存：售罄</span><span class="font-mono code-pill">C000277</span></div>
-                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 36</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商仓 52</span>
+                  <span class="font-mono code-pill">C000277</span>
+                </div>
+                <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
-                  <span class="price text-lg font-bold">¥0.10</span>
+                  <span class="price text-lg font-bold">¥620.00</span>
+                  <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品 2（0库存·沉底·禁用） -->
+        <div class="product-item">
+          <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
+            <div class="flex gap-3">
+              <div class="relative shrink-0">
+                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop" class="w-20 h-20 rounded-lg object-cover bg-gray-100 shrink-0 ring-1 ring-black/5" alt="">
+                <!-- 收藏：图片左上角，实心星标（选中橙色/未选中白色低透明） -->
+                <button type="button" onclick="toggleFavorite(this)" class="fav-btn absolute top-0.5 left-0.5 z-10 text-coral-500" title="已收藏"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] text-gray-800 font-medium leading-tight">香奈儿五号香水 50ml</p>
+                <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商仓 0</span>
+                  <span class="font-mono code-pill">C001930SY</span>
+                </div>
+                <span class="gov-tag mt-1.5">三亚店政府消费券</span>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="price text-lg font-bold">¥745.00</span>
                   <button class="manage-btn-gray" disabled>推荐</button>
                 </div>
               </div>
@@ -200,7 +221,7 @@
           </div>
         </div>
 
-        <!-- 商品 3（售罄·沉底·禁用） -->
+        <!-- 商品 3（0库存·沉底·禁用） -->
         <div class="product-item">
           <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
             <div class="flex gap-3">
@@ -211,8 +232,12 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">兰蔻珍爱香水两支装 30ML</p>
-                <div class="mt-1 flex items-center gap-2 text-xs text-gray-500"><span class="stock-out">总库存：售罄</span><span class="font-mono code-pill">C000365</span></div>
-                <span class="gov-tag mt-1">三亚店政府消费券</span>
+                <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商仓 0</span>
+                  <span class="font-mono code-pill">C000365</span>
+                </div>
+                <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
                   <span class="price text-lg font-bold">¥580.00</span>
                   <button class="manage-btn-gray" disabled>推荐</button>
