@@ -25,6 +25,8 @@
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     #drawer { transition: transform .28s cubic-bezier(.4,0,.2,1); }
+    #toast { transition: opacity .3s ease, transform .3s ease; }
+    #toast.show { opacity:1; transform: translate(-50%,0); }
     .tpl-card.active { border-color:#ff6b52; box-shadow:0 0 0 3px rgba(255,107,82,.18); }
   </style>
 </head>
@@ -141,6 +143,9 @@
     </div>
   </div>
 
+  <!-- 轻提示 -->
+  <div id="toast" class="fixed left-1/2 bottom-8 z-[60] opacity-0 pointer-events-none bg-gray-900/90 text-white text-sm px-4 py-2.5 rounded-xl shadow-lg">提示</div>
+
   <script>
     /* ---------- 数据 ---------- */
     const PRODUCTS = [
@@ -189,11 +194,11 @@
     }
 
     let themes = [
-      { id:'t1', name:'玫瑰金臻选 · 限时 9 件', subtitle:'限时甄选 · 专柜直供', template:'card1', status:'published',
+      { id:'t1', name:'玫瑰金臻选 · 限时 9 件', subtitle:'限时甄选 · 专柜直供', template:'card1', status:'published', enabled:true,
         elements: Object.assign(defaultElements('card1'), { hero:prodEl('p1'), c1:prodEl('p2'), c2:prodEl('p3'), c3:prodEl('p4'), c4:prodEl('p5'), c5:prodEl('p6'), c6:prodEl('p7'), c7:prodEl('p8'), c8:prodEl('p9') }) },
-      { id:'t2', name:'七夕甄礼 · 项链精选', subtitle:'七夕限定企划', template:'card2', status:'published',
+      { id:'t2', name:'七夕甄礼 · 项链精选', subtitle:'七夕限定企划', template:'card2', status:'published', enabled:false,
         elements: Object.assign(defaultElements('card2'), { a1:prodEl('p5'), a2:prodEl('p10'), a3:prodEl('p11'), b1:prodEl('p12'), b2:prodEl('p14'), c1:prodEl('p13'), c2:prodEl('p15'), c3:prodEl('p16'), d1:prodEl('p6'), d2:prodEl('p7') }) },
-      { id:'t3', name:'盛夏腕表甄选', subtitle:'', template:'card1', status:'draft',
+      { id:'t3', name:'盛夏腕表甄选', subtitle:'', template:'card1', status:'draft', enabled:true,
         elements: Object.assign(defaultElements('card1'), { hero:prodEl('p1'), c1:prodEl('p2'), c2:prodEl('p3'), c3:prodEl('p4'), c4:prodEl('p8'), c5:prodEl('p9'), c6:prodEl('p5'), c7:prodEl('p6'), c8:prodEl('p7') }) }
     ];
 
@@ -230,16 +235,24 @@
       $('list').innerHTML = items.map(t=>{
         const cnt = Object.values(t.elements).filter(isFilledProduct).length;
         const badge = t.template==='card1'
-          ? `<span class="tag bg-amber-50 text-amber-600"><i class="fas fa-image mr-1"></i>模板1 · 大图+九宫格</span>`
+          ? `<span class="tag bg-amber-50 text-amber-600"><i class="fas fa-image mr-1"></i>模板1 · 大图+八宫格</span>`
           : `<span class="tag bg-rose-50 text-rose-600"><i class="fas fa-th-large mr-1"></i>模板2 · 杂志拼贴</span>`;
-        return `<div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition cursor-pointer w-[300px] shrink-0" onclick="openDrawer('${t.id}')">
-          ${themeThumb(t)}
+        const disabled = t.enabled===false;
+        const cardCls = disabled
+          ? 'bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition cursor-pointer w-[300px] shrink-0 opacity-70'
+          : 'bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition cursor-pointer w-[300px] shrink-0';
+        const toggleBtn = disabled
+          ? `<button onclick="toggleEnable('${t.id}')" class="flex-1 text-xs text-emerald-600 hover:bg-emerald-50 rounded-lg py-2 transition"><i class="fas fa-play mr-1"></i>启用</button>`
+          : `<button onclick="toggleEnable('${t.id}')" class="flex-1 text-xs text-orange-500 hover:bg-orange-50 rounded-lg py-2 transition"><i class="fas fa-pause mr-1"></i>停用</button>`;
+        return `<div class="${cardCls}" onclick="openDrawer('${t.id}')">
+          <div class="relative">${themeThumb(t)}</div>
           <div class="p-4">
             <div class="flex items-center gap-2 mb-2 flex-wrap">${badge}</div>
             <p class="font-semibold text-gray-800 text-sm truncate">${escapeHtml(t.name)}</p>
             <p class="text-xs text-gray-400 mt-1">${cnt} 款商品</p>
             <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100" onclick="event.stopPropagation()">
               <button onclick="openDrawer('${t.id}')" class="flex-1 text-xs text-coral-600 hover:bg-coral-50 rounded-lg py-2 transition"><i class="fas fa-edit mr-1"></i>编辑</button>
+              ${toggleBtn}
               <button onclick="deleteTheme('${t.id}')" class="flex-1 text-xs text-gray-500 hover:bg-red-50 hover:text-red-500 rounded-lg py-2 transition"><i class="fas fa-trash mr-1"></i>删除</button>
             </div>
           </div>
@@ -250,7 +263,7 @@
     /* ---------- 模板选择 ---------- */
     function renderTplPicker(){
       const tpls = [
-        { k:'card1', t:'模板1', d:'大图横幅 + 4×2 商品九宫格（共 9 商品格）',
+        { k:'card1', t:'模板1', d:'大图横幅 + 4×2 小图（共 9 商品格）',
           thumb:`<div class="h-14 rounded-md overflow-hidden bg-gray-100 flex flex-col"><div class="h-1/2 bg-gradient-to-br from-amber-200 to-coral-200"></div><div class="h-1/2 grid grid-cols-4 grid-rows-2 gap-px bg-gray-200 p-px">${Array.from({length:8}).map(()=>'<div class="bg-gray-200"></div>').join('')}</div></div>` },
         { k:'card2', t:'模板2', d:'4 列杂志拼贴（10 商品格 + 2 文本格）',
           thumb:`<div class="h-14 rounded-md overflow-hidden bg-white border border-gray-100 p-1 flex gap-1"><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div></div><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="h-2 bg-gray-100"></div><div class="flex-1 bg-rose-200"></div></div><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div></div><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="h-2 bg-gray-100"></div><div class="flex-1 bg-rose-200"></div></div></div>` }
@@ -440,7 +453,7 @@
           html += `<hr class="my-4 border-gray-100">
             <p class="text-xs font-semibold text-coral-600 mb-2">文本格子 · <span class="font-mono">${id}</span></p>
             <div class="space-y-2">
-              <div><label class="text-xs text-gray-500">小标签 Kicker</label><input oninput="onElInput('kicker',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.kicker)}"></div>
+              <div><label class="text-xs text-gray-500">小标签</label><input oninput="onElInput('kicker',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.kicker)}"></div>
               <div><label class="text-xs text-gray-500">标题（可换行）</label><textarea oninput="onElInput('title',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300">${escapeHtml(el.title)}</textarea></div>
               <div><label class="text-xs text-gray-500">说明文字</label><input oninput="onElInput('sub',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.sub)}"></div>
             </div>`;
@@ -509,6 +522,24 @@
       if(pendingDelete) themes = themes.filter(x=>x.id!==pendingDelete);
       closeConfirm();
       renderList();
+    }
+
+    /* ---------- 停用 / 启用 ---------- */
+    function toggleEnable(id){
+      const t = themes.find(x=>x.id===id);
+      if(!t) return;
+      t.enabled = !(t.enabled===true);
+      renderList();
+      showToast(t.enabled===true ? ('已启用「'+t.name+'」') : ('已停用「'+t.name+'」'));
+    }
+    let toastTimer = null;
+    function showToast(msg){
+      const el = $('toast');
+      if(!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> el.classList.remove('show'), 2200);
     }
 
     /* ---------- 初始化 ---------- */
