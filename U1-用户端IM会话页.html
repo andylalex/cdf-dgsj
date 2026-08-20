@@ -46,188 +46,58 @@
 
     <!-- 聊天区 -->
     <div id="chat" class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4 bg-gray-50">
-      <div class="text-center text-xs text-gray-400">今天 14:30</div>
-
-      <!-- 商品图集卡片 1：大图满宽 + 两行4张小图（专题活动） -->
-      <div class="flex gap-2.5" id="card1">
-        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=linxiaoting" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="">
-        <div class="max-w-[92%] w-full">
-          <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-gray-100">
-            <div class="px-3 py-2.5 border-b border-gray-50">
-              <span class="text-sm font-semibold text-gray-800">玫瑰金臻选 · 限时 9 件</span>
-            </div>
-            <!-- 大图撑满卡片宽度 · 长方形横幅 -->
-            <div class="relative">
-              <img src="assets/generated/a1.png" class="w-full aspect-[4/3] object-cover" alt="Cartier LOVE 手镯">
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3">
-                <p class="text-white text-sm font-bold">Cartier LOVE 手镯</p>
-                <p class="text-white/90 text-xs mt-0.5">¥42,900</p>
-              </div>
-            </div>
-            <!-- 小图：两行每行 4 张 · 正方形 -->
-            <div class="grid grid-cols-4 gap-1 p-1">
-              <img src="assets/generated/a2.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a3.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a4.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a5.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a6.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a7.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a8.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-              <img src="assets/generated/a9.png" class="w-full aspect-square object-cover rounded-lg" alt="">
-            </div>
-          </div>
-          <span class="text-[10px] text-gray-400 mt-1 ml-1">14:35</span>
-        </div>
-      </div>
-
-      <div class="text-center text-xs text-gray-400">今天 14:40</div>
-
-      <!-- 商品图集卡片 2：杂志风网格（每列 2 张，贴合边缘，专题活动） -->
-      <div class="flex gap-2.5" id="card2">
-        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=linxiaoting" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="">
-        <div class="max-w-[92%] w-full">
-          <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-gray-100">
-            <!-- 杂志风：单列同步横滑错落带 · 10 款商品 + 编辑文案瓦片融入布局 -->
-            <div class="px-3 py-3">
-              <div class="flex flex-col gap-2 h-[500px]">
-                <!-- 头部 -->
-                <div class="flex items-end justify-between">
-                  <div>
-                    <p class="text-[9px] text-coral-600 font-semibold tracking-[0.2em] uppercase">Editor's Pick</p>
-                    <p class="text-sm font-bold text-gray-800 mt-0.5">七夕甄礼 · 项链精选</p>
-                  </div>
-                  <span class="text-[10px] text-gray-400">滑动浏览 ›</span>
-                </div>
-                <!-- 同步横向滚动：错落图片带（4 列混排，高矮不一、上下错位） -->
-                <div class="flex-1 overflow-x-auto hide-scrollbar">
-                  <div class="flex gap-3 h-full items-start pr-3">
-                    <!-- 列 A -->
-                    <div class="w-[160px] shrink-0 flex flex-col gap-3">
-                      <div class="relative w-full h-[170px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b1.png" class="w-full h-full object-cover" alt="Alhambra 四叶项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Van Cleef &amp; Arpels</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Alhambra 四叶项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥28,800</p>
-                        </div>
-                      </div>
-                      <div class="relative w-full h-[130px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b2.png" class="w-full h-full object-cover" alt="Tiffany Keys 钥匙项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Tiffany &amp; Co.</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Tiffany Keys 钥匙项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥12,500</p>
-                        </div>
-                      </div>
-                      <div class="relative w-full h-[100px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b3.png" class="w-full h-full object-cover" alt="Divas' Dream 扇子项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Bvlgari</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Divas' Dream 扇子项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥19,800</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- 列 B（下移错落） -->
-                    <div class="w-[160px] shrink-0 flex flex-col gap-3 mt-8">
-                      <div class="relative w-full h-[120px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b4.png" class="w-full h-full object-cover" alt="Amulette 护身符项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Cartier</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Amulette 护身符项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥16,200</p>
-                        </div>
-                      </div>
-                      <!-- 文字区块（透明·与商品混排于列内） -->
-                      <div class="relative w-full rounded-xl bg-transparent p-3 flex flex-col justify-center gap-1.5">
-                        <p class="text-[9px] text-coral-600 font-semibold tracking-[0.2em] uppercase">Editorial</p>
-                        <p class="text-gray-800 text-xl font-bold leading-[1.15]">把爱<br>戴在颈间</p>
-                        <p class="text-[11px] text-gray-400 leading-snug">10 款臻选 · 七夕限定企划</p>
-                      </div>
-                      <div class="relative w-full h-[150px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b5.png" class="w-full h-full object-cover" alt="Happy Hearts 心形项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Chopard</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Happy Hearts 心形项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥14,600</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- 列 C -->
-                    <div class="w-[160px] shrink-0 flex flex-col gap-3">
-                      <div class="relative w-full h-[145px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b6.png" class="w-full h-full object-cover" alt="Rose des vents 罗盘项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Dior</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Rose des vents 罗盘项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥15,800</p>
-                        </div>
-                      </div>
-                      <div class="relative w-full h-[120px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b7.png" class="w-full h-full object-cover" alt="Flora 花卉项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Gucci</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Flora 花卉项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥13,900</p>
-                        </div>
-                      </div>
-                      <div class="relative w-full h-[140px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b8.png" class="w-full h-full object-cover" alt="Farandole 环扣项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Hermès</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Farandole 环扣项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥17,500</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- 列 D（下移错落） -->
-                    <div class="w-[160px] shrink-0 flex flex-col gap-3 mt-10">
-                      <div class="relative w-full h-[150px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b9.png" class="w-full h-full object-cover" alt="Color Blossom 花朵项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Louis Vuitton</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Color Blossom 花朵项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥18,400</p>
-                        </div>
-                      </div>
-                      <!-- 文字区块（透明·与商品混排于列内） -->
-                      <div class="relative w-full rounded-xl bg-transparent p-3 flex flex-col justify-center gap-1.5">
-                        <p class="text-[9px] text-coral-600 font-semibold tracking-[0.2em] uppercase">Price</p>
-                        <p class="text-gray-800 text-xl font-bold leading-[1.15]">¥12,500 <span class="text-[11px] font-medium text-gray-400">起</span></p>
-                        <p class="text-[11px] text-gray-400 leading-snug">政府消费券可叠加 · 专属导购 1v1</p>
-                      </div>
-                      <div class="relative w-full h-[115px] rounded-xl overflow-hidden">
-                        <img src="assets/generated/b10.png" class="w-full h-full object-cover" alt="Bee My Love 蜂巢项链">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2.5">
-                          <p class="text-white/75 text-[9px] tracking-[0.15em] uppercase">Chaumet</p>
-                          <p class="text-white text-[13px] font-semibold leading-snug mt-0.5">Bee My Love 蜂巢项链</p>
-                          <p class="text-coral-300 text-[13px] font-bold mt-0.5">¥21,300</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span class="text-[10px] text-gray-400 mt-1 ml-1">14:42</span>
-        </div>
-      </div>
-
       <div class="text-center text-xs text-gray-400">今天 14:45</div>
 
-      <!-- 商品图集卡片 3：单图海报 -->
+      <!-- 品牌推荐卡片（G3 品牌卡样式）：兰蔻 -->
       <div class="flex gap-2.5">
         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=linxiaoting" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="">
         <div class="max-w-[92%] w-full">
-          <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-gray-100 relative">
-            <img src="assets/generated/c1.png" class="w-full h-80 object-cover" alt="Hermès Kelly 25">
-            <div class="absolute top-3 left-3">
-              <span class="bg-coral-500 text-white text-[10px] px-2 py-1 rounded-full font-medium">政府消费券</span>
+          <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100">
+            <div class="px-3 py-1.5 flex items-center justify-between gap-2 border-b border-gray-50">
+              <div class="flex items-center gap-2">
+                <img src="assets/brands/兰蔻.jpg" class="w-9 h-9 rounded-full object-contain bg-white border border-gray-100" alt="兰蔻">
+                <span class="text-sm font-semibold text-gray-800">兰蔻</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] text-gray-500">在售 12 件</span>
+                <a href="G4-推荐商品页.html" class="text-[10px] bg-coral-500 hover:bg-coral-600 text-white px-2.5 py-1 rounded-full font-medium transition shadow-sm">进入品牌馆 ›</a>
+              </div>
             </div>
-            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4">
-              <p class="text-white text-base font-bold">经典橙 · Kelly 25</p>
-              <p class="text-white/90 text-xs mt-0.5">Hermès 新季首发</p>
+            <div class="relative bg-gray-900">
+              <img src="assets/brands/兰蔻视觉.jpg" class="w-full aspect-[25/14] object-cover" alt="兰蔻视觉">
+            </div>
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 ml-1">14:45</span>
+        </div>
+      </div>
+
+      <!-- 单品推荐卡片（G3 单品卡样式）：Kelly 25 -->
+      <div class="flex gap-2.5">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=linxiaoting" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="">
+        <div class="max-w-[92%] w-full">
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+            <div class="relative">
+              <img src="assets/generated/c1.png" class="w-full h-72 object-cover" alt="爱马仕 Kelly 25">
+              <div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1 max-w-[72%]">
+                <span class="bg-amber-500 text-white text-[10px] leading-none px-2 py-1 rounded-md font-medium shadow-sm">一口价</span>
+                <span class="bg-amber-500 text-white text-[10px] leading-none px-2 py-1 rounded-md font-medium shadow-sm">赠品</span>
+                <span class="bg-amber-500 text-white text-[10px] leading-none px-2 py-1 rounded-md font-medium shadow-sm">券</span>
+                <span class="bg-amber-500 text-white text-[10px] leading-none px-2 py-1 rounded-md font-medium shadow-sm">2件6折</span>
+                <span class="bg-emerald-500 text-white text-[10px] leading-none px-2 py-1 rounded-md font-medium shadow-sm">政府消费券</span>
+              </div>
+            </div>
+            <div class="p-3.5">
+              <div class="flex items-center gap-1.5">
+                <span class="inline-flex items-center gap-0.5 bg-coral-50 text-coral-600 text-[10px] font-semibold px-1.5 py-0.5 rounded shrink-0">离岛免税</span>
+                <span class="text-sm font-semibold text-gray-800 leading-snug truncate">爱马仕Kelly 25 · 经典橙</span>
+              </div>
+              <div class="mt-3 flex items-end gap-3">
+                <div class="flex items-baseline gap-0.5">
+                  <span class="text-[13px] text-coral-600 font-semibold">¥</span>
+                  <span class="text-2xl font-bold text-coral-600 leading-none">72,000</span>
+                </div>
+                <span class="text-sm text-gray-400 line-through leading-none pb-0.5">¥88,000</span>
+              </div>
             </div>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1">14:48</span>
@@ -279,12 +149,13 @@
               </div>
               <p class="text-xs text-gray-400">适用于：全品类 · 限本单使用</p>
               <p class="text-[10px] text-gray-400 mt-2">有效期至 2026-08-31 23:59</p>
-              <div class="w-full mt-3 bg-gray-100 text-gray-400 py-2 rounded-xl text-sm font-semibold text-center">已领取</div>
-            </div>
+          <div class="w-full mt-3 bg-gray-100 text-gray-400 py-2 rounded-xl text-sm font-semibold text-center">已领取</div>
           </div>
-          <span class="text-[10px] text-gray-400 mt-1 ml-1">14:52</span>
         </div>
+        <span class="text-[10px] text-gray-400 mt-1 ml-1">14:52</span>
       </div>
+
+    </div>
 
     </div>
 

@@ -53,6 +53,29 @@
     .stock-pill.warehouse { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
     .stock-pill.out { background: #fff1f2; color: #e11d48; border: 1px solid #ffe4e6; }
     .stock-pill.zero { background: #f3f4f6; color: #9ca3af; border: 1px solid #e5e7eb; }
+    /* 推荐品牌功能卡片（品牌分类时显示在第一位） */
+    .brand-feature { background: #fff; border: 1px solid #f0f0f0; box-shadow: 0 2px 8px rgba(16,24,40,.05); }
+    .bf-pill { position: relative; flex: 0 0 auto; width: 90px; padding: 5px; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; cursor: pointer; transition: all .15s ease; }
+    .bf-pill:hover { border-color: #ff6b52; box-shadow: 0 2px 8px rgba(255,107,82,.10); }
+    .bf-pill:active { transform: scale(.96); }
+    .bf-pill img { width: 100%; height: 62px; object-fit: contain; border-radius: 8px; background: #fff; }
+    .bf-pill .check { display: none; position: absolute; top: 3px; right: 3px; width: 17px; height: 17px; border-radius: 50%; background: #ff6b52; color: #fff; align-items: center; justify-content: center; font-size: 9px; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+    .bf-name { font-size: 11px; color: #555; line-height: 1.1; margin-top: 3px; }
+    .bf-pill.recommended { border-color: #ff6b52; background: #fff5f2; }
+    .bf-pill.recommended .bf-name { color: #ff6b52; font-weight: 600; }
+    .bf-pill.recommended .check { display: inline-flex; }
+    .bf-more { flex: 0 0 auto; display: inline-flex; flex-direction: row; align-items: center; gap: 3px; padding: 6px 8px; border: 1px dashed #ffb0a0; border-radius: 12px; color: #ff6b52; cursor: pointer; }
+    .bf-more-text { writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 2px; font-size: 13px; }
+    .bf-more:active { background: #fff5f2; }
+    /* 全部品牌视图（从右侧滑入，覆盖商品列表区，左导航不动） */
+    .ab-view { position: absolute; inset: 0; z-index: 20; background: #f2f3f5; transform: translateX(100%); transition: transform .3s ease; overflow-y: auto; }
+    .ab-view.open { transform: translateX(0); }
+    .ab-tile { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px; background: #fff; border: 1px solid #f0f0f0; border-radius: 14px; cursor: pointer; transition: all .15s ease; }
+    .ab-tile:active { transform: scale(.97); }
+    .ab-tile img { width: 56px; height: 56px; object-fit: contain; border-radius: 50%; background: #fff; border: 1px solid #f2f2f2; }
+    .ab-tile .bn { font-size: 13px; color: #333; }
+    .ab-tile.recommended { border-color: #ff6b52; background: #fff5f2; }
+    .ab-tile.recommended .bn { color: #ff6b52; font-weight: 600; }
   </style>
 </head>
 <body class="bg-gray-200">
@@ -98,8 +121,8 @@
       <aside id="sidebar" class="w-24 bg-[#f7f7f7] overflow-y-auto hide-scrollbar shrink-0 border-r border-gray-100">
         <ul class="text-sm text-gray-700">
           <li data-cat="我的收藏" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">我的收藏</p></li>
-          <li data-cat="我的柜组" onclick="selectCat(this)" class="cat-active cat-item px-3 py-3 text-center border-b border-gray-100"><i class="fas fa-box text-gray-500"></i><p class="mt-1 text-[12px]">我的柜组</p></li>
-          <li data-cat="女士腕表" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女士腕表</p></li>
+          <li data-cat="我的柜组" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><i class="fas fa-box text-gray-500"></i><p class="mt-1 text-[12px]">我的柜组</p></li>
+          <li data-cat="女士腕表" onclick="selectCat(this)" class="cat-active cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女士腕表</p></li>
           <li data-cat="男包" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">男包</p></li>
           <li data-cat="首饰" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">首饰</p></li>
           <li data-cat="手机" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">手机</p></li>
@@ -112,10 +135,22 @@
       </aside>
 
       <!-- 右侧商品列表 -->
-      <main class="flex-1 overflow-y-auto hide-scrollbar p-2 space-y-2 bg-[#f2f3f5]">
+      <main class="flex-1 overflow-y-auto hide-scrollbar p-2 space-y-2 bg-[#f2f3f5] relative">
 
-        <!-- 二级分类（随左导航切换，我的柜组无二级分类） -->
+        <!-- 二级分类（随左导航切换；我的收藏/我的柜组无二级分类） -->
         <div id="subCatBar" class="sticky top-0 z-10 -mx-2 px-3 py-2 bg-[#f2f3f5] flex items-center gap-2 overflow-x-auto hide-scrollbar shrink-0 hidden"></div>
+
+        <!-- 推荐品牌功能卡片（仅品牌分类时显示，置顶第一位） -->
+        <div id="brandFeatureCard" class="product-item hidden">
+          <div class="brand-feature rounded-2xl p-3">
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="w-6 h-6 rounded-full bg-coral-50 flex items-center justify-center"><i class="fas fa-bullhorn text-coral-500 text-xs"></i></span>
+              <h3 class="text-[14px] font-semibold text-gray-800">推荐品牌</h3>
+              <span class="text-[11px] text-gray-400 ml-1">滑动浏览 · 末尾继续滑动看全部</span>
+            </div>
+            <div id="featureBrands" class="flex gap-2 overflow-x-auto hide-scrollbar"></div>
+          </div>
+        </div>
 
         <!-- 商品 4（有货） -->
         <div class="product-item">
@@ -128,10 +163,10 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">浪凡光韵女士浓香水50ml</p>
+                <div class="mt-1"><span class="font-mono code-pill">C016080</span></div>
                 <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
                   <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 270</span>
-                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商仓 88</span>
-                  <span class="font-mono code-pill">C016080</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>柜组 88</span>
                 </div>
                 <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
@@ -154,10 +189,10 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">迪奥真我香水 EDT 100ml</p>
+                <div class="mt-1"><span class="font-mono code-pill">C017002</span></div>
                 <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
                   <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 156</span>
-                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商仓 203</span>
-                  <span class="font-mono code-pill">C017002</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>柜组 120</span>
                 </div>
                 <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
@@ -169,7 +204,7 @@
           </div>
         </div>
 
-        <!-- 商品 1（有货） -->
+        <!-- 商品 1（0库存·沉底·禁用） -->
         <div class="product-item">
           <div class="product-card bg-white rounded-xl p-3 border border-gray-100 relative">
             <div class="flex gap-3">
@@ -180,15 +215,15 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight line-clamp-2">兰蔻奇迹香水 100ml</p>
+                <div class="mt-1"><span class="font-mono code-pill">C000277</span></div>
                 <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
-                  <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 36</span>
-                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商仓 52</span>
-                  <span class="font-mono code-pill">C000277</span>
+                  <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>柜组 0</span>
                 </div>
                 <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
                   <span class="price text-lg font-bold">¥620.00</span>
-                  <button class="manage-btn" onclick="recommendProduct(this)">推荐</button>
+                  <button class="manage-btn-gray" disabled>推荐</button>
                 </div>
               </div>
             </div>
@@ -206,10 +241,10 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">香奈儿五号香水 50ml</p>
+                <div class="mt-1"><span class="font-mono code-pill">C001930SY</span></div>
                 <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
                   <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
-                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商仓 0</span>
-                  <span class="font-mono code-pill">C001930SY</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>柜组 0</span>
                 </div>
                 <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
@@ -232,10 +267,10 @@
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[13px] text-gray-800 font-medium leading-tight">兰蔻珍爱香水两支装 30ML</p>
+                <div class="mt-1"><span class="font-mono code-pill">C000365</span></div>
                 <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px]">
                   <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
-                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商仓 0</span>
-                  <span class="font-mono code-pill">C000365</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>柜组 0</span>
                 </div>
                 <span class="gov-tag mt-1.5">三亚店政府消费券</span>
                 <div class="mt-2 flex items-center justify-between">
@@ -247,9 +282,34 @@
           </div>
         </div>
 
+        <!-- 全部品牌视图（从右侧滑入，覆盖商品列表区；左导航不动；右滑返回） -->
+        <div id="allBrandsView" class="ab-view">
+          <div class="p-3">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-[15px] font-semibold text-gray-800">全部品牌</h3>
+              <span class="text-[12px] text-gray-400">← 右滑返回商品</span>
+            </div>
+            <div id="allBrandsGrid" class="grid grid-cols-2 gap-2.5"></div>
+          </div>
+        </div>
+
       </main>
     </div>
 
+  </div>
+
+  <!-- 确认弹窗（推荐品牌 / 推荐商品共用） -->
+  <div id="confirmModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-8">
+    <div class="bg-white rounded-2xl w-full max-w-[300px] overflow-hidden shadow-xl">
+      <div class="px-5 pt-6 pb-4 flex flex-col items-center text-center">
+        <i class="fas fa-circle-question text-coral-500 text-3xl mb-3"></i>
+        <p id="confirmText" class="text-[14px] text-gray-800 font-medium leading-snug"></p>
+      </div>
+      <div class="flex border-t border-gray-100">
+        <button id="confirmCancel" class="flex-1 py-3 text-[14px] text-gray-500 active:bg-gray-50">取消</button>
+        <button id="confirmOk" class="flex-1 py-3 text-[14px] text-coral-500 font-medium border-l border-gray-100 active:bg-coral-50">确认推荐</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -268,45 +328,149 @@
       }
     }
 
-    // 推荐商品：点击后向顾客推送，按钮变为“已推荐”
+    // 推荐商品：点击后弹窗确认是否推荐给顾客
     function recommendProduct(btn) {
       if (btn.disabled) return;
-      btn.disabled = true;
-      btn.textContent = '已推荐';
-      btn.classList.remove('manage-btn');
-      btn.classList.add('manage-btn-gray');
+      showConfirm('确认要推荐该商品给顾客？', () => {
+        btn.disabled = true;
+        btn.textContent = '已推荐';
+        btn.classList.remove('manage-btn');
+        btn.classList.add('manage-btn-gray');
+      });
     }
 
-    // 左导航分类配置：二级分类改为品牌名称（我的柜组为空 → 不显示二级分类）
+    // 左导航分类配置：我的收藏 / 我的柜组 无二级分类；其余品牌分类共用同一套二级分类（全部 + 上传的美妆品牌）
+    const BRANDS = ['全部', '欧莱雅', '资生堂', '兰蔻', '香奈儿'];
     const subCats = {
-      '我的收藏': ['全部', '最近收藏', '价格从高到低', '价格从低到高'],
+      '我的收藏': [],
       '我的柜组': [],
-      '女士腕表': ['全部', '卡地亚', '欧米茄', '浪琴', '天梭', '雷达'],
-      '男包':     ['全部', '路易威登', '古驰', '普拉达', '蔻驰', '巴宝莉'],
-      '首饰':     ['全部', '卡地亚', '蒂芙尼', '宝格丽', '梵克雅宝', '周大福'],
-      '手机':     ['全部', '苹果', '华为', '三星', '小米', '荣耀'],
-      '红酒':     ['全部', '拉菲', '奔富', '木桐', '作品一号', '黄尾袋鼠'],
-      '精华':     ['全部', '雅诗兰黛', '兰蔻', '海蓝之谜', '修丽可', '资生堂'],
-      '彩妆':     ['全部', '迪奥', '圣罗兰', '香奈儿', '阿玛尼', '魅可'],
-      '女包':     ['全部', '路易威登', '香奈儿', '爱马仕', '古驰', '迪奥'],
-      '太阳镜':   ['全部', '雷朋', '普拉达', '古驰', '宝格丽', '欧克利']
+      '女士腕表': BRANDS,
+      '男包':     BRANDS,
+      '首饰':     BRANDS,
+      '手机':     BRANDS,
+      '红酒':     BRANDS,
+      '精华':     BRANDS,
+      '彩妆':     BRANDS,
+      '女包':     BRANDS,
+      '太阳镜':   BRANDS
+    };
+    // 品牌名 → logo 图片
+    const brandLogos = {
+      '欧莱雅': '欧莱雅.jpg',
+      '资生堂': '资生堂.jpg',
+      '兰蔻':   '兰蔻.jpg',
+      '香奈儿': '香奈儿.jpg'
     };
 
-    // 切换左导航：更新选中态 + 渲染对应二级分类（商品列表保持不变）
+    // 切换左导航：更新选中态 + 渲染二级分类（纯文字按钮）+ 品牌分类时展示推荐品牌卡片
     function selectCat(li) {
       document.querySelectorAll('#sidebar li[data-cat]').forEach(el => el.classList.remove('cat-active'));
       li.classList.add('cat-active');
-      const subs = subCats[li.dataset.cat] || [];
+      const cat = li.dataset.cat;
+      const subs = subCats[cat] || [];
       const bar = document.getElementById('subCatBar');
+      const feature = document.getElementById('brandFeatureCard');
+      const isBrandCat = (cat !== '我的收藏' && cat !== '我的柜组');
       if (subs.length === 0) {
+        // 我的收藏 / 我的柜组：无二级分类，也无推荐品牌卡片
         bar.classList.add('hidden');
         bar.innerHTML = '';
+        feature.classList.add('hidden');
       } else {
         bar.classList.remove('hidden');
+        // 二级分类：纯文字按钮（与「全部」样式一致），无推荐按钮
         bar.innerHTML = subs.map((s, i) =>
           `<button class="chip ${i === 0 ? 'chip-active' : ''}" onclick="selectChip(this)">${s}</button>`
         ).join('');
+        // 品牌分类：商品列表第一位展示「推荐品牌」功能卡片
+        feature.classList.toggle('hidden', !isBrandCat);
       }
+    }
+
+    // 构建推荐品牌卡片内的品牌按钮（含品牌名称）+ 末尾「查看全部」入口
+    function buildFeatureBrands() {
+      const wrap = document.getElementById('featureBrands');
+      const pills = BRANDS.slice(1).map(b => {
+        const logo = brandLogos[b] ? `assets/brands/${brandLogos[b]}` : '';
+        return `<button class="bf-pill" data-name="${b}" onclick="recommendFeatureBrand(this)" title="推荐${b}">
+                  <img src="${logo}" alt="${b}">
+                  <span class="bf-name">${b}</span>
+                  <span class="check"><i class="fas fa-check"></i></span>
+                </button>`;
+      }).join('');
+      wrap.innerHTML = pills +
+        `<button class="bf-more" onclick="openAllBrands()"><span class="bf-more-text">全部品牌</span><i class="fas fa-angle-right"></i></button>`;
+      bindFeatureBrandsGestures();
+    }
+
+    // 全部品牌视图：网格构建
+    function buildAllBrands() {
+      const grid = document.getElementById('allBrandsGrid');
+      grid.innerHTML = BRANDS.slice(1).map(b => {
+        const logo = brandLogos[b] ? `assets/brands/${brandLogos[b]}` : '';
+        return `<div class="ab-tile" data-name="${b}" onclick="recommendAllBrand(this)">
+                  <img src="${logo}" alt="${b}">
+                  <span class="bn">${b}</span>
+                </div>`;
+      }).join('');
+    }
+
+    // 推荐品牌（卡片内）：弹窗确认后标记，并同步全部品牌视图
+    function recommendFeatureBrand(btn) {
+      const name = btn.dataset.name;
+      showConfirm(`确认推荐「${name}」给顾客？`, () => {
+        btn.classList.add('recommended');
+        syncBrandState(name, true);
+      });
+    }
+
+    // 推荐品牌（全部品牌视图内）：弹窗确认后标记，并同步卡片
+    function recommendAllBrand(tile) {
+      const name = tile.dataset.name;
+      showConfirm(`确认推荐「${name}」给顾客？`, () => {
+        tile.classList.add('recommended');
+        syncBrandState(name, true);
+      });
+    }
+
+    // 同步两个视图中同一品牌的推荐态
+    function syncBrandState(name, recommended) {
+      document.querySelectorAll(`.bf-pill[data-name="${name}"]`).forEach(el =>
+        el.classList.toggle('recommended', recommended));
+      document.querySelectorAll(`.ab-tile[data-name="${name}"]`).forEach(el =>
+        el.classList.toggle('recommended', recommended));
+    }
+
+    // 打开 / 关闭 全部品牌视图（左导航保持不动）
+    let allBrandsOpen = false;
+    function openAllBrands() {
+      if (allBrandsOpen) return;
+      allBrandsOpen = true;
+      document.getElementById('allBrandsView').classList.add('open');
+    }
+    function closeAllBrands() {
+      if (!allBrandsOpen) return;
+      allBrandsOpen = false;
+      document.getElementById('allBrandsView').classList.remove('open');
+    }
+
+    // 手势：品牌行滑到末尾继续右滑 → 拉出全部品牌；全部品牌视图右滑 → 返回商品
+    function isAtRight(el) { return el.scrollLeft + el.clientWidth >= el.scrollWidth - 2; }
+    function bindFeatureBrandsGestures() {
+      const fb = document.getElementById('featureBrands');
+      const ab = document.getElementById('allBrandsView');
+      let sx = null, atRight = false;
+      fb.addEventListener('touchstart', e => { atRight = isAtRight(fb); sx = e.touches[0].clientX; }, { passive: true });
+      fb.addEventListener('touchmove', e => {
+        if (atRight && sx !== null && e.touches[0].clientX - sx < -30) { openAllBrands(); sx = null; }
+      }, { passive: true });
+      fb.addEventListener('wheel', e => { if (isAtRight(fb) && e.deltaX > 0) openAllBrands(); }, { passive: true });
+      let ax = null;
+      ab.addEventListener('touchstart', e => { ax = e.touches[0].clientX; }, { passive: true });
+      ab.addEventListener('touchmove', e => {
+        if (ax !== null && e.touches[0].clientX - ax > 30) { closeAllBrands(); ax = null; }
+      }, { passive: true });
+      ab.addEventListener('wheel', e => { if (e.deltaX < 0) closeAllBrands(); }, { passive: true });
     }
 
     // 二级分类：点击切换高亮（视觉态，不改变商品）
@@ -314,6 +478,29 @@
       btn.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
       btn.classList.add('chip-active');
     }
+
+    // 初始化：默认选中「女士腕表」，渲染二级分类与推荐品牌卡片
+    buildFeatureBrands();
+    buildAllBrands();
+    selectCat(document.querySelector('#sidebar li[data-cat="女士腕表"]'));
+
+    // 确认弹窗：通用「确认是否推荐」交互
+    let confirmCallback = null;
+    function showConfirm(text, onOk) {
+      document.getElementById('confirmText').textContent = text;
+      confirmCallback = onOk;
+      document.getElementById('confirmModal').classList.remove('hidden');
+    }
+    function hideConfirm() {
+      document.getElementById('confirmModal').classList.add('hidden');
+      confirmCallback = null;
+    }
+    document.getElementById('confirmCancel').addEventListener('click', hideConfirm);
+    document.getElementById('confirmOk').addEventListener('click', () => {
+      const cb = confirmCallback;
+      hideConfirm();
+      if (cb) cb();
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>离岛免税购物袋</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50: '#fff5f5', 100: '#ffe5e5', 200: '#ffcccc', 300: '#ffaaaa', 400: '#ff7a7a', 500: '#ff6b6b', 600: '#e85d5d', 700: '#d14949', 800: '#b33b3b', 900: '#8f2e2e' },
+            brand: '#E02E24'
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .phone-frame { max-width: 414px; margin: 0 auto; height: 100vh; overflow: hidden; background: #f5f5f5; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="phone-frame shadow-2xl flex flex-col relative">
+    <!-- 顶部标题栏 -->
+    <div class="bg-white h-12 flex items-center justify-between px-4 shrink-0 z-20">
+      <div class="w-8"></div>
+      <h1 class="text-base font-semibold text-gray-900 tracking-wide">离岛免税购物袋</h1>
+      <div class="flex items-center gap-4 text-gray-800">
+        <i class="fas fa-ellipsis-h text-base"></i>
+        <i class="fas fa-minus text-sm"></i>
+        <i class="far fa-dot-circle text-lg"></i>
+      </div>
+    </div>
+
+    <!-- 分类 Tab（仅离岛免税 / 会员优选） -->
+    <div class="bg-white flex border-b border-gray-100 shrink-0">
+      <div class="flex-1 py-3 text-center text-[13px] text-gray-900 font-medium relative">
+        离岛免税
+        <div class="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-6 h-[3px] bg-brand rounded-full"></div>
+      </div>
+      <div class="flex-1 py-3 text-center text-[13px] text-gray-500">会员优选</div>
+    </div>
+
+    <!-- 限购提示 -->
+    <div class="bg-white px-4 py-2.5 text-xs text-gray-500 shrink-0">
+      免税限购：自然年内免税品累计限购10万元<span class="text-brand ml-0.5">详情</span>
+    </div>
+
+    <!-- 商品列表（按店铺合并的卡片） -->
+    <div id="cartList" class="flex-1 overflow-y-auto hide-scrollbar bg-[#f5f5f5] py-2"></div>
+
+    <!-- 底部结算栏 -->
+    <div class="bg-white border-t border-gray-100 px-4 py-3 flex items-center justify-between shrink-0 z-20">
+      <div class="flex items-center gap-2" onclick="toggleSelectAll()">
+        <div id="check-all" class="w-5 h-5 rounded-full border border-gray-300 bg-white text-transparent flex items-center justify-center text-[10px] transition">
+          <i class="fas fa-check"></i>
+        </div>
+        <span class="text-xs text-gray-700">全选</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-right">
+          <div id="saveAll" class="text-[11px] text-gray-500">共减 ¥0.00</div>
+          <div class="text-sm text-gray-900 mt-0.5">
+            合计 <span id="totalAll" class="text-brand font-semibold">¥0.00</span>
+            <span class="text-[11px] text-gray-400 ml-1">优惠明细<i class="fas fa-chevron-up text-[9px] ml-0.5"></i></span>
+          </div>
+        </div>
+        <button id="settleBtn" class="bg-brand text-white text-sm font-medium px-6 py-2.5 rounded-full shadow-sm">去结算 (0)</button>
+      </div>
+    </div>
+
+    <!-- 底部 Tab 导航 -->
+    <div class="bg-white border-t border-gray-100 px-2 pt-2 pb-safe flex items-end justify-around shrink-0 z-20">
+      <div class="flex flex-col items-center gap-1 text-gray-400 pb-1 w-12">
+        <i class="fas fa-home text-[22px]"></i>
+        <span class="text-[10px]">商城</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 text-gray-400 pb-1 w-12">
+        <i class="fas fa-tag text-[22px]"></i>
+        <span class="text-[10px]">品牌</span>
+      </div>
+      <div class="flex flex-col items-center gap-0 text-gray-400 pb-1 w-12">
+        <span class="text-[20px] font-bold text-gray-700 leading-none">cdf</span>
+        <span class="text-[10px] mt-0.5">免税店</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 text-brand pb-1 w-12 relative">
+        <div class="relative">
+          <i class="fas fa-shopping-bag text-[22px]"></i>
+          <span class="absolute -top-1 -right-2 bg-brand text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-medium" id="bagCount">4</span>
+        </div>
+        <span class="text-[10px]">购物袋</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 text-gray-400 pb-1 w-12">
+        <i class="far fa-user text-[22px]"></i>
+        <span class="text-[10px]">我的</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const IMG_IPHONE = '<img src="assets/generated/iphone-orange.png" class="w-full h-full object-contain" alt="iPhone">';
+    const IMG_IPSA = '<svg viewBox="0 0 80 100" class="w-full h-full"><defs><linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f0f0f0"/><stop offset="50%" stop-color="#d9d9d9"/><stop offset="100%" stop-color="#b0b0b0"/></linearGradient></defs><ellipse cx="32" cy="72" rx="18" ry="10" fill="url(#silver)" opacity="0.4"/><rect x="20" y="45" width="24" height="36" rx="12" fill="url(#silver)" stroke="#bbb" stroke-width="0.5"/><rect x="24" y="38" width="16" height="8" rx="3" fill="#c0c0c0"/><rect x="50" y="55" width="14" height="40" rx="7" fill="url(#silver)" stroke="#bbb" stroke-width="0.5"/><rect x="53" y="48" width="8" height="8" rx="2" fill="#c0c0c0"/></svg>';
+    const IMG_CP = '<svg viewBox="0 0 80 100" class="w-full h-full"><defs><linearGradient id="blackBottle" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1a1a1a"/><stop offset="50%" stop-color="#2d2d2d"/><stop offset="100%" stop-color="#1a1a1a"/></linearGradient></defs><rect x="28" y="8" width="24" height="84" rx="4" fill="url(#blackBottle)"/><rect x="28" y="8" width="24" height="18" rx="2" fill="#C8A96E"/><rect x="30" y="28" width="20" height="50" rx="2" fill="#111" opacity="0.5"/><rect x="32" y="32" width="16" height="2" rx="1" fill="#C8A96E" opacity="0.6"/></svg>';
+
+    const PRODUCT_TAGS = ['满赠', '买即赠', '立减30', '政府补贴', '政府消费券'];
+    const STORE_TAGS = ['2件8折', '3件7.5折'];
+
+    // 商品数据（同店商品将合并到同一张卡片）
+    const products = [
+      { id: 0, store: '海口美兰机场免税店', name: 'iPhone 17 Pro Max 256GB 星宇橙色', variant: '星宇橙色 256G', price: 8300, orig: 9200, qty: 1, stock: true, img: IMG_IPHONE, countdown: '06:03:31', maxStock: 6, guide: { name: '林晓', initial: '林', code: '68680001', store: '海口美兰机场免税店' } },
+      { id: 1, store: '三亚国际免税城', name: 'iPhone 17 Pro Max 256GB 星宇橙色', variant: '星宇橙色 256G', price: 8300, orig: 9200, qty: 1, stock: false, img: IMG_IPHONE, countdown: '06:03:31', guide: { name: '陈悦', initial: '陈', code: '68680002', store: '三亚国际免税城' } },
+      { id: 2, store: 'cdf中免海南官方商城', name: '茵芙莎深润流金旅行套装', variant: '流金岁月限定版', price: 280, orig: 350, qty: 7, stock: true, img: IMG_IPSA },
+      { id: 3, store: 'cdf中免海南官方商城', name: '肌肤之钥光凝润采妆前霜 37ml(滋润型)', variant: '滋润型 37ml', price: 259, orig: 320, qty: 1, stock: true, img: IMG_CP, countdown: '13:10:34' }
+    ];
+
+    const selected = [true, false, false, false];
+    const qty = [8, 1, 7, 1];
+
+    // 按店铺分组并保持出现顺序
+    const storeOrder = [];
+    const storeMap = {};
+    products.forEach(p => {
+      if (!storeMap[p.store]) { storeMap[p.store] = []; storeOrder.push(p.store); }
+      storeMap[p.store].push(p);
+    });
+
+    function tagClass(t) {
+      if (t === '政府补贴') return 'bg-amber-500 text-white';
+      if (t === '政府消费券') return 'bg-emerald-500 text-white';
+      return 'bg-brand text-white';
+    }
+
+    function tagHtml(list) {
+      return list.map(t => `<span class="${tagClass(t)} text-[10px] leading-none px-1.5 py-[3px] rounded-[3px]">${t}</span>`).join('');
+    }
+
+    function checkHtml(state, indeterminate) {
+      // state: true=选中, false=未选; indeterminate=半选(店铺)
+      if (state) {
+        return 'w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center text-[10px] transition';
+      }
+      if (indeterminate) {
+        return 'w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center text-[10px] transition';
+      }
+      return 'w-5 h-5 rounded-full border border-gray-300 bg-white text-transparent flex items-center justify-center text-[10px] transition';
+    }
+
+    function render() {
+      const list = document.getElementById('cartList');
+      let html = '';
+
+      storeOrder.forEach(storeName => {
+        const items = storeMap[storeName];
+        const allSel = items.every(it => selected[it.id]);
+        const anySel = items.some(it => selected[it.id]);
+        const storeIndeterminate = anySel && !allSel;
+        const storeCheckCls = checkHtml(allSel, storeIndeterminate);
+        const storeIcon = allSel ? '<i class="fas fa-check"></i>' : (storeIndeterminate ? '<i class="fas fa-minus"></i>' : '<i class="fas fa-check"></i>');
+
+        // 商品行
+        const rows = items.map(it => {
+          const sel = selected[it.id];
+          const prodCheckCls = it.stock ? checkHtml(sel, false) : 'w-5 h-5 rounded-full border border-gray-200 bg-gray-100 text-transparent flex items-center justify-center text-[10px]';
+          const prodIcon = '<i class="fas fa-check"></i>';
+          const dim = it.stock ? '' : 'opacity-60';
+
+          const countdown = it.countdown
+            ? `<div class="mt-1.5"><span class="bg-[#fff0ef] text-brand text-[10px] leading-none px-1.5 py-[3px] rounded-[3px]"><i class="far fa-clock mr-0.5"></i>距结束还剩 ${it.countdown}</span></div>`
+            : '';
+
+          const qtyCol = it.stock
+            ? `<div class="flex items-center border border-gray-200 rounded h-7">
+                 <button data-action="dec" data-id="${it.id}" class="w-6 h-full flex items-center justify-center text-gray-400 text-[11px]"><i class="fas fa-minus"></i></button>
+                 <span class="w-7 h-full flex items-center justify-center text-xs text-gray-800 bg-[#f7f7f7] border-x border-gray-100">${qty[it.id]}</span>
+                 <button data-action="inc" data-id="${it.id}" class="w-6 h-full flex items-center justify-center text-gray-700 text-[11px]"><i class="fas fa-plus"></i></button>
+               </div>`
+            : `<span class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">暂时缺货</span>`;
+
+          const overStock = (it.stock && it.maxStock && qty[it.id] > it.maxStock)
+            ? `<div class="text-[10px] text-orange-500 leading-none mb-1"><i class="fas fa-exclamation-circle mr-0.5"></i>超过最大门店库存 ${it.maxStock} 件</div>`
+            : '';
+
+          const guideBar = it.guide
+            ? `<div class="flex items-center gap-1.5 mb-1.5">
+                 <div class="w-5 h-5 rounded-full bg-gradient-to-br from-brand to-coral-500 flex items-center justify-center text-white text-[10px] font-medium">${it.guide.initial}</div>
+                 <span class="text-[11px] text-gray-500"><b class="text-gray-700 font-medium">${it.guide.code}</b> ${it.guide.name} 为你推荐</span>
+               </div>`
+            : '';
+
+          return `
+            <div class="flex gap-3 px-4 py-3 items-stretch border-t border-gray-50 ${dim}">
+              <!-- 第一列：勾选 + 商品图片 -->
+              <div class="shrink-0 flex flex-col items-start gap-2">
+                <div ${it.stock ? `data-toggle="product" data-id="${it.id}"` : ''}>
+                  <div class="${prodCheckCls}">${prodIcon}</div>
+                </div>
+                <div class="w-[72px] h-[72px] flex items-center justify-center">${it.img}</div>
+              </div>
+              <!-- 第二列：两行（第一行其他信息 / 第二行价格+数量） -->
+              <div class="flex-1 min-w-0 flex flex-col justify-between">
+                <div>
+                  ${guideBar}
+                  <h3 class="text-sm font-medium text-gray-900 leading-snug">${it.name}</h3>
+                  <div class="mt-1.5 inline-flex items-center gap-1 bg-[#f2f2f2] rounded px-2 py-1 text-[11px] text-gray-500">
+                    <span>${it.variant}</span><i class="fas fa-chevron-down text-[9px]"></i>
+                  </div>
+                  ${countdown}
+                  <div class="mt-2 flex flex-wrap gap-1">${tagHtml(PRODUCT_TAGS)}</div>
+                </div>
+                <div class="mt-2 flex items-center justify-between">
+                  <span class="text-brand text-base font-semibold">¥${it.price.toLocaleString()}</span>
+                  <div class="flex flex-col items-end">
+                    ${overStock}
+                    ${qtyCol}
+                  </div>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+
+        html += `
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mx-3 mb-2 overflow-hidden">
+            <!-- 店铺头 + 店铺勾选 -->
+            <div class="flex items-center gap-2 px-4 py-3 bg-gray-50/70" data-toggle="store" data-store="${storeName}">
+              <div class="${storeCheckCls}">${storeIcon}</div>
+              <i class="fas fa-store text-[12px] text-gray-700"></i>
+              <span class="text-sm font-semibold text-gray-900">${storeName}</span>
+            </div>
+            <!-- 店铺满减等标签 -->
+            <div class="px-4 py-2 flex flex-wrap items-center gap-1.5 border-t border-gray-100">
+              ${tagHtml(STORE_TAGS)}
+            </div>
+            ${rows}
+          </div>`;
+      });
+
+      list.innerHTML = html;
+      updateSettlement();
+    }
+
+    function toggleStore(storeName) {
+      const items = storeMap[storeName];
+      const allSel = items.every(it => selected[it.id]);
+      items.forEach(it => { if (it.stock) selected[it.id] = !allSel; });
+      render();
+    }
+
+    function toggleProduct(id) {
+      const p = products.find(x => x.id === id);
+      if (!p || !p.stock) return;
+      selected[id] = !selected[id];
+      render();
+    }
+
+    function toggleSelectAll() {
+      const allSel = selected.every((s, i) => s || !products[i].stock);
+      const target = !allSel;
+      products.forEach((p, i) => { if (p.stock) selected[i] = target; });
+      render();
+    }
+
+    function changeQty(id, delta) {
+      qty[id] = Math.max(1, qty[id] + delta);
+      render();
+    }
+
+    function updateSettlement() {
+      let total = 0, save = 0, count = 0;
+      products.forEach((p, i) => {
+        if (selected[i] && p.stock) {
+          total += p.price * qty[i];
+          save += (p.orig - p.price) * qty[i];
+          count++;
+        }
+      });
+      document.getElementById('totalAll').textContent = '¥' + total.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('saveAll').textContent = '共减 ¥' + save.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('settleBtn').textContent = '去结算 (' + count + ')';
+
+      const allSel = selected.every((s, i) => s || !products[i].stock);
+      const anySel = selected.some((s, i) => s && products[i].stock);
+      const allEl = document.getElementById('check-all');
+      allEl.className = allSel
+        ? 'w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center text-[10px] transition'
+        : 'w-5 h-5 rounded-full border border-gray-300 bg-white text-transparent flex items-center justify-center text-[10px] transition';
+      document.getElementById('bagCount').textContent = products.length;
+    }
+
+    // 事件委托：店铺/商品勾选
+    document.getElementById('cartList').addEventListener('click', e => {
+      const toggleEl = e.target.closest('[data-toggle]');
+      if (toggleEl) {
+        const type = toggleEl.getAttribute('data-toggle');
+        if (type === 'store') toggleStore(toggleEl.getAttribute('data-store'));
+        else if (type === 'product') toggleProduct(parseInt(toggleEl.getAttribute('data-id'), 10));
+        return;
+      }
+      const qtyBtn = e.target.closest('[data-action]');
+      if (qtyBtn) {
+        const id = parseInt(qtyBtn.getAttribute('data-id'), 10);
+        const action = qtyBtn.getAttribute('data-action');
+        changeQty(id, action === 'inc' ? 1 : -1);
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
