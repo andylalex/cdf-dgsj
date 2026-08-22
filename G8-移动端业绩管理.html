@@ -95,7 +95,10 @@
       <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
         <div>
           <p class="font-bold text-gray-800">订单详情</p>
-          <p class="text-xs text-gray-400 mt-0.5" id="detailOrderNo">--</p>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <p class="text-xs text-gray-400" id="detailOrderNo">--</p>
+            <button id="copyOrderBtn" onclick="copyOrderNo()" class="text-gray-400 hover:text-coral-600 transition" title="复制订单号"><i class="fas fa-copy text-xs"></i></button>
+          </div>
         </div>
         <button onclick="closeOrderDetail()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
           <i class="fas fa-times text-sm"></i>
@@ -131,6 +134,18 @@
           <div>
             <p class="text-xs text-gray-500 mb-1">订单状态</p>
             <span id="detailStatus" class="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded">--</span>
+          </div>
+        </div>
+
+        <!-- 行程核验信息 -->
+        <div>
+          <h3 class="text-sm font-bold text-gray-800 mb-3">行程核验信息</h3>
+          <div class="rounded-xl bg-gray-50 p-3 space-y-2 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">姓名</span><span id="tripName" class="font-medium text-gray-800">--</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">国家/地区</span><span id="tripCountry" class="font-medium text-gray-800">--</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">证件类型</span><span id="tripIdType" class="font-medium text-gray-800">--</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">证件号</span><span id="tripIdNo" class="font-medium text-gray-800 break-all">--</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">手机号</span><span id="tripPhone" class="font-medium text-gray-800">--</span></div>
           </div>
         </div>
 
@@ -187,93 +202,91 @@
 
     // 每个商品独立携带 门店/柜组/导购(guide)/退款状态(refund)/归因规则(attrRule)
     // 业绩口径：仅「已完成」订单中 refund==='none' 且 guide===ME 的商品计入「我的业绩」
-    const ORDERS = [
-      {
+    const ORDERS = [{
         no: 'ORD20260811001', user: '陈女士', phone: '138****8888', time: '2026-08-11 14:52:18',
         status: { text: '待发货' },
         products: [
-          { icon:'fa-ring', name:'Cartier LOVE 手镯 18K玫瑰金', spec:'17号', qty:1, price:42900, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
-          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:1, price:780, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' }
+          { icon:'fa-ring', name:'Cartier LOVE 手镯 18K玫瑰金', spec:'17号', qty:2, price:85800, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:500, coupon:500, point:0, ship:0
-      },
-      {
+      , trip:{ name:'陈晓梅', country:'中国大陆', idType:'身份证', idNo:'4601**********0023', phone:'138****8888' }},
+{
         no: 'ORD20260811002', user: '王小姐', phone: '139****6666', time: '2026-08-11 13:28:05',
         status: { text: '待支付' },
         products: [
-          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'林小婷', refund:'none', attrRule:'r1first' }
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'林小婷', refund:'none', attrRule:'r1first' , wh:[{name:'海口美兰机场免税仓',qty:2}]}
         ],
         discount:0, platform:100, coupon:0, point:0, ship:0
-      },
-      {
+      , trip:{ name:'王梓萱', country:'中国大陆', idType:'身份证', idNo:'1101**********1520', phone:'139****6666' }},
+{
         no: 'ORD20260811003', user: '李先生', phone: '137****5555', time: '2026-08-11 11:15:42',
         status: { text: '待收货' },
         products: [
-          { icon:'fa-pump-soap', name:'海蓝之谜精粹水 150ml', spec:'修护精萃', qty:1, price:1100, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
-          { icon:'fa-pump-soap', name:'雅诗兰黛小棕瓶 50ml', spec:'修护精华', qty:1, price:1080, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' }
+          { icon:'fa-pump-soap', name:'海蓝之谜精粹水 150ml', spec:'修护精萃', qty:2, price:2200, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
+          { icon:'fa-pump-soap', name:'雅诗兰黛小棕瓶 50ml', spec:'修护精华', qty:2, price:2160, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:200, coupon:0, point:0, ship:0
-      },
-      {
+      , trip:{ name:'李建国', country:'中国大陆', idType:'身份证', idNo:'3701**********4512', phone:'137****5555' }},
+{
         no: 'ORD20260811004', user: '张女士', phone: '136****3333', time: '2026-08-11 10:42:30',
         status: { text: '已完成' },
         products: [
-          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'林小婷', refund:'none', attrRule:'r7last' }
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'林小婷', refund:'none', attrRule:'r7last' , wh:[{name:'海口美兰机场免税仓',qty:1}]}
         ],
         discount:0, platform:800, coupon:500, point:0, ship:0
-      },
-      {
+      , trip:{ name:'张丽华', country:'中国香港', idType:'港澳居民来往内地通行证', idNo:'H123456(7)', phone:'136****3333' }},
+{
         no: 'ORD20260811005', user: '刘先生', phone: '135****2222', time: '2026-08-11 09:30:11',
         status: { text: '已退款' },
         products: [
-          { icon:'fa-gem', name:"宝格丽 divas' dream 项链", spec:'玫瑰金白贝母', qty:1, price:28500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last' }
+          { icon:'fa-gem', name:"宝格丽 divas' dream 项链", spec:'玫瑰金白贝母', qty:2, price:57000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:0, coupon:0, point:0, ship:0
-      },
-      {
+      , trip:{ name:'刘振华', country:'中国大陆', idType:'身份证', idNo:'5101**********3028', phone:'135****2222' }},
+{
         no: 'ORD20260811006', user: '赵女士', phone: '133****1111', time: '2026-08-11 16:05:40',
         status: { text: '已完成' },
         products: [
-          { icon:'fa-spray-can', name:'迪奥真我香水 50ml', spec:'浓香', qty:1, price:9800, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
-          { icon:'fa-paint-brush', name:'圣罗兰圆管口红', spec:'196', qty:1, price:5200, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'partial', attrRule:'r15last' }
+          { icon:'fa-spray-can', name:'迪奥真我香水 50ml', spec:'浓香', qty:2, price:19600, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
+          { icon:'fa-paint-brush', name:'圣罗兰圆管口红', spec:'196', qty:2, price:10400, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'partial', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:300, coupon:200, point:0, ship:0
-      },
-      {
+      , trip:{ name:'赵雅芝', country:'中国台湾', idType:'台湾居民来往大陆通行证', idNo:'01234567(8)', phone:'133****1111' }},
+{
         no: 'ORD20260811007', user: '孙先生', phone: '132****0000', time: '2026-08-11 17:20:10',
         status: { text: '已完成' },
         products: [
-          { icon:'fa-ring', name:'Cartier 戒指 18K', spec:'18K玫瑰金', qty:1, price:12000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
-          { icon:'fa-clock', name:'欧米茄星座女表', spec:'27mm', qty:1, price:8000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'王小丽', refund:'none', attrRule:'r15last' }
+          { icon:'fa-ring', name:'Cartier 戒指 18K', spec:'18K玫瑰金', qty:2, price:24000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
+          { icon:'fa-clock', name:'欧米茄星座女表', spec:'27mm', qty:2, price:16000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'王小丽', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:0, coupon:0, point:0, ship:0
-      },
-      {
+      , trip:{ name:'孙志强', country:'中国大陆', idType:'身份证', idNo:'3201**********6610', phone:'132****0000' }},
+{
         no: 'ORD20260720001', user: '周女士', phone: '188****7777', time: '2026-07-20 15:10:22',
         status: { text: '已完成' },
         products: [
-          { icon:'fa-pump-soap', name:'雅诗兰黛护肤套装', spec:'清爽型', qty:1, price:6800, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' }
+          { icon:'fa-pump-soap', name:'雅诗兰黛护肤套装', spec:'清爽型', qty:2, price:13600, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:300, coupon:200, point:0, ship:0
-      },
-      {
+      , trip:{ name:'周敏', country:'日本', idType:'护照', idNo:'E12345678', phone:'188****7777' }},
+{
         no: 'ORD20260721002', user: '吴先生', phone: '189****8888', time: '2026-07-21 11:02:40',
         status: { text: '已完成' },
         products: [
-          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:1, price:3200, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' },
-          { icon:'fa-paint-brush', name:'迪奥口红', spec:'999', qty:1, price:1200, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'partial', attrRule:'r15last' }
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:6400, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
+          { icon:'fa-paint-brush', name:'迪奥口红', spec:'999', qty:2, price:2400, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'partial', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
         ],
         discount:0, platform:100, coupon:0, point:0, ship:0
-      },
-      {
+      , trip:{ name:'吴彦祖', country:'中国大陆', idType:'身份证', idNo:'4401**********2033', phone:'189****8888' }},
+{
         no: 'ORD20260722003', user: '郑女士', phone: '187****6666', time: '2026-07-22 19:35:08',
         status: { text: '已退款' },
         products: [
-          { icon:'fa-gem', name:"宝格丽 divas' dream 项链", spec:'玫瑰金白贝母', qty:1, price:28500, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'林小婷', refund:'full', attrRule:'r15last' }
+          { icon:'fa-gem', name:"宝格丽 divas' dream 项链", spec:'玫瑰金白贝母', qty:1, price:28500, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'林小婷', refund:'full', attrRule:'r15last' , wh:[{name:'海口美兰机场免税仓',qty:1}]}
         ],
         discount:0, platform:0, coupon:0, point:0, ship:0
-      }
-    ];
+      , trip:{ name:'郑秀文', country:'新加坡', idType:'护照', idNo:'K1234567A', phone:'187****6666' }}];
 
     const orderMap = {};
     ORDERS.forEach(o => orderMap[o.no] = o);
@@ -326,6 +339,21 @@
             '<p class="font-medium text-gray-800 text-sm">' + p.name + '</p>' +
             '<p class="text-xs text-gray-500 mt-1">规格：' + p.spec + ' · 数量：×' + p.qty + '</p>' +
             '<p class="text-[11px] text-gray-400 mt-1">' + sub + '</p>' +
+            (p.wh && p.wh.length ?
+              '<div class="mt-1.5">' +
+                '<div class="flex items-center gap-1.5 text-[11px] text-gray-500">' +
+                  '<i class="fas fa-warehouse"></i><span>出货仓库</span>' +
+                '</div>' +
+                '<div class="mt-1 space-y-1">' +
+                  p.wh.map(w =>
+                    '<div class="flex items-center justify-between gap-2 bg-coral-50 text-coral-600 rounded-md px-2 py-1">' +
+                      '<span class="text-[11px] truncate">'+w.name+'</span>' +
+                      '<b class="text-[11px] font-bold shrink-0">×'+w.qty+'</b>' +
+                    '</div>'
+                  ).join('') +
+                '</div>' +
+              '</div>'
+            : '') +
           '</div>' +
           '<div class="text-right shrink-0">' +
             '<p class="font-bold ' + amtCls + ' text-sm">' + fmt(p.price) + '</p>' +
@@ -393,7 +421,7 @@
               '<span class="text-gray-400 shrink-0">订单金额 <span class="text-gray-700 font-medium">' + fmt(amount) + '</span></span>' +
               '<span class="flex items-center gap-1 text-gray-400 truncate"><i class="fas fa-map-marker-alt"></i>' + stores + ' · ' + groups + '</span>' +
             '</div>' +
-            '<p class="text-[10px] text-gray-400 mt-2">' + o.time.slice(0, 16) + '</p>' +
+            '<div class="text-[10px] text-gray-400 mt-2 flex items-center justify-between gap-2"><span class="shrink-0">' + o.time.slice(0, 16) + '</span><span class="font-mono truncate text-right">单号 ' + o.no + '</span></div>' +
           '</button>';
       }).join('');
     }
@@ -465,13 +493,27 @@
       st.textContent = d.status.text;
       st.className = 'px-2 py-0.5 ' + (STATUS_CLS[d.status.text] || 'bg-gray-100 text-gray-500') + ' text-xs rounded';
 
+      // 行程核验信息
+      const t = d.trip || {};
+      document.getElementById('tripName').textContent = t.name || '--';
+      document.getElementById('tripCountry').textContent = t.country || '--';
+      document.getElementById('tripIdType').textContent = t.idType || '--';
+      document.getElementById('tripIdNo').textContent = t.idNo || '--';
+      document.getElementById('tripPhone').textContent = t.phone || '--';
+
       const isCompleted = d.status.text === '已完成';
       const box = document.getElementById('detailProducts');
       box.innerHTML = '';
-      d.products.forEach(p => {
-        box.insertAdjacentHTML('beforeend', productRow(p, isCompleted));
-      });
-      document.getElementById('detailProductCount').textContent = d.products.length;
+      // 仅展示归属本人业绩的商品（过滤同事业绩的商品）
+      const myProducts = d.products.filter(p => p.guide === ME);
+      if (myProducts.length === 0) {
+        box.innerHTML = '<p class="text-xs text-gray-400 py-3 text-center">本单暂无归属本人的商品</p>';
+      } else {
+        myProducts.forEach(p => {
+          box.insertAdjacentHTML('beforeend', productRow(p, isCompleted));
+        });
+      }
+      document.getElementById('detailProductCount').textContent = myProducts.length;
 
       // 我的业绩归因汇总：仅本人归因且已完成未退款计入
       const counted = myCounted(d);
@@ -500,6 +542,25 @@
     }
     function closeOrderDetail() {
       document.getElementById('orderDetailModal').classList.add('hidden');
+    }
+    function copyOrderNo() {
+      const no = document.getElementById('detailOrderNo').textContent;
+      const btn = document.getElementById('copyOrderBtn');
+      const mark = () => {
+        const i = btn.querySelector('i');
+        i.classList.remove('fa-copy'); i.classList.add('fa-check'); i.style.color = '#16a34a';
+        setTimeout(() => { i.classList.remove('fa-check'); i.classList.add('fa-copy'); i.style.color = ''; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(no).then(mark).catch(() => fallbackCopy(no, mark));
+      } else { fallbackCopy(no, mark); }
+    }
+    function fallbackCopy(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta); cb && cb();
     }
   </script>
 </body>
