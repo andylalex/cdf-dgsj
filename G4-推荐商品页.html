@@ -53,29 +53,22 @@
     .stock-pill.warehouse { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
     .stock-pill.out { background: #fff1f2; color: #e11d48; border: 1px solid #ffe4e6; }
     .stock-pill.zero { background: #f3f4f6; color: #9ca3af; border: 1px solid #e5e7eb; }
-    /* 推荐品牌功能卡片（品牌分类时显示在第一位） */
-    .brand-feature { background: #fff; border: 1px solid #f0f0f0; box-shadow: 0 2px 8px rgba(16,24,40,.05); }
-    .bf-pill { position: relative; flex: 0 0 auto; width: 90px; padding: 5px; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; cursor: pointer; transition: all .15s ease; }
-    .bf-pill:hover { border-color: #ff6b52; box-shadow: 0 2px 8px rgba(255,107,82,.10); }
-    .bf-pill:active { transform: scale(.96); }
-    .bf-pill img { width: 100%; height: 62px; object-fit: contain; border-radius: 8px; background: #fff; }
-    .bf-pill .check { display: none; position: absolute; top: 3px; right: 3px; width: 17px; height: 17px; border-radius: 50%; background: #ff6b52; color: #fff; align-items: center; justify-content: center; font-size: 9px; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
-    .bf-name { font-size: 11px; color: #555; line-height: 1.1; margin-top: 3px; }
-    .bf-pill.recommended { border-color: #ff6b52; background: #fff5f2; }
-    .bf-pill.recommended .bf-name { color: #ff6b52; font-weight: 600; }
-    .bf-pill.recommended .check { display: inline-flex; }
-    .bf-more { flex: 0 0 auto; display: inline-flex; flex-direction: row; align-items: center; gap: 3px; padding: 6px 8px; border: 1px dashed #ffb0a0; border-radius: 12px; color: #ff6b52; cursor: pointer; }
-    .bf-more-text { writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 2px; font-size: 13px; }
-    .bf-more:active { background: #fff5f2; }
-    /* 全部品牌视图（从右侧滑入，覆盖商品列表区，左导航不动） */
-    .ab-view { position: absolute; inset: 0; z-index: 20; background: #f2f3f5; transform: translateX(100%); transition: transform .3s ease; overflow-y: auto; }
-    .ab-view.open { transform: translateX(0); }
+    /* 推荐品牌卡片（二级分类选中品牌时，作为商品列表首位） */
+    .brand-reco { background: linear-gradient(135deg, #fff5f2 0%, #ffffff 60%); border: 1px solid #ffd0c5; }
+    /* 全部品牌：与商品列表并排成两屏，横向滑动切换（ViewPager 式翻页，非覆盖层） */
+    .pager { display: flex; height: 100%; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+    .panel { flex: 0 0 100%; width: 100%; height: 100%; overflow-y: auto; }
+    .ab-view { background: #f2f3f5; overflow-y: auto; padding: 12px; }
     .ab-tile { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px; background: #fff; border: 1px solid #f0f0f0; border-radius: 14px; cursor: pointer; transition: all .15s ease; }
     .ab-tile:active { transform: scale(.97); }
     .ab-tile img { width: 56px; height: 56px; object-fit: contain; border-radius: 50%; background: #fff; border: 1px solid #f2f2f2; }
     .ab-tile .bn { font-size: 13px; color: #333; }
     .ab-tile.recommended { border-color: #ff6b52; background: #fff5f2; }
     .ab-tile.recommended .bn { color: #ff6b52; font-weight: 600; }
+    .ab-reco-btn { width: 100%; margin-top: 5px; padding: 7px 0; border-radius: 16px; background: #ff6b52; color: #fff; font-size: 12px; font-weight: 500; text-align: center; cursor: pointer; transition: background .15s ease, transform .12s ease; }
+    .ab-reco-btn:active { transform: scale(.97); }
+    .ab-reco-btn:disabled { background: #f2f2f2; color: #999; cursor: not-allowed; }
+    .ab-tile img, .ab-tile .bn { cursor: pointer; }
   </style>
 </head>
 <body class="bg-gray-200">
@@ -135,22 +128,13 @@
       </aside>
 
       <!-- 右侧商品列表 -->
-      <main class="flex-1 overflow-y-auto hide-scrollbar p-2 space-y-2 bg-[#f2f3f5] relative">
+      <main class="flex-1 overflow-hidden bg-[#f2f3f5] relative">
+        <div id="pager" class="pager hide-scrollbar">
+          <!-- 第一屏：商品列表（可纵向滚动） -->
+          <div id="productPanel" class="panel hide-scrollbar p-2 space-y-2 bg-[#f2f3f5] relative">
 
-        <!-- 二级分类（随左导航切换；我的收藏/我的柜组无二级分类） -->
+        <!-- 二级分类（随左导航切换；我的收藏无二级分类，其余品牌分类共用一套二级分类） -->
         <div id="subCatBar" class="sticky top-0 z-10 -mx-2 px-3 py-2 bg-[#f2f3f5] flex items-center gap-2 overflow-x-auto hide-scrollbar shrink-0 hidden"></div>
-
-        <!-- 推荐品牌功能卡片（仅品牌分类时显示，置顶第一位） -->
-        <div id="brandFeatureCard" class="product-item hidden">
-          <div class="brand-feature rounded-2xl p-3">
-            <div class="flex items-center gap-2 mb-2.5">
-              <span class="w-6 h-6 rounded-full bg-coral-50 flex items-center justify-center"><i class="fas fa-bullhorn text-coral-500 text-xs"></i></span>
-              <h3 class="text-[14px] font-semibold text-gray-800">推荐品牌</h3>
-              <span class="text-[11px] text-gray-400 ml-1">滑动浏览 · 末尾继续滑动看全部</span>
-            </div>
-            <div id="featureBrands" class="flex gap-2 overflow-x-auto hide-scrollbar"></div>
-          </div>
-        </div>
 
         <!-- 商品 4（有货） -->
         <div class="product-item">
@@ -282,9 +266,9 @@
           </div>
         </div>
 
-        <!-- 全部品牌视图（从右侧滑入，覆盖商品列表区；左导航不动；右滑返回） -->
-        <div id="allBrandsView" class="ab-view">
-          <div class="p-3">
+          </div>
+          <!-- 第二屏：全部品牌（与商品列表并排，横向滑动切换；右滑返回商品） -->
+          <div id="allBrandsView" class="panel ab-view">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-[15px] font-semibold text-gray-800">全部品牌</h3>
               <span class="text-[12px] text-gray-400">← 右滑返回商品</span>
@@ -292,7 +276,6 @@
             <div id="allBrandsGrid" class="grid grid-cols-2 gap-2.5"></div>
           </div>
         </div>
-
       </main>
     </div>
 
@@ -343,7 +326,7 @@
     const BRANDS = ['全部', '欧莱雅', '资生堂', '兰蔻', '香奈儿'];
     const subCats = {
       '我的收藏': [],
-      '我的柜组': [],
+      '我的柜组': BRANDS,
       '女士腕表': BRANDS,
       '男包':     BRANDS,
       '首饰':     BRANDS,
@@ -362,126 +345,156 @@
       '香奈儿': '香奈儿.jpg'
     };
 
-    // 切换左导航：更新选中态 + 渲染二级分类（纯文字按钮）+ 品牌分类时展示推荐品牌卡片
+    // 切换左导航：更新选中态 + 渲染二级分类（纯文字按钮）
     function selectCat(li) {
       document.querySelectorAll('#sidebar li[data-cat]').forEach(el => el.classList.remove('cat-active'));
       li.classList.add('cat-active');
       const cat = li.dataset.cat;
       const subs = subCats[cat] || [];
       const bar = document.getElementById('subCatBar');
-      const feature = document.getElementById('brandFeatureCard');
-      const isBrandCat = (cat !== '我的收藏' && cat !== '我的柜组');
       if (subs.length === 0) {
-        // 我的收藏 / 我的柜组：无二级分类，也无推荐品牌卡片
+        // 我的收藏：无二级分类（我的柜组已改为品牌分类）
         bar.classList.add('hidden');
         bar.innerHTML = '';
-        feature.classList.add('hidden');
+        renderBrandRecommendCard('');
       } else {
         bar.classList.remove('hidden');
-        // 二级分类：纯文字按钮（与「全部」样式一致），无推荐按钮
+        // 二级分类：纯文字按钮（与「全部」样式一致）；末尾提示左滑看全部品牌
         bar.innerHTML = subs.map((s, i) =>
           `<button class="chip ${i === 0 ? 'chip-active' : ''}" onclick="selectChip(this)">${s}</button>`
-        ).join('');
-        // 品牌分类：商品列表第一位展示「推荐品牌」功能卡片
-        feature.classList.toggle('hidden', !isBrandCat);
+        ).join('') + '<span class="text-[11px] text-gray-300 whitespace-nowrap shrink-0 pl-1">左滑看全部 ›</span>';
+        // 默认选中「全部」：不展示单品牌推荐卡
+        renderBrandRecommendCard('');
       }
     }
 
-    // 构建推荐品牌卡片内的品牌按钮（含品牌名称）+ 末尾「查看全部」入口
-    function buildFeatureBrands() {
-      const wrap = document.getElementById('featureBrands');
-      const pills = BRANDS.slice(1).map(b => {
-        const logo = brandLogos[b] ? `assets/brands/${brandLogos[b]}` : '';
-        return `<button class="bf-pill" data-name="${b}" onclick="recommendFeatureBrand(this)" title="推荐${b}">
-                  <img src="${logo}" alt="${b}">
-                  <span class="bf-name">${b}</span>
-                  <span class="check"><i class="fas fa-check"></i></span>
-                </button>`;
-      }).join('');
-      wrap.innerHTML = pills +
-        `<button class="bf-more" onclick="openAllBrands()"><span class="bf-more-text">全部品牌</span><i class="fas fa-angle-right"></i></button>`;
-      bindFeatureBrandsGestures();
+    // 二级分类选中具体品牌时，在商品列表首位插入一张「推荐品牌卡片」
+    function renderBrandRecommendCard(brand) {
+      const sub = document.getElementById('subCatBar');
+      const old = document.getElementById('brandRecommendCard');
+      if (old) old.remove();
+      if (!brand) return; // 「全部」或空：不展示单品牌卡
+      const logo = brandLogos[brand] ? `assets/brands/${brandLogos[brand]}` : '';
+      const card = document.createElement('div');
+      card.className = 'product-item';
+      card.id = 'brandRecommendCard';
+      card.innerHTML =
+        '<div class="brand-reco rounded-2xl p-4 flex items-center gap-3 relative">' +
+          '<div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center shrink-0 border border-gray-100">' +
+            '<img src="' + logo + '" alt="' + brand + '" class="max-w-[60px] max-h-[60px] object-contain">' +
+          '</div>' +
+          '<div class="flex-1 min-w-0">' +
+            '<h3 class="text-[16px] font-semibold text-gray-800 leading-tight">' + brand + '</h3>' +
+            '<p class="text-[11px] text-gray-400 mt-0.5">免税品牌推荐给顾客</p>' +
+          '</div>' +
+          '<button class="manage-btn shrink-0" data-name="' + brand + '" onclick="recommendBrandCard(this)">推荐</button>' +
+        '</div>';
+      sub.insertAdjacentElement('afterend', card);
     }
 
-    // 全部品牌视图：网格构建
+    // 全部品牌视图：网格构建（点击品牌区 → 切回商品列表并选中该品牌；点击"推荐品牌"按钮 → 弹确认弹窗）
     function buildAllBrands() {
       const grid = document.getElementById('allBrandsGrid');
       grid.innerHTML = BRANDS.slice(1).map(b => {
         const logo = brandLogos[b] ? `assets/brands/${brandLogos[b]}` : '';
-        return `<div class="ab-tile" data-name="${b}" onclick="recommendAllBrand(this)">
-                  <img src="${logo}" alt="${b}">
-                  <span class="bn">${b}</span>
+        return `<div class="ab-tile" data-name="${b}">
+                  <img src="${logo}" alt="${b}" onclick="selectBrandFromAll('${b}')">
+                  <span class="bn" onclick="selectBrandFromAll('${b}')">${b}</span>
+                  <button class="ab-reco-btn" data-name="${b}" onclick="recommendAllBrand(this)">推荐品牌</button>
                 </div>`;
       }).join('');
     }
 
-    // 推荐品牌（卡片内）：弹窗确认后标记，并同步全部品牌视图
-    function recommendFeatureBrand(btn) {
+    // 从全部品牌视图点击某品牌：切回商品列表区块，并在二级分类中选中该品牌（无对应二级分类则仅切回）
+    function selectBrandFromAll(brand) {
+      const chips = document.querySelectorAll('#subCatBar .chip');
+      let target = null;
+      chips.forEach(c => { if (c.textContent.trim() === brand) target = c; });
+      if (target) selectChip(target);
+      closeAllBrands();
+    }
+
+    // 推荐品牌卡片：弹窗确认后标记，并同步全部品牌视图中的同品牌
+    function recommendBrandCard(btn) {
+      if (btn.disabled) return;
       const name = btn.dataset.name;
       showConfirm(`确认推荐「${name}」给顾客？`, () => {
-        btn.classList.add('recommended');
+        btn.disabled = true;
+        btn.textContent = '已推荐';
+        btn.classList.remove('manage-btn');
+        btn.classList.add('manage-btn-gray');
         syncBrandState(name, true);
       });
     }
 
-    // 推荐品牌（全部品牌视图内）：弹窗确认后标记，并同步卡片
-    function recommendAllBrand(tile) {
+    // 推荐品牌（全部品牌视图内）：点"推荐品牌"按钮 → 弹窗确认后标记，并同步列表卡片
+    function recommendAllBrand(btn) {
+      if (btn.disabled) return;
+      const tile = btn.closest('.ab-tile');
       const name = tile.dataset.name;
       showConfirm(`确认推荐「${name}」给顾客？`, () => {
-        tile.classList.add('recommended');
         syncBrandState(name, true);
       });
     }
 
-    // 同步两个视图中同一品牌的推荐态
+    // 同步同一品牌的推荐态：全部品牌视图（卡片高亮 + 推荐按钮置为已推荐）+ 列表首位推荐品牌卡片
     function syncBrandState(name, recommended) {
-      document.querySelectorAll(`.bf-pill[data-name="${name}"]`).forEach(el =>
-        el.classList.toggle('recommended', recommended));
-      document.querySelectorAll(`.ab-tile[data-name="${name}"]`).forEach(el =>
-        el.classList.toggle('recommended', recommended));
+      const tile = document.querySelector(`.ab-tile[data-name="${name}"]`);
+      if (tile) {
+        tile.classList.toggle('recommended', recommended);
+        const tb = tile.querySelector('.ab-reco-btn');
+        if (tb && recommended) { tb.disabled = true; tb.textContent = '已推荐'; }
+      }
+      const recoBtn = document.querySelector(`#brandRecommendCard button[data-name="${name}"]`);
+      if (recoBtn && recommended) {
+        recoBtn.disabled = true;
+        recoBtn.textContent = '已推荐';
+        recoBtn.classList.remove('manage-btn');
+        recoBtn.classList.add('manage-btn-gray');
+      }
     }
 
-    // 打开 / 关闭 全部品牌视图（左导航保持不动）
-    let allBrandsOpen = false;
+    // 打开 / 关闭 全部品牌视图（横向翻页；左导航保持不动）
     function openAllBrands() {
-      if (allBrandsOpen) return;
-      allBrandsOpen = true;
-      document.getElementById('allBrandsView').classList.add('open');
+      const pager = document.getElementById('pager');
+      pager.scrollTo({ left: pager.clientWidth, behavior: 'smooth' });
     }
     function closeAllBrands() {
-      if (!allBrandsOpen) return;
-      allBrandsOpen = false;
-      document.getElementById('allBrandsView').classList.remove('open');
+      document.getElementById('pager').scrollTo({ left: 0, behavior: 'smooth' });
     }
 
-    // 手势：品牌行滑到末尾继续右滑 → 拉出全部品牌；全部品牌视图右滑 → 返回商品
-    function isAtRight(el) { return el.scrollLeft + el.clientWidth >= el.scrollWidth - 2; }
-    function bindFeatureBrandsGestures() {
-      const fb = document.getElementById('featureBrands');
+    // 手势：商品列表（第一屏）左滑 → 翻到全部品牌（第二屏）；全部品牌右滑 → 返回商品
+    function bindSwipeGesture() {
+      const pager = document.getElementById('pager');
+      const panel = document.getElementById('productPanel');
       const ab = document.getElementById('allBrandsView');
-      let sx = null, atRight = false;
-      fb.addEventListener('touchstart', e => { atRight = isAtRight(fb); sx = e.touches[0].clientX; }, { passive: true });
-      fb.addEventListener('touchmove', e => {
-        if (atRight && sx !== null && e.touches[0].clientX - sx < -30) { openAllBrands(); sx = null; }
+      let sx = null, sy = null;
+      panel.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      panel.addEventListener('touchmove', e => {
+        if (sx === null) return;
+        const dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
+        if (dx < -40 && Math.abs(dx) > Math.abs(dy)) { pager.scrollTo({ left: pager.clientWidth, behavior: 'smooth' }); sx = null; }
       }, { passive: true });
-      fb.addEventListener('wheel', e => { if (isAtRight(fb) && e.deltaX > 0) openAllBrands(); }, { passive: true });
+      panel.addEventListener('wheel', e => { if (e.deltaX > 0) pager.scrollTo({ left: pager.clientWidth, behavior: 'smooth' }); }, { passive: true });
       let ax = null;
       ab.addEventListener('touchstart', e => { ax = e.touches[0].clientX; }, { passive: true });
       ab.addEventListener('touchmove', e => {
-        if (ax !== null && e.touches[0].clientX - ax > 30) { closeAllBrands(); ax = null; }
+        if (ax !== null && e.touches[0].clientX - ax > 30) { pager.scrollTo({ left: 0, behavior: 'smooth' }); ax = null; }
       }, { passive: true });
-      ab.addEventListener('wheel', e => { if (e.deltaX < 0) closeAllBrands(); }, { passive: true });
+      ab.addEventListener('wheel', e => { if (e.deltaX < 0) pager.scrollTo({ left: 0, behavior: 'smooth' }); }, { passive: true });
     }
 
-    // 二级分类：点击切换高亮（视觉态，不改变商品）
+    // 二级分类：点击切换高亮，并据所选品牌在列表首位渲染推荐品牌卡片
     function selectChip(btn) {
       btn.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
       btn.classList.add('chip-active');
+      const brand = btn.textContent.trim();
+      renderBrandRecommendCard(brand === '全部' ? '' : brand);
     }
 
-    // 初始化：默认选中「女士腕表」，渲染二级分类与推荐品牌卡片
-    buildFeatureBrands();
+    // 初始化：默认选中「女士腕表」，渲染二级分类与全部品牌视图，绑定左滑手势
     buildAllBrands();
+    bindSwipeGesture();
     selectCat(document.querySelector('#sidebar li[data-cat="女士腕表"]'));
 
     // 确认弹窗：通用「确认是否推荐」交互
