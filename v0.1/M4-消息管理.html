@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>消息管理（PC）- 中免海南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
+    .sidebar-active { background: linear-gradient(90deg, rgba(255,107,82,0.12) 0%, rgba(255,107,82,0.02) 100%); border-right: 3px solid #ff6b52; color: #ff6b52; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .col-title { font-size: 13px; font-weight: 600; color: #111827; }
+    .guide-item.active, .customer-item.active { background: #fff5f2; }
+    .guide-item:hover:not(.active), .customer-item:hover:not(.active) { background: #f9fafb; }
+    .msg-time-divider { color: #9ca3af; font-size: 11px; text-align: center; margin: 16px 0; position: relative; }
+    .msg-time-divider::before, .msg-time-divider::after { content: ''; position: absolute; top: 50%; width: calc(50% - 60px); height: 1px; background: #f3f4f6; }
+    .msg-time-divider::before { left: 0; }
+    .msg-time-divider::after { right: 0; }
+    .bubble-left { background: #fff; border: 1px solid #f3f4f6; color: #1f2937; border-radius: 4px 16px 16px 16px; }
+    .bubble-right { background: #95ec69; color: #1f2937; border-radius: 16px 4px 16px 16px; }
+    .search-input { background: #f5f6f8; border-radius: 6px; padding: 7px 10px 7px 30px; font-size: 13px; outline: none; width: 100%; color: #374151; }
+    .search-input::placeholder { color: #9ca3af; }
+    .search-wrap { position: relative; }
+    .search-wrap i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 12px; }
+    .unread-badge { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: #ff4d4f; color: #fff; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; background: #f3f4f6; object-fit: cover; flex-shrink: 0; }
+    .list-cell { padding: 12px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background .15s; border-bottom: 1px solid #f3f4f6; }
+    .tab-active { background: #1890ff; color: #fff; border-color: #1890ff; }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] text-gray-800">
+  <div class="h-screen flex overflow-hidden">
+
+    <!-- 系统左侧导航 -->
+    <aside class="w-56 bg-white border-r border-gray-200 flex-col hidden md:flex shrink-0">
+      <div class="h-16 flex items-center px-5 border-b border-gray-100">
+        <div class="w-8 h-8 rounded-lg coral-gradient flex items-center justify-center text-white mr-3"><i class="fas fa-store"></i></div>
+        <span class="font-bold text-gray-800">中免导购管理</span>
+      </div>
+      <nav class="flex-1 py-4 space-y-1 text-sm">
+        <a href="M1-PC客户管理.html" class="flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-users w-6"></i>客户管理</a>
+        <a href="M4-消息管理.html" class="sidebar-active flex items-center px-5 py-3 font-medium"><i class="fas fa-comment-dots w-6"></i>消息管理</a>
+        <a href="M2-专题管理.html" class="flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-layer-group w-6"></i>专题管理</a>
+        <a href="M3-PC业绩管理.html" class="flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50"><i class="fas fa-chart-line w-6"></i>业绩管理</a>
+      </nav>
+      <div class="px-5 py-4 border-t border-gray-100 text-xs text-gray-400">三亚市免税店 · 海岛免税</div>
+    </aside>
+
+    <!-- 主区域 -->
+    <main class="flex-1 flex flex-col min-w-0">
+
+      <!-- 顶部栏 -->
+      <header class="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-5 shrink-0">
+        <div class="flex items-center gap-3 text-sm">
+          <span class="text-gray-500">首页</span>
+          <span class="text-gray-300">/</span>
+          <span class="text-gray-500">线上导购</span>
+          <span class="text-gray-300">/</span>
+          <span class="font-medium text-gray-800">消息管理</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 transition"><i class="fas fa-bell text-sm"></i></button>
+          <div class="flex items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin" class="w-7 h-7 rounded-full bg-gray-100" alt="">
+            <span class="text-sm text-gray-700 hidden sm:inline">平台管理员</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 标签栏 -->
+      <div class="h-11 bg-white border-b border-gray-200 flex items-center px-5 gap-2 shrink-0">
+        <button class="px-4 h-7 text-xs rounded border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-700 transition">首页</button>
+        <button class="px-4 h-7 text-xs rounded border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-700 transition flex items-center gap-1">店铺子账号管理 <i class="fas fa-times text-[10px]"></i></button>
+        <button class="px-4 h-7 text-xs rounded border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-700 transition flex items-center gap-1">导购管理 <i class="fas fa-times text-[10px]"></i></button>
+        <button class="tab-active px-4 h-7 text-xs rounded border flex items-center gap-1">消息管理 <i class="fas fa-times text-[10px]"></i></button>
+      </div>
+
+      <!-- 三列主体 -->
+      <div class="flex-1 flex min-h-0">
+
+        <!-- 导购列表 -->
+        <section class="w-72 bg-white border-r border-gray-200 flex flex-col shrink-0">
+          <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
+            <span class="col-title">导购 <span class="text-xs text-gray-400 font-normal ml-1" id="guideCount">5</span></span>
+          </div>
+          <div class="px-3 py-2 border-b border-gray-100 shrink-0">
+            <div class="search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="guideSearch" class="search-input" placeholder="搜索导购姓名/工号/品牌">
+            </div>
+          </div>
+          <div id="guideList" class="flex-1 overflow-y-auto hide-scrollbar"></div>
+        </section>
+
+        <!-- 用户列表 -->
+        <section class="w-72 bg-white border-r border-gray-200 flex flex-col shrink-0">
+          <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
+            <span class="col-title"><span id="currentGuideName">刘洋</span> 的客户 <span class="text-xs text-gray-400 font-normal ml-1" id="customerCount">2</span></span>
+          </div>
+          <div class="px-3 py-2 border-b border-gray-100 shrink-0">
+            <div class="search-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="customerSearch" class="search-input" placeholder="搜索客户姓名/手机号">
+            </div>
+          </div>
+          <div id="customerList" class="flex-1 overflow-y-auto hide-scrollbar"></div>
+        </section>
+
+        <!-- 消息对话 -->
+        <section class="flex-1 bg-[#f5f6f8] flex flex-col min-w-0">
+          <!-- 当前会话头部 -->
+          <div class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-5 shrink-0">
+            <div class="flex items-center gap-3">
+              <img id="chatAvatar" src="" class="avatar" alt="">
+              <div>
+                <p class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                  <span id="chatCustomerName">徐女士</span>
+                  <span id="chatPhone" class="text-xs font-normal text-gray-500"></span>
+                </p>
+                <p class="text-xs text-gray-400 mt-0.5">导购：<span id="chatGuideName">刘洋</span></p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 transition" title="查看客户画像"><i class="fas fa-user text-sm"></i></button>
+              <button class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 transition" title="更多"><i class="fas fa-ellipsis-h text-sm"></i></button>
+            </div>
+          </div>
+
+          <!-- 消息记录 -->
+          <div id="messageArea" class="flex-1 overflow-y-auto hide-scrollbar p-5 space-y-1"></div>
+
+          <!-- 输入区 -->
+          <div class="bg-white border-t border-gray-200 p-4 shrink-0">
+            <div class="flex items-end gap-3">
+              <button class="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-500 transition"><i class="fas fa-plus text-sm"></i></button>
+              <div class="flex-1 bg-[#f5f6f8] rounded-lg px-4 py-2.5">
+                <textarea id="msgInput" rows="1" class="w-full bg-transparent outline-none text-sm text-gray-700 resize-none" placeholder="输入消息..."></textarea>
+              </div>
+              <button onclick="sendMessage()" class="h-9 px-5 bg-coral-500 hover:bg-coral-600 text-white text-sm font-medium rounded-lg transition shadow-lg shadow-coral-500/20">发送</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- 操作提示 Toast -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[60] hidden bg-gray-900/90 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg"></div>
+
+  <script>
+    const data = {
+      guides: [
+        { id: 'liu', name: '刘洋', brand: '迪奥', code: '68680005', time: '07-30', unread: 2, avatarSeed: 'liu' },
+        { id: 'zhang', name: '张伟', brand: '雅诗兰黛', code: '68680001', time: '07-23', unread: 3, avatarSeed: 'zhang' },
+        { id: 'li', name: '李娜', brand: '纪梵希', code: '68680002', time: '07-21', unread: 1, avatarSeed: 'li' },
+        { id: 'wang', name: '王强', brand: '兰蔻', code: '68680003', time: '07-22', unread: 0, avatarSeed: 'wang' },
+        { id: 'zhao', name: '赵敏', brand: '香奈儿', code: '68680004', time: '07-21', unread: 0, avatarSeed: 'zhao' }
+      ],
+      customers: {
+        liu: [
+          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '那支口红能帮我留一下吗？' },
+          { id: 'c2', name: '马先生', phone: '138****6688', time: '07-22', unread: 0, avatarSeed: 'maman', lastMsg: '香水礼盒还有库存吗' }
+        ],
+        zhang: [
+          { id: 'c3', name: '陈女士', phone: '139****1234', time: '07-23', unread: 1, avatarSeed: 'chenlady', lastMsg: '帮我查一下眼霜价格' },
+          { id: 'c4', name: '周先生', phone: '136****5678', time: '07-20', unread: 0, avatarSeed: 'zhouman', lastMsg: '好的，我考虑一下' }
+        ],
+        li: [
+          { id: 'c5', name: '吴女士', phone: '135****9012', time: '07-21', unread: 1, avatarSeed: 'wulady', lastMsg: '这个色号有试色吗？' }
+        ],
+        wang: [
+          { id: 'c6', name: '郑先生', phone: '133****3456', time: '07-22', unread: 0, avatarSeed: 'zhengman', lastMsg: '已经下单了，谢谢' }
+        ],
+        zhao: []
+      },
+      messages: {
+        c1: [
+          { time: '2024-07-23 11:00', side: 'left', text: '那支口红能帮我留一下吗？' },
+          { time: '2024-07-23 11:05', side: 'left', text: '那支口红能帮我留一下吗？' },
+          { time: '2024-07-23 11:06', side: 'right', text: '可以的，请问是 999 还是 772？' }
+        ],
+        c2: [
+          { time: '2024-07-22 15:30', side: 'left', text: '香水礼盒还有库存吗' },
+          { time: '2024-07-22 15:32', side: 'right', text: '还有的，门店库存 45，电商仓库存 120，您需要预留吗？' }
+        ],
+        c3: [
+          { time: '2024-07-23 09:10', side: 'left', text: '帮我查一下眼霜价格' },
+          { time: '2024-07-23 09:12', side: 'right', text: '雅诗兰黛小棕瓶眼霜 15ml 现价 ¥385，可以使用三亚店政府消费券。' }
+        ],
+        c4: [
+          { time: '2024-07-20 18:45', side: 'right', text: '先生，今天兰蔻菁纯套装限时活动，需要帮您预留一套吗？' },
+          { time: '2024-07-20 18:50', side: 'left', text: '好的，我考虑一下' }
+        ],
+        c5: [
+          { time: '2024-07-21 14:20', side: 'left', text: '这个色号有试色吗？' },
+          { time: '2024-07-21 14:25', side: 'right', text: '有的，纪梵希 N37 和 N27 都可以试色，我给您发实拍图。' }
+        ],
+        c6: [
+          { time: '2024-07-22 10:00', side: 'left', text: '已经下单了，谢谢' },
+          { time: '2024-07-22 10:02', side: 'right', text: '不客气，到货后我第一时间通知您提货。' }
+        ]
+      }
+    };
+
+    let currentGuideId = 'liu';
+    let currentCustomerId = 'c1';
+
+    function renderGuides(filter = '') {
+      const list = document.getElementById('guideList');
+      const term = filter.trim().toLowerCase();
+      const guides = data.guides.filter(g =>
+        g.name.includes(term) || g.code.includes(term) || g.brand.includes(term)
+      );
+      document.getElementById('guideCount').textContent = guides.length;
+      list.innerHTML = guides.map(g => {
+        const active = g.id === currentGuideId ? 'active' : '';
+        const unread = g.unread > 0 ? `<span class="unread-badge">${g.unread}</span>` : '';
+        return `
+          <div class="guide-item ${active} border-b border-gray-100" data-id="${g.id}">
+            <div class="px-4 py-3 flex items-center gap-3 cursor-pointer" onclick="selectGuide('${g.id}')">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${g.avatarSeed}" class="avatar" alt="">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-medium text-gray-800">${g.name}</span>
+                  <span class="text-[11px] text-gray-400">${g.time}</span>
+                </div>
+                <div class="flex items-center justify-between mt-1">
+                  <span class="text-xs text-gray-500 truncate">${g.brand} · ${g.code}</span>
+                  ${unread}
+                </div>
+              </div>
+            </div>
+            <div class="px-4 pb-3 flex justify-end">
+              <button onclick="event.stopPropagation(); inheritCustomers('${g.id}')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号">
+                <i class="fas fa-user-exchange"></i> 继承客户
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCustomers(guideId, filter = '') {
+      const list = document.getElementById('customerList');
+      const guide = data.guides.find(g => g.id === guideId);
+      document.getElementById('currentGuideName').textContent = guide ? guide.name : '--';
+      const customers = (data.customers[guideId] || []).filter(c =>
+        c.name.includes(filter) || c.phone.includes(filter)
+      );
+      document.getElementById('customerCount').textContent = customers.length;
+      if (customers.length === 0) {
+        list.innerHTML = '<div class="p-6 text-center text-xs text-gray-400">暂无客户消息</div>';
+        return;
+      }
+      list.innerHTML = customers.map(c => {
+        const active = c.id === currentCustomerId ? 'active' : '';
+        const unread = c.unread > 0 ? `<span class="unread-badge">${c.unread}</span>` : '';
+        return `
+          <div class="list-cell customer-item ${active}" data-id="${c.id}" onclick="selectCustomer('${c.id}')">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${c.avatarSeed}" class="avatar" alt="">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-gray-800">${c.name}</span>
+                <span class="text-[11px] text-gray-400">${c.time}</span>
+              </div>
+              <div class="flex items-center justify-between mt-1">
+                <span class="text-xs text-gray-500 truncate">${c.lastMsg}</span>
+                ${unread}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderMessages(customerId) {
+      const customer = findCustomer(customerId);
+      const guide = data.guides.find(g => g.id === currentGuideId);
+      document.getElementById('chatCustomerName').textContent = customer ? customer.name : '--';
+      document.getElementById('chatPhone').textContent = customer ? customer.phone : '';
+      document.getElementById('chatGuideName').textContent = guide ? guide.name : '--';
+      document.getElementById('chatAvatar').src = customer
+        ? `https://api.dicebear.com/7.x/avataaars/svg?seed=${customer.avatarSeed}`
+        : '';
+
+      const area = document.getElementById('messageArea');
+      const msgs = data.messages[customerId] || [];
+      if (msgs.length === 0) {
+        area.innerHTML = '<div class="h-full flex items-center justify-center text-xs text-gray-400">暂无消息记录</div>';
+        return;
+      }
+      area.innerHTML = msgs.map(m => {
+        const isRight = m.side === 'right';
+        return `
+          <div class="msg-time-divider">${m.time}</div>
+          <div class="flex ${isRight ? 'justify-end' : 'justify-start'} mb-3">
+            <div class="max-w-[70%] ${isRight ? 'bubble-right' : 'bubble-left'} px-3.5 py-2 text-sm shadow-sm">${escapeHtml(m.text)}</div>
+          </div>
+        `;
+      }).join('');
+      area.scrollTop = area.scrollHeight;
+    }
+
+    function findCustomer(id) {
+      for (const g of Object.values(data.customers)) {
+        const c = g.find(x => x.id === id);
+        if (c) return c;
+      }
+      return null;
+    }
+
+    function selectGuide(id) {
+      currentGuideId = id;
+      const customers = data.customers[id] || [];
+      currentCustomerId = customers.length > 0 ? customers[0].id : '';
+      renderGuides(document.getElementById('guideSearch').value);
+      renderCustomers(id, document.getElementById('customerSearch').value);
+      if (currentCustomerId) renderMessages(currentCustomerId);
+    }
+
+    function selectCustomer(id) {
+      currentCustomerId = id;
+      renderCustomers(currentGuideId, document.getElementById('customerSearch').value);
+      renderMessages(id);
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('msgInput');
+      const text = input.value.trim();
+      if (!text || !currentCustomerId) return;
+      const now = new Date();
+      const time = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+      if (!data.messages[currentCustomerId]) data.messages[currentCustomerId] = [];
+      data.messages[currentCustomerId].push({ time, side: 'right', text });
+      input.value = '';
+      input.style.height = 'auto';
+      renderMessages(currentCustomerId);
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));
+    }
+
+    document.getElementById('guideSearch').addEventListener('input', e => {
+      renderGuides(e.target.value);
+    });
+
+    document.getElementById('customerSearch').addEventListener('input', e => {
+      renderCustomers(currentGuideId, e.target.value);
+    });
+
+    document.getElementById('msgInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.remove('hidden');
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => t.classList.add('hidden'), 2600);
+    }
+
+    // 继承客户：将指定导购名下的客户继承至当前管理员账号（原型演示）
+    function inheritCustomers(id) {
+      const g = data.guides.find(x => x.id === id);
+      if (!g) return;
+      showToast(`已发起继承「${g.name}」的客户，处理中…`);
+    }
+
+    // 初始化
+    renderGuides();
+    renderCustomers(currentGuideId);
+    renderMessages(currentCustomerId);
+  </script>
+</body>
+</html>

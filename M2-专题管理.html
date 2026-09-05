@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="HGFYgmHnrWIGOuMFtsJ9ST">
+<head data-page-node-id="F9IXI4WgYPNSwqGolV8phk">
+  <meta charset="UTF-8" data-page-node-id="BJoYaRzt65CfeBJGQIZbv6">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="xooPhwhHrXQef8eqFSznMa">
+  <title>管理后台 - 专题管理</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" data-page-node-id="2huybzUOy7WcCfWZgpTbfp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" data-page-node-id="Bgi5Vi51mS6MFWKDFNEHa5">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
+    .sidebar-active { background: linear-gradient(90deg, rgba(255,107,82,0.12) 0%, rgba(255,107,82,0.02) 100%); border-right: 3px solid #ff6b52; color: #ff6b52; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    #drawer { transition: transform .28s cubic-bezier(.4,0,.2,1); }
+    #toast { transition: opacity .3s ease, transform .3s ease; }
+    #toast.show { opacity:1; transform: translate(-50%,0); }
+    .tpl-card.active { border-color:#ff6b52; box-shadow:0 0 0 3px rgba(255,107,82,.18); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans" data-page-node-id="XVBClW9kPahhWgXH7NZ0H3">
+  <div class="flex h-screen overflow-hidden" data-page-node-id="yGwYXAExzsvb1GYJxj0pGH">
+    <!-- 系统侧边栏 -->
+    <aside class="w-56 bg-white border-r border-gray-200 flex-col hidden md:flex shrink-0" data-page-node-id="uDxlP5MMl1RWd6IFxSlD0Q">
+      <div class="h-16 flex items-center px-5 border-b border-gray-100" data-page-node-id="o70CvLsscPZmXG9HqOo5CG">
+        <div class="w-8 h-8 rounded-lg coral-gradient flex items-center justify-center text-white mr-3" data-page-node-id="pSp5yf34wlTn92TZ73eh6Y"><i class="fas fa-store" data-page-node-id="Ekd5cjDguR4OX8EjsOjVWV"></i></div>
+        <span class="font-bold text-gray-800" data-page-node-id="rFStbvEF9AXhZTFeJAeGcT">中免导购管理</span>
+      </div>
+      <nav class="flex-1 py-4 space-y-1 text-sm" data-page-node-id="VCgIvDAmnh03Ec865cmGsd">
+        <a href="M1-PC客户管理.html" class="flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="bw1BI0FQsX8Glg7MEq4Oqm"><i class="fas fa-users w-6" data-page-node-id="FrD6Hc72oOfUsLFlLhmyq4"></i>客户管理</a>
+        <a href="M4-消息管理.html" class="flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="6PmbDPEZsbh4qXtApICYjf"><i class="fas fa-comment-dots w-6" data-page-node-id="Xc0AK5ZlGR9kfDz4UdUUBc"></i>消息管理</a>
+        <a href="M2-专题管理.html" class="sidebar-active flex items-center px-5 py-3 font-medium" data-page-node-id="KDzVg1scUCDzmjQBxj30OU"><i class="fas fa-layer-group w-6" data-page-node-id="0NsWaa84njpoiMnbQWdj5H"></i>专题管理</a>
+        <a href="M3-PC业绩管理.html" class="flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="Q4cFSQqbs4Hxn5sERmpDrg"><i class="fas fa-chart-line w-6" data-page-node-id="VqZArzpi5TMrV4LcFTn8JH"></i>业绩管理</a>
+      </nav>
+      <div class="px-5 py-4 border-t border-gray-100 text-xs text-gray-400" data-page-node-id="1rgHb5HKCRwgdbQtb2qMdy">海口日月广场免税店</div>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-w-0" data-page-node-id="9kWj0mzikjf3qpFL0ZAwDV">
+      <!-- 顶部栏 -->
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0" data-page-node-id="rXODERViCMpl2J7JQYGYoT">
+        <div class="flex items-center gap-4" data-page-node-id="DDYIJyzBLLunJoh6CxsGQX">
+          <button class="md:hidden text-gray-600" data-page-node-id="ep7D30NzY3boozp6UoamIe"><i class="fas fa-bars" data-page-node-id="7JbIeC2Ga5PllmD0e8fK1u"></i></button>
+          <div data-page-node-id="U8FVsDbPjPJTIKHhdAXGRH">
+            <h1 class="text-lg font-bold text-gray-800 leading-none" data-page-node-id="IlTThElrePdwalgNkzISYM">专题管理</h1>
+            <p class="text-xs text-gray-400 mt-1" data-page-node-id="q5wavrUFdbFFZGErCyvgyQ">点击模板格子即可编辑商品与文案</p>
+          </div>
+        </div>
+        <button onclick="openDrawer()" class="coral-gradient text-white text-sm font-medium px-4 py-2 rounded-lg shadow-lg shadow-coral-500/25 hover:opacity-95 transition flex items-center gap-2" data-page-node-id="btj4tOTexLGYKX0A3CTqGA">
+          <i class="fas fa-plus" data-page-node-id="2CwTiIIN83GFrIChDEItdd"></i> 新增专题
+        </button>
+      </header>
+
+      <!-- 内容区 -->
+      <div class="flex-1 overflow-auto p-6" data-page-node-id="jFaRaLT0k0KE8I2LAnj7eM">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4" data-page-node-id="9CIEeYmjHNYBBAe86WTlBQ">
+          <h2 class="font-semibold text-gray-800" data-page-node-id="DxnEDFEkUAiq6ZB5EJYOXo">全部专题 <span id="listCount" class="text-gray-400 text-sm font-normal" data-page-node-id="uTswpexkqLl13xN8ngmnSI"></span></h2>
+          <div class="flex items-center gap-2" data-page-node-id="eBxHhU8dEQDtzdvBCWMGqC">
+            <div class="relative" data-page-node-id="6LGXlhvZAQHfjMZRE6zlZq">
+              <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" data-page-node-id="mtXAnayDihJd5QgdvFpVzB"></i>
+              <input id="listSearch" type="text" placeholder="搜索模板名称…" oninput="renderList()" class="pl-9 pr-4 py-2 bg-gray-100 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300 w-48" data-page-node-id="rXDRFCjDcQOaDzZyULYdg4">
+            </div>
+            <select id="typeFilter" onchange="renderList()" class="px-3 py-2 bg-gray-100 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" data-page-node-id="ULmPmPm8Dteh4DwWbGUwMC">
+              <option value="" data-page-node-id="kH9whN6KB4CLRaXeGcXDJ5">全部模板</option>
+              <option value="card1" data-page-node-id="uQ1BUKAEkmR2auCsIo6ewN">模板1</option>
+              <option value="card2" data-page-node-id="ASKdTAxeSSg9JQLwzCQBxh">模板2</option>
+            </select>
+          </div>
+        </div>
+        <div id="list" class="flex flex-wrap gap-4 content-start" data-page-node-id="a7kFOtpOmUQorYy9JDI1HM"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 抽屉遮罩 -->
+  <div id="drawerMask" class="hidden fixed inset-0 bg-black/30 z-40" onclick="if(event.target===this)closeDrawer()" data-page-node-id="H4eIIdC3EuR8CPFzNByu5U"></div>
+
+  <!-- 右侧抽屉 -->
+  <aside id="drawer" class="fixed right-0 top-0 h-full w-full max-w-4xl bg-white z-50 translate-x-full flex flex-col shadow-2xl" data-page-node-id="AO8WCBOzRofkJdkpo4ddCG">
+    <div class="h-16 px-6 flex items-center justify-between border-b border-gray-100 shrink-0" data-page-node-id="ZR83tY8a1cFuSWUTQny80J">
+      <div data-page-node-id="Z7g1oC1hBlM3JjgMJShCHb">
+        <p id="drawerTitle" class="font-bold text-gray-800" data-page-node-id="0XnMJ4uAGDTOoSO62izFU3">新增专题</p>
+        <p class="text-xs text-gray-400" data-page-node-id="RJN03TKAmbEHNKTKRN8YOr">选择模板 → 点击格子编辑属性 → 发布后导购可在 IM 一键发送</p>
+      </div>
+      <button onclick="closeDrawer()" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition" data-page-node-id="xuiNktzhRdOCw9o58ABLja"><i class="fas fa-times" data-page-node-id="PVVt4ptoRTIsOoZapVm6i7"></i></button>
+    </div>
+
+    <div class="flex-1 overflow-hidden flex flex-col lg:flex-row" data-page-node-id="pNBxmh1dAG9t6JzJdtAgm8">
+      <!-- 左：选择模板 + 编辑画布 -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-6" data-page-node-id="t9Q37TgCvtqIM3VFjY9WPJ">
+        <section data-page-node-id="yDvwRFQBRbdtPBDPZH66ct">
+          <p class="text-sm font-semibold text-gray-800 mb-3" data-page-node-id="vfDeWSdLZk243Gu15h2duf">① 选择模板 <span class="text-gray-400 font-normal text-xs" data-page-node-id="aAJCpHoDo5wjjzx0ZDop2x">（模板1 / 模板2 两套版式）</span></p>
+          <div class="grid grid-cols-2 gap-3" id="tplPicker" data-page-node-id="9Eg5pcVWCG1XeEozH3dQoe"></div>
+        </section>
+
+        <section data-page-node-id="QApdDW6DsYZhgcGfMIrqHB">
+          <p class="text-sm font-semibold text-gray-800 mb-1" data-page-node-id="kACe6KHFLOK1xTHwdAT2U5">② 编辑画布 <span class="text-gray-400 font-normal text-xs" data-page-node-id="d1YTW2Q13BD6miRfoGv49r">（直接点击模板中的格子）</span></p>
+          <p class="text-xs text-gray-400 mb-3" data-page-node-id="fPxYFaSIE4H3OhXJqGrTVy">左侧模板平铺展示全部格子，点击任意「商品」或「文本」格子，右侧属性面板即出现对应表单。</p>
+          <div id="preview" class="mx-auto" style="max-width:480px" data-page-node-id="wrxCoGFMgIYyTmZFCYjG3V"></div>
+        </section>
+      </div>
+
+      <!-- 右：属性设置 -->
+      <div class="w-full lg:w-[400px] shrink-0 border-t lg:border-t-0 lg:border-l border-gray-100 bg-gray-50 p-5 overflow-y-auto" data-page-node-id="c79Y93XH4xaH5gcYbhbIWk">
+        <p class="text-sm font-semibold text-gray-700 mb-3" data-page-node-id="IBw8nWxeD0BfUo8fUsguBv">属性设置</p>
+        <div id="props" data-page-node-id="OmokHFjsBZ0FMHKg2wKyUG"></div>
+      </div>
+    </div>
+
+    <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-end gap-3 shrink-0 bg-white" data-page-node-id="sQBvD9oKqw35L7e5iwq6wS">
+      <button onclick="closeDrawer()" class="px-4 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition" data-page-node-id="L99nmxPCJKs2wwqAkZCHbB">取消</button>
+      <button onclick="saveTheme('published')" class="coral-gradient text-white text-sm font-medium px-5 py-2.5 rounded-lg shadow-lg shadow-coral-500/25 hover:opacity-95 transition" data-page-node-id="jyn2SN9UenKCZAHrvYf3yx">发布</button>
+    </div>
+  </aside>
+
+  <!-- 删除确认弹窗 -->
+  <div id="confirmModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6" onclick="if(event.target===this)closeConfirm()" data-page-node-id="OHUBGUbYBPcAAAlSDqkvun">
+    <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl" data-page-node-id="HVHgC8ovFDVHGgaBGQ16sS">
+      <div class="px-5 py-5" data-page-node-id="xL2uPwXPIBF1PEcaOEkO5v">
+        <div class="flex items-center gap-3" data-page-node-id="41Wq51okTCDyII2PRVgdl8">
+          <div class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0" data-page-node-id="ZUPIfsMdRNGXoGdzMjooTF"><i class="fas fa-exclamation-triangle" data-page-node-id="9KGUNspxJpNDHbN5P9u2h9"></i></div>
+          <div data-page-node-id="iInojGcF0jnCYt93bZ6vCz">
+            <p class="font-semibold text-gray-800 text-sm" data-page-node-id="6KpMR4so2UgGxAjF4atPqP">删除专题</p>
+            <p id="confirmText" class="text-xs text-gray-500 mt-0.5" data-page-node-id="afnH1dSoPhHvEwbgnQGVq1"></p>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 px-5 pb-5" data-page-node-id="0E1VXrz1oKYolzIkOcEmUM">
+        <button onclick="closeConfirm()" class="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition" data-page-node-id="XffQa46etrq8Yxm4oFzT25">取消</button>
+        <button onclick="confirmDelete()" class="flex-1 bg-red-500 hover:bg-red-600 text-white text-center py-2.5 rounded-xl text-sm font-semibold transition" data-page-node-id="vlQMOgJRJXpb7vSNaprL9J">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 轻提示 -->
+  <div id="toast" class="fixed left-1/2 bottom-8 z-[60] opacity-0 pointer-events-none bg-gray-900/90 text-white text-sm px-4 py-2.5 rounded-xl shadow-lg" data-page-node-id="Ma4CLiRG40TiJxJFs8c7av">提示</div>
+
+  <script>
+    /* ---------- 数据 ---------- */
+    const PRODUCTS = [
+      {id:'p1',  name:'LOVE 手镯',            brand:'Cartier',            price:'¥42,900', img:'a1.png',      cat:'首饰'},
+      {id:'p2',  name:'JUSTE UN CLOU 戒指',   brand:'Cartier',            price:'¥18,500', img:'a2.png',      cat:'首饰'},
+      {id:'p3',  name:'Trinity 三环戒指',      brand:'Cartier',            price:'¥15,800', img:'a3.png',      cat:'首饰'},
+      {id:'p4',  name:'Panthère 项链',         brand:'Cartier',            price:'¥56,000', img:'a4.png',      cat:'首饰'},
+      {id:'p5',  name:'Alhambra 四叶项链',     brand:'Van Cleef & Arpels', price:'¥28,800', img:'a5.png',      cat:'首饰'},
+      {id:'p6',  name:'Vintage Alhambra 项链', brand:'Van Cleef & Arpels', price:'¥21,500', img:'a6.png',      cat:'首饰'},
+      {id:'p7',  name:'Perlée 手链',           brand:'Van Cleef & Arpels', price:'¥28,900', img:'a7.png',      cat:'首饰'},
+      {id:'p8',  name:'Kelly 25 手袋',         brand:'Hermès',             price:'¥98,000', img:'a8.png',      cat:'女包'},
+      {id:'p9',  name:'Constance 钱包',        brand:'Hermès',             price:'¥36,000', img:'a9.png',      cat:'女包'},
+      {id:'p10', name:'Tiffany Keys 钥匙项链', brand:'Tiffany & Co.',      price:'¥12,500', img:'b1.png',      cat:'首饰'},
+      {id:'p11', name:'Divas Dream 扇子项链',  brand:'Bvlgari',            price:'¥19,800', img:'b2.png',      cat:'首饰'},
+      {id:'p12', name:'Amulette 护身符项链',   brand:'Cartier',            price:'¥16,200', img:'b3.png',      cat:'首饰'},
+      {id:'p13', name:'Rose des vents 罗盘项链',brand:'Dior',              price:'¥15,800', img:'c1.png',      cat:'首饰'},
+      {id:'p14', name:'Happy Hearts 心形项链', brand:'Chopard',            price:'¥14,600', img:'product1.png', cat:'首饰'},
+      {id:'p15', name:'Flora 花卉项链',        brand:'Gucci',              price:'¥13,900', img:'product2.png', cat:'首饰'},
+      {id:'p16', name:'Farandole 环扣项链',    brand:'Hermès',             price:'¥17,500', img:'product3.png', cat:'女包'}
+    ];
+    const productById = id => PRODUCTS.find(p=>p.id===id);
+    const $ = id => document.getElementById(id);
+    const isUrl = s => /^(https?:|blob:|data:)/.test(s||'');
+    const resolveImg = img => !img ? '' : (isUrl(img) ? img : 'assets/generated/'+img);
+    const escapeHtml = s => (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const nl2br = s => escapeHtml(s).replace(/\n/g,'<br>');
+
+    // 卡2 的四列槽位（ed / pr 为文本块，其余为商品）
+    const CARD2_COLS = [['a1','a2','a3'],['b1','ed','b2'],['c1','c2','c3'],['d1','pr','d2']];
+    const CARD1_GRID = ['c1','c2','c3','c4','c5','c6','c7','c8'];
+
+    function prodEl(id){ const p=productById(id); return {type:'product', productId:id, img:p.img, brand:p.brand, name:p.name, price:p.price, custom:false}; }
+    function emptyProd(){ return {type:'product', productId:null, img:'', brand:'', name:'', price:'', custom:false}; }
+    const isFilledProduct = el => el && el.type==='product' && (!!el.productId || (el.img && isUrl(el.img)));
+    function defaultElements(tpl){
+      const e = {};
+      if(tpl==='card1'){
+        e.hero = emptyProd();
+        CARD1_GRID.forEach(id=> e[id]=emptyProd());
+      } else {
+        ['a1','a2','a3','b1','b2','c1','c2','c3','d1','d2'].forEach(id=> e[id]=emptyProd());
+        e.ed = {type:'text', kicker:'Editorial', title:'把爱\n戴在颈间', sub:'10 款臻选 · 七夕限定企划'};
+        e.pr = {type:'text', kicker:'Price', title:'¥12,500', sub:'政府消费券可叠加 · 专属导购 1v1'};
+      }
+      return e;
+    }
+
+    let themes = [
+      { id:'t1', name:'玫瑰金臻选 · 限时 9 件', subtitle:'限时甄选 · 专柜直供', template:'card1', status:'published', enabled:true,
+        elements: Object.assign(defaultElements('card1'), { hero:prodEl('p1'), c1:prodEl('p2'), c2:prodEl('p3'), c3:prodEl('p4'), c4:prodEl('p5'), c5:prodEl('p6'), c6:prodEl('p7'), c7:prodEl('p8'), c8:prodEl('p9') }) },
+      { id:'t2', name:'七夕甄礼 · 项链精选', subtitle:'七夕限定企划', template:'card2', status:'published', enabled:false,
+        elements: Object.assign(defaultElements('card2'), { a1:prodEl('p5'), a2:prodEl('p10'), a3:prodEl('p11'), b1:prodEl('p12'), b2:prodEl('p14'), c1:prodEl('p13'), c2:prodEl('p15'), c3:prodEl('p16'), d1:prodEl('p6'), d2:prodEl('p7') }) },
+      { id:'t3', name:'盛夏腕表甄选', subtitle:'', template:'card1', status:'draft', enabled:true,
+        elements: Object.assign(defaultElements('card1'), { hero:prodEl('p1'), c1:prodEl('p2'), c2:prodEl('p3'), c3:prodEl('p4'), c4:prodEl('p8'), c5:prodEl('p9'), c6:prodEl('p5'), c7:prodEl('p6'), c8:prodEl('p7') }) }
+    ];
+
+    let form = null;
+    let editingId = null;
+    let pendingDelete = null;
+
+    /* ---------- 列表 ---------- */
+    function themeThumb(t){
+      if(t.template==='card1'){
+        const hero = t.elements.hero;
+        const imgs = CARD1_GRID.map(id=> t.elements[id]);
+        const cells = imgs.map(el=> el.img ? `<img src="${resolveImg(el.img)}" class="w-full h-full object-cover">` : `<div class="w-full h-full bg-gray-100"></div>`).join('');
+        return `<div class="w-full h-32 rounded-lg overflow-hidden bg-gray-100 border border-gray-100 flex flex-col">
+          <div class="h-1/2 bg-gradient-to-br from-amber-200 to-coral-200 relative">${hero.img?`<img src="${resolveImg(hero.img)}" class="w-full h-full object-cover">`:''}</div>
+          <div class="h-1/2 grid grid-cols-4 grid-rows-2 gap-px bg-gray-200 p-px">${cells}</div>
+        </div>`;
+      }
+      const col = ids => `<div class="flex-1 flex flex-col gap-1">${ids.map(id=>{
+        const el = t.elements[id];
+        return el.type==='text'
+          ? `<div class="flex-1 rounded-sm bg-gray-100 flex items-center justify-center"><span class="w-3 h-[3px] bg-gray-300 rounded-full"></span></div>`
+          : (el.img ? `<div class="flex-1 rounded-sm overflow-hidden"><img src="${resolveImg(el.img)}" class="w-full h-full object-cover"></div>` : `<div class="flex-1 rounded-sm bg-gray-100"></div>`);
+      }).join('')}</div>`;
+      return `<div class="w-full h-32 rounded-lg overflow-hidden bg-white border border-gray-100 p-1.5 flex gap-1">${CARD2_COLS.map(col).join('')}</div>`;
+    }
+
+    function renderList(){
+      const q = ($('listSearch').value||'').trim().toLowerCase();
+      const tf = ($('typeFilter').value||'');
+      const items = themes.filter(t=> (!q || t.name.toLowerCase().includes(q)) && (!tf || t.template===tf));
+      $('listCount').textContent = '（'+items.length+'）';
+      if(!items.length){ $('list').innerHTML = `<div class="col-span-full text-center text-gray-400 text-sm py-16">未找到匹配「${escapeHtml(q)}」的专题</div>`; return; }
+      $('list').innerHTML = items.map(t=>{
+        const cnt = Object.values(t.elements).filter(isFilledProduct).length;
+        const badge = t.template==='card1'
+          ? `<span class="tag bg-amber-50 text-amber-600"><i class="fas fa-image mr-1"></i>模板1 · 大图+八宫格</span>`
+          : `<span class="tag bg-rose-50 text-rose-600"><i class="fas fa-th-large mr-1"></i>模板2 · 杂志拼贴</span>`;
+        const disabled = t.enabled===false;
+        const cardCls = disabled
+          ? 'bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition cursor-pointer w-[300px] shrink-0 opacity-70'
+          : 'bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition cursor-pointer w-[300px] shrink-0';
+        const toggleBtn = disabled
+          ? `<button onclick="toggleEnable('${t.id}')" class="flex-1 text-xs text-emerald-600 hover:bg-emerald-50 rounded-lg py-2 transition"><i class="fas fa-play mr-1"></i>启用</button>`
+          : `<button onclick="toggleEnable('${t.id}')" class="flex-1 text-xs text-orange-500 hover:bg-orange-50 rounded-lg py-2 transition"><i class="fas fa-pause mr-1"></i>停用</button>`;
+        return `<div class="${cardCls}" onclick="openDrawer('${t.id}')">
+          <div class="relative">${themeThumb(t)}</div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-2 flex-wrap">${badge}</div>
+            <p class="font-semibold text-gray-800 text-sm truncate">${escapeHtml(t.name)}</p>
+            <p class="text-xs text-gray-400 mt-1">${cnt} 款商品</p>
+            <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100" onclick="event.stopPropagation()">
+              <button onclick="openDrawer('${t.id}')" class="flex-1 text-xs text-coral-600 hover:bg-coral-50 rounded-lg py-2 transition"><i class="fas fa-edit mr-1"></i>编辑</button>
+              ${toggleBtn}
+              <button onclick="deleteTheme('${t.id}')" class="flex-1 text-xs text-gray-500 hover:bg-red-50 hover:text-red-500 rounded-lg py-2 transition"><i class="fas fa-trash mr-1"></i>删除</button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    /* ---------- 模板选择 ---------- */
+    function renderTplPicker(){
+      const tpls = [
+        { k:'card1', t:'模板1', d:'大图横幅 + 4×2 小图（共 9 商品格）',
+          thumb:`<div class="h-14 rounded-md overflow-hidden bg-gray-100 flex flex-col"><div class="h-1/2 bg-gradient-to-br from-amber-200 to-coral-200"></div><div class="h-1/2 grid grid-cols-4 grid-rows-2 gap-px bg-gray-200 p-px">${Array.from({length:8}).map(()=>'<div class="bg-gray-200"></div>').join('')}</div></div>` },
+        { k:'card2', t:'模板2', d:'4 列杂志拼贴（10 商品格 + 2 文本格）',
+          thumb:`<div class="h-14 rounded-md overflow-hidden bg-white border border-gray-100 p-1 flex gap-1"><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div></div><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="h-2 bg-gray-100"></div><div class="flex-1 bg-rose-200"></div></div><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div><div class="flex-1 bg-rose-200"></div></div><div class="flex-1 flex flex-col gap-1"><div class="flex-1 bg-rose-200"></div><div class="h-2 bg-gray-100"></div><div class="flex-1 bg-rose-200"></div></div></div>` }
+      ];
+      $('tplPicker').innerHTML = tpls.map(x=>`
+        <button onclick="selectTemplate('${x.k}')" class="tpl-card text-left rounded-xl border-2 ${form.template===x.k?'active border-coral-500':'border-gray-200'} bg-white p-3 hover:border-coral-300 transition">
+          ${x.thumb}
+          <p class="text-sm font-semibold text-gray-800 mt-2">${x.t}</p>
+          <p class="text-[11px] text-gray-400 mt-0.5">${x.d}</p>
+        </button>`).join('');
+    }
+
+    function selectTemplate(k){
+      form.template = k;
+      form.elements = defaultElements(k);
+      form.selected = null;
+      renderTplPicker();
+      renderPreview();
+      renderProps();
+    }
+
+    /* ---------- 画布格子 ---------- */
+    function cellProductHTML(slotId, hClass){
+      hClass = hClass || 'h-[92px]';
+      const el = form.elements[slotId];
+      const sel = form.selected===slotId;
+      const ring = sel ? 'ring-2 ring-coral-500 z-10' : 'ring-1 ring-gray-100';
+      if(el.img){
+        return `<div data-slot="${slotId}" onclick="selectCell('${slotId}')" class="relative ${hClass} rounded-xl overflow-hidden ${ring} cursor-pointer">
+          <img src="${resolveImg(el.img)}" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-2">
+            <p class="text-white/75 text-[8px] tracking-[0.15em] uppercase">${escapeHtml(el.brand)}</p>
+            <p class="text-white text-[11px] font-semibold leading-snug mt-0.5">${escapeHtml(el.name)}</p>
+            <p class="text-coral-300 text-[11px] font-bold mt-0.5">${el.price}</p>
+          </div>
+          ${sel?'<span class="absolute top-1.5 right-1.5 text-[9px] bg-coral-500 text-white px-1.5 py-0.5 rounded">编辑中</span>':''}
+        </div>`;
+      }
+      return `<div data-slot="${slotId}" onclick="selectCell('${slotId}')" class="relative ${hClass} rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-center ${sel?'ring-2 ring-coral-500':''} cursor-pointer">
+        <span class="text-gray-400 text-[11px] flex flex-col items-center"><i class="fas fa-plus mb-1"></i>点击选择商品</span>
+      </div>`;
+    }
+    function cellTextHTML(slotId){
+      const el = form.elements[slotId];
+      const sel = form.selected===slotId;
+      return `<div data-slot="${slotId}" onclick="selectCell('${slotId}')" class="relative rounded-xl bg-gray-50 border ${sel?'border-coral-500 ring-2 ring-coral-200':'border-gray-200'} p-2.5 flex flex-col justify-center gap-1 cursor-pointer min-h-[64px]">
+        <p class="text-[8px] text-coral-600 font-semibold tracking-[0.2em] uppercase">${escapeHtml(el.kicker)}</p>
+        <p class="text-gray-800 text-sm font-bold leading-[1.15]">${nl2br(el.title)}</p>
+        <p class="text-[10px] text-gray-400 leading-snug">${escapeHtml(el.sub)}</p>
+        ${sel?'<span class="absolute top-1.5 right-1.5 text-[9px] bg-coral-500 text-white px-1.5 py-0.5 rounded">编辑中</span>':''}
+      </div>`;
+    }
+    function avatar(){ return `<img src="https://api.dicebear.com/7.x/avataaars/svg?seed=linxiaoting" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="">`; }
+    function headerHTML(showPick){
+      return `<div class="px-3 py-2.5 border-b border-gray-50">
+        ${showPick?'<p class="text-[9px] text-coral-600 font-semibold tracking-[0.2em] uppercase">Editor\'s Pick</p>':''}
+        <p class="text-sm font-bold text-gray-800 mt-0.5">${escapeHtml(form.name||'未命名专题')}</p>
+      </div>`;
+    }
+
+    function buildCard1(){
+      const grid = CARD1_GRID.map(id=>cellProductHTML(id,'h-[78px]')).join('');
+      return `<div class="flex gap-2.5">${avatar()}<div class="max-w-[88%] w-full">
+        <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-gray-100">
+          ${headerHTML(false)}
+          <div class="p-3 space-y-2.5">
+            <div class="h-[150px]">${cellProductHTML('hero','h-full')}</div>
+            <div class="grid grid-cols-4 gap-2">${grid}</div>
+          </div>
+        </div>
+      </div></div>`;
+    }
+    function buildCard2(){
+      const colHTML = ids => `<div class="flex-1 flex flex-col gap-2">${ids.map(id=> form.elements[id].type==='text' ? cellTextHTML(id) : cellProductHTML(id,'h-[92px]')).join('')}</div>`;
+      return `<div class="flex gap-2.5">${avatar()}<div class="max-w-[88%] w-full">
+        <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-gray-100">
+          ${headerHTML(true)}
+          <div class="p-3"><div class="flex gap-2">${CARD2_COLS.map(colHTML).join('')}</div></div>
+        </div>
+      </div></div>`;
+    }
+    function renderPreview(){ $('preview').innerHTML = form.template==='card1' ? buildCard1() : buildCard2(); }
+
+    /* ---------- 选中 / 属性面板 ---------- */
+    function selectCell(slot){
+      form.selected = (form.selected===slot) ? null : slot;
+      renderPreview();
+      renderProps();
+    }
+    function onTitleInput(){
+      form.name = $('f_name').value;
+      renderPreview();
+    }
+    function onElInput(field, val){
+      if(!form.selected) return;
+      form.elements[form.selected][field] = val;
+      renderPreview();
+    }
+    function assignProduct(slot, id){
+      form.elements[slot] = id ? prodEl(id) : emptyProd();
+      renderPreview();
+      renderProps();
+    }
+    function uploadImage(slot, input){
+      const f = input.files && input.files[0];
+      if(!f) return;
+      const url = URL.createObjectURL(f);
+      const el = form.elements[slot];
+      el.img = url; el.custom = true;
+      if(!el.productId) el.productId = null;
+      renderPreview();
+      renderProps();
+    }
+    function revertImage(slot){
+      const el = form.elements[slot];
+      if(el.productId){ const p = productById(el.productId); el.img = p.img; }
+      else { el.img = ''; }
+      el.custom = false;
+      renderPreview();
+      renderProps();
+    }
+    function renderProductList(){
+      const box = $('psList'); if(!box) return;
+      const q = (($('psSearch') && $('psSearch').value)||'').trim().toLowerCase();
+      const list = PRODUCTS.filter(p=> !q || p.name.toLowerCase().includes(q));
+      const cur = form.selected ? form.elements[form.selected].productId : null;
+      if(!list.length){ box.innerHTML = `<div class="px-3 py-3 text-sm text-gray-400">未找到匹配的商品</div>`; return; }
+      box.innerHTML = list.map(p=>{
+        const sel = cur===p.id;
+        return `<button type="button" onclick="assignProduct('${form.selected}','${p.id}')" class="w-full text-left px-3 py-2 text-sm truncate border-b border-gray-50 last:border-0 ${sel?'bg-coral-50 text-coral-600 font-medium':'text-gray-700 hover:bg-gray-50'}">${escapeHtml(p.name)}</button>`;
+      }).join('');
+    }
+    function showProductDropdown(){
+      const inp = $('psSearch'), box = $('psList'); if(!inp || !box) return;
+      renderProductList();
+      const r = inp.getBoundingClientRect();
+      const dr = $('drawer').getBoundingClientRect();
+      box.style.position = 'fixed';
+      box.style.left = (r.left - dr.left) + 'px';
+      box.style.top = (r.bottom - dr.top + 4) + 'px';
+      box.style.width = Math.min(r.width, 360) + 'px';
+      box.classList.remove('hidden');
+    }
+    function hideProductDropdown(){ const box = $('psList'); if(box) box.classList.add('hidden'); }
+
+    function renderProps(){
+      const box = $('props');
+      let html = `
+        <p class="text-xs font-semibold text-gray-400 mb-2">专题信息</p>
+        <div class="space-y-2 mb-1">
+          <div><label class="text-xs text-gray-500">专题标题</label><input id="f_name" oninput="onTitleInput()" class="mt-1 w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(form.name)}"></div>
+        </div>`;
+      if(form.selected){
+        const id = form.selected, el = form.elements[id];
+        if(el.type==='product'){
+          const imgSrc = resolveImg(el.img);
+          const imgBox = imgSrc
+            ? `<img src="${imgSrc}" class="w-14 h-14 rounded object-cover border border-gray-200">`
+            : `<div class="w-14 h-14 rounded border border-dashed border-gray-200 bg-gray-50 flex items-center justify-center text-gray-300 text-[10px]">无图</div>`;
+          html += `<hr class="my-4 border-gray-100">
+            <p class="text-xs font-semibold text-coral-600 mb-2">商品格子 · <span class="font-mono">${id}</span></p>
+            <div class="space-y-3">
+              <div>
+                <label class="text-xs text-gray-500">选择商品</label>
+                <div class="relative mt-1">
+                  <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                  <input id="psSearch" oninput="form._ps=this.value; renderProductList()" onfocus="showProductDropdown()" onblur="hideProductDropdown()" value="${escapeHtml(form._ps||'')}" placeholder="搜索商品名称…" class="w-full pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300">
+                </div>
+                <div id="psList" class="hidden absolute z-30 mt-1 w-full max-h-56 overflow-y-auto hide-scrollbar bg-white border border-gray-200 rounded-lg shadow-xl" onmousedown="event.preventDefault()"></div>
+              </div>
+              <div>
+                <label class="text-xs text-gray-500">商品图片</label>
+                <div class="mt-1 flex items-center gap-2">
+                  ${imgBox}
+                  <label class="cursor-pointer text-xs text-coral-600 border border-coral-200 rounded-lg px-3 py-2 hover:bg-coral-50 transition">
+                    <i class="fas fa-upload mr-1"></i>上传图片<input type="file" accept="image/*" class="hidden" onchange="uploadImage('${id}',this)">
+                  </label>
+                  ${el.custom?`<button type="button" onclick="revertImage('${id}')" class="text-xs text-gray-500 hover:text-red-500">恢复商品原图</button>`:''}
+                </div>
+              </div>
+              <div><label class="text-xs text-gray-500">品牌</label><input oninput="onElInput('brand',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.brand)}"></div>
+              <div><label class="text-xs text-gray-500">商品名称</label><input oninput="onElInput('name',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.name)}"></div>
+              <div><label class="text-xs text-gray-500">价格</label><input oninput="onElInput('price',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.price)}"></div>
+              <button type="button" onclick="assignProduct('${id}','')" class="w-full mt-1 text-xs text-gray-500 hover:text-red-500 border border-gray-200 rounded-lg py-2 transition">清除商品（留空占位）</button>
+            </div>`;
+        } else {
+          html += `<hr class="my-4 border-gray-100">
+            <p class="text-xs font-semibold text-coral-600 mb-2">文本格子 · <span class="font-mono">${id}</span></p>
+            <div class="space-y-2">
+              <div><label class="text-xs text-gray-500">小标签</label><input oninput="onElInput('kicker',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.kicker)}"></div>
+              <div><label class="text-xs text-gray-500">标题（可换行）</label><textarea oninput="onElInput('title',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300">${escapeHtml(el.title)}</textarea></div>
+              <div><label class="text-xs text-gray-500">说明文字</label><input oninput="onElInput('sub',this.value)" class="mt-1 w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-coral-300" value="${escapeHtml(el.sub)}"></div>
+            </div>`;
+        }
+      } else {
+        html += `<div class="mt-4 rounded-xl bg-coral-50 border border-coral-100 p-3 text-xs text-coral-700 leading-relaxed">点击左侧模板中的任意格子即可在此设置其属性：<br>· <b>商品格子</b>：从商品池选择，并可改写品牌 / 名称 / 价格<br>· <b>文本格子</b>：编辑小标签、标题与说明</div>`;
+      }
+      box.innerHTML = html;
+      if(form.selected && form.elements[form.selected] && form.elements[form.selected].type==='product'){
+        renderProductList();
+      }
+    }
+
+    /* ---------- 抽屉开关 ---------- */
+    function openDrawer(id){
+      editingId = id || null;
+      if(id){
+        const t = themes.find(x=>x.id===id);
+        form = { id:t.id, template:t.template, name:t.name, subtitle:t.subtitle||'', elements:JSON.parse(JSON.stringify(t.elements)), selected:null };
+        $('drawerTitle').textContent = '编辑专题';
+      } else {
+        form = { id:null, template:'card1', name:'', subtitle:'', elements:defaultElements('card1'), selected:null };
+        $('drawerTitle').textContent = '新增专题';
+      }
+      renderTplPicker();
+      renderPreview();
+      renderProps();
+      $('drawerMask').classList.remove('hidden');
+      $('drawer').classList.remove('translate-x-full');
+      $('drawer').classList.add('translate-x-0');
+      document.body.style.overflow='hidden';
+    }
+    function closeDrawer(){
+      $('drawerMask').classList.add('hidden');
+      $('drawer').classList.add('translate-x-full');
+      $('drawer').classList.remove('translate-x-0');
+      document.body.style.overflow='';
+    }
+
+    /* ---------- 保存 / 复制 / 删除 ---------- */
+    function saveTheme(status){
+      if(!form.name.trim()){ alert('请填写专题标题'); return; }
+      const prodSlots = Object.values(form.elements).filter(e=>e.type==='product');
+      const empty = prodSlots.filter(e=>!isFilledProduct(e)).length;
+      if(empty>0){ alert('还有 '+empty+' 个商品格子未选择商品，请先在画布中点击补全。'); return; }
+      const data = { id:form.id, name:form.name, subtitle:form.subtitle, template:form.template, status:status, elements:JSON.parse(JSON.stringify(form.elements)) };
+      if(editingId){
+        const t = themes.find(x=>x.id===editingId);
+        Object.assign(t, data);
+      } else {
+        data.id = 't'+Date.now();
+        themes.unshift(data);
+      }
+      closeDrawer();
+      renderList();
+    }
+    function deleteTheme(id){
+      const t = themes.find(x=>x.id===id);
+      if(!t) return;
+      pendingDelete = id;
+      $('confirmText').textContent = '确定删除专题「'+t.name+'」？此操作不可撤销。';
+      $('confirmModal').classList.remove('hidden');
+    }
+    function closeConfirm(){ $('confirmModal').classList.add('hidden'); pendingDelete = null; }
+    function confirmDelete(){
+      if(pendingDelete) themes = themes.filter(x=>x.id!==pendingDelete);
+      closeConfirm();
+      renderList();
+    }
+
+    /* ---------- 停用 / 启用 ---------- */
+    function toggleEnable(id){
+      const t = themes.find(x=>x.id===id);
+      if(!t) return;
+      t.enabled = !(t.enabled===true);
+      renderList();
+      showToast(t.enabled===true ? ('已启用「'+t.name+'」') : ('已停用「'+t.name+'」'));
+    }
+    let toastTimer = null;
+    function showToast(msg){
+      const el = $('toast');
+      if(!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> el.classList.remove('show'), 2200);
+    }
+
+    /* ---------- 初始化 ---------- */
+    renderList();
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>导购端 - 客户管理</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .phone-frame { max-width: 414px; margin: 0 auto; min-height: 100vh; background: #f2f3f5; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-gray-200">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#f2f3f5]">
+
+    <!-- 顶部 -->
+    <div class="bg-white px-4 pt-12 pb-3 border-b border-gray-100 flex items-center shrink-0">
+      <a href="G1-工作台.html" class="w-8 h-8 flex items-center justify-center -ml-1 mr-1.5 text-gray-700">
+        <i class="fas fa-chevron-left text-lg"></i>
+      </a>
+      <h1 class="text-base font-semibold text-gray-800">客户管理</h1>
+    </div>
+
+    <!-- 搜索 + 筛选 -->
+    <div class="bg-white px-4 py-3 border-b border-gray-100 shrink-0 space-y-3">
+      <div class="flex items-center bg-gray-100 rounded-full px-3 py-2">
+        <i class="fas fa-search text-gray-400 text-sm mr-2"></i>
+        <input type="text" placeholder="搜索客户名称" class="flex-1 bg-transparent outline-none text-sm placeholder-gray-400">
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar">
+        <button class="px-3 py-1.5 bg-coral-500 text-white text-xs font-medium rounded-full whitespace-nowrap">全部客户</button>
+        <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium rounded-full whitespace-nowrap">今天联系</button>
+        <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium rounded-full whitespace-nowrap">昨天联系</button>
+        <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium rounded-full whitespace-nowrap">本周联系</button>
+        <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium rounded-full whitespace-nowrap">本月联系</button>
+      </div>
+    </div>
+
+    <!-- 客户列表 -->
+    <div class="flex-1 overflow-y-auto hide-scrollbar p-3 space-y-3">
+
+      <!-- 客户 1 -->
+      <a href="G3-导购IM会话页.html" class="block bg-white rounded-2xl p-4 border border-gray-100 hover:shadow-md transition">
+        <div class="flex items-center gap-3">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=chen" class="w-11 h-11 rounded-full bg-gray-100 shrink-0" alt="">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-gray-800 text-sm">陈女士</h3>
+              <span class="text-[10px] text-gray-400">上次消息：10分钟前</span>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-1 flex items-center"><i class="fas fa-store text-gray-300 mr-1"></i>来源：cdf中免</p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="flex items-center gap-3 text-xs text-gray-500">
+                <span><i class="fas fa-shopping-bag text-coral-500 mr-1"></i>3 笔订单</span>
+                <span><i class="fas fa-yen-sign text-coral-500 mr-1"></i>¥86,420</span>
+              </div>
+              <span class="text-xs text-coral-600 font-medium">去联系 <i class="fas fa-chevron-right text-[10px]"></i></span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 客户 2 -->
+      <a href="G3-导购IM会话页.html" class="block bg-white rounded-2xl p-4 border border-gray-100 hover:shadow-md transition">
+        <div class="flex items-center gap-3">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=wang" class="w-11 h-11 rounded-full bg-gray-100 shrink-0" alt="">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-gray-800 text-sm">王小姐</h3>
+              <span class="text-[10px] text-gray-400">上次消息：2小时前</span>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-1 flex items-center"><i class="fas fa-store text-gray-300 mr-1"></i>来源：三亚国际免税城云店</p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="flex items-center gap-3 text-xs text-gray-500">
+                <span><i class="fas fa-shopping-bag text-coral-500 mr-1"></i>12 笔订单</span>
+                <span><i class="fas fa-yen-sign text-coral-500 mr-1"></i>¥245,800</span>
+              </div>
+              <span class="text-xs text-coral-600 font-medium">去联系 <i class="fas fa-chevron-right text-[10px]"></i></span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 客户 3 -->
+      <a href="G3-导购IM会话页.html" class="block bg-white rounded-2xl p-4 border border-gray-100 hover:shadow-md transition">
+        <div class="flex items-center gap-3">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=li" class="w-11 h-11 rounded-full bg-gray-100 shrink-0" alt="">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-gray-800 text-sm">李先生</h3>
+              <span class="text-[10px] text-gray-400">上次消息：昨天</span>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-1 flex items-center"><i class="fas fa-store text-gray-300 mr-1"></i>来源：cdf中免</p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="flex items-center gap-3 text-xs text-gray-500">
+                <span><i class="fas fa-shopping-bag text-coral-500 mr-1"></i>1 笔订单</span>
+                <span><i class="fas fa-yen-sign text-coral-500 mr-1"></i>¥3,200</span>
+              </div>
+              <span class="text-xs text-coral-600 font-medium">去联系 <i class="fas fa-chevron-right text-[10px]"></i></span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 客户 4 -->
+      <a href="G3-导购IM会话页.html" class="block bg-white rounded-2xl p-4 border border-gray-100 hover:shadow-md transition">
+        <div class="flex items-center gap-3">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=zhang" class="w-11 h-11 rounded-full bg-gray-100 shrink-0" alt="">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-gray-800 text-sm">张女士</h3>
+              <span class="text-[10px] text-gray-400">上次消息：3天前</span>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-1 flex items-center"><i class="fas fa-store text-gray-300 mr-1"></i>来源：琼海博鳌免税店云店</p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="flex items-center gap-3 text-xs text-gray-500">
+                <span><i class="fas fa-shopping-bag text-coral-500 mr-1"></i>0 笔订单</span>
+                <span><i class="fas fa-yen-sign text-coral-500 mr-1"></i>¥0</span>
+              </div>
+              <span class="text-xs text-coral-600 font-medium">去联系 <i class="fas fa-chevron-right text-[10px]"></i></span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 客户 5 -->
+      <a href="G3-导购IM会话页.html" class="block bg-white rounded-2xl p-4 border border-gray-100 hover:shadow-md transition">
+        <div class="flex items-center gap-3">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=liu" class="w-11 h-11 rounded-full bg-gray-100 shrink-0" alt="">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-gray-800 text-sm">刘先生</h3>
+              <span class="text-[10px] text-gray-400">上次消息：1个月前</span>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-1 flex items-center"><i class="fas fa-store text-gray-300 mr-1"></i>来源：海口日月广场免税店云店</p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="flex items-center gap-3 text-xs text-gray-500">
+                <span><i class="fas fa-shopping-bag text-coral-500 mr-1"></i>5 笔订单</span>
+                <span><i class="fas fa-yen-sign text-coral-500 mr-1"></i>¥68,000</span>
+              </div>
+              <span class="text-xs text-coral-600 font-medium">去联系 <i class="fas fa-chevron-right text-[10px]"></i></span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+</body>
+</html>

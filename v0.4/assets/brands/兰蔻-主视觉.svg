@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="160" viewBox="0 0 400 160">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0f0"/>
+      <stop offset="45%" stop-color="#ffe8e8"/>
+      <stop offset="100%" stop-color="#fff8f0"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff5e6"/>
+      <stop offset="50%" stop-color="#ffd9b3"/>
+      <stop offset="100%" stop-color="#e6b88a"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+  </defs>
+  <rect width="400" height="160" fill="url(#bg)"/>
+  <!-- 左侧玫瑰装饰 -->
+  <g transform="translate(30, 80) scale(0.9)" opacity="0.18">
+    <circle cx="0" cy="-10" r="18" fill="#c45c48"/>
+    <circle cx="-12" cy="-4" r="14" fill="#c45c48"/>
+    <circle cx="12" cy="-4" r="14" fill="#c45c48"/>
+    <circle cx="-8" cy="10" r="12" fill="#c45c48"/>
+    <circle cx="8" cy="10" r="12" fill="#c45c48"/>
+    <circle cx="0" cy="0" r="10" fill="#d96b5a"/>
+  </g>
+  <!-- 右侧大玫瑰装饰 -->
+  <g transform="translate(360, 40) scale(1.2)" opacity="0.12">
+    <circle cx="0" cy="-10" r="18" fill="#c45c48"/>
+    <circle cx="-12" cy="-4" r="14" fill="#c45c48"/>
+    <circle cx="12" cy="-4" r="14" fill="#c45c48"/>
+    <circle cx="-8" cy="10" r="12" fill="#c45c48"/>
+    <circle cx="8" cy="10" r="12" fill="#c45c48"/>
+    <circle cx="0" cy="0" r="10" fill="#d96b5a"/>
+  </g>
+  <!-- 产品瓶剪影 -->
+  <g transform="translate(200, 80)">
+    <ellipse cx="0" cy="-35" rx="22" ry="8" fill="url(#gold)"/>
+    <rect x="-20" y="-35" width="40" height="70" rx="16" fill="url(#gold)"/>
+    <rect x="-12" y="-30" width="24" height="55" rx="10" fill="#fff" opacity="0.6"/>
+    <ellipse cx="0" cy="35" rx="20" ry="7" fill="#d4a574"/>
+    <!-- 瓶盖 -->
+    <rect x="-10" y="-50" width="20" height="18" rx="3" fill="#d4a574"/>
+    <rect x="-14" y="-48" width="28" height="5" rx="2" fill="#c49a6c"/>
+  </g>
+  <!-- 光点 -->
+  <circle cx="160" cy="50" r="8" fill="#fff" opacity="0.5" filter="url(#soft)"/>
+  <circle cx="250" cy="110" r="6" fill="#fff" opacity="0.4" filter="url(#soft)"/>
+</svg>

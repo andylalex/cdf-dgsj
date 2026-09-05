@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="qLfErGonnlY7DmUkE984Ss">
+<head data-page-node-id="Etl9AyVPZVLFSN0z3X2uU7">
+  <meta charset="UTF-8" data-page-node-id="YBkPpzUPwbWH31tCTqni1h">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="Mvc6QemNPYoaRrS7aRmRA4">
+  <title>客户管理（PC）- 中免海南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" data-page-node-id="H1Gz2Vz4DSHFwrSOtJo0K0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" data-page-node-id="mwn7visBtQnLPFICPBg6pI">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coral: { 50:'#fff5f2',100:'#ffe6e0',200:'#ffd0c5',300:'#ffb0a0',400:'#ff8a75',500:'#ff6b52',600:'#ff5a42',700:'#e64e39',800:'#bf3f2e',900:'#9c3628' }
+          },
+          fontFamily: { sans: ['Noto Sans SC', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
+    .sidebar-active { background: #fff5f2; color: #ff6b52; border-right: 3px solid #ff6b52; }
+    .table-row:hover { background: #fff8f7; }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] text-gray-800" data-page-node-id="8CtpJvQU8AXP8DlWYGGS0f">
+  <div class="min-h-screen flex" data-page-node-id="mCCCvjwZWWmsYfuPLs1h4S">
+
+    <!-- 系统左侧导航 -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex-col hidden md:flex" data-page-node-id="0nd9iryHDLmitDNUCZhB1S">
+      <div class="h-16 flex items-center px-6 border-b border-gray-100" data-page-node-id="EexT7FJ2lJ6xJBxooAos7n">
+        <div class="w-8 h-8 rounded-lg coral-gradient flex items-center justify-center text-white mr-3" data-page-node-id="SE7aPbnhBAnX6aKMibs9eo"><i class="fas fa-store" data-page-node-id="PpzBx8SQFgm1ZjoXmSpBoS"></i></div>
+        <span class="font-bold text-gray-800" data-page-node-id="yAzeM0AQydKWGHygtnxXNT">中免导购管理</span>
+      </div>
+      <nav class="flex-1 py-4 space-y-1 text-sm" data-page-node-id="Hzkh8mImrgumHDZHVhXPOB">
+        <a href="M1-PC客户管理.html" class="sidebar-active flex items-center px-6 py-3 font-medium" data-page-node-id="V0nLkpou1OcvBgsWzKFSkh"><i class="fas fa-users w-6" data-page-node-id="oGhhMzTfZ5L1P7jhxWvDkv"></i>客户管理</a>
+        <a href="M4-消息管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="9F3OFHy2qt0QHdAuJPog9X"><i class="fas fa-comment-dots w-6" data-page-node-id="Sg8TV7FAjRDJ9X7eenHnoW"></i>消息管理</a>
+        <a href="M2-专题管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="a8peLyGlnDb7xe44zpDXnQ"><i class="fas fa-layer-group w-6" data-page-node-id="nNmcKoQsYQCF3b5U6mzXSb"></i>专题管理</a>
+        <a href="M3-PC业绩管理.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="KKIFjyX8KTYvXaGVlyQ8qZ"><i class="fas fa-chart-line w-6" data-page-node-id="IO41z8fpBV5BnTWnQgjnZF"></i>业绩管理</a>
+      </nav>
+    </aside>
+
+    <!-- 主体 -->
+    <div class="flex-1 flex flex-col min-w-0" data-page-node-id="L99lvzqKvYisDjNFdFxX4E">
+
+      <!-- 顶部栏 -->
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0" data-page-node-id="00sK6AFllFSapd4nKlVi3K">
+        <div class="flex items-center gap-4" data-page-node-id="Jo8H1TMWauVlaKEkpknave">
+          <h1 class="text-lg font-bold text-gray-800" data-page-node-id="rpHeVAhkEnjrSaabBMHAKG">客户管理</h1>
+          <span class="text-xs text-gray-400" data-page-node-id="MSOtIghxwrdPYwegrOKrvf">按导购查询客户归属与来源</span>
+        </div>
+        <div class="flex items-center gap-3" data-page-node-id="AZxjaF28SXuAEB8qTOAvHe">
+          <button class="w-9 h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-600 transition" data-page-node-id="RkqJ0hOI8kxRHxFdDJQJHY"><i class="fas fa-bell" data-page-node-id="jaq7RmOHVtEhjwXv25BuDr"></i></button>
+          <div class="flex items-center gap-2" data-page-node-id="gkL4fIOrHz2yna27uGqLHk">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin" class="w-8 h-8 rounded-full bg-gray-100" alt="" data-page-node-id="wrw7T2BNelpOnihwQAPSj5">
+            <span class="text-sm text-gray-700 hidden sm:inline" data-page-node-id="Nw2jaH7yVwWuuu1CUjFZJK">平台管理员</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 筛选区 -->
+      <div class="bg-white border-b border-gray-200 px-6 py-4 shrink-0" data-page-node-id="pPv2Vm0SXHJBYGXb4M3e74">
+        <div class="flex flex-wrap items-center gap-3" data-page-node-id="krB5mAXxBDQWXlB999omy6">
+          <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 min-w-[240px]" data-page-node-id="EQGokliEhtLu8JVkwbalUA">
+            <i class="fas fa-search text-gray-400 text-sm mr-2" data-page-node-id="RIQAUv6ZZAzDgdZGFmUvBc"></i>
+            <input type="text" placeholder="搜索客户名称/手机号" class="bg-transparent outline-none text-sm flex-1 text-gray-700" data-page-node-id="xL2hCtDxDCeD0WNXiA3SHj">
+          </div>
+          <select class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="FUIHQzIYR9seZ2GXaVPnuQ">
+            <option value="" data-page-node-id="GBmT5EMtByNfQU77BzKDcV">全部导购</option>
+            <option value="lin" data-page-node-id="nx4F7Wpum2Lb3h929v4yCY">林小婷</option>
+            <option value="wang" data-page-node-id="YeMTjLAyw27sMDLZXZ1nDH">王小丽</option>
+            <option value="zhang" data-page-node-id="ZYi90R7szpFh7PUHu4APqK">张美琪</option>
+            <option value="liu" data-page-node-id="7BoLc6GSJW5KGYvAVsTmWd">刘佳怡</option>
+          </select>
+          <select class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="UkzsC7fHANDTxCa3EEaYd5">
+            <option value="" data-page-node-id="04xqYnG8UWkasMfHPdW7lV">客户状态</option>
+            <option value="high" data-page-node-id="wZaIl6pqpcB7D267zJN6JA">高意向</option>
+            <option value="vip" data-page-node-id="aFL8P1zX1uvY94GFD5Hwju">VIP</option>
+            <option value="follow" data-page-node-id="1s3hMZa5iGxEOoPJTxOLhd">待跟进</option>
+            <option value="silent" data-page-node-id="2tyG4iNju9tHM16xHAoZzg">沉默客户</option>
+          </select>
+          <div class="flex-1" data-page-node-id="7wYSPEr0hGPLX4YIUgaMEr"></div>
+        </div>
+      </div>
+
+      <!-- 列表区 -->
+      <div class="flex-1 overflow-auto p-6" data-page-node-id="YHcw30VYCLakd7KBp4poqf">
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden" data-page-node-id="tnIlzm9fbTsUYCRxNQwAtk">
+          <table class="w-full text-sm text-left" data-page-node-id="TmktKtoE0bjowhqN5ogEvM">
+            <thead class="bg-gray-50 text-gray-500" data-page-node-id="tHuuZhXluk23LGst9hklMO">
+              <tr data-page-node-id="Dw1RIHKQ6CttyEMWOldOoX">
+                <th class="px-5 py-3 font-medium" data-page-node-id="5nW3RlFmKYSZHSUzdstkcN">客户信息</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="pEGAkCy1qSCZP3nlDDqTHf">来源</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="kNHXCBY2yFgWfFSbv8jMxw">最近联系</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="BDcGgOXyJadTj2Kek5MpBD">累计订单数</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="vM2U7HsUUtOLNzGGBh6dUn">累计消费</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100" data-page-node-id="KTa1dyHKh2dRBkYEnNhj2S">
+              <tr class="table-row transition" data-page-node-id="utkpFMtxdWAAEOtOhz2ll3">
+                <td class="px-5 py-4" data-page-node-id="swsWpN1C8ehGzdq1ATO9pF">
+                  <div class="flex items-center gap-3" data-page-node-id="DruRdjyBxD3Jr4Q94r1Zqh">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=chen" class="w-10 h-10 rounded-full bg-gray-100" alt="" data-page-node-id="4mucBZar1B85iflNE0VtJk">
+                    <div data-page-node-id="c1ByMTV0ETcBldOYGINdg0">
+                      <p class="font-medium text-gray-800" data-page-node-id="B3V4YWeIuebrdRv6DJriHb">陈女士</p>
+                      <p class="text-xs text-gray-400" data-page-node-id="PtubCQLHYL4KhS4KvR2hEc">138****8888</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600" data-page-node-id="EXrisrcPlYdDDhmVO3JHxG">cdf中免</td>
+                <td class="px-5 py-4 text-gray-500" data-page-node-id="9dpylscmzNLcLib2qBBQH4">10 分钟前</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="UGHWciQ087Mfs8szlkmbKg">3</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="NygDwu8DaGqNHHFUWdBdP6">¥86,420</td>
+              </tr>
+              <tr class="table-row transition" data-page-node-id="OFAsCZlMHF1J6dlqKZnEAR">
+                <td class="px-5 py-4" data-page-node-id="SpEzN59WCCjXuLERxK0FPP">
+                  <div class="flex items-center gap-3" data-page-node-id="FTezNRRxxCZwtpChGG2Z84">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=wang" class="w-10 h-10 rounded-full bg-gray-100" alt="" data-page-node-id="M5U4ojkRiDOBH36wYrmGUH">
+                    <div data-page-node-id="CgyaDk5yxcJ65VQkpDS9UF">
+                      <p class="font-medium text-gray-800" data-page-node-id="9YBmNAjkEc945ztUBqqnPw">王小姐</p>
+                      <p class="text-xs text-gray-400" data-page-node-id="phfx2qBCnhzDGWiCC0pngj">139****6666</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600" data-page-node-id="T7wGK2NyozAQselX910WUw">三亚国际免税城云店</td>
+                <td class="px-5 py-4 text-gray-500" data-page-node-id="kJEknTqFJpVvoYkCEMmHHd">2 小时前</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="wvomv9QV2fr2XpZPxnCsxq">12</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="EtPqBgsTxmU7B2Ete4SxtX">¥245,800</td>
+              </tr>
+              <tr class="table-row transition" data-page-node-id="czDhvFXaI6Id0ieq83g8lv">
+                <td class="px-5 py-4" data-page-node-id="zdeQOu4hAW0c9bgOcHptRy">
+                  <div class="flex items-center gap-3" data-page-node-id="17RZDlHbPquP7k6QN71zlT">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=li" class="w-10 h-10 rounded-full bg-gray-100" alt="" data-page-node-id="OveZ7gBBsI052yjczCDZaZ">
+                    <div data-page-node-id="DYPJXOlJ1TBfUN953HjXim">
+                      <p class="font-medium text-gray-800" data-page-node-id="IbCDjjd2ZaaGFcOjiI52xr">李先生</p>
+                      <p class="text-xs text-gray-400" data-page-node-id="cxjuEN7IERFwmQ26Se2DNX">137****5555</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600" data-page-node-id="T5Hi6SPt7xJLKProDDLYTF">cdf中免</td>
+                <td class="px-5 py-4 text-gray-500" data-page-node-id="86R7oRAyb2BMIMKJJ4UL0F">昨天</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="OaoCoEEVFGG6x5uN6Zosq2">1</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="oZ3Gv8YEf8Js3HkJQCFmQg">¥3,200</td>
+              </tr>
+              <tr class="table-row transition" data-page-node-id="PTFkJwKMME62t7lJSmCrX5">
+                <td class="px-5 py-4" data-page-node-id="PvEjQhTJgIb82daV3MoiXA">
+                  <div class="flex items-center gap-3" data-page-node-id="Q0SUgrAn039tUGInGtqY07">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=zhang" class="w-10 h-10 rounded-full bg-gray-100" alt="" data-page-node-id="RjnDfn4amoEpWA2ZgnrDnB">
+                    <div data-page-node-id="MJue4CKzg1LqlyMzl7Oh8F">
+                      <p class="font-medium text-gray-800" data-page-node-id="r0iCWpmDXJisvFqt4kutpG">张女士</p>
+                      <p class="text-xs text-gray-400" data-page-node-id="wMWysSXPOH5jUD2L4pAVn3">136****3333</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600" data-page-node-id="OheOjjEIVH2P01qXOY62wO">琼海博鳌免税店云店</td>
+                <td class="px-5 py-4 text-gray-500" data-page-node-id="6JSbMOsDQYa6IsEkAI3CgG">3 天前</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="PIMPG8CWxEzPq9EC3zBKvp">0</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="2AFxHlu4Aexd0DSDdemupM">¥0</td>
+              </tr>
+              <tr class="table-row transition" data-page-node-id="lURT5yY4ZoqnD5W15yTPPt">
+                <td class="px-5 py-4" data-page-node-id="8LFYl6BJgP3UqEQ1alL4te">
+                  <div class="flex items-center gap-3" data-page-node-id="bsfZbSIc5nMmiRGVQDXEvc">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=liu" class="w-10 h-10 rounded-full bg-gray-100" alt="" data-page-node-id="fb0EEqOym4TZEaT1s8H9ov">
+                    <div data-page-node-id="uZmflQnrLeKQ5bJ8p5rIUX">
+                      <p class="font-medium text-gray-800" data-page-node-id="pXvyCpfhIPLkhvGKUGMLUA">刘先生</p>
+                      <p class="text-xs text-gray-400" data-page-node-id="UtOFS58AZk97snGgz5P08n">135****2222</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-gray-600" data-page-node-id="BNz1ryAQ0tN8EpA11XxoQT">海口日月广场免税店云店</td>
+                <td class="px-5 py-4 text-gray-500" data-page-node-id="dCAXOkRCLfN986xL9tIleV">1 个月前</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="aLUCaqUqmNlot7tAgdRPMz">5</td>
+                <td class="px-5 py-4 font-medium text-gray-800" data-page-node-id="SEB9GgDu5Zq6D5zfGGVkD8">¥68,000</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 分页 -->
+          <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between" data-page-node-id="Z43IE8aPdJFtSK5hD9DjbV">
+            <span class="text-xs text-gray-500" data-page-node-id="Om4LDBuTO9gDJgTOarkNzZ">共 128 位客户，每页 10 条</span>
+            <div class="flex items-center gap-1" data-page-node-id="DHBbi5bssXNMPtvSX1fbMH">
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs" data-page-node-id="yXeCgc2GdeTPyLWDHzFmHj"><i class="fas fa-chevron-left" data-page-node-id="CI7AyS2kYFAaPgggZdJGF0"></i></button>
+              <button class="w-8 h-8 rounded-lg bg-coral-500 text-white text-xs font-medium" data-page-node-id="O7weOfwU7xQVFgxcii5wRh">1</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs" data-page-node-id="5AqOjKC5GGtkpGZmBglQI1">2</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs" data-page-node-id="4oWvDBWMPxMukVwAqpag42">3</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs" data-page-node-id="ZTk6XqRp4QMZEjjTolFo8h"><i class="fas fa-chevron-right" data-page-node-id="WKhVMNiz3qwDnv4oSKTJeq"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
