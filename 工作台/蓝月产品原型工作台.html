@@ -1427,7 +1427,8 @@ function renderHotspots(){
     const el=document.createElement('div');
     el.className='hs';el.dataset.id=h.id;el.dataset.type=h.type;
     el.style.left=pos.x+'px';el.style.top=pos.y+'px';
-    el.innerHTML='<div class="hs-pin">'+(i+1)+'</div>';
+    const dnum=(h.num!=null&&h.num!=='')?h.num:(i+1);
+    el.innerHTML='<div class="hs-pin" title="标注编号 '+dnum+'">'+dnum+'</div>';
     el.addEventListener('mouseenter',()=>hoverLinked(h.id,true));
     el.addEventListener('mouseleave',()=>hoverLinked(h.id,false));
     el.addEventListener('click',ev=>{ev.stopPropagation();if(state.tour){const idx=p.hotspots.findIndex(x=>x.id===h.id);if(idx>=0){state.tourIdx=idx;renderTourStep();}}else{openHsPop(h.id);}});
