@@ -297,6 +297,11 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   font-family:var(--mono);font-size:10px;font-weight:700;color:#0B0E14;
   transition:transform .16s;position:relative;
 }
+.hs-num-input{
+  width:18px;height:16px;padding:0 1px;border:0;outline:none;border-radius:4px;
+  background:#fff;color:#0B0E14;font-family:var(--mono);font-size:10px;font-weight:700;text-align:center;
+  box-shadow:0 1px 4px rgba(0,0,0,.35);
+}
 .hs-pin::after{
   content:"";position:absolute;inset:-5px;border-radius:50%;
   border:2px solid var(--pin-glow);animation:pinPulse 2.1s ease-out infinite;
@@ -909,6 +914,9 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
     </div>
     <div class="ed-row" data-page-node-id="edRowTitle"><label data-page-node-id="c1McHYwX31qna6FE1jsk8Z">名称</label>
       <input id="edTitle" placeholder="如：门店库存行 / 佣金结算规则" data-page-node-id="edTitleIn"></div>
+    <div class="ed-row" data-page-node-id="edRowNum"><label data-page-node-id="edNumLbl">标注编号</label>
+      <input id="edNum" type="text" inputmode="numeric" placeholder="留空则自动递增（如 12）" data-page-node-id="edNumIn">
+      <div class="ed-tip" data-page-node-id="edNumTip">每个标注在原型上的显示序号，可手动调整；新增时默认按当前最大编号 +1 自增长。</div></div>
     <div class="ed-row" data-page-node-id="edRowDesc"><label data-page-node-id="dO2gTgFbqY9ihvXGN68Isy">说明</label>
       <textarea id="edDesc" placeholder="这个组件 / 规则的作用、边界与注意事项" data-page-node-id="edDescIn"></textarea></div>
     <div class="ed-row" data-page-node-id="edRowSel"><label data-page-node-id="ebPtKyj5QErqeO52a3cAfU">绑定元素选择器（可选）</label>
@@ -1484,13 +1492,16 @@ frame.addEventListener('load',()=>{
 function renderHotspots(){
   layer.innerHTML='';fixedLayer.innerHTML='';
   const p=current();if(!p){return;}
+  edEnsureHotspotNums(p);
   const vis=visibleHotspots(p);
   vis.forEach((h,i)=>{
     const pos=getHotspotPixelPos(h);
     const el=document.createElement('div');
     el.className='hs';el.dataset.id=h.id;el.dataset.type=h.type;
     el.style.left=pos.x+'px';el.style.top=pos.y+'px';
-    el.innerHTML='<div class="hs-pin">'+(i+1)+'</div>';
+    const dnum=(h.num!=null&&h.num!=='')?h.num:(i+1);
+    el.innerHTML='<div class="hs-pin" title="点击修改标注编号">'+dnum+'</div>';
+    el.querySelector('.hs-pin').addEventListener('click',ev=>{ev.stopPropagation();edEditPinNum(h.id);});
     el.addEventListener('mouseenter',()=>hoverLinked(h.id,true));
     el.addEventListener('mouseleave',()=>hoverLinked(h.id,false));
     el.addEventListener('click',ev=>{ev.stopPropagation();if(state.tour){const idx=p.hotspots.findIndex(x=>x.id===h.id);if(idx>=0){state.tourIdx=idx;renderTourStep();}}else{openHsPop(h.id);}});
@@ -1508,6 +1519,41 @@ function renderHotspots(){
 }
 function hotspotEl(id){return layer.querySelector('.hs[data-id="'+id+'"]');}
 function regionEl(id){return layer.querySelector('.hs-region[data-id="'+id+'"]');}
+
+/* 为缺失编号的标注补上默认值（按原型内顺序 i+1），保证引脚显示与内联编辑有稳定起点 */
+function edEnsureHotspotNums(p){
+  if(!p||!p.hotspots)return;
+  var miss=false; p.hotspots.forEach(function(h){ if(h.num==null)miss=true; });
+  if(!miss)return;
+  p.hotspots.forEach(function(h,i){ if(h.num==null)h.num=i+1; });
+}
+
+/* 在原型引脚上直接查看并修改标注编号：点击数字内联编辑，回车/失焦保存，Esc 取消 */
+function edEditPinNum(id){
+  var p=current(); if(!p)return;
+  var h=p.hotspots.filter(function(x){return x.id===id;})[0]; if(!h)return;
+  var el=document.querySelector('.hs[data-id="'+id+'"]'); if(!el)return;
+  var pin=el.querySelector('.hs-pin'); if(!pin)return;
+  var cur=(h.num!=null&&h.num!=='')?h.num:'';
+  pin.innerHTML='<input class="hs-num-input" type="text" inputmode="numeric" value="'+cur+'">';
+  var inp=pin.querySelector('input');
+  setTimeout(function(){ try{inp.focus();inp.select();}catch(e){} },0);
+  var done=false;
+  function commit(){
+    if(done)return; done=true;
+    var v=(inp.value||'').trim();
+    if(v!==''){ var n=parseInt(v,10); h.num=isNaN(n)?v:n; }
+    else { h.num=edNextNum(p); }
+    p.updated=edToday(); edSaveAll();
+    renderHotspots(); renderPRD(); renderSidebar();
+  }
+  inp.addEventListener('click',function(e){e.stopPropagation();});
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();inp.blur();}
+    else if(e.key==='Escape'){e.preventDefault();done=true;renderHotspots();}
+  });
+  inp.addEventListener('blur',commit);
+}
 
 /* 双向联动：热点 ↔ 右侧 PRD 条目 */
 function hoverLinked(id,on){
@@ -1821,10 +1867,10 @@ function renderPane(){
       '<td class="'+(h.field.required==='是'?'req':'opt')+'">'+h.field.required+'</td>'+
       '<td>'+h.field.format+'</td>'+
       '<td><span class="f-sample">'+h.field.sample+'</span></td>'+
-      '<td class="fr-act"><button class="fr-relo" data-relo="'+h.id+'" title="重新定位该字段标注">'+RELO_SVG+'</button></td></tr>').join('');
+      '</tr>').join('');
     body.innerHTML='<div class="prd-pane on"><table class="field-table"><thead><tr>'+
-      '<th>字段</th><th>类型</th><th>必填</th><th>校验 / 约束</th><th>示例</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>'+
-      '<p style="font-size:11.5px;color:var(--text-3);margin-top:12px">悬停任意行可在原型中定位对应字段，点击进入走查；点右侧 📍 图标可重新定位该字段标注。</p></div>';
+      '<th>字段</th><th>类型</th><th>必填</th><th>校验 / 约束</th><th>示例</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<p style="font-size:11.5px;color:var(--text-3);margin-top:12px">悬停任意行可在原型中定位对应字段，点击进入走查。</p></div>';
     body.querySelectorAll('tr[data-id]').forEach(tr=>{
       tr.addEventListener('mouseenter',()=>hoverLinked(tr.dataset.id,true));
       tr.addEventListener('mouseleave',()=>hoverLinked(tr.dataset.id,false));
@@ -2062,6 +2108,12 @@ var UNCAT='未分类';
 /* ---------- 基础工具 ---------- */
 function edToday(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function edUid(p){return (p||'hs')+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+/* 标注编号自增长默认值：当前原型内最大数字编号 +1（无编号时回退为总数 +1） */
+function edNextNum(p){
+  var max=0,any=false;
+  if(p&&p.hotspots) p.hotspots.forEach(function(h){ var n=parseInt(h.num,10); if(!isNaN(n)){ any=true; if(n>max)max=n; } });
+  return any?(max+1):((p&&p.hotspots)?p.hotspots.length+1:1);
+}
 function edDownload(name,text,mime){
   try{
     var blob=new Blob([text],{type:mime||'text/plain;charset=utf-8'});
@@ -2170,6 +2222,8 @@ function edOpen(id,rect){
   $('edTitle').value=h?h.title:'';
   $('edDesc').value=h?h.desc:'';
   $('edType').value=h?h.type:'element';
+  /* 标注编号：编辑时回显 h.num，新增时默认自增长（当前最大编号 +1） */
+  $('edNum').value=h?(h.num!=null?h.num:''):edNextNum(p);
   /* 重新定位时以新点选元素的选择器为准，否则沿用既有选择器 */
   $('edSelector').value=rect?(rect.sel||''):(h?(h.selector||''):'');
   var r=(h&&h.rule)||{};
@@ -2191,7 +2245,11 @@ function edSave(){
   var desc=$('edDesc').value.trim();
   if(!title){ showToast('请填写标注名称'); try{$('edTitle').focus();}catch(e){} return; }
   var sel=$('edSelector').value.trim();
-  var base={type:type,title:title,desc:desc};
+  var numRaw=$('edNum').value.trim();
+  var numVal;
+  if(numRaw!==''){ var _n=parseInt(numRaw,10); numVal=isNaN(_n)?numRaw:_n; }
+  else { numVal=edNextNum(p); }
+  var base={type:type,title:title,desc:desc,num:numVal};
   if(sel)base.selector=sel;
   if(type==='rule'){
     base.rule={code:$('edRuleCode').value.trim()||('RULE-'+String(p.hotspots.length+1).padStart(2,'0')),
@@ -2628,6 +2686,8 @@ function edBind(){
 window.edOpen=edOpen;
 window.edDeleteHs=edDeleteHs;
 window.edRelocate=edRelocate;
+window.edSaveAll=edSaveAll;
+window.edToday=edToday;
 
 /* ---------- 启动：恢复本地改动 ---------- */
 edBind();
