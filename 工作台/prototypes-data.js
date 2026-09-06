@@ -12,17 +12,17 @@ const PROTOTYPES=[];
 
 /* ---------- v0.4 门店导购升级原型包（本地文件，11 个页面） ---------- */
 const V04={
- 'G1':{url:'v0.4/G1.html',device:'mobile',group:'导购端 · 繁星APP'},
- 'G2':{url:'v0.4/G2.html',device:'mobile',group:'导购端 · 繁星APP'},
- 'G3':{url:'v0.4/G3.html',device:'mobile',group:'导购端 · 繁星APP'},
- 'G4':{url:'v0.4/G4.html',device:'mobile',group:'导购端 · 繁星APP'},
- 'G8':{url:'v0.4/G8.html',device:'mobile',group:'导购端 · 繁星APP'},
- 'U1':{url:'v0.4/U1.html',device:'mobile',group:'用户端 · CDF海南免税'},
- 'U3':{url:'v0.4/U3.html',device:'mobile',group:'用户端 · CDF海南免税'},
- 'U4':{url:'v0.4/U4.html',device:'mobile',group:'用户端 · CDF海南免税'},
- 'U5':{url:'v0.4/U5.html',device:'mobile',group:'用户端 · CDF海南免税'},
- 'M3':{url:'v0.4/M3.html',device:'desktop',group:'管理后台 · PC'},
- 'M4':{url:'v0.4/M4.html',device:'desktop',group:'管理后台 · PC'}
+ 'G1':{url:'v0.4/G1-工作台.html',device:'mobile',group:'导购端 · 繁星APP'},
+ 'G2':{url:'v0.4/G2-消息会话列表.html',device:'mobile',group:'导购端 · 繁星APP'},
+ 'G3':{url:'v0.4/G3-导购IM会话页.html',device:'mobile',group:'导购端 · 繁星APP'},
+ 'G4':{url:'v0.4/G4-选择商品页.html',device:'mobile',group:'导购端 · 繁星APP'},
+ 'G8':{url:'v0.4/G8-移动端业绩管理.html',device:'mobile',group:'导购端 · 繁星APP'},
+ 'U1':{url:'v0.4/U1-用户端IM会话页.html',device:'mobile',group:'用户端 · CDF海南免税'},
+ 'U3':{url:'v0.4/U3-商品详情页.html',device:'mobile',group:'用户端 · CDF海南免税'},
+ 'U4':{url:'v0.4/U4-用户订单确认页.html',device:'mobile',group:'用户端 · CDF海南免税'},
+ 'U5':{url:'v0.4/U5-行程核验页.html',device:'mobile',group:'用户端 · CDF海南免税'},
+ 'M3':{url:'v0.4/M3-PC业绩管理.html',device:'desktop',group:'管理后台 · PC'},
+ 'M4':{url:'v0.4/M4-消息管理.html',device:'desktop',group:'管理后台 · PC'}
 };
 const PROTOTYPES_V03=[
 {
