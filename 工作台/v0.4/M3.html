@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="xmGQoCSDSUzbB4KRFZcoMX">
+<head data-page-node-id="QQNpuTJ1iF3RWFbHEdic2Q">
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+  <style>
+
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Inter,system-ui,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.inset-x-0{left:0;right:0}.-right-2{right:-.5rem}.-top-1{top:-.25rem}.bottom-0{bottom:0}.bottom-\[6px\]{bottom:6px}.left-1\/2{left:50%}.left-2\.5{left:.625rem}.top-2\.5{top:.625rem}.z-20{z-index:20}.z-50{z-index:50}.mx-3{margin-left:.75rem;margin-right:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.ml-0\.5{margin-left:.125rem}.ml-1{margin-left:.25rem}.mr-0\.5{margin-right:.125rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[25\/14\]{aspect-ratio:25/14}.aspect-\[4\/3\]{aspect-ratio:4/3}.aspect-square{aspect-ratio:1/1}.h-1\/2{height:50%}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-20{height:5rem}.h-28{height:7rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-72{height:18rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[3px\]{height:3px}.h-\[72px\]{height:72px}.h-full{height:100%}.max-h-\[60vh\]{max-height:60vh}.max-h-\[70vh\]{max-height:70vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-16{width:4rem}.w-20{width:5rem}.w-28{width:7rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-\[72px\]{width:72px}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[72\%\]{max-width:72%}.max-w-\[85\%\]{max-width:85%}.max-w-\[90\%\]{max-width:90%}.max-w-\[92\%\]{max-width:92%}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%}.-translate-x-1\/2,.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-rows-2{grid-template-rows:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-0{gap:0}.gap-0\.5{gap:.125rem}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-px{gap:1px}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-\[3px\]{border-radius:3px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-md{border-radius:.375rem}.rounded-xl{border-radius:.75rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.rounded-bl-md{border-bottom-left-radius:.375rem}.border{border-width:1px}.border-x{border-left-width:1px;border-right-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-coral-100{--tw-border-opacity:1;border-color:rgb(255 229 229/var(--tw-border-opacity,1))}.border-coral-200{--tw-border-opacity:1;border-color:rgb(255 204 204/var(--tw-border-opacity,1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246/var(--tw-border-opacity,1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235/var(--tw-border-opacity,1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219/var(--tw-border-opacity,1))}.border-gray-50{--tw-border-opacity:1;border-color:rgb(249 250 251/var(--tw-border-opacity,1))}.bg-\[\#f2f2f2\]{--tw-bg-opacity:1;background-color:rgb(242 242 242/var(--tw-bg-opacity,1))}.bg-\[\#f5f5f5\]{--tw-bg-opacity:1;background-color:rgb(245 245 245/var(--tw-bg-opacity,1))}.bg-\[\#f7f7f7\]{--tw-bg-opacity:1;background-color:rgb(247 247 247/var(--tw-bg-opacity,1))}.bg-\[\#fff0ef\]{--tw-bg-opacity:1;background-color:rgb(255 240 239/var(--tw-bg-opacity,1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11/var(--tw-bg-opacity,1))}.bg-black\/40{background-color:rgba(0,0,0,.4)}.bg-brand{--tw-bg-opacity:1;background-color:rgb(224 46 36/var(--tw-bg-opacity,1))}.bg-coral-100{--tw-bg-opacity:1;background-color:rgb(255 229 229/var(--tw-bg-opacity,1))}.bg-coral-50{--tw-bg-opacity:1;background-color:rgb(255 245 245/var(--tw-bg-opacity,1))}.bg-coral-500{--tw-bg-opacity:1;background-color:rgb(255 107 107/var(--tw-bg-opacity,1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity,1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235/var(--tw-bg-opacity,1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251/var(--tw-bg-opacity,1))}.bg-gray-50\/70{background-color:rgba(249,250,251,.7)}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39/var(--tw-bg-opacity,1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94/var(--tw-bg-opacity,1))}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.pb-2{padding-bottom:0.5rem}.w-\[292px\]{width:292px}.px-1{padding-left:0.25rem;padding-right:0.25rem}.leading-tight{line-height:1.25}.w-3{width:0.75rem}.h-3{height:0.75rem}.bg-black\/80{background-color:rgba(0,0,0,.8)}.max-w-\[300px\]{max-width:300px}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity,1))}.text-\[8px\]{font-size:8px}.left-3{left:0.75rem}.right-3{right:0.75rem}.top-14{top:3.5rem}.z-40{z-index:40}.border-2{border-width:2px}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.w-1\.5{width:0.375rem}.h-1\.5{height:0.375rem}.-mt-1{margin-top:-0.25rem}.bottom-1{bottom:0.25rem}.w-3\.5{width:0.875rem}.h-3\.5{height:0.875rem}.opacity-0{opacity:0}.duration-300{transition-duration:.3s}.pointer-events-none{pointer-events:none}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.bg-white\/20{background-color:hsla(0,0%,100%,.2)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.bg-gradient-to-t{background-image:linear-gradient(to top,var(--tw-gradient-stops))}.from-amber-200{--tw-gradient-from:#fde68a var(--tw-gradient-from-position);--tw-gradient-to:hsla(48,97%,77%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-black\/70{--tw-gradient-from:rgba(0,0,0,.7) var(--tw-gradient-from-position);--tw-gradient-to:transparent var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-brand{--tw-gradient-from:#e02e24 var(--tw-gradient-from-position);--tw-gradient-to:rgba(224,46,36,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-coral-500{--tw-gradient-from:#ff6b6b var(--tw-gradient-from-position);--tw-gradient-to:hsla(0,100%,71%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-black\/20{--tw-gradient-to:transparent var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),rgba(0,0,0,.2) var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-coral-200{--tw-gradient-to:#fcc var(--tw-gradient-to-position)}.to-coral-500{--tw-gradient-to:#ff6b6b var(--tw-gradient-to-position)}.to-coral-600{--tw-gradient-to:#e85d5d var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-contain{-o-object-fit:contain;object-fit:contain}.object-cover{-o-object-fit:cover;object-fit:cover}.p-1{padding:.25rem}.p-2{padding:.5rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-px{padding:1px}.px-0{padding-left:0;padding-right:0}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-\[3px\]{padding-top:3px;padding-bottom:3px}.pb-0\.5{padding-bottom:.125rem}.pb-1{padding-bottom:.25rem}.pb-3{padding-bottom:.75rem}.pb-3\.5{padding-bottom:.875rem}.pb-4{padding-bottom:1rem}.pb-5{padding-bottom:1.25rem}.pt-12{padding-top:3rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-5{padding-top:1.25rem}.text-center{text-align:center}.text-right{text-align:right}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[13px\]{font-size:13px}.text-\[20px\]{font-size:20px}.text-\[22px\]{font-size:22px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.tracking-wide{letter-spacing:.025em}.text-brand{--tw-text-opacity:1;color:rgb(224 46 36/var(--tw-text-opacity,1))}.text-coral-600{--tw-text-opacity:1;color:rgb(232 93 93/var(--tw-text-opacity,1))}.text-coral-700{--tw-text-opacity:1;color:rgb(209 73 73/var(--tw-text-opacity,1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55/var(--tw-text-opacity,1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39/var(--tw-text-opacity,1))}.text-orange-500{--tw-text-opacity:1;color:rgb(249 115 22/var(--tw-text-opacity,1))}.text-transparent{color:transparent}.text-black{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/90{color:hsla(0,0%,100%,.9)}.line-through{text-decoration-line:line-through}.accent-coral-500{accent-color:#ff6b6b}.opacity-60{opacity:.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-lg{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-md,.shadow-sm{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color)}.shadow-coral-500\/25{--tw-shadow-color:hsla(0,100%,71%,.25);--tw-shadow:var(--tw-shadow-colored)}.shadow-coral-500\/30{--tw-shadow-color:hsla(0,100%,71%,.3);--tw-shadow:var(--tw-shadow-colored)}.outline-none{outline:2px solid transparent;outline-offset:2px}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-coral-200:hover{--tw-border-opacity:1;border-color:rgb(255 204 204/var(--tw-border-opacity,1))}.hover\:border-coral-300:hover{--tw-border-opacity:1;border-color:rgb(255 170 170/var(--tw-border-opacity,1))}.hover\:bg-coral-100:hover{--tw-bg-opacity:1;background-color:rgb(255 229 229/var(--tw-bg-opacity,1))}.hover\:bg-coral-50\/50:hover{background-color:hsla(0,100%,98%,.5)}.hover\:bg-coral-600:hover{--tw-bg-opacity:1;background-color:rgb(232 93 93/var(--tw-bg-opacity,1))}.hover\:bg-gray-100:hover{--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity,1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235/var(--tw-bg-opacity,1))}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:rgb(249 250 251/var(--tw-bg-opacity,1))}.hover\:text-coral-500:hover{--tw-text-opacity:1;color:rgb(255 107 107/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:items-center{align-items:center}.sm\:rounded-2xl{border-radius:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}}
+
+/* ---- 补齐 U3 所需、U2 未包含的 Tailwind 类 ---- */
+.-ml-2{margin-left:-0.5rem}
+.-mr-1{margin-right:-0.25rem}
+.-mt-2{margin-top:-0.5rem}
+.-right-1\.5{right:-0.375rem}
+.-top-0\.5{top:-0.125rem}
+.bg-\[\#c69c6d\]{--tw-bg-opacity:1;background-color:rgb(198 156 109/var(--tw-bg-opacity,1))}
+.bg-\[\#fff5f4\]{--tw-bg-opacity:1;background-color:rgb(255 245 244/var(--tw-bg-opacity,1))}
+.border-brand{--tw-border-opacity:1;border-color:rgb(224 46 36/var(--tw-border-opacity,1))}
+.gap-5{gap:1.25rem}
+.h-14{height:3.5rem}
+.w-14{width:3.5rem}
+.inline-block{display:inline-block}
+.left-0{left:0px}
+.right-0{right:0px}
+.max-h-\[380px\]{max-height:380px}
+.max-h-full{max-height:100%}
+.max-w-full{max-width:100%}
+.min-w-\[16px\]{min-width:16px}
+.overflow-x-auto{overflow-x:auto}
+.pb-28{padding-bottom:7rem}
+.pb-6{padding-bottom:1.5rem}
+.px-8{padding-left:2rem;padding-right:2rem}
+.z-10{z-index:10}
+.z-30{z-index:30}
+.w-11{width:2.75rem}
+.h-\[15px\]{height:15px}
+.min-w-\[15px\]{min-width:15px}
+.px-\[3px\]{padding-left:3px;padding-right:3px}
+.whitespace-nowrap{white-space:nowrap}.min-h-0{min-height:0}
+
+
+    .sku-opt { background: #fff; transition: all .2s ease; }
+    .sku-opt.sku-active { background: #fff; font-weight: 500; }
+    #skuModalPanel { max-height: 88vh; overflow-y: auto; }
+    #skuQtyInput:focus { outline: none; }
+  .bg-black\/60{background-color:rgba(0,0,0,.6)}
+.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}
+.pr-8{padding-right:2rem}
+.pt-4{padding-top:1rem}
+.text-\[\#f97316\]{color:#f97316}
+.text-\[14px\]{font-size:14px;line-height:1.25rem}
+.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68/var(--tw-text-opacity,1))}
+.border-red-500{--tw-border-opacity:1;border-color:rgb(239 68 68/var(--tw-border-opacity,1))}
+.top-3{top:0.75rem}
+.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}
+.translate-y-full{transform:translateY(100%)}
+.translate-y-0{transform:translateY(0)}
+
+
+  
+    /* missing utilities */
+    .max-h-\[90vh\]{max-height:90vh}
+    .border-gray-200{border-color:#e5e7eb}
+    .bg-\[\#f5f6f8\]{background-color:#f5f6f8}
+    .shadow-coral-500\/20{--tw-shadow-color:rgb(255 107 82 / 0.20)}
+    .truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .gap-4{gap:1rem}
+    .border-coral-200{border-color:#ffd0c5}
+    .gap-1{gap:0.25rem}
+    .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .text-gray-600{color:#4b5563}
+    .text-\[11px\]{font-size:11px;line-height:1.4}
+    .text-green-500{color:#22c55e}
+    .space-y-2{--tw-space-y-reverse:0;margin-top:calc(0.5rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem*var(--tw-space-y-reverse))}
+    .bg-black\/40{background-color:rgba(0,0,0,0.4)}
+    .text-gray-400{color:#9ca3af}
+    .border-gray-100{border-color:#f3f4f6}
+    .min-w-\[220px\]{min-width:220px}
+    .text-gray-700{color:#374151}
+    .text-gray-500{color:#6b7280}
+    .gap-1\.5{gap:0.375rem}
+    .gap-2{gap:0.5rem}
+    .text-white{color:#fff}
+    .text-coral-600{color:#f05b42}
+    .gap-3{gap:0.75rem}
+    /* grid utilities */
+    .grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+    .h-11{height:2.75rem}
+    .gap-1\\.5{gap:0.375rem}
+    /* standard utilities */
+    .top-0{top:0}
+    .sticky{position:sticky}
+    .top-1\/2{top:50%}
+    .-translate-y-1\/2{transform:translateY(-50%)}
+    .-bottom-0\.5{bottom:-0.125rem}
+    .-mr-0\.5{margin-right:-0.125rem}
+    .mb-3{margin-bottom:0.75rem}
+    .mb-4{margin-bottom:1rem}
+    .mb-0\.5{margin-bottom:0.125rem}
+    .mr-1{margin-right:0.25rem}
+    .mr-1\.5{margin-right:0.375rem}
+    .mr-2{margin-right:0.5rem}
+    .mr-3{margin-right:0.75rem}
+    .ml-2{margin-left:0.5rem}
+    .pl-1{padding-left:0.25rem}
+    .pl-8{padding-left:2rem}
+    .py-8{padding-top:2rem;padding-bottom:2rem}
+    .pb-24{padding-bottom:6rem}
+    .p-0\.5{padding:0.125rem}
+    .h-0\.5{height:0.125rem}
+    .h-48{height:12rem}
+    .h-56{height:14rem}
+    .h-64{height:16rem}
+    .w-64{width:16rem}
+    .w-72{width:18rem}
+    .max-w-2xl{max-width:42rem}
+    .max-w-5xl{max-width:64rem}
+    .gap-6{gap:1.5rem}
+    .space-y-1{--tw-space-y-reverse:0;margin-top:calc(0.25rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem*var(--tw-space-y-reverse))}
+    .space-y-5{--tw-space-y-reverse:0;margin-top:calc(1.25rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}
+    .space-y-2\.5{--tw-space-y-reverse:0;margin-top:calc(0.625rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem*var(--tw-space-y-reverse))}
+    .-space-x-1\.5{--tw-space-x-reverse:0;margin-right:calc(-0.375rem*var(--tw-space-x-reverse));margin-left:calc(-0.375rem*calc(1 - var(--tw-space-x-reverse)))}
+    .block{display:block}
+    .tracking-tight{letter-spacing:-0.025em}
+    .font-normal{font-weight:400}
+    .text-rose-600{color:rgb(225,29,72)}
+    .text-emerald-500{color:rgb(16,185,129)}
+    .bg-rose-100{background-color:rgb(255,228,230)}
+    .bg-blue-500{background-color:rgb(59,130,246)}
+    .bg-gray-300{background-color:rgb(209,213,219)}
+    .bg-gray-900\/90{background-color:rgba(17,24,39,0.9)}
+    .rounded-b-\[3rem\]{border-bottom-left-radius:3rem;border-bottom-right-radius:3rem}
+    .justify-start{justify-content:flex-start}
+    .justify-end{justify-content:flex-end}
+    .align-middle{vertical-align:middle}
+    .line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+    .overflow-auto{overflow:auto}
+    .z-\[60\]{z-index:60}
+    .z-\[80\]{z-index:80}
+    .blur-2xl{filter:blur(40px)}
+    .blur-3xl{filter:blur(64px)}
+    .mx-auto{margin-left:auto;margin-right:auto}
+    .pb-safe{padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px))}
+    .font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .top-5{top:1.25rem}
+    .h-screen{height:100vh}
+    .p-6{padding:1.5rem}
+    .text-coral-500{color:rgb(255,107,82)}
+    .bg-amber-100{background-color:rgb(254,243,199)}
+    .text-\[15px\]{font-size:15px;line-height:1.4}
+    .text-\[16px\]{font-size:16px;line-height:1.4}
+    .text-\[18px\]{font-size:18px;line-height:1.4}
+    .divide-y>:not([hidden])~:not([hidden]){border-top-width:1px}
+    .divide-gray-100>:not([hidden])~:not([hidden]){border-color:rgb(243,244,246)}
+    /* utilities 2 */
+    .pt-1\.5{padding-top:0.375rem}
+    .pt-2\.5{padding-top:0.625rem}
+    .pb-1\.5{padding-bottom:0.375rem}
+    .py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}
+    .mb-3\.5{margin-bottom:0.875rem}
+    .mt-3\.5{margin-top:0.875rem}
+    .mb-8{margin-bottom:2rem}
+    .mb-12{margin-bottom:3rem}
+    .w-2\.5{width:0.625rem}
+    .h-2\.5{height:0.625rem}
+    .w-56{width:14rem}
+    .grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+    .min-h-screen{min-height:100vh}
+    .max-w-3xl{max-width:48rem}
+    .max-w-xl{max-width:36rem}
+    .text-3xl{font-size:1.875rem;line-height:2.25rem}
+    .text-4xl{font-size:2.25rem;line-height:2.5rem}
+    .ml-auto{margin-left:auto}
+    .flex-shrink-0{flex-shrink:0}
+    .-mt-28{margin-top:-7rem}
+    .-mt-12{margin-top:-3rem}
+    .-ml-20{margin-left:-5rem}
+    .-mr-28{margin-right:-7rem}
+    .-mb-20{margin-bottom:-5rem}
+    .bg-coral-50\/60{background-color:rgba(255,245,242,0.6)}
+    .bg-white\/10{background-color:rgba(255,255,255,0.1)}
+    .backdrop-blur-sm{backdrop-filter:blur(4px)}
+    .backdrop-blur{backdrop-filter:blur(8px)}
+    .font-sans{font-family:ui-sans-serif,system-ui,sans-serif}
+    .rounded-sm{border-radius:0.125rem}
+    .opacity-50{opacity:0.5}
+    .opacity-90{opacity:0.9}
+    .opacity-20{opacity:0.2}
+    .right-4{right:1rem}
+    .ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}
+    .w-24{width:6rem}
+    .border-dashed{border-style:dashed}
+    .text-amber-500{color:rgb(245,158,11)}
+    .text-amber-600{color:rgb(217,119,6)}
+    .text-blue-600{color:rgb(37,99,235)}
+    .bg-blue-100{background-color:rgb(219,234,254)}
+    .bg-black\/75{background-color:rgba(0,0,0,0.75)}
+    .-mt-0\.5{margin-top:-0.125rem}
+    .placeholder-gray-400{color:rgb(156,163,175)}
+    .break-all{word-break:break-all}
+    .pr-3{padding-right:0.75rem}
+    .text-left{text-align:left}
+    .self-center{align-self:center}
+    .italic{font-style:italic}
+    .ml-1\.5{margin-left:0.375rem}
+    .pl-0{padding-left:0}
+    .pl-2{padding-left:0.5rem}
+    .pt-0\.5{padding-top:0.125rem}
+    .mx-4{margin-left:1rem;margin-right:1rem}
+    .mx-6{margin-left:1.5rem;margin-right:1.5rem}
+    .leading-5{line-height:1.25rem}
+    .space-y-6{--tw-space-y-reverse:0;margin-top:calc(1.5rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}
+    .border-\[\#ffd9d4\]{border-color:#ffd9d4}
+    .border-white\/70{border-color:rgba(255,255,255,0.7)}
+    .from-\[\#ff8a75\]{--tw-gradient-from:#ff8a75 var(--tw-gradient-from-position);--tw-gradient-to:rgba(255,138,117,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}
+    .to-\[\#e64e39\]{--tw-gradient-to:#e64e39 var(--tw-gradient-to-position)}</style>
+  <meta charset="UTF-8" data-page-node-id="s6svfHHIEPCuNbzLX9my7s">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="rIaY2Xae3iyMX9g8FVxASW">
+  <title>业绩管理（PC）- 中免海南</title>
+  <style>
+    body { font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif; }
+    .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
+    .sidebar-active { background: #fff5f2; color: #ff6b52; border-right: 3px solid #ff6b52; }
+    .table-row:hover { background: #fff8f7; }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] text-gray-800" data-page-node-id="6ASQXkDeReJZV7eKCtYPc6">
+  <div class="min-h-screen flex" data-page-node-id="oLRBIi9jrPNIqBbqshoHoQ">
+
+    <!-- 系统左侧导航 -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex-col hidden md:flex" data-page-node-id="qv0TeL27PH7fbgX09Dcgeg">
+      <div class="h-16 flex items-center px-6 border-b border-gray-100" data-page-node-id="hCXMYBmVfO08YVrQz4rxss">
+        <div class="w-8 h-8 rounded-lg coral-gradient flex items-center justify-center text-white mr-3" data-page-node-id="nYQcMxMq8YvWdJQzTAO5GM"><i class="fas fa-store" data-page-node-id="uf7CcFGbEp3D8Zjt4fJgYo"></i></div>
+        <span class="font-bold text-gray-800" data-page-node-id="EVler22JLAIYyuPqA3vJ6I">中免导购管理</span>
+      </div>
+      <nav class="flex-1 py-4 space-y-1 text-sm" data-page-node-id="7lKbBYDnjKtiDv9HqBqfVH">
+        <a href="M4.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50" data-page-node-id="gVVFSqvvO8mtVFf5MA7Yfs"><i class="fas fa-comment-dots w-6" data-page-node-id="sQS932ghg5slBrykFC1mhk"></i>消息管理</a>
+        <a href="M3.html" class="sidebar-active flex items-center px-6 py-3 font-medium" data-page-node-id="dGui16B6bfFr9IqgJjpREC"><i class="fas fa-chart-line w-6" data-page-node-id="5VpbYsQ79GXFEJjBfb9nFw"></i>业绩管理</a>
+      </nav>
+    </aside>
+
+    <!-- 主体 -->
+    <div class="flex-1 flex flex-col min-w-0" data-page-node-id="vBS5DxlsjQ3QmSXDwYBKEO">
+
+      <!-- 顶部栏 -->
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0" data-page-node-id="d7FhyXaFhPGFXgDJEgDbfp">
+        <div class="flex items-center gap-4" data-page-node-id="4dxs27xyP1DTusdjmGWuYX">
+          <h1 class="text-lg font-bold text-gray-800" data-page-node-id="3E95gZSChkpyF56tMp5kJo">业绩管理</h1>
+          <span class="text-xs text-gray-400" data-page-node-id="q6yrco8X5ZJp7iKn8LXCfu">查看业绩概览、订单明细与详情</span>
+        </div>
+        <div class="flex items-center gap-3" data-page-node-id="j1jkAvIt9z2uBpMF7Qs9UE">
+          <button class="w-9 h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-600 transition" data-page-node-id="5wIywlhiDXIDF0C3uWDcQH"><i class="fas fa-bell" data-page-node-id="WJC61lzPgnBE2AAduLZpxa"></i></button>
+          <div class="flex items-center gap-2" data-page-node-id="z7hP9UUFxKDOi4fKuLi4lt">
+            <img src="assets/avatars/admin.svg" class="w-8 h-8 rounded-full bg-gray-100" alt="" data-page-node-id="M1KLpozlrJ3HdzLrYq3L8D" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
+            <span class="text-sm text-gray-700 hidden sm:inline" data-page-node-id="zc23IWF2BHFu5CYNgfZtAo">平台管理员</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex-1 overflow-auto p-6 space-y-6" data-page-node-id="yJd0UXzIm4XCsxcM1BVQxO">
+
+        <!-- 数据卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" data-page-node-id="aK0ruBlTwlc10zd21xBcMD">
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm" data-page-node-id="5KiJwYdUeDeqOFulxz2KeX">
+            <div class="flex items-center justify-between mb-3" data-page-node-id="qtAKlKdVJsXwM4di7sQvrG">
+              <span class="text-sm text-gray-500" data-page-node-id="Zz3GJu7ZNjK1mpihs6ICm7">接待客户数</span>
+              <div class="w-8 h-8 rounded-lg bg-coral-50 text-coral-600 flex items-center justify-center" data-page-node-id="cE3CcShDR2bsXaDq8hrFUM"><i class="fas fa-users text-sm" data-page-node-id="3DmEHDF2t4aYPcQtMvONNn"></i></div>
+            </div>
+            <div class="flex items-baseline gap-2" data-page-node-id="EDYV22UV0iWfoxjS0OBVcy">
+              <span class="text-2xl font-bold text-gray-800" data-page-node-id="DXV8A1D4RXdfAGuDFuWPt0">12</span>
+              <span class="text-xs text-gray-400" data-page-node-id="uRdONFAKERedmNV5pRjTE7">今日</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500" data-page-node-id="LTYVy11BwHtiRqZO0tuv1r">累计 <span class="font-medium text-gray-800" data-page-node-id="Wga0W0fMVbbZcxcO0gpqmJ">1,286</span> 位客户</div>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm" data-page-node-id="hANVTCLfgLCghlOb2xxoWt">
+            <div class="flex items-center justify-between mb-3" data-page-node-id="eCUvSgmyDiwnGkdJQpKPq7">
+              <span class="text-sm text-gray-500" data-page-node-id="khp6En1sTXMKxGDmFMDPn1">订单数</span>
+              <div class="w-8 h-8 rounded-lg bg-coral-50 text-coral-600 flex items-center justify-center" data-page-node-id="LS6hXuUhclkcFdmhNrG4nv"><i class="fas fa-shopping-bag text-sm" data-page-node-id="fOq8dkunzyJuQ9T68zOwsX"></i></div>
+            </div>
+            <div class="flex items-baseline gap-2" data-page-node-id="9VeYsDaYZL3p67Io5DP0h9">
+              <span class="text-2xl font-bold text-gray-800" data-page-node-id="FTViqlmb81Yq6PMRFl85TZ">36</span>
+              <span class="text-xs text-gray-400" data-page-node-id="d5IpCfiy5CEZE0Z3FUp65K">今日</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500" data-page-node-id="sbiFuKjLi05uqHj3fJ5oly">累计 <span class="font-medium text-gray-800" data-page-node-id="RrQ0nDFoN6tMapgy7rLoiJ">3,542</span> 笔订单</div>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm" data-page-node-id="gKl3Dle6kr38x68gk7taaG">
+            <div class="flex items-center justify-between mb-3" data-page-node-id="K5rVFItjYsyi8roE2RNzJ4">
+              <span class="text-sm text-gray-500" data-page-node-id="SAfIIDo00eAEjB8Jup2oxR">订单总金额</span>
+              <div class="w-8 h-8 rounded-lg bg-coral-50 text-coral-600 flex items-center justify-center" data-page-node-id="Wnh55o8JLXjfbvTs5EQ7kR"><i class="fas fa-yen-sign text-sm" data-page-node-id="qxTJVl9GZG7v130P5dqMiZ"></i></div>
+            </div>
+            <div class="flex items-baseline gap-2" data-page-node-id="xLeBBiQGnScTiHKo9qooMR">
+              <span class="text-2xl font-bold text-gray-800" data-page-node-id="g5C2r6RIcMCDW27k6lV6v8">¥128,650</span>
+              <span class="text-xs text-gray-400" data-page-node-id="foKqChfs4eaAPgmOHyNgRI">今日</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500" data-page-node-id="7F45dw660AVZE0nvlA1WzI">累计 <span class="font-medium text-gray-800" data-page-node-id="LEeJdcSEdsKLCOxqEfnj9P">¥12,580,420</span></div>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-400" data-page-node-id="w7bHnrU3N844XI9k2uylAP">导购业绩 = 已完成订单中「未退款」商品的归因金额；已退款 / 未完成订单整单不计。列表「导购业绩」列按导购聚合，每行展示 门店·柜组·导购·业绩金额（金额始终显示，未完成标「未完结」、退款标「退款不计入」）。</p>
+
+        <!-- 筛选 + 订单列表 -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden" data-page-node-id="kNmYDlSvXIEUU0sDcxzExx">
+          <div class="px-6 py-4 border-b border-gray-100 flex flex-wrap items-center gap-3" data-page-node-id="8deC4A7bySLDBd9lYAzD94">
+            <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 min-w-[220px]" data-page-node-id="6we6PS1jPKAVthSqFemV4u">
+              <i class="fas fa-search text-gray-400 text-sm mr-2" data-page-node-id="xhxYfFcH9y3cx4za87NtuF"></i>
+              <input id="fSearch" type="text" placeholder="搜索订单号/商品名称/用户" class="bg-transparent outline-none text-sm flex-1 text-gray-700" data-page-node-id="Doxhj9bh1xq2sEASTt5XgH">
+            </div>
+            <select id="fStatus" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="O0OBOFEPgvnGvEsHaBdVfl">
+              <option value="" data-page-node-id="Lrd8trkDoIPYUSp1q0uPQB">全部状态</option>
+              <option value="pending" data-page-node-id="VbIGY1N9IPuDBGdmQxJVTY">待支付</option>
+              <option value="toshipped" data-page-node-id="57Py1CXEddC2stHvuOIoCC">待发货</option>
+              <option value="toreceive" data-page-node-id="jmHP9TPOBGFrpcPNy5NUkG">待收货</option>
+              <option value="completed" data-page-node-id="LOCw1HduY6kppALZz5TUBP">已完成</option>
+              <option value="refunded" data-page-node-id="jsNzMLRAFqKCzXqZMW1urV">已退款</option>
+              <option value="closed" data-page-node-id="OJ4qUFvHoQV1gkVDNWDHNH">已关闭</option>
+            </select>
+            <select id="fStore" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="iAdrVrpETKSmJwBZ3ypR4k">
+              <option value="" data-page-node-id="sHdNkGkiJjirtE8J176Bf5">全部门店</option>
+              <option value="sanya" data-page-node-id="AW0pd0ccWzBtRFch3R0EQb">三亚国际免税城</option>
+              <option value="haikou" data-page-node-id="bEfz8yT4WhFHcGgJJhEvdD">海口日月广场免税店</option>
+            </select>
+            <select id="fGroup" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="GBT2ot6DX7XKipxWI4bmSv">
+              <option value="" data-page-node-id="vmcKJc5XJiwDOBmJh7En1Y">全部柜组</option>
+              <option value="g1" data-page-node-id="d2GTxL1xwXFiY3CJbpRCju">香化一组（68680401）</option>
+              <option value="g2" data-page-node-id="PD9jNHDHYULIVlJJBzlaz1">香化二组（68680402）</option>
+              <option value="g3" data-page-node-id="ZNlHFBFFSkk255LVmHJr0N">香化三组（68680403）</option>
+            </select>
+            <select id="fGuide" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="BE3NuYxUeZRMl7T0dJvFjO">
+              <option value="" data-page-node-id="6RBvs1rIKytGGbL1ncvmZt">全部导购</option>
+              <option value="lin" data-page-node-id="LRMXanuDz42dMdEsJcoKPA">林小婷</option>
+              <option value="wang" data-page-node-id="Pc5oQKURP3KrGkYDPIcZEX">王小丽</option>
+              <option value="zhang" data-page-node-id="W4G4W0GUcE9L04zhQ8xc14">张美琪</option>
+              <option value="liu" data-page-node-id="eEQPm0zLPkFQrAwFFuP49G">刘佳怡</option>
+            </select>
+            <input id="fDateFrom" type="date" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="iGa4XOK5QYDdnEF9PqROon">
+            <span class="text-xs text-gray-400" data-page-node-id="Zt9V3zwU90E3mTZIXQ5r9W">至</span>
+            <input id="fDateTo" type="date" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="X793lrOVqrHb1LLipY63kY">
+            <div class="flex-1" data-page-node-id="6Qs26eYgoDzvdROjpIavVc"></div>
+            <button class="bg-coral-500 hover:bg-coral-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-coral-500/20" data-page-node-id="G6B81Iuc8kwEyBsI36U1zW">
+              <i class="fas fa-download mr-1.5" data-page-node-id="iF9fCYHr6LH9VvjK37qxQr"></i>导出订单
+            </button>
+          </div>
+
+          <table class="w-full text-sm text-left" data-page-node-id="E6O3bpsExThS6AAeZsYXOF">
+            <thead class="bg-gray-50 text-gray-500" data-page-node-id="wKm9XCCTHIMBcLFrFZdWAH">
+              <tr data-page-node-id="cmRRp26MZ8FssgT3WRmyNx">
+                <th class="px-5 py-3 font-medium" data-page-node-id="kRTC4dFuOoPtZa3DQiw5t1">订单号</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="0Ij8h3S4iUZZQbR0jV2ebz">用户手机号</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="NesH4nRtSIWSiBIZVvD11c">订单金额</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="FGOqxQn6wYuaobDPUlJ3OT">导购业绩（计入）</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="11HeuqaEiFEtTfiur0eAVH">订单时间</th>
+                <th class="px-5 py-3 font-medium" data-page-node-id="XHS1xYsk4hZ3BOisOX0zey">订单状态</th>
+                <th class="px-5 py-3 font-medium text-right" data-page-node-id="f21hdzAKpLVq9WRFutkrO8">操作</th>
+              </tr>
+            </thead>
+            <tbody id="orderTableBody" class="divide-y divide-gray-100" data-page-node-id="ZlgTESq31Ex3I4jJUCymUE"></tbody>
+          </table>
+
+          <!-- 分页 -->
+          <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between" data-page-node-id="C2dToZj185WKJbbEKgu2sJ">
+            <span id="tableSummary" class="text-xs text-gray-500" data-page-node-id="5Szx40AAQjZ6EDrB1xv10u"></span>
+            <div class="flex items-center gap-1" data-page-node-id="YlSYY50uk7RLS7EjSaQ4OF">
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs" data-page-node-id="Yo3B33CmgBKFBrhbedDtTj"><i class="fas fa-chevron-left" data-page-node-id="4cqy4isOU6RLoxEql2bKFq"></i></button>
+              <button class="w-8 h-8 rounded-lg bg-coral-500 text-white text-xs font-medium" data-page-node-id="ciLOXgPH7VYuEpO7ymvNFb">1</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs" data-page-node-id="TVnTaGdOIgHV11vtkaZvCV">2</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs" data-page-node-id="CfXCcZAGKfkGyZgiZ1X2HM">3</button>
+              <button class="w-8 h-8 rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 text-xs" data-page-node-id="xBUbE68uddsiHXeG5OqyKE"><i class="fas fa-chevron-right" data-page-node-id="7F62lmHkHFv5E9qNeHnhGR"></i></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 订单详情弹窗 -->
+  <div id="orderDetailModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6" onclick="if(event.target===this)closeOrderDetail()" data-page-node-id="01kJw2KzeWxtO8JbPQ4vk5">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" data-page-node-id="BXLdbDpilD9pUq80Ib5Re4">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10" data-page-node-id="HfZBtmYmD5sHvQ9a32p62R">
+        <div data-page-node-id="y6dTVaaWQdufHhAEp4OZEi">
+          <p class="font-bold text-gray-800" data-page-node-id="oFrqhM33QAG0GQHr4Yimg4">订单详情</p>
+          <div class="flex items-center gap-1.5 mt-0.5" data-page-node-id="CxeL0ChJ7ecCNYU8pxNuA3">
+            <p class="text-xs text-gray-400" id="detailOrderNo" data-page-node-id="pn6KZW9oDCkYIWfYzGGc8H">--</p>
+            <button id="copyOrderBtn" onclick="copyOrderNo()" class="text-gray-400 hover:text-coral-600 transition" title="复制订单号" data-page-node-id="8TypHk99COoMbR5j2fCNtW"><i class="fas fa-copy text-xs" data-page-node-id="Nb2VrS9LbB2ZYxT9nID5ov"></i></button>
+          </div>
+        </div>
+        <button onclick="closeOrderDetail()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition" data-page-node-id="frwAFiolAVwvVFkaDeGwuY">
+          <i class="fas fa-times text-sm" data-page-node-id="NcrjdA8NrH7Zti6wspbGYo"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-5" data-page-node-id="p3FtDaZf1DBlntqHkdiSlh">
+        <!-- 商品信息 -->
+        <div data-page-node-id="PMrZhTV4WCtdVIQBYYtHsG">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="27NfQrGIM47EkiWNkdgWBh">商品信息（<span id="detailProductCount" data-page-node-id="KsJYt5UlMN3260JUicotfP">1</span>）</h3>
+          <div id="detailProducts" class="space-y-2" data-page-node-id="DUQZZ9N5tvha8UP052LpiW"></div>
+        </div>
+
+        <!-- 导购业绩归因 -->
+        <div data-page-node-id="iigpiqX3EKHqyFde4UYHAL">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="js06ugzvNFYIeAcffWOhyG">导购业绩归因</h3>
+          <div id="detailPerf" class="space-y-2" data-page-node-id="gEmI3byxCrmRUeGuCrQxO6"></div>
+        </div>
+
+        <!-- 用户信息 -->
+        <div class="grid grid-cols-2 gap-4" data-page-node-id="wyNAcAx7XiBPhPJOdPFfkx">
+          <div data-page-node-id="dKdl6fo3pDHrWLL75GrjkW">
+            <p class="text-xs text-gray-500 mb-1" data-page-node-id="IgAuSX7pAF2izFJpNF8aKF">用户名称</p>
+            <p id="detailUser" class="text-sm font-medium text-gray-800" data-page-node-id="SPSXT7XYMpwBAtDa923NCf">陈女士</p>
+          </div>
+          <div data-page-node-id="38Fvtv3xv9GKwYL6lY1tVZ">
+            <p class="text-xs text-gray-500 mb-1" data-page-node-id="F7VyuHiSXJnrhAj0IjDKkm">用户手机号</p>
+            <p id="detailPhone" class="text-sm font-medium text-gray-800" data-page-node-id="d1wFPyIrGkoe6lExsdDLQc">138****8888</p>
+          </div>
+          <div data-page-node-id="iHpNA0JKZSS0EULGPE8M2q">
+            <p class="text-xs text-gray-500 mb-1" data-page-node-id="JqDfSBHsDtxSLUMNDEAXYW">订单时间</p>
+            <p id="detailTime" class="text-sm font-medium text-gray-800" data-page-node-id="6fh2WGWGLT2YKHDkTi9Kfr">2026-08-11 14:52:18</p>
+          </div>
+          <div data-page-node-id="2XGFT0pC7IoCnYQHZjK13K">
+            <p class="text-xs text-gray-500 mb-1" data-page-node-id="T9oj9gIDgoRGsGSlMsCxcy">订单状态</p>
+            <span id="detailStatus" class="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded" data-page-node-id="v5BD9nVGRpxLuQ422LwLnd">待发货</span>
+          </div>
+        </div>
+
+        <!-- 离岛信息 -->
+        <div data-page-node-id="suXBPeJEpiKcnDmIykpZaZ">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="u0B8qfDNtIPVhnv7bgthnm">离岛信息</h3>
+          <div id="tripInfo" class="rounded-xl bg-gray-50 p-3 space-y-2 text-sm" data-page-node-id="BpGTmaNcDC2tWvNGVVRnbc"></div>
+        </div>
+
+        <!-- 金额明细 -->
+        <div data-page-node-id="0pPMBh229nb8O7WdMCGfbm">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="0gKssbXPye0yerHtJa7CZg">金额明细</h3>
+          <div class="space-y-2 text-sm" data-page-node-id="rXor9BHpAXoRK9dxv3c9bx">
+            <div class="flex items-center justify-between" data-page-node-id="TO0OBhi7NcQLZWCSRsPcED">
+              <span class="text-gray-500" data-page-node-id="L70rDIG32QGqypG8AfmqkY">商品总价</span>
+              <span id="amtSubtotal" class="font-medium text-gray-800" data-page-node-id="m0OaRBCU9coQQ1nsh11rug">¥42,900</span>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="2eoWcb5XMQuItUVhKUWhZ0">
+              <span class="text-gray-500" data-page-node-id="oQjYCM4UMPfOUcTjtoU2KP">折扣优惠</span>
+              <span id="amtDiscount" class="font-medium text-coral-600" data-page-node-id="Hf6kMdHcK2TxmNt5ATfM4C">-¥0</span>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="vA7A49RSP8FSpK4tTtS0vd">
+              <span class="text-gray-500" data-page-node-id="vpgrJCP0yXEXIwtROUgGUS">平台满减</span>
+              <span id="amtPlatform" class="font-medium text-coral-600" data-page-node-id="zFEDvwdbIN8DCXAcmbQTbi">-¥500</span>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="MwLoBuSAE1dLnAt1pocrUV">
+              <span class="text-gray-500" data-page-node-id="r0bpfTsrIKmdwsBnGRSzlb">商城优惠券</span>
+              <span id="amtCoupon" class="font-medium text-coral-600" data-page-node-id="iiNgIsQgIyANnhEoz8aCAz">-¥500</span>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="AVUj6B03LOaDRfb1Ci4Crm">
+              <span class="text-gray-500" data-page-node-id="6Jr6qGLnRZfh7c7hNhDXWB">积分抵扣</span>
+              <span id="amtPoint" class="font-medium text-coral-600" data-page-node-id="DHwbnsWl8hX08FX2WjwRru">-¥0</span>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="mRY3w1oYbovdX4eQPnM6IH">
+              <span class="text-gray-500" data-page-node-id="v7pWcq8p1DLYjeFEE3C5HY">运费</span>
+              <span id="amtShip" class="font-medium text-gray-800" data-page-node-id="6gQCmgMG8c35FRzK3MwtkI">¥0</span>
+            </div>
+            <div class="border-t border-gray-100 pt-2 flex items-center justify-between" data-page-node-id="5ToaKuGvHgB4SgTzk86Bhv">
+              <span class="font-bold text-gray-800" data-page-node-id="PMIptHLgLdmREAcWWR7MHB">实付金额</span>
+              <span id="amtPaid" class="font-bold text-coral-600 text-lg" data-page-node-id="k2GAsSg2lxREwZhcVwUKtO">¥41,900</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="px-6 py-4 border-t border-gray-100 flex justify-end" data-page-node-id="kPw6gmEj9yTh0cx6kmmZRr">
+        <button onclick="closeOrderDetail()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-2 rounded-xl text-sm font-medium transition" data-page-node-id="d2KcTkbMkNb93rZaQ9yHtN">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fmt = n => '¥' + n.toLocaleString('zh-CN');
+
+    // 归因规则（不同门店/柜组可能适用不同的导购归因规则）
+    const RULE = { r15last:'15天·末次归因', r1first:'加购1天·首次归因', r7last:'7天·末次归因' };
+
+    // 离岛信息：离岛方式 / 编号标签（航班号/车次/渡轮号）映射
+    const TRIP_MODE = { flight:'飞机', train:'火车', ferry:'渡轮' };
+    const TRIP_NO_LABEL = { flight:'航班号', train:'车次', ferry:'渡轮号' };
+    const tripRow = (label, value) =>
+      (value ? '<div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">' + label + '</span><span class="font-medium text-gray-800 break-all text-right">' + value + '</span></div>' : '');
+    // 动态渲染离岛信息：默认展示 姓名/证件号/手机号/离岛方式；点击展开全部（含境内/境外、境外购票证件号等）
+    function renderTripInfo(t) {
+      if (!t) return '<div class="text-sm text-gray-400 py-1">暂无离岛信息</div>';
+      const overseas = t.country && t.country !== '中国大陆';
+      const region = overseas ? '境外' : '境内';
+      // 默认展示
+      let base = '';
+      base += tripRow('姓名', t.name);
+      base += tripRow('证件号', t.idNo);
+      base += tripRow('手机号', t.phone);
+      base += tripRow('离岛方式', TRIP_MODE[t.mode] || '--');
+      // 展开后追加
+      let more = '';
+      more += tripRow('国家/地区', t.country);
+      more += tripRow('证件类型', t.idType);
+      more += tripRow('境内/境外', region);
+      if (overseas) more += tripRow('购票证件号', t.idNo);
+      more += tripRow(TRIP_NO_LABEL[t.mode] || '航班号', t.flightNo);
+      more += tripRow('离岛日期', t.date);
+      if (t.mode === 'ferry') more += tripRow('离岛港口', t.port);
+      if (t.mode === 'train') more += tripRow('乘车地点', t.station);
+      const moreHtml = more ? '<div id="tripMore" class="hidden mt-2 pt-2 border-t border-gray-200 space-y-2">' + more + '</div>' : '';
+      return base + moreHtml +
+        '<button type="button" onclick="toggleTripMore(this)" class="mt-2 w-full flex items-center justify-center gap-1 text-xs text-coral-600 pt-2 border-t border-gray-200">' +
+          '<span class="trip-toggle-label">展开全部</span><i class="fas fa-chevron-down trip-toggle-icon"></i>' +
+        '</button>';
+    }
+    // 展开/收起离岛信息（同一时间仅一个详情弹窗，使用固定 id 即可）
+    function toggleTripMore(btn) {
+      const more = document.getElementById('tripMore');
+      if (!more) return;
+      const open = !more.classList.contains('hidden');
+      more.classList.toggle('hidden');
+      const label = btn.querySelector('.trip-toggle-label');
+      const icon = btn.querySelector('.trip-toggle-icon');
+      if (open) { label.textContent = '展开全部'; icon.classList.replace('fa-chevron-up', 'fa-chevron-down'); }
+      else { label.textContent = '收起'; icon.classList.replace('fa-chevron-down', 'fa-chevron-up'); }
+    }
+
+    // 订单数据：每个商品可独立归属 门店/柜组/导购(guide)，带退款状态(refund) 与 归因规则(attrRule)
+    // 一个订单可跨多个门店/柜组、适用不同规则；导购业绩仅「已完成」订单中 refund=none 的商品计入
+    function uniqueJoin(arr){ return [...new Set(arr)].join(' / '); }
+
+    const orderDetails = {
+      'ORD20260811001': {
+        user:'陈女士', phone:'138****8888', time:'2026-08-11 14:52:18',
+        status:{text:'待发货', cls:'bg-blue-100 text-blue-600'},
+        amount:42680,
+        products:[
+          { icon:'fa-ring', name:'Cartier LOVE 手镯 18K玫瑰金', spec:'17号', qty:2, price:42900, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:780, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+        ],
+        discount:0, platform:500, coupon:500, point:0, ship:0, trip:{ name:'陈女士', country:'中国大陆', idType:'身份证', idNo:'4601**********0023', phone:'138****8888', mode:'flight', flightNo:'HU7301', date:'2026-08-15' }
+      },
+      'ORD20260811002': {
+        user:'王小姐', phone:'139****6666', time:'2026-08-11 13:28:05',
+        status:{text:'待支付', cls:'bg-coral-100 text-coral-600'},
+        amount:1460,
+        products:[
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'王小丽', refund:'none', attrRule:'r1first', wh:[{name:'海口美兰机场免税仓',qty:2}]}
+        ],
+        discount:0, platform:100, coupon:0, point:0, ship:0, trip:{ name:'王小姐', country:'中国大陆', idType:'身份证', idNo:'1101**********1520', phone:'139****6666', mode:'train', flightNo:'C7301', station:'海口东站', date:'2026-08-16' }
+      },
+      'ORD20260811003': {
+        user:'李先生', phone:'137****5555', time:'2026-08-11 11:15:42',
+        status:{text:'待收货', cls:'bg-purple-100 text-purple-600'},
+        amount:1980,
+        products:[
+          { icon:'fa-pump-soap', name:'海蓝之谜精粹水 150ml', spec:'修护精萃', qty:2, price:1100, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-pump-soap', name:'雅诗兰黛小棕瓶 50ml', spec:'修护精华', qty:2, price:1080, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'王小丽', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+        ],
+        discount:0, platform:200, coupon:0, point:0, ship:0, trip:{ name:'李先生', country:'中国大陆', idType:'身份证', idNo:'3701**********4512', phone:'137****5555', mode:'flight', flightNo:'CZ6799', date:'2026-08-15' }
+      },
+      'ORD20260811004': {
+        user:'张女士', phone:'136****3333', time:'2026-08-11 10:42:30',
+        status:{text:'已完成', cls:'bg-green-100 text-green-600'},
+        amount:15500,
+        products:[
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r7last', wh:[{name:'海口美兰机场免税仓',qty:1}]}
+        ],
+        discount:0, platform:800, coupon:500, point:0, ship:0, trip:{ name:'张女士', country:'中国香港', idType:'港澳居民来往内地通行证', idNo:'H123456(7)', phone:'136****3333', mode:'ferry', flightNo:'HN001', port:'海口秀英港', date:'2026-08-17' }
+      },
+      'ORD20260811005': {
+        user:'刘先生', phone:'135****2222', time:'2026-08-11 09:30:11',
+        status:{text:'已退款', cls:'bg-gray-100 text-gray-500'},
+        amount:28500,
+        products:[
+          { icon:'fa-gem', name:'宝格丽 divas\' dream 项链', spec:'玫瑰金白贝母', qty:2, price:28500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+        ],
+        discount:0, platform:0, coupon:0, point:0, ship:0, trip:{ name:'刘先生', country:'中国大陆', idType:'身份证', idNo:'5101**********3028', phone:'135****2222', mode:'flight', flightNo:'MU5301', date:'2026-08-15' }
+      },
+      'ORD20260811006': {
+        user:'赵女士', phone:'138****1234', time:'2026-08-11 08:20:36',
+        status:{text:'已完成', cls:'bg-green-100 text-green-600'},
+        amount:5000,
+        products:[
+          { icon:'fa-spray-can', name:'迪奥真我香水 50ml', spec:'浓香', qty:2, price:3500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-pump-soap', name:'兰蔻小黑瓶精华 50ml', spec:'修护', qty:2, price:1800, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'full', attrRule:'r1first', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+        ],
+        discount:0, platform:300, coupon:0, point:0, ship:0, trip:{ name:'赵女士', country:'中国台湾', idType:'台湾居民来往大陆通行证', idNo:'01234567(8)', phone:'138****1234', mode:'train', flightNo:'D7201', station:'三亚站', date:'2026-08-18' }
+      },
+      'ORD20260811007': {
+        user:'孙女士', phone:'137****9999', time:'2026-08-11 07:50:02',
+        status:{text:'已完成', cls:'bg-green-100 text-green-600'},
+        amount:22100,
+        products:[
+          { icon:'fa-ring', name:'Cartier 戒指 18K玫瑰金', spec:'玫瑰金', qty:2, price:12000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:10100, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r1first', wh:[{name:'海口美兰机场免税仓',qty:1}]}
+        ],
+        discount:0, platform:500, coupon:0, point:0, ship:0, trip:{ name:'孙女士', country:'日本', idType:'护照', idNo:'E12345678', phone:'137****9999', mode:'ferry', flightNo:'HN002', port:'三亚凤凰岛码头', date:'2026-08-16' }
+      }
+    };
+
+    // 列表渲染：导购列支持同一订单多导购（去重后以「 / 」连接）；新增「导购业绩（计入）」列直接展示归因金额
+    // 导购业绩（计入）= 已完成订单中未退款商品的归因金额；非已完成 / 已退款商品整单不计
+    // 导购业绩行：门店 · 柜组 · 导购 ¥金额 [状态注记]，列表与详情共用，保证文案一致
+    function perfLine(store, group, guide, amtHtml, noteHtml) {
+      return '<span class="text-gray-700 font-medium">' + store + '</span> · ' +
+             '<span class="text-gray-700 font-medium">' + group + '</span> · ' +
+             '<span class="text-gray-700 font-medium">' + guide + '</span> ' +
+             amtHtml + (noteHtml ? ' ' + noteHtml : '');
+    }
+
+    // 订单详情：单个商品的导购业绩行（与列表「导购业绩」列同构）
+    function productPerfLine(p, isCompleted) {
+      let amtHtml, note = '';
+      if (isCompleted) {
+        if (p.refund === 'none') {
+          amtHtml = '<span class="text-coral-600 font-bold">' + fmt(p.price) + '</span>';
+        } else {
+          amtHtml = '<span class="text-gray-400 line-through">' + fmt(p.price) + '</span>';
+          note = '<span class="text-[11px] text-gray-400">退款不计入</span>';
+        }
+      } else {
+        amtHtml = '<span class="text-gray-500">' + fmt(p.price) + '</span>';
+        note = '<span class="text-[11px] text-gray-400">未完结</span>';
+      }
+      return '<span class="text-xs leading-5">' + perfLine(p.store, p.group, p.guide, amtHtml, note) + '</span>';
+    }
+
+    // 列表「导购业绩（计入）」列：按导购聚合，每行展示 门店·柜组·导购·业绩金额；金额始终显示
+    function perfCell(o) {
+      const isCompleted = o.status.text === '已完成';
+      const byGuide = {};
+      o.products.forEach(p => {
+        const g = byGuide[p.guide] || (byGuide[p.guide] = { store:new Set(), group:new Set(), total:0, counted:0, hasRefund:false });
+        g.store.add(p.store);
+        g.group.add(p.group);
+        g.total += p.price;
+        if (isCompleted && p.refund === 'none') g.counted += p.price;
+        if (p.refund !== 'none') g.hasRefund = true;
+      });
+      const lines = Object.keys(byGuide).map(g => {
+        const info = byGuide[g];
+        const store = [...info.store].join('/');
+        const group = [...info.group].join('/');
+        let amtHtml, note = '';
+        if (isCompleted) {
+          if (info.counted > 0) {
+            amtHtml = '<span class="text-coral-600 font-bold">' + fmt(info.counted) + '</span>';
+            if (info.hasRefund) note = '<span class="text-[11px] text-gray-400">含退款不计入</span>';
+          } else {
+            amtHtml = '<span class="text-gray-400 line-through">' + fmt(info.total) + '</span>';
+            note = '<span class="text-[11px] text-gray-400">退款不计入</span>';
+          }
+        } else {
+          amtHtml = '<span class="text-gray-500">' + fmt(info.total) + '</span>';
+          note = '<span class="text-[11px] text-gray-400">未完结</span>';
+        }
+        return '<div class="text-xs leading-5">' + perfLine(store, group, g, amtHtml, note) + '</div>';
+      });
+      return lines.join('');
+    }
+
+    // 读取筛选条件，返回 [{no, o}]（让「合计」反映当前查询）
+    function getFiltered() {
+      const kw = (document.getElementById('fSearch').value || '').trim().toLowerCase();
+      const st = document.getElementById('fStatus').value;
+      const store = document.getElementById('fStore').value;
+      const grp = document.getElementById('fGroup').value;
+      const gd = document.getElementById('fGuide').value;
+      const df = document.getElementById('fDateFrom').value;
+      const dt = document.getElementById('fDateTo').value;
+      const STATUS = { pending:'待支付', toshipped:'待发货', toreceive:'待收货', completed:'已完成', refunded:'已退款', closed:'已关闭' };
+      const STORE  = { sanya:'三亚国际免税城', haikou:'海口日月广场免税店' };
+      const GROUP  = { g1:'香化一组（68680401）', g2:'香化二组（68680402）', g3:'香化三组（68680403）' };
+      const GUIDE  = { lin:'林小婷', wang:'王小丽', zhang:'张美琪', liu:'刘佳怡' };
+      const out = [];
+      Object.keys(orderDetails).forEach(no => {
+        const o = orderDetails[no];
+        if (st && o.status.text !== STATUS[st]) return;
+        if (store && !o.products.some(p => p.store === STORE[store])) return;
+        if (grp && !o.products.some(p => p.group === GROUP[grp])) return;
+        if (gd && !o.products.some(p => p.guide === GUIDE[gd])) return;
+        if (kw) {
+          const hay = (no + o.user + o.phone + o.products.map(p => p.name).join('')).toLowerCase();
+          if (!hay.includes(kw)) return;
+        }
+        if (df && o.time.slice(0,10) < df) return;
+        if (dt && o.time.slice(0,10) > dt) return;
+        out.push({ no, o });
+      });
+      return out;
+    }
+
+    function renderTable(list) {
+      const tbody = document.getElementById('orderTableBody');
+      tbody.innerHTML = '';
+      list.forEach(r => {
+        const o = r.o, no = r.no;
+        const tr = document.createElement('tr');
+        tr.className = 'table-row transition';
+        tr.innerHTML =
+          '<td class="px-5 py-4 font-medium text-gray-800">' + no + '</td>' +
+          '<td class="px-5 py-4 text-gray-500">' + o.phone + '</td>' +
+          '<td class="px-5 py-4 font-medium text-gray-800">' + fmt(o.amount) + '</td>' +
+          '<td class="px-5 py-4">' + perfCell(o) + '</td>' +
+          '<td class="px-5 py-4 text-gray-500">' + o.time.slice(0,16) + '</td>' +
+          '<td class="px-5 py-4"><span class="px-2 py-0.5 ' + o.status.cls + ' text-xs rounded">' + o.status.text + '</span></td>' +
+          '<td class="px-5 py-4 text-right"><button onclick="openOrderDetail(\'' + no + '\')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td>';
+        tbody.appendChild(tr);
+      });
+      renderTotal(list);
+    }
+
+    function renderTotal(list) {
+      const count = list.length;
+      const amt = list.reduce((s, r) => s + r.o.amount, 0);
+      let perf = 0;
+      list.forEach(r => {
+        if (r.o.status.text === '已完成') r.o.products.forEach(p => { if (p.refund === 'none') perf += p.price; });
+      });
+      document.getElementById('tableSummary').innerHTML =
+        '共 <span class="font-medium text-gray-800">' + count + '</span> 笔 · ' +
+        '订单金额合计 <span class="font-medium text-gray-800">' + fmt(amt) + '</span> · ' +
+        '计入导购业绩合计 <span class="font-medium text-coral-600">' + fmt(perf) + '</span>';
+    }
+
+    function rerender() { renderTable(getFiltered()); }
+
+    ['fSearch','fStatus','fStore','fGroup','fGuide','fDateFrom','fDateTo'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener(id === 'fSearch' ? 'input' : 'change', rerender);
+    });
+
+    function openOrderDetail(orderNo) {
+      const d = orderDetails[orderNo];
+      document.getElementById('detailOrderNo').textContent = orderNo;
+      document.getElementById('detailUser').textContent = d.user;
+      document.getElementById('detailPhone').textContent = d.phone;
+      document.getElementById('detailTime').textContent = d.time;
+      document.getElementById('tripInfo').innerHTML = renderTripInfo(d.trip);
+      const st = document.getElementById('detailStatus');
+      st.textContent = d.status.text;
+      st.className = 'px-2 py-0.5 ' + d.status.cls + ' text-xs rounded';
+
+      const isCompleted = d.status.text === '已完成';
+      const box = document.getElementById('detailProducts');
+      box.innerHTML = '';
+      let hasRefund = false;
+      d.products.forEach(p => {
+        if (p.refund !== 'none') hasRefund = true;
+        const el = document.createElement('div');
+        el.className = 'flex items-start gap-3 bg-gray-50 rounded-xl p-3';
+        el.innerHTML =
+          '<div class="w-14 h-14 rounded-lg bg-coral-50 flex items-center justify-center text-coral-600 shrink-0"><i class="fas ' + p.icon + ' text-lg"></i></div>' +
+          '<div class="flex-1"><p class="font-medium text-gray-800 text-sm">' + p.name + '</p>' +
+          '<p class="text-xs text-gray-500 mt-1">规格：' + p.spec + ' · 数量：×' + p.qty + '</p>' +
+          '<div class="mt-1.5">' + productPerfLine(p, isCompleted) + '</div>' +
+          (p.wh && p.wh.length ?
+            '<div class="mt-1.5">' +
+              '<div class="flex items-center gap-1.5 text-[11px] text-gray-500"><i class="fas fa-warehouse"></i><span>出货仓库</span></div>' +
+              '<div class="mt-1 space-y-1">' +
+                p.wh.map(w => '<div class="flex items-center justify-between gap-2 bg-coral-50 text-coral-600 rounded-md px-2 py-1"><span class="text-[11px] truncate">'+w.name+'</span><b class="text-[11px] font-bold shrink-0">×'+w.qty+'</b></div>').join('') +
+              '</div>' +
+            '</div>'
+          : '') + '</div>';
+        box.appendChild(el);
+      });
+      document.getElementById('detailProductCount').textContent = d.products.length;
+
+      // 导购业绩归因汇总：仅已完成订单中未退款商品计入（样式对齐 G8 我的业绩归因）
+      const counted = {};
+      if (isCompleted) {
+        d.products.forEach(p => { if (p.refund === 'none') counted[p.guide] = (counted[p.guide] || 0) + p.price; });
+      }
+      const perfBox = document.getElementById('detailPerf');
+      perfBox.innerHTML = '';
+      if (!isCompleted) {
+        perfBox.innerHTML = '<p class="text-xs text-gray-400">本单状态为「' + d.status.text + '」，整单不计入任何导购业绩。</p>';
+      } else if (Object.keys(counted).length === 0) {
+        perfBox.innerHTML = '<p class="text-xs text-gray-400">本单已完成，但商品均已退款 / 非本人归因，无导购业绩计入。</p>';
+      } else {
+        Object.keys(counted).forEach(g => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between bg-coral-50 rounded-xl px-3 py-2.5';
+          row.innerHTML = '<span class="text-xs text-gray-600">' + g + ' 业绩（计入）</span>' +
+                          '<span class="text-base font-bold text-coral-600">' + fmt(counted[g]) + '</span>';
+          perfBox.appendChild(row);
+        });
+        if (hasRefund) {
+          const note = document.createElement('p');
+          note.className = 'text-xs text-gray-400 mt-1';
+          note.textContent = '注：本订单含退款商品，对应导购业绩已扣除。';
+          perfBox.appendChild(note);
+        }
+      }
+
+      const subtotal = d.products.reduce((s, p) => s + p.price, 0);
+      const paid = subtotal - d.discount - d.platform - d.coupon - d.point + d.ship;
+      document.getElementById('amtSubtotal').textContent = fmt(subtotal);
+      document.getElementById('amtDiscount').textContent = '-' + fmt(d.discount);
+      document.getElementById('amtPlatform').textContent = '-' + fmt(d.platform);
+      document.getElementById('amtCoupon').textContent = '-' + fmt(d.coupon);
+      document.getElementById('amtPoint').textContent = '-' + fmt(d.point);
+      document.getElementById('amtShip').textContent = fmt(d.ship);
+      document.getElementById('amtPaid').textContent = fmt(paid);
+
+      document.getElementById('orderDetailModal').classList.remove('hidden');
+    }
+    function closeOrderDetail() {
+      document.getElementById('orderDetailModal').classList.add('hidden');
+    }
+
+    function copyOrderNo() {
+      const no = (document.getElementById('detailOrderNo').textContent || '').trim();
+      const btn = document.getElementById('copyOrderBtn');
+      const done = () => {
+        if (!btn) return;
+        btn.innerHTML = '<i class="fas fa-check text-xs text-green-500"></i>';
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy text-xs"></i>'; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(no).then(done).catch(() => fallbackCopy(no, done));
+      } else {
+        fallbackCopy(no, done);
+      }
+    }
+    function fallbackCopy(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); if (cb) cb(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    rerender();
+  </script>
+</body>
+</html>
