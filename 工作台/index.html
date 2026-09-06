@@ -1813,11 +1813,9 @@ document.getElementById('handleLeft').addEventListener('click',toggleLeft);
 document.getElementById('handleRight').addEventListener('click',toggleRight);
 
 (function init(){
-  /* CDN 预览环境下，返回目录用绝对链接 */
-  if(/doubaocdn|doubao/i.test(location.hostname)){
-    var bk=document.querySelector('.back-to-catalog');
-    if(bk)bk.href='https://aka.doubaocdn.com/s/tTGrpUIAN7';
-  }
+  /* 返回目录：用相对 hash，本地 / WorkBuddy / GitHub 三环境通用（不整页刷新） */
+  var bk=document.querySelector('.back-to-catalog');
+  if(bk)bk.href='#catalog';
 
   /* ===== 原型目录视图（单文件 hash 路由） ===== */
   const CATALOG_MODULES=[
