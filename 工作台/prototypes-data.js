@@ -21,6 +21,7 @@ const V04={
  'U3':{url:'v0.4/U3-商品详情页.html',device:'mobile',group:'用户端 · CDF海南免税'},
  'U4':{url:'v0.4/U4-用户订单确认页.html',device:'mobile',group:'用户端 · CDF海南免税'},
  'U5':{url:'v0.4/U5-行程核验页.html',device:'mobile',group:'用户端 · CDF海南免税'},
+ 'U6':{url:'v0.4/U6-购物清单页.html',device:'mobile',group:'用户端 · CDF海南免税'},
  'M3':{url:'v0.4/M3-PC业绩管理.html',device:'desktop',group:'管理后台 · PC'},
  'M4':{url:'v0.4/M4-消息管理.html',device:'desktop',group:'管理后台 · PC'}
 };
@@ -260,6 +261,26 @@ const PROTOTYPES_V03=[
     {id:'m4-e3',selector:'#inheritBtn',type:'element',x:55,y:9,w:70,h:6,title:'继承客户按钮',desc:'点击「继承客户」打开导购选择弹窗，选择目标导购并确定后，新导购向该客户批量发送交接会话。'},
     {id:'m4-e4',selector:'#chatCard',type:'element',x:78,y:55,w:35,h:35,title:'对话卡片（推荐品牌/商品/优惠券）',desc:'PRD 6.2.1 对话内容优化：品牌卡片(品牌logo+名称/在售数量/品牌专区链接/品牌banner)、商品卡片(促销标签/缩略图/业态+名称/金额+划线价/提货门店+库存)、优惠券卡片(金额/门店/使用条件/有效期，状态待领取/已领取)。'},
     {id:'m4-r1',selector:'#inheritBtn',type:'rule',x:22,y:4,w:55,h:5,title:'客户继承规则',desc:'',rule:{code:'R-M4-01',trigger:'确认客户继承',behavior:'新导购批量向被继承客户发送交接会话：「您好，由于「***导购」工作变更，接下来将由我继续为您服务。感谢您一直以来对我们的支持。」',exception:'仅一次性向 3 个月内的客户批量发送消息，超出时间范围的客户不发送'}}
+  ]
+},
+{
+  id:'v04-u6',group:V04.U6.group,name:'U6 购物清单页',device:V04.U6.device,url:V04.U6.url,srcdoc:'',
+  status:'review',version:'v0.4',owner:'产品 · 梁伟业',updated:'2026-09-06',
+  overview:{goal:'PRD 5.2.2 购物清单（新增）顾客侧购物清单页：集中展示导购代客加购的商品，按门店/电商分组、可勾选与去结算。导购在会话中通过「+」→「创建清单/购物清单」代客创建或打开清单，引导顾客加购并结算。',
+    scenario:['导购代客加购商品到清单','顾客查看并勾选清单商品','去结算进入订单确认'],
+    entry:['导购会话「+」→ 创建清单/购物清单','顾客端「我的购物清单」'],
+    exit:['点击去结算进入 U4 订单确认','返回继续加购'],
+    summary:'顾客侧购物清单页，集中展示导购代客加购的商品，按门店/电商分组、可勾选与去结算',
+    path:'中免海南 APP → 导购消息对话页 → +号 → 购物清单',
+    users:'C 端用户',
+    permission:'功能权限：商城用户均有数据权限：仅本人清单',
+    ports:'中免海南 APP（安卓、IOS、鸿蒙）、微信小程序、支付宝小程序、H5'},
+  flow:[{t:'门店/电商分组',d:'清单按门店（海口国际免税城）与电商分组展示，门店商品与电商商品不可合并结算'},{t:'勾选与合计',d:'勾选商品后底部展示合计金额，支持全选'},{t:'去结算',d:'点击去结算进入 U4 订单确认页，按分组分别结算'}],
+  states:[{n:'空清单',d:'提示导购代客加购'},{n:'已勾选',d:'展示合计与去结算'}],
+  hotspots:[
+    {id:'u6-e1',selector:'',type:'element',x:6,y:20,w:88,h:30,title:'门店分组卡片',desc:'展示门店（海口国际免税城）下导购代客加购的商品，含单价、导购信息与政府消费券标签（PRD 5.2.2 购物清单）。'},
+    {id:'u6-e2',selector:'',type:'element',x:6,y:54,w:88,h:24,title:'电商分组卡片',desc:'展示电商商品，含买即赠/满赠标签，与门店分组不可合并结算。'},
+    {id:'u6-e3',selector:'',type:'element',x:6,y:90,w:88,h:8,title:'底部合计与去结算',desc:'展示勾选商品合计金额与去结算按钮，支持全选。'}
   ]
 }
 ];
