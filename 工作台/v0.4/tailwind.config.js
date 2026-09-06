@@ -2,12 +2,12 @@
 module.exports = {
   content: [
     'index.html',
-    'G1-工作台.html',
-    'G2-消息会话列表.html',
-    'G4-推荐商品页.html',
-    'G8-移动端业绩管理.html',
-    'M3-PC业绩管理.html',
-    'M4-消息管理.html'
+    'G1.html',
+    'G2.html',
+    'G4.html',
+    'G8.html',
+    'M3.html',
+    'M4.html'
   ],
   theme: {
     extend: {
