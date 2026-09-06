@@ -885,12 +885,12 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
       </div>
     </div>
     <div class="prd-tabs" data-page-node-id="6zIwbzxz8QNj1wqO6mreL6">
-      <button class="prd-tab on" data-pane="overview" data-page-node-id="GN6QEL9dOHnVjaEqHL6JmR">概览</button>
+      <button class="prd-tab on" data-pane="overview" data-page-node-id="GN6QEL9dOHnVjaEqHL6JmR">概述</button>
       <button class="prd-tab" data-pane="element" data-page-node-id="WhqiMLuac2KVGCpwSDhDIw">组件 <span class="n" id="nElement" data-page-node-id="GuMRfZOgXv1cisiqfZgBGH">4</span></button>
       <button class="prd-tab" data-pane="rule" data-page-node-id="iA6aG9M0dcKCH0XJbcrIpL">规则 <span class="n" id="nRule" data-page-node-id="iTFCfQGkvBWTAUB2OCfMsN">1</span></button>
       <button class="prd-tab" data-pane="field" data-page-node-id="ANNeM6VkX0l9AJe9lxV8Sc">字段 <span class="n" id="nField" data-page-node-id="I19gWhQQ7DFF2xHqYALFcE">0</span></button>
     </div>
-    <div class="prd-body" id="prdBody" data-page-node-id="S1VFD004oFqPPXEBAepgaz"><div class="prd-pane on"><div class="ov-block"><div class="ov-label">页面目标</div><div class="ov-goal">导购与顾客的实时沟通界面。PRD v0.3（4.2.2 消息会话优化、变更记录 v0.2/v0.3）底部「+」弹窗新增「推荐商品」「发优惠券」入口；v0.2 已取消创建订单、v0.3 已取消专题与客户管理，故本页不再含代客开单/名片/专题。</div></div><div class="ov-block"><div class="ov-label">用户场景与入口出口</div><div class="ov-list"><div class="ov-line"><span class="tag">场景</span><span>导购与顾客实时聊天</span></div><div class="ov-line"><span class="tag">场景</span><span>发送商品推荐卡片</span></div><div class="ov-line"><span class="tag">场景</span><span>发送优惠券促单</span></div><div class="ov-line"><span class="tag">入口</span><span>G2 点击会话进入</span></div><div class="ov-line"><span class="tag">入口</span><span>G1 待办提醒进入</span></div><div class="ov-line"><span class="tag">出口</span><span>点击「推荐商品」进入 G4 选品并回传商品卡片</span></div><div class="ov-line"><span class="tag">出口</span><span>发送优惠券卡片促单</span></div></div></div><div class="ov-block"><div class="ov-label">主交互流程</div><div class="flow-chain"><div class="flow-node"><div class="flow-dot">1</div><div class="flow-txt"><b>实时沟通</b>顾客与导购消息气泡分列左右，含时间分隔</div></div><div class="flow-node"><div class="flow-dot">2</div><div class="flow-txt"><b>打开+号弹窗</b>底栏「+」展开：推荐商品、发优惠券（v0.2 取消创建订单、v0.3 取消专题，仅保留此两项）</div></div><div class="flow-node"><div class="flow-dot">3</div><div class="flow-txt"><b>推荐商品</b>点击「推荐商品」跳转 G4 商品选择页，确认后回传「商品推荐卡片」</div></div><div class="flow-node"><div class="flow-dot">4</div><div class="flow-txt"><b>发优惠券</b>点击「发优惠券」打开优惠券选择弹窗→确认发券弹窗→发送「优惠券卡片」</div></div></div></div><div class="ov-block"><div class="ov-label">页面状态矩阵</div><div class="state-grid"><div class="state-cell"><b>聊天态</b><span>默认展示对话消息流</span></div><div class="state-cell"><b>+号弹窗</b><span>底栏展开推荐商品/发优惠券入口</span></div><div class="state-cell"><b>优惠券弹窗</b><span>底部弹出可选优惠券列表</span></div></div></div></div></div>
+    <div class="prd-body" id="prdBody" data-page-node-id="S1VFD004oFqPPXEBAepgaz"><div class="prd-pane"><div class="ov-block"><div class="ov-label">概述</div><div class="ov-goal">请选择左侧原型，查看飞书 PRD 模块概述：功能概述 / 功能路径 / 目标用户 / 功能与数据权限 / 涉及系统端口。</div></div></div>
   </aside>
   <button class="collapse-handle left" id="handleLeft" title="收起目录" data-page-node-id="mcnECFQGhhq91SdDf6Y6Of"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="evIUMp4RtA3rQ5vDAl2NbY"><path d="m15 18-6-6 6-6" data-page-node-id="mpGT36pKlFYJWNNh7ENBPX"></path></svg></button>
   <button class="collapse-handle right" id="handleRight" title="收起PRD" data-page-node-id="WH5CBgHqDlqNBjT5UKf7T6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="UFhlcX737PWuBM4qHhEK7r"><path d="m9 18 6-6-6-6" data-page-node-id="eECF72RIRKuKhFkqWbneP2"></path></svg></button>
@@ -2078,7 +2078,12 @@ function edLoadAll(){
           p.url=edBlobUrl(it&&it.content||'');
         }
       }
-      PROTOTYPES.push(p);
+              /* 关键修复：localStorage 仅保存用户编辑（标注等），
+           PRD 概述/流程字段以源数据 prototypes-data.js 为准，
+           始终用 PROTOTYPES_V03 的最新内容覆盖，避免陈旧本地数据隐藏概述 */
+        var _v03=(typeof PROTOTYPES_V03!=="undefined")&&PROTOTYPES_V03.find(function(x){return x.id===p.id;});
+        if(_v03){ if(_v03.overview)p.overview=_v03.overview; if(_v03.flow)p.flow=_v03.flow; }
+        PROTOTYPES.push(p);
     });
     return true;
   }catch(e){ return false; }
