@@ -958,6 +958,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 
 <script src="prototypes-data.js"></script>
 <script src="imported-prototypes.js"></script>
+<script src="nav-data.js"></script>
 <script>
 /* ============================================================
    一、原型数据：每个原型一份配置（单一数据源，同时驱动热点与 PRD）
@@ -2276,6 +2277,28 @@ function edApplyImportedData(){
     PROTOTYPES.push(p);
   });
 }
+/* 启动时优先读取独立数据文件 nav-data.js（window.NAV_DATA）重建左导航：
+   内置原型经 PROTOTYPES_V03 还原，导入原型经 content 内联；为左导航唯一权威源。
+   无文件则回退到 edApplyImportedData / edApplyDataEdits 旧链路。 */
+function edApplyNavData(){
+  if(typeof window.NAV_DATA==='undefined'||!window.NAV_DATA||!Array.isArray(window.NAV_DATA.protos)||!window.NAV_DATA.protos.length)return false;
+  var nd=window.NAV_DATA;
+  if(Array.isArray(nd.cats)&&nd.cats.length) window.ED.cats=nd.cats.slice();
+  var v03={}; if(typeof PROTOTYPES_V03!=='undefined') PROTOTYPES_V03.forEach(function(p){v03[p.id]=p;});
+  PROTOTYPES.length=0;
+  nd.protos.forEach(function(sp){
+    var base=v03[sp.id];
+    if(base){ PROTOTYPES.push(base); return; }
+    if(!sp.__imported)return;
+    var np={id:sp.id,name:sp.name,group:sp.group,device:sp.device,kind:sp.kind,__imported:true,hotspots:sp.hotspots||[]};
+    var it=nd.content&&nd.content[sp.id];
+    if(np.kind==='image'){ if(it&&it.image)np.image=it.image; if(it&&it.images)np.images=(it.images||[]).slice(); }
+    else { np.url=edBlobUrl(it&&it.content||sp.content||''); }
+    PROTOTYPES.push(np);
+  });
+  return true;
+}
+window.edApplyNavData=edApplyNavData;
 window.edApplyImportedData=edApplyImportedData;
 window.edExportImportedData=edExportImportedData;
 /* 启动时合并 prototypes-data.js 末尾自动写入的 PROTOTYPES_EDITS（左导航结构持久化段），
@@ -2440,6 +2463,7 @@ edApplyImportedData();
 /* 实时同步：编辑版（同目录 / 同源）写入本地存储后，本评审版即时刷新；
    并切到编辑版所在的右侧 tab，确保热点说明实时可见 */
 edApplyImportedData();
+edApplyNavData();   /* 优先读取独立数据文件 nav-data.js 构建左导航（与编辑版同源），无文件退回旧链路 */
 edApplyDataEdits();   /* 合并文件级左导航结构段，使只读版同步编辑版左导航整理 */
 window.addEventListener('storage',function(e){
   if(e.key!==ED_KEY)return;

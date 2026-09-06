@@ -827,7 +827,8 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
         <div class="mng-panel" id="mngPanel" hidden>
           <button class="mng-act primary" id="importBtn" title="选择本地图片或 HTML 原型文件导入（可多选，多张图片自动合成幻灯片）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 9l5-5 5 5M12 4v12"/></svg>导入本地文件</button>
           <button class="mng-act" id="catManageBtn" title="新增 / 重命名 / 删除分类，拖拽排序"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3H4v5.59A2 2 0 0 0 4.59 10l9.58 9.59a2 2 0 0 0 2.83 0l3.59-3.59a2 2 0 0 0 0-2.59z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>分类管理</button>
-          <button class="mng-act" id="exportImportBtn" title="把当前导入的原型导出为静态文件 imported-prototypes.js，保存到工作台目录后推送 GitHub 即可让他人看到（不依赖本地缓存）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>导出导入数据</button>
+          <button class="mng-act" id="exportNavBtn" title="把当前左导航（含导入原型/分类/顺序）导出为静态数据文件 nav-data.js；保存到工作台目录推送 GitHub 后，所有浏览器看到一致的左导航，不依赖本地缓存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>导出左导航数据</span></button>
+  <button class="mng-act" id="exportImportBtn" title="把当前导入的原型导出为静态文件 imported-prototypes.js，保存到工作台目录后推送 GitHub 即可让他人看到（不依赖本地缓存）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>导出导入数据</button>
         </div>
       </div>
       <input type="file" id="importFile" accept=".html,text/html,image/*" multiple style="display:none">
@@ -1018,6 +1019,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 
 <script src="prototypes-data.js"></script>
 <script src="imported-prototypes.js"></script>
+<script src="nav-data.js"></script>
 <script>
 /* ============================================================
    一、原型数据：每个原型一份配置（单一数据源，同时驱动热点与 PRD）
@@ -2277,44 +2279,25 @@ function edLoadAll(){
   try{
     var d=JSON.parse(s);
     if(!d||!Array.isArray(d.protos))return false;
-    /* 文件优先：数据文件已写入左导航结构（PROTOTYPES_EDITS / PROTOTYPES_IMPORTED）时，
-       导航以文件为权威源；本地存储仅用于合并标注覆盖层（hotspots/overview/flow/note） */
-    var fileDriven = (typeof window.PROTOTYPES_EDITS!=='undefined'&&window.PROTOTYPES_EDITS&&(window.PROTOTYPES_EDITS.protos||[]).length)
-                  || (typeof window.PROTOTYPES_IMPORTED!=='undefined'&&window.PROTOTYPES_IMPORTED&&window.PROTOTYPES_IMPORTED.length);
-    if(fileDriven){
-      if(d.imported){ window.ED.imported=Object.assign({}, window.ED.imported||{}, d.imported); }
-      var byId={}; PROTOTYPES.forEach(function(p){ byId[p.id]=p; });
-      d.protos.forEach(function(sp){
-        var p=byId[sp.id]; if(!p)return;
-        if(Array.isArray(sp.hotspots))p.hotspots=sp.hotspots;
-        if(sp.overview)p.overview=sp.overview;
-        if(sp.flow)p.flow=sp.flow;
-        if(sp.note!==undefined)p.note=sp.note;
-      });
-      return true;
-    }
-    /* 兜底：纯静态 / 未运行 serve.py，本地存储为主源（旧行为） */
-    window.ED.imported=d.imported||{};
-    window.ED.cats=Array.isArray(d.cats)?d.cats.slice():[];
-    PROTOTYPES.length=0;
-    d.protos.forEach(function(p){
-      if(p.__imported){
-        var it=window.ED.imported[p.id];
-        if(it&&it.kind==='image'){
-          if(it.image)p.image=it.image;
-          if(it.images)p.images=it.images.slice();
-        }else{
-          p.url=edBlobUrl(it&&it.content||'');
+    if(d.imported){ window.ED.imported=Object.assign({}, window.ED.imported||{}, d.imported); }
+    if(Array.isArray(d.cats)&&d.cats.length) window.ED.cats=d.cats.slice();
+    var byId={}; PROTOTYPES.forEach(function(p){ byId[p.id]=p; });
+    d.protos.forEach(function(sp){
+      var p=byId[sp.id];
+      if(!p){
+        if(sp.__imported){
+          var np={id:sp.id,name:sp.name,group:sp.group,device:sp.device,kind:sp.kind,__imported:true,hotspots:sp.hotspots||[]};
+          var it=d.imported&&d.imported[sp.id];
+          if(np.kind==='image'){ if(it&&it.image)np.image=it.image; if(it&&it.images)np.images=(it.images||[]).slice(); }
+          else { np.url=edBlobUrl(it&&it.content||sp.content||''); }
+          PROTOTYPES.push(np); byId[sp.id]=np;
         }
+        return;
       }
-      var _v03=(typeof PROTOTYPES_V03!=="undefined")&&PROTOTYPES_V03.find(function(x){return x.id===p.id;});
-      if(_v03){
-        if(_v03.overview)p.overview=_v03.overview;
-        if(_v03.flow)p.flow=_v03.flow;
-        if(_v03.name)p.name=_v03.name;
-        if(_v03.group)p.group=p.group;
-      }
-      PROTOTYPES.push(p);
+      if(Array.isArray(sp.hotspots))p.hotspots=sp.hotspots;
+      if(sp.overview)p.overview=sp.overview;
+      if(sp.flow)p.flow=p.flow;
+      if(sp.note!==undefined)p.note=sp.note;
     });
     return true;
   }catch(e){ return false; }
@@ -2332,6 +2315,27 @@ function downloadText(filename,text){
 }
 /* 把当前导入的原型（含 HTML content / 图片 dataURL）序列化为 imported-prototypes.js 并下载，
    用户将其保存到 产物/工作台/ 后推送 GitHub，即可让静态托管的新访客看到导入页面（不再只存本地缓存） */
+function edExportNavData(){
+  try{
+    var protos=PROTOTYPES.map(function(p){
+      var c={id:p.id,name:p.name,group:p.group,device:p.device,kind:p.kind,__imported:!!p.__imported};
+      if(p.__imported)c.hotspots=(p.hotspots||[]).map(function(h){return JSON.parse(JSON.stringify(h));});
+      return c;
+    });
+    var content={};
+    PROTOTYPES.forEach(function(p){
+      if(!p.__imported)return;
+      var it=window.ED.imported&&window.ED.imported[p.id];
+      if(p.kind==='image'){ content[p.id]={kind:'image',image:(it&&it.image)||p.image||null,images:(it&&it.images)||p.images||[]}; }
+      else { content[p.id]={kind:'html',content:(it&&it.content)||(p.content)||''}; }
+    });
+    var nav={cats:(window.ED.cats||[]).slice(),protos:protos,content:content};
+    var text='/* 左导航数据文件（由编辑版「导出左导航数据」自动生成；随 GitHub 推送后新访客可见，不依赖浏览器本地缓存） */\n'
+            +'window.NAV_DATA='+JSON.stringify(nav,null,2)+';\n';
+    downloadText('nav-data.js',text);
+    showToast('已生成 nav-data.js（含 '+protos.length+' 个原型），请保存到 产物/工作台/ 后重新推送 GitHub');
+  }catch(e){ showToast('导出左导航数据失败：'+e.message); }
+}
 function edExportImportedData(){
   try{
     var protos=PROTOTYPES.filter(function(p){return p&&p.__imported;}).map(function(p){
@@ -2354,6 +2358,25 @@ function edExportImportedData(){
 }
 /* 启动时合并 imported-prototypes.js（位于 prototypes-data.js 之后的静态数据）到 PROTOTYPES，
    使 GitHub 静态托管的新访客无需本地缓存也能看到导入页面 */
+function edApplyNavData(){
+  /* 优先读取独立数据文件 nav-data.js（window.NAV_DATA）构建左导航；无文件则退回 localStorage/种子 */
+  if(typeof window.NAV_DATA==='undefined'||!window.NAV_DATA||!Array.isArray(window.NAV_DATA.protos)||!window.NAV_DATA.protos.length)return false;
+  var nd=window.NAV_DATA;
+  if(Array.isArray(nd.cats)&&nd.cats.length) window.ED.cats=nd.cats.slice();
+  var v03={}; if(typeof PROTOTYPES_V03!=='undefined') PROTOTYPES_V03.forEach(function(p){v03[p.id]=p;});
+  PROTOTYPES.length=0;
+  nd.protos.forEach(function(sp){
+    var base=v03[sp.id];
+    if(base){ PROTOTYPES.push(base); return; }
+    if(!sp.__imported)return;
+    var np={id:sp.id,name:sp.name,group:sp.group,device:sp.device,kind:sp.kind,__imported:true,hotspots:sp.hotspots||[]};
+    var it=nd.content&&nd.content[sp.id];
+    if(np.kind==='image'){ if(it&&it.image)np.image=it.image; if(it&&it.images)np.images=(it.images||[]).slice(); }
+    else { np.url=edBlobUrl(it&&it.content||sp.content||''); }
+    PROTOTYPES.push(np);
+  });
+  return true;
+}
 function edApplyImportedData(){
   if(typeof window.IMPORTED_PROTOTYPES==='undefined'||!window.IMPORTED_PROTOTYPES)return;
   window.IMPORTED_PROTOTYPES.forEach(function(p){
@@ -3039,6 +3062,7 @@ function edBind(){
   $('catClose').addEventListener('click',closeCatManager);
   $('catAdd').addEventListener('click',function(){ edCatAdd($('catNewName').value); $('catNewName').value=''; });
   $('exportImportBtn').addEventListener('click',edExportImportedData);
+  $('exportNavBtn').addEventListener('click',edExportNavData);
   $('impConfirm').addEventListener('click',edConfirmImport);
   $('impCancel').addEventListener('click',closeImpModal);
   $('impCat').addEventListener('change',function(){ $('impCatNew').style.display=(this.value==='__new__')?'block':'none'; });
@@ -3151,9 +3175,7 @@ window.edToday=edToday;
 
 /* ---------- 启动：恢复本地改动 ---------- */
 edBind();
-edApplyImportedData();
-edApplyDataImported();
-edApplyDataEdits();   /* 合并文件级左导航结构段，编辑版自身也以文件为权威源 */
+edApplyImportedData(); edApplyNavData(); edApplyDataImported(); edApplyDataEdits();   /* 合并文件级左导航结构段，编辑版自身也以文件为权威源 */
 if(edLoadAll()){
   edEnsureCats();
   renderSidebar();
