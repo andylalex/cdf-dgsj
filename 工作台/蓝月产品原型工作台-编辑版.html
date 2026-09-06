@@ -1407,6 +1407,52 @@ function isHotspotLayerCovered(h){
   }catch(e){}
   return false;
 }
+/* ---------- 组件标注引脚定位：优先组件右上角外侧，不可用则自动换角 ---------- */
+/* 浮动层遮挡判定：某坐标是否被原型页面内带 z-index 的弹窗/遮罩等浮动层盖住。
+   注意：角避让的点本就在组件外侧，不能用「是否命中绑定元素」判定，否则四角都会被误判。 */
+function isPointOccludedByFloat(x,y){
+  var p=current(); if(!p) return false;
+  if(p.kind==='image') return false;
+  var idoc; try{ idoc=frame.contentDocument; }catch(e){ return false; }
+  if(!idoc) return false;
+  var offX=frame.offsetLeft||0, offY=frame.offsetTop||0;
+  var vx=x-offX, vy=y-offY;
+  var vw=frame.clientWidth||device.clientWidth, vh=frame.clientHeight||device.clientHeight;
+  if(vx<0||vy<0||vx>vw||vy>vh) return false;        /* 视口外交给边界检查处理 */
+  var topEl; try{ topEl=idoc.elementFromPoint(vx,vy); }catch(e){ return false; }
+  if(!topEl) return false;
+  try{
+    var cs=idoc.defaultView.getComputedStyle(topEl);
+    var pc=cs.position, z=parseInt(cs.zIndex,10);
+    var tag=topEl.tagName?topEl.tagName.toLowerCase():"";
+    if((pc==='fixed'||pc==='absolute') && !isNaN(z) && z>0 && tag!=='body' && tag!=='html') return true;
+  }catch(e){}
+  return false;
+}
+/* 引脚落位是否可用：在可视范围内（留 PAD 边距）且未被浮动层遮挡 */
+function pinSpotUsable(x,y,pad){
+  var W=device.clientWidth||0, H=device.clientHeight||0;
+  if(W&&H&&(x<pad||y<pad||x>W-pad||y>H-pad)) return false;
+  return !isPointOccludedByFloat(x,y);
+}
+/* 引脚锚点：界面组件(element)放组件右上角外侧；右上角放不下/被遮挡则依次换
+   左上 → 右下 → 左下；其它类型（规则/字段）不参与原型内标注。 */
+function getPinAnchor(h,pos){
+  if(h.type!=='element') return {x:pos.x,y:pos.y};
+  var GAP=13, PAD=16;
+  var w=(pos.w>0)?pos.w:0, hh=(pos.h>0)?pos.h:0;
+  var left=pos.x-w/2, top=pos.y-hh/2, right=pos.x+w/2, bottom=pos.y+hh/2;
+  var cands=[
+    {x:right+GAP, y:top-GAP},      /* 右上角外（首选） */
+    {x:left-GAP,  y:top-GAP},      /* 左上角外 */
+    {x:right+GAP, y:bottom+GAP},   /* 右下角外 */
+    {x:left-GAP,  y:bottom+GAP}    /* 左下角外 */
+  ];
+  for(var i=0;i<cands.length;i++){
+    if(pinSpotUsable(cands[i].x,cands[i].y,PAD)) return cands[i];
+  }
+  return cands[0];
+}
 let _rafPos=null;
 function scheduleUpdatePositions(){
   if(_rafPos)return;
@@ -1433,6 +1479,8 @@ function updateHotspotPositions(){
   const covered=(x,y)=>modalRects.some(r=>x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom);
   /* 2) 逐热点计算可见性与定位 */
   p.hotspots.forEach(h=>{
+    /* 规则 / 字段 不在原型页面内做标注，跳过定位与显隐 */
+    if(h.type!=='element')return;
     if(isMultiImage(p)&&(h.slide||0)!==state.slideIndex)return;
     const pos=getHotspotPixelPos(h);
     const parent=h.fixed?fixedLayer:layer;
@@ -1453,7 +1501,7 @@ function updateHotspotPositions(){
     if(hsEl)hsEl.style.display=vis?'':'none';
     if(rgEl)rgEl.style.display=(vis&&pos.w>0)?'':'none';
     if(!vis)return;
-    if(hsEl){hsEl.style.left=pos.x+'px';hsEl.style.top=pos.y+'px';}
+    if(hsEl){const anchor=getPinAnchor(h,pos);hsEl.style.left=anchor.x+'px';hsEl.style.top=anchor.y+'px';}
     if(rgEl&&pos.w>0){
       rgEl.style.left=(pos.x-pos.w/2)+'px';rgEl.style.top=(pos.y-pos.h/2)+'px';
       rgEl.style.width=pos.w+'px';rgEl.style.height=pos.h+'px';
@@ -1498,10 +1546,13 @@ function renderHotspots(){
   edEnsureHotspotNums(p);
   const vis=visibleHotspots(p);
   vis.forEach((h,i)=>{
+    /* 规则 / 字段 不在原型页面内做标注，仅在右侧栏列表中呈现 */
+    if(h.type!=='element')return;
     const pos=getHotspotPixelPos(h);
+    const anchor=getPinAnchor(h,pos);
     const el=document.createElement('div');
     el.className='hs';el.dataset.id=h.id;el.dataset.type=h.type;
-    el.style.left=pos.x+'px';el.style.top=pos.y+'px';
+    el.style.left=anchor.x+'px';el.style.top=anchor.y+'px';
     const dnum=(h.num!=null&&h.num!=='')?h.num:(i+1);
     el.innerHTML='<div class="hs-pin" title="点击修改标注编号">'+dnum+'</div>';
     el.querySelector('.hs-pin').addEventListener('click',ev=>{ev.stopPropagation();edEditPinNum(h.id);});
