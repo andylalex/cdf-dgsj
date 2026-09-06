@@ -68,7 +68,7 @@ const PROTOTYPES_V03=[
   ]
 },
 {
-  id:'v04-g4',group:V04.G4.group,name:'G4 推荐商品页',device:V04.G4.device,url:V04.G4.url,srcdoc:'',
+  id:'v04-g4',group:V04.G4.group,name:'G4 选择商品页',device:V04.G4.device,url:V04.G4.url,srcdoc:'',
   status:'review',version:'v0.4',owner:'产品 · 梁伟业',updated:'2026-09-06',
   overview:{},
   flow:[{t:'左侧导航',d:'我的收藏 / 我的柜组 / 一级分类（仅当前门店分类）'},{t:'搜索与二级分类',d:'按商品名称/编号/品牌搜索；二级分类以品牌维度展示，选中品牌后首位为该品牌推荐卡片'},{t:'商品列表',d:'展示缩略图/名称/库存/编号/活动/价格，门店库存=门店全部库存+电商仓门店库存，柜组库存=当前柜组库存；门店0库存沉底，未授权商品沉底且推荐禁用'},{t:'确认发送',d:'点击「推荐」弹窗确认推荐商品/品牌，回传对应卡片至 G3'}],
