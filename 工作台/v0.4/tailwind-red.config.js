@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    'G3-导购IM会话页.html',
-    'U1-用户端IM会话页.html',
+    'G3.html',
+    'U1.html',
     'U2-购物袋.html'
   ],
   theme: {
