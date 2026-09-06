@@ -15,7 +15,7 @@ const V04={
  'G1':{url:'v0.4/G1-工作台.html',device:'mobile',group:'导购端 · 繁星APP'},
  'G2':{url:'v0.4/G2-消息会话列表.html',device:'mobile',group:'导购端 · 繁星APP'},
  'G3':{url:'v0.4/G3-导购IM会话页.html',device:'mobile',group:'导购端 · 繁星APP'},
- 'G4':{url:'v0.4/G4-选择商品页.html',device:'mobile',group:'导购端 · 繁星APP'},
+ 'G4':{url:'v0.4/G4-选择商品.html',device:'mobile',group:'导购端 · 繁星APP'},
  'G8':{url:'v0.4/G8-移动端业绩管理.html',device:'mobile',group:'导购端 · 繁星APP'},
  'U1':{url:'v0.4/U1-用户端IM会话页.html',device:'mobile',group:'用户端 · CDF海南免税'},
  'U3':{url:'v0.4/U3-商品详情页.html',device:'mobile',group:'用户端 · CDF海南免税'},
