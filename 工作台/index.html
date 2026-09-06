@@ -1265,6 +1265,36 @@ function scheduleUpdatePositions(){
   if(_rafPos)return;
   _rafPos=requestAnimationFrame(()=>{_rafPos=null;updateHotspotPositions();});
 }
+function isHotspotLayerCovered(h){
+  var p=current(); if(!p) return false;
+  if(p.kind==='image') return false;
+  var idoc; try{ idoc=frame.contentDocument; }catch(e){ return false; }
+  if(!idoc) return false;
+  var pos; try{ pos=getHotspotPixelPos(h); }catch(e){ return false; }
+  if(!pos || pos.x==null || pos.y==null) return false;
+  var offX=frame.offsetLeft||0, offY=frame.offsetTop||0;
+  var vx=pos.x-offX, vy=pos.y-offY;
+  var vw=frame.clientWidth||device.clientWidth, vh=frame.clientHeight||device.clientHeight;
+  if(vx<0||vy<0||vx>vw||vy>vh) return false;
+  var topEl; try{ topEl=idoc.elementFromPoint(vx,vy); }catch(e){ return false; }
+  if(!topEl) return false;
+  if(h.selector){
+    var target=null; try{ target=idoc.querySelector(h.selector); }catch(e){}
+    if(target){
+      var n=topEl;
+      while(n){ if(n===target) return false; n=n.parentElement; }
+      return true;
+    }
+    return false;
+  }
+  try{
+    var cs=idoc.defaultView.getComputedStyle(topEl);
+    var pc=cs.position, z=parseInt(cs.zIndex,10);
+    var tag=topEl.tagName?topEl.tagName.toLowerCase():"";
+    if((pc==='fixed'||pc==='absolute') && !isNaN(z) && z>0 && tag!=='body' && tag!=='html') return true;
+  }catch(e){}
+  return false;
+}
 function updateHotspotPositions(){
   const p=current();if(!p)return;
   /* 1) 收集当前已打开弹窗的覆盖矩形（用于遮挡判定） */
@@ -1291,16 +1321,17 @@ function updateHotspotPositions(){
     const parent=h.fixed?fixedLayer:layer;
     const hsEl=parent.querySelector('.hs[data-id="'+h.id+'"]');
     const rgEl=parent.querySelector('.hs-region[data-id="'+h.id+'"]');
+    const occluded=isHotspotLayerCovered(h);
     let vis;
     if(h.modal){
       /* 弹窗类：仅在弹窗已打开时显示标注 */
-      vis=pos.found;
+      vis=pos.found && !occluded;
     }else if(!pos.found){
       /* 降级坐标：无弹窗遮挡即显示（无法判断滚动出屏） */
-      vis=!covered(pos.x,pos.y);
+      vis=!covered(pos.x,pos.y) && !occluded;
     }else{
       /* 组件类：滚动出屏幕 / 被弹窗遮挡 时隐藏 */
-      vis=pos.inView && !covered(pos.x,pos.y);
+      vis=pos.inView && !covered(pos.x,pos.y) && !occluded;
     }
     if(hsEl)hsEl.style.display=vis?'':'none';
     if(rgEl)rgEl.style.display=(vis&&pos.w>0)?'':'none';
