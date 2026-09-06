@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="G4NewRoot">
+<head data-page-node-id="G4NewHead">
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+  <style>
+
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Inter,system-ui,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.inset-x-0{left:0;right:0}.-right-2{right:-.5rem}.-top-1{top:-.25rem}.bottom-0{bottom:0}.bottom-\[6px\]{bottom:6px}.left-1\/2{left:50%}.left-2\.5{left:.625rem}.top-2\.5{top:.625rem}.z-20{z-index:20}.z-50{z-index:50}.mx-3{margin-left:.75rem;margin-right:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.ml-0\.5{margin-left:.125rem}.ml-1{margin-left:.25rem}.mr-0\.5{margin-right:.125rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[25\/14\]{aspect-ratio:25/14}.aspect-\[4\/3\]{aspect-ratio:4/3}.aspect-square{aspect-ratio:1/1}.h-1\/2{height:50%}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-20{height:5rem}.h-28{height:7rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-72{height:18rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[3px\]{height:3px}.h-\[72px\]{height:72px}.h-full{height:100%}.max-h-\[60vh\]{max-height:60vh}.max-h-\[70vh\]{max-height:70vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-16{width:4rem}.w-20{width:5rem}.w-28{width:7rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-\[72px\]{width:72px}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[72\%\]{max-width:72%}.max-w-\[85\%\]{max-width:85%}.max-w-\[90\%\]{max-width:90%}.max-w-\[92\%\]{max-width:92%}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%}.-translate-x-1\/2,.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-rows-2{grid-template-rows:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-0{gap:0}.gap-0\.5{gap:.125rem}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-px{gap:1px}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-\[3px\]{border-radius:3px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-md{border-radius:.375rem}.rounded-xl{border-radius:.75rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.rounded-bl-md{border-bottom-left-radius:.375rem}.border{border-width:1px}.border-x{border-left-width:1px;border-right-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-coral-100{--tw-border-opacity:1;border-color:rgb(255 229 229/var(--tw-border-opacity,1))}.border-coral-200{--tw-border-opacity:1;border-color:rgb(255 204 204/var(--tw-border-opacity,1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246/var(--tw-border-opacity,1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235/var(--tw-border-opacity,1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219/var(--tw-border-opacity,1))}.border-gray-50{--tw-border-opacity:1;border-color:rgb(249 250 251/var(--tw-border-opacity,1))}.bg-\[\#f2f2f2\]{--tw-bg-opacity:1;background-color:rgb(242 242 242/var(--tw-bg-opacity,1))}.bg-\[\#f5f5f5\]{--tw-bg-opacity:1;background-color:rgb(245 245 245/var(--tw-bg-opacity,1))}.bg-\[\#f7f7f7\]{--tw-bg-opacity:1;background-color:rgb(247 247 247/var(--tw-bg-opacity,1))}.bg-\[\#fff0ef\]{--tw-bg-opacity:1;background-color:rgb(255 240 239/var(--tw-bg-opacity,1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11/var(--tw-bg-opacity,1))}.bg-black\/40{background-color:rgba(0,0,0,.4)}.bg-brand{--tw-bg-opacity:1;background-color:rgb(224 46 36/var(--tw-bg-opacity,1))}.bg-coral-100{--tw-bg-opacity:1;background-color:rgb(255 229 229/var(--tw-bg-opacity,1))}.bg-coral-50{--tw-bg-opacity:1;background-color:rgb(255 245 245/var(--tw-bg-opacity,1))}.bg-coral-500{--tw-bg-opacity:1;background-color:rgb(255 107 107/var(--tw-bg-opacity,1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity,1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235/var(--tw-bg-opacity,1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251/var(--tw-bg-opacity,1))}.bg-gray-50\/70{background-color:rgba(249,250,251,.7)}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39/var(--tw-bg-opacity,1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94/var(--tw-bg-opacity,1))}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.pb-2{padding-bottom:0.5rem}.w-\[292px\]{width:292px}.px-1{padding-left:0.25rem;padding-right:0.25rem}.leading-tight{line-height:1.25}.w-3{width:0.75rem}.h-3{height:0.75rem}.bg-black\/80{background-color:rgba(0,0,0,.8)}.max-w-\[300px\]{max-width:300px}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity,1))}.text-\[8px\]{font-size:8px}.left-3{left:0.75rem}.right-3{right:0.75rem}.top-14{top:3.5rem}.z-40{z-index:40}.border-2{border-width:2px}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.w-1\.5{width:0.375rem}.h-1\.5{height:0.375rem}.-mt-1{margin-top:-0.25rem}.bottom-1{bottom:0.25rem}.w-3\.5{width:0.875rem}.h-3\.5{height:0.875rem}.opacity-0{opacity:0}.duration-300{transition-duration:.3s}.pointer-events-none{pointer-events:none}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.bg-white\/20{background-color:hsla(0,0%,100%,.2)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.bg-gradient-to-t{background-image:linear-gradient(to top,var(--tw-gradient-stops))}.from-amber-200{--tw-gradient-from:#fde68a var(--tw-gradient-from-position);--tw-gradient-to:hsla(48,97%,77%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-black\/70{--tw-gradient-from:rgba(0,0,0,.7) var(--tw-gradient-from-position);--tw-gradient-to:transparent var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-brand{--tw-gradient-from:#e02e24 var(--tw-gradient-from-position);--tw-gradient-to:rgba(224,46,36,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-coral-500{--tw-gradient-from:#ff6b6b var(--tw-gradient-from-position);--tw-gradient-to:hsla(0,100%,71%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-black\/20{--tw-gradient-to:transparent var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),rgba(0,0,0,.2) var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-coral-200{--tw-gradient-to:#fcc var(--tw-gradient-to-position)}.to-coral-500{--tw-gradient-to:#ff6b6b var(--tw-gradient-to-position)}.to-coral-600{--tw-gradient-to:#e85d5d var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-contain{-o-object-fit:contain;object-fit:contain}.object-cover{-o-object-fit:cover;object-fit:cover}.p-1{padding:.25rem}.p-2{padding:.5rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-px{padding:1px}.px-0{padding-left:0;padding-right:0}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-\[3px\]{padding-top:3px;padding-bottom:3px}.pb-0\.5{padding-bottom:.125rem}.pb-1{padding-bottom:.25rem}.pb-3{padding-bottom:.75rem}.pb-3\.5{padding-bottom:.875rem}.pb-4{padding-bottom:1rem}.pb-5{padding-bottom:1.25rem}.pt-12{padding-top:3rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-5{padding-top:1.25rem}.text-center{text-align:center}.text-right{text-align:right}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[13px\]{font-size:13px}.text-\[20px\]{font-size:20px}.text-\[22px\]{font-size:22px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.tracking-wide{letter-spacing:.025em}.text-brand{--tw-text-opacity:1;color:rgb(224 46 36/var(--tw-text-opacity,1))}.text-coral-600{--tw-text-opacity:1;color:rgb(232 93 93/var(--tw-text-opacity,1))}.text-coral-700{--tw-text-opacity:1;color:rgb(209 73 73/var(--tw-text-opacity,1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55/var(--tw-text-opacity,1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39/var(--tw-text-opacity,1))}.text-orange-500{--tw-text-opacity:1;color:rgb(249 115 22/var(--tw-text-opacity,1))}.text-transparent{color:transparent}.text-black{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/90{color:hsla(0,0%,100%,.9)}.line-through{text-decoration-line:line-through}.accent-coral-500{accent-color:#ff6b6b}.opacity-60{opacity:.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-lg{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-md,.shadow-sm{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color)}.shadow-coral-500\/25{--tw-shadow-color:hsla(0,100%,71%,.25);--tw-shadow:var(--tw-shadow-colored)}.shadow-coral-500\/30{--tw-shadow-color:hsla(0,100%,71%,.3);--tw-shadow:var(--tw-shadow-colored)}.outline-none{outline:2px solid transparent;outline-offset:2px}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-coral-200:hover{--tw-border-opacity:1;border-color:rgb(255 204 204/var(--tw-border-opacity,1))}.hover\:border-coral-300:hover{--tw-border-opacity:1;border-color:rgb(255 170 170/var(--tw-border-opacity,1))}.hover\:bg-coral-100:hover{--tw-bg-opacity:1;background-color:rgb(255 229 229/var(--tw-bg-opacity,1))}.hover\:bg-coral-50\/50:hover{background-color:hsla(0,100%,98%,.5)}.hover\:bg-coral-600:hover{--tw-bg-opacity:1;background-color:rgb(232 93 93/var(--tw-bg-opacity,1))}.hover\:bg-gray-100:hover{--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity,1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235/var(--tw-bg-opacity,1))}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:rgb(249 250 251/var(--tw-bg-opacity,1))}.hover\:text-coral-500:hover{--tw-text-opacity:1;color:rgb(255 107 107/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:items-center{align-items:center}.sm\:rounded-2xl{border-radius:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}}
+
+/* ---- 补齐 U3 所需、U2 未包含的 Tailwind 类 ---- */
+.-ml-2{margin-left:-0.5rem}
+.-mr-1{margin-right:-0.25rem}
+.-mt-2{margin-top:-0.5rem}
+.-right-1\.5{right:-0.375rem}
+.-top-0\.5{top:-0.125rem}
+.bg-\[\#c69c6d\]{--tw-bg-opacity:1;background-color:rgb(198 156 109/var(--tw-bg-opacity,1))}
+.bg-\[\#fff5f4\]{--tw-bg-opacity:1;background-color:rgb(255 245 244/var(--tw-bg-opacity,1))}
+.border-brand{--tw-border-opacity:1;border-color:rgb(224 46 36/var(--tw-border-opacity,1))}
+.gap-5{gap:1.25rem}
+.h-14{height:3.5rem}
+.w-14{width:3.5rem}
+.inline-block{display:inline-block}
+.left-0{left:0px}
+.right-0{right:0px}
+.max-h-\[380px\]{max-height:380px}
+.max-h-full{max-height:100%}
+.max-w-full{max-width:100%}
+.min-w-\[16px\]{min-width:16px}
+.overflow-x-auto{overflow-x:auto}
+.pb-28{padding-bottom:7rem}
+.pb-6{padding-bottom:1.5rem}
+.px-8{padding-left:2rem;padding-right:2rem}
+.z-10{z-index:10}
+.z-30{z-index:30}
+.w-11{width:2.75rem}
+.h-\[15px\]{height:15px}
+.min-w-\[15px\]{min-width:15px}
+.px-\[3px\]{padding-left:3px;padding-right:3px}
+.whitespace-nowrap{white-space:nowrap}.min-h-0{min-height:0}
+
+
+    .sku-opt { background: #fff; transition: all .2s ease; }
+    .sku-opt.sku-active { background: #fff; font-weight: 500; }
+    #skuModalPanel { max-height: 88vh; overflow-y: auto; }
+    #skuQtyInput:focus { outline: none; }
+  .bg-black\/60{background-color:rgba(0,0,0,.6)}
+.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}
+.pr-8{padding-right:2rem}
+.pt-4{padding-top:1rem}
+.text-\[\#f97316\]{color:#f97316}
+.text-\[14px\]{font-size:14px;line-height:1.25rem}
+.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68/var(--tw-text-opacity,1))}
+.border-red-500{--tw-border-opacity:1;border-color:rgb(239 68 68/var(--tw-border-opacity,1))}
+.top-3{top:0.75rem}
+.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}
+.translate-y-full{transform:translateY(100%)}
+.translate-y-0{transform:translateY(0)}
+
+
+  
+    /* missing utilities */
+    .text-gray-900{color:#111827}
+    .text-\[13px\]{font-size:13px;line-height:1.4}
+    .space-y-3{--tw-space-y-reverse:0;margin-top:calc(0.75rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem*var(--tw-space-y-reverse))}
+    .gap-1{gap:0.25rem}
+    .h-\[18px\]{height:18px}
+    .text-\[11px\]{font-size:11px;line-height:1.4}
+    .text-\[8px\]{font-size:8px;line-height:1.4}
+    .text-black{color:#000}
+    .text-\[9px\]{font-size:9px;line-height:1.4}
+    .text-\[12px\]{font-size:12px;line-height:1.4}
+    .min-w-\[18px\]{min-width:18px}
+    .ring-black\/5{--tw-ring-color:rgba(0,0,0,.05)}
+    .bg-\[\#f7f7f7\]{background-color:#f7f7f7}
+    .object-cover{object-fit:cover}
+    .text-\[18px\]{font-size:18px;line-height:1.4}
+    .text-\[15px\]{font-size:15px;line-height:1.4}
+    .text-\[14px\]{font-size:14px;line-height:1.4}
+    .text-gray-400{color:#9ca3af}
+    .border-gray-100{border-color:#f3f4f6}
+    .text-gray-700{color:#374151}
+    .bg-\[\#f2f3f5\]{background-color:#f2f3f5}
+    .text-gray-500{color:#6b7280}
+    .border-black{border-color:#000}
+    .gap-1\.5{gap:0.375rem}
+    .gap-2{gap:0.5rem}
+    .text-blue-500{color:#3b82f6}
+    .text-white{color:#fff}
+    .text-coral-500{color:#ff6b52}
+    .text-coral-600{color:#f05b42}
+    .gap-3{gap:0.75rem}
+    .text-\[10px\]{font-size:10px;line-height:1.4}
+    /* grid utilities */
+    .grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+    .h-11{height:2.75rem}
+    .gap-1\\.5{gap:0.375rem}
+    /* standard utilities */
+    .top-0{top:0}
+    .sticky{position:sticky}
+    .top-1\/2{top:50%}
+    .-translate-y-1\/2{transform:translateY(-50%)}
+    .-bottom-0\.5{bottom:-0.125rem}
+    .-mr-0\.5{margin-right:-0.125rem}
+    .mb-3{margin-bottom:0.75rem}
+    .mb-4{margin-bottom:1rem}
+    .mb-0\.5{margin-bottom:0.125rem}
+    .mr-1{margin-right:0.25rem}
+    .mr-1\.5{margin-right:0.375rem}
+    .mr-2{margin-right:0.5rem}
+    .mr-3{margin-right:0.75rem}
+    .ml-2{margin-left:0.5rem}
+    .pl-1{padding-left:0.25rem}
+    .pl-8{padding-left:2rem}
+    .py-8{padding-top:2rem;padding-bottom:2rem}
+    .pb-24{padding-bottom:6rem}
+    .p-0\.5{padding:0.125rem}
+    .h-0\.5{height:0.125rem}
+    .h-48{height:12rem}
+    .h-56{height:14rem}
+    .h-64{height:16rem}
+    .w-64{width:16rem}
+    .w-72{width:18rem}
+    .max-w-2xl{max-width:42rem}
+    .max-w-5xl{max-width:64rem}
+    .gap-6{gap:1.5rem}
+    .space-y-1{--tw-space-y-reverse:0;margin-top:calc(0.25rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem*var(--tw-space-y-reverse))}
+    .space-y-5{--tw-space-y-reverse:0;margin-top:calc(1.25rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}
+    .space-y-2\.5{--tw-space-y-reverse:0;margin-top:calc(0.625rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem*var(--tw-space-y-reverse))}
+    .-space-x-1\.5{--tw-space-x-reverse:0;margin-right:calc(-0.375rem*var(--tw-space-x-reverse));margin-left:calc(-0.375rem*calc(1 - var(--tw-space-x-reverse)))}
+    .block{display:block}
+    .tracking-tight{letter-spacing:-0.025em}
+    .font-normal{font-weight:400}
+    .text-rose-600{color:rgb(225,29,72)}
+    .text-emerald-500{color:rgb(16,185,129)}
+    .bg-rose-100{background-color:rgb(255,228,230)}
+    .bg-blue-500{background-color:rgb(59,130,246)}
+    .bg-gray-300{background-color:rgb(209,213,219)}
+    .bg-gray-900\/90{background-color:rgba(17,24,39,0.9)}
+    .rounded-b-\[3rem\]{border-bottom-left-radius:3rem;border-bottom-right-radius:3rem}
+    .justify-start{justify-content:flex-start}
+    .justify-end{justify-content:flex-end}
+    .align-middle{vertical-align:middle}
+    .line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+    .overflow-auto{overflow:auto}
+    .z-\[60\]{z-index:60}
+    .z-\[80\]{z-index:80}
+    .blur-2xl{filter:blur(40px)}
+    .blur-3xl{filter:blur(64px)}
+    .mx-auto{margin-left:auto;margin-right:auto}
+    .pb-safe{padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px))}
+    .font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .top-5{top:1.25rem}
+    .h-screen{height:100vh}
+    .p-6{padding:1.5rem}
+    .bg-amber-100{background-color:rgb(254,243,199)}
+    .text-\[16px\]{font-size:16px;line-height:1.4}
+    .divide-y>:not([hidden])~:not([hidden]){border-top-width:1px}
+    .divide-gray-100>:not([hidden])~:not([hidden]){border-color:rgb(243,244,246)}
+    /* utilities 2 */
+    .pt-1\.5{padding-top:0.375rem}
+    .pt-2\.5{padding-top:0.625rem}
+    .pb-1\.5{padding-bottom:0.375rem}
+    .py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}
+    .mb-3\.5{margin-bottom:0.875rem}
+    .mt-3\.5{margin-top:0.875rem}
+    .mb-8{margin-bottom:2rem}
+    .mb-12{margin-bottom:3rem}
+    .w-2\.5{width:0.625rem}
+    .h-2\.5{height:0.625rem}
+    .w-56{width:14rem}
+    .grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+    .min-h-screen{min-height:100vh}
+    .max-w-3xl{max-width:48rem}
+    .max-w-xl{max-width:36rem}
+    .text-3xl{font-size:1.875rem;line-height:2.25rem}
+    .text-4xl{font-size:2.25rem;line-height:2.5rem}
+    .ml-auto{margin-left:auto}
+    .flex-shrink-0{flex-shrink:0}
+    .-mt-28{margin-top:-7rem}
+    .-mt-12{margin-top:-3rem}
+    .-ml-20{margin-left:-5rem}
+    .-mr-28{margin-right:-7rem}
+    .-mb-20{margin-bottom:-5rem}
+    .bg-coral-50\/60{background-color:rgba(255,245,242,0.6)}
+    .bg-white\/10{background-color:rgba(255,255,255,0.1)}
+    .backdrop-blur-sm{backdrop-filter:blur(4px)}
+    .backdrop-blur{backdrop-filter:blur(8px)}
+    .font-sans{font-family:ui-sans-serif,system-ui,sans-serif}
+    .rounded-sm{border-radius:0.125rem}
+    .opacity-50{opacity:0.5}
+    .opacity-90{opacity:0.9}
+    .opacity-20{opacity:0.2}
+    .right-4{right:1rem}
+    .ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}
+    .w-24{width:6rem}
+    .border-dashed{border-style:dashed}
+    .text-amber-500{color:rgb(245,158,11)}
+    .text-amber-600{color:rgb(217,119,6)}
+    .text-blue-600{color:rgb(37,99,235)}
+    .bg-blue-100{background-color:rgb(219,234,254)}
+    .bg-black\/75{background-color:rgba(0,0,0,0.75)}
+    .-mt-0\.5{margin-top:-0.125rem}
+    .placeholder-gray-400{color:rgb(156,163,175)}
+    .break-all{word-break:break-all}
+    .pr-3{padding-right:0.75rem}
+    .text-left{text-align:left}
+    .self-center{align-self:center}
+    .italic{font-style:italic}
+    .ml-1\.5{margin-left:0.375rem}
+    .pl-0{padding-left:0}
+    .pl-2{padding-left:0.5rem}
+    .pt-0\.5{padding-top:0.125rem}
+    .mx-4{margin-left:1rem;margin-right:1rem}
+    .mx-6{margin-left:1.5rem;margin-right:1.5rem}
+    .leading-5{line-height:1.25rem}
+    .space-y-6{--tw-space-y-reverse:0;margin-top:calc(1.5rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}
+    .border-\[\#ffd9d4\]{border-color:#ffd9d4}
+    .border-white\/70{border-color:rgba(255,255,255,0.7)}
+    .from-\[\#ff8a75\]{--tw-gradient-from:#ff8a75 var(--tw-gradient-from-position);--tw-gradient-to:rgba(255,138,117,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}
+    .to-\[\#e64e39\]{--tw-gradient-to:#e64e39 var(--tw-gradient-to-position)}</style>
+  <meta charset="UTF-8" data-page-node-id="G4MetaCharset">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="G4MetaViewport">
+  <title>导购端 - 选择商品</title>
+  <style>
+
+    body { font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif; }
+    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; overflow:hidden; background:#f2f3f5; }
+    .phone-frame > * { min-height:0; }
+    .phone-frame > * { min-height:0; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .status-bar { font-size:13px; font-weight:600; letter-spacing:-0.5px; }
+    .status-icon { font-size:11px; }
+    .cat-active { background:#fff; color:#ff6b52; font-weight:500; position:relative; }
+    .cat-active::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:3px; background:#ff6b52; border-radius:0 2px 2px 0; }
+    .cat-item { cursor:pointer; transition:background .15s ease; }
+    .cat-item:hover:not(.cat-active) { background:#fff; }
+    .chip { padding:6px 14px; border-radius:999px; font-size:13px; white-space:nowrap; border:1px solid #e5e5e5; background:#fff; color:#333; }
+    .chip-active { background:#2b2b2b; color:#fff; border-color:#2b2b2b; }
+    .product-card { background:#fff; border:1px solid #f3f4f6; border-radius:16px; padding:12px; transition:all .2s ease; }
+    .product-card.selected { border-color:#ff6b52; box-shadow:0 4px 12px rgba(255,107,82,.10); }
+    .product-card:active { transform:scale(.99); }
+    .code-pill { background:#f4f5f7; color:#8a8f99; border-radius:5px; padding:1px 6px; font-size:11px; }
+    .stock-pill { padding:2px 7px; border-radius:5px; font-size:11px; font-weight:500; display:inline-flex; align-items:center; gap:3px; }
+    .stock-pill.store { background:#ecfdf5; color:#059669; border:1px solid #d1fae5; }
+    .stock-pill.warehouse { background:#eff6ff; color:#2563eb; border:1px solid #dbeafe; }
+    .stock-pill.out { background:#fff1f2; color:#e11d48; border:1px solid #ffe4e6; }
+    .stock-pill.zero { background:#f3f4f6; color:#9ca3af; border:1px solid #e5e7eb; }
+    .price { color:#ff6b52; letter-spacing:-.3px; }
+    .btn-primary { background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39); color:#fff; border-radius:999px; padding:6px 14px; font-size:12px; font-weight:600; border:none; cursor:pointer; transition:transform .12s ease, box-shadow .15s ease; box-shadow:0 4px 10px rgba(255,107,82,.25); }
+    .btn-primary:active { transform:scale(.96); }
+    .btn-primary:disabled { background:#f3f4f6; color:#9ca3af; box-shadow:none; cursor:not-allowed; }
+    .btn-ghost { background:#fff5f2; color:#ff6b52; border-radius:999px; padding:4px 10px; font-size:12px; font-weight:500; border:1px solid #ffd0c5; cursor:pointer; }
+    .selected-tag { display:inline-flex; align-items:center; gap:3px; background:#fff; color:#ff6b52; border:1px solid #ffd0c5; border-radius:999px; padding:2px 8px; font-size:11px; font-weight:500; }
+    .selected-row { width:100%; margin-top:12px; background:#fff5f2; border:1px solid #ffd9d0; border-radius:12px; padding:10px 12px; }
+    .order-bar { background:#fff; border-top:1px solid #f3f4f6; box-shadow:0 -4px 16px rgba(0,0,0,.06); }
+    .source-tab { flex:1; text-align:center; padding:10px 0; font-size:13px; color:#6b7280; border:1.5px solid #e5e7eb; border-radius:12px; background:#fff; cursor:pointer; transition:all .15s ease; }
+    .source-tab.active { color:#ff6b52; border-color:#ff6b52; background:#fff5f2; font-weight:600; }
+    .source-tab.disabled { color:#d1d5db; background:#f9fafb; cursor:not-allowed; border-color:#f3f4f6; }
+    .qty-stepper { display:inline-flex; align-items:center; border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fff; }
+    .qty-stepper button { width:34px; height:34px; background:#f9fafb; color:#374151; font-size:18px; display:flex; align-items:center; justify-content:center; border:none; }
+    .qty-stepper button:disabled { color:#d1d5db; cursor:not-allowed; }
+    .qty-stepper input { width:48px; height:34px; text-align:center; border:none; font-size:14px; color:#1f2937; font-weight:600; background:#fff; }
+    .modal-sheet { position:fixed; left:0; right:0; bottom:0; max-width:414px; margin:0 auto; background:#fff; border-radius:24px 24px 0 0; padding:20px 16px calc(16px + env(safe-area-inset-bottom, 0px)); transform:translateY(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); z-index:60; }
+    .modal-sheet.open { transform:translateY(0); }
+    .modal-mask { position:fixed; inset:0; background:rgba(0,0,0,.45); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:55; }
+    .modal-mask.open { opacity:1; pointer-events:auto; }
+    .toast { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,.7); color:#fff; padding:10px 16px; border-radius:10px; font-size:13px; z-index:70; }
+    .modal-sheet .source-tab { padding:12px 0; }
+    .modal-sheet .qty-stepper button { width:38px; height:38px; }
+    .modal-sheet .qty-stepper input { width:54px; height:38px; font-size:15px; }
+
+  
+    .sub-cat { flex-shrink:0; padding:6px 14px; border-radius:999px; font-size:12px; color:#6b7280; background:#f4f5f7; border:1px solid transparent; cursor:pointer; transition:all .15s ease; white-space:nowrap; }
+    .sub-cat.active { background:#fff5f2; color:#ff6b52; border-color:#ffd0c5; font-weight:600; }
+    .sub-cat:active { transform:scale(.96); }
+    .product-item.hide { display:none; }
+    .qty-stepper input.item-qty { width:44px; }
+    .fav-btn { position:absolute; top:6px; left:6px; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.92); border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.1); color:#d1d5db; transition:all .15s ease; z-index:5; }
+    .fav-btn.active { color:#ff6b52; background:#fff; }
+    .fav-btn:active { transform:scale(.9); }
+    .fav-btn i { font-size:13px; }
+    .spec-chip { padding:6px 14px; border-radius:999px; font-size:13px; border:1px solid #e5e7eb; background:#fff; color:#374151; transition:all .15s ease; }
+    .spec-chip.active { border-color:#ff6b52; background:#fff5f2; color:#ff6b52; font-weight:600; }
+  
+    /* patched utilities */
+    .mb-5{margin-bottom:1.25rem}
+    .mt-2\.5{margin-top:0.625rem}
+    .h-1{height:0.25rem}
+    .border-r{border-right-width:1px}
+  </style>
+</head>
+<body class="bg-gray-200" data-page-node-id="G4NewBody">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#f2f3f5]" data-page-node-id="G4NewFrame">
+<!-- 状态栏 -->
+    <div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0" data-page-node-id="statusBar">
+      <span data-page-node-id="time">9:32</span>
+      <div class="flex items-center gap-1 status-icon" data-page-node-id="statusIcons">
+        <i class="fas fa-location-dot text-[10px]" data-page-node-id="loc"></i>
+        <i class="fas fa-circle text-[8px] text-blue-500" data-page-node-id="dot"></i>
+        <i class="fas fa-square text-[8px]" data-page-node-id="sq"></i>
+        <i class="fas fa-record-vinyl text-[8px]" data-page-node-id="rec"></i>
+        <span class="bg-blue-500 text-white rounded-sm px-1 text-[9px] font-bold ml-0.5" data-page-node-id="net">8K</span>
+        <i class="fas fa-signal" data-page-node-id="sig"></i>
+        <i class="fas fa-wifi" data-page-node-id="wifi"></i>
+        <span class="border border-black rounded-sm px-1 text-[10px] font-bold" data-page-node-id="bat">90</span>
+      </div>
+    </div>
+
+    <!-- 顶栏 -->
+    <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative border-b border-gray-100" data-page-node-id="header">
+      <a href="G3.html" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="back">
+        <i class="fas fa-chevron-left text-gray-700 text-base"></i>
+      </a>
+      <h1 class="text-base font-semibold text-gray-900" data-page-node-id="title">选择商品</h1>
+      <button onclick="clearOrder()" class="absolute right-4 text-[13px] text-gray-400" data-page-node-id="clear">清空</button>
+    </div>
+
+    <!-- 顶部搜索区 -->
+    <div class="bg-white shrink-0" data-page-node-id="searchWrap">
+      <div class="px-3 py-2.5 border-b border-gray-100" data-page-node-id="searchBox">
+        <div class="flex items-center gap-2 bg-gray-100 rounded-full px-3 py-2" data-page-node-id="searchInner">
+          <i class="fas fa-search text-gray-400 text-sm"></i>
+          <input type="text" placeholder="搜索商品名称 / 编号 / 品牌" class="flex-1 bg-transparent outline-none text-sm placeholder-gray-400 text-gray-700" data-page-node-id="searchInput">
+        </div>
+      </div>
+    </div>
+
+    <!-- 主体：左侧分类 + 右侧商品 -->
+    <div class="flex-1 flex overflow-hidden min-h-0" data-page-node-id="main">
+      <aside id="sidebar" class="w-24 bg-[#f7f7f7] overflow-y-auto hide-scrollbar shrink-0 border-r border-gray-100" data-page-node-id="sidebar">
+        <ul class="text-sm text-gray-700" data-page-node-id="catList">
+          <li data-cat="我的收藏" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><i class="fas fa-star text-gray-500"></i><p class="mt-1 text-[12px]">我的收藏</p></li>
+          <li data-cat="我的柜组" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><i class="fas fa-box text-gray-500"></i><p class="mt-1 text-[12px]">我的柜组</p></li>
+          <li data-cat="女士腕表" onclick="selectCat(this)" class="cat-active cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女士腕表</p></li>
+          <li data-cat="男包" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">男包</p></li>
+          <li data-cat="首饰" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">首饰</p></li>
+          <li data-cat="手机" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">手机</p></li>
+          <li data-cat="红酒" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">红酒</p></li>
+          <li data-cat="精华" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">精华</p></li>
+          <li data-cat="彩妆" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">彩妆</p></li>
+          <li data-cat="女包" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">女包</p></li>
+          <li data-cat="太阳镜" onclick="selectCat(this)" class="cat-item px-3 py-3 text-center border-b border-gray-100"><p class="text-[12px]">太阳镜</p></li>
+        </ul>
+      </aside>
+
+      <main class="flex-1 overflow-hidden bg-[#f2f3f5] relative" data-page-node-id="productMain">
+        <!-- 二级品牌分类 -->
+        <div id="subCatBar" class="bg-white border-b border-gray-100 shrink-0" data-page-node-id="subCatBar">
+          <div class="flex gap-2 overflow-x-auto hide-scrollbar px-3 py-2.5" data-page-node-id="subCatList">
+            <button type="button" class="sub-cat active" data-sub="全部" onclick="selectSubCat(this)">全部</button>
+            <button type="button" class="sub-cat" data-sub="迪奥" onclick="selectSubCat(this)">迪奥</button>
+            <button type="button" class="sub-cat" data-sub="兰蔻" onclick="selectSubCat(this)">兰蔻</button>
+            <button type="button" class="sub-cat" data-sub="香奈儿" onclick="selectSubCat(this)">香奈儿</button>
+            <button type="button" class="sub-cat" data-sub="浪凡" onclick="selectSubCat(this)">浪凡</button>
+          </div>
+        </div>
+
+
+        <div id="productPanel" class="h-full overflow-y-auto hide-scrollbar p-3 space-y-3 pb-28" data-page-node-id="productPanel">
+          
+        <div class="product-item" data-sku="C016080" data-brand="浪凡" data-name="浪凡光韵女士浓香水" data-specs="30ml,50ml,100ml" data-price="394.00" data-img="assets/generated/product1.png" data-store="270" data-warehouse="88" data-page-node-id="prod-C016080">
+          <div class="product-card" data-page-node-id="card-C016080">
+            <div class="flex gap-3" data-page-node-id="row-C016080">
+              <div class="relative shrink-0" data-page-node-id="imgwrap-C016080">
+                <button type="button" class="fav-btn" onclick="event.stopPropagation();toggleFavorite('C016080')" data-page-node-id="fav-C016080"><i class="fas fa-star"></i></button>
+                <img src="assets/generated/product1.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C016080">
+              </div>
+              <div class="flex-1 min-w-0" data-page-node-id="info-C016080">
+                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C016080">浪凡光韵女士浓香水50ml</p>
+                <div class="mt-1.5" data-page-node-id="code-C016080"><span class="font-mono code-pill">C016080</span></div>
+                <div class="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]" data-page-node-id="stock-C016080">
+                  <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 270</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商 88</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between" data-page-node-id="action-C016080">
+                  <span class="price text-[18px] font-bold" data-page-node-id="price-C016080">¥394.00</span>
+                  <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))"  data-page-node-id="btn-C016080">加入清单</button>
+                </div>
+              </div>
+            </div>
+          <div class="selected-row hidden mt-3 pt-3 border-t border-dashed border-gray-100 flex items-center justify-between" data-page-node-id="selrow-C016080"><span class="selected-tag" data-page-node-id="seltag-C016080"><i class="fas fa-check-circle"></i><span class="sel-text">门店库存 · 50ml</span></span><div class="qty-stepper" data-page-node-id="stepper-C016080"><button type="button" onclick="event.stopPropagation();changeItemQty('C016080', -1)" data-page-node-id="minus-C016080">-</button><input type="text" class="item-qty" value="1" readonly data-page-node-id="qty-C016080"><button type="button" onclick="event.stopPropagation();changeItemQty('C016080', 1)" data-page-node-id="plus-C016080">+</button></div></div>
+          </div>
+        </div>
+
+        <div class="product-item" data-sku="C017002" data-brand="迪奥" data-name="迪奥真我香水 EDT" data-specs="50ml,100ml" data-price="1280.00" data-img="assets/generated/product2.png" data-store="156" data-warehouse="120" data-page-node-id="prod-C017002">
+          <div class="product-card" data-page-node-id="card-C017002">
+            <div class="flex gap-3" data-page-node-id="row-C017002">
+              <div class="relative shrink-0" data-page-node-id="imgwrap-C017002">
+                <button type="button" class="fav-btn" onclick="event.stopPropagation();toggleFavorite('C017002')" data-page-node-id="fav-C017002"><i class="fas fa-star"></i></button>
+                <img src="assets/generated/product2.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C017002">
+              </div>
+              <div class="flex-1 min-w-0" data-page-node-id="info-C017002">
+                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C017002">迪奥真我香水 EDT 100ml</p>
+                <div class="mt-1.5" data-page-node-id="code-C017002"><span class="font-mono code-pill">C017002</span></div>
+                <div class="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]" data-page-node-id="stock-C017002">
+                  <span class="stock-pill store"><i class="fas fa-store text-[9px]"></i>门店 156</span>
+                  <span class="stock-pill warehouse"><i class="fas fa-warehouse text-[9px]"></i>电商 120</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between" data-page-node-id="action-C017002">
+                  <span class="price text-[18px] font-bold" data-page-node-id="price-C017002">¥1,280.00</span>
+                  <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))"  data-page-node-id="btn-C017002">加入清单</button>
+                </div>
+              </div>
+            </div>
+          <div class="selected-row hidden mt-3 pt-3 border-t border-dashed border-gray-100 flex items-center justify-between" data-page-node-id="selrow-C017002"><span class="selected-tag" data-page-node-id="seltag-C017002"><i class="fas fa-check-circle"></i><span class="sel-text">门店库存 · 100ml</span></span><div class="qty-stepper" data-page-node-id="stepper-C017002"><button type="button" onclick="event.stopPropagation();changeItemQty('C017002', -1)" data-page-node-id="minus-C017002">-</button><input type="text" class="item-qty" value="1" readonly data-page-node-id="qty-C017002"><button type="button" onclick="event.stopPropagation();changeItemQty('C017002', 1)" data-page-node-id="plus-C017002">+</button></div></div>
+          </div>
+        </div>
+
+        <div class="product-item" data-sku="C000277" data-brand="兰蔻" data-name="兰蔻奇迹香水" data-specs="30ml,50ml,100ml" data-price="620.00" data-img="assets/generated/product3.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C000277">
+          <div class="product-card" data-page-node-id="card-C000277">
+            <div class="flex gap-3" data-page-node-id="row-C000277">
+              <div class="relative shrink-0" data-page-node-id="imgwrap-C000277">
+                <button type="button" class="fav-btn" onclick="event.stopPropagation();toggleFavorite('C000277')" data-page-node-id="fav-C000277"><i class="fas fa-star"></i></button>
+                <img src="assets/generated/product3.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C000277">
+              </div>
+              <div class="flex-1 min-w-0" data-page-node-id="info-C000277">
+                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C000277">兰蔻奇迹香水 100ml</p>
+                <div class="mt-1.5" data-page-node-id="code-C000277"><span class="font-mono code-pill">C000277</span></div>
+                <div class="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]" data-page-node-id="stock-C000277">
+                  <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商 0</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between" data-page-node-id="action-C000277">
+                  <span class="price text-[18px] font-bold" data-page-node-id="price-C000277">¥620.00</span>
+                  <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" disabled data-page-node-id="btn-C000277">缺货</button>
+                </div>
+              </div>
+            </div>
+          <div class="selected-row hidden mt-3 pt-3 border-t border-dashed border-gray-100 flex items-center justify-between" data-page-node-id="selrow-C000277"><span class="selected-tag" data-page-node-id="seltag-C000277"><i class="fas fa-check-circle"></i><span class="sel-text">门店库存</span></span><div class="qty-stepper" data-page-node-id="stepper-C000277"><button type="button" onclick="event.stopPropagation();changeItemQty('C000277', -1)" data-page-node-id="minus-C000277">-</button><input type="text" class="item-qty" value="1" readonly data-page-node-id="qty-C000277"><button type="button" onclick="event.stopPropagation();changeItemQty('C000277', 1)" data-page-node-id="plus-C000277">+</button></div></div>
+          </div>
+        </div>
+
+        <div class="product-item" data-sku="C001930SY" data-brand="香奈儿" data-name="香奈儿五号香水" data-specs="30ml,50ml,100ml" data-price="745.00" data-img="assets/generated/c1.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C001930SY">
+          <div class="product-card" data-page-node-id="card-C001930SY">
+            <div class="flex gap-3" data-page-node-id="row-C001930SY">
+              <div class="relative shrink-0" data-page-node-id="imgwrap-C001930SY">
+                <button type="button" class="fav-btn" onclick="event.stopPropagation();toggleFavorite('C001930SY')" data-page-node-id="fav-C001930SY"><i class="fas fa-star"></i></button>
+                <img src="assets/generated/c1.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C001930SY">
+              </div>
+              <div class="flex-1 min-w-0" data-page-node-id="info-C001930SY">
+                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C001930SY">香奈儿五号香水 50ml</p>
+                <div class="mt-1.5" data-page-node-id="code-C001930SY"><span class="font-mono code-pill">C001930SY</span></div>
+                <div class="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]" data-page-node-id="stock-C001930SY">
+                  <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商 0</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between" data-page-node-id="action-C001930SY">
+                  <span class="price text-[18px] font-bold" data-page-node-id="price-C001930SY">¥745.00</span>
+                  <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" disabled data-page-node-id="btn-C001930SY">缺货</button>
+                </div>
+              </div>
+            </div>
+          <div class="selected-row hidden mt-3 pt-3 border-t border-dashed border-gray-100 flex items-center justify-between" data-page-node-id="selrow-C001930SY"><span class="selected-tag" data-page-node-id="seltag-C001930SY"><i class="fas fa-check-circle"></i><span class="sel-text">门店库存</span></span><div class="qty-stepper" data-page-node-id="stepper-C001930SY"><button type="button" onclick="event.stopPropagation();changeItemQty('C001930SY', -1)" data-page-node-id="minus-C001930SY">-</button><input type="text" class="item-qty" value="1" readonly data-page-node-id="qty-C001930SY"><button type="button" onclick="event.stopPropagation();changeItemQty('C001930SY', 1)" data-page-node-id="plus-C001930SY">+</button></div></div>
+          </div>
+        </div>
+
+        <div class="product-item" data-sku="C000365" data-brand="兰蔻" data-name="兰蔻珍爱香水两支装" data-specs="30ML,50ML" data-price="580.00" data-img="assets/generated/product2.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C000365">
+          <div class="product-card" data-page-node-id="card-C000365">
+            <div class="flex gap-3" data-page-node-id="row-C000365">
+              <div class="relative shrink-0" data-page-node-id="imgwrap-C000365">
+                <button type="button" class="fav-btn" onclick="event.stopPropagation();toggleFavorite('C000365')" data-page-node-id="fav-C000365"><i class="fas fa-star"></i></button>
+                <img src="assets/generated/product2.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C000365">
+              </div>
+              <div class="flex-1 min-w-0" data-page-node-id="info-C000365">
+                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C000365">兰蔻珍爱香水两支装 30ML</p>
+                <div class="mt-1.5" data-page-node-id="code-C000365"><span class="font-mono code-pill">C000365</span></div>
+                <div class="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]" data-page-node-id="stock-C000365">
+                  <span class="stock-pill zero"><i class="fas fa-store text-[9px]"></i>门店 0</span>
+                  <span class="stock-pill zero"><i class="fas fa-warehouse text-[9px]"></i>电商 0</span>
+                </div>
+                <div class="mt-3 flex items-center justify-between" data-page-node-id="action-C000365">
+                  <span class="price text-[18px] font-bold" data-page-node-id="price-C000365">¥580.00</span>
+                  <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" disabled data-page-node-id="btn-C000365">缺货</button>
+                </div>
+              </div>
+            </div>
+          <div class="selected-row hidden mt-3 pt-3 border-t border-dashed border-gray-100 flex items-center justify-between" data-page-node-id="selrow-C000365"><span class="selected-tag" data-page-node-id="seltag-C000365"><i class="fas fa-check-circle"></i><span class="sel-text">门店库存</span></span><div class="qty-stepper" data-page-node-id="stepper-C000365"><button type="button" onclick="event.stopPropagation();changeItemQty('C000365', -1)" data-page-node-id="minus-C000365">-</button><input type="text" class="item-qty" value="1" readonly data-page-node-id="qty-C000365"><button type="button" onclick="event.stopPropagation();changeItemQty('C000365', 1)" data-page-node-id="plus-C000365">+</button></div></div>
+          </div>
+        </div>
+
+        </div>
+      </main>
+    </div>
+
+    <!-- 底部订单栏 -->
+    <div id="orderBar" class="order-bar px-4 py-3 shrink-0 flex items-center justify-between pb-safe" data-page-node-id="orderBar">
+      <div class="flex items-center gap-3" data-page-node-id="orderInfo">
+        <div class="relative w-10 h-10 rounded-full bg-coral-50 flex items-center justify-center text-coral-500" data-page-node-id="bagWrap">
+          <i class="fas fa-shopping-bag text-[18px]"></i>
+          <span id="orderBadge" class="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-coral-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1 hidden" data-page-node-id="badge">0</span>
+        </div>
+        <div data-page-node-id="orderText">
+          <p class="text-[14px] text-gray-900 font-semibold" data-page-node-id="orderTotal">合计 <span id="orderTotal" class="text-coral-600 font-bold">¥0.00</span></p>
+          <p id="orderCount" class="text-[11px] text-gray-400" data-page-node-id="orderCount">未选商品</p>
+        </div>
+      </div>
+      <button id="sendOrderBtn" onclick="sendOrder()" class="btn-primary opacity-50" disabled data-page-node-id="sendBtn">发送清单</button>
+    </div>
+
+  <!-- 加入清单弹窗 -->
+  <div id="modalMask" class="modal-mask" onclick="closeAddModal()" data-page-node-id="modalMask"></div>
+  <div id="addModal" class="modal-sheet" data-page-node-id="addModal">
+    <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-5" data-page-node-id="modalHandle"></div>
+    <div class="flex items-start gap-3 mb-5" data-page-node-id="modalHeader">
+      <img id="modalImg" src="" alt="" class="w-[72px] h-[72px] rounded-xl object-cover bg-gray-100 ring-1 ring-black/5 shrink-0" data-page-node-id="modalImg">
+      <div class="flex-1 min-w-0 py-0.5" data-page-node-id="modalInfo">
+        <p id="modalName" class="text-[15px] font-semibold text-gray-900 leading-snug" data-page-node-id="modalName"></p>
+        <p id="modalCode" class="text-[11px] text-gray-400 mt-1.5" data-page-node-id="modalCode"></p>
+        <p class="text-[18px] font-bold text-coral-600 mt-2.5" data-page-node-id="modalPrice">¥<span id="modalPrice" data-page-node-id="modalPriceNum"></span></p>
+      </div>
+      <button onclick="closeAddModal()" class="w-8 h-8 -mr-1 -mt-1 flex items-center justify-center text-gray-400" data-page-node-id="modalClose"><i class="fas fa-times text-lg"></i></button>
+    </div>
+
+    <div id="specWrap" class="mb-5" data-page-node-id="specWrap">
+      <p class="text-[14px] font-semibold text-gray-900 mb-3" data-page-node-id="specTitle">选择规格</p>
+      <div id="specChips" class="flex flex-wrap gap-2" data-page-node-id="specChips"></div>
+    </div>
+
+    <div class="mb-5" data-page-node-id="sourceWrap">
+      <p class="text-[14px] font-semibold text-gray-900 mb-3" data-page-node-id="sourceTitle">选择库存来源</p>
+      <div class="flex gap-3" data-page-node-id="sourceTabs">
+        <div id="tabStore" class="source-tab" data-page-node-id="tabStore">
+          <div class="text-[15px]">门店库存</div>
+          <div id="stockStore" class="text-[11px] mt-1 font-normal">库存 0</div>
+        </div>
+        <div id="tabWarehouse" class="source-tab" data-page-node-id="tabWarehouse">
+          <div class="text-[15px]">电商库存</div>
+          <div id="stockWarehouse" class="text-[11px] mt-1 font-normal">库存 0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between mb-3" data-page-node-id="qtyRow">
+      <span class="text-[14px] font-semibold text-gray-900" data-page-node-id="qtyLabel">数量</span>
+      <div class="qty-stepper" data-page-node-id="qtyStepper">
+        <button onclick="changeQty(-1)" id="qtyMinus">-</button>
+        <input id="modalQty" type="text" value="1" readonly data-page-node-id="modalQty">
+        <button onclick="changeQty(1)" id="qtyPlus">+</button>
+      </div>
+    </div>
+    <p id="stockTip" class="text-[11px] text-amber-500 mb-5 hidden" data-page-node-id="stockTip"><i class="fas fa-exclamation-triangle mr-1"></i>超过该来源库存，超出部分将由其他仓库发货</p>
+
+    <button onclick="confirmAdd()" id="confirmBtn" class="w-full btn-primary py-3.5 text-[15px]" data-page-node-id="confirmBtn">确认加入</button>
+  </div>
+
+  <div id="toast" class="toast hidden" data-page-node-id="toast"></div>
+
+  <script>
+    let currentItem = null;
+    let currentSource = 'store';
+    let currentQty = 1;
+
+    function getOrder() { try { return JSON.parse(localStorage.getItem('guideOrder')) || { items: [] }; } catch(e) { return { items: [] }; } }
+    function saveOrder(order) { localStorage.setItem('guideOrder', JSON.stringify(order)); }
+
+    function formatMoney(num) {
+      return num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    let currentSpecs = [];
+    let currentSpec = '';
+
+    function openAddModal(card) {
+      currentItem = card;
+      currentSpecs = (card.dataset.specs || '').split(',').filter(Boolean);
+      const store = parseInt(card.dataset.store || 0, 10);
+      const warehouse = parseInt(card.dataset.warehouse || 0, 10);
+      const order = getOrder();
+      const exist = order.items.find(i => i.sku === card.dataset.sku);
+      if (exist) {
+        currentSource = exist.source;
+        currentQty = exist.qty;
+        currentSpec = exist.spec || (currentSpecs[0] || '');
+      } else {
+        currentSource = store > 0 ? 'store' : (warehouse > 0 ? 'warehouse' : 'store');
+        currentQty = 1;
+        currentSpec = currentSpecs[0] || '';
+      }
+      document.getElementById('modalImg').src = card.dataset.img;
+      document.getElementById('modalName').textContent = card.dataset.name;
+      document.getElementById('modalCode').textContent = '商品编号 ' + card.dataset.sku;
+      document.getElementById('modalPrice').textContent = formatMoney(parseFloat(card.dataset.price));
+      document.getElementById('stockStore').textContent = '库存 ' + store;
+      document.getElementById('stockWarehouse').textContent = '库存 ' + warehouse;
+
+      renderSpecChips();
+
+      const tStore = document.getElementById('tabStore');
+      const tWh = document.getElementById('tabWarehouse');
+      tStore.classList.toggle('disabled', store === 0);
+      tStore.onclick = store > 0 ? function() { selectSource('store'); } : null;
+      tWh.classList.toggle('disabled', warehouse === 0);
+      tWh.onclick = warehouse > 0 ? function() { selectSource('warehouse'); } : null;
+      if (currentSource === 'store' && store === 0 && warehouse > 0) currentSource = 'warehouse';
+      if (currentSource === 'warehouse' && warehouse === 0 && store > 0) currentSource = 'store';
+      selectSource(currentSource);
+      document.getElementById('modalQty').value = currentQty;
+      updateStockTip();
+      document.getElementById('modalMask').classList.add('open');
+      document.getElementById('addModal').classList.add('open');
+    }
+
+    function renderSpecChips() {
+      const wrap = document.getElementById('specChips');
+      const box = document.getElementById('specWrap');
+      if (!wrap || !box) return;
+      if (!currentSpecs.length) {
+        wrap.innerHTML = '';
+        box.classList.add('hidden');
+        return;
+      }
+      box.classList.remove('hidden');
+      wrap.innerHTML = currentSpecs.map(s =>
+        '<button type="button" onclick="selectSpec(\'' + s + '\')" class="spec-chip' + (s === currentSpec ? ' active' : '') + '">' + s + '</button>'
+      ).join('');
+    }
+
+    function selectSpec(spec) {
+      currentSpec = spec;
+      renderSpecChips();
+    }
+
+    function closeAddModal() {
+      document.getElementById('addModal').classList.remove('open');
+      document.getElementById('modalMask').classList.remove('open');
+    }
+
+    function selectSource(src) {
+      currentSource = src;
+      document.getElementById('tabStore').classList.toggle('active', src === 'store');
+      document.getElementById('tabWarehouse').classList.toggle('active', src === 'warehouse');
+      updateStockTip();
+    }
+
+    function changeQty(delta) {
+      currentQty = Math.max(1, currentQty + delta);
+      document.getElementById('modalQty').value = currentQty;
+      updateStockTip();
+    }
+
+    function getStockLimit() {
+      if (!currentItem) return 0;
+      return currentSource === 'store' ? parseInt(currentItem.dataset.store || 0, 10) : parseInt(currentItem.dataset.warehouse || 0, 10);
+    }
+
+    function updateStockTip() {
+      const limit = getStockLimit();
+      const tip = document.getElementById('stockTip');
+      tip.classList.toggle('hidden', limit === 0 || currentQty <= limit);
+    }
+
+    function confirmAdd() {
+      if (!currentItem) return;
+      const order = getOrder();
+      const idx = order.items.findIndex(i => i.sku === currentItem.dataset.sku);
+      const item = {
+        sku: currentItem.dataset.sku,
+        name: currentItem.dataset.name,
+        price: parseFloat(currentItem.dataset.price),
+        img: currentItem.dataset.img,
+        qty: currentQty,
+        source: currentSource,
+        sourceLabel: currentSource === 'store' ? '门店库存' : '电商库存',
+        spec: currentSpec
+      };
+      if (idx >= 0) order.items[idx] = item; else order.items.push(item);
+      saveOrder(order);
+      updateOrderBar();
+      updateCardState(currentItem.dataset.sku);
+      closeAddModal();
+      showToast('已加入清单');
+    }
+
+    function updateCardState(sku) {
+      const card = document.querySelector('.product-item[data-sku="' + sku + '"]');
+      if (!card) return;
+      const order = getOrder();
+      const item = order.items.find(i => i.sku === sku);
+      const prodCard = card.querySelector('.product-card');
+      const selRow = card.querySelector('.selected-row');
+      const btn = card.querySelector('.add-btn');
+      const qtyInput = card.querySelector('.item-qty');
+      const selText = card.querySelector('.sel-text');
+      if (item) {
+        prodCard.classList.add('selected');
+        selRow.classList.remove('hidden');
+        if (qtyInput) qtyInput.value = item.qty;
+        if (selText) selText.textContent = item.sourceLabel + (item.spec ? ' · ' + item.spec : '');
+        btn.textContent = '已加入';
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+      } else {
+        prodCard.classList.remove('selected');
+        selRow.classList.add('hidden');
+        if (qtyInput) qtyInput.value = 1;
+        btn.textContent = '加入清单';
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+      }
+    }
+
+    // 卡片内计数器：直接增减已选商品数量，减到 0 自动移除
+    function changeItemQty(sku, delta) {
+      const order = getOrder();
+      const idx = order.items.findIndex(i => i.sku === sku);
+      if (idx < 0) return;
+      const next = order.items[idx].qty + delta;
+      if (next <= 0) {
+        order.items.splice(idx, 1);
+        saveOrder(order);
+        updateCardState(sku);
+        updateOrderBar();
+        showToast('已从清单移除');
+        return;
+      }
+      order.items[idx].qty = next;
+      saveOrder(order);
+      updateCardState(sku);
+      updateOrderBar();
+    }
+
+    // 二级品牌分类筛选
+    function selectSubCat(btn) {
+      document.querySelectorAll('.sub-cat').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      const sub = btn.dataset.sub;
+      document.querySelectorAll('.product-item').forEach(function(el) {
+        const match = (sub === '全部') || (el.dataset.brand === sub);
+        el.classList.toggle('hide', !match);
+      });
+    }
+
+    function updateOrderBar() {
+      const order = getOrder();
+      const count = order.items.reduce((s, i) => s + i.qty, 0);
+      const total = order.items.reduce((s, i) => s + i.price * i.qty, 0);
+      const badge = document.getElementById('orderBadge');
+      badge.textContent = count;
+      badge.classList.toggle('hidden', count === 0);
+      document.getElementById('orderTotal').textContent = '¥' + formatMoney(total);
+      document.getElementById('orderCount').textContent = count === 0 ? '未选商品' : ('已选 ' + count + ' 件商品');
+      const sendBtn = document.getElementById('sendOrderBtn');
+      sendBtn.disabled = count === 0;
+      sendBtn.classList.toggle('opacity-50', count === 0);
+    }
+
+    function clearOrder() {
+      saveOrder({ items: [] });
+      document.querySelectorAll('.product-item').forEach(c => updateCardState(c.dataset.sku));
+      updateOrderBar();
+      showToast('已清空');
+    }
+
+    function sendOrder() {
+      const order = getOrder();
+      if (order.items.length === 0) return;
+      const total = order.items.reduce((s, i) => s + i.price * i.qty, 0);
+      const id = 'DD' + Date.now().toString().slice(-10);
+      const pending = { id, items: order.items, total, time: '刚刚' };
+      localStorage.setItem('pendingOrderForUser', JSON.stringify(pending));
+      localStorage.setItem('guideShoppingList', JSON.stringify(pending));
+      saveOrder({ items: [] });
+      showToast('清单已发送给顾客');
+      setTimeout(() => { window.location.href = 'G3.html'; }, 800);
+    }
+
+    function showToast(text) {
+      const t = document.getElementById('toast');
+      t.textContent = text;
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 1500);
+    }
+
+    function selectCat(li) {
+      document.querySelectorAll('#sidebar li').forEach(el => el.classList.remove('cat-active'));
+      li.classList.add('cat-active');
+      const cat = li.dataset.cat;
+      if (cat === '我的收藏') {
+        document.getElementById('subCatBar').classList.add('hidden');
+        renderFavoriteView();
+        return;
+      }
+      document.getElementById('subCatBar').classList.remove('hidden');
+      const all = document.querySelector('.sub-cat[data-sub="全部"]');
+      if (all) selectSubCat(all);
+    }
+
+    function getFavorites() { try { return JSON.parse(localStorage.getItem('guideFavorites')) || []; } catch(e) { return []; } }
+    function setFavorites(list) { localStorage.setItem('guideFavorites', JSON.stringify(list)); }
+    function toggleFavorite(sku) {
+      const list = getFavorites();
+      const idx = list.indexOf(sku);
+      const btn = document.querySelector('.fav-btn[onclick*="' + sku + '"]');
+      if (idx >= 0) { list.splice(idx, 1); if(btn) { btn.classList.remove('active'); showToast('已取消收藏'); } }
+      else { list.push(sku); if(btn) { btn.classList.add('active'); showToast('收藏成功'); } }
+      setFavorites(list);
+      if (document.querySelector('#sidebar .cat-active')?.dataset.cat === '我的收藏') renderFavoriteView();
+    }
+    function renderFavoriteView() {
+      const list = getFavorites();
+      document.querySelectorAll('.product-item').forEach(el => el.classList.toggle('hide', list.indexOf(el.dataset.sku) < 0));
+      if (list.length === 0) showToast('暂无收藏商品');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const favs = getFavorites();
+      document.querySelectorAll('.fav-btn').forEach(btn => {
+        const sku = btn.getAttribute('data-page-node-id').replace('fav-','');
+        if (favs.indexOf(sku) >= 0) btn.classList.add('active');
+      });
+      document.querySelectorAll('.product-item').forEach(c => updateCardState(c.dataset.sku));
+      updateOrderBar();
+    });
+  </script>
+
+  </div>
+</body>
+</html>
