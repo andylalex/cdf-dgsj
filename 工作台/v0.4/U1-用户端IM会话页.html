@@ -243,8 +243,19 @@
 </style></head>
 <body class="bg-gray-100" data-page-node-id="U1NewBody" style="">
   <div class="phone-frame shadow-2xl overflow-hidden flex flex-col" data-page-node-id="U1NewFrame">
+<!-- 状态栏 -->
+<div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0">
+  <span class="text-[14px] font-semibold tracking-tight">9:41</span>
+  <div class="flex items-center gap-1.5 text-black">
+    <span class="text-[10px] font-semibold">5G</span>
+    <i class="fas fa-signal text-[11px]"></i>
+    <i class="fas fa-wifi text-[11px]"></i>
+    <i class="fas fa-battery-three-quarters text-[15px]"></i>
+  </div>
+</div>
+
 <!-- 顶部 -->
-    <div class="bg-white px-4 pt-12 pb-3 border-b border-gray-100 flex items-center justify-between shrink-0" data-page-node-id="U1Header">
+    <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0" data-page-node-id="U1Header">
       <div class="flex items-center gap-3" data-page-node-id="U1HeaderLeft">
         <button class="p-2 hover:bg-gray-100 rounded-full transition" data-page-node-id="U1Back">
           <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="HGuyrzrRWjb3INltlJzl3K"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" data-page-node-id="Waqm6Y4HA8ohNRigtmQkNg"></path></svg>
@@ -305,7 +316,6 @@
                 <i class="fas fa-clipboard-list text-coral-500 text-[15px]" data-page-node-id="U1PendingIcon"></i>
                 <span class="font-semibold text-[14px] text-gray-900" data-page-node-id="U1PendingTitle">导购为您挑选的购物清单</span>
               </div>
-              <span id="pOrderTime" class="text-[11px] text-gray-400" data-page-node-id="U1PendingTime">刚刚</span>
             </div>
             <div class="p-3.5" data-page-node-id="U1PendingBody">
               <div id="pOrderItems" class="mb-3" data-page-node-id="U1PendingItems"></div>
@@ -333,8 +343,8 @@
           <i class="fas fa-clipboard-list text-[19px]"></i>
           <span id="U1ListBadge" class="hidden absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-coral-500 text-white text-[10px] leading-4 text-center" data-page-node-id="U1ListBadge">0</span>
         </button>
-        <button class="p-2 text-gray-400 hover:text-coral-500 transition" data-page-node-id="U1EmojiBtn">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="WBhZ8zMMHjMcEGkeNoS6WE"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-page-node-id="3Ix77I2CeUTe1x7HwGjxVd"></path></svg>
+        <button onclick="sendImage()" class="p-2 text-gray-400 hover:text-coral-500 transition" data-page-node-id="U1ImageBtn">
+          <i class="fas fa-image text-[19px]" data-page-node-id="U1ImageIcon"></i>
         </button>
         <div class="flex-1 bg-gray-100 rounded-full px-4 py-2.5" data-page-node-id="U1InputWrap">
           <input type="text" placeholder="回复导购..." class="w-full bg-transparent text-sm outline-none text-gray-700" data-page-node-id="U1Input">
@@ -346,18 +356,56 @@
     </div>
   </div>
 
+  <!-- 图片发送：隐藏的文件选择器 -->
+  <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="onImageSelected(this)">
+
   <script>
     var DEMO_ORDER = {
       id: 'DD20260903001',
       time: '14:52',
       items: [
-        { name: '浪凡光韵女士浓香水 50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', sourceLabel: '门店库存' },
-        { name: '迪奥真我香水 EDT 100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', sourceLabel: '门店库存' }
+        { name: '浪凡光韵女士浓香水', price: 394.00, qty: 1, img: 'assets/generated/product1.png', sourceLabel: '门店库存', spec: '50ml' },
+        { name: '迪奥真我香水 EDT', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', sourceLabel: '门店库存', spec: '100ml' }
       ]
     };
 
     function formatMoney(num) {
       return num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function nowTime() {
+      var d = new Date();
+      var h = ('0' + d.getHours()).slice(-2);
+      var m = ('0' + d.getMinutes()).slice(-2);
+      return h + ':' + m;
+    }
+    function sendImage() {
+      var input = document.getElementById('imageInput');
+      if (input) input.click();
+    }
+    function onImageSelected(input) {
+      var file = input.files && input.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var url = e.target.result;
+        var chat = document.getElementById('chat');
+        if (!chat) return;
+        var wrap = document.createElement('div');
+        wrap.className = 'flex gap-2.5 flex-row-reverse';
+        wrap.innerHTML =
+          '<img src="assets/avatars/chen.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src=\'assets/avatars/_default.svg\'">' +
+          '<div class="max-w-[80%]">' +
+            '<div class="bg-white msg-bubble shadow-md p-1.5 border border-gray-100">' +
+              '<img src="' + url + '" class="rounded-lg w-[180px] h-auto object-cover" alt="图片">' +
+            '</div>' +
+            '<span class="text-[10px] text-gray-400 mt-1 mr-1 text-right block">' + nowTime() + '</span>' +
+          '</div>';
+        chat.appendChild(wrap);
+        chat.scrollTop = chat.scrollHeight;
+      };
+      reader.readAsDataURL(file);
+      input.value = '';
     }
 
     function currentOrder() {
@@ -368,11 +416,9 @@
       return DEMO_ORDER;
     }
 
-    function renderPendingOrder() {
-      var order = currentOrder();
-      var t = document.getElementById('pOrderTime');
-      if (t) t.textContent = order.time || '刚刚';
-      var wrap = document.getElementById('pOrderItems');
+      function renderPendingOrder() {
+        var order = currentOrder();
+        var wrap = document.getElementById('pOrderItems');
       var shown = order.items.slice(0, 3);
       var s = shown.map(function(it) {
         var qty = it.qty || 1;
@@ -381,11 +427,10 @@
           '<img src="' + (it.img || 'assets/generated/product1.png') + '" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility=\'hidden\'">' +
           '<div class="flex-1 min-w-0">' +
             '<p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">' + it.name + '</p>' +
-            '<p class="text-[11px] text-gray-400 mt-0.5">' + (it.sourceLabel || '门店库存') + (it.spec ? ' · ' + it.spec : '') + '</p>' +
+            (it.spec ? '<p class="text-[11px] text-gray-400 mt-0.5">' + it.spec + '</p>' : '') +
           '</div>' +
           '<div class="text-right shrink-0">' +
-            '<p class="text-[13px] font-semibold text-gray-900 leading-tight">¥' + formatMoney(unit) + ' × ' + qty + '</p>' +
-            '<p class="text-[12px] font-bold text-coral-600 leading-tight mt-0.5">¥' + formatMoney(unit * qty) + '</p>' +
+            '<p class="text-[13px] font-semibold text-gray-900 leading-tight">¥' + formatMoney(unit) + '</p>' +
           '</div>' +
         '</div>';
       }).join('');
