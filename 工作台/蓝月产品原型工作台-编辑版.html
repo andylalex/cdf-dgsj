@@ -1015,6 +1015,20 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   </div>
 </div>
 
+<div class="ed-modal" id="navExportModal">
+  <div class="ed-card" style="width:min(760px,100%)">
+    <h3>导出左导航数据（nav-data.js）</h3>
+    <p class="ed-sub">已生成含全部原型与导入内容的 nav-data.js。复制全文后发给我（或保存为 工作台/nav-data.js），即可同步到 GitHub 与所有浏览器，不再依赖本地缓存。</p>
+    <div class="ed-row"><textarea id="navExportText" readonly style="height:320px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;line-height:1.45"></textarea></div>
+    <div class="ed-foot">
+      <button class="ed-btn primary" id="navCopyBtn">复制全文</button>
+      <button class="ed-btn" id="navDownloadBtn">仍下载文件</button>
+      <span class="sp"></span>
+      <button class="ed-btn" id="navExportClose">关闭</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast" data-page-node-id="nYDdJ735lVkFrieBAMC6Eg">已载入本地编辑数据</div>
 
 <script src="prototypes-data.js"></script>
@@ -2332,10 +2346,20 @@ function edExportNavData(){
     var nav={cats:(window.ED.cats||[]).slice(),protos:protos,content:content};
     var text='/* 左导航数据文件（由编辑版「导出左导航数据」自动生成；随 GitHub 推送后新访客可见，不依赖浏览器本地缓存） */\n'
             +'window.NAV_DATA='+JSON.stringify(nav,null,2)+';\n';
-    downloadText('nav-data.js',text);
-    showToast('已生成 nav-data.js（含 '+protos.length+' 个原型），请保存到 产物/工作台/ 后重新推送 GitHub');
+    $('navExportText').value=text;
+    $('navExportModal').classList.add('show');
   }catch(e){ showToast('导出左导航数据失败：'+e.message); }
 }
+function navExportCopy(){
+  var t=$('navExportText').value;
+  var ok=function(){ showToast('已复制 nav-data.js 全文，请粘贴给我'); };
+  var fb=function(){
+    try{ var ta=$('navExportText'); ta.removeAttribute('readonly'); ta.select(); ta.setSelectionRange(0,ta.value.length); document.execCommand('copy'); ta.setAttribute('readonly',''); ok(); }
+    catch(e){ showToast('复制失败，请手动全选复制'); }
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(ok,fb); } else fb();
+}
+function navExportHide(){ var m=$('navExportModal'); if(m) m.classList.remove('show'); }
 function edExportImportedData(){
   try{
     var protos=PROTOTYPES.filter(function(p){return p&&p.__imported;}).map(function(p){
@@ -3063,6 +3087,10 @@ function edBind(){
   $('catAdd').addEventListener('click',function(){ edCatAdd($('catNewName').value); $('catNewName').value=''; });
   $('exportImportBtn').addEventListener('click',edExportImportedData);
   $('exportNavBtn').addEventListener('click',edExportNavData);
+  $('navCopyBtn').addEventListener('click',navExportCopy);
+  $('navDownloadBtn').addEventListener('click',function(){ downloadText('nav-data.js',$('navExportText').value); showToast('已触发下载 nav-data.js'); });
+  $('navExportClose').addEventListener('click',navExportHide);
+  $('navExportModal').addEventListener('click',function(e){ if(e.target===this) navExportHide(); });
   $('impConfirm').addEventListener('click',edConfirmImport);
   $('impCancel').addEventListener('click',closeImpModal);
   $('impCat').addEventListener('change',function(){ $('impCatNew').style.display=(this.value==='__new__')?'block':'none'; });
