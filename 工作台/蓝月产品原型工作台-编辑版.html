@@ -2441,7 +2441,12 @@ function edApplyNavData(){
   PROTOTYPES.length=0;
   nd.protos.forEach(function(sp){
     var base=v03[sp.id];
-    if(base){ PROTOTYPES.push(base); return; }
+    if(base){
+      var np={}; for(var k in base) np[k]=base[k];
+      if(sp.group!==undefined) np.group=sp.group;
+      if(sp.name!==undefined) np.name=sp.name;
+      PROTOTYPES.push(np); return;
+    }
     if(!sp.__imported)return;
     var np={id:sp.id,name:sp.name,group:sp.group,device:sp.device,kind:sp.kind,__imported:true,hotspots:sp.hotspots||[]};
     var it=nd.content&&nd.content[sp.id];
