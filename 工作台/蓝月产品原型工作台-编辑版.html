@@ -220,10 +220,12 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .legend-dot.fi{background:var(--c-field);box-shadow:0 0 7px var(--c-field)}
 .stage{
   flex:1;overflow:auto;min-height:0;position:relative;
+  scrollbar-width:none;-ms-overflow-style:none;
   background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);
   background-size:22px 22px;
   display:flex;align-items:flex-start;justify-content:center;padding:34px 28px;
 }
+.stage::-webkit-scrollbar{width:0;height:0;display:none}
 /* 页面切换 · 蓝月 logo 过渡遮罩（在设备框内） */
 .page-transition{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;
   background:radial-gradient(circle at 50% 46%, #183455 0%, #0c1424 56%, #070b14 100%);
