@@ -834,6 +834,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
           <button class="mng-act" id="catManageBtn" title="新增 / 重命名 / 删除分类，拖拽排序"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3H4v5.59A2 2 0 0 0 4.59 10l9.58 9.59a2 2 0 0 0 2.83 0l3.59-3.59a2 2 0 0 0 0-2.59z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>分类管理</button>
           <button class="mng-act" id="exportNavBtn" title="把当前左导航（含导入原型/分类/顺序）导出为静态数据文件 nav-data.js；保存到工作台目录推送 GitHub 后，所有浏览器看到一致的左导航，不依赖本地缓存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>导出左导航数据</span></button>
   <button class="mng-act" id="exportImportBtn" title="把当前导入的原型导出为静态文件 imported-prototypes.js，保存到工作台目录后推送 GitHub 即可让他人看到（不依赖本地缓存）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>导出导入数据</button>
+  <button class="mng-act" id="exportProtoBtn" title="把当前原型数据（srcdoc / 标注 / PRD）导出为静态文件 prototypes-data.js，保存到工作台目录后推送 GitHub 即生效"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>导出原型数据</span></button>
         </div>
       </div>
       <input type="file" id="importFile" accept=".html,text/html,image/*" multiple style="display:none">
@@ -1031,6 +1032,20 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
       <button class="ed-btn" id="navDownloadBtn">仍下载文件</button>
       <span class="sp"></span>
       <button class="ed-btn" id="navExportClose">关闭</button>
+    </div>
+  </div>
+</div>
+<div class="ed-modal" id="protoExportModal">
+  <div class="ed-card" style="width:min(760px,100%)">
+    <h3>导出原型数据（prototypes-data.js）</h3>
+    <p class="ed-sub">已生成含全部内置原型 srcdoc / 标注 / PRD 的原型数据文件 prototypes-data.js。<b>桌面 Chrome/Edge</b> 可点「保存到本地 prototypes-data.js」直接写文件（纯前端、无需后台）；鸿蒙/其他浏览器该按钮会自动隐藏，请改用「复制全文」发给我落盘。文件更新后部署 GitHub 即生效。</p>
+    <div class="ed-row"><textarea id="protoExportText" readonly style="height:320px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;line-height:1.45"></textarea></div>
+    <div class="ed-foot">
+      <button class="ed-btn primary" id="protoCopyBtn">复制全文</button>
+      <button class="ed-btn" id="protoSaveFileBtn">保存到本地 prototypes-data.js</button>
+      <button class="ed-btn" id="protoDownloadBtn">仍下载文件</button>
+      <span class="sp"></span>
+      <button class="ed-btn" id="protoExportClose">关闭</button>
     </div>
   </div>
 </div>
@@ -2397,6 +2412,52 @@ function navExportCopy(){
   if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(ok,fb); } else fb();
 }
 function navExportHide(){ var m=$('navExportModal'); if(m) m.classList.remove('show'); }
+/* ---------- 原型数据导出：把当前内存 PROTOTYPES（内置原型的 srcdoc / 标注 / PRD 等）序列化为 prototypes-data.js ---------- */
+function edBuildProtoText(){
+  var rows=[];
+  PROTOTYPES.forEach(function(p){
+    if(p.__imported) return; /* 导入原型不进 prototypes-data.js（其数据走 imported-prototypes.js / nav-data.js content） */
+    var o={};
+    ['id','group','name','device','url','srcdoc','status','version','owner','updated','overview','flow','states','hotspots','note'].forEach(function(k){ if(p[k]!==undefined) o[k]=p[k]; });
+    rows.push(o);
+  });
+  var v04={};
+  rows.forEach(function(o){ var key=(o.id||'').toUpperCase().replace(/^V04-/,''); v04[key]={url:o.url,device:o.device,group:o.group}; });
+  var esc=function(s){ return String(s).replace(/<\/script>/gi,'<\\/script>'); };
+  var json=esc(JSON.stringify(rows,null,2));
+  var v04json=esc(JSON.stringify(v04,null,2));
+  return '/* 原型数据（由编辑版「导出原型数据」自动生成；HTML 通过 <script src="prototypes-data.js"><\/script> 加载）\n'
+    + '   修改数据保存后即可生效，无需再合并回 HTML。 */\n\n'
+    + 'const PROTOTYPES=[];\n\n'
+    + '/* ---------- v0.4 门店导购升级原型包（本地文件） ---------- */\n'
+    + 'const V04='+v04json+';\n\n'
+    + 'const PROTOTYPES_V03='+json+';\n\n'
+    + 'PROTOTYPES.push.apply(PROTOTYPES, PROTOTYPES_V03);\n';
+}
+function edExportProtoData(){
+  try{ var text=edBuildProtoText(); $('protoExportText').value=text; $('protoExportModal').classList.add('show'); }
+  catch(e){ showToast('导出原型数据失败：'+e.message); }
+}
+function protoExportCopy(){
+  var t=$('protoExportText').value;
+  var ok=function(){ showToast('已复制 prototypes-data.js 全文，请粘贴给我'); };
+  var fb=function(){ try{ var ta=$('protoExportText'); ta.removeAttribute('readonly'); ta.select(); ta.setSelectionRange(0,ta.value.length); document.execCommand('copy'); ta.setAttribute('readonly',''); ok(); }catch(e){ showToast('复制失败，请手动全选复制'); } };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(ok,fb); } else fb();
+}
+function protoExportHide(){ var m=$('protoExportModal'); if(m) m.classList.remove('show'); }
+/* 纯前端、无后台写本地文件：仅桌面 Chrome/Edge 的 File System Access API 支持。
+   用户点击后弹出文件选择器，选 工作台/prototypes-data.js 即写入最新内容；鸿蒙/移动端无此 API 会隐藏按钮。 */
+async function edSaveProtoLocal(){
+  if(!('showSaveFilePicker' in window)){ showToast('当前浏览器不支持直接写文件，请改用「复制全文」'); return; }
+  try{
+    var text=edBuildProtoText();
+    var handle=await window.showSaveFilePicker({suggestedName:'prototypes-data.js',types:[{description:'JavaScript',accept:{'text/javascript':['.js']}}]});
+    var w=await handle.createWritable();
+    await w.write(text);
+    await w.close();
+    showToast('已写入本地 prototypes-data.js（还需部署到 GitHub 才会让所有人看到）');
+  }catch(e){ if(e&&e.name!=='AbortError') showToast('保存失败：'+e.message); }
+}
 /* 纯前端、无后台写本地文件：仅桌面 Chrome/Edge 的 File System Access API 支持。
    用户点击后弹出文件选择器，选 工作台/nav-data.js 即写入最新内容；鸿蒙/移动端无此 API 会隐藏按钮。 */
 async function edSaveNavLocal(){
@@ -2984,8 +3045,10 @@ function renderCatManager(){
   (window.ED.cats||[]).forEach(function(g){
     var cnt=edCatCount(g);
     var row=document.createElement('div');
+    var orderIdx=(window.ED.cats||[]).indexOf(g)+1;
     row.className='cat-row'; row.draggable=true; row.dataset.cat=g;
     row.innerHTML='<div class="cat-line"><div class="cat-name">'+escapeHtml(g)+' <span class="cat-cnt">'+cnt+' 个</span></div>'+
+      '<label class="cat-ord" style="display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#8a8a8a;margin-right:8px">排序<input type="number" class="cat-order" data-cat="'+escapeHtml(g)+'" value="'+orderIdx+'" min="1" step="1" style="width:50px;padding:2px 4px;border:1px solid #ddd;border-radius:6px;font-size:12px"></label>'+
       '<div class="cat-acts"><button class="cat-btn" data-act="rename">重命名</button>'+
       (g===UNCAT?'<button class="cat-btn" disabled style="opacity:.4">删除</button>':'<button class="cat-btn danger" data-act="delete">删除</button>')+
       '</div></div>';
@@ -2996,8 +3059,24 @@ function renderCatManager(){
     row.querySelector('[data-act="rename"]').addEventListener('click',function(){ edCatRenameInline(g,row); });
     var del=row.querySelector('[data-act="delete"]');
     if(del)del.addEventListener('click',function(){ edCatDelete(g); });
+    var oi=row.querySelector('.cat-order');
+    if(oi)oi.addEventListener('change',function(){ edSetCatOrder(); });
     list.appendChild(row);
   });
+}
+function edSetCatOrder(){
+  var list=$('catList'); if(!list)return;
+  var rows=Array.prototype.slice.call(list.querySelectorAll('.cat-row'));
+  if(!rows.length)return;
+  var arr=rows.map(function(row){
+    var g=row.dataset.cat;
+    var inp=row.querySelector('.cat-order');
+    var v=inp?parseInt(inp.value,10):0; if(isNaN(v))v=0;
+    return {g:g,v:v,old:window.ED.cats.indexOf(g)};
+  }).sort(function(a,b){ return (a.v-b.v)||(a.old-b.old); });
+  window.ED.cats=arr.map(function(x){return x.g;});
+  edSaveAll(); edPersistNav(); renderCatManager(); renderSidebar();
+  showToast('已调整分类顺序');
 }
 function edCatRenameInline(g,row){
   var nameEl=row.querySelector('.cat-name'); if(!nameEl)return;
@@ -3113,6 +3192,13 @@ function edBind(){
   $('catAdd').addEventListener('click',function(){ edCatAdd($('catNewName').value); $('catNewName').value=''; });
   $('exportImportBtn').addEventListener('click',edExportImportedData);
   $('exportNavBtn').addEventListener('click',edExportNavData);
+  $('exportProtoBtn').addEventListener('click',edExportProtoData);
+  $('protoCopyBtn').addEventListener('click',protoExportCopy);
+  $('protoSaveFileBtn').addEventListener('click',edSaveProtoLocal);
+  if(!('showSaveFilePicker' in window)){ var _p=$('protoSaveFileBtn'); if(_p)_p.style.display='none'; }
+  $('protoDownloadBtn').addEventListener('click',function(){ downloadText('prototypes-data.js',$('protoExportText').value); showToast('已触发下载 prototypes-data.js'); });
+  $('protoExportClose').addEventListener('click',protoExportHide);
+  $('protoExportModal').addEventListener('click',function(e){ if(e.target===this) protoExportHide(); });
   $('navCopyBtn').addEventListener('click',navExportCopy);
   $('navSaveFileBtn').addEventListener('click',edSaveNavLocal);
   /* 不支持 File System Access API 的浏览器隐藏「保存到本地」按钮（如鸿蒙内置浏览器） */
