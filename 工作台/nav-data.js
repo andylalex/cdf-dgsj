@@ -1,10 +1,9 @@
 /* 左导航数据文件（由编辑版自动生成；本地 serve.py 写回 工作台/nav-data.js，index 与编辑版均读取此文件） */
 window.NAV_DATA={
   "cats": [
+    "用户端 · CDF海南免税",
     "导购端 · 繁星APP",
-    "PC · 繁星后台",
-    "管理后台 · PC",
-    "用户端 · CDF海南免税"
+    "管理后台 · PC"
   ],
   "protos": [
     {
@@ -42,6 +41,13 @@ window.NAV_DATA={
       "__imported": false
     },
     {
+      "id": "v04-u6",
+      "name": "U6 购物清单页",
+      "group": "用户端 · CDF海南免税",
+      "device": "mobile",
+      "__imported": false
+    },
+    {
       "id": "v04-u4",
       "name": "U4 用户订单确认页",
       "group": "用户端 · CDF海南免税",
@@ -51,13 +57,6 @@ window.NAV_DATA={
     {
       "id": "v04-u5",
       "name": "U5 行程核验页",
-      "group": "用户端 · CDF海南免税",
-      "device": "mobile",
-      "__imported": false
-    },
-    {
-      "id": "v04-u6",
-      "name": "U6 购物清单页",
       "group": "用户端 · CDF海南免税",
       "device": "mobile",
       "__imported": false
