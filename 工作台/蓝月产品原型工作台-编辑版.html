@@ -304,11 +304,13 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   transform:translate(-50%,-50%);
 }
 .hs-pin{
-  width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  width:24px;height:24px;border-radius:9999px 9999px 9999px 0;display:grid;place-items:center;
   background:var(--pin-bg);border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.18),0 0 14px var(--pin-glow);
   font-family:var(--mono);font-size:10px;font-weight:700;color:#0B0E14;
   transition:transform .16s;position:relative;z-index:3;
+  transform:rotate(var(--pin-rot,0deg));
 }
+.hs-pin-num{display:grid;place-items:center;width:100%;height:100%;transform:rotate(calc(-1 * var(--pin-rot,0deg)))}
 .hs-num-input{
   width:18px;height:16px;padding:0 1px;border:0;outline:none;border-radius:4px;
   background:#fff;color:#0B0E14;font-family:var(--mono);font-size:10px;font-weight:700;text-align:center;position:relative;z-index:2;
@@ -318,24 +320,14 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   content:"";position:absolute;inset:-5px;border-radius:50%;
   border:2px solid var(--pin-glow);animation:pinPulse 2.1s ease-out infinite;pointer-events:none;
 }
-/* 三层同心箭头：绿(绿圆22px)/白(白圈26px)/灰(灰线32px)，各自高≈0.34×圆圈直径，方向由 JS 设 --arrow-rot */
-.arr{position:absolute;top:50%;left:50%;width:0;height:0;pointer-events:none;transform-origin:center center}
-.arr-gray{border-left:8px solid transparent;border-right:8px solid transparent;border-top:11px solid rgba(15,23,42,.55);
-  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(19px);z-index:1;
-  filter:drop-shadow(0 0 1px rgba(255,255,255,.6))}
-.arr-white{border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid #fff;
-  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(16px);z-index:2;
-  filter:drop-shadow(0 0 1px rgba(0,0,0,.45))}
-.arr-green{border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid var(--pin-bg);
-  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(14px);z-index:4;
-  filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+/* 标注圆圈：朝向被标注区域的角为方角，充当箭头（无三角形/引线） */
 @keyframes pinPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}
-.hs:hover .hs-pin,.hs.hover .hs-pin{transform:scale(1.22)}
+.hs:hover .hs-pin,.hs.hover .hs-pin{transform:rotate(var(--pin-rot,0deg)) scale(1.22)}
 .hs[data-type=element]{--pin-bg:var(--c-element);--pin-glow:var(--c-element)}
 .hs[data-type=rule]{--pin-bg:var(--c-rule);--pin-glow:var(--c-rule)}
 .hs[data-type=field]{--pin-bg:var(--c-field);--pin-glow:var(--c-field)}
 .hs.dim{opacity:.22}
-.hs.hover .hs-pin,.hs.sel .hs-pin{transform:scale(1.3)}
+.hs.hover .hs-pin,.hs.sel .hs-pin{transform:rotate(var(--pin-rot,0deg)) scale(1.3)}
 .hs.sel .hs-pin::after{animation-duration:.9s;border-width:3px}
 .hidden-annotations .hs{display:none}
 
@@ -1721,12 +1713,11 @@ function renderHotspots(){
     el.className='hs';el.dataset.id=h.id;el.dataset.type=h.type;
     el.style.left=anchor.x+'px';el.style.top=anchor.y+'px';
     const dnum=(h.num!=null&&h.num!=='')?h.num:(i+1);
-    el.innerHTML='<div class="arr arr-gray"></div><div class="arr arr-white"></div>'
-      +'<div class="hs-pin" title="点击修改标注编号">'+dnum+'</div>'
-      +'<div class="arr arr-green"></div>';
+    el.innerHTML='<div class="hs-pin" title="点击修改标注编号"><span class="hs-pin-num">'+dnum+'</span></div>';
     var pin=el.querySelector('.hs-pin');
+    /* 标注圆圈本身朝向区域的角为方角，充当箭头：旋转让左下(BL)方角指向区域中心 */
     var _dx=pos.x-anchor.x, _dy=pos.y-anchor.y;
-    el.style.setProperty('--arrow-rot',(Math.atan2(-_dx,_dy)*180/Math.PI).toFixed(1)+'deg');
+    el.style.setProperty('--pin-rot',(Math.atan2(-_dx,_dy)*180/Math.PI - 45).toFixed(1)+'deg');
     pin.addEventListener('click',ev=>{ev.stopPropagation();edEditPinNum(h.id);});
     el.addEventListener('mouseenter',()=>hoverLinked(h.id,true));
     el.addEventListener('mouseleave',()=>hoverLinked(h.id,false));
