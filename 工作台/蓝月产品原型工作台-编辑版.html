@@ -307,7 +307,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
   background:var(--pin-bg);border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.18),0 0 14px var(--pin-glow);
   font-family:var(--mono);font-size:10px;font-weight:700;color:#0B0E14;
-  transition:transform .16s;position:relative;
+  transition:transform .16s;position:relative;z-index:3;
 }
 .hs-num-input{
   width:18px;height:16px;padding:0 1px;border:0;outline:none;border-radius:4px;
@@ -318,17 +318,17 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   content:"";position:absolute;inset:-5px;border-radius:50%;
   border:2px solid var(--pin-glow);animation:pinPulse 2.1s ease-out infinite;pointer-events:none;
 }
-/* 圆圈边缘伸出的小箭头，始终指向被标注的元素区域（方向由 JS 设 --arrow-rot） */
-.hs-pin::before{
-  content:"";position:absolute;top:50%;left:50%;
-  width:0;height:0;
-  border-left:5px solid transparent;
-  border-right:5px solid transparent;
-  border-top:7px solid var(--pin-bg);
-  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(14px);
-  pointer-events:none;
-  filter:drop-shadow(0 1px 1px rgba(0,0,0,.18));
-}
+/* 三层同心箭头：绿(绿圆22px)/白(白圈26px)/灰(灰线32px)，各自高≈0.34×圆圈直径，方向由 JS 设 --arrow-rot */
+.arr{position:absolute;top:50%;left:50%;width:0;height:0;pointer-events:none;transform-origin:center center}
+.arr-gray{border-left:8px solid transparent;border-right:8px solid transparent;border-top:11px solid rgba(15,23,42,.55);
+  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(19px);z-index:1;
+  filter:drop-shadow(0 0 1px rgba(255,255,255,.6))}
+.arr-white{border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid #fff;
+  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(16px);z-index:2;
+  filter:drop-shadow(0 0 1px rgba(0,0,0,.45))}
+.arr-green{border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid var(--pin-bg);
+  transform:translate(-50%,-50%) rotate(var(--arrow-rot,0deg)) translateY(14px);z-index:4;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
 @keyframes pinPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}
 .hs:hover .hs-pin,.hs.hover .hs-pin{transform:scale(1.22)}
 .hs[data-type=element]{--pin-bg:var(--c-element);--pin-glow:var(--c-element)}
@@ -1721,10 +1721,12 @@ function renderHotspots(){
     el.className='hs';el.dataset.id=h.id;el.dataset.type=h.type;
     el.style.left=anchor.x+'px';el.style.top=anchor.y+'px';
     const dnum=(h.num!=null&&h.num!=='')?h.num:(i+1);
-    el.innerHTML='<div class="hs-pin" title="点击修改标注编号">'+dnum+'</div>';
+    el.innerHTML='<div class="arr arr-gray"></div><div class="arr arr-white"></div>'
+      +'<div class="hs-pin" title="点击修改标注编号">'+dnum+'</div>'
+      +'<div class="arr arr-green"></div>';
     var pin=el.querySelector('.hs-pin');
     var _dx=pos.x-anchor.x, _dy=pos.y-anchor.y;
-    pin.style.setProperty('--arrow-rot',(Math.atan2(-_dx,_dy)*180/Math.PI).toFixed(1)+'deg');
+    el.style.setProperty('--arrow-rot',(Math.atan2(-_dx,_dy)*180/Math.PI).toFixed(1)+'deg');
     pin.addEventListener('click',ev=>{ev.stopPropagation();edEditPinNum(h.id);});
     el.addEventListener('mouseenter',()=>hoverLinked(h.id,true));
     el.addEventListener('mouseleave',()=>hoverLinked(h.id,false));
