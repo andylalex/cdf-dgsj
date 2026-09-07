@@ -28,7 +28,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8848
 
 # 仅允许写回这两个数据文件，且必须通过白名单（basename），杜绝路径穿越
-ALLOWED_SAVE = {"prototypes-data.js"}
+ALLOWED_SAVE = {"prototypes-data.js", "nav-data.js"}
 IMPORTED_MARKER = "/* ===== 导入原型（编辑版"
 EDITS_MARKER = "/* ===== 左导航结构（编辑版"
 
@@ -124,6 +124,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     f.write(cur)
                 self._json(200, {"ok": True, "imported": len(imported) if imported else 0, "edits": 1 if edits is not None else 0})
             except Exception as e:  # noqa
+                self._json(500, {"ok": False, "msg": str(e)})
+            return
+        if path == "/api/save-nav":
+            try:
+                length = int(self.headers.get("Content-Length", 0) or 0)
+                raw = self.rfile.read(length) if length else b""
+                data = json.loads(raw.decode("utf-8"))
+                fn = data.get("file", "")
+                if fn not in ALLOWED_SAVE:
+                    self._json(400, {"ok": False, "msg": "不允许写入该文件：" + fn})
+                    return
+                target = os.path.join(ROOT, fn)
+                abs_target = os.path.abspath(target)
+                abs_root = os.path.abspath(ROOT)
+                if abs_target != os.path.join(abs_root, fn):
+                    self._json(400, {"ok": False, "msg": "非法路径"})
+                    return
+                text = data.get("text", "")
+                if not text.strip().startswith("window.NAV_DATA"):
+                    self._json(400, {"ok": False, "msg": "内容校验失败（必须以 window.NAV_DATA 开头）"})
+                    return
+                with open(target, "w", encoding="utf-8") as f:
+                    f.write(text)
+                self._json(200, {"ok": True, "bytes": len(text)})
+            except Exception as e:
                 self._json(500, {"ok": False, "msg": str(e)})
             return
         self.send_error(405)

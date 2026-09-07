@@ -182,6 +182,11 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .side-item.manage{cursor:default;-webkit-user-select:none;user-select:none}
 .side-item.manage .si-drag{display:flex}
 .side-item.manage .si-drag:active{cursor:grabbing}
+/* 管理模式：分类下拉 + 排序值编辑控件（替代拖拽） */
+.side-item.manage .si-edit{display:flex;gap:6px;align-items:center;margin-top:5px;flex-wrap:wrap}
+.side-item.manage .si-cat{flex:1;min-width:84px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,#e5e7eb);border-radius:6px;background:#fff;color:var(--text-1,#1f2937);max-width:160px}
+.side-item.manage .si-ord{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--text-3,#6b7280);white-space:nowrap}
+.side-item.manage .si-order{width:48px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,#e5e7eb);border-radius:6px;background:#fff;color:var(--text-1,#1f2937)}
 .side-item.dragging{opacity:.45;background:rgba(56,189,248,.08);border-color:#38BDF8!important;pointer-events:none}
 /* 拖拽位置提示线：固定蓝色，不依赖 CSS 变量，规避未定义导致不可见 */
 .side-item.drop-before,.side-item.drop-after{position:relative;background:rgba(56,189,248,.12)}
@@ -1018,10 +1023,11 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 <div class="ed-modal" id="navExportModal">
   <div class="ed-card" style="width:min(760px,100%)">
     <h3>导出左导航数据（nav-data.js）</h3>
-    <p class="ed-sub">已生成含全部原型与导入内容的 nav-data.js。复制全文后发给我（或保存为 工作台/nav-data.js），即可同步到 GitHub 与所有浏览器，不再依赖本地缓存。</p>
+    <p class="ed-sub">已生成含全部原型与导入内容的 nav-data.js。<b>桌面 Chrome/Edge</b> 可点「保存到本地 nav-data.js」直接写文件（纯前端、无需后台）；鸿蒙/其他浏览器该按钮会自动隐藏，请改用「复制全文」发给我落盘。文件更新后再部署 GitHub，所有人即可看到，不再依赖本地缓存。</p>
     <div class="ed-row"><textarea id="navExportText" readonly style="height:320px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;line-height:1.45"></textarea></div>
     <div class="ed-foot">
       <button class="ed-btn primary" id="navCopyBtn">复制全文</button>
+      <button class="ed-btn" id="navSaveFileBtn">保存到本地 nav-data.js</button>
       <button class="ed-btn" id="navDownloadBtn">仍下载文件</button>
       <span class="sp"></span>
       <button class="ed-btn" id="navExportClose">关闭</button>
@@ -1127,11 +1133,20 @@ function renderSidebar(){
       const manage=window.ED&&window.ED.manage;
       const active=p.id===state.currentId?'active':'';
       const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>';
-      const grip='<span class="si-drag" title="拖拽调整排序（跨分组即改分类）"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></span>';
+      const catOpts=(window.ED&&Array.isArray(window.ED.cats)?window.ED.cats:[]).map(function(c){
+        return '<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===p.group?' selected':'')+'>'+c+'</option>';
+      }).join('');
+      const orderVal=PROTOTYPES.indexOf(p)+1;
       html+='<div class="side-item '+active+(manage?' manage':'')+'" data-id="'+p.id+'" data-group="'+p.group+'" role="button" tabindex="0">'+
-        (manage?grip:'')+
         '<span class="side-ico">'+icon+'</span>'+
-        '<span class="side-meta"><div class="side-name">'+p.name+'</div></span>'+
+        '<span class="side-meta"><div class="side-name">'+p.name+'</div>'+
+        (manage
+          ? '<div class="si-edit">'+
+              '<select class="si-cat" data-id="'+p.id+'" title="选择分类">'+catOpts+'</select>'+
+              '<label class="si-ord" title="排序值：数字越小越靠前（全局顺序）">排序<input type="number" class="si-order" data-id="'+p.id+'" value="'+orderVal+'" min="1" step="1"></label>'+
+            '</div>'
+          : '')+
+        '</span>'+
         (manage
           ? '<span class="si-acts">'+(p.__imported
               ? '<button class="si-dl" data-dl="'+p.id+'" title="下载该原型 HTML"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></button>'
@@ -1146,7 +1161,19 @@ function renderSidebar(){
   $('sideList').innerHTML=html;
   $('protoTotal').textContent=PROTOTYPES.length+' 个页面';
   document.querySelectorAll('.side-item').forEach(el=>{
-    el.addEventListener('click',e=>{ if(e.target.closest('.si-acts'))return; selectPrototype(el.dataset.id); });
+    el.addEventListener('click',e=>{ if(e.target.closest('.si-acts')||e.target.closest('.si-edit'))return; selectPrototype(el.dataset.id); });
+  });
+  document.querySelectorAll('.side-item.manage').forEach(function(el){
+    const id=el.dataset.id;
+    const sel=el.querySelector('.si-cat');
+    if(sel)sel.addEventListener('change',function(){ setProtoGroup(id, sel.value); renderSidebar(); showToast('已改分类：'+sel.value); });
+    const ord=el.querySelector('.si-order');
+    if(ord)ord.addEventListener('change',function(){
+      let n=parseInt(ord.value,10); if(isNaN(n)||n<1)n=1;
+      const ids=PROTOTYPES.map(p=>p.id); const cur=ids.indexOf(id);
+      if(cur<0)return; ids.splice(cur,1); n=Math.min(n,ids.length+1); ids.splice(n-1,0,id);
+      setProtoOrder(ids); renderSidebar(); showToast('已调整排序值');
+    });
   });
   if(window.ED&&window.ED.manage){ if(window.edBindSidebarDrag)window.edBindSidebarDrag(); } else { if(window.edUnbindSidebarDrag)window.edUnbindSidebarDrag(); }
 }
@@ -2296,6 +2323,7 @@ function edLoadAll(){
     if(d.imported){ window.ED.imported=Object.assign({}, window.ED.imported||{}, d.imported); }
     if(Array.isArray(d.cats)&&d.cats.length) window.ED.cats=d.cats.slice();
     var byId={}; PROTOTYPES.forEach(function(p){ byId[p.id]=p; });
+    var reordered=[];
     d.protos.forEach(function(sp){
       var p=byId[sp.id];
       if(!p){
@@ -2304,15 +2332,20 @@ function edLoadAll(){
           var it=d.imported&&d.imported[sp.id];
           if(np.kind==='image'){ if(it&&it.image)np.image=it.image; if(it&&it.images)np.images=(it.images||[]).slice(); }
           else { np.url=edBlobUrl(it&&it.content||sp.content||''); }
-          PROTOTYPES.push(np); byId[sp.id]=np;
-        }
-        return;
+          PROTOTYPES.push(np); byId[sp.id]=np; p=np;
+        } else { return; }
       }
       if(Array.isArray(sp.hotspots))p.hotspots=sp.hotspots;
       if(sp.overview)p.overview=sp.overview;
       if(sp.flow)p.flow=p.flow;
       if(sp.note!==undefined)p.note=sp.note;
+      if(sp.group!==undefined)p.group=sp.group;   /* 恢复分类改动（file:// 下的最终兜底） */
+      reordered.push(p);
     });
+    /* 按 localStorage 保存的顺序重排（仅当数量一致，避免误删原型） */
+    if(reordered.length===PROTOTYPES.length && reordered.length){
+      PROTOTYPES.length=0; reordered.forEach(function(p){ PROTOTYPES.push(p); });
+    }
     return true;
   }catch(e){ return false; }
 }
@@ -2329,26 +2362,30 @@ function downloadText(filename,text){
 }
 /* 把当前导入的原型（含 HTML content / 图片 dataURL）序列化为 imported-prototypes.js 并下载，
    用户将其保存到 产物/工作台/ 后推送 GitHub，即可让静态托管的新访客看到导入页面（不再只存本地缓存） */
+function edBuildNavText(){
+  var protos=PROTOTYPES.map(function(p){
+    var c={id:p.id,name:p.name,group:p.group,device:p.device,kind:p.kind,__imported:!!p.__imported};
+    if(p.__imported)c.hotspots=(p.hotspots||[]).map(function(h){return JSON.parse(JSON.stringify(h));});
+    return c;
+  });
+  var content={};
+  PROTOTYPES.forEach(function(p){
+    if(!p.__imported)return;
+    var it=window.ED.imported&&window.ED.imported[p.id];
+    if(p.kind==='image'){ content[p.id]={kind:'image',image:(it&&it.image)||p.image||null,images:(it&&it.images)||p.images||[]}; }
+    else { content[p.id]={kind:'html',content:(it&&it.content)||(p.content)||''}; }
+  });
+  var nav={cats:(window.ED.cats||[]).slice(),protos:protos,content:content};
+  return '/* 左导航数据文件（由编辑版自动生成；本地 serve.py 写回 工作台/nav-data.js，index 与编辑版均读取此文件） */\n'
+       + 'window.NAV_DATA='+JSON.stringify(nav,null,2)+';\n';
+}
+/* 自动落盘：任意改动（拖拽/导入/分类/排序/改名/删除）后把最新左导航写回本地 nav-data.js。
+   http 环境（经 serve.py 打开）直接写文件；file:// 环境浏览器无法写本地文件，降级弹窗复制。 */
+function edSaveNavFile(){ /* 已改为 localStorage 同步，不再经 serve.py 写文件；需固化到 nav-data.js 请用「导出左导航数据」按钮 */ }
+function navExportShow(text){ try{ $('navExportText').value=text; $('navExportModal').classList.add('show'); }catch(e){} }
 function edExportNavData(){
-  try{
-    var protos=PROTOTYPES.map(function(p){
-      var c={id:p.id,name:p.name,group:p.group,device:p.device,kind:p.kind,__imported:!!p.__imported};
-      if(p.__imported)c.hotspots=(p.hotspots||[]).map(function(h){return JSON.parse(JSON.stringify(h));});
-      return c;
-    });
-    var content={};
-    PROTOTYPES.forEach(function(p){
-      if(!p.__imported)return;
-      var it=window.ED.imported&&window.ED.imported[p.id];
-      if(p.kind==='image'){ content[p.id]={kind:'image',image:(it&&it.image)||p.image||null,images:(it&&it.images)||p.images||[]}; }
-      else { content[p.id]={kind:'html',content:(it&&it.content)||(p.content)||''}; }
-    });
-    var nav={cats:(window.ED.cats||[]).slice(),protos:protos,content:content};
-    var text='/* 左导航数据文件（由编辑版「导出左导航数据」自动生成；随 GitHub 推送后新访客可见，不依赖浏览器本地缓存） */\n'
-            +'window.NAV_DATA='+JSON.stringify(nav,null,2)+';\n';
-    $('navExportText').value=text;
-    $('navExportModal').classList.add('show');
-  }catch(e){ showToast('导出左导航数据失败：'+e.message); }
+  try{ navExportShow(edBuildNavText()); }
+  catch(e){ showToast('导出左导航数据失败：'+e.message); }
 }
 function navExportCopy(){
   var t=$('navExportText').value;
@@ -2360,6 +2397,19 @@ function navExportCopy(){
   if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(ok,fb); } else fb();
 }
 function navExportHide(){ var m=$('navExportModal'); if(m) m.classList.remove('show'); }
+/* 纯前端、无后台写本地文件：仅桌面 Chrome/Edge 的 File System Access API 支持。
+   用户点击后弹出文件选择器，选 工作台/nav-data.js 即写入最新内容；鸿蒙/移动端无此 API 会隐藏按钮。 */
+async function edSaveNavLocal(){
+  if(!('showSaveFilePicker' in window)){ showToast('当前浏览器不支持直接写文件，请改用「复制全文」'); return; }
+  try{
+    var text=edBuildNavText();
+    var handle=await window.showSaveFilePicker({suggestedName:'nav-data.js',types:[{description:'JavaScript',accept:{'text/javascript':['.js']}}]});
+    var w=await handle.createWritable();
+    await w.write(text);
+    await w.close();
+    showToast('已写入本地 nav-data.js（还需部署到 GitHub 才会让所有人看到）');
+  }catch(e){ if(e&&e.name!=='AbortError') showToast('保存失败：'+e.message); }
+}
 function edExportImportedData(){
   try{
     var protos=PROTOTYPES.filter(function(p){return p&&p.__imported;}).map(function(p){
@@ -2422,7 +2472,7 @@ window.edApplyImportedData=edApplyImportedData;
 function edApplyDataEdits(){
   if(typeof window.PROTOTYPES_EDITS==='undefined'||!window.PROTOTYPES_EDITS)return;
   var E=window.PROTOTYPES_EDITS;
-  if(E.cats&&Array.isArray(E.cats)&&E.cats.length){ window.ED.cats=E.cats.slice(); }
+  /* nav-data.js 已为唯一权威源：这里仅补足「旧双段里有、nav 里缺失」的导入原型，不再覆盖分类/顺序/分组 */
   if(E.protos&&Array.isArray(E.protos)){
     E.protos.forEach(function(m){
       if(!m||!m.id)return;
@@ -2434,15 +2484,8 @@ function edApplyDataEdits(){
           else { np.url=edBlobUrl((window.ED.imported[m.id]&&window.ED.imported[m.id].content)||''); }
           PROTOTYPES.push(np);
         }
-        return;
       }
-      if(m.name!==undefined)p.name=m.name;
-      if(m.group!==undefined)p.group=m.group;
-      if(m.device!==undefined)p.device=m.device;
-      p.__imported=!!m.__imported;
     });
-    var ids=E.protos.map(function(m){return m.id;});
-    if(typeof setProtoOrder==='function')setProtoOrder(ids);
   }
 }
 window.edApplyDataEdits=edApplyDataEdits;
@@ -2452,32 +2495,10 @@ window.edApplyDataEdits=edApplyDataEdits;
    同时写 localStorage 作为兜底 / 同浏览器实时同步。文件为权威源，编辑版与 index 均从这两段读取，
    达成「两侧读同一数据文件」。 */
 function edPersistNav(){
-  try{
-    var imported=PROTOTYPES.filter(function(p){return p&&p.__imported;}).map(function(p){
-      var c={id:p.id,name:p.name,group:p.group,device:p.device,kind:p.kind,__imported:true,
-             hotspots:(p.hotspots||[]).map(function(h){return JSON.parse(JSON.stringify(h));})};
-      var it=window.ED.imported[p.id];
-      if(p.kind==='image'){
-        if(it&&it.image)c.image=it.image; else if(p.image)c.image=p.image;
-        if(it&&it.images)c.images=it.images.slice(); else if(p.images)c.images=p.images.slice();
-      }else{
-        c.content=(it&&it.content)||(p.content)||'';
-      }
-      return c;
-    });
-    var cats=(window.ED&&Array.isArray(window.ED.cats))?window.ED.cats.slice():[];
-    var protos=PROTOTYPES.map(function(p){
-      return {id:p.id,name:p.name,group:p.group,device:p.device,kind:p.kind,__imported:!!p.__imported};
-    });
-    if(typeof fetch==='function'){
-      fetch('/api/save-data',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({file:'prototypes-data.js',imported:imported,edits:{cats:cats,protos:protos}})})
-        .then(function(r){ if(!r.ok)throw new Error('HTTP '+r.status); return r.json(); })
-        .then(function(d){ /* 写入成功，静默 */ })
-        .catch(function(){ /* 未连接本地服务，仅存本地 */ });
-    }
-  }catch(e){}
-  edSaveAll();
+  /* 左导航已统一为 localStorage 同步（与右侧栏一致）：改动仅写 lanyue_wb_edit_v1，
+     同浏览器 index 经 storage 事件实时刷新左导航；刷新后经 edLoadAll 恢复分类/顺序。
+     不再依赖 serve.py 等本地服务写文件（file:// 也能用）；需固化到 nav-data.js 请用「导出左导航数据」。 */
+  try{ edSaveAll(); }catch(e){}
 }
 window.edPersistNav=edPersistNav;
 
@@ -3088,6 +3109,9 @@ function edBind(){
   $('exportImportBtn').addEventListener('click',edExportImportedData);
   $('exportNavBtn').addEventListener('click',edExportNavData);
   $('navCopyBtn').addEventListener('click',navExportCopy);
+  $('navSaveFileBtn').addEventListener('click',edSaveNavLocal);
+  /* 不支持 File System Access API 的浏览器隐藏「保存到本地」按钮（如鸿蒙内置浏览器） */
+  if(!('showSaveFilePicker' in window)){ var _b=$('navSaveFileBtn'); if(_b)_b.style.display='none'; }
   $('navDownloadBtn').addEventListener('click',function(){ downloadText('nav-data.js',$('navExportText').value); showToast('已触发下载 nav-data.js'); });
   $('navExportClose').addEventListener('click',navExportHide);
   $('navExportModal').addEventListener('click',function(e){ if(e.target===this) navExportHide(); });
