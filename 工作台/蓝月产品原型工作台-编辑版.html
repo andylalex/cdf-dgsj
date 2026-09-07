@@ -270,7 +270,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
    宽度由 JS 按图片自然宽设置（窄于手机），即「同款外壳、不同宽度、独立展示类型」；
    图片过长时由内部 .img-scroll 纵向滚动查看。非图片模式下 .img-scroll 仅作为标注层覆盖层，不占布局 */
 .img-scroll{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:4}
-.device.img-mode .img-scroll{position:relative;inset:auto;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;background:#fff;pointer-events:auto;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-y}
+.device.img-mode .img-scroll{position:relative;inset:auto;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;background:#fff;border-radius:26px;pointer-events:auto;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-y}
 .device.img-mode .img-scroll::-webkit-scrollbar{width:0;height:0;display:none}
 .device.img-mode{border:8px solid #1C2333;border-radius:34px;overflow:visible;
   box-shadow:0 0 0 1px #33405C,0 24px 70px rgba(0,0,0,.6)}
