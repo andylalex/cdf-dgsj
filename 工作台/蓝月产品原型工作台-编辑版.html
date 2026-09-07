@@ -186,7 +186,11 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .side-item.manage .si-edit{display:flex;gap:6px;align-items:center;margin-top:5px;flex-wrap:wrap}
 .side-item.manage .si-cat{flex:1;min-width:84px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,#e5e7eb);border-radius:6px;background:#fff;color:var(--text-1,#1f2937);max-width:160px}
 .side-item.manage .si-ord{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--text-3,#6b7280);white-space:nowrap}
-.side-item.manage .si-order{width:48px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,#e5e7eb);border-radius:6px;background:#fff;color:var(--text-1,#1f2937)}
+.side-item.manage .si-order{width:46px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,#e5e7eb);border-radius:6px;background:#fff;color:var(--text-1,#1f2937);text-align:center;transition:border-color .15s,box-shadow .15s}
+.side-item.manage .si-order:focus{outline:none;border-color:#38BDF8;box-shadow:0 0 0 3px rgba(56,189,248,.18)}
+.side-item.manage .si-step{flex:0 0 auto;width:20px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1;color:#94a3b8;background:#f1f5f9;border:1px solid var(--border,#e5e7eb);border-radius:6px;cursor:pointer;user-select:none;transition:background .15s,color .15s}
+.side-item.manage .si-step:hover{background:#e2e8f0;color:#334155}
+.side-item.manage .si-step:active{background:#cbd5e1}
 .side-item.dragging{opacity:.45;background:rgba(56,189,248,.08);border-color:#38BDF8!important;pointer-events:none}
 /* 拖拽位置提示线：固定蓝色，不依赖 CSS 变量，规避未定义导致不可见 */
 .side-item.drop-before,.side-item.drop-after{position:relative;background:rgba(56,189,248,.12)}
@@ -688,12 +692,23 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .imp-file{font-family:var(--mono);font-size:12px;color:#C6D2E6;background:#0E1522;border:1px dashed #2A344C;border-radius:8px;padding:7px 9px;word-break:break-all}
 .imp-group-new{margin-top:8px;width:100%;background:#0E1522;border:1px solid #2A344C;border-radius:7px;color:#E8EEF8;padding:7px 9px;font-size:13px}
 .cat-list{display:flex;flex-direction:column;gap:10px;margin:4px 0 12px;max-height:42vh;overflow:auto}
-.cat-row{border:1px solid #2A344C;border-radius:10px;padding:10px 12px;background:#0E1522}
-.cat-line{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cat-row{display:flex;align-items:center;gap:10px;border:1px solid #2A344C;border-radius:10px;padding:9px 12px;background:#0E1522;transition:border-color .15s,background .15s}
+.cat-row:hover{border-color:#3C4A66;background:#111C30}
+.cat-row.dragging{opacity:.45;border-color:#38BDF8!important}
+.cat-grip{display:flex;align-items:center;justify-content:center;width:20px;height:24px;color:#56657F;cursor:grab;flex:0 0 auto;transition:color .15s}
+.cat-grip:hover{color:#9FB0CC}
+.cat-grip:active{cursor:grabbing}
+.cat-grip svg{width:16px;height:16px;pointer-events:none}
+.cat-info{flex:1;min-width:0}
 .cat-name{font-size:14px;color:#E8EEF8;font-weight:600;display:flex;align-items:center;gap:8px}
 .cat-cnt{font-size:11px;color:#7E8AA3;font-weight:400}
+.cat-ctrl{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.cat-ord{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#8A9BB8;white-space:nowrap}
+.cat-ord-label{font-size:11px}
+.cat-order{width:54px;font-size:12px;line-height:1.4;padding:4px 6px;border:1px solid #2A344C;border-radius:7px;background:#0B1220;color:#E8EEF8;text-align:center;transition:border-color .15s,box-shadow .15s}
+.cat-order:focus{outline:none;border-color:#38BDF8;box-shadow:0 0 0 3px rgba(56,189,248,.18)}
 .cat-acts{display:flex;gap:8px}
-.cat-btn{font-size:12px;padding:5px 10px;border-radius:7px;border:1px solid #2A344C;background:transparent;color:#C6D2E6;cursor:pointer;white-space:nowrap}
+.cat-btn{font-size:12px;padding:5px 10px;border-radius:7px;border:1px solid #2A344C;background:transparent;color:#C6D2E6;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
 .cat-btn:hover{background:#1B2740}
 .cat-btn.danger{color:#FF8A7A;border-color:#5A2A2A}
 .cat-btn.danger:hover{background:#2A1818}
@@ -1010,7 +1025,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 <div class="ed-modal" id="catModal">
   <div class="ed-card">
     <h3>分类管理</h3>
-    <p class="ed-sub">拖拽排序；重命名 / 删除（原型迁移到「未分类」）；底部可新增分类</p>
+    <p class="ed-sub">拖动左侧手柄调整顺序，或填写顺序值（数字越小越靠前）；可重命名 / 删除（原型迁移到「未分类」）；底部可新增分类</p>
     <div class="cat-list" id="catList"></div>
     <div class="ed-row"><label>新增分类</label><input class="imp-group-new" id="catNewName" placeholder="输入新分类名后点「添加」"></div>
     <div class="ed-foot">
@@ -1158,7 +1173,7 @@ function renderSidebar(){
         (manage
           ? '<div class="si-edit">'+
               '<select class="si-cat" data-id="'+p.id+'" title="选择分类">'+catOpts+'</select>'+
-              '<label class="si-ord" title="排序值：数字越小越靠前（全局顺序）">排序<input type="number" class="si-order" data-id="'+p.id+'" value="'+orderVal+'" min="1" step="1"></label>'+
+              '<label class="si-ord" title="顺序值：数字越小越靠前（全局顺序）"><button type="button" class="si-step" data-step="-1" aria-label="上移">−</button><input type="number" class="si-order" data-id="'+p.id+'" value="'+orderVal+'" min="1" step="1"><button type="button" class="si-step" data-step="1" aria-label="下移">+</button></label>'+
             '</div>'
           : '')+
         '</span>'+
@@ -1188,6 +1203,14 @@ function renderSidebar(){
       const ids=PROTOTYPES.map(p=>p.id); const cur=ids.indexOf(id);
       if(cur<0)return; ids.splice(cur,1); n=Math.min(n,ids.length+1); ids.splice(n-1,0,id);
       setProtoOrder(ids); renderSidebar(); showToast('已调整排序值');
+    });
+    el.querySelectorAll('.si-step').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(!ord)return;
+        let v=parseInt(ord.value,10); if(isNaN(v))v=1;
+        v=Math.max(1, v+(parseInt(btn.dataset.step,10)||0));
+        ord.value=v; ord.dispatchEvent(new Event('change',{bubbles:true}));
+      });
     });
   });
   if(window.ED&&window.ED.manage){ if(window.edBindSidebarDrag)window.edBindSidebarDrag(); } else { if(window.edUnbindSidebarDrag)window.edUnbindSidebarDrag(); }
@@ -3047,11 +3070,10 @@ function renderCatManager(){
     var row=document.createElement('div');
     var orderIdx=(window.ED.cats||[]).indexOf(g)+1;
     row.className='cat-row'; row.draggable=true; row.dataset.cat=g;
-    row.innerHTML='<div class="cat-line"><div class="cat-name">'+escapeHtml(g)+' <span class="cat-cnt">'+cnt+' 个</span></div>'+
-      '<label class="cat-ord" style="display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#8a8a8a;margin-right:8px">排序<input type="number" class="cat-order" data-cat="'+escapeHtml(g)+'" value="'+orderIdx+'" min="1" step="1" style="width:50px;padding:2px 4px;border:1px solid #ddd;border-radius:6px;font-size:12px"></label>'+
-      '<div class="cat-acts"><button class="cat-btn" data-act="rename">重命名</button>'+
-      (g===UNCAT?'<button class="cat-btn" disabled style="opacity:.4">删除</button>':'<button class="cat-btn danger" data-act="delete">删除</button>')+
-      '</div></div>';
+    var grip='<span class="cat-grip" title="拖拽排序"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></span>';
+    var orderCtl='<label class="cat-ord" title="顺序值：数字越小越靠前"><span class="cat-ord-label">顺序</span><input type="number" class="cat-order" data-cat="'+escapeHtml(g)+'" value="'+orderIdx+'" min="1" step="1"></label>';
+    var acts='<div class="cat-acts"><button class="cat-btn" data-act="rename">重命名</button>'+(g===UNCAT?'<button class="cat-btn" disabled style="opacity:.4">删除</button>':'<button class="cat-btn danger" data-act="delete">删除</button>')+'</div>';
+    row.innerHTML=grip+'<div class="cat-info"><div class="cat-name">'+escapeHtml(g)+' <span class="cat-cnt">'+cnt+' 个</span></div></div>'+'<div class="cat-ctrl">'+orderCtl+acts+'</div>';
     row.addEventListener('dragstart',function(e){ try{e.dataTransfer.setData('text/plain',g);}catch(_){} row.style.opacity=.4; });
     row.addEventListener('dragend',function(){ row.style.opacity=''; });
     row.addEventListener('dragover',function(e){ e.preventDefault(); });
