@@ -242,7 +242,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   box-shadow:0 0 0 1px #2A344C,0 24px 70px rgba(0,0,0,.6),0 4px 16px rgba(0,0,0,.45);
   height:100%;display:flex;flex-direction:column;transition:width .28s cubic-bezier(.4,0,.2,1);
 }
-.device.desktop{width:100%}
+.device.desktop{width:1280px;margin:0 auto}
 .device.tablet{width:768px}
 .device.mobile{width:414px;border-radius:34px;overflow:visible;border:8px solid #1C2333;box-shadow:0 0 0 1px #33405C,0 24px 70px rgba(0,0,0,.6)}
 .device-frame-bar{
@@ -1210,6 +1210,19 @@ function applyDevice(){
   document.querySelectorAll('#deviceSeg button').forEach(b=>b.classList.toggle('on',b.dataset.device===state.device));
   /* 图片 / 幻灯片原型：恢复自适应宽度 + 内部滚动 */
   if(current() && current().kind==='image'){ device.classList.add('img-mode'); fitImageStage(); }
+  fitDesktop();
+}
+/* PC 端（desktop 设备）按真实桌面宽度渲染，再用 zoom 缩放适配中间区：
+   保证 iframe 视口达 1280px（≥ md 断点 → 侧栏可见、桌面布局完整），
+   同时整体缩放进展示区，不溢出、无需滚动条 */
+function fitDesktop(){
+  if(state.device!=='desktop' || (current() && current().kind==='image')) return;
+  var DESIGN=1280;
+  device.style.width=DESIGN+'px';
+  var avail=stage.clientWidth-56; if(avail<320)avail=320;
+  var s=Math.min(1, avail/DESIGN);
+  try{ device.style.zoom=String(s); device.style.transform=''; }
+  catch(err){ device.style.zoom=''; device.style.transform='scale('+s+')'; device.style.transformOrigin='top center'; }
 }
 document.querySelectorAll('#deviceSeg button').forEach(b=>b.addEventListener('click',()=>{
   state.device=b.dataset.device;applyDevice();
@@ -1498,6 +1511,7 @@ function updateHotspotPositions(){
 /* 三重实时重算：窗口 resize + iframe 内部 scroll + DOM 变化 */
 window.addEventListener('resize',scheduleUpdatePositions);
 window.addEventListener('resize',fitImageStage);
+window.addEventListener('resize',fitDesktop);
 frame.addEventListener('load',()=>{
   try{
     const iwin=frame.contentWindow,idoc=frame.contentDocument;
