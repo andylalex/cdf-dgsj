@@ -639,12 +639,14 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .mng-toggle.on .mng-dot{background:#04222b;box-shadow:0 0 0 3px rgba(4,34,43,.25)}
 
 /* ---- 管理操作面板（开启后展开） ---- */
-.mng-panel{display:flex;flex-direction:column;gap:7px;margin-top:9px;padding:10px;
+.mng-panel{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;padding:9px;
   border-radius:11px;background:var(--panel-2);border:1px dashed rgba(56,189,248,.32);animation:mngIn .18s ease}
 .mng-panel[hidden]{display:none}
-.mng-panel .mp-full{grid-column:auto}
-.mng-act{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px 12px;border-radius:10px;cursor:pointer;
-  font-size:12.5px;font-weight:600;color:var(--text-2);background:var(--panel-3);border:1px solid var(--line);transition:.16s}
+.mng-act{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:9px 4px;border-radius:10px;cursor:pointer;
+  font-size:11px;font-weight:600;line-height:1.25;text-align:center;color:var(--text-2);
+  background:var(--panel-3);border:1px solid var(--line);transition:.16s}
+.mng-act.full{grid-column:1 / -1}
 .mng-act svg{width:15px;height:15px;flex:none}
 .mng-act:hover{border-color:var(--accent);color:var(--text);background:var(--panel-2);box-shadow:0 2px 8px rgba(0,0,0,.22)}
 .mng-act.danger:hover{border-color:#F87171;color:#F87171;background:rgba(248,113,113,.12)}
@@ -845,11 +847,10 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
           <span class="mng-dot"></span>
         </button>
         <div class="mng-panel" id="mngPanel" hidden>
-          <button class="mng-act primary" id="importBtn" title="选择本地图片或 HTML 原型文件导入（可多选，多张图片自动合成幻灯片）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 9l5-5 5 5M12 4v12"/></svg>导入本地文件</button>
+          <button class="mng-act primary full" id="importBtn" title="选择本地图片或 HTML 原型文件导入（可多选，多张图片自动合成幻灯片）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 9l5-5 5 5M12 4v12"/></svg>导入本地文件</button>
           <button class="mng-act" id="catManageBtn" title="新增 / 重命名 / 删除分类，拖拽排序"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3H4v5.59A2 2 0 0 0 4.59 10l9.58 9.59a2 2 0 0 0 2.83 0l3.59-3.59a2 2 0 0 0 0-2.59z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>分类管理</button>
           <button class="mng-act" id="exportNavBtn" title="把当前左导航（含导入原型/分类/顺序）导出为静态数据文件 nav-data.js；保存到工作台目录推送 GitHub 后，所有浏览器看到一致的左导航，不依赖本地缓存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>导出左导航数据</span></button>
-  <button class="mng-act" id="exportImportBtn" title="把当前导入的原型导出为静态文件 imported-prototypes.js，保存到工作台目录后推送 GitHub 即可让他人看到（不依赖本地缓存）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>导出导入数据</button>
-  <button class="mng-act" id="exportProtoBtn" title="把当前原型数据（srcdoc / 标注 / PRD）导出为静态文件 prototypes-data.js，保存到工作台目录后推送 GitHub 即生效"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>导出原型数据</span></button>
+          <button class="mng-act full" id="exportProtoBtn" title="把当前原型数据（srcdoc / 标注 / PRD）导出为静态文件 prototypes-data.js，保存到工作台目录后推送 GitHub 即生效"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>导出原型数据</span></button>
         </div>
       </div>
       <input type="file" id="importFile" accept=".html,text/html,image/*" multiple style="display:none">
@@ -2494,26 +2495,6 @@ async function edSaveNavLocal(){
     showToast('已写入本地 nav-data.js（还需部署到 GitHub 才会让所有人看到）');
   }catch(e){ if(e&&e.name!=='AbortError') showToast('保存失败：'+e.message); }
 }
-function edExportImportedData(){
-  try{
-    var protos=PROTOTYPES.filter(function(p){return p&&p.__imported;}).map(function(p){
-      var c={id:p.id,name:p.name,group:p.group,device:p.device,kind:p.kind,__imported:true,
-             hotspots:(p.hotspots||[]).map(function(h){return JSON.parse(JSON.stringify(h));})};
-      if(p.kind==='image'){ c.image=p.image||null; c.images=(p.images||[]).slice(); }
-      else { c.url=''; }
-      return c;
-    });
-    var content={};
-    Object.keys(window.ED.imported||{}).forEach(function(k){ content[k]=window.ED.imported[k]; });
-    var data={protos:protos,content:content,cats:(window.ED.cats||[]).slice()};
-    var text='/* 导入原型静态数据（由编辑版「导出导入数据」自动生成；随 GitHub 推送后新访客可见）\n'
-            +'   本文件是导入功能的「数据真源」，不依赖浏览器本地缓存。 */\n'
-            +'window.IMPORTED_PROTOTYPES='+JSON.stringify(data.protos,null,2)+';\n'
-            +'window.IMPORTED_CONTENT='+JSON.stringify(data.content,null,2)+';\n';
-    downloadText('imported-prototypes.js',text);
-    showToast('已生成 imported-prototypes.js，请保存到 产物/工作台/ 后重新推送 GitHub');
-  }catch(e){ showToast('导出导入数据失败：'+e.message); }
-}
 /* 启动时合并 imported-prototypes.js（位于 prototypes-data.js 之后的静态数据）到 PROTOTYPES，
    使 GitHub 静态托管的新访客无需本地缓存也能看到导入页面 */
 function edApplyNavData(){
@@ -2601,7 +2582,6 @@ function edApplyDataImported(){
     PROTOTYPES.push(p);
   });
 }
-window.edExportImportedData=edExportImportedData;
 
 /* ---------- 元素选择器生成（点选时自动绑定最内层元素） ---------- */
 function edCssPath(el,idoc){
@@ -3212,7 +3192,6 @@ function edBind(){
   $('catManageBtn').addEventListener('click',openCatManager);
   $('catClose').addEventListener('click',closeCatManager);
   $('catAdd').addEventListener('click',function(){ edCatAdd($('catNewName').value); $('catNewName').value=''; });
-  $('exportImportBtn').addEventListener('click',edExportImportedData);
   $('exportNavBtn').addEventListener('click',edExportNavData);
   $('exportProtoBtn').addEventListener('click',edExportProtoData);
   $('protoCopyBtn').addEventListener('click',protoExportCopy);
