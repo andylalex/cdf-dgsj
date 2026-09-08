@@ -2028,6 +2028,7 @@ function renderPane(){
   }
   if(state.tab==='field'){
     const ents=Object.keys(DATA_MODELS).map(k=>({key:k,obj:DATA_MODELS[k]})).filter(e=>e.obj.sources&&e.obj.sources.indexOf(p.id)>=0);
+    const nf=document.getElementById('nField'); if(nf) nf.textContent=String(ents.reduce((s,e)=>s+e.obj.fields.length,0));
     if(!ents.length){
       body.innerHTML='<div class="prd-pane on"><p style="font-size:12px;color:var(--text-3);padding:10px 2px">当前原型暂无对应的数据模型字段。</p></div>';
       return;
@@ -2086,6 +2087,36 @@ function focusHotspot(id){
 }
 
 /* 右侧组件/规则卡片点击 → 原型展示区滚动到对应组件位置（优先 selector，降级百分比坐标） */
+/* 展开原型内弹窗（兼容 hidden 类 / display:none / show|active|open 类） */
+function openProtoModal(el){
+  if(!el) return;
+  el.classList.remove('hidden');
+  el.classList.add('show','active','open');
+  if(el.style.display==='none') el.style.display='';
+}
+/* 找离元素最近的可滚动祖先（跳过 overflow:hidden 的设备外壳 .phone-frame） */
+function getScrollableParent(el){
+  let n=el.parentElement;
+  while(n && n.nodeType===1){
+    const cs=getComputedStyle(n);
+    const canY=(cs.overflowY==='auto'||cs.overflowY==='scroll')&&n.scrollHeight>n.clientHeight+1;
+    const canX=(cs.overflowX==='auto'||cs.overflowX==='scroll')&&n.scrollWidth>n.clientWidth+1;
+    if(canY||canX) return n;
+    n=n.parentElement;
+  }
+  return null;
+}
+/* 在指定容器内把元素滚到居中（容器为 null 时回退整窗居中） */
+function scrollElInto(el, container){
+  if(!el) return;
+  if(container){
+    const cr=container.getBoundingClientRect();
+    const tr=el.getBoundingClientRect();
+    container.scrollBy({top:(tr.top-cr.top)-(container.clientHeight-el.offsetHeight)/2, behavior:'smooth'});
+  }else{
+    el.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+  }
+}
 function scrollProtoToHotspot(id){
   const p=current(); if(!p) return;
   const h=p.hotspots.find(x=>x.id===id); if(!h) return;
@@ -2095,10 +2126,16 @@ function scrollProtoToHotspot(id){
       if(sc && h.y!=null){ sc.scrollTo({top:Math.max(0,(h.y/100)*sc.scrollHeight - sc.clientHeight/2),behavior:'smooth'}); }
     }else{
       const idoc=frame.contentDocument; if(!idoc) return;
+      /* 弹窗组件：先自动展开弹窗 */
+      if(h.modal && h.modalEl){ openProtoModal(idoc.querySelector(h.modalEl)); }
       let done=false;
       if(h.selector){
         const target=idoc.querySelector(h.selector);
-        if(target){ target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}); done=true; }
+        if(target){
+          const sc=getScrollableParent(target);   /* 只滚设备外壳内部内容区，不滚外壳本身 */
+          scrollElInto(target, sc);
+          done=true;
+        }
       }
       if(!done){
         const sc=findScrollContainer(idoc)||(idoc.scrollingElement||idoc.documentElement);
