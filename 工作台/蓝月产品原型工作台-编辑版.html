@@ -453,7 +453,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .prd-meta{display:flex;gap:14px;margin-top:9px;font-size:11.5px;color:var(--text-3);flex-wrap:wrap}
 .prd-meta span{display:inline-flex;align-items:center;gap:5px}
 .prd-meta svg{width:13px;height:13px}
-.prd-tabs{display:flex;gap:2px;padding:8px 12px 0;border-bottom:1px solid var(--line-soft);flex:none;overflow-x:auto;touch-action:pan-x;scrollbar-width:none}
+.prd-tabs{display:flex;gap:2px;padding:8px 12px 0;border-bottom:1px solid var(--line-soft);flex:none}
 .prd-tab{
   padding:8px 11px;font-size:12.5px;color:var(--text-3);border-bottom:2px solid transparent;margin-bottom:-1px;
   display:flex;align-items:center;gap:6px;transition:.15s;border-radius:6px 6px 0 0;
@@ -2106,6 +2106,29 @@ function renderTourStep(){
    六、右侧 PRD
    ============================================================ */
 document.querySelectorAll('.prd-tab').forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.pane)));
+/* —— 右侧栏两指横向滑动切换 tab（触控板 wheel.deltaX 主导时触发） —— */
+const TAB_ORDER=['overview','element','rule','field'];
+let _tabSwipeLock=false;
+function switchTabByDir(dir){
+  const i=TAB_ORDER.indexOf(state.tab);
+  if(i<0) return;
+  const ni=Math.min(TAB_ORDER.length-1,Math.max(0,i+dir));
+  if(ni!==i) switchTab(TAB_ORDER[ni]);
+}
+(function bindTabSwipe(){
+  const panel=document.querySelector('.prd-panel');
+  if(!panel) return;
+  panel.addEventListener('wheel',e=>{
+    /* 仅当横向位移明显大于纵向（即两指横向滑动）时切换 tab */
+    if(Math.abs(e.deltaX)>Math.abs(e.deltaY) && Math.abs(e.deltaX)>12){
+      e.preventDefault();
+      if(_tabSwipeLock) return;
+      _tabSwipeLock=true;
+      switchTabByDir(e.deltaX>0?1:-1);   /* 向右滚(手指左滑)=下一个；向左滚=上一个 */
+      setTimeout(()=>{_tabSwipeLock=false;},320);
+    }
+  },{passive:false});
+})();
 function switchTab(tab,silent){
   state.tab=tab;
   document.querySelectorAll('.prd-tab').forEach(t=>t.classList.toggle('on',t.dataset.pane===tab));
