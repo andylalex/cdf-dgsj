@@ -2155,8 +2155,9 @@ function scrollProtoToHotspot(id){
       if(sc && h.y!=null){ sc.scrollTo({top:Math.max(0,(h.y/100)*sc.scrollHeight - sc.clientHeight/2),behavior:'smooth'}); }
     }else{
       const idoc=frame.contentDocument; if(!idoc) return;
-      /* 弹窗组件：先自动展开弹窗 */
+      /* 弹窗组件：先自动展开弹窗；非弹窗组件：关闭已打开的弹窗 */
       if(h.modal && h.modalEl){ openProtoModal(idoc.querySelector(h.modalEl)); }
+      else { closeOpenModal(); }
       let done=false;
       if(h.selector){
         const target=idoc.querySelector(h.selector);

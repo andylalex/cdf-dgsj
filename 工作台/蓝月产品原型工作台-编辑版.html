@@ -2329,8 +2329,9 @@ function scrollProtoToHotspot(id){
       if(sc && h.y!=null){ sc.scrollTo({top:Math.max(0,(h.y/100)*sc.scrollHeight - sc.clientHeight/2),behavior:'smooth'}); }
     }else{
       const idoc=frame.contentDocument; if(!idoc) return;
-      /* 弹窗组件：先自动展开弹窗 */
+      /* 弹窗组件：先自动展开弹窗；非弹窗组件：关闭已打开的弹窗 */
       if(h.modal && h.modalEl){ openProtoModal(idoc.querySelector(h.modalEl)); }
+      else { closeOpenModal(); }
       let done=false;
       if(h.selector){
         const target=idoc.querySelector(h.selector);
@@ -2785,7 +2786,7 @@ function edBuildProtoText(){
     + 'const V04='+v04json+';\n\n'
     + 'const PROTOTYPES_V03='+json+';\n\n'
     + 'PROTOTYPES.push.apply(PROTOTYPES, PROTOTYPES_V03);\n'
-    + (function(){ var dm=(typeof window.DATA_MODELS!=='undefined'&&window.DATA_MODELS)?window.DATA_MODELS:(typeof DATA_MODELS!=='undefined'?DATA_MODELS:null); return dm?'\n/* ---------- 数据模型（来自《中免海南商城·门店导购升级 数据模型》v0.4；由 AI 写入 prototypes-data.js，编辑版导出时一并保留） ---------- */\nconst DATA_MODELS='+JSON.stringify(dm,null,2)+';\n':''; })());
+    + (function(){ var dm=(typeof window.DATA_MODELS!=='undefined'&&window.DATA_MODELS)?window.DATA_MODELS:(typeof DATA_MODELS!=='undefined'?DATA_MODELS:null); return dm?'\n/* ---------- 数据模型（来自《中免海南商城·门店导购升级 数据模型》v0.4；由 AI 写入 prototypes-data.js，编辑版导出时一并保留） ---------- */\nconst DATA_MODELS='+JSON.stringify(dm,null,2)+';\n':''; })();
 }
 function edExportProtoData(){
   try{ var text=edBuildProtoText(); $('protoExportText').value=text; $('protoExportModal').classList.add('show'); }
