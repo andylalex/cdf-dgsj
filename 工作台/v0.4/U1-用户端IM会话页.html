@@ -516,7 +516,7 @@
       showToast('正在为你打开门店导航…');
     }
 
-    // ===== 图片画廊（图片类型切换 + 裁切遮挡 10%，手机宽度内） =====
+    // ===== 图片画廊（无 Tab 切换；底部页码按键；图片裁切遮挡 15%；手机宽度内） =====
     var LB_SETS = {};      // 图集集合：{ key: { title, imgs } }
     var lbKey = '';        // 当前图集类型
     var lbImages = [];
@@ -543,53 +543,30 @@
       if (!lbImages.length) lbImages = ['assets/generated/product1.png'];
       lbIndex = idx || 0;
       if (lbIndex >= lbImages.length) lbIndex = 0;
-      renderTabs();
       renderLightbox();
       document.getElementById('imgLightbox').classList.remove('hidden');
-    }
-    function renderTabs() {
-      var bar = document.getElementById('lbTabs');
-      if (!bar) return;
-      bar.innerHTML = '';
-      Object.keys(LB_SETS).forEach(function(k) {
-        var s = LB_SETS[k];
-        var active = (k === lbKey);
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.textContent = s.title;
-        b.onclick = function(e) { e.stopPropagation(); switchGallery(k); };
-        b.style.cssText = 'font-size:13px;padding:5px 14px;border-radius:999px;font-weight:' + (active ? '600' : '500') + ';transition:all .2s;' +
-          (active ? 'background:#E02E24;color:#fff;' : 'background:rgba(255,255,255,.22);color:#fff;');
-        bar.appendChild(b);
-      });
-    }
-    function switchGallery(key) {
-      if (key === lbKey) return;
-      lbKey = key;
-      lbImages = (LB_SETS[key].imgs || []).filter(Boolean);
-      if (!lbImages.length) lbImages = ['assets/generated/product1.png'];
-      lbIndex = 0;
-      renderTabs();
-      renderLightbox();
     }
     function renderLightbox() {
       document.getElementById('lbImg').src = lbImages[lbIndex];
       var single = lbImages.length <= 1;
       document.getElementById('lbPrev').style.display = single ? 'none' : 'flex';
       document.getElementById('lbNext').style.display = single ? 'none' : 'flex';
-      var dots = document.getElementById('lbDots');
-      dots.innerHTML = '';
+      var pages = document.getElementById('lbPages');
+      pages.innerHTML = '';
       lbImages.forEach(function(_, i) {
-        var d = document.createElement('span');
-        d.style.width = '8px';
-        d.style.height = '8px';
-        d.style.borderRadius = '50%';
-        d.style.transition = 'all .2s';
-        d.style.background = (i === lbIndex) ? '#E02E24' : 'rgba(0,0,0,.18)';
-        dots.appendChild(d);
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = (i + 1);
+        b.onclick = function(e) { e.stopPropagation(); goToImg(i); };
+        b.style.cssText = 'width:26px;height:26px;border-radius:7px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;' +
+          (i === lbIndex ? 'background:#E02E24;color:#fff;' : 'background:rgba(255,255,255,.2);color:#fff;');
+        pages.appendChild(b);
       });
-      var counter = document.getElementById('lbCounter');
-      if (counter) counter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+    function goToImg(i) {
+      if (i < 0 || i >= lbImages.length || i === lbIndex) return;
+      lbIndex = i;
+      renderLightbox();
     }
     function prevImg() {
       if (lbImages.length <= 1) return;
@@ -639,22 +616,19 @@
     </div>
   </div>
 
-  <!-- 图片画廊弹窗（图片类型切换 Tab + 箭头 + 序号均在图片区域内；参考工作台图片/幻灯片组件） -->
+  <!-- 图片画廊弹窗（无 Tab 切换；底部页码按键切换；图片裁切遮挡 15%；参考工作台图片/幻灯片组件） -->
   <div id="imgLightbox" class="hidden fixed inset-0 z-[90] flex items-center justify-center" style="background:rgba(0,0,0,.55);padding:16px" onclick="closeLightbox()" data-page-node-id="imgLightbox">
     <div onclick="event.stopPropagation()" style="width:100%;max-width:414px;background:#0b0b0d;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.32)">
       <div style="position:relative;background:#111;height:min(82vw,420px);overflow:hidden;box-shadow:inset 0 0 0 8px #1f2937">
-        <img id="lbImg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:opacity .25s ease" alt="商品图片" data-page-node-id="lbImg">
-        <!-- 顶部：图片类型切换 Tab（遮挡图片上方约 10%）+ 关闭 -->
-        <div style="position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;z-index:5;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,0))">
-          <div id="lbTabs" style="display:flex;gap:8px;overflow:hidden"></div>
-          <button onclick="closeLightbox()" aria-label="关闭" style="width:30px;height:30px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.35);transition:background .2s" onmouseover="this.style.background='rgba(0,0,0,.6)'" onmouseout="this.style.background='rgba(0,0,0,.35)'"><i class="fas fa-times" style="font-size:16px"></i></button>
-        </div>
+        <img id="lbImg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:opacity .25s ease" alt="商品图片" data-page-node-id="lbImg">
+        <!-- 关闭按钮：浮图片右上角 -->
+        <button onclick="closeLightbox()" aria-label="关闭" style="position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.35);z-index:5;transition:background .2s" onmouseover="this.style.background='rgba(0,0,0,.6)'" onmouseout="this.style.background='rgba(0,0,0,.35)'"><i class="fas fa-times" style="font-size:16px"></i></button>
         <button id="lbPrev" onclick="event.stopPropagation();prevImg()" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.20);color:#374151;font-size:20px;display:flex;align-items:center;justify-content:center;z-index:4">&#8249;</button>
         <button id="lbNext" onclick="event.stopPropagation();nextImg()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.20);color:#374151;font-size:20px;display:flex;align-items:center;justify-content:center;z-index:4">&#8250;</button>
-        <div style="position:absolute;left:0;right:0;bottom:0;height:10%;background:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0));z-index:2"></div>
-        <div style="position:absolute;left:0;right:0;bottom:9px;display:flex;align-items:center;justify-content:center;gap:8px;z-index:3">
-          <div id="lbDots" style="display:flex;gap:6px"></div>
-          <span id="lbCounter" style="color:rgba(255,255,255,.92);font-size:12px;font-weight:600" data-page-node-id="lbCounter"></span>
+        <!-- 底部 15% 渐变遮罩 + 页码切换按键 -->
+        <div style="position:absolute;left:0;right:0;bottom:0;height:15%;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0));z-index:2"></div>
+        <div style="position:absolute;left:0;right:0;bottom:11px;display:flex;align-items:center;justify-content:center;z-index:3">
+          <div id="lbPages" style="display:flex;gap:8px"></div>
         </div>
       </div>
     </div>
