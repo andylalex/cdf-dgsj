@@ -117,8 +117,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .layout.resizing{transition:none}
 .layout.resizing .collapse-handle{transition:none}
 }
-.layout.collapse-left{--left-w:0px}
-.layout.collapse-right{--right-w:0px}
+/* 收起宽度改由 JS 内联 --left-w/--right-w 控制（见 setSideCollapsed），避免被拖拽内联值覆盖 */
 .sidebar,.prd-panel{min-width:0;overflow:hidden;transition:opacity .18s}
 .layout.collapse-left .sidebar{opacity:0;pointer-events:none}
 .layout.collapse-right .prd-panel{opacity:0;pointer-events:none}
@@ -126,14 +125,14 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .collapse-handle{position:absolute;top:50%;z-index:30;width:24px;height:72px;background:var(--panel-3);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:left .28s cubic-bezier(.4,0,.2,1),right .28s cubic-bezier(.4,0,.2,1),width .28s,height .28s,background .15s,color .15s,border-color .15s,box-shadow .15s}
 .collapse-handle:hover{background:var(--accent-dim);color:var(--accent);border-color:rgba(56,189,248,.45)}
 .collapse-handle svg{width:15px;height:15px;transition:transform .28s cubic-bezier(.4,0,.2,1)}
-.collapse-handle.left{left:calc(var(--left-w,264px) + 14px);transform:translateY(-50%);border-radius:0 8px 8px 0;border-left:none}
-.collapse-handle.right{right:calc(var(--right-w,408px) + 14px);transform:translateY(-50%);border-radius:8px 0 0 8px;border-right:none}
+.collapse-handle.left{left:calc(var(--left-w,264px) - 12px);transform:translateY(-50%);border-radius:0 8px 8px 0;border-left:none}
+.collapse-handle.right{right:calc(var(--right-w,408px) - 12px);transform:translateY(-50%);border-radius:8px 0 0 8px;border-right:none}
 .layout.collapse-left .collapse-handle.left{left:14px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
 .layout.collapse-right .collapse-handle.right{right:14px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),-2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
 .layout.collapse-left .collapse-handle.left:hover,.layout.collapse-right .collapse-handle.right:hover{background:rgba(56,189,248,.32);box-shadow:0 0 22px rgba(56,189,248,.55);animation:none}
 .layout.collapse-left .collapse-handle.left svg,.layout.collapse-right .collapse-handle.right svg{transform:rotate(180deg);width:16px;height:16px}
 /* 分栏中间线独立拖拽条：只负责拖拽调宽，不承载折叠按钮（按钮仅点击折叠，二者分离避免点击/拖拽冲突） */
-.vdivider{position:absolute;top:0;bottom:0;width:10px;z-index:29;cursor:col-resize;transform:translateX(-50%);touch-action:none}
+.vdivider{position:absolute;top:0;bottom:0;width:10px;z-index:31;cursor:col-resize;transform:translateX(-50%);touch-action:none}
 .vdivider.left{left:var(--left-w,264px)}
 .vdivider.right{right:var(--right-w,408px);transform:translateX(50%)}
 .vdivider::after{content:"";position:absolute;top:8px;bottom:8px;left:50%;width:2px;transform:translateX(-50%);border-radius:2px;background:transparent;transition:background .15s}
@@ -2066,7 +2065,18 @@ window.addEventListener('hashchange',()=>{
 function setSideCollapsed(side,c){
   const layout=document.querySelector('.layout'); if(!layout)return;
   const cls=(side==='left')?'collapse-left':'collapse-right';
+  const varName=side==='left'?'--left-w':'--right-w';
+  const defW=side==='left'?264:408;
+  const _v=layout.style.getPropertyValue(varName).trim();
+  const curVal=_v?parseFloat(_v):defW;
   if(layout.classList.contains(cls)===c)return;
+  if(c){
+    layout.dataset['w_'+side]=curVal;                 // 记住收起前的宽度
+    layout.style.setProperty(varName,'0px');          // 内联直接收起（优先级高于类选择器）
+  }else{
+    const w=layout.dataset['w_'+side]?parseFloat(layout.dataset['w_'+side]):defW;
+    layout.style.setProperty(varName,w+'px');         // 恢复记忆宽度
+  }
   layout.classList.toggle(cls,c);
   try{localStorage.setItem(side==='left'?'pd_left':'pd_right',c?'1':'0');}catch(e){}
   const h=document.getElementById(side==='left'?'handleLeft':'handleRight');
@@ -2082,21 +2092,13 @@ function toggleSides(){
   try{showToast(anyOpen?'已隐藏左右栏':'已显示左右栏');}catch(e){}
 }
 function toggleLeft(){
-  const h=document.getElementById('handleLeft');
   const layout=document.querySelector('.layout');
-  layout.classList.toggle('collapse-left');
-  const c=layout.classList.contains('collapse-left');
-  try{localStorage.setItem('pd_left',c?'1':'0');}catch(e){}
-  h.title=c?'展开目录（[）':'收起目录（[）';
+  setSideCollapsed('left', !layout.classList.contains('collapse-left'));
   setTimeout(scheduleUpdatePositions,300);
 }
 function toggleRight(){
-  const h=document.getElementById('handleRight');
   const layout=document.querySelector('.layout');
-  layout.classList.toggle('collapse-right');
-  const c=layout.classList.contains('collapse-right');
-  try{localStorage.setItem('pd_right',c?'1':'0');}catch(e){}
-  h.title=c?'展开PRD（]）':'收起PRD（]）';
+  setSideCollapsed('right', !layout.classList.contains('collapse-right'));
   setTimeout(scheduleUpdatePositions,300);
 }
 document.getElementById('handleLeft').addEventListener('click',toggleLeft);
@@ -2112,8 +2114,13 @@ function bindResize(handle,side){
   function curW(){const v=layout.style.getPropertyValue(varName).trim();return v?parseFloat(v):defW;}
   handle.addEventListener('mousedown',function(e){
     e.preventDefault();
-    let startW=curW();
-    if(layout.classList.contains(cls)){ setSideCollapsed(side,false); layout.style.setProperty(varName,'0px'); startW=0; }
+    let startW;
+    if(layout.classList.contains(cls)){
+      setSideCollapsed(side,false);                 // 取消隐藏并恢复记忆宽度（内联）
+      startW=parseFloat(layout.style.getPropertyValue(varName))||defW;
+    }else{
+      startW=curW();
+    }
     const startX=e.clientX;
     document.body.style.cursor='col-resize'; document.body.style.userSelect='none';
     layout.classList.add('resizing');
@@ -2232,8 +2239,8 @@ var _pt=document.getElementById('panelToggle'); if(_pt)_pt.addEventListener('cli
   /* 恢复侧边栏收起状态 */
   const layout=document.querySelector('.layout');
   try{
-    if(localStorage.getItem('pd_left')==='1'){layout.classList.add('collapse-left');document.getElementById('handleLeft').title='展开目录';}
-    if(localStorage.getItem('pd_right')==='1'){layout.classList.add('collapse-right');document.getElementById('handleRight').title='展开PRD';}
+    if(localStorage.getItem('pd_left')==='1'){layout.classList.add('collapse-left');layout.style.setProperty('--left-w','0px');document.getElementById('handleLeft').title='展开目录';}
+    if(localStorage.getItem('pd_right')==='1'){layout.classList.add('collapse-right');layout.style.setProperty('--right-w','0px');document.getElementById('handleRight').title='展开PRD';}
   }catch(e){}
   if(isCatalogHash()){showCatalog();return;}
   hideCatalog();
