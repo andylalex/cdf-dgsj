@@ -11,12 +11,12 @@ const V04={
     "group": "用户端 · CDF海南免税"
   },
   "U6": {
-    "url": "v0.4/U6-购物清单页.html",
+    "url": "v0.4/U6-意向单页.html",
     "device": "mobile",
     "group": "用户端 · CDF海南免税"
   },
   "U4": {
-    "url": "v0.4/U4-用户订单确认页.html",
+    "url": "v0.4/U4-结算中心页.html",
     "device": "mobile",
     "group": "用户端 · CDF海南免税"
   },
@@ -143,9 +143,9 @@ const PROTOTYPES_V03=[
   {
     "id": "v04-u6",
     "group": "用户端 · CDF海南免税",
-    "name": "U6 购物清单页",
+    "name": "U6 意向单页",
     "device": "mobile",
-    "url": "v0.4/U6-购物清单页.html",
+    "url": "v0.4/U6-意向单页.html",
     "srcdoc": "",
     "status": "review",
     "version": "v0.4",
@@ -169,7 +169,7 @@ const PROTOTYPES_V03=[
       },
       {
         "t": "去结算",
-        "d": "点击去结算进入 U4 订单确认页，按分组分别结算"
+        "d": "点击去结算进入 U4 结算中心页，按分组分别结算"
       }
     ],
     "states": [
@@ -236,16 +236,16 @@ const PROTOTYPES_V03=[
   {
     "id": "v04-u4",
     "group": "用户端 · CDF海南免税",
-    "name": "U4 用户订单确认页",
+    "name": "U4 结算中心页",
     "device": "mobile",
-    "url": "v0.4/U4-用户订单确认页.html",
+    "url": "v0.4/U4-结算中心页.html",
     "srcdoc": "",
     "status": "review",
     "version": "v0.4",
     "owner": "产品 · 梁伟业",
     "updated": "2026-09-07",
     "overview": {
-      "summary": "用户确认订单的页面，含提货方式、商品清单、发票/优惠券/积分、费用明细、行程核验与同意条款",
+      "summary": "用户结算中心的页面，含提货方式、商品清单、发票/优惠券/积分、费用明细、行程核验与同意条款",
       "path": "购物清单 → 去结算 / 商品详情 → 去结算",
       "users": "C 端用户",
       "permission": "功能权限：商城用户均有数据权限：仅本人订单",
@@ -1409,7 +1409,7 @@ window.DATA_MODELS = {
     ]
   },
   "Order": {
-    "label": "Order（用户确认订单）",
+    "label": "Order（用户结算中心）",
     "sources": [
       "v04-u4",
       "v04-u6"

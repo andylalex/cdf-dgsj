@@ -42,14 +42,14 @@ window.NAV_DATA={
     },
     {
       "id": "v04-u6",
-      "name": "U6 购物清单页",
+      "name": "U6 意向单页",
       "group": "用户端 · CDF海南免税",
       "device": "mobile",
       "__imported": false
     },
     {
       "id": "v04-u4",
-      "name": "U4 用户订单确认页",
+      "name": "U4 结算中心页",
       "group": "用户端 · CDF海南免税",
       "device": "mobile",
       "__imported": false
