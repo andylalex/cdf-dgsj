@@ -531,6 +531,9 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .field-table tbody tr:hover .fr-relo{opacity:1}
 .field-table .fr-relo:hover{border-color:#FBBF24;color:#FBBF24}
 .field-table .fr-relo svg{width:13px;height:13px;display:block}
+.dm-entity{margin-bottom:16px}
+.dm-entity:last-child{margin-bottom:0}
+.dm-entity-h{font-size:12.5px;font-weight:600;color:var(--text-2);margin:6px 0 6px;padding-left:8px;border-left:3px solid var(--c-field,#6366F1)}
 .empty-hint{text-align:center;color:var(--text-3);font-size:12px;padding:40px 20px}
 
 /* toast */
@@ -2186,25 +2189,24 @@ function renderPane(){
     return;
   }
   if(state.tab==='field'){
-    const fs=visibleHotspots(p).filter(h=>h.type==='field');
-    let rows=fs.map((h,i)=>'<tr data-id="'+h.id+'">'+
-      '<td><div class="f-name">'+h.title.replace(/^.*?\s/,'')+'</div></td>'+
-      '<td><span class="f-type">'+h.field.type+'</span></td>'+
-      '<td class="'+(h.field.required==='是'?'req':'opt')+'">'+h.field.required+'</td>'+
-      '<td>'+h.field.format+'</td>'+
-      '<td><span class="f-sample">'+h.field.sample+'</span></td>'+
-      '</tr>').join('');
-    body.innerHTML='<div class="prd-pane on"><table class="field-table"><thead><tr>'+
-      '<th>字段</th><th>类型</th><th>必填</th><th>校验 / 约束</th><th>示例</th></tr></thead><tbody>'+rows+'</tbody></table>'+
-      '<p style="font-size:11.5px;color:var(--text-3);margin-top:12px">悬停任意行可在原型中定位对应字段，点击进入走查。</p></div>';
-    body.querySelectorAll('tr[data-id]').forEach(tr=>{
-      tr.addEventListener('mouseenter',()=>hoverLinked(tr.dataset.id,true));
-      tr.addEventListener('mouseleave',()=>hoverLinked(tr.dataset.id,false));
-      tr.addEventListener('click',()=>{const idx=p.hotspots.findIndex(h=>h.id===tr.dataset.id);state.tour=true;state.tourIdx=idx;startTour();});
+    const ents=Object.keys(DATA_MODELS).map(k=>({key:k,obj:DATA_MODELS[k]})).filter(e=>e.obj.sources&&e.obj.sources.indexOf(p.id)>=0);
+    if(!ents.length){
+      body.innerHTML='<div class="prd-pane on"><p style="font-size:12px;color:var(--text-3);padding:10px 2px">当前原型暂无对应的数据模型字段。</p></div>';
+      return;
+    }
+    let html='<div class="prd-pane on">';
+    ents.forEach(e=>{
+      const o=e.obj;
+      let rows=o.fields.map(f=>'<tr><td><div class="f-name">'+f.name+'</div></td>'+
+        '<td><span class="f-type">'+f.type+'</span></td>'+
+        '<td class="'+(f.required==='是'?'req':'opt')+'">'+f.required+'</td>'+
+        '<td>'+f.format+'</td>'+
+        '<td><span class="f-sample">'+f.sample+'</span></td></tr>').join('');
+      html+='<div class="dm-entity"><div class="dm-entity-h">'+o.label+'</div>'+
+        '<table class="field-table"><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>校验 / 约束</th><th>示例</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
     });
-    body.querySelectorAll('.fr-relo').forEach(b=>b.addEventListener('click',e=>{
-      e.stopPropagation(); if(window.edRelocate)window.edRelocate(b.dataset.relo);
-    }));
+    html+='<p style="font-size:11.5px;color:var(--text-3);margin-top:12px">字段数据来自《中免海南商城·门店导购升级 数据模型》（v0.4 原型对齐）。</p></div>';
+    body.innerHTML=html;
     return;
   }
   const list=visibleHotspots(p).filter(h=>h.type===state.tab);
@@ -2716,7 +2718,8 @@ function edBuildProtoText(){
     + '/* ---------- v0.4 门店导购升级原型包（本地文件） ---------- */\n'
     + 'const V04='+v04json+';\n\n'
     + 'const PROTOTYPES_V03='+json+';\n\n'
-    + 'PROTOTYPES.push.apply(PROTOTYPES, PROTOTYPES_V03);\n';
+    + 'PROTOTYPES.push.apply(PROTOTYPES, PROTOTYPES_V03);\n'
+    + (window.DATA_MODELS ? '\n/* ---------- 数据模型（来自《中免海南商城·门店导购升级 数据模型》v0.4；由 AI 写入 prototypes-data.js，编辑版导出时一并保留） ---------- */\nconst DATA_MODELS='+JSON.stringify(window.DATA_MODELS,null,2)+';\n' : '');
 }
 function edExportProtoData(){
   try{ var text=edBuildProtoText(); $('protoExportText').value=text; $('protoExportModal').classList.add('show'); }
