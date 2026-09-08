@@ -318,19 +318,18 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   box-shadow:0 1px 4px rgba(0,0,0,.35);
 }
 .hs-pin::after,.hs-pin::before{
-  content:"";position:absolute;left:0;bottom:0;width:18px;height:2px;
-  background:linear-gradient(90deg,var(--pin-glow),transparent);transform-origin:left bottom;border-radius:2px;
-  pointer-events:none;animation:arrowPulse 1.8s ease-out infinite;
+  content:"➤";position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%) translateX(6px);
+  color:var(--pin-glow);font-size:13px;line-height:1;text-shadow:0 0 6px var(--pin-glow);
+  pointer-events:none;animation:arrowPush 1.5s ease-out infinite;
 }
-.hs-pin::before{--a:110deg}
-.hs-pin::after{--a:160deg}
-@keyframes arrowPulse{
-  0%{opacity:0;transform:rotate(var(--a)) scale(.5)}
-  35%{opacity:.95}
-  100%{opacity:0;transform:rotate(var(--a)) scale(1.5)}
+.hs-pin::before{animation-delay:.75s}
+@keyframes arrowPush{
+  0%{opacity:0;transform:translate(-50%,-50%) translateX(4px)}
+  18%{opacity:1}
+  100%{opacity:0;transform:translate(-50%,-50%) translateX(24px)}
 }
 /* 标注圆圈：朝向被标注区域的角为方角，充当箭头（无三角形/引线） */
-100%{transform:scale(1.7);opacity:0}}
 .hs:hover .hs-pin,.hs.hover .hs-pin{transform:rotate(var(--pin-rot,0deg)) scale(1.22)}
 .hs[data-type=element]{--pin-bg:var(--c-element);--pin-glow:var(--c-element)}
 .hs[data-type=rule]{--pin-bg:var(--c-rule);--pin-glow:var(--c-rule)}
