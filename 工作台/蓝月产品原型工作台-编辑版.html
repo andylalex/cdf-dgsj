@@ -325,13 +325,13 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   transform-origin:center;
   transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(10px);
   pointer-events:none;
-  animation:arrowPush 1.5s ease-out infinite;
+  animation:arrowPush 3s ease-out infinite;
 }
-.hs-pin::after{animation-delay:.75s;opacity:.5}
+.hs-pin::after{animation-delay:1.5s;opacity:.5}
 @keyframes arrowPush{
   0%{opacity:0;transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(10px)}
   20%{opacity:1}
-  100%{opacity:0;transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(28px)}
+  100%{opacity:0;transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(19px)}
 }
   25%{opacity:1}
   100%{opacity:0;transform:translate(-100%,100%) translate(-10px,10px)}
