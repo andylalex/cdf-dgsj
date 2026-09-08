@@ -317,24 +317,18 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   background:#fff;color:#0B0E14;font-family:var(--mono);font-size:10px;font-weight:700;text-align:center;position:relative;z-index:2;
   box-shadow:0 1px 4px rgba(0,0,0,.35);
 }
-.hs-pin::after,.hs-pin::before{
-  content:"➤";
-  position:absolute;left:50%;top:50%;
-  color:var(--pin-glow);
-  font-size:15px;line-height:1;
-  transform-origin:center;
-  transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(10px);
+.hs-pin::after{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  border:2px solid var(--pin-glow);
   pointer-events:none;
-  animation:arrowPush 3s ease-out infinite;
+  animation:pinPulse 1.5s ease-out infinite;
 }
-.hs-pin::after{animation-delay:1.5s;opacity:.5}
-@keyframes arrowPush{
-  0%{opacity:0;transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(10px)}
-  20%{opacity:1}
-  100%{opacity:0;transform:translate(-50%,-50%) rotate(calc(-1 * var(--pin-rot,0deg) + var(--arrow-rot,0deg))) translateX(19px)}
-}
-  25%{opacity:1}
-  100%{opacity:0;transform:translate(-100%,100%) translate(-10px,10px)}
+@keyframes pinPulse{
+  0%{transform:scale(.6);opacity:.9}
+  100%{transform:scale(1.7);opacity:0}
 }
 /* 标注圆圈：朝向被标注区域的角为方角，充当箭头（无三角形/引线） */
 .hs:hover .hs-pin,.hs.hover .hs-pin{transform:rotate(var(--pin-rot,0deg)) scale(1.22)}
@@ -1784,7 +1778,6 @@ function renderHotspots(){
     /* 标注圆圈本身朝向区域的角为方角，充当箭头：旋转让左下(BL)方角指向区域中心 */
     var _dx=pos.x-anchor.x, _dy=pos.y-anchor.y;
     el.style.setProperty('--pin-rot',(Math.atan2(-_dx,_dy)*180/Math.PI - 45).toFixed(1)+'deg');
-    el.style.setProperty('--arrow-rot',(Math.atan2(_dy,_dx)*180/Math.PI).toFixed(1)+'deg');
     pin.addEventListener('click',ev=>{ev.stopPropagation();edEditPinNum(h.id);});
     el.addEventListener('mouseenter',()=>hoverLinked(h.id,true));
     el.addEventListener('mouseleave',()=>hoverLinked(h.id,false));
