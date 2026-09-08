@@ -1183,3 +1183,918 @@ const PROTOTYPES_V03=[
 ];
 
 PROTOTYPES.push.apply(PROTOTYPES, PROTOTYPES_V03);
+
+/* ---------- 数据模型（来自《中免海南商城·门店导购升级 数据模型》v0.4；由 AI 写入 prototypes-data.js，编辑版导出时一并保留） ---------- */
+window.DATA_MODELS = {
+  "Product": {
+    "label": "Product（商品）",
+    "sources": [
+      "v04-g4",
+      "v04-u6",
+      "v04-g8",
+      "v04-m3"
+    ],
+    "fields": [
+      {
+        "name": "sku",
+        "type": "string",
+        "required": "是",
+        "format": "商品唯一编码；门店品以C开头，电商品以E开头",
+        "sample": "C016080 / E00123"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": "否",
+        "format": "商品名称",
+        "sample": "浪凡光韵女士浓香水"
+      },
+      {
+        "name": "brand",
+        "type": "string",
+        "required": "否",
+        "format": "品牌",
+        "sample": "浪凡 / 迪奥 / 兰蔻 / 香奈儿"
+      },
+      {
+        "name": "specs",
+        "type": "string[]",
+        "required": "否",
+        "format": "可选规格列表（多规格，逗号分隔存储）",
+        "sample": "30ml,50ml,100ml"
+      },
+      {
+        "name": "spec",
+        "type": "string",
+        "required": "否",
+        "format": "用户/导购选中的规格",
+        "sample": "50ml"
+      },
+      {
+        "name": "price",
+        "type": "number",
+        "required": "否",
+        "format": "单价（元）",
+        "sample": "394.00"
+      },
+      {
+        "name": "img",
+        "type": "string",
+        "required": "否",
+        "format": "商品图路径（本地 assets/generated/）",
+        "sample": "assets/generated/product1.png"
+      },
+      {
+        "name": "store",
+        "type": "number",
+        "required": "否",
+        "format": "门店库存（来源=门店时的可用量）",
+        "sample": "270 / 0(缺货)"
+      },
+      {
+        "name": "warehouse",
+        "type": "number",
+        "required": "否",
+        "format": "电商库存（平台库存，来源=电商时的可用量）",
+        "sample": "88 / 0(缺货)"
+      },
+      {
+        "name": "group",
+        "type": "enum",
+        "required": "否",
+        "format": "左侧导航二级分类（柜组视图分组）",
+        "sample": "我的收藏 / 我的柜组 / 其他柜组"
+      },
+      {
+        "name": "fav",
+        "type": "boolean",
+        "required": "否",
+        "format": "是否收藏（我的收藏）",
+        "sample": "—"
+      },
+      {
+        "name": "source",
+        "type": "enum",
+        "required": "否",
+        "format": "加入清单时选择的库存来源 store/ecommerce",
+        "sample": "来源：门店库存 / 来源：电商库存"
+      }
+    ]
+  },
+  "ShoppingList": {
+    "label": "ShoppingList（导购代客购物清单）",
+    "sources": [
+      "v04-g4",
+      "v04-g3",
+      "v04-g1",
+      "v04-u6"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": "是",
+        "format": "清单编号",
+        "sample": "DD20260903001"
+      },
+      {
+        "name": "time",
+        "type": "string",
+        "required": "否",
+        "format": "创建/发送时间",
+        "sample": "14:52 / 刚刚"
+      },
+      {
+        "name": "items",
+        "type": "Item[]",
+        "required": "否",
+        "format": "商品行集合，见 ListItem",
+        "sample": "—"
+      },
+      {
+        "name": "total",
+        "type": "number",
+        "required": "否",
+        "format": "清单金额合计（Σ price×qty）",
+        "sample": "—"
+      },
+      {
+        "name": "source",
+        "type": "enum",
+        "required": "否",
+        "format": "结算来源；门店与电商不可合并结算，必须同来源",
+        "sample": "—"
+      },
+      {
+        "name": "guide",
+        "type": "object",
+        "required": "否",
+        "format": "挂单导购 {name, store}（每个 item 可不同导购）",
+        "sample": "—"
+      }
+    ]
+  },
+  "ListItem": {
+    "label": "ListItem（清单商品行）",
+    "sources": [
+      "v04-g4",
+      "v04-u6",
+      "v04-g1",
+      "v04-g3"
+    ],
+    "fields": [
+      {
+        "name": "sku",
+        "type": "string",
+        "required": "是",
+        "format": "商品编码",
+        "sample": "C016080"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": "否",
+        "format": "商品名",
+        "sample": "浪凡光韵女士浓香水"
+      },
+      {
+        "name": "spec",
+        "type": "string",
+        "required": "否",
+        "format": "规格",
+        "sample": "50ml"
+      },
+      {
+        "name": "price",
+        "type": "number",
+        "required": "否",
+        "format": "单价",
+        "sample": "394.00"
+      },
+      {
+        "name": "qty",
+        "type": "number",
+        "required": "否",
+        "format": "数量",
+        "sample": "1"
+      },
+      {
+        "name": "img",
+        "type": "string",
+        "required": "否",
+        "format": "图",
+        "sample": "assets/generated/product1.png"
+      },
+      {
+        "name": "source",
+        "type": "enum",
+        "required": "否",
+        "format": "store / ecommerce",
+        "sample": "store"
+      },
+      {
+        "name": "guide",
+        "type": "object",
+        "required": "否",
+        "format": "挂单导购",
+        "sample": "{name:'李婷', store:'三亚国际免税城'}"
+      },
+      {
+        "name": "tags",
+        "type": "string[]",
+        "required": "否",
+        "format": "营销标签",
+        "sample": "政府消费券 / 买即赠 / 满赠"
+      }
+    ]
+  },
+  "Order": {
+    "label": "Order（用户确认订单）",
+    "sources": [
+      "v04-u4",
+      "v04-u6"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": "是",
+        "format": "订单号（清单 id 或新生成）",
+        "sample": "—"
+      },
+      {
+        "name": "time",
+        "type": "string",
+        "required": "否",
+        "format": "下单时间",
+        "sample": "—"
+      },
+      {
+        "name": "items",
+        "type": "ListItem[]",
+        "required": "否",
+        "format": "勾选的商品行（同来源）",
+        "sample": "—"
+      },
+      {
+        "name": "source",
+        "type": "enum",
+        "required": "否",
+        "format": "单一来源 store/ecommerce",
+        "sample": "—"
+      },
+      {
+        "name": "coupon",
+        "type": "Coupon",
+        "required": "否",
+        "format": "使用的优惠券（U4 优惠券卡）",
+        "sample": "—"
+      },
+      {
+        "name": "fee",
+        "type": "OrderFee",
+        "required": "否",
+        "format": "费用明细",
+        "sample": "—"
+      },
+      {
+        "name": "pickup",
+        "type": "Pickup",
+        "required": "否",
+        "format": "提货预约",
+        "sample": "—"
+      },
+      {
+        "name": "trip",
+        "type": "TripVerify",
+        "required": "否",
+        "format": "行程核验（离岛信息）",
+        "sample": "—"
+      },
+      {
+        "name": "agreement",
+        "type": "boolean",
+        "required": "否",
+        "format": "协议勾选（U4 协议 checkbox 联动）",
+        "sample": "—"
+      }
+    ]
+  },
+  "Customer": {
+    "label": "Customer（客户 / 用户）",
+    "sources": [
+      "v04-u6",
+      "v04-g8",
+      "v04-m3",
+      "v04-u5",
+      "v04-u1"
+    ],
+    "fields": [
+      {
+        "name": "name",
+        "type": "string",
+        "required": "是",
+        "format": "客户称呼",
+        "sample": "陈女士"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "required": "否",
+        "format": "手机号（脱敏）",
+        "sample": "138****8888"
+      },
+      {
+        "name": "idcard",
+        "type": "string",
+        "required": "否",
+        "format": "身份证号",
+        "sample": "—"
+      },
+      {
+        "name": "level",
+        "type": "enum?",
+        "required": "否",
+        "format": "客户等级（原型未显式建模，预留）",
+        "sample": "—"
+      }
+    ]
+  },
+  "Consultant": {
+    "label": "Consultant（导购）",
+    "sources": [
+      "v04-g8",
+      "v04-m3",
+      "v04-u6",
+      "v04-g4"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "enum/string",
+        "required": "是",
+        "format": "导购工号（映射键）",
+        "sample": "lin / wang / zhang / liu"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": "否",
+        "format": "导购姓名",
+        "sample": "林小婷 / 王小丽 / 张美琪 / 刘佳怡"
+      },
+      {
+        "name": "store",
+        "type": "enum",
+        "required": "否",
+        "format": "所属门店",
+        "sample": "三亚国际免税城"
+      },
+      {
+        "name": "group",
+        "type": "enum",
+        "required": "否",
+        "format": "所属柜组",
+        "sample": "香化一组（68680401）"
+      },
+      {
+        "name": "phone",
+        "type": "string?",
+        "required": "否",
+        "format": "导购手机（消息管理继承用）",
+        "sample": "—"
+      }
+    ]
+  },
+  "TripVerify": {
+    "label": "TripVerify（离岛行程核验）",
+    "sources": [
+      "v04-u5",
+      "v04-g8",
+      "v04-m3"
+    ],
+    "fields": [
+      {
+        "name": "type",
+        "type": "enum",
+        "required": "是",
+        "format": "离岛方式 flight/train/ship",
+        "sample": "flight"
+      },
+      {
+        "name": "typeLabel",
+        "type": "string",
+        "required": "否",
+        "format": "方式中文",
+        "sample": "飞机 / 火车 / 轮船"
+      },
+      {
+        "name": "tripNo",
+        "type": "string",
+        "required": "是",
+        "format": "航班号 / 车次 / 船次",
+        "sample": "HU7281 / Z202 / 海峡号"
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "required": "是",
+        "format": "离岛时间",
+        "sample": "2026-09-10T14:30"
+      },
+      {
+        "name": "port",
+        "type": "string",
+        "required": "否",
+        "format": "出发/到达 机场/车站/港口",
+        "sample": "—"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": "是",
+        "format": "乘机人姓名",
+        "sample": "—"
+      },
+      {
+        "name": "idcard",
+        "type": "string",
+        "required": "是",
+        "format": "乘机人身份证",
+        "sample": "—"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "required": "否",
+        "format": "联系电话",
+        "sample": "—"
+      },
+      {
+        "name": "passed",
+        "type": "boolean",
+        "required": "否",
+        "format": "核验是否通过",
+        "sample": "true"
+      }
+    ]
+  },
+  "Performance": {
+    "label": "Performance（导购业绩）",
+    "sources": [
+      "v04-g8",
+      "v04-m3"
+    ],
+    "fields": [
+      {
+        "name": "total",
+        "type": "number",
+        "required": "否",
+        "format": "该导购在本单商品金额合计",
+        "sample": "—"
+      },
+      {
+        "name": "counted",
+        "type": "number",
+        "required": "否",
+        "format": "已完成且无退款的商品金额（已计入业绩）",
+        "sample": "—"
+      },
+      {
+        "name": "hasRefund",
+        "type": "boolean",
+        "required": "否",
+        "format": "是否含退款→状态「含退款不计入」",
+        "sample": "—"
+      },
+      {
+        "name": "r15last",
+        "type": "string",
+        "required": "否",
+        "format": "归因规则：15天·末次点击归因",
+        "sample": "—"
+      },
+      {
+        "name": "r1first",
+        "type": "string",
+        "required": "否",
+        "format": "归因规则：加购1天·首次归因",
+        "sample": "—"
+      },
+      {
+        "name": "r7last",
+        "type": "string",
+        "required": "否",
+        "format": "归因规则：7天·末次点击归因",
+        "sample": "—"
+      },
+      {
+        "name": "业绩额",
+        "type": "number",
+        "required": "否",
+        "format": "业绩额（M3 PC 维度派生）",
+        "sample": "—"
+      },
+      {
+        "name": "提成",
+        "type": "number",
+        "required": "否",
+        "format": "提成（M3 PC 维度派生）",
+        "sample": "—"
+      },
+      {
+        "name": "订单数",
+        "type": "number",
+        "required": "否",
+        "format": "订单数（M3 PC 维度派生）",
+        "sample": "—"
+      },
+      {
+        "name": "客单价",
+        "type": "number",
+        "required": "否",
+        "format": "客单价（M3 PC 维度派生）",
+        "sample": "—"
+      }
+    ]
+  },
+  "PerformanceOrder": {
+    "label": "PerformanceOrder（业绩订单）",
+    "sources": [
+      "v04-g8",
+      "v04-m3"
+    ],
+    "fields": [
+      {
+        "name": "no",
+        "type": "string",
+        "required": "是",
+        "format": "订单号",
+        "sample": "ORD20260811001"
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "required": "否",
+        "format": "客户名",
+        "sample": "陈女士"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "required": "否",
+        "format": "客户手机（脱敏）",
+        "sample": "138****8888"
+      },
+      {
+        "name": "time",
+        "type": "datetime",
+        "required": "否",
+        "format": "下单时间",
+        "sample": "2026-08-11 14:52:18"
+      },
+      {
+        "name": "status",
+        "type": "enum",
+        "required": "否",
+        "format": "订单状态（见状态字典）",
+        "sample": "待发货"
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "required": "否",
+        "format": "订单金额",
+        "sample": "42680"
+      },
+      {
+        "name": "products",
+        "type": "PerfItem[]",
+        "required": "否",
+        "format": "商品明细（每行独立携带归属）",
+        "sample": "—"
+      }
+    ]
+  },
+  "PerfItem": {
+    "label": "PerfItem（业绩商品行）",
+    "sources": [
+      "v04-g8",
+      "v04-m3"
+    ],
+    "fields": [
+      {
+        "name": "icon",
+        "type": "string",
+        "required": "否",
+        "format": "图标类（fa-ring 等）",
+        "sample": "—"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": "否",
+        "format": "商品名",
+        "sample": "—"
+      },
+      {
+        "name": "spec",
+        "type": "string",
+        "required": "否",
+        "format": "规格",
+        "sample": "—"
+      },
+      {
+        "name": "qty",
+        "type": "number",
+        "required": "否",
+        "format": "数量",
+        "sample": "—"
+      },
+      {
+        "name": "price",
+        "type": "number",
+        "required": "否",
+        "format": "单价（计入业绩的金额基准）",
+        "sample": "—"
+      },
+      {
+        "name": "store",
+        "type": "enum",
+        "required": "否",
+        "format": "门店",
+        "sample": "—"
+      },
+      {
+        "name": "group",
+        "type": "enum",
+        "required": "否",
+        "format": "柜组",
+        "sample": "—"
+      },
+      {
+        "name": "guide",
+        "type": "string",
+        "required": "否",
+        "format": "归属导购 id（按商品级归因）",
+        "sample": "—"
+      },
+      {
+        "name": "refund",
+        "type": "enum",
+        "required": "否",
+        "format": "退款状态 none/其他（影响业绩计入口径）",
+        "sample": "—"
+      }
+    ]
+  },
+  "Coupon": {
+    "label": "Coupon（优惠券）",
+    "sources": [
+      "v04-u4",
+      "v04-m4",
+      "v04-g3",
+      "v04-u1"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": "是",
+        "format": "券 ID",
+        "sample": "—"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": "否",
+        "format": "券名称",
+        "sample": "—"
+      },
+      {
+        "name": "type",
+        "type": "enum",
+        "required": "否",
+        "format": "满减 / 折扣",
+        "sample": "满减"
+      },
+      {
+        "name": "threshold",
+        "type": "number",
+        "required": "否",
+        "format": "使用门槛（满 X 元）",
+        "sample": "—"
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "required": "否",
+        "format": "减免金额（满减）",
+        "sample": "500"
+      },
+      {
+        "name": "validFrom",
+        "type": "date",
+        "required": "否",
+        "format": "有效期起",
+        "sample": "—"
+      },
+      {
+        "name": "validTo",
+        "type": "date",
+        "required": "否",
+        "format": "有效期止",
+        "sample": "—"
+      },
+      {
+        "name": "status",
+        "type": "enum",
+        "required": "否",
+        "format": "可用 / 已使用 / 已过期",
+        "sample": "已使用"
+      }
+    ]
+  },
+  "OrderFee": {
+    "label": "OrderFee（订单费用明细）",
+    "sources": [
+      "v04-u4"
+    ],
+    "fields": [
+      {
+        "name": "goodsTotal",
+        "type": "number",
+        "required": "是",
+        "format": "商品总额",
+        "sample": "¥1,674.00"
+      },
+      {
+        "name": "discount",
+        "type": "number",
+        "required": "否",
+        "format": "折扣优惠（优惠/券抵，负）",
+        "sample": "-¥500.00"
+      },
+      {
+        "name": "pointsDeduct",
+        "type": "number",
+        "required": "否",
+        "format": "积分抵扣（负）",
+        "sample": "-¥0.00"
+      },
+      {
+        "name": "tax",
+        "type": "number",
+        "required": "否",
+        "format": "行邮税（加）",
+        "sample": "+¥0.00"
+      },
+      {
+        "name": "payable",
+        "type": "number",
+        "required": "否",
+        "format": "应付总额（派生 = 商品总额+折扣+积分+税）",
+        "sample": "—"
+      }
+    ]
+  },
+  "Pickup": {
+    "label": "Pickup（提货预约）",
+    "sources": [
+      "v04-u4"
+    ],
+    "fields": [
+      {
+        "name": "date",
+        "type": "date",
+        "required": "是",
+        "format": "提货日期（未来 7 天可选）",
+        "sample": "—"
+      },
+      {
+        "name": "weekday",
+        "type": "string",
+        "required": "否",
+        "format": "星期（周日~周六）",
+        "sample": "—"
+      },
+      {
+        "name": "timeSlot",
+        "type": "string",
+        "required": "否",
+        "format": "提货时段（09:00~20:30，每 30 分钟一档）",
+        "sample": "—"
+      }
+    ]
+  },
+  "Conversation": {
+    "label": "Conversation / Message（会话与消息）",
+    "sources": [
+      "v04-g2",
+      "v04-g3",
+      "v04-g1",
+      "v04-u1",
+      "v04-m4"
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": "是",
+        "format": "会话 ID",
+        "sample": "—"
+      },
+      {
+        "name": "peer",
+        "type": "object",
+        "required": "否",
+        "format": "对端（导购/客户）",
+        "sample": "—"
+      },
+      {
+        "name": "lastMsg",
+        "type": "string",
+        "required": "否",
+        "format": "最后一条消息预览",
+        "sample": "—"
+      },
+      {
+        "name": "unread",
+        "type": "number",
+        "required": "否",
+        "format": "未读数",
+        "sample": "—"
+      },
+      {
+        "name": "type",
+        "type": "enum",
+        "required": "否",
+        "format": "会话类型",
+        "sample": "—"
+      },
+      {
+        "name": "msgId",
+        "type": "string",
+        "required": "否",
+        "format": "消息 ID",
+        "sample": "—"
+      },
+      {
+        "name": "convId",
+        "type": "string",
+        "required": "否",
+        "format": "所属会话 ID",
+        "sample": "—"
+      },
+      {
+        "name": "sender",
+        "type": "string",
+        "required": "否",
+        "format": "发送方",
+        "sample": "—"
+      },
+      {
+        "name": "msgType",
+        "type": "enum",
+        "required": "否",
+        "format": "消息类型 text/image/product/shoppingList/coupon",
+        "sample": "text"
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "required": "否",
+        "format": "消息内容",
+        "sample": "—"
+      },
+      {
+        "name": "time",
+        "type": "string",
+        "required": "否",
+        "format": "消息时间",
+        "sample": "—"
+      },
+      {
+        "name": "template",
+        "type": "string",
+        "required": "否",
+        "format": "模板消息（M4 消息管理 PC 端扩展）",
+        "sample": "—"
+      },
+      {
+        "name": "massSend",
+        "type": "string",
+        "required": "否",
+        "format": "群发消息（M4 消息管理 PC 端扩展）",
+        "sample": "—"
+      },
+      {
+        "name": "customerInherit",
+        "type": "string",
+        "required": "否",
+        "format": "客户继承至当前账号（M4 消息管理 PC 端扩展）",
+        "sample": "—"
+      }
+    ]
+  }
+};

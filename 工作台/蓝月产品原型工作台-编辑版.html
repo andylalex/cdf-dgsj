@@ -2785,7 +2785,7 @@ function edBuildProtoText(){
     + 'const V04='+v04json+';\n\n'
     + 'const PROTOTYPES_V03='+json+';\n\n'
     + 'PROTOTYPES.push.apply(PROTOTYPES, PROTOTYPES_V03);\n'
-    + (window.DATA_MODELS ? '\n/* ---------- 数据模型（来自《中免海南商城·门店导购升级 数据模型》v0.4；由 AI 写入 prototypes-data.js，编辑版导出时一并保留） ---------- */\nconst DATA_MODELS='+JSON.stringify(window.DATA_MODELS,null,2)+';\n' : '');
+    + (function(){ var dm=(typeof window.DATA_MODELS!=='undefined'&&window.DATA_MODELS)?window.DATA_MODELS:(typeof DATA_MODELS!=='undefined'?DATA_MODELS:null); return dm?'\n/* ---------- 数据模型（来自《中免海南商城·门店导购升级 数据模型》v0.4；由 AI 写入 prototypes-data.js，编辑版导出时一并保留） ---------- */\nconst DATA_MODELS='+JSON.stringify(dm,null,2)+';\n':''; })());
 }
 function edExportProtoData(){
   try{ var text=edBuildProtoText(); $('protoExportText').value=text; $('protoExportModal').classList.add('show'); }
