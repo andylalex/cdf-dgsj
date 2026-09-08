@@ -1933,27 +1933,29 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){endTour();return;}
   if(e.key==='ArrowLeft'){moveTour(-1);return;}
   if(e.key==='ArrowRight'||e.key==='Enter'||e.key===' '){e.preventDefault();moveTour(1);return;}
-  /* ===== 键盘快捷键：侧栏展示前 3 个 + 弹窗全量 ===== */
-  const SHORTCUTS=[
-    {keys:['['], desc:'收起 / 展开 左栏（目录）'},
-    {keys:[']'], desc:'收起 / 展开 右栏（PRD）'},
-    {keys:['\\'], desc:'一键 隐藏 / 显示 左右栏'},
-    {keys:['Alt','↑'], desc:'切换上一个原型'},
-    {keys:['Alt','↓'], desc:'切换下一个原型'},
-    {keys:['C'], desc:'开始 / 结束 走查模式'},
-    {keys:['Esc'], desc:'结束走查'},
-    {keys:['←','→'], desc:'走查 上一步 / 下一步'}
-  ];
-  function kbdCell(k){ return '<kbd>'+k.replace(/</g,'&lt;')+'</kbd>'; }
-  function renderSideKbd(){
-    const wrap=$('sideKbdList'); if(wrap) wrap.innerHTML=SHORTCUTS.slice(0,3).map(s=>'<div class="side-kbd-row">'+s.keys.map(kbdCell).join('<span class="plus">+</span>')+'<span>'+s.desc+'</span></div>').join('');
-    const all=$('kbdAllList'); if(all) all.innerHTML=SHORTCUTS.map(s=>'<div class="kbd-all-row"><div class="k">'+s.keys.map(kbdCell).join('')+'</div><div class="d">'+s.desc+'</div></div>').join('');
-  }
-  renderSideKbd();
-  $('kbdMoreBtn').addEventListener('click',()=>$('shortcutModal').classList.add('show'));
-  $('kbdCloseBtn').addEventListener('click',()=>$('shortcutModal').classList.remove('show'));
-  $('shortcutModal').addEventListener('click',e=>{ if(e.target===$('shortcutModal')) $('shortcutModal').classList.remove('show'); });
 });
+
+/* ===== 键盘快捷键：侧栏展示前 3 个 + 弹窗全量 ===== */
+const SHORTCUTS=[
+  {keys:['['], desc:'收起 / 展开 左栏（目录）'},
+  {keys:[']'], desc:'收起 / 展开 右栏（PRD）'},
+  {keys:['\\'], desc:'一键 隐藏 / 显示 左右栏'},
+  {keys:['Alt','↑'], desc:'切换上一个原型'},
+  {keys:['Alt','↓'], desc:'切换下一个原型'},
+  {keys:['C'], desc:'开始 / 结束 走查模式'},
+  {keys:['Esc'], desc:'结束走查'},
+  {keys:['←','→'], desc:'走查 上一步 / 下一步'}
+];
+function kbdCell(k){ return '<kbd>'+k.replace(/</g,'&lt;')+'</kbd>'; }
+function renderSideKbd(){
+  const wrap=$('sideKbdList'); if(wrap) wrap.innerHTML=SHORTCUTS.slice(0,3).map(s=>'<div class="side-kbd-row">'+s.keys.map(kbdCell).join('<span class="plus">+</span>')+'<span>'+s.desc+'</span></div>').join('');
+  const all=$('kbdAllList'); if(all) all.innerHTML=SHORTCUTS.map(s=>'<div class="kbd-all-row"><div class="k">'+s.keys.map(kbdCell).join('')+'</div><div class="d">'+s.desc+'</div></div>').join('');
+}
+renderSideKbd();
+$('kbdMoreBtn').addEventListener('click',()=>$('shortcutModal').classList.add('show'));
+$('kbdCloseBtn').addEventListener('click',()=>$('shortcutModal').classList.remove('show'));
+$('shortcutModal').addEventListener('click',e=>{ if(e.target===$('shortcutModal')) $('shortcutModal').classList.remove('show'); });
+
 
 function startTour(){
   closeHsPop();
