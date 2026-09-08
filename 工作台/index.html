@@ -2553,7 +2553,9 @@ function edLoadAll(){
           if(it.image)p.image=it.image;
           if(it.images)p.images=it.images.slice();
         }else{
-          p.url=edBlobUrl(it&&it.content||'');
+          var _c=(it&&it.content)||'';
+          if(_c) p.url=edBlobUrl(_c);
+          /* 内置原型被误标 __imported 且 content 为空时，不强行覆盖 url，交由下方 _v03 回退正确文件地址，避免白屏 */
         }
       }
       var _v03=(typeof PROTOTYPES_V03!=="undefined")&&PROTOTYPES_V03.find(function(x){return x.id===p.id;});
@@ -2562,6 +2564,8 @@ function edLoadAll(){
         if(_v03.flow)p.flow=_v03.flow;
         if(_v03.name)p.name=_v03.name;
         if(_v03.group)p.group=p.group;
+        if(!p.url && _v03.url) p.url=_v03.url;
+        if(!p.srcdoc && _v03.srcdoc) p.srcdoc=_v03.srcdoc;
       }
       PROTOTYPES.push(p);
     });

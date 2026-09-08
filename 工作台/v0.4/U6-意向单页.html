@@ -350,8 +350,8 @@
       id: 'DD20260903001',
       time: '14:52',
       items: [
-        { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', source: 'store', guide: { name: '李婷', store: '三亚国际免税城' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] },
-        { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', source: 'store', guide: { name: '王芳', store: '海口国际免税城' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] }
+        { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', images: ['assets/generated/product1.png', 'assets/generated/product1_detail.png'], source: 'store', guide: { name: '李婷', store: '三亚国际免税城' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] },
+        { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', images: ['assets/generated/product2.png', 'assets/generated/product2_detail.png'], source: 'store', guide: { name: '王芳', store: '海口国际免税城' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] }
       ]
     };
 
@@ -368,6 +368,7 @@
       if (!it.guide || !it.guide.name) it.guide = { name: '导购', store: '' };
       if (!Array.isArray(it.tags)) it.tags = it.source === 'store' ? ['政府消费券'] : [];
       if (!Array.isArray(it.promos)) it.promos = [];
+      if (!Array.isArray(it.images) || !it.images.length) it.images = [it.img || 'assets/generated/product1.png'];
       if (typeof it.checked !== 'boolean') it.checked = true;
       if (!it.qty) it.qty = 1;
       return it;
@@ -420,7 +421,7 @@
         var proTags = (it.promos || []).map(function(t){return '<span class="tag-promo">' + t + '</span>';}).join('');
         return '<label class="item-row flex gap-3 items-start" data-idx="' + idx + '">' +
           '<input type="checkbox" class="item-check w-5 h-5 rounded accent-coral-500 shrink-0 mt-1" ' + (it.checked ? 'checked' : '') + ' onchange="toggleItem(' + idx + ', this.checked)">' +
-          '<img src="' + (it.img || 'assets/generated/product1.png') + '" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility=\'hidden\'">' +
+          '<img src="' + (it.img || 'assets/generated/product1.png') + '" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0 cursor-pointer" onclick="openItemGallery(' + idx + ');event.preventDefault();event.stopPropagation()" onerror="this.style.visibility=\'hidden\'">' +
           '<div class="flex-1 min-w-0">' +
             '<p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">' + it.name + '</p>' +
             '<p class="text-[11px] text-gray-500 mt-0.5">商品码：' + (it.sku || '-') + '</p>' +
@@ -543,6 +544,54 @@
       setTimeout(function () { el.classList.add('hidden'); }, 1600);
     }
 
+    // ===== 商品图片画廊（点击商品图片弹出；底部页码 + 左右箭头置于页码前后；图片裁切遮挡 15%） =====
+    var lbImages = [];
+    var lbIndex = 0;
+    function openItemGallery(idx) {
+      var list = getList();
+      var it = list.items[idx];
+      if (!it) return;
+      lbImages = (it.images && it.images.length) ? it.images.slice() : [it.img || 'assets/generated/product1.png'];
+      lbIndex = 0;
+      renderLightbox();
+      document.getElementById('imgLightbox').classList.remove('hidden');
+    }
+    function renderLightbox() {
+      document.getElementById('lbImg').src = lbImages[lbIndex];
+      var single = lbImages.length <= 1;
+      document.getElementById('lbPrev').style.display = single ? 'none' : 'flex';
+      document.getElementById('lbNext').style.display = single ? 'none' : 'flex';
+      var pages = document.getElementById('lbPages');
+      pages.innerHTML = '';
+      lbImages.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = (i + 1);
+        b.onclick = function (e) { e.stopPropagation(); goToImg(i); };
+        b.style.cssText = 'width:26px;height:26px;border-radius:7px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;' +
+          (i === lbIndex ? 'background:#E02E24;color:#fff;' : 'background:rgba(255,255,255,.2);color:#fff;');
+        pages.appendChild(b);
+      });
+    }
+    function goToImg(i) {
+      if (i < 0 || i >= lbImages.length || i === lbIndex) return;
+      lbIndex = i;
+      renderLightbox();
+    }
+    function prevImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+      renderLightbox();
+    }
+    function nextImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex + 1) % lbImages.length;
+      renderLightbox();
+    }
+    function closeLightbox() {
+      document.getElementById('imgLightbox').classList.add('hidden');
+    }
+
         window.addEventListener('DOMContentLoaded', function () {
       // 默认展示门店 demo 商品：每次进入都用 demo 重置清单（门店项默认勾选），
       // 保证打开页面就是门店商品，不受历史 localStorage 残留影响。
@@ -555,5 +604,21 @@
 
   </script>
 
+
+  <!-- 商品图片画廊弹窗（点击商品图片弹出；左右箭头置于页码前后；图片裁切遮挡 15%） -->
+  <div id="imgLightbox" class="hidden fixed inset-0 z-[90] flex items-center justify-center" style="background:rgba(0,0,0,.55);padding:16px" onclick="closeLightbox()" data-page-node-id="imgLightbox">
+    <div onclick="event.stopPropagation()" style="width:100%;max-width:414px;background:#0b0b0d;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.32)">
+      <div style="position:relative;background:#111;height:min(82vw,420px);overflow:hidden;box-shadow:inset 0 0 0 8px #1f2937">
+        <img id="lbImg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:opacity .25s ease" alt="商品图片" data-page-node-id="lbImg">
+        <button onclick="closeLightbox()" aria-label="关闭" style="position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.35);z-index:5;transition:background .2s" onmouseover="this.style.background='rgba(0,0,0,.6)'" onmouseout="this.style.background='rgba(0,0,0,.35)'"><i class="fas fa-times" style="font-size:16px"></i></button>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:15%;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0));z-index:2"></div>
+        <div id="lbBar" style="position:absolute;left:0;right:0;bottom:11px;display:flex;align-items:center;justify-content:center;gap:10px;z-index:3">
+          <button id="lbPrev" onclick="event.stopPropagation();prevImg()" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.32)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">&#8249;</button>
+          <div id="lbPages" style="display:flex;gap:8px"></div>
+          <button id="lbNext" onclick="event.stopPropagation();nextImg()" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.32)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body></html>

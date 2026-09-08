@@ -2878,7 +2878,9 @@ function edApplyImportedData(){
       if(it&&it.kind==='image'){ if(it.image)p.image=it.image; if(it.images)p.images=(it.images||[]).slice(); }
     }else{
       var it=window.IMPORTED_CONTENT&&window.IMPORTED_CONTENT[p.id];
-      p.url=edBlobUrl(it&&it.content||'');
+      var _c=(it&&it.content)||'';
+          if(_c) p.url=edBlobUrl(_c);
+          /* 内置原型被误标 __imported 且 content 为空时，不强行覆盖 url，交由下方 _v03 回退正确文件地址，避免白屏 */
     }
     PROTOTYPES.push(p);
   });
