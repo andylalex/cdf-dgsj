@@ -2228,6 +2228,7 @@ function renderPane(){
   body.querySelectorAll('.prd-item').forEach(it=>{
     it.addEventListener('mouseenter',()=>hoverLinked(it.dataset.id,true));
     it.addEventListener('mouseleave',()=>hoverLinked(it.dataset.id,false));
+    it.addEventListener('click',()=>scrollProtoToHotspot(it.dataset.id));
   });
   /* 编辑增强：条目的编辑 / 删除（阻止冒泡，避免触发定位走查） */
   body.querySelectorAll('.pi-edit').forEach(b=>b.addEventListener('click',e=>{
@@ -2254,6 +2255,36 @@ function focusHotspot(id){
   openHsPop(id);
   const hs=hotspotEl(id);if(!hs)return;
   hs.style.animation='none';
+}
+
+/* 右侧组件/规则卡片点击 → 原型展示区滚动到对应组件位置（优先 selector，降级百分比坐标） */
+function scrollProtoToHotspot(id){
+  const p=current(); if(!p) return;
+  const h=p.hotspots.find(x=>x.id===id); if(!h) return;
+  try{
+    if(p.kind==='image'){
+      const sc=document.getElementById('imgScroll');
+      if(sc && h.y!=null){ sc.scrollTo({top:Math.max(0,(h.y/100)*sc.scrollHeight - sc.clientHeight/2),behavior:'smooth'}); }
+    }else{
+      const idoc=frame.contentDocument; if(!idoc) return;
+      let done=false;
+      if(h.selector){
+        const target=idoc.querySelector(h.selector);
+        if(target){ target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}); done=true; }
+      }
+      if(!done){
+        const sc=findScrollContainer(idoc)||(idoc.scrollingElement||idoc.documentElement);
+        if(sc && h.y!=null){
+          const dh=sc.scrollHeight||idoc.documentElement.scrollHeight;
+          sc.scrollTo({top:Math.max(0,(h.y/100)*dh - sc.clientHeight/2),behavior:'smooth'});
+        }
+      }
+    }
+  }catch(e){}
+  hoverLinked(id,true);
+  setTimeout(()=>hoverLinked(id,false),900);
+  const it=document.querySelector('.prd-item[data-id="'+id+'"]');
+  if(it){ it.classList.add('sel'); setTimeout(()=>it.classList.remove('sel'),1400); }
 }
 
 /* ============================================================
