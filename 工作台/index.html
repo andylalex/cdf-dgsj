@@ -109,7 +109,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .layout{
   position:relative;
   display:grid;
-  grid-template-columns:var(--left-w,264px) minmax(0,1fr) var(--right-w,408px);
+  grid-template-columns:var(--left-w,200px) minmax(0,1fr) var(--right-w,320px);
   height:calc(100vh - 54px);
   min-width:0;
   transition:grid-template-columns .28s cubic-bezier(.4,0,.2,1);
@@ -125,16 +125,16 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .collapse-handle{position:absolute;top:50%;z-index:30;width:24px;height:72px;background:var(--panel-3);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:left .28s cubic-bezier(.4,0,.2,1),right .28s cubic-bezier(.4,0,.2,1),width .28s,height .28s,background .15s,color .15s,border-color .15s,box-shadow .15s}
 .collapse-handle:hover{background:var(--accent-dim);color:var(--accent);border-color:rgba(56,189,248,.45)}
 .collapse-handle svg{width:15px;height:15px;transition:transform .28s cubic-bezier(.4,0,.2,1)}
-.collapse-handle.left{left:calc(var(--left-w,264px) - 12px);transform:translateY(-50%);border-radius:0 8px 8px 0;border-left:none}
-.collapse-handle.right{right:calc(var(--right-w,408px) - 12px);transform:translateY(-50%);border-radius:8px 0 0 8px;border-right:none}
-.layout.collapse-left .collapse-handle.left{left:14px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
-.layout.collapse-right .collapse-handle.right{right:14px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),-2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
+.collapse-handle.left{left:calc(var(--left-w,200px) + 2px);transform:translateY(-50%);border-radius:0 8px 8px 0;border-left:none}
+.collapse-handle.right{right:calc(var(--right-w,320px) + 2px);transform:translateY(-50%);border-radius:8px 0 0 8px;border-right:none}
+.layout.collapse-left .collapse-handle.left{left:2px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
+.layout.collapse-right .collapse-handle.right{right:2px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),-2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
 .layout.collapse-left .collapse-handle.left:hover,.layout.collapse-right .collapse-handle.right:hover{background:rgba(56,189,248,.32);box-shadow:0 0 22px rgba(56,189,248,.55);animation:none}
 .layout.collapse-left .collapse-handle.left svg,.layout.collapse-right .collapse-handle.right svg{transform:rotate(180deg);width:16px;height:16px}
 /* 分栏中间线独立拖拽条：只负责拖拽调宽，不承载折叠按钮（按钮仅点击折叠，二者分离避免点击/拖拽冲突） */
 .vdivider{position:absolute;top:0;bottom:0;width:10px;z-index:31;cursor:col-resize;transform:translateX(-50%);touch-action:none}
-.vdivider.left{left:var(--left-w,264px)}
-.vdivider.right{right:var(--right-w,408px);transform:translateX(50%)}
+.vdivider.left{left:var(--left-w,200px)}
+.vdivider.right{right:var(--right-w,320px);transform:translateX(50%)}
 .vdivider::after{content:"";position:absolute;top:8px;bottom:8px;left:50%;width:2px;transform:translateX(-50%);border-radius:2px;background:transparent;transition:background .15s}
 .vdivider:hover::after,.layout.resizing .vdivider::after{background:rgba(56,189,248,.65)}
 @keyframes handlePulse{0%,100%{box-shadow:0 0 10px rgba(56,189,248,.25)}50%{box-shadow:0 0 22px rgba(56,189,248,.55)}}
@@ -2066,7 +2066,7 @@ function setSideCollapsed(side,c){
   const layout=document.querySelector('.layout'); if(!layout)return;
   const cls=(side==='left')?'collapse-left':'collapse-right';
   const varName=side==='left'?'--left-w':'--right-w';
-  const defW=side==='left'?264:408;
+  const defW=side==='left'?200:320;
   const _v=layout.style.getPropertyValue(varName).trim();
   const curVal=_v?parseFloat(_v):defW;
   if(layout.classList.contains(cls)===c)return;
@@ -2107,7 +2107,7 @@ document.getElementById('handleRight').addEventListener('click',toggleRight);
 function bindResize(handle,side){
   const layout=document.querySelector('.layout'); if(!layout||!handle)return;
   const varName=side==='left'?'--left-w':'--right-w';
-  const defW=side==='left'?264:408;
+  const defW=side==='left'?200:320;
   const MIN=side==='left'?200:320;   /* 最小宽度 */
   const MAX=side==='left'?460:640;   /* 最大宽度 */
   const cls=side==='left'?'collapse-left':'collapse-right';
