@@ -233,11 +233,11 @@
 
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}
-    /* 购物清单卡片：商品行分隔线，避免间距重叠 */
+    /* 意向单卡片：商品行分隔线，避免间距重叠 */
     .order-item{}
     .order-item + .order-item { border-top:1px solid #f0f1f3; margin-top:12px; padding-top:12px; }
 
-    /* 购物清单角标补齐 */
+    /* 意向单角标补齐 */
     .leading-4{line-height:1rem;}
     .-right-0\.5{right:-0.125rem;}
 </style></head>
@@ -262,8 +262,13 @@
         </button>
         <img src="assets/avatars/linxiaoting.svg" class="w-10 h-10 rounded-full bg-gray-100" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
         <div data-page-node-id="U1HeaderInfo">
-          <h1 class="text-base font-semibold text-gray-900" data-page-node-id="U1HeaderName">林小婷 · 专属导购</h1>
-          
+          <h1 class="text-base font-semibold text-gray-900" data-page-node-id="U1HeaderName">林小婷 · 奢品顾问</h1>
+          <p class="text-[11px] text-gray-400 mt-0.5" data-page-node-id="U1HeaderFloor">雅诗兰黛专柜 · 2F 美妆区</p>
+          <button onclick="openStoreNav()" class="flex items-center gap-1 text-[11px] text-coral-600 mt-0.5 font-medium" data-page-node-id="U1HeaderStore">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>海口国际免税城</span>
+            <i class="fas fa-directions text-[10px]"></i>
+          </button>
         </div>
       </div>
       <button class="p-2 hover:bg-gray-100 rounded-full transition" data-page-node-id="U1More">
@@ -306,31 +311,49 @@
         </div>
       </div>
 
-      <!-- 购物清单卡片 -->
+      <!-- 意向单卡片 -->
       <div id="pendingOrderBubble" class="flex gap-2.5" data-page-node-id="U1PendingOrder">
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" data-page-node-id="U1PendingAvatar" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
         <div class="max-w-[92%] w-full" data-page-node-id="U1PendingWrap">
-          <a href="U6-购物清单页.html" class="block order-card bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden" data-page-node-id="U1PendingCard">
+          <div class="block order-card bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden cursor-pointer" data-page-node-id="U1PendingCard" onclick="openPendingGallery()">
             <div class="bg-coral-50 px-4 py-3 flex items-center justify-between border-b border-coral-100" data-page-node-id="U1PendingHead">
               <div class="flex items-center gap-2" data-page-node-id="U1PendingHeadLeft">
                 <i class="fas fa-clipboard-list text-coral-500 text-[15px]" data-page-node-id="U1PendingIcon"></i>
-                <span class="font-semibold text-[14px] text-gray-900" data-page-node-id="U1PendingTitle">导购为您挑选的购物清单</span>
+                <span class="font-semibold text-[14px] text-gray-900" data-page-node-id="U1PendingTitle">导购为您挑选的意向单</span>
               </div>
             </div>
             <div class="p-3.5" data-page-node-id="U1PendingBody">
               <div id="pOrderItems" class="mb-3" data-page-node-id="U1PendingItems"></div>
               <div class="flex items-center justify-between border-t border-gray-100 pt-3" data-page-node-id="U1PendingFooter">
                 <span class="text-[12px] text-gray-500" data-page-node-id="U1PendingCount">共 <span id="pOrderCount" data-page-node-id="nFdPfAzZCzJdmDQpPDDZep">0</span> 件</span>
-                <span class="text-[11px] text-gray-400" data-page-node-id="U1PendingTip">可在清单中调整数量</span>
-              </div>
-              <div class="mt-3 pt-3 border-t border-gray-100" data-page-node-id="U1PendingAction">
-                <span class="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-coral-500 text-white text-[14px] font-semibold" data-page-node-id="U1PendingBtn">
-                  查看并确认清单
-                  <i class="fas fa-chevron-right text-[11px]" data-page-node-id="U1PendingArrow"></i>
-                </span>
+                <a href="U6-意向单页.html" class="flex items-center justify-center gap-1 px-2.5 py-1 rounded-lg bg-coral-500 text-white text-[12px] font-semibold" data-page-node-id="U1PendingBtn" onclick="event.stopPropagation()">
+                  查看意向单
+                  <i class="fas fa-chevron-right text-[10px]" data-page-node-id="U1PendingArrow"></i>
+                </a>
               </div>
             </div>
-          </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 推荐商品卡片（用户端收到） -->
+      <div class="flex gap-2.5" data-page-node-id="prodCardMsgU1">
+        <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
+        <div class="max-w-[90%] w-full">
+          <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100 cursor-pointer" onclick="openProductGallery()">
+            <div class="flex items-start gap-3 p-3">
+              <img src="assets/generated/product1.png" class="w-16 h-16 rounded-xl object-cover bg-gray-100 shrink-0" alt="" onerror="this.style.visibility='hidden'">
+              <div class="flex-1 min-w-0">
+                <p class="text-[13px] font-semibold text-gray-900 leading-snug">浪凡光韵女士浓香水</p>
+                <p class="text-[11px] text-gray-400 mt-1">50ml</p>
+              </div>
+              <div class="shrink-0 text-right flex flex-col items-end gap-2">
+                <p class="text-[15px] font-bold text-coral-600 leading-tight">¥394.00</p>
+                <button onclick="addToMyList(this); event.stopPropagation()" class="px-3 py-1.5 rounded-lg bg-coral-500 text-white text-[12px] font-semibold transition" data-page-node-id="U1AddListBtn">加入意向单</button>
+              </div>
+            </div>
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 ml-1">14:55</span>
         </div>
       </div>
 
@@ -339,7 +362,7 @@
     <!-- 底部输入 -->
     <div class="bg-white border-t border-gray-100 p-3 shrink-0" data-page-node-id="U1Footer">
       <div class="flex items-center gap-2" data-page-node-id="U1FooterInner">
-                <button onclick="location.href='U6-购物清单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
+                <button onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
           <i class="fas fa-clipboard-list text-[19px]"></i>
           <span id="U1ListBadge" class="hidden absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-coral-500 text-white text-[10px] leading-4 text-center" data-page-node-id="U1ListBadge">0</span>
         </button>
@@ -364,8 +387,8 @@
       id: 'DD20260903001',
       time: '14:52',
       items: [
-        { name: '浪凡光韵女士浓香水', price: 394.00, qty: 1, img: 'assets/generated/product1.png', sourceLabel: '门店库存', spec: '50ml' },
-        { name: '迪奥真我香水 EDT', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', sourceLabel: '门店库存', spec: '100ml' }
+        { name: '浪凡光韵女士浓香水', price: 394.00, qty: 1, img: 'assets/generated/product1.png', imgs: ['assets/generated/product1.png','assets/generated/b1_detail.png'], sourceLabel: '门店库存', spec: '50ml' },
+        { name: '迪奥真我香水 EDT', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', imgs: ['assets/generated/product2.png','assets/generated/b2_detail.png'], sourceLabel: '门店库存', spec: '100ml' }
       ]
     };
 
@@ -434,9 +457,6 @@
           '</div>' +
         '</div>';
       }).join('');
-      if (order.items.length > 3) {
-        s += '<p class="text-[11px] text-gray-400 pl-1">...等 ' + order.items.length + ' 件商品</p>';
-      }
       wrap.innerHTML = s;
       var count = order.items.reduce(function(acc, i) { return acc + (i.qty || 1); }, 0);
       document.getElementById('pOrderCount').textContent = count;
@@ -460,7 +480,183 @@
       var chat = document.getElementById('chat');
       if (chat) chat.scrollTop = chat.scrollHeight;
     });
+
+    function showToast(text) {
+      var t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = text;
+      t.classList.remove('hidden');
+      setTimeout(function(){ t.classList.add('hidden'); }, 1500);
+    }
+    function addToMyList(btn) {
+      btn.textContent = '已加入意向单';
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      try {
+        var l = JSON.parse(localStorage.getItem('pendingOrderForUser') || 'null');
+        if (!l || !l.items) l = { id:'DD20260903001', items:[], time:'刚刚' };
+        var exists = l.items.some(function(i){ return i.name && i.name.indexOf('浪凡光韵') >= 0; });
+        if (!exists) {
+          l.items.push({ name:'浪凡光韵女士浓香水', price:394.00, qty:1, img:'assets/generated/product1.png', sourceLabel:'门店库存', spec:'50ml' });
+        }
+        localStorage.setItem('pendingOrderForUser', JSON.stringify(l));
+      } catch(e) {}
+      if (typeof updateListBadge === 'function') updateListBadge();
+      showToast('已加入意向单');
+    }
+    // ===== 门店导航弹窗 =====
+    function openStoreNav() {
+      document.getElementById('storeNavModal').classList.remove('hidden');
+    }
+    function closeStoreNav() {
+      document.getElementById('storeNavModal').classList.add('hidden');
+    }
+    function startNav() {
+      closeStoreNav();
+      showToast('正在为你打开门店导航…');
+    }
+
+    // ===== 图片画廊（图片类型切换 + 裁切遮挡 10%，手机宽度内） =====
+    var LB_SETS = {};      // 图集集合：{ key: { title, imgs } }
+    var lbKey = '';        // 当前图集类型
+    var lbImages = [];
+    var lbIndex = 0;
+    var lbTouchX = null;
+    function buildGallerySets() {
+      var product = ['assets/generated/product1.png', 'assets/generated/b1_detail.png'];
+      var pending = [];
+      var order = currentOrder();
+      (order.items || []).forEach(function(it) {
+        if (it.imgs && it.imgs.length) pending = pending.concat(it.imgs);
+        else if (it.img) pending.push(it.img);
+      });
+      LB_SETS = {
+        product: { title: '商品图集', imgs: product },
+        pending: { title: '意向单图集', imgs: pending }
+      };
+    }
+    function openLightbox(key, idx) {
+      buildGallerySets();
+      if (!LB_SETS[key]) key = 'product';
+      lbKey = key;
+      lbImages = (LB_SETS[key].imgs || []).filter(Boolean);
+      if (!lbImages.length) lbImages = ['assets/generated/product1.png'];
+      lbIndex = idx || 0;
+      if (lbIndex >= lbImages.length) lbIndex = 0;
+      renderTabs();
+      renderLightbox();
+      document.getElementById('imgLightbox').classList.remove('hidden');
+    }
+    function renderTabs() {
+      var bar = document.getElementById('lbTabs');
+      if (!bar) return;
+      bar.innerHTML = '';
+      Object.keys(LB_SETS).forEach(function(k) {
+        var s = LB_SETS[k];
+        var active = (k === lbKey);
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = s.title;
+        b.onclick = function(e) { e.stopPropagation(); switchGallery(k); };
+        b.style.cssText = 'font-size:13px;padding:5px 14px;border-radius:999px;font-weight:' + (active ? '600' : '500') + ';transition:all .2s;' +
+          (active ? 'background:#E02E24;color:#fff;' : 'background:rgba(255,255,255,.22);color:#fff;');
+        bar.appendChild(b);
+      });
+    }
+    function switchGallery(key) {
+      if (key === lbKey) return;
+      lbKey = key;
+      lbImages = (LB_SETS[key].imgs || []).filter(Boolean);
+      if (!lbImages.length) lbImages = ['assets/generated/product1.png'];
+      lbIndex = 0;
+      renderTabs();
+      renderLightbox();
+    }
+    function renderLightbox() {
+      document.getElementById('lbImg').src = lbImages[lbIndex];
+      var single = lbImages.length <= 1;
+      document.getElementById('lbPrev').style.display = single ? 'none' : 'flex';
+      document.getElementById('lbNext').style.display = single ? 'none' : 'flex';
+      var dots = document.getElementById('lbDots');
+      dots.innerHTML = '';
+      lbImages.forEach(function(_, i) {
+        var d = document.createElement('span');
+        d.style.width = '8px';
+        d.style.height = '8px';
+        d.style.borderRadius = '50%';
+        d.style.transition = 'all .2s';
+        d.style.background = (i === lbIndex) ? '#E02E24' : 'rgba(0,0,0,.18)';
+        dots.appendChild(d);
+      });
+      var counter = document.getElementById('lbCounter');
+      if (counter) counter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+    function prevImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+      renderLightbox();
+    }
+    function nextImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex + 1) % lbImages.length;
+      renderLightbox();
+    }
+    function closeLightbox() {
+      document.getElementById('imgLightbox').classList.add('hidden');
+    }
+    function openProductGallery() {
+      openLightbox('product', 0);
+    }
+    function openPendingGallery() {
+      openLightbox('pending', 0);
+    }
+    var lb = document.getElementById('imgLightbox');
+    if (lb) {
+      lb.addEventListener('touchstart', function(e){ lbTouchX = e.touches[0].clientX; }, {passive:true});
+      lb.addEventListener('touchend', function(e){
+        if (lbTouchX === null) return;
+        var dx = e.changedTouches[0].clientX - lbTouchX;
+        if (dx > 40) prevImg(); else if (dx < -40) nextImg();
+        lbTouchX = null;
+      }, {passive:true});
+    }
   </script>
 
 
+  <div id="toast" class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 text-white px-4 py-2 rounded-lg text-[13px] z-[80]" data-page-node-id="U1Toast"></div>
+  <!-- 门店导航弹窗 -->
+  <div id="storeNavModal" class="hidden fixed inset-0 z-[80] flex items-end justify-center bg-black/40" onclick="closeStoreNav()" data-page-node-id="storeNavModal">
+    <div class="bg-white w-full max-w-[414px] rounded-t-2xl p-5" onclick="event.stopPropagation()">
+      <p class="font-semibold text-[16px] text-gray-900" data-page-node-id="storeNavTitle">门店导航</p>
+      <div class="mt-3 flex items-start gap-2">
+        <i class="fas fa-store text-coral-500 mt-1"></i>
+        <div>
+          <p class="text-[14px] text-gray-900 font-medium" data-page-node-id="storeNavName">海口国际免税城</p>
+          <p class="text-[12px] text-gray-500 mt-1" data-page-node-id="storeNavAddr">海南省海口市秀英区西海岸 · 2F 美妆区 雅诗兰黛专柜</p>
+        </div>
+      </div>
+      <button onclick="startNav()" class="mt-4 w-full py-3 rounded-full bg-coral-500 text-white text-[15px] font-semibold" data-page-node-id="storeNavBtn">导航前往</button>
+    </div>
+  </div>
+
+  <!-- 图片画廊弹窗（图片类型切换 Tab + 箭头 + 序号均在图片区域内；参考工作台图片/幻灯片组件） -->
+  <div id="imgLightbox" class="hidden fixed inset-0 z-[90] flex items-center justify-center" style="background:rgba(0,0,0,.55);padding:16px" onclick="closeLightbox()" data-page-node-id="imgLightbox">
+    <div onclick="event.stopPropagation()" style="width:100%;max-width:414px;background:#0b0b0d;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.32)">
+      <div style="position:relative;background:#111;height:min(82vw,420px);overflow:hidden;box-shadow:inset 0 0 0 8px #1f2937">
+        <img id="lbImg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:opacity .25s ease" alt="商品图片" data-page-node-id="lbImg">
+        <!-- 顶部：图片类型切换 Tab（遮挡图片上方约 10%）+ 关闭 -->
+        <div style="position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;z-index:5;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,0))">
+          <div id="lbTabs" style="display:flex;gap:8px;overflow:hidden"></div>
+          <button onclick="closeLightbox()" aria-label="关闭" style="width:30px;height:30px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.35);transition:background .2s" onmouseover="this.style.background='rgba(0,0,0,.6)'" onmouseout="this.style.background='rgba(0,0,0,.35)'"><i class="fas fa-times" style="font-size:16px"></i></button>
+        </div>
+        <button id="lbPrev" onclick="event.stopPropagation();prevImg()" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.20);color:#374151;font-size:20px;display:flex;align-items:center;justify-content:center;z-index:4">&#8249;</button>
+        <button id="lbNext" onclick="event.stopPropagation();nextImg()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.20);color:#374151;font-size:20px;display:flex;align-items:center;justify-content:center;z-index:4">&#8250;</button>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:10%;background:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0));z-index:2"></div>
+        <div style="position:absolute;left:0;right:0;bottom:9px;display:flex;align-items:center;justify-content:center;gap:8px;z-index:3">
+          <div id="lbDots" style="display:flex;gap:6px"></div>
+          <span id="lbCounter" style="color:rgba(255,255,255,.92);font-size:12px;font-weight:600" data-page-node-id="lbCounter"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </body></html>

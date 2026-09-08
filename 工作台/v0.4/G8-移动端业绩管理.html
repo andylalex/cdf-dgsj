@@ -676,8 +676,8 @@
 
     // 月份范围：period='cur' 当前月，'last' 上月
     function monthRange(period) {
-      const now = new Date();
-      let y = now.getFullYear(), m = now.getMonth();
+      // 固定基准月：2026年8月（cur=8月, last=7月），时间筛选默认即 8 月
+      let y = 2026, m = 7;
       if (period === 'last') { m -= 1; if (m < 0) { m = 11; y -= 1; } }
       const pad = n => (n < 10 ? '0' + n : '' + n);
       const end = new Date(y, m + 1, 0).getDate();

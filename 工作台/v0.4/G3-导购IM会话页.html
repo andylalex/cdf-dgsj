@@ -250,13 +250,13 @@
 <body class="bg-gray-100" data-page-node-id="G3NewBody" style="">
   <div class="phone-frame shadow-2xl overflow-hidden flex flex-col" data-page-node-id="G3NewFrame">
 <!-- 状态栏 -->
-<div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0">
-  <span class="text-[14px] font-semibold tracking-tight">9:41</span>
-  <div class="flex items-center gap-1.5 text-black">
-    <span class="text-[10px] font-semibold">5G</span>
-    <i class="fas fa-signal text-[11px]"></i>
-    <i class="fas fa-wifi text-[11px]"></i>
-    <i class="fas fa-battery-three-quarters text-[15px]"></i>
+<div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0" data-page-node-id="zPJpeme7gDWFePHs95iRFw">
+  <span class="text-[14px] font-semibold tracking-tight" data-page-node-id="j2jafrxqeBtJvr2p2EWSJy">9:41</span>
+  <div class="flex items-center gap-1.5 text-black" data-page-node-id="lMmrfevGpxdiqfYKTpp9pT">
+    <span class="text-[10px] font-semibold" data-page-node-id="POX8abGnmU3ayiEzC7Hqz1">5G</span>
+    <i class="fas fa-signal text-[11px]" data-page-node-id="efd9zamFEjhMg2p2MRgGqS"></i>
+    <i class="fas fa-wifi text-[11px]" data-page-node-id="R2qeVzHHWAa299Nw0YsRfW"></i>
+    <i class="fas fa-battery-three-quarters text-[15px]" data-page-node-id="SqAUD0AJzZRghSrO2dByQ4"></i>
   </div>
 </div>
 
@@ -278,7 +278,7 @@
     </div>
 
     <!-- 聊天区 -->
-    <div id="chat" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-4 bg-gray-50" data-page-node-id="chat">
+    <div id="chat" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-4 bg-white" data-page-node-id="chat">
       <div class="text-center text-xs text-gray-400" data-page-node-id="timeDivider">今天 14:30</div>
 
       <!-- 顾客开场 -->
@@ -322,7 +322,7 @@
         </div>
       </div>
 
-      <!-- 购物清单卡片 -->
+      <!-- 意向单卡片 -->
       <div id="pendingOrderBubble" class="flex gap-2.5" data-page-node-id="pendingOrderWrap">
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" data-page-node-id="pendingAvatar" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
         <div class="max-w-[92%] w-full" data-page-node-id="pendingCardWrap">
@@ -330,18 +330,42 @@
             <div class="bg-coral-50 px-4 py-3 flex items-center justify-between border-b border-coral-100" data-page-node-id="pendingCardHead">
               <div class="flex items-center gap-2" data-page-node-id="pendingCardHeadLeft">
                 <i class="fas fa-clipboard-list text-coral-500 text-[15px]" data-page-node-id="pendingCardIcon"></i>
-                <span class="font-semibold text-[14px] text-gray-900" data-page-node-id="pendingCardTitle">购物清单</span>
+                <span class="font-semibold text-[14px] text-gray-900" data-page-node-id="pendingCardTitle" style="">意向单</span>
               </div>
               
             </div>
             <div class="p-3.5" data-page-node-id="pendingCardBody">
-              <div id="pOrderItems" class="mb-3" data-page-node-id="pendingCardItems"><div class="flex items-center gap-2.5 order-item"><img src="assets/generated/product1.png" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5">50ml</p></div><div class="text-right shrink-0"><p class="text-[13px] font-semibold text-gray-900 leading-tight">¥394.00</p></div></div><div class="flex items-center gap-2.5 order-item"><img src="assets/generated/product2.png" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">迪奥真我香水 EDT</p><p class="text-[11px] text-gray-400 mt-0.5">100ml</p></div><div class="text-right shrink-0"><p class="text-[13px] font-semibold text-gray-900 leading-tight">¥1,280.00</p></div></div><div class="flex items-center gap-2.5 order-item"><img src="assets/generated/product3.png" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">雅诗兰黛小棕瓶精华</p><p class="text-[11px] text-gray-400 mt-0.5">50ml</p></div><div class="text-right shrink-0"><p class="text-[13px] font-semibold text-gray-900 leading-tight">¥760.00</p></div></div><p class="text-[11px] text-gray-400 pl-1 mt-3">...等 5 件商品</p></div>
+              <div id="pOrderItems" class="mb-3" data-page-node-id="pendingCardItems"><div class="flex items-center gap-2.5 order-item"><img src="assets/generated/product1.png" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5">50ml</p></div><div class="text-right shrink-0"><p class="text-[13px] font-semibold text-gray-900 leading-tight">¥394.00</p></div></div><div class="flex items-center gap-2.5 order-item"><img src="assets/generated/product2.png" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">迪奥真我香水 EDT</p><p class="text-[11px] text-gray-400 mt-0.5">100ml</p></div><div class="text-right shrink-0"><p class="text-[13px] font-semibold text-gray-900 leading-tight">¥1,280.00</p></div></div><div class="flex items-center gap-2.5 order-item"><img src="assets/generated/product3.png" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">雅诗兰黛小棕瓶精华</p><p class="text-[11px] text-gray-400 mt-0.5">50ml</p></div><div class="text-right shrink-0"><p class="text-[13px] font-semibold text-gray-900 leading-tight">¥760.00</p></div></div></div>
               <div class="flex items-center justify-between border-t border-gray-100 pt-3" data-page-node-id="pendingCardFooter">
                 <span class="text-[12px] text-gray-500" data-page-node-id="pendingCardCountWrap">共 <span id="pOrderCount" data-page-node-id="DjDqI9r5jAiOXWuGDARuv0">5</span> 件</span>
-                <span class="text-[11px] text-gray-400" data-page-node-id="pendingCardTip">顾客可在清单中调整数量</span>
+                <span class="text-[11px] text-gray-400" data-page-node-id="pendingCardTip">多拍实物照分享给顾客提高下单意向哦</span>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- 推荐商品卡片（导购端发出） -->
+      <div class="flex gap-2.5" data-page-node-id="prodCardMsgG3">
+        <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="QeJjjR66wTF40dtWISFPDM">
+        <div class="max-w-[90%] w-full" data-page-node-id="gkmzXtUu6zTxLsyObEKfiR">
+          <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100" data-page-node-id="GcWxWxnDpHTTfW4UL0hHMV">
+            <div class="flex items-start gap-3 p-3" data-page-node-id="grf6FJ6Akx7phfWiwGXtx8">
+              <img src="assets/generated/product1.png" class="w-16 h-16 rounded-xl object-cover bg-gray-100 shrink-0" alt="" onerror="this.style.visibility='hidden'" data-page-node-id="FoTqLHp6x6NwL3VQY2NMzy">
+              <div class="flex-1 min-w-0" data-page-node-id="qDLowkgh9V4uGz2B41Cq12">
+                <p class="text-[13px] font-semibold text-gray-900 leading-snug" data-page-node-id="LfLfOktj0bjT8mSGy4AFmr">浪凡光韵女士浓香水</p>
+                <p class="text-[11px] text-gray-400 mt-1" data-page-node-id="LyeGbdPOQTELOT1kGGHgPZ" style="white-space: pre-wrap;">50ml </p><p data-page-node-id="ieiuOYkOsnn9WIFsmzaUBX" class="text-[11px] text-gray-400 mt-1" data-dm-enter-block="1" style="box-sizing: border-box; border: 0px solid rgb(229, 231, 235); margin: 0.25rem 0px 0px; color: rgb(156, 163, 175); font-size: 11px; line-height: 1.4; -webkit-user-drag: none !important;"></p>
+                
+              </div>
+              <div class="shrink-0 text-right" data-page-node-id="DJcytnIc8Gag92tSeXzh3W">
+                <p class="text-[15px] font-bold text-coral-600 leading-tight" data-page-node-id="cPg9EKzSljcpKKgU7gdFCV">¥394.00</p>
+              </div>
+            </div>
+            <div class="px-3 pb-3 pt-3 border-t border-gray-100 flex items-center justify-between" data-page-node-id="YJ1WffTrI60N4FPSBNehjc">
+              <span class="text-[11px] text-gray-400" data-page-node-id="lWz40wdMEVjenbtRZk9jz7">多拍实物照分享给顾客提高下单意向哦</span>
+            </div>
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="31zqgv3EqVxCbe9PSDdBSJ">14:55</span>
         </div>
       </div>
 
@@ -362,30 +386,26 @@
     </div>
 
   <!-- + 面板 -->
-  <div id="plusPanel" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40" onclick="if(event.target===this)closePlusPanel()" data-page-node-id="plusPanel">
+  <div id="plusPanel" class="fixed inset-0 z-50 flex items-end justify-center bg-black/40 hidden" onclick="if(event.target===this)closePlusPanel()" data-page-node-id="plusPanel">
     <div class="bg-white w-full max-w-[414px] rounded-t-2xl overflow-hidden shadow-2xl" data-page-node-id="plusInner">
       <div class="px-5 py-4 flex items-center justify-between border-b border-gray-100" data-page-node-id="plusHead">
         <p class="font-semibold text-gray-900 text-sm" data-page-node-id="plusTitle">快捷功能</p>
         <button onclick="closePlusPanel()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition" data-page-node-id="plusClose"><i class="fas fa-times" data-page-node-id="XR6E7qgof20NtEWXqGwxu2"></i></button>
       </div>
-      <div class="p-4 grid grid-cols-5 gap-2" data-page-node-id="plusGrid">
-        <a href="G4-选择商品.html" onclick="closePlusPanel()" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition" data-page-node-id="createOrder">
-          <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="createOrderIcon"><i class="fas fa-plus text-base" data-page-node-id="85QOnXv5RYG9O5Nkv8hdQK"></i></div>
-          <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="createOrderLabel">创建清单</span>
-        </a>
-        <button onclick="closePlusPanel(); openCouponModal();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition" data-page-node-id="sendCoupon">
+      <div class="p-4 flex gap-2" data-page-node-id="plusGrid">
+        <button onclick="closePlusPanel(); openCouponModal();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="sendCoupon">
           <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="sendCouponIcon"><i class="fas fa-ticket-alt text-base" data-page-node-id="UvAWDuMuHElLYOKnOlN6eu"></i></div>
           <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="sendCouponLabel">发优惠券</span>
         </button>
-        <a href="U6-购物清单页.html" onclick="closePlusPanel()" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition" data-page-node-id="openList">
+        <a href="G4-选择商品.html" onclick="closePlusPanel()" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="openList">
           <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="openListIcon"><i class="fas fa-clipboard-list text-base" data-page-node-id="STkgmBCWXzRGJBOwKDQsfO"></i></div>
-          <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="openListLabel">购物清单</span>
+          <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="openListLabel" style="">意向单</span>
         </a>
-        <button onclick="closePlusPanel(); openNameCardModal();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition" data-page-node-id="nameCard">
+        <button onclick="closePlusPanel(); openNameCardModal();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="nameCard">
           <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="nameCardIcon"><i class="fas fa-id-card text-base" data-page-node-id="GjrN94Y84weKd4trApEErD"></i></div>
           <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="nameCardLabel">名片</span>
         </button>
-        <button onclick="closePlusPanel(); sendImage();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition" data-page-node-id="sendImage">
+        <button onclick="closePlusPanel(); sendImage();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="sendImage">
           <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="sendImageIcon"><i class="fas fa-image text-base" data-page-node-id="sendImageFa"></i></div>
           <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="sendImageLabel">图片发送</span>
         </button>
@@ -394,7 +414,7 @@
   </div>
 
   <!-- 图片发送：隐藏的文件选择器 -->
-  <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="onImageSelected(this)">
+  <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="onImageSelected(this)" data-page-node-id="bPJjfARpROxi3fEbizcRam">
 
   <!-- 优惠券选择弹窗 -->
   <div id="couponModal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 px-0 sm:px-6" onclick="if(event.target===this)closeCouponModal()" data-page-node-id="couponModal">
@@ -556,9 +576,6 @@
       var itemsWrap = document.getElementById('pOrderItems');
       var shown = order.items.slice(0, 3);
       var htmlStr = shown.map(renderItemRow).join('');
-      if (order.items.length > 3) {
-        htmlStr += '<p class="text-[11px] text-gray-400 pl-1 mt-3">...等 ' + order.items.length + ' 件商品</p>';
-      }
       itemsWrap.innerHTML = htmlStr;
       document.getElementById('pOrderCount').textContent = orderCount(order);
     }
