@@ -1182,7 +1182,8 @@ function selectPrototype(id){
   }
   renderSidebar();renderPRD();renderHotspots();updateTopMeta();
   if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);
-  playPageTransition(function(){ setTimeout(scheduleUpdatePositions,200); });
+  // 切换原型过渡动画（playPageTransition）已关闭，仅保留标注位置重算
+  setTimeout(scheduleUpdatePositions,200);
 }
   /* 原型内部链接跳转 → 同步切换左右栏（左目录 + 右 PRD）；外部链接（basename 不匹配任一原型）不切换 */
   function frameHrefToProto(raw){
