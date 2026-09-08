@@ -126,12 +126,18 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .collapse-handle{position:absolute;top:50%;z-index:30;width:24px;height:72px;background:var(--panel-3);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:left .28s cubic-bezier(.4,0,.2,1),right .28s cubic-bezier(.4,0,.2,1),width .28s,height .28s,background .15s,color .15s,border-color .15s,box-shadow .15s}
 .collapse-handle:hover{background:var(--accent-dim);color:var(--accent);border-color:rgba(56,189,248,.45)}
 .collapse-handle svg{width:15px;height:15px;transition:transform .28s cubic-bezier(.4,0,.2,1)}
-.collapse-handle.left{left:var(--left-w,264px);transform:translateY(-50%);border-radius:0 8px 8px 0;border-left:none}
-.collapse-handle.right{right:var(--right-w,408px);transform:translateY(-50%);border-radius:8px 0 0 8px;border-right:none}
-.layout.collapse-left .collapse-handle.left{left:0;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
-.layout.collapse-right .collapse-handle.right{right:0;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),-2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
+.collapse-handle.left{left:calc(var(--left-w,264px) + 14px);transform:translateY(-50%);border-radius:0 8px 8px 0;border-left:none}
+.collapse-handle.right{right:calc(var(--right-w,408px) + 14px);transform:translateY(-50%);border-radius:8px 0 0 8px;border-right:none}
+.layout.collapse-left .collapse-handle.left{left:14px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
+.layout.collapse-right .collapse-handle.right{right:14px;width:26px;height:80px;color:var(--accent);background:linear-gradient(180deg,rgba(56,189,248,.22),rgba(56,189,248,.1));border-color:rgba(56,189,248,.55);box-shadow:0 0 14px rgba(56,189,248,.3),-2px 0 10px rgba(0,0,0,.3);animation:handlePulse 2.4s ease-in-out infinite}
 .layout.collapse-left .collapse-handle.left:hover,.layout.collapse-right .collapse-handle.right:hover{background:rgba(56,189,248,.32);box-shadow:0 0 22px rgba(56,189,248,.55);animation:none}
 .layout.collapse-left .collapse-handle.left svg,.layout.collapse-right .collapse-handle.right svg{transform:rotate(180deg);width:16px;height:16px}
+/* 分栏中间线独立拖拽条：只负责拖拽调宽，不承载折叠按钮（按钮仅点击折叠，二者分离避免点击/拖拽冲突） */
+.vdivider{position:absolute;top:0;bottom:0;width:10px;z-index:29;cursor:col-resize;transform:translateX(-50%);touch-action:none}
+.vdivider.left{left:var(--left-w,264px)}
+.vdivider.right{right:var(--right-w,408px);transform:translateX(50%)}
+.vdivider::after{content:"";position:absolute;top:8px;bottom:8px;left:50%;width:2px;transform:translateX(-50%);border-radius:2px;background:transparent;transition:background .15s}
+.vdivider:hover::after,.layout.resizing .vdivider::after{background:rgba(56,189,248,.65)}
 @keyframes handlePulse{0%,100%{box-shadow:0 0 10px rgba(56,189,248,.25)}50%{box-shadow:0 0 22px rgba(56,189,248,.55)}}
 .sidebar,.prd-panel{background:var(--panel);overflow:hidden;display:flex;flex-direction:column;min-height:0}
 .sidebar{border-right:1px solid var(--line)}
@@ -924,6 +930,8 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   </aside>
   <button class="collapse-handle left" id="handleLeft" title="收起目录" data-page-node-id="mcnECFQGhhq91SdDf6Y6Of"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="evIUMp4RtA3rQ5vDAl2NbY"><path d="m15 18-6-6 6-6" data-page-node-id="mpGT36pKlFYJWNNh7ENBPX"></path></svg></button>
   <button class="collapse-handle right" id="handleRight" title="收起PRD" data-page-node-id="WH5CBgHqDlqNBjT5UKf7T6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="UFhlcX737PWuBM4qHhEK7r"><path d="m9 18 6-6-6-6" data-page-node-id="eECF72RIRKuKhFkqWbneP2"></path></svg></button>
+  <div class="vdivider left" id="divLeft" title="拖拽调整目录宽度"></div>
+  <div class="vdivider right" id="divRight" title="拖拽调整PRD宽度"></div>
 </div>
 
 
@@ -2075,7 +2083,6 @@ function toggleSides(){
 }
 function toggleLeft(){
   const h=document.getElementById('handleLeft');
-  if(h&&h.dataset.dragged){delete h.dataset.dragged;return;}
   const layout=document.querySelector('.layout');
   layout.classList.toggle('collapse-left');
   const c=layout.classList.contains('collapse-left');
@@ -2085,7 +2092,6 @@ function toggleLeft(){
 }
 function toggleRight(){
   const h=document.getElementById('handleRight');
-  if(h&&h.dataset.dragged){delete h.dataset.dragged;return;}
   const layout=document.querySelector('.layout');
   layout.classList.toggle('collapse-right');
   const c=layout.classList.contains('collapse-right');
@@ -2108,11 +2114,11 @@ function bindResize(handle,side){
     e.preventDefault();
     let startW=curW();
     if(layout.classList.contains(cls)){ setSideCollapsed(side,false); layout.style.setProperty(varName,'0px'); startW=0; }
-    const startX=e.clientX; let moved=false;
+    const startX=e.clientX;
     document.body.style.cursor='col-resize'; document.body.style.userSelect='none';
     layout.classList.add('resizing');
     function onMove(ev){
-      const dx=ev.clientX-startX; if(Math.abs(dx)>4)moved=true;
+      const dx=ev.clientX-startX;
       let w=startW+(side==='left'?dx:-dx);
       w=Math.max(MIN,Math.min(MAX,w));
       layout.style.setProperty(varName,w+'px');
@@ -2122,14 +2128,13 @@ function bindResize(handle,side){
       document.removeEventListener('mouseup',onUp);
       document.body.style.cursor=''; document.body.style.userSelect='';
       layout.classList.remove('resizing');
-      if(moved)handle.dataset.dragged='1'; else delete handle.dataset.dragged;
     }
     document.addEventListener('mousemove',onMove);
     document.addEventListener('mouseup',onUp);
   });
 }
-bindResize(document.getElementById('handleLeft'),'left');
-bindResize(document.getElementById('handleRight'),'right');
+bindResize(document.getElementById('divLeft'),'left');
+bindResize(document.getElementById('divRight'),'right');
 var _pt=document.getElementById('panelToggle'); if(_pt)_pt.addEventListener('click',toggleSides);
 
 (function init(){
