@@ -351,7 +351,7 @@
         <div class="max-w-[90%] w-full" data-page-node-id="gkmzXtUu6zTxLsyObEKfiR">
           <div class="bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100" data-page-node-id="GcWxWxnDpHTTfW4UL0hHMV">
             <div class="flex items-start gap-3 p-3" data-page-node-id="grf6FJ6Akx7phfWiwGXtx8">
-              <img src="assets/generated/product1.png" class="w-16 h-16 rounded-xl object-cover bg-gray-100 shrink-0" alt="" onerror="this.style.visibility='hidden'" data-page-node-id="FoTqLHp6x6NwL3VQY2NMzy">
+              <img src="assets/generated/product1.png" class="w-16 h-16 rounded-xl object-cover bg-gray-100 shrink-0 cursor-pointer" alt="" onerror="this.style.visibility='hidden'" onclick="openG3ProductGallery()" data-page-node-id="FoTqLHp6x6NwL3VQY2NMzy">
               <div class="flex-1 min-w-0" data-page-node-id="qDLowkgh9V4uGz2B41Cq12">
                 <p class="text-[13px] font-semibold text-gray-900 leading-snug" data-page-node-id="LfLfOktj0bjT8mSGy4AFmr">浪凡光韵女士浓香水</p>
                 <p class="text-[11px] text-gray-400 mt-1" data-page-node-id="LyeGbdPOQTELOT1kGGHgPZ" style="white-space: pre-wrap;">50ml </p><p data-page-node-id="ieiuOYkOsnn9WIFsmzaUBX" class="text-[11px] text-gray-400 mt-1" data-dm-enter-block="1" style="box-sizing: border-box; border: 0px solid rgb(229, 231, 235); margin: 0.25rem 0px 0px; color: rgb(156, 163, 175); font-size: 11px; line-height: 1.4; -webkit-user-drag: none !important;"></p>
@@ -361,7 +361,7 @@
                 <p class="text-[15px] font-bold text-coral-600 leading-tight" data-page-node-id="cPg9EKzSljcpKKgU7gdFCV">¥394.00</p>
               </div>
             </div>
-            <div class="px-3 pb-3 pt-3 border-t border-gray-100 flex items-center justify-between" data-page-node-id="YJ1WffTrI60N4FPSBNehjc">
+            <div class="px-3 pb-3 pt-3 border-t border-gray-100 flex items-center justify-end" data-page-node-id="YJ1WffTrI60N4FPSBNehjc">
               <span class="text-[11px] text-gray-400" data-page-node-id="lWz40wdMEVjenbtRZk9jz7">多拍实物照分享给顾客提高下单意向哦</span>
             </div>
           </div>
@@ -559,8 +559,13 @@
     function renderItemRow(it) {
       var qty = it.qty || 1;
       var unit = it.price || 0;
+      var gset = [it.img || 'assets/generated/product1.png'];
+      if (/product1/.test(it.img || '')) gset = ['assets/generated/product1.png', 'assets/generated/product1_detail.png'];
+      else if (/product2/.test(it.img || '')) gset = ['assets/generated/product2.png', 'assets/generated/product2_detail.png'];
+      else if (/product3/.test(it.img || '')) gset = ['assets/generated/product3.png', 'assets/generated/product3_detail.png'];
+      var setStr = "['" + gset.join("','") + "']";
       return '<div class="flex items-center gap-2.5 order-item">' +
-        '<img src="' + (it.img || 'assets/generated/product1.png') + '" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility=\'hidden\'">' +
+        '<img src="' + (it.img || 'assets/generated/product1.png') + '" class="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0 cursor-pointer" onclick="openG3Gallery(' + setStr + ');event.stopPropagation()" onerror="this.style.visibility=\'hidden\'">' +
         '<div class="flex-1 min-w-0">' +
           '<p class="text-[13px] text-gray-900 font-medium line-clamp-2 leading-snug">' + it.name + '</p>' +
           (it.spec ? '<p class="text-[11px] text-gray-400 mt-0.5">' + it.spec + '</p>' : '') +
@@ -588,6 +593,54 @@
       setTimeout(function(){ t.classList.add('hidden'); }, 1500);
     }
 
+    // ===== 单品卡片图片集弹窗（点击商品图片弹出；左右箭头置于页码前后；图片裁切遮挡 15%） =====
+    var lbImages = [];
+    var lbIndex = 0;
+    function openG3Gallery(imgs) {
+      lbImages = (imgs && imgs.length) ? imgs.slice() : ['assets/generated/product1.png'];
+      lbIndex = 0;
+      renderLightbox();
+      document.getElementById('imgLightbox').classList.remove('hidden');
+    }
+    function openG3ProductGallery() {
+      openG3Gallery(['assets/generated/product1.png', 'assets/generated/product1_detail.png']);
+    }
+    function renderLightbox() {
+      document.getElementById('lbImg').src = lbImages[lbIndex];
+      var single = lbImages.length <= 1;
+      document.getElementById('lbPrev').style.display = single ? 'none' : 'flex';
+      document.getElementById('lbNext').style.display = single ? 'none' : 'flex';
+      var pages = document.getElementById('lbPages');
+      pages.innerHTML = '';
+      lbImages.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = (i + 1);
+        b.onclick = function (e) { e.stopPropagation(); goToImg(i); };
+        b.style.cssText = 'width:26px;height:26px;border-radius:7px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;' +
+          (i === lbIndex ? 'background:#E02E24;color:#fff;' : 'background:rgba(255,255,255,.2);color:#fff;');
+        pages.appendChild(b);
+      });
+    }
+    function goToImg(i) {
+      if (i < 0 || i >= lbImages.length || i === lbIndex) return;
+      lbIndex = i;
+      renderLightbox();
+    }
+    function prevImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+      renderLightbox();
+    }
+    function nextImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex + 1) % lbImages.length;
+      renderLightbox();
+    }
+    function closeLightbox() {
+      document.getElementById('imgLightbox').classList.add('hidden');
+    }
+
     window.addEventListener('DOMContentLoaded', function() {
       renderPendingOrderBubble();
       var chat = document.getElementById('chat');
@@ -599,5 +652,20 @@
   </div>
   <div id="toast" class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 text-white px-4 py-2 rounded-lg text-[13px] z-[80]" data-page-node-id="VHlGRMCFzGARmETZGlhyar"></div>
 
+  <!-- 单品图片集弹窗（点击商品图片弹出；左右箭头置于页码前后；图片裁切遮挡 15%） -->
+  <div id="imgLightbox" class="hidden fixed inset-0 z-[90] flex items-center justify-center" style="background:rgba(0,0,0,.55);padding:16px" onclick="closeLightbox()" data-page-node-id="imgLightbox">
+    <div onclick="event.stopPropagation()" style="width:100%;max-width:414px;background:#0b0b0d;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.32)">
+      <div style="position:relative;background:#111;height:min(82vw,420px);overflow:hidden;box-shadow:inset 0 0 0 8px #1f2937">
+        <img id="lbImg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:opacity .25s ease" alt="商品图片" data-page-node-id="lbImg">
+        <button onclick="closeLightbox()" aria-label="关闭" style="position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.35);z-index:5;transition:background .2s" onmouseover="this.style.background='rgba(0,0,0,.6)'" onmouseout="this.style.background='rgba(0,0,0,.35)'"><i class="fas fa-times" style="font-size:16px"></i></button>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:15%;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0));z-index:2"></div>
+        <div id="lbBar" style="position:absolute;left:0;right:0;bottom:11px;display:flex;align-items:center;justify-content:center;gap:10px;z-index:3">
+          <button id="lbPrev" onclick="event.stopPropagation();prevImg()" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.32)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">&#8249;</button>
+          <div id="lbPages" style="display:flex;gap:8px"></div>
+          <button id="lbNext" onclick="event.stopPropagation();nextImg()" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.32)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body></html>

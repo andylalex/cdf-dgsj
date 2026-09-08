@@ -430,7 +430,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();recommendProduct(this.closest('.product-item'))" data-page-node-id="recbtn-C016080">推荐商品</button>
+              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C016080">推荐商品</button>
             </div>
           </div>
         </div>
@@ -466,7 +466,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();recommendProduct(this.closest('.product-item'))" data-page-node-id="recbtn-C017002">推荐商品</button>
+              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C017002">推荐商品</button>
             </div>
           </div>
         </div>
@@ -489,7 +489,7 @@
             </div>
             <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C000277">
               <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C000277">加入清单</button>
-              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();recommendProduct(this.closest('.product-item'))" data-page-node-id="recbtn-C000277">推荐商品</button>
+              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C000277">推荐商品</button>
             </div>
           </div>
         </div>
@@ -512,7 +512,7 @@
             </div>
             <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C001930SY">
               <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C001930SY">加入清单</button>
-              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();recommendProduct(this.closest('.product-item'))" data-page-node-id="recbtn-C001930SY">推荐商品</button>
+              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C001930SY">推荐商品</button>
             </div>
           </div>
         </div>
@@ -535,7 +535,7 @@
             </div>
             <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C000365">
               <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C000365">加入清单</button>
-              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();recommendProduct(this.closest('.product-item'))" data-page-node-id="recbtn-C000365">推荐商品</button>
+              <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C000365">推荐商品</button>
             </div>
           </div>
         </div>
@@ -623,7 +623,7 @@
     let currentSpecs = [];
     let currentSpec = '';
 
-    function openAddModal(card) {
+    function openAddModal(card, isRec) {
       currentItem = card;
       currentSpecs = (card.dataset.specs || '').split(',').filter(Boolean);
       const order = getOrder();
@@ -641,6 +641,14 @@
       document.getElementById('modalPrice').textContent = formatMoney(parseFloat(card.dataset.price));
       renderSpecChips();
       document.getElementById('modalQty').value = currentQty;
+      const cbtn = document.getElementById('confirmBtn');
+      if (isRec) {
+        cbtn.textContent = '确认推荐';
+        cbtn.onclick = confirmRecommendFromModal;
+      } else {
+        cbtn.textContent = '确认加入';
+        cbtn.onclick = confirmAdd;
+      }
       document.getElementById('modalMask').classList.add('open');
       document.getElementById('addModal').classList.add('open');
     }
@@ -677,6 +685,13 @@
     }
 
 
+
+    function confirmRecommendFromModal() {
+      if (!currentItem) return;
+      const name = currentItem.dataset.name;
+      closeAddModal();
+      showToast('已推荐给顾客：' + name);
+    }
 
     function confirmAdd() {
       if (!currentItem) return;
