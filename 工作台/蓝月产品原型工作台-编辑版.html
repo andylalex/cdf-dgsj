@@ -317,19 +317,27 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   background:#fff;color:#0B0E14;font-family:var(--mono);font-size:10px;font-weight:700;text-align:center;position:relative;z-index:2;
   box-shadow:0 1px 4px rgba(0,0,0,.35);
 }
-.hs-pin::after{
-  content:"";position:absolute;inset:-5px;border-radius:50%;
-  border:2px solid var(--pin-glow);animation:pinPulse 2.1s ease-out infinite;pointer-events:none;
+.hs-pin::after,.hs-pin::before{
+  content:"";position:absolute;left:0;bottom:0;width:18px;height:2px;
+  background:linear-gradient(90deg,var(--pin-glow),transparent);transform-origin:left bottom;border-radius:2px;
+  pointer-events:none;animation:arrowPulse 1.8s ease-out infinite;
+}
+.hs-pin::before{--a:110deg}
+.hs-pin::after{--a:160deg}
+@keyframes arrowPulse{
+  0%{opacity:0;transform:rotate(var(--a)) scale(.5)}
+  35%{opacity:.95}
+  100%{opacity:0;transform:rotate(var(--a)) scale(1.5)}
 }
 /* 标注圆圈：朝向被标注区域的角为方角，充当箭头（无三角形/引线） */
-@keyframes pinPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+100%{transform:scale(1.7);opacity:0}}
 .hs:hover .hs-pin,.hs.hover .hs-pin{transform:rotate(var(--pin-rot,0deg)) scale(1.22)}
 .hs[data-type=element]{--pin-bg:var(--c-element);--pin-glow:var(--c-element)}
 .hs[data-type=rule]{--pin-bg:var(--c-rule);--pin-glow:var(--c-rule)}
 .hs[data-type=field]{--pin-bg:var(--c-field);--pin-glow:var(--c-field)}
 .hs.dim{opacity:.22}
 .hs.hover .hs-pin,.hs.sel .hs-pin{transform:rotate(var(--pin-rot,0deg)) scale(1.3)}
-.hs.sel .hs-pin::after{animation-duration:.9s;border-width:3px}
+.hs.sel .hs-pin::after,.hs-pin::before{animation-duration:.9s}
 .hidden-annotations .hs{display:none}
 
 /* 热点区域框（走查/悬停时出现） */
@@ -1936,16 +1944,16 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ===== 键盘快捷键：侧栏展示前 3 个 + 弹窗全量 ===== */
-const SHORTCUTS=[
-  {keys:['['], desc:'收起 / 展开 左栏（目录）'},
-  {keys:[']'], desc:'收起 / 展开 右栏（PRD）'},
-  {keys:['\\'], desc:'一键 隐藏 / 显示 左右栏'},
-  {keys:['Alt','↑'], desc:'切换上一个原型'},
-  {keys:['Alt','↓'], desc:'切换下一个原型'},
-  {keys:['C'], desc:'开始 / 结束 走查模式'},
-  {keys:['Esc'], desc:'结束走查'},
-  {keys:['←','→'], desc:'走查 上一步 / 下一步'}
-];
+  const SHORTCUTS=[
+    {keys:['Alt','↑'], desc:'切换上一个原型'},
+    {keys:['Alt','↓'], desc:'切换下一个原型'},
+    {keys:['C'], desc:'开始 / 结束 走查模式'},
+    {keys:['['], desc:'收起 / 展开 左栏（目录）'},
+    {keys:[']'], desc:'收起 / 展开 右栏（PRD）'},
+    {keys:['\\'], desc:'一键 隐藏 / 显示 左右栏'},
+    {keys:['Esc'], desc:'结束走查'},
+    {keys:['←','→'], desc:'走查 上一步 / 下一步'}
+  ];
 function kbdCell(k){ return '<kbd>'+k.replace(/</g,'&lt;')+'</kbd>'; }
 function renderSideKbd(){
   const wrap=$('sideKbdList'); if(wrap) wrap.innerHTML=SHORTCUTS.slice(0,3).map(s=>'<div class="side-kbd-row">'+s.keys.map(kbdCell).join('<span class="plus">+</span>')+'<span>'+s.desc+'</span></div>').join('');
