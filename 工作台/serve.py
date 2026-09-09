@@ -151,6 +151,32 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             except Exception as e:
                 self._json(500, {"ok": False, "msg": str(e)})
             return
+        if path == "/api/save-proto":
+            try:
+                length = int(self.headers.get("Content-Length", 0) or 0)
+                raw = self.rfile.read(length) if length else b""
+                data = json.loads(raw.decode("utf-8"))
+                fn = data.get("file", "")
+                if fn not in ALLOWED_SAVE:
+                    self._json(400, {"ok": False, "msg": "不允许写入该文件：" + fn})
+                    return
+                target = os.path.join(ROOT, fn)
+                abs_target = os.path.abspath(target)
+                abs_root = os.path.abspath(ROOT)
+                if abs_target != os.path.join(abs_root, fn):
+                    self._json(400, {"ok": False, "msg": "非法路径"})
+                    return
+                text = data.get("text", "")
+                # 完整性闸门：必须包含完整原型数据结构，杜绝写入残缺文件导致丢失数据
+                if not ("const V04" in text and "DATA_MODELS" in text and "PROTOTYPES_V03" in text):
+                    self._json(400, {"ok": False, "msg": "内容完整性校验失败（缺少 const V04/DATA_MODELS/PROTOTYPES_V03）"})
+                    return
+                with open(target, "w", encoding="utf-8") as f:
+                    f.write(text)
+                self._json(200, {"ok": True, "bytes": len(text)})
+            except Exception as e:
+                self._json(500, {"ok": False, "msg": str(e)})
+            return
         self.send_error(405)
 
     def _json(self, code, obj):
