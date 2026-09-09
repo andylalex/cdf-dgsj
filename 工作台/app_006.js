@@ -1147,7 +1147,11 @@ window.edToday=edToday;
 
 /* ---------- 启动：恢复本地改动 ---------- */
 edBind();
-edApplyImportedData(); edApplyNavData(); edApplyDataImported(); edApplyDataEdits();   /* 合并文件级左导航结构段，编辑版自身也以文件为权威源 */
+edApplyImportedData(); edApplyNavData(); edApplyDataImported();
+/* 叠加「手动 EDIT 增量」之前先拍一份纯净基准快照（运行时生成，不依赖数据文件是否静态包含 __PROTOTYPES_BASE）。
+   供 edBuildProtoText 做增量差异对比：仅输出与基准不同的字段，杜绝全量导出/冗余。 */
+window.__PROTOTYPES_BASE = JSON.parse(JSON.stringify(PROTOTYPES));
+edApplyDataEdits();   /* 合并文件级左导航结构段，编辑版自身也以文件为权威源 */
 if(edLoadAll()){
   edEnsureCats();
   renderSidebar();
