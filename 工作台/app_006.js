@@ -189,18 +189,35 @@ function protoExportHide(){ var m=$('protoExportModal'); if(m) m.classList.remov
 /* 纯前端、无后台写本地文件：仅桌面 Chrome/Edge 的 File System Access API 支持。
    用户点击后弹出文件选择器，选 工作台/prototypes-data.js 即写入最新内容；鸿蒙/移动端无此 API 会隐藏按钮。 */
 async function mergeProtoEdits(orig, seg){
-  /* 把最新增量段合并进原 prototypes-data.js：定位文件内 PROTOTYPES_EDITS_START/END 标记块，
-     整体替换为生成的增量段（含标记），从而只在原文件中“增加编辑数据”，其余结构（V04/V03/push/DATA_MODELS 等）全部保留，
-     杜绝直接覆盖写增量段导致其他数据丢失。 */
-  var RE=/[/][*]\s*>>>\s*PROTOTYPES_EDITS_START[\s\S]*?<<<\s*PROTOTYPES_EDITS_END\s*<<<\s*[*][/]/g;
-  var cleaned=orig.replace(RE,'');                                  /* 全局删除所有旧块 */
-  if(!seg) return cleaned.replace(/\n{3,}/g,'\n\n');                 /* 无编辑：只清块，不留空块 */
-  var block='\n\n'+seg.trim()+'\n';
-  var anchor=/window\.__PROTOTYPES_BASE\s*=/;
+  /* 合并原型编辑增量：保留原文件中已有的 EDIT 块（如文件级 U8 编辑），仅以 id 为键叠加/覆盖 seg 的新编辑，
+     杜绝「全局删除旧块后插入 seg」导致原 EDIT 块（U8 等）被误删的问题。 */
+  function extractBlocks(s){
+    var re=new RegExp('\\/\\*\\s*>>>\\s*PROTOTYPES_EDITS_START[\\s\\S]*?<<<\\s*PROTOTYPES_EDITS_END\\s*<<<\\s*\\*\\/','g');
+    var mm, out=[];
+    while((mm=re.exec(s))){ out.push(mm[0]); }
+    return out;
+  }
+  function extractArr(s){
+    var m=s.match(/window\\.PROTOTYPES_EDITS\\s*=\\s*(\\[[\\s\\S]*?\\])\\s*;/);
+    if(!m) return [];
+    try{ return JSON.parse(m[1]); }catch(e){ return []; }
+  }
+  var existing=[];
+  extractBlocks(orig).forEach(function(b){ existing=existing.concat(extractArr(b)); });
+  var incoming = seg ? extractArr(seg) : [];
+  var map={};
+  existing.forEach(function(it){ if(it&&it.id) map[it.id]=it; });
+  incoming.forEach(function(it){ if(it&&it.id) map[it.id]=it; });
+  var merged=Object.keys(map).map(function(k){ return map[k]; });
+  var RE=new RegExp('\\/\\*\\s*>>>\\s*PROTOTYPES_EDITS_START[\\s\\S]*?<<<\\s*PROTOTYPES_EDITS_END\\s*<<<\\s*\\*\\/','g');
+  var cleaned=orig.replace(RE,'').replace(/\\n{3,}/g,'\\n\\n');
+  if(!merged.length) return cleaned.replace(/\\s*$/,'')+'\\n';
+  var block='\\n\\n/* >>> PROTOTYPES_EDITS_START （编辑版导出：整体替换为最新编辑增量；原文件其余结构保持不变） >>> */\\nwindow.PROTOTYPES_EDITS = '+JSON.stringify(merged,null,2)+';\\n/* <<< PROTOTYPES_EDITS_END <<< */\\n';
+  var anchor=/window\\.__PROTOTYPES_BASE\\s*=/;
   var out = anchor.test(cleaned)
     ? cleaned.replace(anchor, function(m){ return m+block; })
-    : (cleaned.replace(/\s*$/,'')+block);
-  return out.replace(/\n{3,}/g,'\n\n');
+    : (cleaned.replace(/\\s*$/,'')+block);
+  return out.replace(/\\n{3,}/g,'\\n\\n');
 }
 function edProtoFileIsComplete(s){ return typeof s==='string' && s.indexOf('const V04')>=0 && s.indexOf('DATA_MODELS')>=0 && s.indexOf('PROTOTYPES_V03')>=0; }
 async function edSaveProtoLocal(){
@@ -376,6 +393,24 @@ function edPersistNav(){
   try{ edAutoSave(); }catch(e){}
 }
 window.edPersistNav=edPersistNav;
+/* 立即同步：把当前内存（含 localStorage 编辑）经 serve.py 合并回写物理文件，无需等待防抖。file:// 下不可用。 */
+function edSyncNow(){
+  if(typeof fetch!=='function' || location.protocol==='file:'){ showToast('仅在 http 预览下可自动同步，请用「保存到本地」'); return; }
+  (async function(){
+    try{
+      var navText=edBuildNavText();
+      await fetch('/api/save-nav',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'nav-data.js',text:navText})});
+      var seg=edBuildProtoText();
+      if(seg!==null){
+        var r=await fetch('prototypes-data.js',{cache:'no-store'});
+        if(r.ok){ var orig=await r.text(); var out=await mergeProtoEdits(orig, seg); if(edProtoFileIsComplete(out)){ await fetch('/api/save-proto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'prototypes-data.js',text:out})}); } }
+      }
+      showToast('已同步到本地文件（原型数据 + 左导航）');
+    }catch(e){ showToast('同步失败：'+e.message); }
+  })();
+}
+window.edSyncNow=edSyncNow;
+var _syncBtn=$('protoSyncBtn'); if(_syncBtn) _syncBtn.addEventListener('click', edSyncNow);
 
 
 function edApplyDataImported(){
@@ -1152,6 +1187,7 @@ edApplyImportedData(); edApplyNavData(); edApplyDataImported();
    供 edBuildProtoText 做增量差异对比：仅输出与基准不同的字段，杜绝全量导出/冗余。 */
 window.__PROTOTYPES_BASE = JSON.parse(JSON.stringify(PROTOTYPES));
 edApplyDataEdits();   /* 合并文件级左导航结构段，编辑版自身也以文件为权威源 */
+setTimeout(edAutoSave, 2000);   /* 页面加载后自动把 localStorage 编辑回写一次物理文件（http 环境） */
 if(edLoadAll()){
   edEnsureCats();
   renderSidebar();
