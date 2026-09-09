@@ -15,6 +15,16 @@ const V04={
     "device": "mobile",
     "group": "用户端 · CDF海南免税"
   },
+  "U7": {
+    "url": "v0.4/U7-奢品顾问列表页.html",
+    "device": "mobile",
+    "group": "用户端 · CDF海南免税"
+  },
+  "U8": {
+    "url": "v0.4/U8-品牌主页.html",
+    "device": "mobile",
+    "group": "用户端 · CDF海南免税"
+  },
   "U4": {
     "url": "v0.4/U4-结算中心页.html",
     "device": "mobile",
@@ -63,6 +73,50 @@ const V04={
 };
 
 const PROTOTYPES_V03=[
+  {
+    "id": "v04-u8",
+    "group": "用户端 · CDF海南免税",
+    "name": "U8 品牌主页",
+    "device": "mobile",
+    "url": "v0.4/U8-品牌主页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-09",
+    "overview": {
+      "summary": "品牌主页：集中展示品牌故事、商品矩阵与会员权益，承接导购列表入口与品牌导购承接。",
+      "path": "导购列表入口 → 品牌主页",
+      "users": "门店导购、C端用户",
+      "permission": "功能权限：全员可见；数据权限：当前品牌商品与权益",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
+  {
+    "id": "v04-u7",
+    "group": "用户端 · CDF海南免税",
+    "name": "U7 奢品顾问列表页",
+    "device": "mobile",
+    "url": "v0.4/U7-奢品顾问列表页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-09",
+    "overview": {
+      "summary": "奢品顾问列表页：集中展示可服务的奢品顾问，支持发起会话或查看详情，承接导购列表入口的流转。",
+      "path": "导购列表入口 → 奢品顾问列表页",
+      "users": "门店导购、C端用户",
+      "permission": "功能权限：门店导购可见；数据权限：当前门店奢品顾问",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
   {
     "id": "v04-u1",
     "group": "用户端 · CDF海南免税",

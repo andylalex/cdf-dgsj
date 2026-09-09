@@ -34,6 +34,20 @@ window.NAV_DATA={
       "hotspots": []
     },
     {
+      "id": "v04-u8",
+      "name": "U8 品牌主页",
+      "group": "用户端 · CDF海南免税",
+      "device": "mobile",
+      "__imported": false
+    },
+    {
+      "id": "v04-u7",
+      "name": "U7 奢品顾问列表页",
+      "group": "用户端 · CDF海南免税",
+      "device": "mobile",
+      "__imported": false
+    },
+    {
       "id": "v04-u1",
       "name": "U1 用户端 IM 会话页",
       "group": "用户端 · CDF海南免税",
