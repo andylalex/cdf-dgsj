@@ -200,6 +200,8 @@
 [data-theme="light"] .tbtn kbd{background:var(--accent);color:var(--text-inverse);border-color:rgba(255,255,255,.55)}
 [data-theme="light"] kbd{background:var(--accent-dim);border:1px solid rgba(14,132,216,.4);color:var(--accent)}
 /* —— 图例栏 —— */
+/* 预览舞台点阵：浅色下由白点(rgba(255,255,255,.055))改为深蓝点，确保可见且更明显 */
+[data-theme="light"] .stage{background-image:radial-gradient(rgba(21,38,63,.22) 1.4px,transparent 1.4px);background-size:22px 22px}
 [data-theme="light"] .stage-toolbar{background:rgba(241,246,252,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom-color:var(--line-soft);color:var(--text-2)}
 /* —— 目录页（原型目录视图）工作台标题 —— */
 [data-theme="light"] .cat-nav{background:rgba(255,255,255,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
@@ -304,7 +306,6 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 }
 .layout.resizing{transition:none}
 .layout.resizing .collapse-handle{transition:none}
-}
 /* 收起宽度改由 JS 内联 --left-w/--right-w 控制（见 setSideCollapsed），避免被拖拽内联值覆盖 */
 .sidebar,.prd-panel{min-width:0;overflow:hidden;transition:opacity .18s}
 .layout.collapse-left .sidebar{opacity:0;pointer-events:none}
