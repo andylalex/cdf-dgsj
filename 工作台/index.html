@@ -1435,17 +1435,18 @@ function fitImageStage(){
     return;
   }
   device.classList.add('img-mode');
-  var img=$('protoImg');
   var border=16;                            /* 8px*2 设备边框，从舞台可用宽中扣除 */
-  var nw=img.naturalWidth||0;
   var sw=$('stage').clientWidth||0;
   if(sw<120){                                  /* 舞台尚未完成布局（宽度 0）：先不写死宽度，避免误设成最小宽后残留到切页 */
     device.style.width='';scheduleUpdatePositions();return;
   }
   var avail=sw-56-border;                      /* 舞台可用宽 - 边框，作为图片内容上限，防横向溢出 */
   if(avail<320)avail=320;
-  var w=nw>0?Math.min(nw,avail):375;           /* 图片内容宽 = 自然宽（窄于手机外框） */
-  device.style.width=(w+border)+'px';          /* 加回边框：图片恰好按自然宽完整展示 */
+  /* 图片原型外壳宽度统一按设备类型标准宽（mobile 414 / tablet 768 / desktop 1280），
+     不再跟随图片自然宽，避免不同截图原始尺寸导致舞台设备框宽度不一致（如“导购入口”与“意向单入口”宽度不一） */
+  var baseW = state.device==='desktop'?1280 : state.device==='tablet'?768 : 414;
+  var w=Math.min(baseW,avail);
+  device.style.width=(w+border)+'px';          /* 加回边框：图片按设备标准宽完整展示 */
   scheduleUpdatePositions();
 }
 /* 渲染幻灯片控制条（仅多图显示），并绑定圆点跳转 */
