@@ -98,7 +98,7 @@ function renderSidebar(){
       const orderVal=PROTOTYPES.indexOf(p)+1;
       html+='<div class="side-item '+active+(manage?' manage':'')+'" data-id="'+p.id+'" data-group="'+p.group+'" role="button" tabindex="0">'+
         '<span class="side-ico">'+icon+'</span>'+
-        '<span class="side-meta"><div class="side-name">'+p.name+'</div>'+
+        '<span class="side-meta"><div class="side-name">'+p.name.replace(/^[A-Za-z]+\d+\s+/,'')+'</div>'+
         (manage
           ? '<div class="si-edit">'+
               '<select class="si-cat" data-id="'+p.id+'" title="选择分类">'+catOpts+'</select>'+

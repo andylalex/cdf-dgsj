@@ -1294,7 +1294,7 @@ function renderSidebar(){
       html+='<div class="side-item '+active+(manage?' manage':'')+'" data-id="'+p.id+'" data-group="'+p.group+'" role="button" tabindex="0">'+
         (manage?grip:'')+
         '<span class="side-ico">'+icon+'</span>'+
-        '<span class="side-meta"><div class="side-name">'+p.name+'</div></span>'+
+        '<span class="side-meta"><div class="side-name">'+p.name.replace(/^[A-Za-z]+\d+\s+/,'')+'</div></span>'+
         '</div>';
     });
     html+='</div>';
