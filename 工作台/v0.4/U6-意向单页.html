@@ -321,12 +321,12 @@
     <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-3 pb-24" data-page-node-id="U6Content">
 
       <!-- 分组清单 -->
-      <div id="groupWrap" class="space-y-3" data-page-node-id="U6GroupWrap"><div class="bg-white rounded-2xl p-4 shadow-sm" data-source="store"><div class="group-head flex items-center gap-2.5 mb-3"><input type="checkbox" class="group-check w-5 h-5 rounded accent-coral-500 shrink-0" checked="" onchange="toggleGroup('store', this.checked)"><div class="flex-1 min-w-0"><p class="text-[15px] font-semibold text-gray-800">海口国际免税城</p></div><span class="group-count text-[12px] text-gray-400">共 1 件</span></div><div class="group-items space-y-3"><label class="item-row flex gap-3 items-start" data-idx="0"><input type="checkbox" class="item-check w-5 h-5 rounded accent-coral-500 shrink-0 mt-1" checked="" onchange="toggleItem(0, this.checked)"><img src="assets/generated/product1.png" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>导购 · 导购</p><div class="flex flex-wrap gap-1.5 mt-1.5"><span class="tag-gov">政府消费券</span></div><div class="mt-2 flex items-center justify-between gap-2"><span class="text-[14px] font-bold text-coral-600 shrink-0">¥394.00</span><div class="flex items-center gap-2 shrink-0"><div class="qty-stepper flex items-center"><button type="button" class="stepper-btn" onclick="changeQty(0, -1)" disabled="">-</button><input type="text" class="stepper-input" value="1" readonly=""><button type="button" class="stepper-btn" onclick="changeQty(0, 1)">+</button></div><button type="button" onclick="removeItem(0)" class="w-7 h-7 flex items-center justify-center text-gray-300 active:text-coral-500 transition"><i class="fas fa-trash-can text-[12px]"></i></button></div></div></div></label></div></div></div>
+      <div id="groupWrap" class="space-y-3" data-page-node-id="U6GroupWrap"><div class="bg-white rounded-2xl p-4 shadow-sm" data-source="store"><div class="group-head flex items-center gap-2.5 mb-3"><input type="checkbox" class="group-check w-5 h-5 rounded accent-coral-500 shrink-0" checked="" onchange="toggleGroup('store', this.checked)"><div class="flex-1 min-w-0"><p class="text-[15px] font-semibold text-gray-800">海口国际免税城</p></div><span class="group-count text-[12px] text-gray-400">共 1 件</span></div><div class="group-items space-y-3"><label class="item-row flex gap-3 items-start" data-idx="0"><input type="checkbox" class="item-check w-5 h-5 rounded accent-coral-500 shrink-0 mt-1" checked="" onchange="toggleItem(0, this.checked)"><img src="assets/generated/product1.png" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>顾问 · 顾问</p><div class="flex flex-wrap gap-1.5 mt-1.5"><span class="tag-gov">政府消费券</span></div><div class="mt-2 flex items-center justify-between gap-2"><span class="text-[14px] font-bold text-coral-600 shrink-0">¥394.00</span><div class="flex items-center gap-2 shrink-0"><div class="qty-stepper flex items-center"><button type="button" class="stepper-btn" onclick="changeQty(0, -1)" disabled="">-</button><input type="text" class="stepper-input" value="1" readonly=""><button type="button" class="stepper-btn" onclick="changeQty(0, 1)">+</button></div><button type="button" onclick="removeItem(0)" class="w-7 h-7 flex items-center justify-center text-gray-300 active:text-coral-500 transition"><i class="fas fa-trash-can text-[12px]"></i></button></div></div></div></label></div></div></div>
 
       <!-- 空状态 -->
       <div id="emptyTip" class="hidden text-center py-10 bg-white rounded-2xl shadow-sm" data-page-node-id="U6Empty">
         <i class="fas fa-clipboard-list text-gray-300 text-3xl" data-page-node-id="U6EmptyIcon"></i>
-        <p class="text-[13px] text-gray-400 mt-2" data-page-node-id="U6EmptyText">清单已空，可返回会话请导购重新推荐</p>
+        <p class="text-[13px] text-gray-400 mt-2" data-page-node-id="U6EmptyText">清单已空，可返回会话请顾问重新推荐</p>
       </div>
 
     </div>
@@ -365,7 +365,7 @@
 
     function normItem(it) {
       it.source = it.source === 'ecommerce' ? 'ecommerce' : 'store';
-      if (!it.guide || !it.guide.name) it.guide = { name: '导购', store: '' };
+      if (!it.guide || !it.guide.name) it.guide = { name: '顾问', store: '' };
       if (!Array.isArray(it.tags)) it.tags = it.source === 'store' ? ['政府消费券'] : [];
       if (!Array.isArray(it.promos)) it.promos = [];
       if (!Array.isArray(it.images) || !it.images.length) it.images = [it.img || 'assets/generated/product1.png'];
@@ -406,7 +406,7 @@
 
     function guideText(it) {
       var g = it.guide || {};
-      return '导购 · ' + (g.name || '导购');
+      return '顾问 · ' + (g.name || '顾问');
     }
 
     function renderGroup(source, items) {

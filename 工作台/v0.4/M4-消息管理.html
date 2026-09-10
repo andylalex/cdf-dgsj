@@ -672,35 +672,35 @@
       area.innerHTML = msgs.map(m => {
         const isRight = m.side === 'right';
         if (m.type === 'order') {
-          const isPending = m.status === 'pending';
-          const statusLabel = isPending ? '待顾客确认' : '已确认';
-          const statusCls = isPending ? 'bg-coral-500 text-white' : 'bg-green-500 text-white';
           const total = m.items.reduce((s, i) => s + i.price * i.qty, 0);
           const count = m.items.reduce((s, i) => s + i.qty, 0);
-          const itemHtml = m.items.slice(0, 3).map(i => `
+          const itemHtml = m.items.slice(0, 3).map(i => {
+            var gset = [i.img || 'assets/generated/product1.png'];
+            if (/product1/.test(i.img || '')) gset = ['assets/generated/product1.png', 'assets/generated/product1_detail.png'];
+            else if (/product2/.test(i.img || '')) gset = ['assets/generated/product2.png', 'assets/generated/product2_detail.png'];
+            else if (/product3/.test(i.img || '')) gset = ['assets/generated/product3.png', 'assets/generated/product3_detail.png'];
+            var setStr = "['" + gset.join("','") + "']";
+            return `
             <div class="flex items-center gap-2.5 mb-2.5 last:mb-0">
-              <img src="${i.img}" class="w-10 h-10 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'">
+              <img src="${i.img}" class="w-10 h-10 rounded-lg object-cover bg-gray-100 shrink-0 cursor-pointer" onclick="openG3Gallery(${setStr});event.stopPropagation()" onerror="this.style.visibility='hidden'">
               <div class="flex-1 min-w-0">
                 <p class="text-xs text-gray-900 font-medium truncate">${i.name}</p>
                 <p class="text-[10px] text-gray-400 mt-0.5">${i.sourceLabel} · x${i.qty}</p>
               </div>
               <span class="text-xs font-semibold text-gray-900 shrink-0">¥${(i.price * i.qty).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-          `).join('');
+          `;
+          }).join('');
           return `
             <div class="msg-time-divider">${m.time}</div>
             <div class="w-[320px] mb-3 bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100">
-              <div class="bg-coral-50 px-4 py-2.5 flex items-center justify-between border-b border-coral-100">
+              <div class="bg-coral-50 px-4 py-3 flex items-center justify-between border-b border-coral-100">
                 <div class="flex items-center gap-2">
-                  <i class="fas fa-file-invoice text-coral-500 text-sm"></i>
-                  <span class="font-semibold text-sm text-gray-900">代客开单</span>
+                  <i class="fas fa-clipboard-list text-coral-500 text-sm"></i>
+                  <span class="font-semibold text-sm text-gray-900">意向单</span>
                 </div>
-                <span class="text-[10px] ${statusCls} px-2 py-0.5 rounded-full">${statusLabel}</span>
               </div>
               <div class="p-3.5">
-                <div class="flex items-center justify-between text-[11px] text-gray-500 mb-3">
-                  <span>订单号 ${m.id}</span>
-                </div>
                 ${itemHtml}
                 <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-3">
                   <span class="text-xs text-gray-500">共 ${count} 件</span>
@@ -746,6 +746,51 @@
         `;
       }).join('');
       area.scrollTop = area.scrollHeight;
+    }
+
+    // ===== 商品图片集弹窗（点击商品图片弹出；左右箭头置于页码前后；图片裁切遮挡 15%） =====
+    var lbImages = [];
+    var lbIndex = 0;
+    function openG3Gallery(imgs) {
+      lbImages = (imgs && imgs.length) ? imgs.slice() : ['assets/generated/product1.png'];
+      lbIndex = 0;
+      renderLightbox();
+      document.getElementById('imgLightbox').classList.remove('hidden');
+    }
+    function renderLightbox() {
+      document.getElementById('lbImg').src = lbImages[lbIndex];
+      var single = lbImages.length <= 1;
+      document.getElementById('lbPrev').style.display = single ? 'none' : 'flex';
+      document.getElementById('lbNext').style.display = single ? 'none' : 'flex';
+      var pages = document.getElementById('lbPages');
+      pages.innerHTML = '';
+      lbImages.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = (i + 1);
+        b.onclick = function (e) { e.stopPropagation(); goToImg(i); };
+        b.style.cssText = 'width:26px;height:26px;border-radius:7px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;' +
+          (i === lbIndex ? 'background:#E02E24;color:#fff;' : 'background:rgba(255,255,255,.2);color:#fff;');
+        pages.appendChild(b);
+      });
+    }
+    function goToImg(i) {
+      if (i < 0 || i >= lbImages.length || i === lbIndex) return;
+      lbIndex = i;
+      renderLightbox();
+    }
+    function prevImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+      renderLightbox();
+    }
+    function nextImg() {
+      if (lbImages.length <= 1) return;
+      lbIndex = (lbIndex + 1) % lbImages.length;
+      renderLightbox();
+    }
+    function closeLightbox() {
+      document.getElementById('imgLightbox').classList.add('hidden');
     }
 
     function findCustomer(id) {
@@ -828,5 +873,20 @@
     renderMessages(currentCustomerId);
   </script>
 
+  <!-- 商品图片集弹窗（点击商品图片弹出；左右箭头置于页码前后；图片裁切遮挡 15%） -->
+  <div id="imgLightbox" class="hidden fixed inset-0 z-[90] flex items-center justify-center" style="background:rgba(0,0,0,.55);padding:16px" onclick="closeLightbox()" data-page-node-id="imgLightbox">
+    <div onclick="event.stopPropagation()" style="width:100%;max-width:414px;background:#0b0b0d;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.32)">
+      <div style="position:relative;background:#111;height:min(82vw,420px);overflow:hidden;box-shadow:inset 0 0 0 8px #1f2937">
+        <img id="lbImg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:opacity .25s ease" alt="商品图片" data-page-node-id="lbImg">
+        <button onclick="closeLightbox()" aria-label="关闭" style="position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.35);z-index:5;transition:background .2s" onmouseover="this.style.background='rgba(0,0,0,.6)'" onmouseout="this.style.background='rgba(0,0,0,.35)'"><i class="fas fa-times" style="font-size:16px"></i></button>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:15%;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0));z-index:2"></div>
+        <div id="lbBar" style="position:absolute;left:0;right:0;bottom:11px;display:flex;align-items:center;justify-content:center;gap:10px;z-index:3">
+          <button id="lbPrev" onclick="event.stopPropagation();prevImg()" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.32)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">&#8249;</button>
+          <div id="lbPages" style="display:flex;gap:8px"></div>
+          <button id="lbNext" onclick="event.stopPropagation();nextImg()" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.32)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body></html>
