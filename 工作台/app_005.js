@@ -188,6 +188,7 @@ function selectPrototype(id){
     }else{
       $('protoImg').style.display='none';
       $('slideBar').hidden=true;
+      if($('imgCaption'))$('imgCaption').hidden=true;
       frame.style.display='';
       if(p.srcdoc){frame.srcdoc=p.srcdoc;$('frameUrl').textContent='prototype://'+p.id;}
       else if(p.url){frame.src=p.url;$('frameUrl').textContent=p.url;}
@@ -245,6 +246,7 @@ function showImageSlide(idx){
   img.style.display='block';
   $('frameUrl').textContent=p.name+'（图片'+(isMultiImage(p)?(' · 幻灯片 '+(idx+1)+'/'+imgs.length):'')+'）';
   renderSlideBar();
+  var cap=$('imgCaption'); if(cap){ cap.hidden=false; cap.textContent=p.name.replace(/\.[^.]+$/,'')+(isMultiImage(p)?(' · 第 '+(idx+1)+' / '+imgs.length+' 张'):''); }
   renderHotspots();
   renderPRD();
 }

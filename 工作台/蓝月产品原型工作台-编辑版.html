@@ -493,11 +493,17 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .device.img-mode .hotspot-fixed-layer{position:absolute;inset:0;pointer-events:none}
 .device.img-mode .hotspot-fixed-layer{overflow:visible}
 /* ---- 图片幻灯片控制条（多图导入时显示） ---- */
-.slide-bar{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:20;
+.slide-bar{position:static;transform:none;z-index:auto;margin:10px auto 2px;width:fit-content;
   display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;
   background:rgba(28,30,38,.78);backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,.28);
   color:var(--x71);font-size:12px;user-select:none}
 .slide-bar[hidden]{display:none}
+.img-caption{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;
+  margin:10px auto 0;padding:7px 16px;width:fit-content;max-width:92%;
+  font-size:13px;font-weight:600;color:var(--x62);
+  background:rgba(28,30,38,.5);border:1px solid var(--x52);border-radius:10px;
+  text-align:center;line-height:1.4}
+.img-caption[hidden]{display:none}
 .slide-nav{width:26px;height:26px;border:none;border-radius:50%;background:rgba(255,255,255,.16);
   color:var(--x71);font-size:16px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
   transition:background .15s}
@@ -1141,6 +1147,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
         <div class="hotspot-layer" id="hotspotLayer" data-page-node-id="CKtLQEQdaGnbW6Yc1x1pgl"><div class="hs" data-id="g3-e2" data-type="element" style="left: 199.211px; top: 344.416px;"><div class="hs-pin">2</div></div><div class="hs" data-id="g3-e3" data-type="element" style="left: 0px; top: 389.36px; display: none;"><div class="hs-pin">3</div></div><div class="hs" data-id="g3-e4" data-type="element" style="left: 222.208px; top: 383.845px;"><div class="hs-pin">4</div></div><div class="hs" data-id="g3-r1" data-type="rule" style="left: 199.211px; top: 344.416px;"><div class="hs-pin">5</div></div></div>
         <div class="hotspot-fixed-layer" id="hotspotFixedLayer" data-page-node-id="tHapiRBdl5hiHM4ZvChcGz"><div class="hs" data-id="g3-e1" data-type="element" style="left: 23.88px; top: 25.48px;"><div class="hs-pin">1</div></div></div>
         </div>
+        <div class="img-caption" id="imgCaption" hidden=""></div>
         <div class="slide-bar" id="slideBar" hidden="" data-page-node-id="slideBar">
           <button class="slide-nav" id="slidePrev" title="上一张" data-page-node-id="slidePrev">‹</button>
           <span class="slide-counter" id="slideCounter" data-page-node-id="slideCounter">1 / 1</span>
@@ -1351,8 +1358,8 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 
 <script src="prototypes-data.js?v=20260909c"></script>
 <script></script>
-<script src="nav-data.js?v=20260909b"></script>
-<script src="app_005.js?v=20260910a"></script>
+<script src="nav-data.js?v=20260910b"></script>
+<script src="app_005.js?v=20260910b"></script>
 
 <script src="app_006.js?v=20260909p"></script>
 
