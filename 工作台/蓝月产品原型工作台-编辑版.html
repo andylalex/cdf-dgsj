@@ -432,7 +432,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .legend-dot.ru{background:var(--c-rule);box-shadow:0 0 7px var(--c-rule)}
 .legend-dot.fi{background:var(--c-field);box-shadow:0 0 7px var(--c-field)}
 .stage{
-  flex:1;overflow:auto;min-height:0;position:relative;
+  flex:1;overflow:auto;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:nowrap;
   scrollbar-width:none;-ms-overflow-style:none;
   background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
   background-size:22px 22px;
@@ -514,6 +514,10 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   background:rgba(255,255,255,.4);transition:background .15s,transform .15s}
 .slide-dot:hover{background:rgba(255,255,255,.7)}
 .slide-dot.on{background:var(--x69);transform:scale(1.25)}
+/* 图片预览：左侧竖版切换条 + 右侧[名称在上,手机壳在下] */
+.preview-stack{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-width:0;min-height:0;height:100%;position:relative}
+.slide-bar.vertical{position:absolute;right:100%;top:50%;transform:translateY(-50%);margin:0 16px 0 0;flex-direction:column;gap:9px;padding:10px 7px;border-radius:14px;width:auto}
+.slide-bar.vertical .slide-dots{flex-direction:column}
 
 /* ---- 热点标注层 ---- */
 .hotspot-layer{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:visible;will-change:transform}
@@ -1134,7 +1138,14 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
       </div>
     </div>
     <div class="stage" id="stage" data-page-node-id="WZhW7ySE6HM0Z4ze4wEHF2">
-      <div class="device mobile" id="device" data-page-node-id="jeZvlQC3SYsb2OLBflyQCX" style="display: flex;">
+              <div class="preview-stack">
+<div class="slide-bar vertical" id="slideBar" hidden="" data-page-node-id="slideBar">
+          <button class="slide-nav" id="slidePrev" title="上一张" data-page-node-id="slidePrev"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg></button>
+          <div class="slide-dots" id="slideDots" data-page-node-id="slideDots"></div>
+          <button class="slide-nav" id="slideNext" title="下一张" data-page-node-id="slideNext"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10l6 6 6-6"/></svg></button>
+        </div>
+          <div class="img-caption" id="imgCaption" hidden=""></div>
+          <div class="device mobile" id="device" data-page-node-id="jeZvlQC3SYsb2OLBflyQCX" style="display: flex;">
         <div class="device-frame-bar" data-page-node-id="bq146QWX4bDNghA23uh7Fq">
           <span class="fb-dot" style="background:var(--x68)" data-page-node-id="cXDitHXVOmcvpR83hL9x2K"></span>
           <span class="fb-dot" style="background:var(--x67)" data-page-node-id="oJDu1BDdoDoDxWBx4VVquh"></span>
@@ -1147,13 +1158,6 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
         <div class="hotspot-layer" id="hotspotLayer" data-page-node-id="CKtLQEQdaGnbW6Yc1x1pgl"><div class="hs" data-id="g3-e2" data-type="element" style="left: 199.211px; top: 344.416px;"><div class="hs-pin">2</div></div><div class="hs" data-id="g3-e3" data-type="element" style="left: 0px; top: 389.36px; display: none;"><div class="hs-pin">3</div></div><div class="hs" data-id="g3-e4" data-type="element" style="left: 222.208px; top: 383.845px;"><div class="hs-pin">4</div></div><div class="hs" data-id="g3-r1" data-type="rule" style="left: 199.211px; top: 344.416px;"><div class="hs-pin">5</div></div></div>
         <div class="hotspot-fixed-layer" id="hotspotFixedLayer" data-page-node-id="tHapiRBdl5hiHM4ZvChcGz"><div class="hs" data-id="g3-e1" data-type="element" style="left: 23.88px; top: 25.48px;"><div class="hs-pin">1</div></div></div>
         </div>
-        <div class="img-caption" id="imgCaption" hidden=""></div>
-        <div class="slide-bar" id="slideBar" hidden="" data-page-node-id="slideBar">
-          <button class="slide-nav" id="slidePrev" title="上一张" data-page-node-id="slidePrev">‹</button>
-          <span class="slide-counter" id="slideCounter" data-page-node-id="slideCounter">1 / 1</span>
-          <div class="slide-dots" id="slideDots" data-page-node-id="slideDots"></div>
-          <button class="slide-nav" id="slideNext" title="下一张" data-page-node-id="slideNext">›</button>
-        </div>
         <div class="spot-mask" id="spotMask" data-page-node-id="b0aoJjJ2lJKUPXpeDDgLt9"><div class="spot-hole" id="spotHole" data-page-node-id="AvY4DG1BMm8TFTBAGRUEDl"></div></div>
 
         <div class="hs-pop" id="hsPop" data-page-node-id="TF72DlFlxUCEvDZolKol16"></div>
@@ -1164,28 +1168,10 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
           <div class="pt-text" id="ptText" data-page-node-id="A9zT3yQ8xP1mB4c7Dw6oHg" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 0; visibility: hidden;">蓝月 · 原型工作台</div>
         </div>
       <div id="boxOverlay" class="box-overlay" style="display: none;"><div class="box-hint">将鼠标移到原型上预览选区，单击即可标注 · 按 Esc 取消</div><div class="box-sel" id="boxSel"><span class="box-sel-tag"></span></div></div></div>
-      <div class="tour-card" id="tourCard" hidden="" data-page-node-id="2hlTtEsERQlVR7erNysZdt">
-        <button class="tour-exit" id="tourExit" data-page-node-id="WdfjWIEDFwAG3eUZDhjPmD"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" data-page-node-id="3urHukMaZ4zTXcUvIr9dOn"><path d="M18 6 6 18M6 6l12 12" data-page-node-id="jN5qpBkVpRUPqBConTDDnG"></path></svg></button>
-        <div class="tour-head" data-page-node-id="XD5UzGQ34VmFSBaY12vpZW">
-          <span class="type-chip" id="tourChip" data-page-node-id="ekpxdl2nGlPcrC9EqAu8xo"></span>
-          <div class="tour-progress" data-page-node-id="9qLgItg5aCLR907wTTDlvi"><div class="tour-bar" data-page-node-id="jAgbhjvES7TM21FMCEurSy"><i id="tourBar" data-page-node-id="lCpssay3X2vPmdoOEpALnP"></i></div><span id="tourCount" data-page-node-id="BYurGrt9fAfrZ662gVrCqW"></span></div>
-          <div class="tour-filter" id="tourFilter" style="display:none">
-            <button type="button" data-f="all" class="on">全部</button>
-            <button type="button" data-f="element">仅组件</button>
-          </div>
         </div>
-        <div class="tour-title" id="tourTitle" data-page-node-id="mBXFVTxqNShOpRDZ15NbBF"></div>
-        <div class="tour-body" id="tourBody" data-page-node-id="TTrrwA5FU0lGwLrwd3fYVK"></div>
-        <div class="tour-foot" data-page-node-id="SvGf58cfDJYXdjnSsKNtKM">
-          <button class="tour-btn" id="tourPrev" data-page-node-id="lNaOd5QVHAKGoU3Pe5huKr">上一步</button>
-          <button class="tour-btn" id="tourNext" data-page-node-id="3bvBzM4AjZV7Do7oCK8PFp">下一步</button>
-          <span class="sp" data-page-node-id="cLoUogvPkfrcFWAgPcp5kY"></span>
-          <button class="tour-btn primary" id="tourDone" data-page-node-id="yHMpv5VApNW1BCk2HGXS2G">完成走查</button>
-        </div>
-        </div>
-      <!-- 使用指南 -->
-      <div class="guide-view" id="guideView" data-page-node-id="XGC2RcpKvfYPJGFHW0twRo"></div>
-    </div>
+      
+
+        
   </section>
 
   <!-- 右：PRD 说明 -->

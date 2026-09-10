@@ -241,12 +241,15 @@ function showImageSlide(idx){
   state.slideIndex=idx;
   try{ closeHsPop(); }catch(e){}
   var img=$('protoImg');
+  var cur=imgs[idx];
+  var src=(cur&&typeof cur==='object')?cur.src:cur;
+  var iname=(cur&&typeof cur==='object')?cur.name:'';
   img.onload=function(){ fitImageStage(); scheduleUpdatePositions(); };
-  img.src=imgs[idx];
+  img.src=src;
   img.style.display='block';
   $('frameUrl').textContent=p.name+'（图片'+(isMultiImage(p)?(' · 幻灯片 '+(idx+1)+'/'+imgs.length):'')+'）';
   renderSlideBar();
-  var cap=$('imgCaption'); if(cap){ cap.hidden=false; cap.textContent=p.name.replace(/\.[^.]+$/,'')+(isMultiImage(p)?(' · 第 '+(idx+1)+' / '+imgs.length+' 张'):''); }
+  var cap=$('imgCaption'); if(cap){ cap.hidden=false; cap.textContent=iname; }
   renderHotspots();
   renderPRD();
 }
@@ -272,7 +275,7 @@ function fitImageStage(){
      不再跟随图片自然宽，避免不同截图原始尺寸导致舞台设备框宽度不一致（如“导购入口”与“意向单入口”宽度不一） */
   var baseW = state.device==='desktop'?1280 : state.device==='tablet'?768 : 414;
   var w=Math.min(baseW,avail);
-  device.style.width=(w+border)+'px';          /* 加回边框：图片按设备标准宽完整展示 */
+  device.style.width=baseW+'px';                /* 与品牌主页(iframe)设备外壳同宽：border-box 总宽=baseW，去掉 +border 避免比同设备 iframe 宽 16px */
   scheduleUpdatePositions();
 }
 /* 渲染幻灯片控制条（仅多图显示），并绑定圆点跳转 */
@@ -281,13 +284,12 @@ function renderSlideBar(){
   if(!p||p.kind!=='image'||!isMultiImage(p)){ bar.hidden=true; return; }
   bar.hidden=false;
   var n=p.images.length;
-  $('slideCounter').textContent=(state.slideIndex+1)+' / '+n;
   var dots=$('slideDots'); dots.innerHTML='';
   for(var i=0;i<n;i++){
     (function(i){
       var d=document.createElement('button');
       d.className='slide-dot'+(i===state.slideIndex?' on':'');
-      d.dataset.idx=i; d.title='第 '+(i+1)+' 张';
+      d.dataset.idx=i; d.title=(i+1)+'/'+n;
       d.addEventListener('click',function(){ showImageSlide(i); });
       dots.appendChild(d);
     })(i);
@@ -384,7 +386,7 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='ArrowRight'){ slideGo(1); }
 });
 $('frameRefresh').addEventListener('click',()=>{const p=current();if(!p)return;
-  if(p.kind==='image'){const img=$('protoImg');if(img)img.src=(p.images&&p.images[state.slideIndex])||p.image;showToast('图片已重载');return;}
+  if(p.kind==='image'){const img=$('protoImg');if(img)img.src=(p.images&&p.images[state.slideIndex])?(p.images[state.slideIndex].src||p.images[state.slideIndex]):p.image;showToast('图片已重载');return;}
   if(p.srcdoc)frame.srcdoc=p.srcdoc;else frame.src=p.url;showToast('原型已重载');});
 $('frameOpen').addEventListener('click',()=>{const p=current();if(!p||!p.url){showToast('内置示例原型仅在框架内展示，外部原型可新窗口打开');return;}window.open(p.url,'_blank');});
 $('annoToggle').addEventListener('click',()=>{
