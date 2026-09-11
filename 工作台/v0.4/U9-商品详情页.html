@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>用户端 - 商品详情（导购入口）</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+<style>
+*,::after,::before{box-sizing:border-box}
+:root{--gold:#bc9578;--gold-line:#d8bb9d;--brand:#e01f26;--ink:#26282c;--ink2:#6b7280;--ink3:#9aa1ab;--line:#eceef1}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#d8dae0;color:var(--ink);-webkit-font-smoothing:antialiased}
+.phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;background:#f2f3f5;display:flex;flex-direction:column;position:relative}
+.phone-frame>*{min-height:0}
+.hide-scrollbar::-webkit-scrollbar{display:none}
+.hide-scrollbar{scrollbar-width:none}
+
+/* 状态栏 / 导航 / Tabs */
+.status-bar{padding:10px 20px 6px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;background:#fff;flex:0 0 auto}
+.nav-bar{padding:6px 14px 10px;background:#fff;display:flex;align-items:center;position:relative;flex:0 0 auto}
+.nav-bar button{border:0;background:transparent;padding:0;color:#26282c;cursor:pointer}
+.nav-bar .ttl{position:absolute;left:0;right:0;text-align:center;font-size:17px;font-weight:500}
+.tabs{display:flex;align-items:flex-end;padding:0 8px;background:#fff;flex:0 0 auto;position:relative;z-index:3}
+.tabs .t{flex:1;text-align:center;font-size:15px;color:#3c4048;padding:8px 0 13px;position:relative;cursor:pointer}
+.tabs .t.on{color:#1b1d21;font-weight:600}
+.tabs .t.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:5px;width:17px;height:3.5px;border-radius:2px;background:var(--brand)}
+
+/* 内容区 */
+.main{flex:1;overflow-y:auto;background:#f2f3f5;padding:8px 0 0}
+.card{background:#fff;border-radius:12px;margin:0 0 8px;overflow:hidden}
+
+/* 商品名 */
+.pname{background:#fff;border-radius:12px;padding:12px 14px 12px;margin:0 0 8px}
+.pname .t1{font-size:15px;color:#26282c;line-height:1.35;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pname .t2{font-size:13px;color:#6b7280;margin-top:8px}
+
+/* 价格区（增强） */
+.price{padding:2px 14px 14px}
+.price .pline{display:flex;align-items:baseline;gap:3px}
+.price .pfx{font-size:11.5px;color:#e8543f;background:#fdeeea;border-radius:3px;padding:1px 5px;line-height:17px;margin-right:5px;align-self:center}
+.price .cur{font-size:15px;color:#e01f26;font-weight:600}
+.price .pnum{font-size:25px;color:#e01f26;font-weight:700;letter-spacing:-.5px}
+.price .porg{font-size:12.5px;color:#9aa1ab;text-decoration:line-through;margin-left:7px}
+.price .pmeta{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:12px;color:#9aa1ab}
+.price .pmeta .save{color:#e8543f}
+.price .pmeta .dot{width:3px;height:3px;border-radius:50%;background:#d9dde2;display:inline-block}
+
+/* 图集 */
+.gallery{padding:0 0 12px}
+.gallery .gmain{aspect-ratio:1/1;background:#fdfbf8;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.gallery .gmain img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery .gmain .badge{position:absolute;left:12px;top:12px;background:rgba(224,31,38,.94);color:#fff;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px}
+.gallery .gthumbs{display:flex;gap:8px;padding:10px 14px 0;overflow-x:auto}
+.gallery .gt{flex:0 0 auto;width:52px;height:52px;border-radius:8px;overflow:hidden;background:#f7f5f2;border:1.5px solid transparent;cursor:pointer}
+.gallery .gt img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery .gt.on{border-color:var(--gold)}
+
+/* 通用行 */
+.row{display:flex;gap:10px;padding:12px 14px;align-items:flex-start;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .k{flex:0 0 auto;width:46px;font-size:14.5px;color:#26282c;font-weight:500}
+.row .v{flex:1;min-width:0;font-size:13.5px;color:#3c4048;line-height:1.45}
+.dots{display:flex;gap:4px;align-items:center;padding-top:6px;flex:0 0 auto}
+.dots i{width:5.5px;height:5.5px;border-radius:50%;background:#dcdfe4;display:block}
+.dots i.on{background:#3c4048}
+
+/* 促销 / 领券 */
+.promo{display:flex;gap:9px;margin-bottom:10px;align-items:flex-start}
+.promo:last-child{margin-bottom:0}
+.promo .bx{flex:0 0 auto;font-size:11.5px;color:#e8543f;background:#fdeeea;border-radius:3px;padding:1px 5px;line-height:17px;white-space:nowrap}
+.promo .tx{flex:1;min-width:0;font-size:13.5px;color:#3c4048;line-height:1.45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.coupons{display:flex;gap:7px;flex-wrap:nowrap;overflow:hidden}
+.coupon{flex:0 0 auto;border:1px dashed #e8543f;color:#e8543f;font-size:11.5px;line-height:17px;padding:1px 6px;border-radius:4px;background:#fffdfd}
+.row .more{flex:0 0 auto;font-size:12.5px;color:#9aa1ab;display:flex;align-items:center;gap:3px;align-self:center}
+
+/* 政府消费券 */
+.gov{margin:0 0 8px;border-radius:12px;background:#0aa25e;color:#fff;padding:14px;display:flex;align-items:center;gap:10px}
+.gov .tt{font-size:15px;font-weight:600;letter-spacing:.2px;white-space:nowrap;display:flex;align-items:center}
+.gov .sp{display:inline-block;width:1px;height:13px;background:rgba(255,255,255,.55);margin:0 8px;vertical-align:-1px}
+.gov .tt .sub{font-size:12.5px;font-weight:400;opacity:.96;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gov .ss{font-size:13px;opacity:.97;line-height:1.55;margin-top:7px}
+.gov .ss b{color:#ffe14d;font-weight:600}
+.gov .btn{flex:0 0 auto;background:#fff;color:#0aa25e;font-size:13px;font-weight:600;padding:8px 14px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px;border:0;cursor:pointer}
+
+/* 服务保障（增强） */
+.svc{display:flex;gap:6px;padding:11px 12px;justify-content:space-between}
+.svc .s{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11.5px;color:#6b7280}
+.svc .s i{font-size:17px;color:var(--gold)}
+
+/* 评分摘要（增强） */
+.rate{padding:13px 14px}
+.rate .hd{display:flex;align-items:center;gap:8px}
+.rate .score{font-size:20px;font-weight:700;color:#26282c}
+.rate .stars{color:#f5a623;font-size:12px;letter-spacing:1px}
+.rate .cnt{font-size:12px;color:#9aa1ab;margin-left:auto;display:flex;align-items:center;gap:3px}
+.rate .r1{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:#3c4048;line-height:1.5}
+.rate .r1 .who{font-size:12px;color:#9aa1ab;margin-bottom:4px}
+
+/* 金牌导购 */
+.guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
+.guide-sec .hd{display:flex;align-items:center;padding:0 14px 12px;font-size:15.5px;color:#26282c;font-weight:600}
+.guide-sec .hd .arr{margin-left:auto;color:#8b9099;font-size:13px}
+.guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
+.gcard{flex:0 0 auto;width:292px;background:#fff;border-radius:10px;padding:11px;display:flex;align-items:center;gap:9px}
+.gcard img{width:50px;height:50px;border-radius:50%;flex:0 0 auto;object-fit:cover}
+.gcard .gi{min-width:0;flex:1}
+.gcard .gn{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.gcard .gn .bar{color:#dcdfe4;font-weight:400}
+.gcard .gn .yr{font-weight:400;color:#3c4048;font-size:14px}
+.gcard .gs{font-size:13px;color:#8b9099;margin-top:7px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-gold{flex:0 0 auto;border:1px solid var(--gold-line);color:var(--gold);background:#fff;font-size:13px;padding:6px 14px;border-radius:999px;white-space:nowrap;cursor:pointer}
+
+/* 提货方式 */
+.pick{background:#fff;border-radius:12px;padding:0 0 18px;margin:0 0 8px}
+.pick .hd{padding:16px 14px 12px;font-size:15.5px;font-weight:600;color:#1b1d21}
+.pick .g{padding:0 14px}
+.pick .gt{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:5px}
+.pick .o{font-size:13.5px;color:#3c4048;line-height:1.5;margin-top:8px;display:flex;gap:0}
+.pick .o .n{flex:0 0 auto;width:42px;color:#6b7280}
+.pick .o .n.v{color:#3c4048}
+.pick .dash{height:1px;background:var(--line);margin:14px 0}
+
+/* 浮动帮助 */
+.float-help{position:absolute;right:12px;bottom:104px;display:flex;flex-direction:column;gap:10px;z-index:5}
+.float-help .fb{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;font-size:19px;color:#3c4048;cursor:pointer}
+
+/* 底部操作栏 */
+.actionbar{flex:0 0 auto;background:#fff;border-top:1px solid var(--line);padding:7px 10px 9px;display:flex;align-items:center;position:relative;z-index:6}
+.acts{display:flex;gap:16px;padding-right:10px}
+.acts .a{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:#6b7280;cursor:pointer}
+.acts .a i{font-size:20px}
+.acts .a .nb{position:absolute;top:-4px;right:-6px;min-width:15px;height:15px;padding:0 4px;border-radius:999px;background:#e01f26;color:#fff;font-size:10px;line-height:15px;text-align:center;font-style:normal}
+.abtns{flex:1;display:flex;gap:7px}
+.abtns button{flex:1;height:42px;border-radius:999px;font-size:15.5px;font-weight:600;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer}
+.abtns .b1{background:#ffb800;color:#fff}
+.abtns .b2{background:linear-gradient(92deg,#f5563f,#e01f26);color:#fff}
+</style>
+</head>
+<body>
+<div class="phone-frame">
+
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <span>14:53</span>
+    <div style="display:flex;align-items:center;gap:6px">
+      <i class="fab fa-weixin" style="color:#07c160;font-size:15px"></i>
+      <span style="font-size:11px;color:#9aa1ab">···</span>
+      <i class="fas fa-signal" style="font-size:11px;color:#c9ccd2"></i>
+      <i class="fas fa-wifi" style="font-size:11px"></i>
+      <i class="fas fa-battery-three-quarters" style="font-size:15px"></i>
+    </div>
+  </div>
+
+  <!-- 导航 -->
+  <div class="nav-bar">
+    <button style="width:26px" aria-label="返回" onclick="history.length>1?history.back():null"><i class="fas fa-chevron-left" style="font-size:19px"></i></button>
+    <span class="ttl">商品详情</span>
+    <div style="margin-left:auto"><i class="fas fa-external-link-alt" style="font-size:18px;color:#3c4048"></i></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs" id="tabs">
+    <span class="t on">商品</span>
+    <span class="t">评价</span>
+    <span class="t">详情</span>
+    <span class="t">常见问题</span>
+  </div>
+
+  <div class="main hide-scrollbar">
+
+    <!-- 商品名 -->
+    <div class="pname">
+      <div class="t1">Van Cleef &amp; Arpels 梵克雅宝 四叶草项链 白贝母钻石吊坠</div>
+      <div class="t2">Van Cleef &amp; Arpels · 18K金 · 白贝母</div>
+    </div>
+
+    <!-- 价格区（增强） -->
+    <div class="card">
+      <div class="price">
+        <div class="pline">
+          <span class="pfx">免税价</span>
+          <span class="cur">¥</span><span class="pnum">86,500</span>
+          <span class="porg">¥92,000</span>
+        </div>
+        <div class="pmeta">
+          <span class="save">已省 ¥5,500</span>
+          <span class="dot"></span>
+          <span>已售 126 件</span>
+          <span class="dot"></span>
+          <span>评价 89 条</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品主图 + 图集 -->
+    <div class="card gallery">
+      <div class="gmain">
+        <span class="badge">中免正品 · 免税专供</span>
+        <img id="gMainImg" src="assets/generated/b1_detail.png" alt="梵克雅宝四叶草项链吊坠特写">
+      </div>
+      <div class="gthumbs hide-scrollbar" id="gThumbs">
+        <div class="gt on"><img src="assets/generated/b1_detail.png" alt=""></div>
+        <div class="gt"><img src="assets/generated/b1.png" alt=""></div>
+        <div class="gt"><img src="assets/generated/a4.png" alt=""></div>
+        <div class="gt"><img src="assets/generated/a5.png" alt=""></div>
+      </div>
+    </div>
+
+    <!-- 促销 + 领券（同一张卡内） -->
+    <div class="card">
+      <div class="row">
+        <span class="k">促销</span>
+        <div class="v">
+          <div class="promo"><span class="bx">赠品</span><span class="tx">购买梵克雅宝单笔实付满50000元及以上赠品牌丝巾</span></div>
+          <div class="promo"><span class="bx">赠品</span><span class="tx">购买梵克雅宝单笔实付满30000元及以上赠定制礼盒</span></div>
+          <div class="promo"><span class="bx">1件9折</span><span class="tx">指定品牌专享1件9折</span></div>
+        </div>
+        <div class="dots"><i class="on"></i><i></i><i></i></div>
+      </div>
+      <div class="row">
+        <span class="k">领券</span>
+        <div class="v">
+          <div class="coupons">
+            <span class="coupon">满20000减1500</span>
+            <span class="coupon">满30000减2380</span>
+            <span class="coupon">满10000减800</span>
+          </div>
+        </div>
+        <span class="more">领券<i class="fas fa-chevron-right" style="font-size:10px"></i></span>
+      </div>
+    </div>
+
+    <!-- 政府消费券 -->
+    <div class="gov">
+      <div style="flex:1;min-width:0">
+        <div class="tt">政府消费券<span class="sp"></span><span class="sub">支持使用海南消费券</span></div>
+        <div class="ss">专区购买可叠加<b>促销</b>还能再省</div>
+      </div>
+      <button class="btn" onclick="location.href='U6-意向单页.html'">去购买<i class="fas fa-chevron-right" style="font-size:10px"></i></button>
+    </div>
+
+    <!-- 服务保障（增强） -->
+    <div class="card svc">
+      <div class="s"><i class="fas fa-shield-alt"></i>中免正品</div>
+      <div class="s"><i class="fas fa-plane-departure"></i>免税专供</div>
+      <div class="s"><i class="fas fa-gem"></i>品牌直营</div>
+      <div class="s"><i class="fas fa-coins"></i>支持积分</div>
+      <div class="s"><i class="fas fa-undo"></i>离岛自提</div>
+    </div>
+
+    <!-- 评分摘要（增强） -->
+    <div class="card rate">
+      <div class="hd">
+        <span class="score">4.9</span>
+        <span class="stars">★★★★★</span>
+        <span class="cnt">好评率 98%<i class="fas fa-chevron-right" style="font-size:10px"></i></span>
+      </div>
+      <div class="r1">
+        <div class="who">陈女士 · 会员 · 2024-08-12</div>
+        "实物比图片更精致，贝母在光下很通透，导购全程帮我确认了离岛航班和提货点，很省心。"
+      </div>
+    </div>
+
+    <!-- 积分 / 说明 / 限购 -->
+    <div class="card">
+      <div class="row">
+        <span class="k">积分</span>
+        <div class="v">参与积分赠送和抵扣</div>
+        <div class="dots"><i></i><i class="on"></i><i></i></div>
+      </div>
+      <div class="row">
+        <span class="k">说明</span>
+        <div class="v">不支持7天无理由退货</div>
+        <div class="dots"><i></i><i class="on"></i><i></i></div>
+      </div>
+      <div class="row">
+        <span class="k">限购</span>
+        <div class="v">商品限购8件</div>
+        <div class="dots"><i></i><i class="on"></i><i></i></div>
+      </div>
+    </div>
+
+    <!-- 导购服务条 -->
+    <div class="guide-sec">
+      <div class="hd">
+        <span>门店金牌导购员专属服务</span>
+        <i class="fas fa-chevron-right arr"></i>
+      </div>
+      <div class="guide-rail hide-scrollbar">
+        <div class="gcard">
+          <img src="assets/generated/advisor1.png" alt="张三">
+          <div class="gi">
+            <div class="gn">张三<span class="bar">|</span><span class="yr">4年经验</span></div>
+            <div class="gs"><i class="fas fa-map-marker-alt"></i>海口国际免税城</div>
+          </div>
+          <button class="btn-gold" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
+        </div>
+        <div class="gcard">
+          <img src="assets/generated/advisor2.png" alt="李现">
+          <div class="gi">
+            <div class="gn">李现<span class="bar">|</span><span class="yr">5年经验</span></div>
+            <div class="gs"><i class="fas fa-map-marker-alt"></i>三亚国际免税城</div>
+          </div>
+          <button class="btn-gold" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 提货方式 -->
+    <div class="pick">
+      <div class="hd">提货方式</div>
+      <div class="g">
+        <div class="gt"><i class="far fa-circle" style="font-size:13px;color:#6b7280"></i>离岛自提</div>
+        <div class="o"><span class="n v">三亚</span><span>机场离岛，最快4小时送达</span></div>
+        <div class="o"><span class="n v">海口</span><span>机场/火车站/港口离岛，最快6小时送达</span></div>
+        <div class="o"><span class="n v">琼海</span><span>机场离岛，最快4小时送达</span></div>
+        <div class="dash"></div>
+        <div class="o" style="margin-top:0"><span class="n"></span><span>下单时请确认提货方式，具体以实际提货点为准</span></div>
+      </div>
+    </div>
+
+    <div style="height:6px"></div>
+  </div>
+
+  <div class="float-help">
+    <div class="fb" onclick="location.href='U1-用户端IM会话页.html'"><i class="fas fa-headset"></i></div>
+    <div class="fb" onclick="document.querySelector('.main').scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="actionbar">
+    <div class="acts">
+      <div class="a" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>首页</span></div>
+      <div class="a" id="favBtn" onclick="toggleFav(this)"><i class="far fa-star"></i><span>收藏</span></div>
+      <div class="a" onclick="location.href='U6-意向单页.html'"><i class="fas fa-shopping-bag"></i><span>购物袋</span><i class="nb">2</i></div>
+    </div>
+    <div class="abtns">
+      <button class="b1" onclick="location.href='U6-意向单页.html'">加入购物袋</button>
+      <button class="b2" onclick="location.href='U4-结算中心页.html'">立即购买</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // 缩略图切换主图
+  (function () {
+    var mainImg = document.getElementById('gMainImg');
+    var thumbs = document.getElementById('gThumbs');
+    if (mainImg && thumbs) {
+      thumbs.addEventListener('click', function (e) {
+        var gt = e.target.closest('.gt');
+        if (!gt) return;
+        thumbs.querySelectorAll('.gt').forEach(function (n) { n.classList.remove('on'); });
+        gt.classList.add('on');
+        var img = gt.querySelector('img');
+        if (img) mainImg.src = img.getAttribute('src');
+      });
+    }
+    // Tab 切换（仅视觉，演示用）
+    var tabs = document.getElementById('tabs');
+    if (tabs) {
+      tabs.addEventListener('click', function (e) {
+        var t = e.target.closest('.t');
+        if (!t) return;
+        tabs.querySelectorAll('.t').forEach(function (n) { n.classList.remove('on'); });
+        t.classList.add('on');
+      });
+    }
+  })();
+
+  // 收藏切换
+  function toggleFav(el) {
+    var i = el.querySelector('i');
+    var on = i.classList.contains('fas');
+    i.className = on ? 'far fa-star' : 'fas fa-star';
+    i.style.color = on ? '' : '#e01f26';
+    el.querySelector('span').textContent = on ? '收藏' : '已收藏';
+  }
+</script>
+</body>
+</html>
