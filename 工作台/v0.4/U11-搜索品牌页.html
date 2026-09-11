@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>搜索品牌 - 导购入口</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+<style>
+*,::after,::before{box-sizing:border-box}
+:root{--gold:#bc9578;--gold-line:#d8bb9d;--brand:#e01f26;--ink:#26282c;--ink3:#9aa1ab;--line:#eceef1}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#d8dae0;color:var(--ink);-webkit-font-smoothing:antialiased}
+.phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;background:#fff;display:flex;flex-direction:column;position:relative}
+.phone-frame>*{min-height:0}
+.hide-scrollbar::-webkit-scrollbar{display:none}
+.hide-scrollbar{scrollbar-width:none}
+
+/* 状态栏 / 搜索行 */
+.status-bar{padding:10px 20px 6px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;background:#fff;flex:0 0 auto}
+.status-bar .r{display:flex;align-items:center;gap:5px;font-size:11px;color:#26282c}
+.search-row{padding:4px 12px 10px;background:#fff;display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.search-row button.back{border:0;background:transparent;padding:0;color:#26282c;cursor:pointer}
+.search-box{flex:1;display:flex;align-items:center;gap:8px;background:#f4f5f7;border-radius:999px;padding:8px 12px}
+.search-box i.sea{color:#9aa1ab;font-size:13px}
+.search-box input{flex:1;min-width:0;border:0;background:transparent;outline:none;font-size:14px;color:#26282c}
+.search-box button.clr{border:0;background:transparent;color:#c3c8cf;font-size:15px;cursor:pointer;padding:0}
+
+/* 频道 tabs */
+.chan{display:flex;align-items:center;padding:2px 14px 0;background:#fff;flex:0 0 auto}
+.chan .c{display:flex;align-items:center;gap:6px;font-size:15px;color:#3c4048;cursor:pointer}
+.chan .c .bdg{font-size:10px;color:var(--brand);border:1px solid rgba(224,31,38,.55);border-radius:3px;padding:0 3px;line-height:15px}
+.chan .c.on{color:#1b1d21;font-weight:600;position:relative;padding-bottom:9px}
+.chan .c.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:2px;width:18px;height:3px;border-radius:2px;background:#1b1d21}
+.chan .sp{flex:1}
+
+/* 筛选行 */
+.filters{display:flex;align-items:center;gap:18px;padding:11px 14px 9px;background:#fff;border-bottom:1px solid #f4f5f7;flex:0 0 auto}
+.filters .f{font-size:14px;color:#3c4048;display:flex;align-items:center;gap:3px;cursor:pointer}
+.filters .f.on{color:#1b1d21;font-weight:600}
+.filters .f i{font-size:10px;color:#9aa1ab}
+.filters .sp{flex:1}
+.filters .more{display:flex;align-items:center;gap:5px;font-size:13px;color:#3c4048;cursor:pointer}
+.quick{display:flex;gap:8px;padding:10px 14px;background:#fff;flex:0 0 auto}
+.quick span{font-size:12px;color:#4a4f57;background:#f4f5f7;border-radius:4px;padding:4px 10px;cursor:pointer}
+
+/* 主区 */
+.main{flex:1;overflow-y:auto;background:#fff;padding:0 0 0}
+.empty{display:flex;flex-direction:column;align-items:center;padding:26px 0 10px}
+.empty .cir{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fbe9ef,#f6d7e2 70%,#f3cfdd);display:flex;align-items:center;justify-content:center}
+.empty .cir i{font-size:40px;color:#d9a8b8}
+.empty p{font-size:13px;color:#9aa1ab;margin:14px 0 0}
+
+/* 导购服务面板 */
+.gpanel{background:#fff;border-radius:14px;margin:6px 10px 0;border:1px solid #f1ede6;box-shadow:0 2px 12px rgba(60,40,20,.06);padding:13px 0 12px;overflow:hidden}
+.gpanel .hd{display:flex;align-items:center;padding:0 14px 11px;font-size:15.5px;font-weight:600;color:#26282c}
+.gpanel .hd .x{margin-left:auto;border:0;background:transparent;color:#9aa1ab;font-size:16px;cursor:pointer;padding:2px 4px}
+.grail{display:flex;gap:9px;padding:0 10px;overflow-x:auto}
+.gcard{flex:0 0 auto;width:216px;border-radius:12px;padding:12px 12px 11px;background:linear-gradient(180deg,#fffdf8,#fbf3e6);border:1px solid #f3e9dc;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.gcard .st{width:100%;display:flex;align-items:center;gap:4px;font-size:12.5px;color:#8a6a4f;font-weight:500}
+.gcard .st i{color:var(--gold);font-size:11px}
+.gcard .mid{font-size:12px;color:#8b9099;text-align:center;line-height:1.5;margin-top:9px}
+.gcard .bt{width:100%;display:flex;align-items:center;gap:7px;margin-top:10px}
+.gcard .bt img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.gcard .bt .gi{min-width:0;flex:1}
+.gcard .bt .gn{font-size:12.5px;font-weight:600;color:#1b1d21;white-space:nowrap;display:flex;align-items:center;gap:4px}
+.gcard .bt .gn .bar{color:#dcdfe4;font-weight:400}
+.gcard .bt .gn .bd{font-weight:400;color:#8a6a4f;font-size:11px}
+.gcard .bt .yr{font-size:11px;color:#9aa1ab;margin-top:3px;white-space:nowrap}
+.gcard .cbtn{flex:0 0 auto;border:1px solid var(--gold-line);color:#8a6a4f;background:#fff;font-size:11.5px;line-height:24px;padding:0 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.gcard .cbtn:active{background:#f7efe4}
+
+/* 为您推荐 */
+.rec-hd{display:flex;align-items:center;gap:10px;padding:20px 40px 12px}
+.rec-hd .ln{flex:1;height:1px;background:linear-gradient(90deg,transparent,#e3e4e8)}
+.rec-hd .ln:last-child{background:linear-gradient(90deg,#e3e4e8,transparent)}
+.rec-hd .t{display:flex;align-items:center;gap:6px;font-size:14.5px;color:#26282c;font-weight:500}
+.rec-hd .t i{color:var(--brand);font-size:13px}
+
+/* 商品瀑布流 */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 16px}
+.pitem{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #f4f5f7;cursor:pointer;position:relative}
+.pitem .pimg{position:relative;aspect-ratio:10/9;overflow:hidden;background:#f7f5f2}
+.pitem .pimg img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.pitem .pimg .tag{position:absolute;right:6px;bottom:6px;background:rgba(17,17,17,.82);color:#fff;font-size:10.5px;line-height:18px;padding:0 7px;border-radius:4px}
+.pitem .pinfo{padding:9px 10px 11px}
+.pitem .pname{font-size:13px;color:#26282c;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pitem .pprice{margin-top:7px;font-size:16px;font-weight:600;color:#e01f26}
+.pitem .pprice .cur{font-size:12px;font-weight:500;margin-right:1px}
+.pitem .psold{font-size:11px;color:#9aa1ab;margin-top:3px}
+
+/* home indicator */
+.home-ind{flex:0 0 auto;background:#fff;padding:8px 0 9px;display:flex;justify-content:center}
+.home-ind span{width:120px;height:4px;border-radius:999px;background:#111;display:block}
+
+/* 导购服务说明弹窗 */
+.gsvc-mask{position:absolute;inset:0;background:rgba(17,17,17,.45);z-index:30;display:none;align-items:flex-end}
+.gsvc-mask.show{display:flex}
+.gsvc{background:#fff;border-radius:16px 16px 0 0;width:100%;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:up .22s ease}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.gsvc .x{position:absolute;right:14px;top:14px;border:0;background:transparent;color:#9aa1ab;font-size:17px;cursor:pointer;padding:4px}
+.gsvc .hd{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:#1b1d21;padding-right:40px}
+.gsvc .hd i{color:var(--gold)}
+.gsvc .sub{font-size:12px;color:#9aa1ab;margin-top:6px}
+.gsvc .it{display:flex;gap:12px;margin-top:14px;background:#fdf9f4;border:1px solid #f3e9dc;border-radius:12px;padding:13px}
+.gsvc .it .ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px}
+.gsvc .it .t{font-size:14.5px;font-weight:600;color:#1b1d21}
+.gsvc .it .d{font-size:12.5px;color:#6b7280;line-height:1.55;margin-top:4px}
+.gsvc .cta{width:100%;margin-top:16px;height:44px;border:0;border-radius:999px;background:linear-gradient(92deg,#c9a06d,#a87e4f);color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="phone-frame">
+
+  <div class="status-bar">
+    <span>16:57</span>
+    <span class="r"><i class="fas fa-signal"></i><i class="fas fa-signal"></i> 5G <i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters" style="font-size:13px"></i></span>
+  </div>
+
+  <div class="search-row">
+    <button class="back" aria-label="返回" onclick="goBack()"><i class="fas fa-chevron-left" style="font-size:19px"></i></button>
+    <div class="search-box">
+      <i class="fas fa-search sea"></i>
+      <input id="kw" type="text" value="prada" aria-label="搜索关键词">
+      <button class="clr" aria-label="清空" onclick="clearKw()"><i class="fas fa-times-circle"></i></button>
+    </div>
+  </div>
+
+  <div class="chan">
+    <span class="c">会员优选 <span class="bdg">全国随心购</span></span>
+    <span class="sp"></span>
+    <span class="c on">离岛免税</span>
+  </div>
+
+  <div class="filters">
+    <span class="f on">综合</span>
+    <span class="f">销量</span>
+    <span class="f">价格 <i class="fas fa-sort"></i></span>
+    <span class="f">优惠力度 <i class="fas fa-sort"></i></span>
+    <span class="sp"></span>
+    <span class="more"><i class="fas fa-sliders-h" style="font-size:13px"></i>筛选</span>
+  </div>
+  <div class="quick">
+    <span>7天无理由</span>
+    <span>支持邮寄</span>
+  </div>
+
+  <div class="main hide-scrollbar">
+
+    <!-- 空状态 -->
+    <div class="empty">
+      <div class="cir"><i class="fas fa-box-open"></i></div>
+      <p>额，没有商品哦~</p>
+    </div>
+
+    <!-- 导购服务面板 -->
+    <div class="gpanel" id="guidePanel">
+      <div class="hd">
+        <span onclick="openGuideSvc()" style="cursor:pointer">门店金牌导购员专属服务</span>
+        <button class="x" aria-label="关闭面板" onclick="hidePanel()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="grail hide-scrollbar">
+        <div class="gcard">
+          <div class="st"><i class="fas fa-map-marker-alt"></i>海口国际免税城</div>
+          <div class="mid">线下门店商品抢购中,<br>可咨询门店导购</div>
+          <div class="bt">
+            <img src="assets/generated/advisor1.png" alt="张三">
+            <div class="gi">
+              <div class="gn">张三<span class="bar">|</span><span class="bd">prada金牌导购</span></div>
+              <div class="yr">4年经验</div>
+            </div>
+            <button class="cbtn" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
+          </div>
+        </div>
+        <div class="gcard">
+          <div class="st"><i class="fas fa-map-marker-alt"></i>三亚国际免税城</div>
+          <div class="mid">线下门店商品抢购中,<br>可咨询门店导购</div>
+          <div class="bt">
+            <img src="assets/generated/advisor2.png" alt="李现">
+            <div class="gi">
+              <div class="gn">李现<span class="bar">|</span><span class="bd">prada金牌导购</span></div>
+              <div class="yr">5年经验</div>
+            </div>
+            <button class="cbtn" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
+          </div>
+        </div>
+        <div class="gcard">
+          <div class="st"><i class="fas fa-map-marker-alt"></i>琼海国际免税城</div>
+          <div class="mid">线下门店商品抢购中,<br>可咨询门店导购</div>
+          <div class="bt">
+            <img src="assets/generated/advisor3.png" alt="王芳">
+            <div class="gi">
+              <div class="gn">王芳<span class="bar">|</span><span class="bd">prada金牌导购</span></div>
+              <div class="yr">3年经验</div>
+            </div>
+            <button class="cbtn" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 为您推荐 -->
+    <div class="rec-hd">
+      <span class="ln"></span>
+      <span class="t"><i class="fas fa-heart"></i>为您推荐</span>
+      <span class="ln"></span>
+    </div>
+    <div class="pgrid">
+      <div class="pitem" onclick="location.href='U9-商品详情页.html'">
+        <div class="pimg">
+          <img src="assets/generated/product_e1.png" alt="EviDens 夜间修护面霜">
+          <span class="tag">满赠</span>
+        </div>
+        <div class="pinfo">
+          <div class="pname">EviDens de Beauté 夜间修护面霜 THE NIGHT RECOVERY 50ml</div>
+          <div class="pprice"><span class="cur">¥</span>2880</div>
+          <div class="psold">已售 326 件</div>
+        </div>
+      </div>
+      <div class="pitem" onclick="location.href='U9-商品详情页.html'">
+        <div class="pimg">
+          <img src="assets/generated/product_e2.png" alt="EviDens 超级面膜双件礼盒">
+          <span class="tag">满赠</span>
+        </div>
+        <div class="pinfo">
+          <div class="pname">EviDens de Beauté 超级面膜双件礼盒 清凉焕彩 50ml×2</div>
+          <div class="pprice"><span class="cur">¥</span>4580</div>
+          <div class="psold">已售 158 件</div>
+        </div>
+      </div>
+      <div class="pitem" onclick="location.href='U9-商品详情页.html'">
+        <div class="pimg">
+          <img src="assets/generated/product_e3.png" alt="EviDens 优肤精华水">
+        </div>
+        <div class="pinfo">
+          <div class="pname">EviDens de Beauté 优肤精华水 OXYGEN SKIN LOTION 200ml</div>
+          <div class="pprice"><span class="cur">¥</span>1680</div>
+          <div class="psold">已售 512 件</div>
+        </div>
+      </div>
+      <div class="pitem" onclick="location.href='U9-商品详情页.html'">
+        <div class="pimg">
+          <img src="assets/generated/product_e4.png" alt="EviDens 紧致焕活精华">
+          <span class="tag">满赠</span>
+        </div>
+        <div class="pinfo">
+          <div class="pname">EviDens de Beauté 紧致焕活精华 Anti-aging Serum 30ml</div>
+          <div class="pprice"><span class="cur">¥</span>3280</div>
+          <div class="psold">已售 97 件</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="home-ind"><span></span></div>
+
+  <!-- 导购服务说明弹窗 -->
+  <div class="gsvc-mask" id="gsvcMask" onclick="closeGuideSvc(event)">
+    <div class="gsvc" onclick="event.stopPropagation()">
+      <button class="x" aria-label="关闭" onclick="closeGuideSvc()"><i class="fas fa-times"></i></button>
+      <div class="hd"><i class="fas fa-user-tie"></i>专业导购员服务</div>
+      <div class="sub">门店金牌导购员专属服务，为您的每一次选购保驾护航</div>
+      <div class="it">
+        <div class="ic"><i class="fas fa-headset"></i></div>
+        <div>
+          <div class="t">专业导购员服务</div>
+          <div class="d">美妆行业资深导购员在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="ic"><i class="fas fa-hands-helping"></i></div>
+        <div>
+          <div class="t">商品选购手把手</div>
+          <div class="d">提供最详细全面的商品信息,并根据您的个人特质和使用需求给出合适的选购建议。</div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="ic"><i class="fas fa-bullhorn"></i></div>
+        <div>
+          <div class="t">门店活动早知道</div>
+          <div class="d">提前了解线下门店优惠活动信息,助您规划美妆购买最优攻略</div>
+        </div>
+      </div>
+      <button class="cta" onclick="location.href='U1-用户端IM会话页.html'">开始咨询</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function goBack() { if (history.length > 1) { history.back(); } }
+
+  function clearKw() {
+    var kw = document.getElementById('kw');
+    kw.value = '';
+    kw.focus();
+  }
+
+  function hidePanel() {
+    var p = document.getElementById('guidePanel');
+    if (p) { p.style.display = 'none'; }
+  }
+
+  // 筛选项切换
+  var filters = document.querySelector('.filters');
+  if (filters) {
+    filters.addEventListener('click', function (e) {
+      var f = e.target.closest('.f');
+      if (!f) return;
+      filters.querySelectorAll('.f').forEach(function (n) { n.classList.remove('on'); });
+      f.classList.add('on');
+    });
+  }
+
+  // 导购服务说明弹窗
+  function openGuideSvc() { document.getElementById('gsvcMask').classList.add('show'); }
+  function closeGuideSvc(e) {
+    if (e && e.target && e.target.closest && e.target.closest('.gsvc') && e.type === 'click') return;
+    document.getElementById('gsvcMask').classList.remove('show');
+  }
+</script>
+</body>
+</html>

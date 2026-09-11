@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>品牌馆 - 导购入口</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+<style>
+*,::after,::before{box-sizing:border-box}
+:root{--gold:#bc9578;--gold-line:#d8bb9d;--brand:#e01f26;--ink:#26282c;--ink3:#9aa1ab;--line:#eceef1}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#d8dae0;color:var(--ink);-webkit-font-smoothing:antialiased}
+.phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;background:#fff;display:flex;flex-direction:column;position:relative}
+.phone-frame>*{min-height:0}
+.hide-scrollbar::-webkit-scrollbar{display:none}
+.hide-scrollbar{scrollbar-width:none}
+
+/* 状态栏 / 导航 */
+.status-bar{padding:10px 20px 6px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;background:#fff;flex:0 0 auto}
+.status-bar .r{display:flex;align-items:center;gap:5px;font-size:11px;color:#26282c}
+.nav-bar{padding:4px 12px 8px;background:#fff;display:flex;align-items:center;position:relative;flex:0 0 auto}
+.nav-bar button{border:0;background:transparent;padding:0;color:#26282c;cursor:pointer}
+.nav-bar .ttl{position:absolute;left:0;right:0;text-align:center;font-size:16.5px;font-weight:500;pointer-events:none}
+.mini-caps{margin-left:auto;position:relative;z-index:2;display:flex;align-items:center;background:rgba(255,255,255,.85);border:1px solid #e3e4e8;border-radius:999px;padding:0 10px;height:30px;gap:10px;color:#26282c;font-size:15px;cursor:pointer}
+.mini-caps .sep{width:1px;height:16px;background:#e3e4e8}
+
+/* 品牌行 */
+.brand-bar{padding:8px 14px 10px;background:#fff;display:flex;align-items:center;border-bottom:1px solid #f1f2f4;flex:0 0 auto}
+.brand-bar button{border:0;background:transparent;padding:0;color:#26282c;cursor:pointer;font-size:18px}
+.brand-name{position:absolute;left:0;right:0;text-align:center;font-family:"Didot","Times New Roman",Georgia,serif;font-size:24px;letter-spacing:6px;font-weight:600;pointer-events:none}
+
+/* 分类 tabs */
+.cat-tabs{display:flex;background:#fff;padding:0 6px;flex:0 0 auto;border-bottom:1px solid #f4f5f7}
+.cat-tabs .t{flex:1;text-align:center;font-size:15px;color:#3c4048;padding:10px 0 11px;position:relative;cursor:pointer}
+.cat-tabs .t.on{color:#1b1d21;font-weight:600}
+.cat-tabs .t.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:5px;width:17px;height:3px;border-radius:2px;background:#1b1d21}
+
+/* banner */
+.banner{position:relative;aspect-ratio:10/9;overflow:hidden;flex:0 0 auto;
+background:
+ radial-gradient(46% 34% at 26% 30%, rgba(255,255,255,.75), rgba(255,255,255,0) 70%),
+ radial-gradient(40% 30% at 74% 22%, rgba(255,255,255,.5), rgba(255,255,255,0) 70%),
+ radial-gradient(60% 44% at 62% 72%, rgba(126,66,155,.55), rgba(126,66,155,0) 75%),
+ linear-gradient(168deg,#efe0f6 0%,#dfc3ee 34%,#c8a3e2 62%,#b184cf 100%)}
+.banner .bl{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);filter:blur(2px)}
+.banner .cap{position:absolute;left:0;right:0;top:20%;text-align:center;color:#fff;text-shadow:0 2px 14px rgba(90,40,120,.35)}
+.banner .cap .c1{font-family:"Didot","Times New Roman",Georgia,serif;font-size:34px;letter-spacing:8px;font-weight:600}
+.banner .cap .c2{font-size:13px;letter-spacing:3px;margin-top:8px;opacity:.95}
+.banner .cap .c3{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:3px 14px}
+/* banner 内导购服务条 */
+.gsvc-bar{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);display:flex;align-items:center;gap:6px;padding:11px 14px;font-size:14px;color:#26282c;font-weight:500;cursor:pointer}
+.gsvc-bar .arr{margin-left:auto;color:#8b9099;font-size:12px}
+
+/* 导购卡 */
+.grail{display:flex;gap:9px;padding:10px 12px 2px;overflow-x:auto;background:#fff;flex:0 0 auto}
+.gcard{flex:0 0 auto;width:236px;background:#fff;border:1px solid #f1ede6;border-radius:12px;box-shadow:0 2px 10px rgba(60,40,20,.05);padding:10px;display:flex;align-items:center;gap:9px;cursor:pointer}
+.gcard img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.gcard .gi{min-width:0;flex:1}
+.gcard .gn{font-size:13.5px;font-weight:600;color:#1b1d21;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.gcard .gn .bar{color:#dcdfe4;font-weight:400}
+.gcard .gn .yr{font-weight:400;color:#3c4048;font-size:13px}
+.gcard .gs{font-size:12px;color:#8b9099;margin-top:5px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcard .gs i{color:var(--gold);font-size:11px}
+.gcard .cbtn{flex:0 0 auto;border:1px solid var(--gold-line);color:#8a6a4f;background:#fffdf9;font-size:12px;line-height:26px;padding:0 11px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.gcard .cbtn:active{background:#f7efe4}
+
+/* 活动区 */
+.hero{background:#fff;text-align:center;padding:26px 20px 30px;flex:0 0 auto}
+.hero .h1{font-size:22px;font-weight:600;color:#1b1d21;letter-spacing:1px}
+.hero .h2{font-size:13px;color:#6b7280;margin-top:9px;letter-spacing:2px}
+.hero .go{display:inline-block;margin-top:16px;background:#111;color:#fff;font-size:14px;letter-spacing:4px;padding:10px 34px;border:0;border-radius:2px;cursor:pointer}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:20px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#dcdfe4;display:block;cursor:pointer}
+.dots i.on{background:#1b1d21}
+
+/* home indicator */
+.home-ind{flex:0 0 auto;background:#fff;padding:8px 0 9px;display:flex;justify-content:center}
+.home-ind span{width:120px;height:4px;border-radius:999px;background:#111;display:block}
+
+/* 导购服务说明弹窗 */
+.gsvc-mask{position:absolute;inset:0;background:rgba(17,17,17,.45);z-index:30;display:none;align-items:flex-end}
+.gsvc-mask.show{display:flex}
+.gsvc{background:#fff;border-radius:16px 16px 0 0;width:100%;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:up .22s ease}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.gsvc .x{position:absolute;right:14px;top:14px;border:0;background:transparent;color:#9aa1ab;font-size:17px;cursor:pointer;padding:4px}
+.gsvc .hd{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:#1b1d21;padding-right:40px}
+.gsvc .hd i{color:var(--gold)}
+.gsvc .sub{font-size:12px;color:#9aa1ab;margin-top:6px}
+.gsvc .it{display:flex;gap:12px;margin-top:14px;background:#fdf9f4;border:1px solid #f3e9dc;border-radius:12px;padding:13px}
+.gsvc .it .ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px}
+.gsvc .it .t{font-size:14.5px;font-weight:600;color:#1b1d21}
+.gsvc .it .d{font-size:12.5px;color:#6b7280;line-height:1.55;margin-top:4px}
+.gsvc .cta{width:100%;margin-top:16px;height:44px;border:0;border-radius:999px;background:linear-gradient(92deg,#c9a06d,#a87e4f);color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="phone-frame">
+
+  <div class="status-bar">
+    <span>10:35</span>
+    <span class="r"><i class="fas fa-signal"></i><i class="fas fa-signal"></i> 5G <i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters" style="font-size:13px"></i></span>
+  </div>
+
+  <div class="nav-bar">
+    <button aria-label="返回" onclick="goBack()"><i class="fas fa-chevron-left" style="font-size:19px"></i></button>
+    <div class="ttl">中免海南</div>
+    <div class="mini-caps"><i class="fas fa-ellipsis-h"></i><span class="sep"></span><i class="far fa-circle" style="font-size:13px"></i></div>
+  </div>
+
+  <div class="brand-bar">
+    <button aria-label="分类"><i class="fas fa-bars"></i></button>
+    <div class="brand-name">CHANEL</div>
+    <button aria-label="搜索" style="margin-left:auto;position:relative;z-index:2" onclick="location.href='U11-搜索品牌页.html'"><i class="fas fa-search"></i></button>
+  </div>
+
+  <div class="cat-tabs" id="catTabs">
+    <span class="t on">彩妆</span>
+    <span class="t">香水</span>
+    <span class="t">护肤</span>
+    <span class="t">香奈儿一号</span>
+  </div>
+
+  <div class="main hide-scrollbar" style="background:#fff">
+
+    <!-- banner + 导购服务条 -->
+    <div class="banner">
+      <span class="bl" style="left:8%;top:16%;width:90px;height:90px"></span>
+      <span class="bl" style="right:12%;top:40%;width:46px;height:46px;opacity:.6"></span>
+      <span class="bl" style="left:38%;bottom:26%;width:130px;height:130px;opacity:.25"></span>
+      <div class="cap">
+        <div class="c1">CHANCE</div>
+        <div class="c2">邂逅系列 全新香氛</div>
+        <div class="c3">门店专柜同步有售</div>
+      </div>
+      <div class="gsvc-bar" onclick="openGuideSvc()">
+        <span>门店金牌导购员专属服务</span>
+        <i class="fas fa-chevron-right arr"></i>
+      </div>
+    </div>
+
+    <!-- 导购卡 -->
+    <div class="grail hide-scrollbar">
+      <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
+        <img src="assets/generated/advisor1.png" alt="张三">
+        <div class="gi">
+          <div class="gn">张三<span class="bar">|</span><span class="yr">4年经验</span></div>
+          <div class="gs"><i class="fas fa-map-marker-alt"></i>海口国际免税城</div>
+        </div>
+        <button class="cbtn">点击咨询</button>
+      </div>
+      <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
+        <img src="assets/generated/advisor2.png" alt="李现">
+        <div class="gi">
+          <div class="gn">李现<span class="bar">|</span><span class="yr">5年经验</span></div>
+          <div class="gs"><i class="fas fa-map-marker-alt"></i>三亚国际免税城</div>
+        </div>
+        <button class="cbtn">点击咨询</button>
+      </div>
+    </div>
+
+    <!-- 活动 slide -->
+    <div class="hero">
+      <div class="h1">邂逅梦幻香氛层叠仪式</div>
+      <div class="h2">全新用香体验</div>
+      <button class="go">即刻探索</button>
+      <div class="dots" id="heroDots">
+        <i class="on"></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="home-ind"><span></span></div>
+
+  <!-- 导购服务说明弹窗 -->
+  <div class="gsvc-mask" id="gsvcMask" onclick="closeGuideSvc(event)">
+    <div class="gsvc" onclick="event.stopPropagation()">
+      <button class="x" aria-label="关闭" onclick="closeGuideSvc()"><i class="fas fa-times"></i></button>
+      <div class="hd"><i class="fas fa-user-tie"></i>专业导购员服务</div>
+      <div class="sub">门店金牌导购员专属服务，为您的每一次选购保驾护航</div>
+      <div class="it">
+        <div class="ic"><i class="fas fa-headset"></i></div>
+        <div>
+          <div class="t">专业导购员服务</div>
+          <div class="d">美妆行业资深导购员在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="ic"><i class="fas fa-hands-helping"></i></div>
+        <div>
+          <div class="t">商品选购手把手</div>
+          <div class="d">提供最详细全面的商品信息,并根据您的个人特质和使用需求给出合适的选购建议。</div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="ic"><i class="fas fa-bullhorn"></i></div>
+        <div>
+          <div class="t">门店活动早知道</div>
+          <div class="d">提前了解线下门店优惠活动信息,助您规划美妆购买最优攻略</div>
+        </div>
+      </div>
+      <button class="cta" onclick="location.href='U1-用户端IM会话页.html'">开始咨询</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function goBack() { if (history.length > 1) { history.back(); } }
+
+  // 分类 tabs
+  var catTabs = document.getElementById('catTabs');
+  if (catTabs) {
+    catTabs.addEventListener('click', function (e) {
+      var t = e.target.closest('.t');
+      if (!t) return;
+      catTabs.querySelectorAll('.t').forEach(function (n) { n.classList.remove('on'); });
+      t.classList.add('on');
+    });
+  }
+
+  // 轮播点
+  var heroDots = document.getElementById('heroDots');
+  if (heroDots) {
+    heroDots.addEventListener('click', function (e) {
+      var d = e.target.closest('i');
+      if (!d) return;
+      heroDots.querySelectorAll('i').forEach(function (n) { n.classList.remove('on'); });
+      d.classList.add('on');
+    });
+  }
+
+  // 导购服务说明弹窗
+  function openGuideSvc() { document.getElementById('gsvcMask').classList.add('show'); }
+  function closeGuideSvc(e) {
+    if (e && e.target && e.target.closest && e.target.closest('.gsvc') && e.type === 'click') return;
+    document.getElementById('gsvcMask').classList.remove('show');
+  }
+</script>
+</body>
+</html>
