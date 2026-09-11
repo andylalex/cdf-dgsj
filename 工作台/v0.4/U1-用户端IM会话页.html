@@ -425,7 +425,7 @@
     <!-- 底部输入 -->
     <div class="bg-white border-t border-gray-100 p-3 shrink-0" data-page-node-id="U1Footer">
       <div class="flex items-center gap-2" data-page-node-id="U1FooterInner">
-                <button onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
+                <button id="U1ListBtn" onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
           <i class="fas fa-clipboard-list text-[19px]"></i>
           <span id="U1ListBadge" class="hidden absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-coral-500 text-white text-[10px] leading-4 text-center" data-page-node-id="U1ListBadge">0</span>
         </button>
@@ -528,6 +528,7 @@
       setTimeout(function(){ t.classList.add('hidden'); }, 1500);
     }
     function addToMyList(btn) {
+      if (btn.disabled) return;
       btn.textContent = '已加入意向单';
       btn.disabled = true;
       btn.style.opacity = '0.6';
@@ -540,7 +541,56 @@
         }
         localStorage.setItem('pendingOrderForUser', JSON.stringify(l));
       } catch(e) {}
+      // 触发「抛入意向单」动画，落点再更新角标数字与提示
+      flyToCart(btn);
+    }
+
+    // ===== 加入意向单：商品沿抛物线飞入左下角意向单入口 =====
+    function flyToCart(btn) {
+      var cart = document.getElementById('U1ListBtn');
+      if (!cart) { if (typeof updateListBadge === 'function') updateListBadge(); showToast('已加入意向单'); return; }
+      var card = btn.closest('.bg-white.rounded-2xl') || btn.parentElement;
+      var start = (card || btn).getBoundingClientRect();
+      var end = cart.getBoundingClientRect();
+      var sx = start.left + start.width / 2;
+      var sy = start.top + start.height / 2;
+      var ex = end.left + end.width / 2;
+      var ey = end.top + end.height / 2;
+
+      var fly = document.createElement('div');
+      fly.style.cssText = 'position:fixed;z-index:9999;border-radius:50%;background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39);box-shadow:0 12px 28px rgba(255,107,82,.45);width:42px;height:42px;left:' + sx + 'px;top:' + sy + 'px;transform:translate(-50%,-50%);pointer-events:none';
+      document.body.appendChild(fly);
+
+      var dur = 720;
+      var ctrlY = Math.min(sy, ey) - 140; // 抛物线控制点（向上拱起）
+      var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+      var raf = window.requestAnimationFrame || function(cb){ return setTimeout(function(){ cb(Date.now()); }, 16); };
+      function step(now) {
+        var t = Math.min(1, (now - t0) / dur);
+        var x = sx + (ex - sx) * t;
+        var y = (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * ctrlY + t * t * ey; // 二次贝塞尔抛物线
+        var scale = 1 - 0.55 * t;
+        fly.style.left = x + 'px';
+        fly.style.top = y + 'px';
+        fly.style.transform = 'translate(-50%,-50%) scale(' + scale + ')';
+        fly.style.opacity = String(1 - 0.25 * t);
+        if (t < 1) { raf(step); }
+        else {
+          if (fly.parentNode) fly.parentNode.removeChild(fly);
+          bumpCart();
+        }
+      }
+      raf(step);
+    }
+
+    function bumpCart() {
+      var cart = document.getElementById('U1ListBtn');
       if (typeof updateListBadge === 'function') updateListBadge();
+      if (cart) {
+        cart.style.transition = 'transform .18s ease';
+        cart.style.transform = 'scale(1.28)';
+        setTimeout(function(){ cart.style.transform = 'scale(1)'; }, 190);
+      }
       showToast('已加入意向单');
     }
     // ===== 门店导航弹窗 =====
