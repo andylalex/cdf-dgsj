@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-page-node-id="FBRuL2KoDbh6GTJiyqJlvx" data-dm-ref="1"><head data-page-node-id="ZjgjNFcKjMafEhXDZc9AvX">
 <meta charset="UTF-8" data-page-node-id="3Dqs6mJwLAbcel07Q5ylmS">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-page-node-id="5uGBDWDVM9ApkhZ7aZiCu4">
-<title>用户端 - 商品详情（导购入口）</title>
+<title>用户端 - 商品详情（奢品顾问入口）</title>
 <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="Gllfka0Na740O5iFm3Px8p">
 <style>
 *,::after,::before{box-sizing:border-box}
@@ -86,7 +86,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .rate .r1{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:#3c4048;line-height:1.5}
 .rate .r1 .who{font-size:12px;color:#9aa1ab;margin-bottom:4px}
 
-/* 金牌导购 */
+/* 金牌奢品顾问 */
 .guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
 .guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 12px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -133,7 +133,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .pcard .ptag .ptxt{min-width:0;font-size:12.5px;color:#4a4f57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pcard .ptitle{font-size:19px;color:#1b1d21;font-weight:500;line-height:1.36;margin-top:11px}
 .pcard .psub{font-size:12.5px;color:#9aa1ab;margin-top:8px}
-/* 导购服务说明弹窗 */
+/* 奢品顾问服务说明弹窗 */
 .gsvc-mask{position:absolute;inset:0;background:rgba(17,17,17,.45);z-index:30;display:none;align-items:flex-end}
 .gsvc-mask.show{display:flex}
 .gsvc{background:#fff;border-radius:16px 16px 0 0;width:100%;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:gsvcup .22s ease}
@@ -201,10 +201,10 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
       </div>
     </div>
 
-    <!-- 导购服务条 -->
+    <!-- 奢品顾问服务条 -->
     <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
       <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
-        <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌导购员专属服务</span>
+        <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌奢品顾问专属服务</span>
         <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
       </div>
       <div class="glist">
@@ -298,7 +298,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
       </div>
       <div class="r1" data-page-node-id="6mzHEfPVFaevROX19qXjce">
         <div class="who" data-page-node-id="3Bopv3va0wDKQ9hroVmie2">陈女士 · 会员 · 2024-08-12</div>
-        "实物比图片更精致，贝母在光下很通透，导购全程帮我确认了离岛航班和提货点，很省心。"
+        "实物比图片更精致，贝母在光下很通透，奢品顾问全程帮我确认了离岛航班和提货点，很省心。"
       </div>
     </div>
 
@@ -355,17 +355,17 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     </div>
   </div>
 
-  <!-- 导购服务说明弹窗 -->
+  <!-- 奢品顾问服务说明弹窗 -->
   <div class="gsvc-mask" id="gsvcMask" onclick="closeGuideSvc(event)">
     <div class="gsvc" onclick="event.stopPropagation()">
       <button class="x" aria-label="关闭" onclick="closeGuideSvc()"><i class="fas fa-times"></i></button>
-      <div class="hd"><i class="fas fa-user-tie"></i>专业导购员服务</div>
-      <div class="sub">门店金牌导购员专属服务，为您的每一次选购保驾护航</div>
+      <div class="hd"><i class="fas fa-user-tie"></i>专业奢品顾问服务</div>
+      <div class="sub">门店金牌奢品顾问专属服务，为您的每一次选购保驾护航</div>
       <div class="it">
         <div class="ic"><i class="fas fa-headset"></i></div>
         <div>
-          <div class="t">专业导购员服务</div>
-          <div class="d">美妆行业资深导购员在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
+          <div class="t">专业奢品顾问服务</div>
+          <div class="d">美妆行业资深奢品顾问在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
         </div>
       </div>
       <div class="it">
@@ -418,7 +418,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
   // 返回：属性内避免出现 > 字符，防止工作台注入 data-page-node-id 时截断标签
   function goBack() { if (history.length > 1) { history.back(); } }
 
-  // 导购服务说明弹窗
+  // 奢品顾问服务说明弹窗
   function openGuideSvc() { document.getElementById('gsvcMask').classList.add('show'); }
   function closeGuideSvc(e) {
     if (e && e.target && e.target.closest && e.target.closest('.gsvc') && e.type === 'click') return;

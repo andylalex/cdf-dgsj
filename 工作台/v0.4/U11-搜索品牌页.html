@@ -3,7 +3,7 @@
 <head data-page-node-id="40QNagI86fehdD7yW23pqd">
 <meta charset="UTF-8" data-page-node-id="vQW6ABTdgToR0OcRWCPIQS">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-page-node-id="jxIy6yhNcK3mUBti1pJYDK">
-<title>搜索品牌 - 导购入口</title>
+<title>搜索品牌 - 奢品顾问入口</title>
 <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="bcTAbtSrynUbmegHfFTHh0">
 <style>
 *,::after,::before{box-sizing:border-box}
@@ -50,25 +50,24 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .empty .cir i{font-size:40px;color:#d9a8b8}
 .empty p{font-size:13px;color:#9aa1ab;margin:14px 0 0}
 
-/* 导购服务面板 */
-.gpanel{background:#fff;border-radius:14px;margin:6px 10px 0;border:1px solid #f1ede6;box-shadow:0 2px 12px rgba(60,40,20,.06);padding:13px 0 12px;overflow:hidden}
-.gpanel .hd{display:flex;align-items:center;gap:8px;padding:0 12px 11px;font-size:15.5px;font-weight:600;color:#26282c;cursor:pointer}
-.gpanel .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.gpanel .hd .x{flex:0 0 auto;margin-left:auto;border:0;background:transparent;color:#9aa1ab;font-size:16px;cursor:pointer;padding:2px 4px}
-.grail{display:flex;gap:9px;padding:0 10px;overflow-x:auto}
-.gcard{flex:0 0 auto;width:216px;border-radius:12px;padding:12px 12px 11px;background:linear-gradient(180deg,#fffdf8,#fbf3e6);border:1px solid #f3e9dc;display:flex;flex-direction:column;align-items:center;cursor:pointer}
-.gcard .st{width:100%;display:flex;align-items:center;gap:4px;font-size:12.5px;color:#8a6a4f;font-weight:500}
-.gcard .st i{color:var(--gold);font-size:11px}
-.gcard .mid{font-size:12px;color:#8b9099;text-align:center;line-height:1.5;margin-top:9px}
-.gcard .bt{width:100%;display:flex;align-items:center;gap:7px;margin-top:10px}
-.gcard .bt img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:0 0 auto}
-.gcard .bt .gi{min-width:0;flex:1}
-.gcard .bt .gn{font-size:12.5px;font-weight:600;color:#1b1d21;white-space:nowrap;display:flex;align-items:center;gap:4px}
-.gcard .bt .gn .bar{color:#dcdfe4;font-weight:400}
-.gcard .bt .gn .bd{font-weight:400;color:#8a6a4f;font-size:11px}
-.gcard .bt .yr{font-size:11px;color:#9aa1ab;margin-top:3px;white-space:nowrap}
-.gcard .cbtn{flex:0 0 auto;border:1px solid var(--gold-line);color:#8a6a4f;background:#fff;font-size:11.5px;line-height:24px;padding:0 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
-.gcard .cbtn:active{background:#f7efe4}
+/* 金牌奢品顾问（同 U9） */
+.guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 12px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
+.guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
+.glist{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px}
+.gcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:#fff;border-radius:10px;cursor:pointer;transition:transform .14s}
+.gcard:active{transform:scale(.96)}
+.gcard .gav{position:relative;width:46px;height:46px;flex:0 0 auto}
+.gcard .gav img{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block}
+.gcard .gav .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+.gcard .gav .gc{position:absolute;left:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff}
+.gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1}
+.gcard .gs{font-size:11px;color:#8b9099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
+@keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.gwrap{margin:10px 10px 0;flex:0 0 auto}
+.gwrap .guide-sec{margin:0}
 
 /* 为您推荐 */
 .rec-hd{display:flex;align-items:center;gap:10px;padding:20px 40px 12px}
@@ -93,7 +92,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .home-ind{flex:0 0 auto;background:#fff;padding:8px 0 9px;display:flex;justify-content:center}
 .home-ind span{width:120px;height:4px;border-radius:999px;background:#111;display:block}
 
-/* 导购服务说明弹窗 */
+/* 奢品顾问服务说明弹窗 */
 .gsvc-mask{position:absolute;inset:0;background:rgba(17,17,17,.45);z-index:30;display:none;align-items:flex-end}
 .gsvc-mask.show{display:flex}
 .gsvc{background:#fff;border-radius:16px 16px 0 0;width:100%;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:up .22s ease}
@@ -153,51 +152,55 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
       <p data-page-node-id="zmht65dNZss7XW3WP8AIMw">额，没有商品哦~</p>
     </div>
 
-    <!-- 导购服务面板 -->
-    <div class="gpanel" id="guidePanel" data-page-node-id="25BUsvbZ1vM96pT76TeknM">
-      <div class="hd" data-page-node-id="9z57vkpBtFClCZHoGzQLQm" onclick="openGuideSvc()">
-        <span class="t" data-page-node-id="H146EXYM4LEzMlgmfikP4V">门店金牌导购员专属服务</span>
-        <button class="x" aria-label="关闭面板" onclick="event.stopPropagation();hidePanel()" data-page-node-id="WitrUrDV09mmqr0HNmIeNA"><i class="fas fa-times" data-page-node-id="k6NCAJgoLveWtBBcVY5GKo"></i></button>
-      </div>
-      <div class="grail hide-scrollbar" data-page-node-id="rgtX5iUMev9MTkBx8EONFS">
-        <div class="gcard" data-page-node-id="Ng71keVz8wNTEXSVrMmxoK">
-          <div class="st" data-page-node-id="KL16guLRslNtFIuJP7CwXb"><i class="fas fa-map-marker-alt" data-page-node-id="d4jzWYvMRcmEUut8mbTXP2"></i>海口国际免税城</div>
-          <div class="mid" data-page-node-id="t659B6MSem3gEkSOKDpjrY">线下门店商品抢购中,<br data-page-node-id="GRNh6qNl0FBQnRaiRwLSmt">可咨询门店导购</div>
-          <div class="bt" data-page-node-id="LrmiqpVSXLJKXZIGaeeQUL">
-            <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="oVpxQI8EuaoRi9CSpKcyqz">
-            <div class="gi" data-page-node-id="z6C2l9GpjiEJYaDeUX52af">
-              <div class="gn" data-page-node-id="S6eR9Pr3TJQAns3xtvF7FX">张三<span class="bar" data-page-node-id="YxSxuU654roZH2cYg9CGME">|</span><span class="bd" data-page-node-id="UJWMIhq4x0PTE7GdKDOFxQ">prada金牌导购</span></div>
-              <div class="yr" data-page-node-id="NEIKBafJhRuj84S1El72H4">4年经验</div>
-            </div>
-            <button class="cbtn" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="95UEUbnIYkiPxj86B4L5Rn">点击咨询</button>
-          </div>
+    <!-- 奢品顾问服务条 -->
+    <div class="gwrap">
+  <!-- 奢品顾问服务条 -->
+      <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
+        <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
+          <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌奢品顾问专属服务</span>
+          <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
         </div>
-        <div class="gcard" data-page-node-id="hpPjVBG2ryzzdocFmFntOB">
-          <div class="st" data-page-node-id="RlrL8ooG0MoadwOANBYVCO"><i class="fas fa-map-marker-alt" data-page-node-id="2MrH5mFGzrvdK5X5u1xdRo"></i>三亚国际免税城</div>
-          <div class="mid" data-page-node-id="2MA9nKLPvE4FxcrgzDu3CQ">线下门店商品抢购中,<br data-page-node-id="5U6ZdSxoJA2c1vnlaUgzpD">可咨询门店导购</div>
-          <div class="bt" data-page-node-id="jYaHBYrAPidMxRdhCuAycz">
-            <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="kEvW0xho5rWZNbGbebGoEo">
-            <div class="gi" data-page-node-id="jKe6xeIk8ugQKJFuA0Rzj2">
-              <div class="gn" data-page-node-id="ifCuS4MpH9olRUmDuBliTU">李现<span class="bar" data-page-node-id="CuLTAvSAYZtrcTVX6HP4e7">|</span><span class="bd" data-page-node-id="YHJG5CDOORvt4wyLTb6atk">prada金牌导购</span></div>
-              <div class="yr" data-page-node-id="kHBeDQ4ADoYh6hVgXVgrCb">5年经验</div>
+        <div class="glist">
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
+            <div class="gav" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-av">
+              <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
-            <button class="cbtn" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="C4RHNU54Whz9uoBW66HB5L">点击咨询</button>
+            <div class="gn" data-page-node-id="bXb7EGlgw2byOe3H6WUzdd">张三</div>
+            <div class="gs">海口免税城</div>
           </div>
-        </div>
-        <div class="gcard" data-page-node-id="K4r2LHFQktzJBTrBDDv3q9">
-          <div class="st" data-page-node-id="4zAreGSO3izxn10wEL7ZcZ"><i class="fas fa-map-marker-alt" data-page-node-id="9L2TbuQZCN2qa3CrmaWqV7"></i>琼海国际免税城</div>
-          <div class="mid" data-page-node-id="7lwgwyqhCtu37JRLkC16cA">线下门店商品抢购中,<br data-page-node-id="fJ6ZHCKQdsTzFionUH0tHv">可咨询门店导购</div>
-          <div class="bt" data-page-node-id="xKyestBzppgIkdQW2CsIB9">
-            <img src="assets/generated/advisor3.png" alt="王芳" data-page-node-id="l6R4apfVpyKDUB7hyHEJNb">
-            <div class="gi" data-page-node-id="vXaJDudZpfRFeHJesRj2WW">
-              <div class="gn" data-page-node-id="EoVUnngJDCdeVU7BtuZ1sB">王芳<span class="bar" data-page-node-id="w9ELJDKo91nIwehYulXVL2">|</span><span class="bd" data-page-node-id="kQ5Dn8rrasEAsBsTPEN19S">prada金牌导购</span></div>
-              <div class="yr" data-page-node-id="rYuxI6Bklj3caXFZXIQxwG">3年经验</div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-c">
+            <div class="gav" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-av">
+              <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
-            <button class="cbtn" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="1nq0JdxMYz1tvIcatZCccR">点击咨询</button>
+            <div class="gn" data-page-node-id="sXAPsnATiCmtrZzvtCXLga">李现</div>
+            <div class="gs">三亚免税城</div>
+          </div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-c">
+            <div class="gav" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-av">
+              <img src="assets/generated/advisor3.png" alt="王芳" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            </div>
+            <div class="gn" data-page-node-id="GN3kJd8pQmT5nB2sLcWy1f">王芳</div>
+            <div class="gs">琼海免税城</div>
+          </div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-c">
+            <div class="gav" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-av">
+              <img src="assets/generated/advisor4.png" alt="陈晨" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            </div>
+            <div class="gn" data-page-node-id="GN4kJd8pQmT5nB2sLcWy1h">陈晨</div>
+            <div class="gs">万宁免税城</div>
           </div>
         </div>
       </div>
     </div>
+
 
     <!-- 为您推荐 -->
     <div class="rec-hd" data-page-node-id="uaNYRX3IM8dLnxzlFPkBMZ">
@@ -255,17 +258,17 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
   <div class="home-ind" data-page-node-id="hbMugqZwtjGuVOuNgLqo39"><span data-page-node-id="4ZmUEo16C8CzeNplOsPpeY"></span></div>
 
-  <!-- 导购服务说明弹窗 -->
+  <!-- 奢品顾问服务说明弹窗 -->
   <div class="gsvc-mask" id="gsvcMask" onclick="closeGuideSvc(event)" data-page-node-id="7rhHF3v2QiBAQITXFrCpR3">
     <div class="gsvc" onclick="event.stopPropagation()" data-page-node-id="oQ5gEHXmtYsH4LRISbuCxn">
       <button class="x" aria-label="关闭" onclick="closeGuideSvc()" data-page-node-id="65hzsGCQN7wR59k2WkCMxM"><i class="fas fa-times" data-page-node-id="YINfUm2M0NhqYdwURHLPi9"></i></button>
-      <div class="hd" data-page-node-id="iA71Qhy1urRU9kLvOVvEKw"><i class="fas fa-user-tie" data-page-node-id="lZk6c9o0NMdRRFPi3WrL4s"></i>专业导购员服务</div>
-      <div class="sub" data-page-node-id="YTJS2iOkX3kOEXlhiV80Vf">门店金牌导购员专属服务，为您的每一次选购保驾护航</div>
+      <div class="hd" data-page-node-id="iA71Qhy1urRU9kLvOVvEKw"><i class="fas fa-user-tie" data-page-node-id="lZk6c9o0NMdRRFPi3WrL4s"></i>专业奢品顾问服务</div>
+      <div class="sub" data-page-node-id="YTJS2iOkX3kOEXlhiV80Vf">门店金牌奢品顾问专属服务，为您的每一次选购保驾护航</div>
       <div class="it" data-page-node-id="ACsMeM6yDwAcPlkj8YEShX">
         <div class="ic" data-page-node-id="97kxxJbAh5ESxUUbokv7tm"><i class="fas fa-headset" data-page-node-id="kUjTB9idTKW71d6TRMlRlc"></i></div>
         <div data-page-node-id="kOJBtR1AXLXnJSTb8hBrzk">
-          <div class="t" data-page-node-id="xyyBrG3YFC6ddNBVNuPWt2">专业导购员服务</div>
-          <div class="d" data-page-node-id="ubJaDpvVKDQcOXSs3vsQ4D">美妆行业资深导购员在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
+          <div class="t" data-page-node-id="xyyBrG3YFC6ddNBVNuPWt2">专业奢品顾问服务</div>
+          <div class="d" data-page-node-id="ubJaDpvVKDQcOXSs3vsQ4D">美妆行业资深奢品顾问在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
         </div>
       </div>
       <div class="it" data-page-node-id="kRzNEwCOSovRw9GCIO5E7w">
@@ -313,7 +316,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     });
   }
 
-  // 导购服务说明弹窗
+  // 奢品顾问服务说明弹窗
   function openGuideSvc() { document.getElementById('gsvcMask').classList.add('show'); }
   function closeGuideSvc(e) {
     if (e && e.target && e.target.closest && e.target.closest('.gsvc') && e.type === 'click') return;
