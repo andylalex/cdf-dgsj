@@ -299,7 +299,7 @@
 <!-- 顶部 -->
     <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0" data-page-node-id="U1Header">
       <div class="flex items-center gap-3" data-page-node-id="U1HeaderLeft">
-        <button class="p-2 hover:bg-gray-100 rounded-full transition" data-page-node-id="U1Back">
+        <button class="p-2 hover:bg-gray-100 rounded-full transition" onclick="goBack()" aria-label="返回" data-page-node-id="U1Back">
           <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="HGuyrzrRWjb3INltlJzl3K"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" data-page-node-id="Waqm6Y4HA8ohNRigtmQkNg"></path></svg>
         </button>
         <img src="assets/avatars/linxiaoting.svg" class="w-10 h-10 rounded-full bg-gray-100" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
@@ -446,6 +446,16 @@
   <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="onImageSelected(this)">
 
   <script>
+  // 动态返回上一页：优先回退到来源页，无历史则回原型首页
+  function goBack() {
+    try {
+      var ref = document.referrer;
+      if (ref && new URL(ref).origin === location.origin) { location.href = ref; return; }
+    } catch (e) {}
+    if (history.length > 1) { history.back(); return; }
+    location.href = 'index.html';
+  }
+
     var DEMO_ORDER = {
       id: 'DD20260903001',
       time: '14:52',
