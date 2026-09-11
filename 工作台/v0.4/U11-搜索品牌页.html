@@ -26,11 +26,13 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .search-box button.clr{border:0;background:transparent;color:#c3c8cf;font-size:15px;cursor:pointer;padding:0}
 
 /* 频道 tabs */
-.chan{display:flex;align-items:center;padding:2px 14px 0;background:#fff;flex:0 0 auto}
-.chan .c{display:flex;align-items:center;gap:6px;font-size:15px;color:#3c4048;cursor:pointer}
-.chan .c .bdg{font-size:10px;color:var(--brand);border:1px solid rgba(224,31,38,.55);border-radius:3px;padding:0 3px;line-height:15px}
-.chan .c.on{color:#1b1d21;font-weight:600;position:relative;padding-bottom:9px}
-.chan .c.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:2px;width:18px;height:3px;border-radius:2px;background:#1b1d21}
+.chan{display:flex;align-items:center;gap:20px;padding:6px 14px 0;background:#fff;flex:0 0 auto;border-bottom:1px solid #f4f5f7}
+.chan .c{position:relative;display:flex;align-items:center;gap:6px;padding:6px 2px 9px;font-size:15px;color:#8b9199;cursor:pointer;white-space:nowrap;transition:color .18s}
+.chan .c.on{color:#1b1d21;font-weight:600}
+.chan .c::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:0;height:3px;border-radius:2px;background:var(--brand);transition:width .22s ease}
+.chan .c.on::after{width:22px}
+.chan .c .bdg{font-size:10px;color:var(--brand);border:1px solid rgba(224,31,38,.55);border-radius:3px;padding:0 3px;line-height:15px;transition:background .18s,color .18s}
+.chan .c.on .bdg{background:var(--brand);color:#fff;border-color:var(--brand)}
 .chan .sp{flex:1}
 
 /* 筛选行 */
@@ -52,7 +54,8 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
 /* 金牌奢品顾问（同 U9） */
 .guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
-.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 12px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .gsub{display:flex;align-items:center;gap:5px;padding:0 12px 11px;font-size:12px;color:#a2907a;cursor:pointer}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
@@ -127,8 +130,8 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
   <div class="chan" data-page-node-id="hBOWwShGrgtQ9GAuwaA3rN">
     <span class="c" data-page-node-id="xD18OFOHBf2u5Uy7JUh8W1">会员优选 <span class="bdg" data-page-node-id="5bE3BdnwgXJHauyWXTFrO1">全国随心购</span></span>
-    <span class="sp" data-page-node-id="Tvw9e5ZGWfUdQNBLwYz2ir"></span>
     <span class="c on" data-page-node-id="T6gCzUYqP0rVTnw7ZNpObZ">离岛免税</span>
+    <span class="sp" data-page-node-id="Tvw9e5ZGWfUdQNBLwYz2ir"></span>
   </div>
 
   <div class="filters" data-page-node-id="EEEyRZleDidCnl0brk3LUj">
@@ -159,6 +162,10 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
           <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
           <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
+        </div>
+        <div class="gsub" onclick="openGuideSvc()" data-page-node-id="U11GuideSub">
+          <i class="fas fa-gem" style="font-size:10px" data-page-node-id="U11GuideSubIc"></i>
+          <span data-page-node-id="U11GuideSubTx">咨询奢品顾问，享线下独家货源与专属礼遇</span>
         </div>
         <div class="glist">
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
@@ -303,6 +310,17 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
   function hidePanel() {
     var p = document.getElementById('guidePanel');
     if (p) { p.style.display = 'none'; }
+  }
+
+  // 频道切换（会员优选 / 离岛免税）
+  var chan = document.querySelector('.chan');
+  if (chan) {
+    chan.addEventListener('click', function (e) {
+      var c = e.target.closest('.c');
+      if (!c) return;
+      chan.querySelectorAll('.c').forEach(function (n) { n.classList.remove('on'); });
+      c.classList.add('on');
+    });
   }
 
   // 筛选项切换
