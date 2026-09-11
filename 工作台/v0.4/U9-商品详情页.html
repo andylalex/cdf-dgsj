@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="zh-CN" data-page-node-id="FBRuL2KoDbh6GTJiyqJlvx" data-dm-ref="1"><head data-page-node-id="ZjgjNFcKjMafEhXDZc9AvX">
+<meta charset="UTF-8" data-page-node-id="3Dqs6mJwLAbcel07Q5ylmS">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-page-node-id="5uGBDWDVM9ApkhZ7aZiCu4">
 <title>用户端 - 商品详情（导购入口）</title>
-<link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="Gllfka0Na740O5iFm3Px8p">
 <style>
 *,::after,::before{box-sizing:border-box}
 :root{--gold:#bc9578;--gold-line:#d8bb9d;--brand:#e01f26;--ink:#26282c;--ink2:#6b7280;--ink3:#9aa1ab;--line:#eceef1}
@@ -134,209 +133,212 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .abtns button{flex:1;height:42px;border-radius:999px;font-size:15.5px;font-weight:600;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer}
 .abtns .b1{background:#ffb800;color:#fff}
 .abtns .b2{background:linear-gradient(92deg,#f5563f,#e01f26);color:#fff}
+.gchat{position:relative;flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:#fdf7f0;border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px;cursor:pointer}
+.gchat .od{position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+@keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
 </style>
-</head>
-<body>
-<div class="phone-frame">
+<style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
+<body data-page-node-id="IYziwQjgqC5ydRTG7mVlVU" style="">
+<div class="phone-frame" data-page-node-id="vPBskAmBfa9OZrEUWs4JNl">
 
   <!-- 状态栏 -->
-  <div class="status-bar">
-    <span>14:53</span>
-    <div style="display:flex;align-items:center;gap:6px">
-      <i class="fab fa-weixin" style="color:#07c160;font-size:15px"></i>
-      <span style="font-size:11px;color:#9aa1ab">···</span>
-      <i class="fas fa-signal" style="font-size:11px;color:#c9ccd2"></i>
-      <i class="fas fa-wifi" style="font-size:11px"></i>
-      <i class="fas fa-battery-three-quarters" style="font-size:15px"></i>
+  <div class="status-bar" data-page-node-id="NpZAGp39Q97XzotuCgVC2E">
+    <span data-page-node-id="tiMNMKefJmn2JwpJiHFsnL">14:53</span>
+    <div style="display:flex;align-items:center;gap:6px" data-page-node-id="HJnDGuS5459iNXtd3D85Ez">
+      <i class="fab fa-weixin" style="color:#07c160;font-size:15px" data-page-node-id="amnZv4lBAxpDxMXvYoX9X8"></i>
+      <span style="font-size:11px;color:#9aa1ab" data-page-node-id="9wxXbQATjmV7a0allj5tvd">···</span>
+      <i class="fas fa-signal" style="font-size:11px;color:#c9ccd2" data-page-node-id="MWeLblLrpakzZ3aE9vT5LT"></i>
+      <i class="fas fa-wifi" style="font-size:11px" data-page-node-id="YuIGWZ0OOpydFp7lCGy0gH"></i>
+      <i class="fas fa-battery-three-quarters" style="font-size:15px" data-page-node-id="825P7ihEkyk5ki0KHtR0dg"></i>
     </div>
   </div>
 
   <!-- 导航 -->
-  <div class="nav-bar">
-    <button style="width:26px" aria-label="返回" onclick="history.length>1?history.back():null"><i class="fas fa-chevron-left" style="font-size:19px"></i></button>
-    <span class="ttl">商品详情</span>
-    <div style="margin-left:auto"><i class="fas fa-external-link-alt" style="font-size:18px;color:#3c4048"></i></div>
+  <div class="nav-bar" data-page-node-id="AEmZ8nIUyLcBkH5oBSAVt9">
+    <button style="width:26px" aria-label="返回" data-page-node-id="yf4xuilboznnpk933fxkch" onclick="goBack()"><i class="fas fa-chevron-left" style="font-size:19px" data-page-node-id="bFYD99pCXAx2DsbihrLCxE"></i></button>
+    <span class="ttl" data-page-node-id="GYDT1GhVZssi0rnZLM9Pu0">商品详情</span>
+    <div style="margin-left:auto" data-page-node-id="cwW8lCT5kMDQBZ4rCqgUBd"><i class="fas fa-external-link-alt" style="font-size:18px;color:#3c4048" data-page-node-id="AOPbPtgi09EAOcRQmM8hZg"></i></div>
   </div>
 
   <!-- Tabs -->
-  <div class="tabs" id="tabs">
-    <span class="t on">商品</span>
-    <span class="t">评价</span>
-    <span class="t">详情</span>
-    <span class="t">常见问题</span>
+  <div class="tabs" id="tabs" data-page-node-id="SiHAx3QPFmMOuy9VIMPqR5">
+    <span class="t on" data-page-node-id="xtpqhvqLjIHCygToWUzhhm">商品</span>
+    <span class="t" data-page-node-id="T9EnEBCIkO9MBUnWcgS047">评价</span>
+    <span class="t" data-page-node-id="JqpOVthIjN5fy2D7XhsBV8">详情</span>
+    <span class="t" data-page-node-id="znBJkdIafCFEyVyj24Jnvd">常见问题</span>
   </div>
 
-  <div class="main hide-scrollbar">
+  <div class="main hide-scrollbar" data-page-node-id="EciB1oadd2VPGB4VfuFHNx">
 
-    <!-- 商品名 -->
+        <!-- 商品名 -->
     <div class="pname">
       <div class="t1">Van Cleef &amp; Arpels 梵克雅宝 四叶草项链 白贝母钻石吊坠</div>
       <div class="t2">Van Cleef &amp; Arpels · 18K金 · 白贝母</div>
     </div>
 
+<!-- 商品主图 + 图集 -->
+    <div class="card gallery" data-page-node-id="przJWnx5AZOx29FRtuPFS8">
+      <div class="gmain" data-page-node-id="CfMv7BhqxJMN8VGCxrQjy0">
+        <span class="badge" data-page-node-id="1CefYF30eVl192qFut7XGE">中免正品 · 免税专供</span>
+        <img id="gMainImg" src="assets/generated/b1_detail.png" alt="梵克雅宝四叶草项链吊坠特写" data-page-node-id="0jdHw1KFuIoFFjZEhk0XkD">
+      </div>
+      <div class="gthumbs hide-scrollbar" id="gThumbs" data-page-node-id="7hrz6hI0bswUkRu5Jz8xGF">
+        <div class="gt on" data-page-node-id="gAOmCGHd7VlJZE4OAT3CQU"><img src="assets/generated/b1_detail.png" alt="" data-page-node-id="7CccMZz4ZnbWBol2OIa2gu"></div>
+        <div class="gt" data-page-node-id="lDF8QIFBp4In4uuFYdlJOt"><img src="assets/generated/b1.png" alt="" data-page-node-id="KfI1NtjkrNHXROhMxSFDPl"></div>
+        <div class="gt" data-page-node-id="HLABcEikLAPmNsawSCNjX4"><img src="assets/generated/a4.png" alt="" data-page-node-id="DCBRx9rUOhdhwllgXazFz0"></div>
+        <div class="gt" data-page-node-id="O7xczep3xDS0QwgOwI07Lp"><img src="assets/generated/a5.png" alt="" data-page-node-id="BdD9vpWnty9mmC6cz3J5oN"></div>
+      </div>
+    </div>
+
     <!-- 价格区（增强） -->
-    <div class="card">
-      <div class="price">
-        <div class="pline">
-          <span class="pfx">免税价</span>
-          <span class="cur">¥</span><span class="pnum">86,500</span>
-          <span class="porg">¥92,000</span>
+    <div class="card" data-page-node-id="TkfiZHWRfHFFLtrLPnVnWy">
+      <div class="price" data-page-node-id="efojGajBR1DwvmxxrWWt5M">
+        <div class="pline" data-page-node-id="FtWfT4HTDk7hNJKGE6DTDD">
+          <span class="pfx" data-page-node-id="4X81c4SAhc0sfXazWf6Epp">免税价</span>
+          <span class="cur" data-page-node-id="gH6OferHwvYDUUhn1SFviM">¥</span><span class="pnum" data-page-node-id="lPHTwYhNPMA1QfodxK9TGg">86,500</span>
+          <span class="porg" data-page-node-id="DOAM5mE9VrNxStI8bM7nNT">¥92,000</span>
         </div>
-        <div class="pmeta">
-          <span class="save">已省 ¥5,500</span>
-          <span class="dot"></span>
-          <span>已售 126 件</span>
-          <span class="dot"></span>
-          <span>评价 89 条</span>
+        <div class="pmeta" data-page-node-id="SWIPjLHqd5PisXujiS0tLK">
+          <span class="save" data-page-node-id="CZLm9DWBmU6MOivEng1urx">已省 ¥5,500</span>
+          <span class="dot" data-page-node-id="aD0aIhbBFRe72iCtVCOPCK"></span>
+          <span data-page-node-id="P5EsSq1kYpF2gRI3vFO2zb">已售 126 件</span>
+          <span class="dot" data-page-node-id="Pu2XSQ0Hiw4DqIqNSd4owT"></span>
+          <span data-page-node-id="GKqcIVevZnwF6CvKvR2phh">评价 89 条</span>
         </div>
       </div>
     </div>
 
-    <!-- 商品主图 + 图集 -->
-    <div class="card gallery">
-      <div class="gmain">
-        <span class="badge">中免正品 · 免税专供</span>
-        <img id="gMainImg" src="assets/generated/b1_detail.png" alt="梵克雅宝四叶草项链吊坠特写">
+    <!-- 导购服务条 -->
+    <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
+      <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF">
+        <span data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌导购员专属服务</span>
+        <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
       </div>
-      <div class="gthumbs hide-scrollbar" id="gThumbs">
-        <div class="gt on"><img src="assets/generated/b1_detail.png" alt=""></div>
-        <div class="gt"><img src="assets/generated/b1.png" alt=""></div>
-        <div class="gt"><img src="assets/generated/a4.png" alt=""></div>
-        <div class="gt"><img src="assets/generated/a5.png" alt=""></div>
+      <div class="guide-rail hide-scrollbar" data-page-node-id="TU1sgeoBRYvcWq1IEWGMaJ">
+        <div class="gcard" data-page-node-id="8Cf8voxrpLgZmyyWwa7YSf">
+          <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ">
+          <div class="gi" data-page-node-id="14nXMxhUNGdb7qfYlXQGpp">
+            <div class="gn" data-page-node-id="bXb7EGlgw2byOe3H6WUzdd">张三</div>
+            <div class="gs" data-page-node-id="4NB1CcH0qPCBegLn8G4Bop"><i class="fas fa-map-marker-alt" data-page-node-id="ac6ipvRkA4fpzDf61jvOwi"></i>海口国际免税城</div>
+          </div>
+          <div class="gchat" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="NGkG1v6v0uvddcJxMRRsRc"><i class="fas fa-comment-dots"></i><span class="od"></span></div>
+        </div>
+        <div class="gcard" data-page-node-id="qGZSsGDw2MyANB3htYjbE6">
+          <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b">
+          <div class="gi" data-page-node-id="QsqjMfMayeXDe24ml7kEsB">
+            <div class="gn" data-page-node-id="sXAPsnATiCmtrZzvtCXLga">李现</div>
+            <div class="gs" data-page-node-id="9HsL1PvEH4EBR4FCpJK0OQ"><i class="fas fa-map-marker-alt" data-page-node-id="azofD2GVlKSgsY5CYObPxl"></i>三亚国际免税城</div>
+          </div>
+          <div class="gchat" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="kRaYWaP9hN5dp5WQ0ihcp9"><i class="fas fa-comment-dots"></i><span class="od"></span></div>
+        </div>
       </div>
     </div>
 
     <!-- 促销 + 领券（同一张卡内） -->
-    <div class="card">
-      <div class="row">
-        <span class="k">促销</span>
-        <div class="v">
-          <div class="promo"><span class="bx">赠品</span><span class="tx">购买梵克雅宝单笔实付满50000元及以上赠品牌丝巾</span></div>
-          <div class="promo"><span class="bx">赠品</span><span class="tx">购买梵克雅宝单笔实付满30000元及以上赠定制礼盒</span></div>
-          <div class="promo"><span class="bx">1件9折</span><span class="tx">指定品牌专享1件9折</span></div>
+    <div class="card" data-page-node-id="jGXozuUVRTJf9V5gEYUa6s">
+      <div class="row" data-page-node-id="9doZiPb0iTk5meM70FnTqH">
+        <span class="k" data-page-node-id="AQ6AiNTfhB4MjF7xkcthre">促销</span>
+        <div class="v" data-page-node-id="Efb5tt92S0dMnfxoJnmIZs">
+          <div class="promo" data-page-node-id="t5ch5gNDTzLzS9gRq0X9mb"><span class="bx" data-page-node-id="6con1qYjGgrw0iNTIN4y8i">赠品</span><span class="tx" data-page-node-id="NleDId0g5g3b3MvBxWK6g1">购买梵克雅宝单笔实付满50000元及以上赠品牌丝巾</span></div>
+          <div class="promo" data-page-node-id="TvXfGj3GPbzAPW1F6R0wIL"><span class="bx" data-page-node-id="SDKjj46sH6MxrRPclIYaAH">赠品</span><span class="tx" data-page-node-id="MW2zxSVyLFBoHjfJB0WG8E">购买梵克雅宝单笔实付满30000元及以上赠定制礼盒</span></div>
+          <div class="promo" data-page-node-id="YMdXHuOMJJ384VKICWhP9i"><span class="bx" data-page-node-id="btBJ1tZDpq1FIDeJZeBwM2">1件9折</span><span class="tx" data-page-node-id="tLwfmwfA9JPJtCYhOvToTH">指定品牌专享1件9折</span></div>
         </div>
-        <div class="dots"><i class="on"></i><i></i><i></i></div>
+        <div class="dots" data-page-node-id="pXz4iStzLU8kX1cZc1SDIW"><i class="on" data-page-node-id="utwLpc01G1Ux03sWXIyuLt"></i><i data-page-node-id="mb9GrLDeUIx0r4tr5pDWk4"></i><i data-page-node-id="VjXx0glNblnANQxi0fFrWw"></i></div>
       </div>
-      <div class="row">
-        <span class="k">领券</span>
-        <div class="v">
-          <div class="coupons">
-            <span class="coupon">满20000减1500</span>
-            <span class="coupon">满30000减2380</span>
-            <span class="coupon">满10000减800</span>
+      <div class="row" data-page-node-id="xv9o2ZjiUOcyTD471qZNlN">
+        <span class="k" data-page-node-id="ZbJAYonQC0AXKIlnNjJpiY">领券</span>
+        <div class="v" data-page-node-id="tuP8oHt3Jd4xiX6hIGT84u">
+          <div class="coupons" data-page-node-id="Sfmy5ZrT9d7CvrZouDwhou">
+            <span class="coupon" data-page-node-id="Vf1vi9ec0urUiDdDJ853R5">满20000减1500</span>
+            <span class="coupon" data-page-node-id="LZLc6wRi9TVdKGNquwEChH">满30000减2380</span>
+            <span class="coupon" data-page-node-id="xYPBZpk0ESdSK3GvFui528">满10000减800</span>
           </div>
         </div>
-        <span class="more">领券<i class="fas fa-chevron-right" style="font-size:10px"></i></span>
+        <span class="more" data-page-node-id="lOJFytcMWsFwqWhTUW3GbC">领券<i class="fas fa-chevron-right" style="font-size:10px" data-page-node-id="AHCBqwBa5QtndZF9dKoWT5"></i></span>
       </div>
     </div>
 
     <!-- 政府消费券 -->
-    <div class="gov">
-      <div style="flex:1;min-width:0">
-        <div class="tt">政府消费券<span class="sp"></span><span class="sub">支持使用海南消费券</span></div>
-        <div class="ss">专区购买可叠加<b>促销</b>还能再省</div>
+    <div class="gov" data-page-node-id="MdGdl2DlRcbE5GYvMtBGRV">
+      <div style="flex:1;min-width:0" data-page-node-id="C6qP8FuFSrfYHwou2lAi1s">
+        <div class="tt" data-page-node-id="dqbDMD90UxuthmrM2e7HV0">政府消费券<span class="sp" data-page-node-id="HFIBGb7GrAwK8xEHRyO2Th"></span><span class="sub" data-page-node-id="EpAO83vYom3OtWllokRWMl">支持使用海南消费券</span></div>
+        <div class="ss" data-page-node-id="7ca0fg2eKZzmAFXAhoFhTD">专区购买可叠加<b data-page-node-id="qgIYzdPDiLeaZpKRHQyo1z">促销</b>还能再省</div>
       </div>
-      <button class="btn" onclick="location.href='U6-意向单页.html'">去购买<i class="fas fa-chevron-right" style="font-size:10px"></i></button>
+      <button class="btn" onclick="location.href='U6-意向单页.html'" data-page-node-id="M5xFoqFrH042JBbNSC0kMk">去购买<i class="fas fa-chevron-right" style="font-size:10px" data-page-node-id="EqpygM8dq8BNWWOuzsMH2S"></i></button>
     </div>
 
     <!-- 服务保障（增强） -->
-    <div class="card svc">
-      <div class="s"><i class="fas fa-shield-alt"></i>中免正品</div>
-      <div class="s"><i class="fas fa-plane-departure"></i>免税专供</div>
-      <div class="s"><i class="fas fa-gem"></i>品牌直营</div>
-      <div class="s"><i class="fas fa-coins"></i>支持积分</div>
-      <div class="s"><i class="fas fa-undo"></i>离岛自提</div>
+    <div class="card svc" data-page-node-id="k7oHv9qH1vxdHAaSYwFfdI">
+      <div class="s" data-page-node-id="GzizG6xD055e5fK0XhLAYH"><i class="fas fa-shield-alt" data-page-node-id="ysa7iNJuHzN4SsjUTngFeu"></i>中免正品</div>
+      <div class="s" data-page-node-id="gyFASq2hZQEgHACx2U8HDS"><i class="fas fa-plane-departure" data-page-node-id="WYVpVD47dudIn0gFiWLrPI"></i>免税专供</div>
+      <div class="s" data-page-node-id="wc1vZwk7zmsAhhkJUae2rg"><i class="fas fa-gem" data-page-node-id="oWFyzJY2aeJRTDmU6VtkWA"></i>品牌直营</div>
+      <div class="s" data-page-node-id="c1tLwxEDmRVV0IqUZVB84K"><i class="fas fa-coins" data-page-node-id="KxZsG62BDOnxibO07sWknp"></i>支持积分</div>
+      <div class="s" data-page-node-id="4rBnKpCGNMm2ChQPhvGvZJ"><i class="fas fa-undo" data-page-node-id="5ZLhD7Ac36AeN4SJdgg6Cu"></i>离岛自提</div>
     </div>
 
     <!-- 评分摘要（增强） -->
-    <div class="card rate">
-      <div class="hd">
-        <span class="score">4.9</span>
-        <span class="stars">★★★★★</span>
-        <span class="cnt">好评率 98%<i class="fas fa-chevron-right" style="font-size:10px"></i></span>
+    <div class="card rate" data-page-node-id="vI8qK9wfRtPgW9QVjzkwl0">
+      <div class="hd" data-page-node-id="KGaykEUL1cTgLinhDqptgJ">
+        <span class="score" data-page-node-id="PR0FxECAywFJcKkdTlOaTi">4.9</span>
+        <span class="stars" data-page-node-id="ysuBGo1yXcEoumv2TAg1sc">★★★★★</span>
+        <span class="cnt" data-page-node-id="CQht9NxPHjH9S4HLBD6eFU">好评率 98%<i class="fas fa-chevron-right" style="font-size:10px" data-page-node-id="BeF1Ii6PCz0DKPYImyuCd9"></i></span>
       </div>
-      <div class="r1">
-        <div class="who">陈女士 · 会员 · 2024-08-12</div>
+      <div class="r1" data-page-node-id="6mzHEfPVFaevROX19qXjce">
+        <div class="who" data-page-node-id="3Bopv3va0wDKQ9hroVmie2">陈女士 · 会员 · 2024-08-12</div>
         "实物比图片更精致，贝母在光下很通透，导购全程帮我确认了离岛航班和提货点，很省心。"
       </div>
     </div>
 
     <!-- 积分 / 说明 / 限购 -->
-    <div class="card">
-      <div class="row">
-        <span class="k">积分</span>
-        <div class="v">参与积分赠送和抵扣</div>
-        <div class="dots"><i></i><i class="on"></i><i></i></div>
+    <div class="card" data-page-node-id="U0wTtCfD8tGLd9m2DIFch4">
+      <div class="row" data-page-node-id="fjPKRRRgVQtuTGOqFDKq83">
+        <span class="k" data-page-node-id="udjNuSa52KVNGCEiPAMBl1">积分</span>
+        <div class="v" data-page-node-id="7xPrBylkcbX5lCtZVcRDhU">参与积分赠送和抵扣</div>
+        <div class="dots" data-page-node-id="xk3rd69zeir5RsP2WKJH4S"><i data-page-node-id="UC2TxDAGLPIHY84Hz8Wqw2"></i><i class="on" data-page-node-id="YhuUWtxFGsS8pWDo6Vtn7L"></i><i data-page-node-id="DyTBH2F3MjC1lm8EH92pbu"></i></div>
       </div>
-      <div class="row">
-        <span class="k">说明</span>
-        <div class="v">不支持7天无理由退货</div>
-        <div class="dots"><i></i><i class="on"></i><i></i></div>
+      <div class="row" data-page-node-id="thmFEzICIPqBcOBeLsS8CD">
+        <span class="k" data-page-node-id="VrReXLhB1AfL14AzrseBp5">说明</span>
+        <div class="v" data-page-node-id="1bSXaXhFPGQBFhbjhld4br">不支持7天无理由退货</div>
+        <div class="dots" data-page-node-id="yBdLnuKWNDJATeVjLFRm63"><i data-page-node-id="sawnn1OuQygLqH55OndeD3"></i><i class="on" data-page-node-id="na4bCb8USnRdHk2WrJnzz9"></i><i data-page-node-id="p5Jchee81FCJblsuUB2xxV"></i></div>
       </div>
-      <div class="row">
-        <span class="k">限购</span>
-        <div class="v">商品限购8件</div>
-        <div class="dots"><i></i><i class="on"></i><i></i></div>
-      </div>
-    </div>
-
-    <!-- 导购服务条 -->
-    <div class="guide-sec">
-      <div class="hd">
-        <span>门店金牌导购员专属服务</span>
-        <i class="fas fa-chevron-right arr"></i>
-      </div>
-      <div class="guide-rail hide-scrollbar">
-        <div class="gcard">
-          <img src="assets/generated/advisor1.png" alt="张三">
-          <div class="gi">
-            <div class="gn">张三<span class="bar">|</span><span class="yr">4年经验</span></div>
-            <div class="gs"><i class="fas fa-map-marker-alt"></i>海口国际免税城</div>
-          </div>
-          <button class="btn-gold" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
-        </div>
-        <div class="gcard">
-          <img src="assets/generated/advisor2.png" alt="李现">
-          <div class="gi">
-            <div class="gn">李现<span class="bar">|</span><span class="yr">5年经验</span></div>
-            <div class="gs"><i class="fas fa-map-marker-alt"></i>三亚国际免税城</div>
-          </div>
-          <button class="btn-gold" onclick="location.href='U1-用户端IM会话页.html'">点击咨询</button>
-        </div>
+      <div class="row" data-page-node-id="yIk2CDEyRiIBYlm5YM7oGZ">
+        <span class="k" data-page-node-id="7NhgONakBKQKKb4D7ooupR">限购</span>
+        <div class="v" data-page-node-id="uuEN1VKNqcsr3z17nEJoea">商品限购8件</div>
+        <div class="dots" data-page-node-id="LOcGrRHMnQIA0AUAiljEFQ"><i data-page-node-id="P0tFSG6evDFfpix9PffBsu"></i><i class="on" data-page-node-id="DmFz8ZrboZvglHPfwUdOiM"></i><i data-page-node-id="vcs5F36DydQMb9dFBw8mvp"></i></div>
       </div>
     </div>
 
     <!-- 提货方式 -->
-    <div class="pick">
-      <div class="hd">提货方式</div>
-      <div class="g">
-        <div class="gt"><i class="far fa-circle" style="font-size:13px;color:#6b7280"></i>离岛自提</div>
-        <div class="o"><span class="n v">三亚</span><span>机场离岛，最快4小时送达</span></div>
-        <div class="o"><span class="n v">海口</span><span>机场/火车站/港口离岛，最快6小时送达</span></div>
-        <div class="o"><span class="n v">琼海</span><span>机场离岛，最快4小时送达</span></div>
-        <div class="dash"></div>
-        <div class="o" style="margin-top:0"><span class="n"></span><span>下单时请确认提货方式，具体以实际提货点为准</span></div>
+    <div class="pick" data-page-node-id="1XIYdTHxW0EQ5JWjfCe4Fb">
+      <div class="hd" data-page-node-id="sJrOA6kLiiQiuGqyHejnHa">提货方式</div>
+      <div class="g" data-page-node-id="P3jFIT0aVdMIG1zpnPQXCz">
+        <div class="gt" data-page-node-id="jO6DD3FmdIX6rUv3ad2igs"><i class="far fa-circle" style="font-size:13px;color:#6b7280" data-page-node-id="a0HMKbpA4YAThUj5udTpXN"></i>离岛自提</div>
+        <div class="o" data-page-node-id="XGeInHMJA1UM0oCnxwpc5r"><span class="n v" data-page-node-id="7QUvYMo1ODE4z7tx7ckj7O">三亚</span><span data-page-node-id="M85OBrFz9aHCyoYD7Px8Zu">机场离岛，最快4小时送达</span></div>
+        <div class="o" data-page-node-id="Fv0TMRGDUem5Uh37YLJA70"><span class="n v" data-page-node-id="8PQr8cUtP09M4KSMqkNyRy">海口</span><span data-page-node-id="XG6zGcIAHiKmUhwq7MigHv">机场/火车站/港口离岛，最快6小时送达</span></div>
+        <div class="o" data-page-node-id="ug7L15gk7Zm7f5dIqWRCO8"><span class="n v" data-page-node-id="1Kq53acRscnrUJbmIDtpAS">琼海</span><span data-page-node-id="XYRqIQQCbIiCtbqQb1Vpua">机场离岛，最快4小时送达</span></div>
+        <div class="dash" data-page-node-id="MHnPXfyrbL6iyM8bgtGbGE"></div>
+        <div class="o" style="margin-top:0" data-page-node-id="RZXJkTyhyw8CDlVFMkn2NH"><span class="n" data-page-node-id="FAgFu4QrZgGFw5WJ2zm2t6"></span><span data-page-node-id="hMPl2N247SG2W88eM1UqhD">下单时请确认提货方式，具体以实际提货点为准</span></div>
       </div>
     </div>
 
-    <div style="height:6px"></div>
+    <div style="height:6px" data-page-node-id="YOAG6OCyBEWNenuIzEsZ2g"></div>
   </div>
 
-  <div class="float-help">
-    <div class="fb" onclick="location.href='U1-用户端IM会话页.html'"><i class="fas fa-headset"></i></div>
-    <div class="fb" onclick="document.querySelector('.main').scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
+  <div class="float-help" data-page-node-id="xYKLeWp3AXovqkLfMNulnL">
+    <div class="fb" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="RikDVthe0KQGoo7fqUlYoJ"><i class="fas fa-headset" data-page-node-id="lbSFbTSQmTFWVwC24MqqZD"></i></div>
+    <div class="fb" onclick="document.querySelector('.main').scrollTo({top:0,behavior:'smooth'})" data-page-node-id="VoWEwfyFWBrPNxXtB6sIyd"><i class="fas fa-chevron-up" data-page-node-id="2yQvlEnqJkLLlF57LKvrgp"></i></div>
   </div>
 
   <!-- 底部 -->
-  <div class="actionbar">
-    <div class="acts">
-      <div class="a" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>首页</span></div>
-      <div class="a" id="favBtn" onclick="toggleFav(this)"><i class="far fa-star"></i><span>收藏</span></div>
-      <div class="a" onclick="location.href='U6-意向单页.html'"><i class="fas fa-shopping-bag"></i><span>购物袋</span><i class="nb">2</i></div>
+  <div class="actionbar" data-page-node-id="GAYIxRpwpiLFagZSb6ZU9l">
+    <div class="acts" data-page-node-id="1TufGfPNv5ZOVAesoBRiog">
+      <div class="a" onclick="location.href='index.html'" data-page-node-id="doo5M1JKwhIWK8N4vJ05pd"><i class="fas fa-home" data-page-node-id="gxWHCQuUA5m45Ae5SJiee4"></i><span data-page-node-id="ArkNYlOCy54XWPhtx9UW4q">首页</span></div>
+      <div class="a" id="favBtn" onclick="toggleFav(this)" data-page-node-id="vxxAuCnxwpqgefVML2Jelo"><i class="far fa-star" data-page-node-id="GTML13ky6FKVDuJTWAufNj"></i><span data-page-node-id="bK2YYkltPkVDDpzVaZuixK">收藏</span></div>
+      <div class="a" onclick="location.href='U6-意向单页.html'" data-page-node-id="P7jdllVG5Gf3ygFdEsXafY"><i class="fas fa-shopping-bag" data-page-node-id="BbYT3zlUFvGRbeg8yffeVq"></i><span data-page-node-id="SGSg2DB0K5kCgWCdb1vzz5">购物袋</span><i class="nb" data-page-node-id="2UrQBNBw6dUEqTvsNdTX67">2</i></div>
     </div>
-    <div class="abtns">
-      <button class="b1" onclick="location.href='U6-意向单页.html'">加入购物袋</button>
-      <button class="b2" onclick="location.href='U4-结算中心页.html'">立即购买</button>
+    <div class="abtns" data-page-node-id="h6SnDRFi21Hq47yqT8QOT2">
+      <button class="b1" onclick="location.href='U6-意向单页.html'" data-page-node-id="WUrePGixFijoQCJMTGNt5g">加入购物袋</button>
+      <button class="b2" onclick="location.href='U4-结算中心页.html'" data-page-node-id="Lmyi5WBkRSSFuvbWPD7ww2">立即购买</button>
     </div>
   </div>
 
@@ -369,6 +371,9 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     }
   })();
 
+  // 返回：属性内避免出现 > 字符，防止工作台注入 data-page-node-id 时截断标签
+  function goBack() { if (history.length > 1) { history.back(); } }
+
   // 收藏切换
   function toggleFav(el) {
     var i = el.querySelector('i');
@@ -378,5 +383,6 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     el.querySelector('span').textContent = on ? '收藏' : '已收藏';
   }
 </script>
-</body>
-</html>
+
+
+</body></html>
