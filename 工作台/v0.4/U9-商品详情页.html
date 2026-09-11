@@ -88,8 +88,9 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
 /* 金牌导购 */
 .guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
-.guide-sec .hd{display:flex;align-items:center;padding:0 14px 12px;font-size:15.5px;color:#26282c;font-weight:600}
-.guide-sec .hd .arr{margin-left:auto;color:#8b9099;font-size:13px}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 12px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
 .glist{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px}
 .gcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:#fff;border-radius:10px;cursor:pointer;transition:transform .14s}
@@ -202,8 +203,8 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
     <!-- 导购服务条 -->
     <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
-      <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF">
-        <span data-page-node-id="clD7R8V2MHZczkNJZwTlsD" onclick="openGuideSvc()" style="cursor:pointer">门店金牌导购员专属服务</span>
+      <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
+        <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌导购员专属服务</span>
         <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
       </div>
       <div class="glist">
