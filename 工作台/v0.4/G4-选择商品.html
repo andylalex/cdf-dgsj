@@ -303,12 +303,19 @@
     .spec-chip { padding:6px 14px; border-radius:999px; font-size:13px; border:1px solid #e5e7eb; background:#fff; color:#374151; transition:all .15s ease; }
     .spec-chip.active { border-color:#ff6b52; background:#fff5f2; color:#ff6b52; font-weight:600; }
   
+    /* ---- 商品信息三段式布局（主信息 / 基础信息条 / 促销 / 操作） ---- */
+    .pc-name{font-size:13.5px;font-weight:600;color:#111827;line-height:1.35;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+    .pc-spec{font-size:11px;color:#9ca3af;margin-top:3px}
+    .pc-brand{font-size:11px;color:#b0b5bd;white-space:nowrap}
+    .pc-price{font-size:17px;font-weight:700;color:#ff6b52;letter-spacing:-.3px;line-height:1}
+    .pc-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#f7f8fa;border-radius:9px;padding:6px 8px}
+    .pc-meta .code-pill,.pc-meta .stock-pill{background:#fff}
     /* patched utilities */
     .mb-5{margin-bottom:1.25rem}
     .mt-2\.5{margin-top:0.625rem}
     .h-1{height:0.25rem}
     .border-r{border-right-width:1px}
-    /* G4 action 三列布局：规格（小字） | 加入清单/计数器 | 推荐商品 */
+    /* G4 action 布局：推荐商品 */
     .action-grid { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:10px; }
     .act-info { display:flex; flex-direction:column; gap:4px; min-width:0; }
     .act-mid { display:flex; align-items:center; min-width:0; }
@@ -340,7 +347,6 @@
         <i class="fas fa-chevron-left text-gray-700 text-base" data-page-node-id="7W6MbS2gksDmvyKmsleHGr"></i>
       </a>
       <h1 class="text-base font-semibold text-gray-900" data-page-node-id="title">选择商品</h1>
-      <button onclick="clearOrder()" class="absolute right-4 text-[13px] text-gray-400" data-page-node-id="clear">清空</button>
     </div>
 
     <!-- 顶部搜索区 -->
@@ -397,39 +403,28 @@
         </div>
 
 
-        <div id="productPanel" class="h-full overflow-y-auto hide-scrollbar px-3 pb-28 space-y-3" data-page-node-id="productPanel">
+        <div id="productPanel" class="h-full overflow-y-auto hide-scrollbar px-3 pb-4 space-y-3" data-page-node-id="productPanel">
           
         <div class="product-item" data-sku="C016080" data-cat="香水" data-brand="浪凡" data-name="浪凡光韵女士浓香水" data-specs="30ml,50ml,100ml" data-default-spec="50ml" data-price="394.00" data-img="assets/generated/product1.png" data-store="270" data-warehouse="88" data-page-node-id="prod-C016080">
-          <div class="product-card selected" data-page-node-id="card-C016080">
+          <div class="product-card" data-page-node-id="card-C016080">
             <div class="flex gap-3" data-page-node-id="row-C016080">
               <div class="relative shrink-0" data-page-node-id="imgwrap-C016080">
                 <button type="button" class="fav-btn" onclick="event.stopPropagation();toggleFavorite('C016080')" data-page-node-id="fav-C016080"><i class="fas fa-star" data-page-node-id="3QuU8IaV55dYNbf3sMQKlb"></i></button>
                 <img src="assets/generated/product1.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C016080">
               </div>
               <div class="flex-1 min-w-0" data-page-node-id="info-C016080">
-                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C016080">浪凡光韵女士浓香水50ml</p>
-                                <div class="mt-1.5 flex items-center gap-2 flex-wrap meta" data-page-node-id="meta-C016080"><span class="font-mono code-pill" data-page-node-id="21AFA12Tr5rpr2FZ6eIoaL">C016080</span></div>
-                <div class="mt-1.5 flex flex-wrap gap-1 promo-box" data-page-node-id="promo-C016080">
-                  <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>WJ-满10000元减500元</span>
+                <p class="pc-name" data-page-node-id="name-C016080">浪凡光韵女士浓香水</p>
+                <span class="font-mono code-pill mt-1" data-page-node-id="21AFA12Tr5rpr2FZ6eIoaL">C016080</span>
+                <div class="mt-2 flex items-end justify-between gap-2">
+                  <span class="pc-price" data-page-node-id="price-C016080">¥394.00</span>
                 </div>
-                <div class="mt-2" data-page-node-id="pricebox-C016080"><span class="price text-[16px] font-bold" data-page-node-id="price-C016080">¥394.00</span></div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-gray-50 action-grid" data-page-node-id="action-C016080">
-              <div class="act-info" data-page-node-id="actinfo-C016080">
-                
-<div class="act-spec-row" data-page-node-id="a15uEl2Bv1WukM1N7GSOA0"><span class="act-spec" data-page-node-id="actspec-C016080">30ml</span></div>
-              </div>
-              <div class="act-mid" data-page-node-id="actmid-C016080">
-                <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C016080" style="display: none;">已加入</button>
-                <div class="selected-row" data-page-node-id="selrow-C016080" style="display: flex;">
-                  <div class="qty-stepper justify-center" data-page-node-id="stepper-C016080">
-                    <button type="button" onclick="event.stopPropagation();changeItemQty('C016080', -1)" data-page-node-id="minus-C016080">-</button>
-                    <input type="text" class="item-qty" value="1" readonly="" data-page-node-id="qty-C016080">
-                    <button type="button" onclick="event.stopPropagation();changeItemQty('C016080', 1)" data-page-node-id="plus-C016080">+</button>
-                  </div>
-                </div>
-              </div>
+            <div class="pc-meta mt-2.5 meta" data-page-node-id="meta-C016080"></div>
+            <div class="promo-box mt-2" data-page-node-id="promo-C016080">
+              <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>WJ-满10000元减500元</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C016080">
               <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C016080">推荐商品</button>
             </div>
           </div>
@@ -443,35 +438,24 @@
                 <img src="assets/generated/product2.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C017002">
               </div>
               <div class="flex-1 min-w-0" data-page-node-id="info-C017002">
-                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C017002">迪奥真我香水 EDT 100ml</p>
-                                <div class="mt-1.5 flex items-center gap-2 flex-wrap meta" data-page-node-id="meta-C017002"><span class="font-mono code-pill" data-page-node-id="0G0x7GStbXZN4SrVnYNFNA">C017002</span></div>
-                <div class="mt-1.5 flex flex-wrap gap-1 promo-box" data-page-node-id="promo-C017002">
-                  <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>DJ-满5000减300</span>
+                <p class="pc-name" data-page-node-id="name-C017002">迪奥真我香水 EDT</p>
+                <span class="font-mono code-pill mt-1" data-page-node-id="0G0x7GStbXZN4SrVnYNFNA">C017002</span>
+                <div class="mt-2 flex items-end justify-between gap-2">
+                  <span class="pc-price" data-page-node-id="price-C017002">¥1,280.00</span>
                 </div>
-                <div class="mt-2" data-page-node-id="pricebox-C017002"><span class="price text-[16px] font-bold" data-page-node-id="price-C017002">¥1,280.00</span></div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C017002">
-
-              <div class="act-info hidden" data-page-node-id="actinfo-C017002">
-                
-              </div>
-              <div class="act-mid" data-page-node-id="actmid-C017002">
-                <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C017002" style="text-align: center;">加入清单</button>
-                <div class="selected-row hidden" data-page-node-id="selrow-C017002" style="display: none;">
-                  <div class="qty-stepper justify-center" data-page-node-id="stepper-C017002">
-                    <button type="button" onclick="event.stopPropagation();changeItemQty('C017002', -1)" data-page-node-id="minus-C017002">-</button>
-                    <input type="text" class="item-qty" value="1" readonly="" data-page-node-id="qty-C017002">
-                    <button type="button" onclick="event.stopPropagation();changeItemQty('C017002', 1)" data-page-node-id="plus-C017002">+</button>
-                  </div>
-                </div>
-              </div>
+            <div class="pc-meta mt-2.5 meta" data-page-node-id="meta-C017002"></div>
+            <div class="promo-box mt-2" data-page-node-id="promo-C017002">
+              <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>DJ-满5000减300</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C017002">
               <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C017002">推荐商品</button>
             </div>
           </div>
         </div>
 
-        <div class="product-item" data-sku="C000277" data-cat="香水" data-brand="兰蔻" data-name="兰蔻奇迹香水" data-specs="30ml,50ml,100ml" data-price="620.00" data-img="assets/generated/product3.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C000277">
+        <div class="product-item" data-sku="C000277" data-cat="香水" data-brand="兰蔻" data-name="兰蔻奇迹香水" data-specs="30ml,50ml,100ml" data-default-spec="100ml" data-price="620.00" data-img="assets/generated/product3.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C000277">
           <div class="product-card" data-page-node-id="card-C000277">
             <div class="flex gap-3" data-page-node-id="row-C000277">
               <div class="relative shrink-0" data-page-node-id="imgwrap-C000277">
@@ -479,22 +463,24 @@
                 <img src="assets/generated/product3.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C000277">
               </div>
               <div class="flex-1 min-w-0" data-page-node-id="info-C000277">
-                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C000277">兰蔻奇迹香水 100ml</p>
-                                <div class="mt-1.5 flex items-center gap-2 flex-wrap meta" data-page-node-id="meta-C000277"><span class="font-mono code-pill" data-page-node-id="aKKGA8PBp0P0DWkNDWqA2L">C000277</span></div>
-                <div class="mt-1.5 flex flex-wrap gap-1 promo-box" data-page-node-id="promo-C000277">
-                  <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>LF-满3000减200</span>
+                <p class="pc-name" data-page-node-id="name-C000277">兰蔻奇迹香水</p>
+                <span class="font-mono code-pill mt-1" data-page-node-id="aKKGA8PBp0P0DWkNDWqA2L">C000277</span>
+                <div class="mt-2 flex items-end justify-between gap-2">
+                  <span class="pc-price" data-page-node-id="price-C000277">¥620.00</span>
                 </div>
-                <div class="mt-2" data-page-node-id="pricebox-C000277"><span class="price text-[16px] font-bold" data-page-node-id="price-C000277">¥620.00</span></div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C000277">
-              <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C000277">加入清单</button>
+            <div class="pc-meta mt-2.5 meta" data-page-node-id="meta-C000277"></div>
+            <div class="promo-box mt-2" data-page-node-id="promo-C000277">
+              <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>LF-满3000减200</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C000277">
               <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C000277">推荐商品</button>
             </div>
           </div>
         </div>
 
-        <div class="product-item" data-sku="C001930SY" data-cat="香水" data-brand="香奈儿" data-name="香奈儿五号香水" data-specs="30ml,50ml,100ml" data-price="745.00" data-img="assets/generated/c1.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C001930SY">
+        <div class="product-item" data-sku="C001930SY" data-cat="香水" data-brand="香奈儿" data-name="香奈儿五号香水" data-specs="30ml,50ml,100ml" data-default-spec="50ml" data-price="745.00" data-img="assets/generated/c1.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C001930SY">
           <div class="product-card" data-page-node-id="card-C001930SY">
             <div class="flex gap-3" data-page-node-id="row-C001930SY">
               <div class="relative shrink-0" data-page-node-id="imgwrap-C001930SY">
@@ -502,22 +488,24 @@
                 <img src="assets/generated/c1.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C001930SY">
               </div>
               <div class="flex-1 min-w-0" data-page-node-id="info-C001930SY">
-                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C001930SY">香奈儿五号香水 50ml</p>
-                                <div class="mt-1.5 flex items-center gap-2 flex-wrap meta" data-page-node-id="meta-C001930SY"><span class="font-mono code-pill" data-page-node-id="0Z9bsd0VnHIf6wKGPhGUDV">C001930SY</span></div>
-                <div class="mt-1.5 flex flex-wrap gap-1 promo-box" data-page-node-id="promo-C001930SY">
-                  <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>CX-满8000减400</span><span class="promo-pill promo-gift"><i class="fas fa-gift text-[9px]"></i>买即赠小样</span>
+                <p class="pc-name" data-page-node-id="name-C001930SY">香奈儿五号香水</p>
+                <span class="font-mono code-pill mt-1" data-page-node-id="0Z9bsd0VnHIf6wKGPhGUDV">C001930SY</span>
+                <div class="mt-2 flex items-end justify-between gap-2">
+                  <span class="pc-price" data-page-node-id="price-C001930SY">¥745.00</span>
                 </div>
-                <div class="mt-2" data-page-node-id="pricebox-C001930SY"><span class="price text-[16px] font-bold" data-page-node-id="price-C001930SY">¥745.00</span></div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C001930SY">
-              <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C001930SY">加入清单</button>
+            <div class="pc-meta mt-2.5 meta" data-page-node-id="meta-C001930SY"></div>
+            <div class="promo-box mt-2" data-page-node-id="promo-C001930SY">
+              <span class="promo-pill promo-coupon"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>CX-满8000减400</span><span class="promo-pill promo-gift"><i class="fas fa-gift text-[9px]"></i>买即赠小样</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C001930SY">
               <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C001930SY">推荐商品</button>
             </div>
           </div>
         </div>
 
-        <div class="product-item" data-sku="C000365" data-cat="香水" data-brand="兰蔻" data-name="兰蔻珍爱香水两支装" data-specs="30ML,50ML" data-price="580.00" data-img="assets/generated/product2.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C000365">
+        <div class="product-item" data-sku="C000365" data-cat="香水" data-brand="兰蔻" data-name="兰蔻珍爱香水两支装" data-specs="30ML,50ML" data-default-spec="30ML" data-price="580.00" data-img="assets/generated/product2.png" data-store="0" data-warehouse="0" data-page-node-id="prod-C000365">
           <div class="product-card" data-page-node-id="card-C000365">
             <div class="flex gap-3" data-page-node-id="row-C000365">
               <div class="relative shrink-0" data-page-node-id="imgwrap-C000365">
@@ -525,16 +513,18 @@
                 <img src="assets/generated/product2.png" class="w-20 h-20 rounded-xl object-cover bg-gray-100 ring-1 ring-black/5" alt="" data-page-node-id="img-C000365">
               </div>
               <div class="flex-1 min-w-0" data-page-node-id="info-C000365">
-                <p class="text-[14px] text-gray-900 font-semibold leading-snug" data-page-node-id="name-C000365">兰蔻珍爱香水两支装 30ML</p>
-                                <div class="mt-1.5 flex items-center gap-2 flex-wrap meta" data-page-node-id="meta-C000365"><span class="font-mono code-pill" data-page-node-id="h81dEa0w6MSZcA9hdUaud2">C000365</span></div>
-                <div class="mt-1.5 flex flex-wrap gap-1 promo-box" data-page-node-id="promo-C000365">
-                  <span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>LF-满3000减150</span>
+                <p class="pc-name" data-page-node-id="name-C000365">兰蔻珍爱香水两支装</p>
+                <span class="font-mono code-pill mt-1" data-page-node-id="h81dEa0w6MSZcA9hdUaud2">C000365</span>
+                <div class="mt-2 flex items-end justify-between gap-2">
+                  <span class="pc-price" data-page-node-id="price-C000365">¥580.00</span>
                 </div>
-                <div class="mt-2" data-page-node-id="pricebox-C000365"><span class="price text-[16px] font-bold" data-page-node-id="price-C000365">¥580.00</span></div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C000365">
-              <button class="btn-primary add-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'))" data-page-node-id="btn-C000365">加入清单</button>
+            <div class="pc-meta mt-2.5 meta" data-page-node-id="meta-C000365"></div>
+            <div class="promo-box mt-2" data-page-node-id="promo-C000365">
+              <span class="promo-pill promo-fullcut"><i class="fas fa-tag text-[9px]"></i>LF-满3000减150</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-gray-50 flex items-center justify-end gap-2" data-page-node-id="action-C000365">
               <button class="btn-ghost rec-btn" onclick="event.stopPropagation();openAddModal(this.closest('.product-item'), true)" data-page-node-id="recbtn-C000365">推荐商品</button>
             </div>
           </div>
@@ -547,22 +537,8 @@
       </div></main>
     </div>
 
-    <!-- 底部订单栏 -->
-    <div id="orderBar" class="order-bar px-4 py-3 shrink-0 flex items-center justify-between pb-safe" data-page-node-id="orderBar">
-      <div class="flex items-center gap-3" data-page-node-id="orderInfo">
-        <div class="relative w-10 h-10 rounded-full bg-coral-50 flex items-center justify-center text-coral-500" data-page-node-id="bagWrap">
-          <i class="fas fa-shopping-bag text-[18px]" data-page-node-id="PWwzXJdrwzrEec3yVgEYlx"></i>
-          
-        </div>
-        <div data-page-node-id="orderText">
-          <p class="text-[14px] text-gray-900 font-semibold" data-page-node-id="orderTotal">合计 <span id="orderTotal" class="text-coral-600 font-bold" data-page-node-id="89KKZTQB08uEka3bfSViSh">¥394.00</span></p>
-          <p id="orderCount" class="text-[11px] text-gray-400" data-page-node-id="orderCount">已选 1 件商品</p>
-        </div>
-      </div>
-      <button id="sendOrderBtn" onclick="sendOrder()" class="btn-primary" data-page-node-id="sendBtn">发送清单</button>
-    </div>
 
-  <!-- 加入清单弹窗 -->
+  <!-- 推荐商品弹窗 -->
   <div id="modalMask" class="modal-mask" onclick="closeAddModal()" data-page-node-id="modalMask"></div>
   <div id="addModal" class="modal-sheet" data-page-node-id="addModal">
     <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-5" data-page-node-id="modalHandle"></div>
@@ -590,7 +566,7 @@
       </div>
     </div>
 
-    <button onclick="confirmAdd()" id="confirmBtn" class="w-full btn-primary py-3.5 text-[15px]" data-page-node-id="confirmBtn">确认加入</button>
+    <button id="confirmBtn" class="w-full btn-primary py-3.5 text-[15px]" data-page-node-id="confirmBtn">确认推荐</button>
   </div>
 
   <!-- 推荐商品确认弹窗 -->
@@ -613,9 +589,6 @@
     let currentQty = 1;
     let recName = '';
 
-    function getOrder() { try { return JSON.parse(localStorage.getItem('guideOrder')) || { items: [] }; } catch(e) { return { items: [] }; } }
-    function saveOrder(order) { localStorage.setItem('guideOrder', JSON.stringify(order)); }
-
     function formatMoney(num) {
       return num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
@@ -626,15 +599,8 @@
     function openAddModal(card, isRec) {
       currentItem = card;
       currentSpecs = (card.dataset.specs || '').split(',').filter(Boolean);
-      const order = getOrder();
-      const exist = order.items.find(i => i.sku === card.dataset.sku);
-      if (exist) {
-        currentQty = exist.qty;
-        currentSpec = exist.spec || (currentSpecs[0] || '');
-      } else {
-        currentQty = 1;
-        currentSpec = currentSpecs[0] || '';
-      }
+      currentQty = 1;
+      currentSpec = currentSpecs[0] || '';
       document.getElementById('modalImg').src = card.dataset.img;
       document.getElementById('modalName').textContent = card.dataset.name;
       document.getElementById('modalCode').textContent = '商品编号 ' + card.dataset.sku;
@@ -642,13 +608,8 @@
       renderSpecChips();
       document.getElementById('modalQty').value = currentQty;
       const cbtn = document.getElementById('confirmBtn');
-      if (isRec) {
-        cbtn.textContent = '确认推荐';
-        cbtn.onclick = confirmRecommendFromModal;
-      } else {
-        cbtn.textContent = '确认加入';
-        cbtn.onclick = confirmAdd;
-      }
+      cbtn.textContent = '确认推荐';
+      cbtn.onclick = confirmRecommendFromModal;
       document.getElementById('modalMask').classList.add('open');
       document.getElementById('addModal').classList.add('open');
     }
@@ -693,89 +654,6 @@
       showToast('已推荐给顾客：' + name);
     }
 
-    function confirmAdd() {
-      if (!currentItem) return;
-      const order = getOrder();
-      const idx = order.items.findIndex(i => i.sku === currentItem.dataset.sku);
-      const item = {
-        sku: currentItem.dataset.sku,
-        name: currentItem.dataset.name,
-        price: parseFloat(currentItem.dataset.price),
-        img: currentItem.dataset.img,
-        qty: currentQty,
-        spec: currentSpec
-      };
-      if (idx >= 0) order.items[idx] = item; else order.items.push(item);
-      saveOrder(order);
-      updateOrderBar();
-      updateCardState(currentItem.dataset.sku);
-      closeAddModal();
-      showToast('已加入清单');
-    }
-
-    function updateCardState(sku) {
-      const card = document.querySelector('.product-item[data-sku="' + sku + '"]');
-      if (!card) return;
-      const order = getOrder();
-      const item = order.items.find(i => i.sku === sku);
-      const prodCard = card.querySelector('.product-card');
-      const selRow = card.querySelector('.selected-row');
-      const btn = card.querySelector('.add-btn');
-      const qtyInput = card.querySelector('.item-qty');
-      const selText = card.querySelector('.sel-text');
-      const actMid = card.querySelector('.act-mid');
-      const actInfo = card.querySelector('.act-info');
-      const actSpec = card.querySelector('.act-spec');
-      const action = actMid ? actMid.parentElement : null;
-      const isInStock = !!actMid;
-      const defSpec = card.dataset.defaultSpec || (card.dataset.specs || '').split(',').filter(Boolean)[0] || '';
-      if (item) {
-        prodCard.classList.add('selected');
-        if (selRow) { selRow.classList.remove('hidden'); selRow.style.display = 'flex'; }
-        if (qtyInput) qtyInput.value = item.qty;
-        if (selText) selText.textContent = item.spec || '';
-        btn.textContent = '已加入';
-        btn.style.display = 'none';
-        // 仅加入清单后显示第一列：来源(品牌色) + 规格
-        if (isInStock) {
-          if (action) action.className = 'mt-3 pt-3 border-t border-gray-50 action-grid';
-          if (actInfo) actInfo.classList.remove('hidden');
-          if (actSpec) actSpec.textContent = item.spec || defSpec;
-        }
-      } else {
-        prodCard.classList.remove('selected');
-        if (selRow) { selRow.classList.add('hidden'); selRow.style.display = 'none'; }
-        if (qtyInput) qtyInput.value = 1;
-        btn.textContent = '加入清单';
-        btn.style.display = '';
-        if (isInStock) {
-          if (action) action.className = 'mt-3 pt-3 border-t border-gray-50 flex items-center justify-end gap-2';
-          if (actInfo) actInfo.classList.add('hidden');
-          if (actSpec) actSpec.textContent = defSpec;
-        }
-      }
-    }
-
-    // 卡片内计数器：直接增减已选商品数量，减到 0 自动移除
-    function changeItemQty(sku, delta) {
-      const order = getOrder();
-      const idx = order.items.findIndex(i => i.sku === sku);
-      if (idx < 0) return;
-      const next = order.items[idx].qty + delta;
-      if (next <= 0) {
-        order.items.splice(idx, 1);
-        saveOrder(order);
-        updateCardState(sku);
-        updateOrderBar();
-        showToast('已从清单移除');
-        return;
-      }
-      order.items[idx].qty = next;
-      saveOrder(order);
-      updateCardState(sku);
-      updateOrderBar();
-    }
-
     // 品类 + 品牌 协同筛选
     let stateCat = '全部';
     let stateBrand = '全部';
@@ -797,37 +675,6 @@
       btn.classList.add('active');
       stateBrand = btn.dataset.sub;
       applyFilter();
-    }
-
-    function updateOrderBar() {
-      const order = getOrder();
-      const count = order.items.reduce((s, i) => s + i.qty, 0);
-      const total = order.items.reduce((s, i) => s + i.price * i.qty, 0);
-      document.getElementById('orderTotal').textContent = '¥' + formatMoney(total);
-      document.getElementById('orderCount').textContent = count === 0 ? '未选商品' : ('已选 ' + count + ' 件商品');
-      const sendBtn = document.getElementById('sendOrderBtn');
-      sendBtn.disabled = count === 0;
-      sendBtn.classList.toggle('opacity-50', count === 0);
-    }
-
-    function clearOrder() {
-      saveOrder({ items: [] });
-      document.querySelectorAll('.product-item').forEach(c => updateCardState(c.dataset.sku));
-      updateOrderBar();
-      showToast('已清空');
-    }
-
-    function sendOrder() {
-      const order = getOrder();
-      if (order.items.length === 0) return;
-      const total = order.items.reduce((s, i) => s + i.price * i.qty, 0);
-      const id = 'DD' + Date.now().toString().slice(-10);
-      const pending = { id, items: order.items, total, time: '刚刚' };
-      localStorage.setItem('pendingOrderForUser', JSON.stringify(pending));
-      localStorage.setItem('guideShoppingList', JSON.stringify(pending));
-      saveOrder({ items: [] });
-      showToast('清单已发送给顾客');
-      setTimeout(() => { window.location.href = 'G3-导购IM会话页.html'; }, 800);
     }
 
     function showToast(text) {
@@ -901,21 +748,25 @@
 
     function renderStock() {
       document.querySelectorAll('.product-item').forEach(function(el) {
-        const total = (parseInt(el.dataset.store || 0, 10)) + (parseInt(el.dataset.warehouse || 0, 10));
+        const store = parseInt(el.dataset.store || '0', 10);
+        const wh = parseInt(el.dataset.warehouse || '0', 10);
         const meta = el.querySelector('.meta');
         if (meta) {
-          const span = document.createElement('span');
-          span.className = 'stock-pill' + (total === 0 ? ' zero' : '');
-          span.textContent = total === 0 ? '售罄' : '库存 ' + total;
-          meta.appendChild(span);
+          meta.appendChild(mkStockPill('门店库存', store));
+          meta.appendChild(mkStockPill('柜组库存', wh));
         }
-        if (total === 0) {
-          const addBtn = el.querySelector('.add-btn');
-          if (addBtn && addBtn.textContent.indexOf('加入') >= 0) addBtn.disabled = true;
+        if (store === 0 && wh === 0) {
           const recBtn = el.querySelector('.rec-btn');
           if (recBtn) recBtn.disabled = true;
         }
       });
+    }
+    function mkStockPill(label, val) {
+      const span = document.createElement('span');
+      const zero = val === 0;
+      span.className = 'stock-pill' + (zero ? ' zero' : '');
+      span.textContent = label + ' ' + val;
+      return span;
     }
 
     window.addEventListener('DOMContentLoaded', function() {
@@ -924,9 +775,7 @@
         const sku = btn.getAttribute('data-page-node-id').replace('fav-','');
         if (favs.indexOf(sku) >= 0) btn.classList.add('active');
       });
-      document.querySelectorAll('.product-item').forEach(c => updateCardState(c.dataset.sku));
       renderStock();
-      updateOrderBar();
     });
   </script>
 
