@@ -34,15 +34,6 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .pname .t2{font-size:13px;color:#6b7280;margin-top:8px}
 
 /* 价格区（增强） */
-.price{padding:2px 14px 14px}
-.price .pline{display:flex;align-items:baseline;gap:3px}
-.price .pfx{font-size:11.5px;color:#e8543f;background:#fdeeea;border-radius:3px;padding:1px 5px;line-height:17px;margin-right:5px;align-self:center}
-.price .cur{font-size:15px;color:#e01f26;font-weight:600}
-.price .pnum{font-size:25px;color:#e01f26;font-weight:700;letter-spacing:-.5px}
-.price .porg{font-size:12.5px;color:#9aa1ab;text-decoration:line-through;margin-left:7px}
-.price .pmeta{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:12px;color:#9aa1ab}
-.price .pmeta .save{color:#e8543f}
-.price .pmeta .dot{width:3px;height:3px;border-radius:50%;background:#d9dde2;display:inline-block}
 
 /* 图集 */
 .gallery{padding:0 0 12px}
@@ -132,6 +123,15 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .gchat{position:relative;flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:#fdf7f0;border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px;cursor:pointer}
 .gchat .od{position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
 @keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.pcard{padding:14px}
+.pcard .pprice{display:flex;align-items:baseline;gap:4px;line-height:1}
+.pcard .pprice .cur{font-size:17px;color:#1b1d21;font-weight:500}
+.pcard .pprice .num{font-size:28px;color:#1b1d21;font-weight:500;letter-spacing:-.6px}
+.pcard .ptag{display:flex;align-items:center;gap:8px;margin-top:10px}
+.pcard .ptag .taxfree{flex:0 0 auto;background:#d8c69e;color:#3a2f1c;font-size:12px;font-weight:600;line-height:17px;padding:1px 7px;border-radius:3px}
+.pcard .ptag .ptxt{min-width:0;font-size:12.5px;color:#4a4f57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard .ptitle{font-size:19px;color:#1b1d21;font-weight:500;line-height:1.36;margin-top:11px}
+.pcard .psub{font-size:12.5px;color:#9aa1ab;margin-top:8px}
 </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body data-page-node-id="IYziwQjgqC5ydRTG7mVlVU" style="">
@@ -171,25 +171,22 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
       </div>
     </div>
 
-    <!-- 价格区（增强） -->
+    <!-- 价格卡（按参考截图布局） -->
     <div class="card" data-page-node-id="TkfiZHWRfHFFLtrLPnVnWy">
-      <div class="price" data-page-node-id="efojGajBR1DwvmxxrWWt5M">
-        <div class="pline" data-page-node-id="FtWfT4HTDk7hNJKGE6DTDD">
-          <span class="pfx" data-page-node-id="4X81c4SAhc0sfXazWf6Epp">免税价</span>
-          <span class="cur" data-page-node-id="gH6OferHwvYDUUhn1SFviM">¥</span><span class="pnum" data-page-node-id="lPHTwYhNPMA1QfodxK9TGg">86,500</span>
-          <span class="porg" data-page-node-id="DOAM5mE9VrNxStI8bM7nNT">¥92,000</span>
+      <div class="pcard" data-page-node-id="efojGajBR1DwvmxxrWWt5M">
+        <div class="pprice" data-page-node-id="FtWfT4HTDk7hNJKGE6DTDD">
+          <span class="cur" data-page-node-id="gH6OferHwvYDUUhn1SFviM">¥</span><span class="num" data-page-node-id="lPHTwYhNPMA1QfodxK9TGg">35100.00</span>
         </div>
-        <div class="pmeta" data-page-node-id="SWIPjLHqd5PisXujiS0tLK">
-          <span class="save" data-page-node-id="CZLm9DWBmU6MOivEng1urx">已省 ¥5,500</span>
-          <span class="dot" data-page-node-id="aD0aIhbBFRe72iCtVCOPCK"></span>
-          <span data-page-node-id="P5EsSq1kYpF2gRI3vFO2zb">已售 126 件</span>
-          <span class="dot" data-page-node-id="Pu2XSQ0Hiw4DqIqNSd4owT"></span>
-          <span data-page-node-id="GKqcIVevZnwF6CvKvR2phh">评价 89 条</span>
+        <div class="ptag" data-page-node-id="SWIPjLHqd5PisXujiS0tLK">
+          <span class="taxfree" data-page-node-id="CZLm9DWBmU6MOivEng1urx">离岛免税</span>
+          <span class="ptxt" data-page-node-id="P5EsSq1kYpF2gRI3vFO2zb">来海南，买免税。凭离岛机票/火车票/船票购买</span>
         </div>
+        <div class="ptitle" data-page-node-id="GKqcIVevZnwF6CvKvR2phh">Cartier卡地亚Ballon Bleu蓝气球系列腕表 精钢手表 28毫米</div>
+        <div class="psub" data-page-node-id="nEW8xQ2vLmT5pB3sLcWy9a">卡地亚BB精钢石英表W69010Z4</div>
       </div>
     </div>
 
-        <!-- 导购服务条 -->
+    <!-- 导购服务条 -->
     <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
       <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF">
         <span data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌导购员专属服务</span>
