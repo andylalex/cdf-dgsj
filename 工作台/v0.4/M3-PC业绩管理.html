@@ -35,7 +35,6 @@
 .px-\[3px\]{padding-left:3px;padding-right:3px}
 .whitespace-nowrap{white-space:nowrap}.min-h-0{min-height:0}
 
-
     .sku-opt { background: #fff; transition: all .2s ease; }
     .sku-opt.sku-active { background: #fff; font-weight: 500; }
     #skuModalPanel { max-height: 88vh; overflow-y: auto; }
@@ -52,7 +51,6 @@
 .transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}
 .translate-y-full{transform:translateY(100%)}
 .translate-y-0{transform:translateY(0)}
-
 
   
     /* missing utilities */
@@ -210,12 +208,8 @@
     .border-\[\#ffd9d4\]{border-color:#ffd9d4}
     .border-white\/70{border-color:rgba(255,255,255,0.7)}
     .from-\[\#ff8a75\]{--tw-gradient-from:#ff8a75 var(--tw-gradient-from-position);--tw-gradient-to:rgba(255,138,117,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}
-    .to-\[\#e64e39\]{--tw-gradient-to:#e64e39 var(--tw-gradient-to-position)}    /* 客户消息群发弹窗 */
-    .bc-rounded{border-radius:0.75rem}
-    .bc-sender{border:2px solid #f3f4f6;background:#fff;transition:all .15s;cursor:pointer}
-    .bc-sender:hover{border-color:#e5e7eb}
-    .bc-sender.on{border-color:#ff6b52;background:#fff5f4}
-    .bc-textarea:focus{border-color:#ff6b52}
+    .to-\[\#e64e39\]{--tw-gradient-to:#e64e39 var(--tw-gradient-to-position)}
+
 </style>
   <meta charset="UTF-8" data-page-node-id="s6svfHHIEPCuNbzLX9my7s">
   <meta name="viewport" content="width=1280" data-page-node-id="rIaY2Xae3iyMX9g8FVxASW">
@@ -339,7 +333,7 @@
             <span class="text-xs text-gray-400" data-page-node-id="Zt9V3zwU90E3mTZIXQ5r9W">至</span>
             <input id="fDateTo" type="date" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-coral-400" data-page-node-id="X793lrOVqrHb1LLipY63kY">
             <div class="flex-1" data-page-node-id="6Qs26eYgoDzvdROjpIavVc"></div>
-            <button onclick="openBroadcast()" class="border border-coral-200 text-coral-600 hover:bg-coral-50 px-4 py-2 rounded-lg text-sm font-medium transition" data-page-node-id="bcBroadcastBtn"><i class="fas fa-bullhorn mr-1.5"></i>群发消息</button>
+      
       <button class="bg-coral-500 hover:bg-coral-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-coral-500/20" data-page-node-id="G6B81Iuc8kwEyBsI36U1zW">
               <i class="fas fa-download mr-1.5" data-page-node-id="iF9fCYHr6LH9VvjK37qxQr"></i>导出订单
             </button>
@@ -482,49 +476,6 @@
       </div>
       <div class="px-6 py-4 border-t border-gray-100 flex justify-end" data-page-node-id="kPw6gmEj9yTh0cx6kmmZRr">
         <button onclick="closeOrderDetail()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-2 rounded-xl text-sm font-medium transition" data-page-node-id="d2KcTkbMkNb93rZaQ9yHtN">关闭</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 客户消息群发弹窗（顾问交接通知） -->
-  <div id="broadcastModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6" onclick="if(event.target===this)closeBroadcast()">
-    <div class="bg-white rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl">
-      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
-        <div>
-          <p class="font-bold text-gray-800">客户消息群发</p>
-          <p class="text-xs text-gray-400 mt-0.5">顾问工作变更 · 客户交接通知</p>
-        </div>
-        <button onclick="closeBroadcast()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition"><i class="fas fa-times text-sm"></i></button>
-      </div>
-      <div class="p-6 space-y-5">
-        <div>
-          <p class="text-xs text-gray-500 mb-2">发送人</p>
-          <div class="grid grid-cols-2 gap-3" id="senderTabs">
-            <button type="button" onclick="selectSender('zhang')" data-sender="zhang" class="bc-sender bc-rounded flex items-center gap-3 p-3 text-left">
-              <div class="w-10 h-10 rounded-full bg-coral-500 text-white flex items-center justify-center font-bold shrink-0">张</div>
-              <div><p class="text-sm font-medium text-gray-800">张伟</p><p class="text-[11px] text-gray-400">奢品顾问</p></div>
-            </button>
-            <button type="button" onclick="selectSender('li')" data-sender="li" class="bc-sender bc-rounded flex items-center gap-3 p-3 text-left">
-              <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold shrink-0">李</div>
-              <div><p class="text-sm font-medium text-gray-800">李娜</p><p class="text-[11px] text-gray-400">奢品顾问</p></div>
-            </button>
-          </div>
-        </div>
-        <div>
-          <p class="text-xs text-gray-500 mb-2">消息内容</p>
-          <textarea id="broadcastMsg" rows="4" class="bc-textarea w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 outline-none resize-none leading-6"></textarea>
-        </div>
-        <div class="rounded-xl bg-gray-50 p-3">
-          <div class="flex items-center justify-between">
-            <p class="text-xs text-gray-500">接收客户（全部客户）</p>
-            <p class="text-xs font-medium text-coral-600" id="bcCustCount">共 0 位</p>
-          </div>
-          <p class="text-xs text-gray-600 mt-2 leading-5" id="bcCustList"></p>
-        </div>
-      </div>
-      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-end gap-3">
-        <button onclick="closeBroadcast()" class="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition">取消</button>
-        <button onclick="sendBroadcast()" class="bg-coral-500 hover:bg-coral-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-coral-500/20">发送消息</button>
       </div>
     </div>
   </div>
@@ -906,54 +857,6 @@
     }
 
     rerender();
-
-    // ===== 客户消息群发（顾问交接通知）=====
-    const BROADCAST_MSGS = {
-      zhang: '您好，由于「李娜顾问」工作变更，接下来将由我继续为您服务。感谢您一直以来对我们的支持。',
-      li: '您好，由于我的工作变更，接下来将由「张伟顾问」继续为您服务。感谢您一直以来对我们的支持。'
-    };
-    const SENDER_NAME = { zhang:'张伟', li:'李娜' };
-    let curSender = 'zhang';
-
-    function openBroadcast() {
-      const users = [...new Set(Object.values(orderDetails).map(d => d.user))];
-      document.getElementById('bcCustCount').textContent = '共 ' + users.length + ' 位';
-      document.getElementById('bcCustList').textContent = users.join('、');
-      selectSender('zhang');
-      document.getElementById('broadcastModal').classList.remove('hidden');
-    }
-
-    function selectSender(key) {
-      curSender = key;
-      document.getElementById('broadcastMsg').value = BROADCAST_MSGS[key];
-      document.querySelectorAll('#senderTabs .bc-sender').forEach(btn => {
-        btn.classList.toggle('on', btn.dataset.sender === key);
-      });
-    }
-
-    function sendBroadcast() {
-      const users = [...new Set(Object.values(orderDetails).map(d => d.user))];
-      closeBroadcast();
-      showToast('已向 ' + users.length + ' 位客户发送消息（' + SENDER_NAME[curSender] + '）');
-    }
-
-    function closeBroadcast() {
-      document.getElementById('broadcastModal').classList.add('hidden');
-    }
-
-    function showToast(msg) {
-      let t = document.getElementById('bcToast');
-      if (!t) {
-        t = document.createElement('div');
-        t.id = 'bcToast';
-        t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:80;background:rgba(17,24,39,0.9);color:#fff;font-size:13px;padding:10px 18px;border-radius:9999px;box-shadow:0 10px 25px rgba(0,0,0,.25);opacity:0;transition:opacity .2s;pointer-events:none';
-        document.body.appendChild(t);
-      }
-      t.textContent = msg;
-      requestAnimationFrame(function(){ t.style.opacity = '1'; });
-      clearTimeout(t._timer);
-      t._timer = setTimeout(function(){ t.style.opacity = '0'; }, 2600);
-    }
 
   </script>
 
