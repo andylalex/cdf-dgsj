@@ -100,20 +100,16 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .guide-sec .hd{display:flex;align-items:center;padding:0 14px 12px;font-size:15.5px;color:#26282c;font-weight:600}
 .guide-sec .hd .arr{margin-left:auto;color:#8b9099;font-size:13px}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
-.gcard{flex:0 0 auto;width:292px;background:#fff;border-radius:10px;padding:11px;display:flex;align-items:center;gap:9px}
-.gcard img{width:50px;height:50px;border-radius:50%;flex:0 0 auto;object-fit:cover}
-.gcard .gi{min-width:0;flex:1}
-.gcard .gn{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:6px;white-space:nowrap}
-.gcard .gn .bar{color:#dcdfe4;font-weight:400}
-.gcard .gn .yr{font-weight:400;color:#3c4048;font-size:14px}
-.gcard .gs{font-size:13px;color:#8b9099;margin-top:7px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.btn-gold{flex:0 0 auto;border:1px solid var(--gold-line);color:var(--gold);background:#fff;font-size:13px;padding:6px 14px;border-radius:999px;white-space:nowrap;cursor:pointer}
-
-/* 提货方式 */
-.pick{background:#fff;border-radius:12px;padding:0 0 18px;margin:0 0 8px}
-.pick .hd{padding:16px 14px 12px;font-size:15.5px;font-weight:600;color:#1b1d21}
-.pick .g{padding:0 14px}
-.pick .gt{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:5px}
+.glist{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px}
+.gcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:#fff;border-radius:10px;cursor:pointer;transition:transform .14s}
+.gcard:active{transform:scale(.96)}
+.gcard .gav{position:relative;width:46px;height:46px;flex:0 0 auto}
+.gcard .gav img{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block}
+.gcard .gav .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+.gcard .gav .gc{position:absolute;left:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff}
+.gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1}
+.gcard .gs{font-size:11px;color:#8b9099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
+.gt{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:5px}
 .pick .o{font-size:13.5px;color:#3c4048;line-height:1.5;margin-top:8px;display:flex;gap:0}
 .pick .o .n{flex:0 0 auto;width:42px;color:#6b7280}
 .pick .o .n.v{color:#3c4048}
@@ -170,13 +166,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
   <div class="main hide-scrollbar" data-page-node-id="EciB1oadd2VPGB4VfuFHNx">
 
-        <!-- 商品名 -->
-    <div class="pname">
-      <div class="t1">Van Cleef &amp; Arpels 梵克雅宝 四叶草项链 白贝母钻石吊坠</div>
-      <div class="t2">Van Cleef &amp; Arpels · 18K金 · 白贝母</div>
-    </div>
-
-<!-- 商品主图 + 图集 -->
+        <!-- 商品主图 + 图集 -->
     <div class="card gallery" data-page-node-id="przJWnx5AZOx29FRtuPFS8">
       <div class="gmain" data-page-node-id="CfMv7BhqxJMN8VGCxrQjy0">
         <span class="badge" data-page-node-id="1CefYF30eVl192qFut7XGE">中免正品 · 免税专供</span>
@@ -208,33 +198,53 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
       </div>
     </div>
 
-    <!-- 导购服务条 -->
+        <!-- 导购服务条 -->
     <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
       <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF">
         <span data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌导购员专属服务</span>
         <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
       </div>
-      <div class="guide-rail hide-scrollbar" data-page-node-id="TU1sgeoBRYvcWq1IEWGMaJ">
-        <div class="gcard" data-page-node-id="8Cf8voxrpLgZmyyWwa7YSf">
-          <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ">
-          <div class="gi" data-page-node-id="14nXMxhUNGdb7qfYlXQGpp">
-            <div class="gn" data-page-node-id="bXb7EGlgw2byOe3H6WUzdd">张三</div>
-            <div class="gs" data-page-node-id="4NB1CcH0qPCBegLn8G4Bop"><i class="fas fa-map-marker-alt" data-page-node-id="ac6ipvRkA4fpzDf61jvOwi"></i>海口国际免税城</div>
+      <div class="glist">
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
+          <div class="gav" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-av">
+            <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
           </div>
-          <div class="gchat" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="NGkG1v6v0uvddcJxMRRsRc"><i class="fas fa-comment-dots"></i><span class="od"></span></div>
+          <div class="gn" data-page-node-id="bXb7EGlgw2byOe3H6WUzdd">张三</div>
+          <div class="gs">海口免税城</div>
         </div>
-        <div class="gcard" data-page-node-id="qGZSsGDw2MyANB3htYjbE6">
-          <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b">
-          <div class="gi" data-page-node-id="QsqjMfMayeXDe24ml7kEsB">
-            <div class="gn" data-page-node-id="sXAPsnATiCmtrZzvtCXLga">李现</div>
-            <div class="gs" data-page-node-id="9HsL1PvEH4EBR4FCpJK0OQ"><i class="fas fa-map-marker-alt" data-page-node-id="azofD2GVlKSgsY5CYObPxl"></i>三亚国际免税城</div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-c">
+          <div class="gav" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-av">
+            <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
           </div>
-          <div class="gchat" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="kRaYWaP9hN5dp5WQ0ihcp9"><i class="fas fa-comment-dots"></i><span class="od"></span></div>
+          <div class="gn" data-page-node-id="sXAPsnATiCmtrZzvtCXLga">李现</div>
+          <div class="gs">三亚免税城</div>
+        </div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-c">
+          <div class="gav" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-av">
+            <img src="assets/generated/advisor3.png" alt="王芳" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+          </div>
+          <div class="gn" data-page-node-id="GN3kJd8pQmT5nB2sLcWy1f">王芳</div>
+          <div class="gs">琼海免税城</div>
+        </div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-c">
+          <div class="gav" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-av">
+            <img src="assets/generated/advisor4.png" alt="陈晨" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+          </div>
+          <div class="gn" data-page-node-id="GN4kJd8pQmT5nB2sLcWy1h">陈晨</div>
+          <div class="gs">万宁免税城</div>
         </div>
       </div>
     </div>
 
-    <!-- 促销 + 领券（同一张卡内） -->
+<!-- 促销 + 领券（同一张卡内） -->
     <div class="card" data-page-node-id="jGXozuUVRTJf9V5gEYUa6s">
       <div class="row" data-page-node-id="9doZiPb0iTk5meM70FnTqH">
         <span class="k" data-page-node-id="AQ6AiNTfhB4MjF7xkcthre">促销</span>
