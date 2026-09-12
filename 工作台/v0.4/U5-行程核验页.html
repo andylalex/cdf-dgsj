@@ -374,37 +374,11 @@
       else window.location.href = 'U4-结算中心页.html';
     }
 
-    // 确认核验后动态返回上一级页面：优先用 from 参数，其次用 referrer 推断，最后退浏览器历史。
+    // 确认核验通过后进入结算中心（行程核验为结算的前置条件）
     function goBackAfterVerify() {
-      var params = new URLSearchParams(window.location.search);
-      var from = params.get('from');
-      var target = null;
-      if (from === 'U6') target = 'U6-意向单页.html';
-      else if (from === 'U4') target = 'U4-结算中心页.html';
-      else if (document.referrer) {
-        var m = document.referrer.match(/([^\/]+\.html)(?:[?#]|$)/);
-        if (m) target = m[1];
-      }
-      if (target) window.location.href = target;
-      else if (window.history && window.history.length > 1) window.history.back();
-      else window.location.href = 'U4-结算中心页.html';
+      window.location.href = 'U4-结算中心页.html';
     }
 
-    // 确认核验后动态返回上一级页面：优先用 from 参数，其次用 referrer 推断，最后退浏览器历史。
-    function goBackAfterVerify() {
-      var params = new URLSearchParams(window.location.search);
-      var from = params.get('from');
-      var target = null;
-      if (from === 'U6') target = 'U6-意向单页.html';
-      else if (from === 'U4') target = 'U4-结算中心页.html';
-      else if (document.referrer) {
-        var m = document.referrer.match(/([^\/]+\.html)(?:[?#]|$)/);
-        if (m) target = m[1];
-      }
-      if (target) window.location.href = target;
-      else if (window.history && window.history.length > 1) window.history.back();
-      else window.location.href = 'U4-结算中心页.html';
-    }
 
     window.addEventListener('DOMContentLoaded', function() {
       const info = getVerifyInfo();
