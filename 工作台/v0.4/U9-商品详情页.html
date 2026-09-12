@@ -99,8 +99,12 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .gcard:active{transform:scale(.96)}
 .gcard .gav{position:relative;width:80px;height:80px;flex:0 0 auto}
 .gcard .gav img{width:80px;height:80px;border-radius:50%;object-fit:cover;display:block}
-.gcard .gav .od{position:absolute;right:1px;bottom:1px;width:16px;height:16px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
-.gcard .gav .gc{position:absolute;left:-4px;bottom:-4px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
+    .gcard .gav .gc-wrap{position:absolute;right:-4px;bottom:-4px;width:26px;height:26px}
+    .gcard .gav .gc-wrap .gc{position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
+    .gcard .gav .gc-wrap .od{position:absolute;right:-3px;top:-3px;width:16px;height:16px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+    .gcard .gav .gc-wrap .od.off{background:#fbbf24;animation:none}
+
+
 .gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1;margin-top:2px}
 .gcard .gs{font-size:11px;color:#8b9099;white-space:normal;line-height:1.25;max-width:100px;margin-top:1px}
 .gt{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:5px}
@@ -213,8 +217,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad1-c">
           <div class="gav" data-page-node-id="U9Ad1-av">
             <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="U9Ad1">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad1-n">张三</div>
           <div class="gs">海口国际免税城</div>
@@ -222,8 +225,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad2-c">
           <div class="gav" data-page-node-id="U9Ad2-av">
             <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="U9Ad2">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad2-n">李现</div>
           <div class="gs">海口国际免税城</div>
@@ -231,8 +233,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad3-c">
           <div class="gav" data-page-node-id="U9Ad3-av">
             <img src="assets/generated/advisor3.png" alt="王芳" data-page-node-id="U9Ad3">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad3-n">王芳</div>
           <div class="gs">海口国际免税城</div>
@@ -240,8 +241,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad4-c">
           <div class="gav" data-page-node-id="U9Ad4-av">
             <img src="assets/generated/advisor4.png" alt="孙琳" data-page-node-id="U9Ad4">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad4-n">孙琳</div>
           <div class="gs">海口国际免税城</div>
@@ -249,8 +249,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad5-c">
           <div class="gav" data-page-node-id="U9Ad5-av">
             <img src="assets/generated/advisor5.png" alt="陈晨" data-page-node-id="U9Ad5">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad5-n">陈晨</div>
           <div class="gs">三亚国际免税城</div>
@@ -258,8 +257,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad6-c">
           <div class="gav" data-page-node-id="U9Ad6-av">
             <img src="assets/generated/advisor6.png" alt="周涛" data-page-node-id="U9Ad6">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad6-n">周涛</div>
           <div class="gs">三亚国际免税城</div>
@@ -267,8 +265,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad7-c">
           <div class="gav" data-page-node-id="U9Ad7-av">
             <img src="assets/generated/advisor7.png" alt="刘洋" data-page-node-id="U9Ad7">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad7-n">刘洋</div>
           <div class="gs">海口国际免税城</div>
@@ -276,8 +273,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
         <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad8-c">
           <div class="gav" data-page-node-id="U9Ad8-av">
             <img src="assets/generated/advisor8.png" alt="赵敏" data-page-node-id="U9Ad8">
-            <span class="od"></span>
-            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            <span class="gc-wrap"><span class="gc"><i class="fas fa-comment-dots"></i></span><span class="od"></span></span>
           </div>
           <div class="gn" data-page-node-id="U9Ad8-n">赵敏</div>
           <div class="gs">三亚国际免税城</div>
