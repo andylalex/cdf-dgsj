@@ -93,15 +93,16 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
 .guide-sec .gsub{display:flex;align-items:center;gap:5px;padding:0 12px 11px;font-size:12px;color:#a2907a;cursor:pointer}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
-.glist{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px}
-.gcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:#fff;border-radius:10px;cursor:pointer;transition:transform .14s}
+.glist{display:flex;gap:14px;padding:2px 12px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.glist::-webkit-scrollbar{display:none}
+.gcard{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 auto;width:100px;cursor:pointer;transition:transform .14s}
 .gcard:active{transform:scale(.96)}
-.gcard .gav{position:relative;width:46px;height:46px;flex:0 0 auto}
-.gcard .gav img{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block}
-.gcard .gav .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
-.gcard .gav .gc{position:absolute;left:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff}
-.gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1}
-.gcard .gs{font-size:11px;color:#8b9099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
+.gcard .gav{position:relative;width:80px;height:80px;flex:0 0 auto}
+.gcard .gav img{width:80px;height:80px;border-radius:50%;object-fit:cover;display:block}
+.gcard .gav .od{position:absolute;right:1px;bottom:1px;width:16px;height:16px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+.gcard .gav .gc{position:absolute;left:-4px;bottom:-4px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
+.gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1;margin-top:2px}
+.gcard .gs{font-size:11px;color:#8b9099;white-space:normal;line-height:1.25;max-width:100px;margin-top:1px}
 .gt{font-size:14.5px;font-weight:600;color:#1b1d21;display:flex;align-items:center;gap:5px}
 .pick .o{font-size:13.5px;color:#3c4048;line-height:1.5;margin-top:8px;display:flex;gap:0}
 .pick .o .n{flex:0 0 auto;width:42px;color:#6b7280}
@@ -205,49 +206,81 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     <!-- 奢品顾问服务条 -->
     <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
       <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
-        <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店金牌奢品顾问专属服务</span>
+        <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">门店奢品顾问</span>
         <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
       </div>
-      <div class="gsub" onclick="openGuideSvc()" data-page-node-id="U9GuideSub">
-        <i class="fas fa-gem" style="font-size:10px" data-page-node-id="U9GuideSubIc"></i>
-        <span data-page-node-id="U9GuideSubTx">咨询奢品顾问，享线下独家货源与专属礼遇</span>
-      </div>
       <div class="glist">
-        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
-          <div class="gav" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-av">
-            <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ">
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad1-c">
+          <div class="gav" data-page-node-id="U9Ad1-av">
+            <img src="assets/generated/advisor1.png" alt="张三" data-page-node-id="U9Ad1">
             <span class="od"></span>
             <span class="gc"><i class="fas fa-comment-dots"></i></span>
           </div>
-          <div class="gn" data-page-node-id="bXb7EGlgw2byOe3H6WUzdd">张三</div>
+          <div class="gn" data-page-node-id="U9Ad1-n">张三</div>
           <div class="gs">海口国际免税城</div>
         </div>
-        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-c">
-          <div class="gav" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-av">
-            <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b">
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad2-c">
+          <div class="gav" data-page-node-id="U9Ad2-av">
+            <img src="assets/generated/advisor2.png" alt="李现" data-page-node-id="U9Ad2">
             <span class="od"></span>
             <span class="gc"><i class="fas fa-comment-dots"></i></span>
           </div>
-          <div class="gn" data-page-node-id="sXAPsnATiCmtrZzvtCXLga">李现</div>
+          <div class="gn" data-page-node-id="U9Ad2-n">李现</div>
+          <div class="gs">海口国际免税城</div>
+        </div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad3-c">
+          <div class="gav" data-page-node-id="U9Ad3-av">
+            <img src="assets/generated/advisor3.png" alt="王芳" data-page-node-id="U9Ad3">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+          </div>
+          <div class="gn" data-page-node-id="U9Ad3-n">王芳</div>
+          <div class="gs">海口国际免税城</div>
+        </div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad4-c">
+          <div class="gav" data-page-node-id="U9Ad4-av">
+            <img src="assets/generated/advisor4.png" alt="孙琳" data-page-node-id="U9Ad4">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+          </div>
+          <div class="gn" data-page-node-id="U9Ad4-n">孙琳</div>
+          <div class="gs">海口国际免税城</div>
+        </div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad5-c">
+          <div class="gav" data-page-node-id="U9Ad5-av">
+            <img src="assets/generated/advisor5.png" alt="陈晨" data-page-node-id="U9Ad5">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+          </div>
+          <div class="gn" data-page-node-id="U9Ad5-n">陈晨</div>
           <div class="gs">三亚国际免税城</div>
         </div>
-        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-c">
-          <div class="gav" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-av">
-            <img src="assets/generated/advisor3.png" alt="王芳" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e">
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad6-c">
+          <div class="gav" data-page-node-id="U9Ad6-av">
+            <img src="assets/generated/advisor6.png" alt="周涛" data-page-node-id="U9Ad6">
             <span class="od"></span>
             <span class="gc"><i class="fas fa-comment-dots"></i></span>
           </div>
-          <div class="gn" data-page-node-id="GN3kJd8pQmT5nB2sLcWy1f">王芳</div>
-          <div class="gs">琼海博鳌免税店</div>
+          <div class="gn" data-page-node-id="U9Ad6-n">周涛</div>
+          <div class="gs">三亚国际免税城</div>
         </div>
-        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-c">
-          <div class="gav" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-av">
-            <img src="assets/generated/advisor4.png" alt="陈晨" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g">
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad7-c">
+          <div class="gav" data-page-node-id="U9Ad7-av">
+            <img src="assets/generated/advisor7.png" alt="刘洋" data-page-node-id="U9Ad7">
             <span class="od"></span>
             <span class="gc"><i class="fas fa-comment-dots"></i></span>
           </div>
-          <div class="gn" data-page-node-id="GN4kJd8pQmT5nB2sLcWy1h">陈晨</div>
-          <div class="gs">海口日月广场免税店</div>
+          <div class="gn" data-page-node-id="U9Ad7-n">刘洋</div>
+          <div class="gs">海口国际免税城</div>
+        </div>
+        <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U9Ad8-c">
+          <div class="gav" data-page-node-id="U9Ad8-av">
+            <img src="assets/generated/advisor8.png" alt="赵敏" data-page-node-id="U9Ad8">
+            <span class="od"></span>
+            <span class="gc"><i class="fas fa-comment-dots"></i></span>
+          </div>
+          <div class="gn" data-page-node-id="U9Ad8-n">赵敏</div>
+          <div class="gs">三亚国际免税城</div>
         </div>
       </div>
     </div>
