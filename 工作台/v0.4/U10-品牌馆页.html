@@ -53,7 +53,6 @@ background:
 .guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
-.guide-sec .gsub{display:flex;align-items:center;gap:5px;padding:0 12px 11px;font-size:12px;color:#a2907a;cursor:pointer}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
 .glist{display:flex;gap:14px;padding:2px 14px 6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .glist::-webkit-scrollbar{display:none}
@@ -65,8 +64,8 @@ background:
 .gcard .gav .gc{position:absolute;left:-4px;bottom:-4px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
 .gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1;margin-top:2px}
 .gcard .gs{font-size:11px;color:#8b9099;white-space:normal;line-height:1.25;max-width:100px;margin-top:1px}
-.gcard--all{justify-content:center}
-.gcard--all .all-ic{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#c9a06d,#a87e4f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(168,126,79,.3)}
+.gcard--all{justify-content:flex-start}
+.gcard--all .all-pill{width:100px;height:80px;border-radius:16px;background:linear-gradient(135deg,#c9a06d,#a87e4f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;white-space:nowrap;box-shadow:0 4px 12px rgba(168,126,79,.3)}
 .gcard--all .gn{font-size:12px;color:#a87e4f;font-weight:600}
 @keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
 .gwrap{background:#fff;padding:12px 10px 14px;flex:0 0 auto}
@@ -148,11 +147,6 @@ background:
       <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
         <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
           <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
-          <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
-        </div>
-        <div class="gsub" onclick="openGuideSvc()" data-page-node-id="U10GuideSub">
-          <i class="fas fa-gem" style="font-size:10px" data-page-node-id="U10GuideSubIc"></i>
-          <span data-page-node-id="U10GuideSubTx">咨询奢品顾问，享线下独家货源与专属礼遇</span>
         </div>
         <div class="glist">
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
@@ -228,8 +222,7 @@ background:
             <div class="gs">海口日月广场免税店</div>
           </div>
           <div class="gcard gcard--all" onclick="location.href='U7-奢品顾问列表页.html'">
-            <div class="all-ic"><i class="fas fa-chevron-right"></i></div>
-            <div class="gn">全部顾问</div>
+            <div class="all-pill">全部顾问</div>
           </div>
         </div>
       </div>
