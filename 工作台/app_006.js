@@ -1196,20 +1196,29 @@ edApplyImportedData(); edApplyNavData(); edApplyDataImported();
 window.__PROTOTYPES_BASE = JSON.parse(JSON.stringify(PROTOTYPES));
 edApplyDataEdits();   /* 合并文件级左导航结构段，编辑版自身也以文件为权威源 */
 setTimeout(edAutoSave, 2000);   /* 页面加载后自动把 localStorage 编辑回写一次物理文件（http 环境） */
+/* 默认打开页：优先 URL hash 指定的原型；hash 未命中时取左导航第一项 */
+function edDefaultProtoId(){
+  var _h=location.hash.replace('#','');
+  if(_h && PROTOTYPES.some(function(p){return p.id===_h;}))return _h;
+  if(typeof firstSidebarProto==='function'){ var _f=firstSidebarProto(); if(_f)return _f.id; }
+  return PROTOTYPES[0].id;
+}
 if(edLoadAll()){
   edEnsureCats();
   renderSidebar();
   var still=PROTOTYPES.some(function(p){return p.id===state.currentId;});
   if(!still){
-    if(PROTOTYPES.length){ state.currentId=null; selectPrototype(PROTOTYPES[0].id); }
+    if(PROTOTYPES.length){ state.currentId=null; selectPrototype(edDefaultProtoId()); }
   }else{
     renderPRD(); renderHotspots(); scheduleUpdatePositions();
   }
   showToast('已载入本地编辑数据');
 }else{
-  /* 首次访问（如 GitHub 静态托管的新访客，无本地缓存）：仍须渲染内置 + 导入的静态数据 */
+  /* 首次访问（如 GitHub 静态托管的新访客，无本地缓存）：仍须渲染内置 + 导入的静态数据。
+     注意：仅当当前页面失效时才回退，避免覆盖启动时按 hash / 左导航第一项作出的选择。 */
   edEnsureCats();
   renderSidebar();
-  if(PROTOTYPES.length){ state.currentId=null; selectPrototype(PROTOTYPES[0].id); }
+  var ok0=PROTOTYPES.some(function(p){return p.id===state.currentId;});
+  if(PROTOTYPES.length && !ok0){ state.currentId=null; selectPrototype(edDefaultProtoId()); }
 }
 })();

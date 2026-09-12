@@ -48,6 +48,14 @@ function groups(){
   m.forEach((arr,g)=>out.set(g,arr.sort((a,b)=>a.idx-b.idx).map(x=>x.p)));
   return out;
 }
+/* 左导航第一项：进入工作台（无 hash 或 hash 未命中）时默认打开的页面 */
+function firstSidebarProto(){
+  try{
+    const g=groups();
+    for(const arr of g.values()){ if(arr&&arr.length)return arr[0]; }
+  }catch(e){}
+  return PROTOTYPES[0];
+}
 function setProtoOrder(orderedIds){
   const byId={}; PROTOTYPES.forEach((p,i)=>byId[p.id]=i);
   const tail=PROTOTYPES.filter(p=>orderedIds.indexOf(p.id)<0);
@@ -1381,7 +1389,7 @@ function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('sh
 window.addEventListener('hashchange',()=>{
   if(isCatalogHash()){showCatalog();return;}
   hideCatalog();
-  const id=location.hash.replace('#','')||'__guide__';
+  const id=location.hash.replace('#','')||firstSidebarProto().id;
   if(id!==state.currentId&&(id==='__guide__'||PROTOTYPES.some(p=>p.id===id)))selectPrototype(id);
   setTimeout(hideCatalog,0);
 });
@@ -1531,7 +1539,8 @@ var _pt=document.getElementById('panelToggle'); if(_pt)_pt.addEventListener('cli
     if(stats){gsap.killTweensOf(stats);gsap.set(stats,{y:16,autoAlpha:0});gsap.to(stats,{y:0,autoAlpha:1,duration:0.6,delay:lastDelay+0.5,ease:'power2.out'});}
   }
   function hideCatalog(){catalogView.style.display='none';}
-  function isCatalogHash(){const h=location.hash.replace('#','');return !h||h==='catalog';}
+  /* 仅显式 #catalog 视为目录页；访问不带 hash 时直接进入左导航第一个页面 */
+function isCatalogHash(){const h=location.hash.replace('#','');return h==='catalog';}
   $('catGrid').innerHTML=CATALOG_MODULES.map(m=>{
     const on=m.status==='online';
     return `<div class="cat-card ${on?'':'planned'}" data-proto="${m.proto}">
@@ -1578,6 +1587,6 @@ var _pt=document.getElementById('panelToggle'); if(_pt)_pt.addEventListener('cli
   /* 静态部署无法列目录，直接以配置数组为准（删文件不会自动从导航消失，需同步删配置项） */
   (function(){
     const _id=location.hash.replace('#','');
-    selectPrototype(PROTOTYPES.some(p=>p.id===_id)?_id:PROTOTYPES[0].id);
+    selectPrototype(PROTOTYPES.some(p=>p.id===_id)?_id:firstSidebarProto().id);
   })();
 })();

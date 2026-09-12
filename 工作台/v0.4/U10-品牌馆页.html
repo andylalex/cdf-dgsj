@@ -14,6 +14,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .phone-frame>*{min-height:0}
 .hide-scrollbar::-webkit-scrollbar{display:none}
 .hide-scrollbar{scrollbar-width:none}
+.main{flex:1;min-height:0;overflow-y:auto;background:#fff;-webkit-overflow-scrolling:touch}
 
 /* 状态栏 / 导航 */
 .status-bar{padding:10px 20px 6px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;background:#fff;flex:0 0 auto}
@@ -49,9 +50,10 @@ background:
 .banner .cap .c3{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:3px 14px}
 /* 金牌奢品顾问（同 U9） */
 .guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
-.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 12px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
+.guide-sec .gsub{display:flex;align-items:center;gap:5px;padding:0 12px 11px;font-size:12px;color:#a2907a;cursor:pointer}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
 .glist{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px}
 .gcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:#fff;border-radius:10px;cursor:pointer;transition:transform .14s}
@@ -144,6 +146,10 @@ background:
           <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
           <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
         </div>
+        <div class="gsub" onclick="openGuideSvc()" data-page-node-id="U10GuideSub">
+          <i class="fas fa-gem" style="font-size:10px" data-page-node-id="U10GuideSubIc"></i>
+          <span data-page-node-id="U10GuideSubTx">咨询奢品顾问，享线下独家货源与专属礼遇</span>
+        </div>
         <div class="glist">
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
             <div class="gav" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-av">
@@ -152,7 +158,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="bXb7EGlgw2byOe3H6WUzdd">张三</div>
-            <div class="gs">海口免税城</div>
+            <div class="gs">海口国际免税城</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-c">
             <div class="gav" data-page-node-id="nYo3R5R6pmPs04xtUWGM0b-av">
@@ -161,7 +167,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="sXAPsnATiCmtrZzvtCXLga">李现</div>
-            <div class="gs">三亚免税城</div>
+            <div class="gs">三亚国际免税城</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-c">
             <div class="gav" data-page-node-id="AV3xKd9mQpT7nB2sLcWy1e-av">
@@ -170,7 +176,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="GN3kJd8pQmT5nB2sLcWy1f">王芳</div>
-            <div class="gs">琼海免税城</div>
+            <div class="gs">琼海博鳌免税店</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-c">
             <div class="gav" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-av">
@@ -179,7 +185,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="GN4kJd8pQmT5nB2sLcWy1h">陈晨</div>
-            <div class="gs">万宁免税城</div>
+            <div class="gs">海口日月广场免税店</div>
           </div>
         </div>
       </div>

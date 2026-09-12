@@ -344,16 +344,19 @@
         </div>
       </div>
 
-      <!-- 横向导购列表 -->
+      <!-- 奢品顾问整卡（与「搜品牌」页一致） -->
       <div class="px-4 pt-4" data-page-node-id="U8GuideSec">
-        <div class="flex items-center justify-between" data-page-node-id="U8GuideHead">
-          <div class="flex items-baseline gap-2" data-page-node-id="U8GuideTitleWrap">
-            <span class="text-[15px] font-bold text-gray-800" data-page-node-id="U8GuideTitle">奢品顾问</span>
-            <span class="text-[11px] italic" style="font-family:Georgia,serif;color:#b0a284" data-page-node-id="U8GuideEn">Concierge</span>
+        <div class="guide-sec" data-page-node-id="U8GuideCard">
+          <div class="hd" onclick="openGuideSvc()" data-page-node-id="U8GuideHead">
+            <span class="t" data-page-node-id="U8GuideTitle">奢品顾问</span>
+            <i class="fas fa-chevron-right arr" data-page-node-id="U8GuideArr"></i>
           </div>
-          <a href="U7-奢品顾问列表页.html" class="text-[12px] text-gray-400 active:text-gray-600 transition" data-page-node-id="U8GuideAll">全部<i class="fas fa-chevron-right text-[9px] ml-0.5" data-page-node-id="U8GuideAllCaret"></i></a>
+          <div class="gsub" onclick="openGuideSvc()" data-page-node-id="U8GuideSub">
+            <i class="fas fa-gem" style="font-size:10px" data-page-node-id="U8GuideSubIc"></i>
+            <span data-page-node-id="U8GuideSubTx">咨询奢品顾问，享线下独家货源与专属礼遇</span>
+          </div>
+          <div class="glist" id="guideList" data-page-node-id="U8GuideList"></div>
         </div>
-        <div id="guideList" class="flex gap-3 mt-3 overflow-x-auto hide-scrollbar" style="-webkit-overflow-scrolling:touch" data-page-node-id="U8GuideList"></div>
       </div>
 
       <!-- 搜索 -->
@@ -385,6 +388,37 @@
       </div>
 
     </div>
+
+    <!-- 奢品顾问服务说明弹窗 -->
+    <div class="gsvc-mask" id="gsvcMask" onclick="closeGuideSvc(event)" data-page-node-id="U8GsvcMask">
+      <div class="gsvc" onclick="event.stopPropagation()" data-page-node-id="U8Gsvc">
+        <button class="x" aria-label="关闭" onclick="closeGuideSvc()" data-page-node-id="U8GsvcX"><i class="fas fa-times" data-page-node-id="U8GsvcXIc"></i></button>
+        <div class="hd" data-page-node-id="U8GsvcHd"><i class="fas fa-user-tie" data-page-node-id="U8GsvcHdIc"></i>专业奢品顾问服务</div>
+        <div class="sub" data-page-node-id="U8GsvcSub">门店金牌奢品顾问专属服务，为您的每一次选购保驾护航</div>
+        <div class="it" data-page-node-id="U8GsvcIt1">
+          <div class="ic" data-page-node-id="U8GsvcIt1Ic"><i class="fas fa-headset" data-page-node-id="U8GsvcIt1I"></i></div>
+          <div data-page-node-id="U8GsvcIt1Tx">
+            <div class="t" data-page-node-id="U8GsvcIt1T">专业奢品顾问服务</div>
+            <div class="d" data-page-node-id="U8GsvcIt1D">美妆行业资深奢品顾问在线服务，即时解答美妆相关问题并给出定制化专业指导。</div>
+          </div>
+        </div>
+        <div class="it" data-page-node-id="U8GsvcIt2">
+          <div class="ic" data-page-node-id="U8GsvcIt2Ic"><i class="fas fa-hands-helping" data-page-node-id="U8GsvcIt2I"></i></div>
+          <div data-page-node-id="U8GsvcIt2Tx">
+            <div class="t" data-page-node-id="U8GsvcIt2T">商品选购手把手</div>
+            <div class="d" data-page-node-id="U8GsvcIt2D">提供最详细全面的商品信息，并根据您的个人特质和使用需求给出合适的选购建议。</div>
+          </div>
+        </div>
+        <div class="it" data-page-node-id="U8GsvcIt3">
+          <div class="ic" data-page-node-id="U8GsvcIt3Ic"><i class="fas fa-bullhorn" data-page-node-id="U8GsvcIt3I"></i></div>
+          <div data-page-node-id="U8GsvcIt3Tx">
+            <div class="t" data-page-node-id="U8GsvcIt3T">门店活动早知道</div>
+            <div class="d" data-page-node-id="U8GsvcIt3D">提前了解线下门店优惠活动信息，助您规划美妆购买最优攻略</div>
+          </div>
+        </div>
+        <button class="cta" onclick="location.href='U7-奢品顾问列表页.html'" data-page-node-id="U8GsvcCta">全部顾问</button>
+      </div>
+    </div>
   </div>
 
   <div id="toast" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 text-white px-4 py-2 rounded-lg text-[13px] z-[80] hidden" data-page-node-id="U8Toast"></div>
@@ -392,22 +426,48 @@
   <style>
     .filter-item{white-space:nowrap;transition:all .2s;background:none;border:none;padding:0}
     .filter-item.active{color:#111;font-weight:600}
-    .guide-card{flex:0 0 auto;width:72px;text-align:center;cursor:pointer}
-    .guide-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;margin:0 auto;border:2px solid #f5f2ec}
-    .guide-status-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:3px}
-    .guide-status-dot.on{background:#4ade80}
-    .guide-status-dot.off{background:#fbbf24}
+    /* ---- 奢品顾问整卡（与 U11-搜索品牌页 一致） ---- */
+    .phone-frame{position:relative}
+    .guide-sec{background:#fdf9f4;border-radius:12px;padding:14px 0 15px}
+    .guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+    .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
+    .guide-sec .gsub{display:flex;align-items:center;gap:5px;padding:0 12px 11px;font-size:12px;color:#a2907a;cursor:pointer}
+    .glist{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px}
+    .gcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:#fff;border-radius:10px;cursor:pointer;transition:transform .14s}
+    .gcard:active{transform:scale(.96)}
+    .gcard .gav{position:relative;width:46px;height:46px;flex:0 0 auto}
+    .gcard .gav img{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block}
+    .gcard .gav .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+    .gcard .gav .od.off{background:#fbbf24;animation:none}
+    .gcard .gav .gc{position:absolute;left:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;background:#bc9578;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff}
+    .gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1}
+    .gcard .gs{font-size:11px;color:#8b9099;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
+    @keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+    /* 顾问服务说明弹窗 */
+    .gsvc-mask{position:absolute;inset:0;background:rgba(17,17,17,.45);z-index:60;display:none;align-items:flex-end}
+    .gsvc-mask.show{display:flex}
+    .gsvc{position:relative;background:#fff;border-radius:16px 16px 0 0;width:100%;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:gsup .22s ease}
+    @keyframes gsup{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+    .gsvc .x{position:absolute;right:14px;top:14px;border:0;background:transparent;color:#9aa1ab;font-size:17px;cursor:pointer;padding:4px}
+    .gsvc .hd{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:#1b1d21;padding-right:40px}
+    .gsvc .hd i{color:#bc9578}
+    .gsvc .sub{font-size:12px;color:#9aa1ab;margin-top:6px}
+    .gsvc .it{display:flex;gap:12px;margin-top:14px;background:#fdf9f4;border:1px solid #f3e9dc;border-radius:12px;padding:13px}
+    .gsvc .it .ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #d8bb9d;display:flex;align-items:center;justify-content:center;color:#bc9578;font-size:16px}
+    .gsvc .it .t{font-size:14.5px;font-weight:600;color:#1b1d21}
+    .gsvc .it .d{font-size:12.5px;color:#6b7280;line-height:1.55;margin-top:4px}
+    .gsvc .cta{width:100%;margin-top:16px;height:44px;border:0;border-radius:999px;background:linear-gradient(92deg,#c9a06d,#a87e4f);color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
     .product-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);cursor:pointer;transition:transform .2s ease}
     .product-card:active{transform:scale(.98)}
   </style>
 
   <script data-page-node-id="U8Script">
     var GUIDES = [
-      { name: '林小婷', img: 'assets/generated/advisor1.png', online: true },
-      { name: '陈佳琪', img: 'assets/generated/advisor2.png', online: false },
-      { name: '王子墨', img: 'assets/generated/advisor3.png', online: true },
-      { name: '苏晚晴', img: 'assets/generated/advisor5.png', online: true },
-      { name: '许静文', img: 'assets/generated/advisor6.png', online: true }
+      { name: '林小婷', img: 'assets/generated/advisor1.png', online: true,  store: '海口国际免税城' },
+      { name: '陈佳琪', img: 'assets/generated/advisor2.png', online: false, store: '三亚国际免税城' },
+      { name: '王子墨', img: 'assets/generated/advisor3.png', online: true,  store: '琼海博鳌免税店' },
+      { name: '苏晚晴', img: 'assets/generated/advisor5.png', online: true,  store: '海口日月广场免税店' }
     ];
     var PRODUCTS = [
       { name: '【特卖商品】伊菲丹 夜间修护面膜 50ml', label: '离岛免税', tag: '满赠', price: '¥1,280.00', oldPrice: '¥1,680.00', img: 'assets/generated/product_e1.png' },
@@ -420,14 +480,16 @@
 
     function renderGuides() {
       var el = document.getElementById('guideList');
+      if (!el) return;
       el.innerHTML = GUIDES.map(function(g, i) {
-        return '<div class="guide-card" onclick="openGuide(' + i + ')">' +
-          '<div class="relative" style="width:56px;margin:0 auto">' +
-            '<img src="' + g.img + '" class="guide-avatar" alt="' + esc(g.name) + '">' +
-            '<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-white guide-status-dot ' + (g.online ? 'on' : 'off') + '"></span>' +
+        return '<div class="gcard" onclick="openGuide(' + i + ')" data-page-node-id="U8GCard' + i + '">' +
+          '<div class="gav" data-page-node-id="U8GCard' + i + 'Av">' +
+            '<img src="' + g.img + '" alt="' + esc(g.name) + '">' +
+            '<span class="od' + (g.online ? '' : ' off') + '"></span>' +
+            '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
           '</div>' +
-          '<p class="text-[11px] font-medium text-gray-700 mt-1.5 truncate">' + esc(g.name) + '</p>' +
-          '<p class="text-[9px] text-gray-400 mt-0.5"><span class="guide-status-dot ' + (g.online ? 'on' : 'off') + '"></span>' + (g.online ? '在线' : '稍后回复') + '</p>' +
+          '<div class="gn">' + esc(g.name) + '</div>' +
+          '<div class="gs">' + esc(g.store) + '</div>' +
         '</div>';
       }).join('');
     }
@@ -458,6 +520,17 @@
       var g = GUIDES[i];
       try { localStorage.setItem('currentAdvisor', JSON.stringify({ name: g.name, img: g.img })); } catch (e) {}
       window.location.href = 'U1-用户端IM会话页.html';
+    }
+
+    /* 奢品顾问服务说明弹窗（与「搜品牌」页一致） */
+    function openGuideSvc() {
+      var m = document.getElementById('gsvcMask');
+      if (m) m.classList.add('show');
+    }
+    function closeGuideSvc(e) {
+      if (e && e.target && e.target.closest && e.target.closest('.gsvc') && e.type === 'click') return;
+      var m = document.getElementById('gsvcMask');
+      if (m) m.classList.remove('show');
     }
 
     function openProduct(i) {
