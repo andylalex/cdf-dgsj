@@ -519,6 +519,72 @@ const PROTOTYPES_V03=[
       }
     ]
   },
+    {
+    "id": "v04-u9",
+    "group": "用户端 · CDF海南免税",
+    "name": "U9 商品详情页",
+    "device": "mobile",
+    "url": "v0.4/U9-商品详情页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-12",
+    "overview": {
+      "summary": "商品详情页：展示商品主图、价格、规格、促销与导购推荐，支持加入购物车/意向单与发起 IM 咨询。",
+      "path": "导购入口/品牌卡片 → 商品详情页",
+      "users": "门店导购、C端用户",
+      "permission": "功能权限：全员可见；数据权限：当前品牌商品与权益",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
+    {
+    "id": "v04-u10",
+    "group": "用户端 · CDF海南免税",
+    "name": "U10 品牌馆页",
+    "device": "mobile",
+    "url": "v0.4/U10-品牌馆页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-12",
+    "overview": {
+      "summary": "品牌馆页：集中展示品牌旗舰商品矩阵、品牌故事与会员权益，承接品牌导购承接与商品分发。",
+      "path": "导购入口/品牌卡片 → 品牌馆页",
+      "users": "门店导购、C端用户",
+      "permission": "功能权限：全员可见；数据权限：当前品牌商品与权益",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
+    {
+    "id": "v04-u11",
+    "group": "用户端 · CDF海南免税",
+    "name": "U11 搜索品牌页",
+    "device": "mobile",
+    "url": "v0.4/U11-搜索品牌页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-12",
+    "overview": {
+      "summary": "搜索品牌页：支持按关键词/分类检索品牌，承接无结果态与品牌结果列表，连接到品牌馆页。",
+      "path": "导购入口 → 搜索品牌页",
+      "users": "门店导购、C端用户",
+      "permission": "功能权限：全员可见；数据权限：当前品牌商品与权益",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
   {
     "id": "v04-g1",
     "group": "导购端 · 繁星APP",

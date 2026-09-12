@@ -85,6 +85,27 @@ window.NAV_DATA={
       "__imported": false
     },
     {
+    "id": "v04-u9",
+    "name": "U9 商品详情页",
+    "group": "用户端 · CDF海南免税",
+    "device": "mobile",
+    "__imported": false
+  },
+    {
+    "id": "v04-u10",
+    "name": "U10 品牌馆页",
+    "group": "用户端 · CDF海南免税",
+    "device": "mobile",
+    "__imported": false
+  },
+    {
+    "id": "v04-u11",
+    "name": "U11 搜索品牌页",
+    "group": "用户端 · CDF海南免税",
+    "device": "mobile",
+    "__imported": false
+  },
+  {
       "id": "v04-g1",
       "name": "G1 导购工作台",
       "group": "导购端 · 繁星APP",

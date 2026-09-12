@@ -173,7 +173,7 @@ function selectPrototype(id){
   document.querySelectorAll('.prd-tab').forEach(t=>t.classList.toggle('on',t.dataset.pane===state.tab));
   const isGuide=id==='__guide__';
   device.style.display=isGuide?'none':'flex';
-  $('guideView').classList.toggle('show',isGuide);
+  var gv=$('guideView'); if(gv)gv.classList.toggle('show',isGuide);
   /* —— 同步渲染：不依赖过渡动画回调，保证切页立即刷新右侧内容 / 目录 / 热点（tab 保持 state.tab 不变） —— */
   if(isGuide){
     renderGuide();
@@ -183,15 +183,15 @@ function selectPrototype(id){
     state._scrollContainer=null;
     if(p.kind==='image'){
       frame.style.display='none';
-      $('protoImg').style.display='block';
+      var pi=$('protoImg'); if(pi)pi.style.display='block';
       showImageSlide(0);
     }else{
-      $('protoImg').style.display='none';
-      $('slideBar').hidden=true;
+      var pi2=$('protoImg'); if(pi2)pi2.style.display='none';
+      var sb=$('slideBar'); if(sb)sb.hidden=true;
       if($('imgCaption'))$('imgCaption').hidden=true;
       frame.style.display='';
-      if(p.srcdoc){frame.srcdoc=p.srcdoc;$('frameUrl').textContent='prototype://'+p.id;}
-      else if(p.url){frame.src=p.url;$('frameUrl').textContent=p.url;}
+      if(p.srcdoc){frame.srcdoc=p.srcdoc;var fu=$('frameUrl');if(fu)fu.textContent='prototype://'+p.id;}
+      else if(p.url){frame.src=p.url;var fu2=$('frameUrl');if(fu2)fu2.textContent=p.url;}
     }
   }
   renderSidebar();renderPRD();renderHotspots();updateTopMeta();
@@ -792,18 +792,21 @@ stage.addEventListener('click',e=>{if(!e.target.closest('.hs'))closeHsPop();});
 /* ============================================================
    五、聚光灯走查（Tour）
    ============================================================ */
-$('tourStart').addEventListener('click',()=>{
+/* 走查按钮绑定：编辑版 / 无走查 UI 的视图缺失这些元素，判空避免整段脚本中断 */
+var tourStart=$('tourStart'), tourExit=$('tourExit'), tourPrev=$('tourPrev'),
+    tourNext=$('tourNext'), tourDone=$('tourDone'), tourFilter=$('tourFilter');
+if(tourStart)tourStart.addEventListener('click',()=>{
   const p=current();if(!p){showToast('请先在左侧选择一个原型');return;}
   state.tour=true;state.tourIdx=0;startTour();
 });
-$('tourExit').addEventListener('click',endTour);
-$('tourPrev').addEventListener('click',()=>moveTour(-1));
-$('tourNext').addEventListener('click',()=>moveTour(1));
-$('tourDone').addEventListener('click',endTour);
+if(tourExit)tourExit.addEventListener('click',endTour);
+if(tourPrev)tourPrev.addEventListener('click',()=>moveTour(-1));
+if(tourNext)tourNext.addEventListener('click',()=>moveTour(1));
+if(tourDone)tourDone.addEventListener('click',endTour);
 /* 走查范围过滤：全部 / 仅界面组件 */
-$('tourFilter').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+if(tourFilter)tourFilter.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
   const f=b.dataset.f;
-  $('tourFilter').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  tourFilter.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
   state.tourFilter=f;
   const p=current();if(!p)return;
   state.tourList=(f==='element')?p.hotspots.filter(h=>h.type==='element'):p.hotspots.slice();
@@ -868,6 +871,7 @@ $('shortcutModal').addEventListener('click',e=>{ if(e.target===$('shortcutModal'
 function startTour(){
   closeHsPop();
   const p=current();if(!p){endTour();return;}
+  if(!tourCard||!spotMask){ showToast('当前视图不支持走查模式'); return; }
   state.tourList=(state.tourFilter==='element')
     ? p.hotspots.filter(h=>h.type==='element')
     : p.hotspots.slice();
@@ -878,7 +882,9 @@ function startTour(){
   renderTourStep();
 }
 function endTour(){
-  state.tour=false;spotMask.classList.remove('on');tourCard.hidden=true;
+  state.tour=false;
+  if(spotMask)spotMask.classList.remove('on');
+  if(tourCard)tourCard.hidden=true;
   const tf=$('tourFilter');if(tf)tf.style.display='none';
   document.querySelectorAll('.hs-region.show').forEach(r=>r.classList.remove('show'));
 }
