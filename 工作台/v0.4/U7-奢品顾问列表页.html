@@ -326,18 +326,6 @@
       <div style="position:absolute;right:40px;top:-60px;width:120px;height:120px;border:1px solid rgba(212,180,140,.12);border-radius:50%" data-page-node-id="U7Ring3"></div>
 
       <div class="relative px-5 pt-2.5 pb-3" data-page-node-id="U7HeroInner">
-      <div class="mt-2.5 flex items-center justify-between gap-2" data-page-node-id="U7EntryRow">
-          <a href="U12-奢品顾问消息列表.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium relative shrink-0" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" aria-label="消息" data-page-node-id="U7MsgEntry">
-            <i class="fas fa-comment-dots text-[12px]" data-page-node-id="U7MsgIcon"></i>
-            消息
-            <span class="absolute -top-1.5 -right-1.5 min-w-[14px] h-3.5 px-1 rounded-full bg-brand text-white text-[10px] font-bold flex items-center justify-center border border-white" data-page-node-id="U7MsgDot">3</span>
-          </a>
-          <a href="U6-意向单页.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium relative shrink-0" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" aria-label="意向单" data-page-node-id="U7IntentEntry">
-            <i class="fas fa-clipboard-list text-[12px]" data-page-node-id="U7IntentIcon"></i>
-            我的意向单
-            <span id="intentBadge" class="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-1 rounded-full bg-brand text-white text-[10px] font-bold flex items-center justify-center border border-white" data-page-node-id="U7IntentBadge">2</span>
-          </a>
-        </div>
         <h2 class="mt-2.5 text-[20px] font-bold text-white leading-tight" data-page-node-id="U7HeroTitle">您的专属</h2>
         <p class="mt-0.5 text-[11px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证</p>
 
@@ -361,6 +349,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 消息 / 意向单 入口 -->
+    <div class="entry-bar" data-page-node-id="U7EntryBar">
+      <a href="U12-奢品顾问消息列表.html" class="entry-btn" aria-label="消息" data-page-node-id="U7MsgEntry">
+        <span class="entry-ic" style="background:rgba(224,46,36,.1);color:#E02E24" data-page-node-id="U7MsgIcWrap"><i class="fas fa-comment-dots" data-page-node-id="U7MsgIcon"></i></span>
+        <span class="entry-txt" data-page-node-id="U7MsgTxt">消息</span>
+        <span class="entry-dot" data-page-node-id="U7MsgDot">3</span>
+      </a>
+      <a href="U6-意向单页.html" class="entry-btn" aria-label="意向单" data-page-node-id="U7IntentEntry">
+        <span class="entry-ic" style="background:rgba(201,162,107,.14);color:#c9a26b" data-page-node-id="U7IntentIcWrap"><i class="fas fa-clipboard-list" data-page-node-id="U7IntentIcon"></i></span>
+        <span class="entry-txt" data-page-node-id="U7IntentTxt">我的意向单</span>
+        <span id="intentBadge" class="entry-dot" data-page-node-id="U7IntentBadge">2</span>
+      </a>
     </div>
 
     <!-- 内容区 -->
@@ -413,14 +415,22 @@
     .adv-card:active{transform:scale(.98)}
     .adv-cover{position:relative;width:100%;aspect-ratio:1/1;background:#f0ece3;overflow:hidden;border-radius:10px}
     .adv-cover img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-    .adv-cover .od{position:absolute;right:7px;bottom:7px;width:13px;height:13px;border-radius:50%;background:#4ade80;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
-    .adv-cover .od.off{background:#fbbf24}
-    .adv-cover .gc{position:absolute;left:7px;bottom:7px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
-    .adv-like-cover{position:absolute;right:7px;top:7px;display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.08);color:#8b7a5f;font-size:10px;font-weight:600;cursor:pointer;transition:background .18s,color .18s,border-color .18s;z-index:2}
+    .adv-like-cover{position:absolute;right:7px;bottom:7px;display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);color:#8b7a5f;font-size:10px;font-weight:600;cursor:pointer;transition:background .18s,color .18s,border-color .18s;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,.12)}
     .adv-like-cover i{font-size:9px}
     .adv-like-cover.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
     .adv-body{padding:8px 0 0}
-    .adv-row{display:flex;align-items:center;gap:4px;overflow:hidden}
+    .adv-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
+    .adv-left{display:flex;align-items:center;gap:4px;min-width:0;overflow:hidden}
+    .adv-right{display:flex;align-items:center;gap:7px;flex-shrink:0}
+    .adv-right .gc{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .adv-right .od{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 1.5px #fff,0 1px 2px rgba(0,0,0,.2);flex-shrink:0}
+    .adv-right .od.off{background:#fbbf24}
+    .entry-bar{display:flex;gap:12px;padding:16px 16px 0}
+    .entry-btn{flex:1;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-radius:14px;background:#fff;border:1px solid #f0eef0;box-shadow:0 1px 3px rgba(0,0,0,.04);position:relative;cursor:pointer;transition:background .18s;text-decoration:none}
+    .entry-btn:active{background:#fafafa}
+    .entry-ic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+    .entry-txt{font-size:14px;font-weight:600;color:#1f2937}
+    .entry-dot{position:absolute;top:9px;right:12px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
     .adv-nm{flex:0 1 auto;min-width:0;font-size:15px;font-weight:700;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .adv-sep{flex:0 0 auto;color:#d1d5db;font-size:13px}
     .adv-brand{flex:0 1 auto;min-width:0;font-size:13px;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -470,14 +480,18 @@
           '<div class="adv-cover">' +
             '<img src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
             '<button type="button" class="adv-like-cover' + (a.liked ? ' active' : '') + '" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞" data-page-node-id="U7Like' + idx + '"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
-            '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
-            '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
           '</div>' +
           '<div class="adv-body">' +
             '<div class="adv-row">' +
-              '<p class="adv-nm">' + esc(a.name) + '</p>' +
-              '<span class="adv-sep">|</span>' +
-              '<span class="adv-brand">' + esc(a.brand) + '</span>' +
+              '<div class="adv-left">' +
+                '<p class="adv-nm">' + esc(a.name) + '</p>' +
+                '<span class="adv-sep">|</span>' +
+                '<span class="adv-brand">' + esc(a.brand) + '</span>' +
+              '</div>' +
+              '<div class="adv-right">' +
+                '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
+                '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
+              '</div>' +
             '</div>' +
             '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
             '<div class="adv-tag-row"><span class="adv-tag">' + esc(a.tag || '') + '</span></div>' +
