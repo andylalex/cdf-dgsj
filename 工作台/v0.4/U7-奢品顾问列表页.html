@@ -408,34 +408,35 @@
     .chip.active{background:#1a140e;color:#f3e7cd;border-color:#1a140e;font-weight:600}
     .adv-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
     .adv-card:active{transform:scale(.98)}
-    /* 头像撑满卡片宽度 */
-    .adv-cover{position:relative;width:100%;aspect-ratio:4/3;background:#f0ece3;overflow:hidden}
-    .adv-cover img{width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block}
+    .adv-cover{position:relative;width:100%;aspect-ratio:4/3;background:#f0ece3;overflow:hidden;border-radius:0}
+    .adv-cover img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
     .adv-cover .od{position:absolute;right:7px;bottom:7px;width:13px;height:13px;border-radius:50%;background:#4ade80;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
     .adv-cover .od.off{background:#fbbf24}
     .adv-cover .gc{position:absolute;left:7px;bottom:7px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
+    .adv-like-cover{position:absolute;right:7px;top:7px;display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.08);color:#8b7a5f;font-size:10px;font-weight:600;cursor:pointer;transition:background .18s,color .18s,border-color .18s;z-index:2}
+    .adv-like-cover i{font-size:9px}
+    .adv-like-cover.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
     .adv-body{padding:9px 10px 11px}
-    .adv-row{display:flex;align-items:center;gap:6px}
-    .adv-nm{flex:1 1 auto;min-width:0;font-size:14px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .adv-desc{font-size:12px;line-height:1.5;color:#4e545c;margin-top:5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-    .adv-like{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;background:#f6f4ef;border:1px solid #ece6da;color:#8b7a5f;font-size:11px;font-weight:600;flex:0 0 auto;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
-    .adv-like i{font-size:10px}
-    .adv-like.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
-    .adv-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-    .adv-tag{display:inline-block;padding:2px 7px;border-radius:6px;background:#f8f4ec;color:#8a6f4d;font-size:10px;line-height:16px}
-    .adv-store{display:flex;align-items:center;gap:4px;margin-top:8px;font-size:10px;color:#9aa0a6}
+    .adv-row{display:flex;align-items:center;gap:4px;overflow:hidden}
+    .adv-nm{flex:0 1 auto;min-width:0;font-size:15px;font-weight:700;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .adv-sep{flex:0 0 auto;color:#d1d5db;font-size:13px}
+    .adv-brand{flex:0 1 auto;min-width:0;font-size:13px;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .adv-store{display:flex;align-items:center;gap:4px;margin-top:5px;font-size:11px;color:#9aa0a6}
+    .adv-tag-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+    .adv-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;background:#fff;border:1px solid #e5e7eb;color:#4b5563;font-size:11px;line-height:1.4}
+    .adv-quote{margin-top:6px;font-size:12px;line-height:1.5;color:#c9a26b;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   </style>
 
   <script data-page-node-id="U7Script">
     var ADVISORS = [
-      { name: '林小婷', desc: '待人真诚，优质服务', tags: ['待人以诚', '秒回消息'], brand: '迪奥', img: 'assets/generated/advisor1.png', online: true,  likes: 328, store: '三亚国际免税城' },
-      { name: '陈佳琪', desc: '耐心细致，专业推荐', tags: ['专业选品'], brand: '宝诗龙', img: 'assets/generated/advisor2.png', online: false, likes: 214, store: '三亚国际免税城' },
-      { name: '王子墨', desc: '眼光独到，品味在线', tags: ['潮流穿搭', '有问必答'], brand: '巴黎世家', img: 'assets/generated/advisor3.png', online: true,  likes: 356, store: '海口国际免税城' },
-      { name: '赵文博', desc: '响应迅速，售后无忧', tags: ['服务周到'], brand: '博柏利', img: 'assets/generated/advisor4.png', online: true,  likes: 402, store: '三亚国际免税城' },
-      { name: '苏晚晴', desc: '温柔亲切，细致贴心', tags: ['贴心服务'], brand: '巴黎世家', img: 'assets/generated/advisor5.png', online: false, likes: 168, store: '海口国际免税城' },
-      { name: '许静文', desc: '专业严谨，值得信赖', tags: ['专业选品', '值得信赖'], brand: '卡地亚', img: 'assets/generated/advisor6.png', online: true,  likes: 289, store: '三亚国际免税城' },
-      { name: '韩语嫣', desc: '热情主动，耐心解答', tags: ['热情周到'], brand: '宝诗龙', img: 'assets/generated/advisor7.png', online: true,  likes: 233, store: '三亚国际免税城' },
-      { name: '沈明轩', desc: '亲和有礼，响应及时', tags: ['亲和有礼'], brand: '浪凡', img: 'assets/generated/advisor8.png', online: false, likes: 147, store: '海口国际免税城' }
+      { name: '符光亮', tag: '人气导购', quote: '极致服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a1.jpg', online: true,  likes: 328, store: '海口国际免税城' },
+      { name: '张琪',   tag: '贴心顾问', quote: '真诚服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a2.png', online: false, likes: 214, store: '海口国际免税城' },
+      { name: '郑小曼', tag: '贴心顾问', quote: '用心倾听，积极相应，诚挚服务。', brand: '卡地亚', img: 'assets/generated/u7_a3.png', online: true,  likes: 356, store: '海口国际免税城' },
+      { name: '江莹莹', tag: '贴心顾问', quote: '真诚服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a4.png', online: true,  likes: 402, store: '海口国际免税城' },
+      { name: '苏晚晴', tag: '贴心服务', quote: '温柔亲切，细致贴心', brand: '巴黎世家', img: 'assets/generated/advisor5.png', online: false, likes: 168, store: '海口国际免税城' },
+      { name: '许静文', tag: '专业选品', quote: '专业严谨，值得信赖', brand: '卡地亚', img: 'assets/generated/advisor6.png', online: true,  likes: 289, store: '三亚国际免税城' },
+      { name: '韩语嫣', tag: '热情周到', quote: '热情主动，耐心解答', brand: '宝诗龙', img: 'assets/generated/advisor7.png', online: true,  likes: 233, store: '三亚国际免税城' },
+      { name: '沈明轩', tag: '亲和有礼', quote: '亲和有礼，响应及时', brand: '浪凡', img: 'assets/generated/advisor8.png', online: false, likes: 147, store: '海口国际免税城' }
     ];
     var BRANDS = ['全部品牌', '巴黎世家', '宝诗龙', '博柏利', '卡地亚', '迪奥', '浪凡'];
     var stateBrand = '全部品牌';
@@ -462,21 +463,22 @@
       document.getElementById('advisorCount').textContent = list.length;
       grid.innerHTML = list.map(function (a, i) {
         var idx = ADVISORS.indexOf(a);
-        var tags = (a.tags || []).map(function (t) { return '<span class="adv-tag">' + esc(t) + '</span>'; }).join('');
         return '<div class="adv-card" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
           '<div class="adv-cover">' +
             '<img src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
+            '<button type="button" class="adv-like-cover' + (a.liked ? ' active' : '') + '" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞" data-page-node-id="U7Like' + idx + '"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
             '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
             '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
           '</div>' +
           '<div class="adv-body">' +
             '<div class="adv-row">' +
               '<p class="adv-nm">' + esc(a.name) + '</p>' +
-              '<button type="button" class="adv-like" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
+              '<span class="adv-sep">|</span>' +
+              '<span class="adv-brand">' + esc(a.brand) + '</span>' +
             '</div>' +
-            '<p class="adv-desc">' + esc(a.desc) + '</p>' +
-            '<div class="adv-tags">' + tags + '</div>' +
             '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
+            '<div class="adv-tag-row"><span class="adv-tag">' + esc(a.tag || '') + '</span></div>' +
+            '<p class="adv-quote">' + esc(a.quote || '') + '</p>' +
           '</div>' +
         '</div>';
       }).join('');

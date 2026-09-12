@@ -14,7 +14,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .phone-frame>*{min-height:0}
 .hide-scrollbar::-webkit-scrollbar{display:none}
 .hide-scrollbar{scrollbar-width:none}
-.main{flex:1;min-height:0;overflow-y:auto;background:#fff;-webkit-overflow-scrolling:touch}
+.main{flex:1;min-height:0;overflow-y:auto;background:#fff;padding-bottom:14px;-webkit-overflow-scrolling:touch}
 
 /* 状态栏 / 导航 */
 .status-bar{padding:10px 20px 6px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;background:#fff;flex:0 0 auto}
@@ -49,8 +49,8 @@ background:
 .banner .cap .c2{font-size:13px;letter-spacing:3px;margin-top:8px;opacity:.95}
 .banner .cap .c3{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:3px 14px}
 /* 金牌奢品顾问（同 U9） */
-.guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
-.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec{background:transparent;border-radius:0;margin:0;padding:0}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 14px 7px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
@@ -64,18 +64,18 @@ background:
 .gcard .gav .gc{position:absolute;left:-4px;bottom:-4px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
 .gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1;margin-top:2px}
 .gcard .gs{font-size:11px;color:#8b9099;white-space:normal;line-height:1.25;max-width:100px;margin-top:1px}
-.gcard--all{justify-content:flex-start}
-.gcard--all .all-pill{width:100px;height:80px;border-radius:16px;background:linear-gradient(135deg,#c9a06d,#a87e4f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;white-space:nowrap;box-shadow:0 4px 12px rgba(168,126,79,.3)}
+.gcard--all .all-pill{width:100px;height:80px;border-radius:10px;background:#fff;border:1px solid var(--gold-line);color:#a87e4f;display:flex;align-items:center;justify-content:center;gap:4px;font-size:13px;font-weight:600;box-shadow:0 2px 6px rgba(168,126,79,.12)}
+.gcard--all .all-pill i{font-size:11px}
 .gcard--all .gn{font-size:12px;color:#a87e4f;font-weight:600}
 @keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.gwrap{background:#fff;padding:12px 10px 14px;flex:0 0 auto}
+.gwrap{background:#fff;margin:12px;border:1px solid var(--line);border-radius:16px;padding:14px 0 16px;box-shadow:0 2px 10px rgba(17,17,17,.04);flex:0 0 auto}
 .gwrap .guide-sec{margin:0}
 
 /* 活动区 */
-.hero{background:#fff;text-align:center;padding:26px 20px 30px;flex:0 0 auto}
+.hero{background:#fff;text-align:center;padding:26px 20px 30px;margin:12px;border:1px solid var(--line);border-radius:16px;box-shadow:0 2px 10px rgba(17,17,17,.04);flex:0 0 auto}
 .hero .h1{font-size:22px;font-weight:600;color:#1b1d21;letter-spacing:1px}
 .hero .h2{font-size:13px;color:#6b7280;margin-top:9px;letter-spacing:2px}
-.hero .go{display:inline-block;margin-top:16px;background:#111;color:#fff;font-size:14px;letter-spacing:4px;padding:10px 34px;border:0;border-radius:2px;cursor:pointer}
+.hero .go{display:inline-block;margin-top:16px;background:linear-gradient(92deg,#c9a06d,#a87e4f);color:#fff;font-size:14px;letter-spacing:2px;padding:11px 36px;border:0;border-radius:999px;cursor:pointer;box-shadow:0 4px 12px rgba(168,126,79,.25)}
 .dots{display:flex;gap:6px;justify-content:center;margin-top:20px}
 .dots i{width:6px;height:6px;border-radius:50%;background:#dcdfe4;display:block;cursor:pointer}
 .dots i.on{background:#1b1d21}
@@ -93,7 +93,7 @@ background:
 .gsvc .hd{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:#1b1d21;padding-right:40px}
 .gsvc .hd i{color:var(--gold)}
 .gsvc .sub{font-size:12px;color:#9aa1ab;margin-top:6px}
-.gsvc .it{display:flex;gap:12px;margin-top:14px;background:#fdf9f4;border:1px solid #f3e9dc;border-radius:12px;padding:13px}
+.gsvc .it{display:flex;gap:12px;margin-top:14px;background:#fff;border:1px solid #f3e9dc;border-radius:12px;padding:13px}
 .gsvc .it .ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px}
 .gsvc .it .t{font-size:14.5px;font-weight:600;color:#1b1d21}
 .gsvc .it .d{font-size:12.5px;color:#6b7280;line-height:1.55;margin-top:4px}
@@ -110,7 +110,7 @@ background:
 
   <div class="nav-bar" data-page-node-id="IVx25Jd81s0tMVszSLDJSG">
     <button aria-label="返回" onclick="goBack()" data-page-node-id="zmGr3d4BYNWWpgwjCq1hAB"><i class="fas fa-chevron-left" style="font-size:19px" data-page-node-id="umzB2t3DSEmEwyOutIQe1A"></i></button>
-    <div class="ttl" data-page-node-id="A3AsXrrF8gACWo6r9ucrzi">中免海南</div>
+    <div class="ttl" data-page-node-id="A3AsXrrF8gACWo6r9ucrzi">cdf中免</div>
     <div class="mini-caps" data-page-node-id="cRJEDxYGD4Gnf0Whrqm7Sb"><i class="fas fa-ellipsis-h" data-page-node-id="BcansY547hLM9eisH560Tp"></i><span class="sep" data-page-node-id="66thQ3ymaAj2ZaIZKrVqTR"></span><i class="far fa-circle" style="font-size:13px" data-page-node-id="oKmZNRCwVL6MFSy3nAiHAe"></i></div>
   </div>
 
@@ -135,7 +135,7 @@ background:
       <span class="bl" style="right:12%;top:40%;width:46px;height:46px;opacity:.6" data-page-node-id="0mm2NZkqR7LoU4F9onmF6o"></span>
       <span class="bl" style="left:38%;bottom:26%;width:130px;height:130px;opacity:.25" data-page-node-id="oStOkJyITa4dnyz2qGIKbQ"></span>
       <div class="cap" data-page-node-id="wvYgYMvv61ZGjDpRXwwGzs">
-        <div class="c1" data-page-node-id="LXgAbDGnlJLcRBmJNclTiU">CHANCL</div>
+        <div class="c1" data-page-node-id="LXgAbDGnlJLcRBmJNclTiU">CHANEL</div>
         <div class="c2" data-page-node-id="hKI87UF5v1FopL8FiGaF8j">邂逅系列 全新香氛</div>
         <div class="c3" data-page-node-id="HxvQbkdoLrvZDlz3ua88Zi">门店专柜同步有售</div>
       </div>
@@ -146,7 +146,7 @@ background:
   <!-- 奢品顾问服务条 -->
       <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
         <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
-          <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
+          <i class="fas fa-gem" style="color:var(--gold);font-size:15px" data-page-node-id="hGemU10"></i><span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
         </div>
         <div class="glist">
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
@@ -174,7 +174,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="GN3kJd8pQmT5nB2sLcWy1f">王芳</div>
-            <div class="gs">琼海博鳌免税店</div>
+            <div class="gs">海口国际免税城</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-c">
             <div class="gav" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-av">
@@ -183,7 +183,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="GN4kJd8pQmT5nB2sLcWy1h">陈晨</div>
-            <div class="gs">海口日月广场免税店</div>
+            <div class="gs">三亚国际免税城</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
             <div class="gav">
@@ -210,7 +210,7 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn">孙琳</div>
-            <div class="gs">琼海博鳌免税店</div>
+            <div class="gs">海口国际免税城</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
             <div class="gav">
@@ -219,10 +219,10 @@ background:
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn">周涛</div>
-            <div class="gs">海口日月广场免税店</div>
+            <div class="gs">三亚国际免税城</div>
           </div>
           <div class="gcard gcard--all" onclick="location.href='U7-奢品顾问列表页.html'">
-            <div class="all-pill">全部顾问</div>
+            <div class="all-pill">全部顾问 <i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
       </div>
