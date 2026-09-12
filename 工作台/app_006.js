@@ -59,7 +59,11 @@ function edLoadAll(){
     var d=JSON.parse(s);
     if(!d||!Array.isArray(d.protos))return false;
     if(d.imported){ window.ED.imported=Object.assign({}, window.ED.imported||{}, d.imported); }
-    if(Array.isArray(d.cats)&&d.cats.length) window.ED.cats=d.cats.slice();
+    if(Array.isArray(d.cats)&&d.cats.length){
+      var _nd=(window.NAV_DATA&&Array.isArray(window.NAV_DATA.cats))?window.NAV_DATA.cats:[];
+      /* 本地分类数量与数据文件一致时以数据文件（权威真源）为准，避免陈旧分组名残留出幽灵分组 */
+      window.ED.cats=(_nd.length&&_nd.length===d.cats.length)?_nd.slice():d.cats.slice();
+    }
     var byId={}; PROTOTYPES.forEach(function(p){ byId[p.id]=p; });
     var reordered=[];
     d.protos.forEach(function(sp){
@@ -78,7 +82,11 @@ function edLoadAll(){
       if(sp.overview)p.overview=sp.overview;
       if(sp.flow)p.flow=p.flow;
       if(sp.note!==undefined)p.note=sp.note;
-      if(sp.group!==undefined)p.group=sp.group;   /* 恢复分类改动（file:// 下的最终兜底） */
+      if(sp.group!==undefined){   /* 恢复分类改动（file:// 下的最终兜底）；旧分类名已不在真源时忽略，避免幽灵分组 */
+        var _cats=(window.ED&&Array.isArray(window.ED.cats))?window.ED.cats:[];
+        var _gk=(typeof groupKey==='function')?groupKey(sp.group):sp.group;
+        if(!_cats.length||_cats.some(function(c){return groupKey(c)===_gk;}))p.group=sp.group;
+      }
       reordered.push(p);
     });
     /* 按 localStorage 保存的顺序重排（仅当数量一致，避免误删原型） */

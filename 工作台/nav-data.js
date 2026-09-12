@@ -1,15 +1,15 @@
 /* 左导航数据文件（由编辑版自动生成；本地 serve.py 写回 工作台/nav-data.js，index 与编辑版均读取此文件） */
 window.NAV_DATA = {
   "cats": [
-    "用户端 · CDF海南免税",
+    "用户端 · CDF中免海南",
     "导购端 · 繁星APP",
     "管理后台 · PC"
   ],
   "protos": [
     {
       "id": "p_mtobsr6sh8yw",
-      "name": "导购入口",
-      "group": "用户端 · CDF海南免税",
+      "name": "顾问入口",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "kind": "pages",
       "pages": [
@@ -23,8 +23,8 @@ window.NAV_DATA = {
     },
     {
       "id": "p_dgmsglist01",
-      "name": "导购消息列表",
-      "group": "用户端 · CDF海南免税",
+      "name": "顾问消息列表",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "kind": "image",
       "__imported": true,
@@ -33,35 +33,35 @@ window.NAV_DATA = {
     {
       "id": "v04-u7",
       "name": "U7 奢品顾问列表页",
-      "group": "用户端 · CDF海南免税",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
     {
       "id": "v04-u1",
       "name": "U1 用户端 IM 会话页",
-      "group": "用户端 · CDF海南免税",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
     {
       "id": "v04-u6",
       "name": "U6 意向单页",
-      "group": "用户端 · CDF海南免税",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
     {
       "id": "v04-u4",
       "name": "U4 结算中心页",
-      "group": "用户端 · CDF海南免税",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
     {
       "id": "v04-u5",
       "name": "U5 行程核验页",
-      "group": "用户端 · CDF海南免税",
+      "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },

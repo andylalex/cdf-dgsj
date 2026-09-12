@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="x3f2qGTEYgcAyEZ66FSCyn">
+<head data-page-node-id="hErJgNb20amyW08aKBf50K">
+<meta charset="UTF-8" data-page-node-id="8DvQZApTEeANFNkJkgAVbI">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" data-page-node-id="H22XABXdxTZSZYAYmmLdM7">
+<title>奢品顾问消息列表</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="wwGEoSTeODU3GLTewO6XCQ">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  :root{--red:#fa5151}
+  body{background:#e9e9e9;font-family:"Noto Sans SC","PingFang SC","Helvetica Neue",Arial,sans-serif}
+  .phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;display:flex;flex-direction:column;position:relative;
+    background:linear-gradient(180deg,#f7ccca 0%,#fadfdd 20%,#ffffff 46%)}
+  .phone-frame>*{min-height:0}
+
+  /* 状态栏 */
+  .status-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 18px 4px;color:#111}
+  .status-bar .t{font-size:15px;font-weight:600;letter-spacing:.2px}
+  .status-bar .r{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
+  .status-bar .r i{font-size:12px}
+
+  /* 顶部导航 */
+  .navbar{flex:0 0 auto;display:flex;align-items:center;height:48px;padding:0 12px;position:relative}
+  .navbar .back{border:0;background:transparent;padding:6px 8px;margin-left:-4px;color:#1a1a1a;cursor:pointer;display:flex;align-items:center}
+  .navbar .back i{font-size:18px}
+  .navbar .title{position:absolute;left:50%;transform:translateX(-50%);font-size:17px;font-weight:600;color:#1a1a1a;white-space:nowrap}
+  .navbar .capsule{margin-left:auto;width:88px;height:32px;border-radius:16px;background:rgba(30,30,30,.82);display:flex;align-items:center;color:#fff}
+  .navbar .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .navbar .capsule .sep{width:1px;height:18px;background:rgba(255,255,255,.35)}
+
+  /* 消息列表 */
+  .list{flex:1;min-height:0;overflow-y:auto;padding:14px 12px 20px}
+  .msg{display:flex;align-items:center;gap:11px;background:#fff;border-radius:10px;padding:12px;margin-bottom:9px;cursor:pointer;
+       box-shadow:0 1px 2px rgba(180,120,115,.06);transition:transform .14s}
+  .msg:active{transform:scale(.985)}
+  .msg .av{flex:0 0 auto;width:46px;height:46px;border-radius:50%;object-fit:cover;background:#f3e3e1}
+  .msg .mid{flex:1 1 auto;min-width:0}
+  .msg .name{font-size:15px;font-weight:600;color:#1a1a1a;line-height:1.3}
+  .msg .prev{margin-top:4px;font-size:13px;color:#9b9b9b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .msg .right{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+  .msg .time{font-size:12px;color:#9b9b9b}
+  .msg .dot{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--red);color:#fff;font-size:11px;line-height:18px;text-align:center;font-weight:500}
+</style>
+</head>
+<body data-page-node-id="ethHlFMYej5tfkaP0GoiQH">
+<div class="phone-frame" data-page-node-id="cyN56jb4SpeCRAwvfCGtoK">
+
+  <!-- 状态栏 -->
+  <div class="status-bar" data-page-node-id="X8YmzGLfX0qul3Ty8pPIxl">
+    <span class="t" data-page-node-id="BUhjiiSLeFSOjKdTkdH9qs">9:41</span>
+    <span class="r" data-page-node-id="PtM3Yhok1sAHrjV2IGGIGl"><i class="fas fa-signal" data-page-node-id="BVQl3nPQeZzogAN9RCAccm"></i><i class="fas fa-wifi" data-page-node-id="crm61gyLysyhcPHwaAk9QQ"></i><i class="fas fa-battery-three-quarters" style="font-size:14px" data-page-node-id="Usmx0zv5WFVEURe1FowXZQ"></i></span>
+  </div>
+
+  <!-- 顶部导航 -->
+  <div class="navbar" data-page-node-id="eCejXF0VzyB85UguubM3zt">
+    <button class="back" aria-label="返回" onclick="goBack()" data-page-node-id="KTrVCvrcmjNjeHH7sPVG7q"><i class="fas fa-chevron-left" data-page-node-id="KcyHDQvAKzmTriLzCJYTyD"></i></button>
+    <div class="title" data-page-node-id="g7LZF9H8D5jk9RElW6UZdb">奢品顾问消息列表(3)</div>
+    <div class="capsule" data-page-node-id="1BA2KHqlU4NZZVdHSHJxze">
+      <span class="half" data-page-node-id="YEhEArVGdBuCQSmHSCaGm9"><i class="fas fa-ellipsis-h" data-page-node-id="DPUbQOYLXE5mIOlC7ypGPy"></i></span>
+      <span class="sep" data-page-node-id="oTPP56qfiQV49KUMHWp9hW"></span>
+      <span class="half" data-page-node-id="jgHcTLlPT0EoLPH4piD0A7"><i class="fas fa-dot-circle" data-page-node-id="2EN93xriBMScg3d7MDW4wv"></i></span>
+    </div>
+  </div>
+
+  <!-- 消息列表 -->
+  <div class="list" data-page-node-id="JNaarOSxWhmBR2WrARuQs5">
+    <div class="msg" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="sScjbVB7oFmm3uZcS1Q5ZI">
+      <img class="av" src="assets/generated/advisor1.png" alt="导购-张三" onerror="this.onerror=null;this.src='assets/avatars/zhang.svg'" data-page-node-id="qPnR768qrzQlmfvioMQUDM">
+      <div class="mid" data-page-node-id="ZjHyQBi2fGSh2HWLCmqXbb">
+        <div class="name" data-page-node-id="nu8OFJH0oemfAXgcJn6AYg">导购-张三</div>
+        <div class="prev" data-page-node-id="wcIn1mEW1hDtNG5ihPNTW8">快来领取你的专属新人礼...</div>
+      </div>
+      <div class="right" data-page-node-id="fROOuBlpymGqvDfV5uxg3y">
+        <span class="time" data-page-node-id="4Ld5QlTQmHfvbGCExna9Ha">10:20</span>
+        <span class="dot" data-page-node-id="4za5ujMaLGatIw7JBAUOEc">1</span>
+      </div>
+    </div>
+
+    <div class="msg" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="CZTBrXHq012poLRSiDvjmg">
+      <img class="av" src="assets/generated/advisor2.png" alt="导购-李现" onerror="this.onerror=null;this.src='assets/avatars/li.svg'" data-page-node-id="dNiCTPeNtDAiyD7XxBPrVE">
+      <div class="mid" data-page-node-id="z7zBOANTqEWBLRMPwRjujQ">
+        <div class="name" data-page-node-id="dMHJTnd8dNgr2OTZl8b2ZY">导购-李现</div>
+        <div class="prev" data-page-node-id="CmbGXRWKLOUiP25BewCvnL">快来领取你的专属新人礼...</div>
+      </div>
+      <div class="right" data-page-node-id="3VQhyQEivljNCf4NfEp4Hw">
+        <span class="time" data-page-node-id="x8cNUYKRUdeJMAt70HeEn1">09:29</span>
+        <span class="dot" data-page-node-id="4x5LvgDMbGxijQDrtBJv7P">1</span>
+      </div>
+    </div>
+
+    <div class="msg" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="Ckj8crSpgA0uXgD7lJ6ACp">
+      <img class="av" src="assets/generated/advisor3.png" alt="导购-张可" onerror="this.onerror=null;this.src='assets/avatars/zhang.svg'" data-page-node-id="Pqu6FE6TaPAM6iyktBDymA">
+      <div class="mid" data-page-node-id="FGDDrH8A7WiviDhRvuVPMx">
+        <div class="name" data-page-node-id="o1hB67AsVXc7TQclwCaS8q">导购-张可</div>
+        <div class="prev" data-page-node-id="zKDISyVP48DhAGuuHkvohH">快来领取你的专属新人礼...</div>
+      </div>
+      <div class="right" data-page-node-id="Zvqr9htoMkVYeQEbRUZ7iW">
+        <span class="time" data-page-node-id="esykc1OAzBtoyAu68OAvOk">03/01</span>
+        <span class="dot" data-page-node-id="NFqd8Ea6y8zuzdcgqnjt4F">1</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // 动态返回上一页：优先回退到来源页，无历史则回原型首页
+  function goBack() {
+    try {
+      var ref = document.referrer;
+      if (ref && new URL(ref).origin === location.origin) { location.href = ref; return; }
+    } catch (e) {}
+    if (history.length > 1) { history.back(); return; }
+    location.href = 'index.html';
+  }
+</script>
+</body>
+</html>

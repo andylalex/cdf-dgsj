@@ -8,32 +8,32 @@ const V04={
   "U1": {
     "url": "v0.4/U1-用户端IM会话页.html",
     "device": "mobile",
-    "group": "用户端 · CDF海南免税"
+    "group": "用户端 · CDF中免海南"
   },
   "U6": {
     "url": "v0.4/U6-意向单页.html",
     "device": "mobile",
-    "group": "用户端 · CDF海南免税"
+    "group": "用户端 · CDF中免海南"
   },
   "U7": {
     "url": "v0.4/U7-奢品顾问列表页.html",
     "device": "mobile",
-    "group": "用户端 · CDF海南免税"
+    "group": "用户端 · CDF中免海南"
   },
   "U8": {
     "url": "v0.4/U8-品牌主页.html",
     "device": "mobile",
-    "group": "用户端 · CDF海南免税"
+    "group": "用户端 · CDF中免海南"
   },
   "U4": {
     "url": "v0.4/U4-结算中心页.html",
     "device": "mobile",
-    "group": "用户端 · CDF海南免税"
+    "group": "用户端 · CDF中免海南"
   },
   "U5": {
     "url": "v0.4/U5-行程核验页.html",
     "device": "mobile",
-    "group": "用户端 · CDF海南免税"
+    "group": "用户端 · CDF中免海南"
   },
   "G1": {
     "url": "v0.4/G1-工作台.html",
@@ -75,8 +75,8 @@ const V04={
 const PROTOTYPES_V03=[
   {
     "id": "p_mtobsr6sh8yw",
-    "group": "用户端 · CDF海南免税",
-    "name": "导购入口",
+    "group": "用户端 · CDF中免海南",
+    "name": "顾问入口",
     "device": "mobile",
     "kind": "pages",
     "pages": [
@@ -91,8 +91,8 @@ const PROTOTYPES_V03=[
     "owner": "产品 · 梁伟业",
     "updated": "2026-09-12",
     "overview": {
-      "summary": "导购入口：聚合品牌馆页、品牌主页、商品详情页、搜品牌页的二级入口，在手机壳内切换四个真实页面。",
-      "path": "导购端 / 用户端 → 导购入口",
+      "summary": "顾问入口：聚合品牌馆页、品牌主页、商品详情页、搜品牌页的二级入口，在手机壳内切换四个真实页面。",
+      "path": "导购端 / 用户端 → 顾问入口",
       "users": "门店导购、C端用户",
       "permission": "功能权限：全员可见",
       "ports": "中免海南 APP、微信小程序、支付宝小程序、H5"
@@ -103,7 +103,7 @@ const PROTOTYPES_V03=[
   },
   {
     "id": "v04-u7",
-    "group": "用户端 · CDF海南免税",
+    "group": "用户端 · CDF中免海南",
     "name": "U7 奢品顾问列表页",
     "device": "mobile",
     "url": "v0.4/U7-奢品顾问列表页.html",
@@ -125,7 +125,7 @@ const PROTOTYPES_V03=[
   },
   {
     "id": "v04-u1",
-    "group": "用户端 · CDF海南免税",
+    "group": "用户端 · CDF中免海南",
     "name": "U1 用户端 IM 会话页",
     "device": "mobile",
     "url": "v0.4/U1-用户端IM会话页.html",
@@ -136,7 +136,7 @@ const PROTOTYPES_V03=[
     "updated": "2026-09-06",
     "overview": {
       "summary": "用户在IM里发优惠券",
-      "path": "导购入口 → 导购消息对话页",
+      "path": "顾问入口 → 顾问消息对话页",
       "users": "C端用户",
       "permission": "功能权限：所有商城用户均有功能权限数据权限：不涉及",
       "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
@@ -202,7 +202,7 @@ const PROTOTYPES_V03=[
   },
   {
     "id": "v04-u6",
-    "group": "用户端 · CDF海南免税",
+    "group": "用户端 · CDF中免海南",
     "name": "U6 意向单页",
     "device": "mobile",
     "url": "v0.4/U6-意向单页.html",
@@ -271,7 +271,7 @@ const PROTOTYPES_V03=[
   },
   {
     "id": "v04-u4",
-    "group": "用户端 · CDF海南免税",
+    "group": "用户端 · CDF中免海南",
     "name": "U4 结算中心页",
     "device": "mobile",
     "url": "v0.4/U4-结算中心页.html",
@@ -416,7 +416,7 @@ const PROTOTYPES_V03=[
   },
   {
     "id": "v04-u5",
-    "group": "用户端 · CDF海南免税",
+    "group": "用户端 · CDF中免海南",
     "name": "U5 行程核验页",
     "device": "mobile",
     "url": "v0.4/U5-行程核验页.html",
