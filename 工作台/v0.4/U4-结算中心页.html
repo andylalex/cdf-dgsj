@@ -296,8 +296,25 @@
     <!-- 内容区 -->
     <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-3 pb-24" data-page-node-id="U4Content">
 
-      <!-- 行程核验入口（与 U6 意向单页同一套样式） -->
-      <div id="tripCard" class="bg-white rounded-2xl p-3 shadow-sm" data-page-node-id="U4Verify"></div>
+      <!-- 行程核验入口（与 U6 意向单页同一套样式 · 静态数据） -->
+      <div id="tripCard" class="bg-white rounded-2xl p-3 shadow-sm" data-page-node-id="U4Verify">
+        <div class="flex items-start gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-coral-50 text-coral-500 flex items-center justify-center shrink-0"><i class="fas fa-plane-departure text-[14px]"></i></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-[13px] font-semibold text-gray-800">行程信息</p>
+              <a href="U5-行程核验页.html?from=U4" class="text-gray-400 text-[15px] shrink-0"><i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="mt-1 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
+              <div class="flex items-center gap-1.5 min-w-0"><span class="text-gray-400 shrink-0">姓名</span><span class="text-gray-700 font-medium truncate">张女士</span></div>
+              <div class="flex items-center gap-1.5 min-w-0"><span class="text-gray-400 shrink-0">身份证</span><span class="text-gray-700 font-medium truncate">460100**********0023</span></div>
+              <div class="flex items-center gap-1.5 min-w-0"><span class="text-gray-400 shrink-0">航班</span><span class="text-gray-700 font-medium truncate">HU7301</span></div>
+              <div class="flex items-center gap-1.5 min-w-0"><span class="text-gray-400 shrink-0">时间</span><span class="text-gray-700 font-medium truncate">2026-09-10 14:30</span></div>
+              <div class="flex items-center gap-1.5 min-w-0"><span class="text-gray-400 shrink-0">手机号</span><span class="text-gray-700 font-medium truncate">138****6688</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- 提货方式 -->
       <div class="bg-white rounded-2xl p-4 shadow-sm" data-page-node-id="U4Pickup">
@@ -429,7 +446,7 @@
 
       <!-- 同意条款 -->
       <div class="bg-white rounded-2xl p-4 shadow-sm flex items-start gap-2.5" data-page-node-id="U4Agree">
-        <input type="checkbox" id="agreeCheck" class="item-check w-5 h-5 rounded shrink-0 mt-0.5" checked onchange="updatePayState()">
+        <input type="checkbox" id="agreeCheck" class="item-check w-5 h-5 rounded shrink-0 mt-0.5" checked>
         <p class="text-[11px] text-gray-500 leading-relaxed">已阅读并同意《关于海南离岛旅客免税购物政策的公告》和《用户购买须知》，商城所售商品部分不支持7天无理由退货，请您确认。</p>
       </div>
 
@@ -441,7 +458,7 @@
         <p class="text-[12px] text-gray-500" data-page-node-id="U4FooterTotalLabel">应付合计</p>
         <p id="footerTotal" class="text-[20px] font-bold text-coral-600 leading-none mt-0.5" data-page-node-id="U4FooterTotalVal">¥1,674.00</p>
       </div>
-      <button id="payBtn" onclick="payOrder()" class="bg-gray-300 text-white px-6 py-3 rounded-full text-[15px] font-semibold cursor-not-allowed" data-page-node-id="U4FooterBtn" style="background: linear-gradient(135deg, rgb(255, 138, 117), rgb(255, 107, 82), rgb(230, 78, 57)); color: rgb(255, 255, 255); cursor: pointer; box-shadow: rgba(255, 107, 82, 0.28) 0px 8px 20px;">立即支付</button>
+      <button id="payBtn" onclick="payOrder()" class="text-white px-6 py-3 rounded-full text-[15px] font-semibold active:scale-95" data-page-node-id="U4FooterBtn" style="background: linear-gradient(135deg, rgb(255, 138, 117), rgb(255, 107, 82), rgb(230, 78, 57)); box-shadow: rgba(255, 107, 82, 0.28) 0px 8px 20px;">立即支付</button>
     </div>
 
   </div>
@@ -486,10 +503,6 @@
       try { return JSON.parse(localStorage.getItem('pendingOrderForUser')) || { items: [], total: 0 }; } catch(e) { return { items: [], total: 0 }; }
     }
 
-    function getVerifyInfo() {
-      try { return JSON.parse(localStorage.getItem('tripVerifyInfo')) || null; } catch(e) { return null; }
-    }
-
     function render() {
       const order = getOrder();
       const list = document.getElementById('itemsList');
@@ -527,89 +540,12 @@
       document.getElementById('summaryTaxDiscount').textContent = '-' + formatMoney(taxDiscount);
       document.getElementById('summaryTotal').textContent = formatMoney(total);
       document.getElementById('footerTotal').textContent = formatMoney(total);
-      updateVerifyState();
     }
 
-    function maskId(s) {
-      s = s || '';
-      if (s.length <= 8) return s;
-      return s.slice(0, 4) + '**********' + s.slice(-4);
-    }
-
-    function maskPhone(s) {
-      s = (s || '').replace(/\s/g, '');
-      if (s.length < 11) return s || '-';
-      return s.slice(0, 3) + '****' + s.slice(-4);
-    }
-
-    // 单个字段单元（标签 + 值，紧凑排列）
-    function tripCell(label, value) {
-      return '<div class="flex items-center gap-1.5 min-w-0">' +
-        '<span class="text-gray-400 shrink-0">' + label + '</span>' +
-        '<span class="text-gray-700 font-medium truncate">' + value + '</span>' +
-      '</div>';
-    }
-
-    // 行程核验卡片：默认即展示行程信息（无核验记录时用示例行程填充），
-    // 行程核验卡片：默认即展示行程信息（无核验记录时用示例行程填充），右上角箭头可跳转 U5 行程核验页进行核验/修改。
-    function renderTrip(from) {
-      var el = document.getElementById('tripCard');
-      if (!el) return;
-      var info = getVerifyInfo();
-      // 默认行程信息（原型演示数据），保证进入页面即展示行程内容
-      var d = (info && (info.name || info.flightNo || info.idcard)) ? info : {
-        name: '张女士', idcard: '460100**********0023', flightNo: 'HU7301', date: '2026-09-10 14:30', phone: '138****6688'
-      };
-      var icon = (info && info.passed) ? 'fa-circle-check' : 'fa-plane-departure';
-      var title = (info && info.passed) ? '行程已核验' : '行程信息';
-      var rows = tripCell('姓名', d.name || '-') +
-                 tripCell('身份证', maskId(d.idcard)) +
-                 tripCell('航班', d.flightNo || '-') +
-                 tripCell('时间', d.date || '-') +
-                 tripCell('手机号', maskPhone(d.phone));
-      el.innerHTML = '<div class="flex items-start gap-2.5">' +
-        '<div class="w-8 h-8 rounded-full bg-coral-50 text-coral-500 flex items-center justify-center shrink-0"><i class="fas ' + icon + ' text-[14px]"></i></div>' +
-        '<div class="flex-1 min-w-0">' +
-          '<div class="flex items-center justify-between gap-2">' +
-            '<p class="text-[13px] font-semibold text-gray-800">' + title + '</p>' +
-            '<a href="U5-行程核验页.html?from=' + from + '" class="text-gray-400 text-[15px] shrink-0"><i class="fas fa-chevron-right"></i></a>' +
-          '</div>' +
-          '<div class="mt-1 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">' + rows + '</div>' +
-        '</div>' +
-      '</div>';
-    }
-
-    function updateVerifyState() {
-      renderTrip('U4');
-      updatePayState();
-    }
-
-    function updatePayState() {
-      const info = getVerifyInfo();
-      const payBtn = document.getElementById('payBtn');
-      const agree = document.getElementById('agreeCheck');
-      const verified = !!(info && info.passed);
-      const agreed = agree ? agree.checked : false;
-      if (verified && agreed) {
-        payBtn.style.background = 'linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39)';
-        payBtn.style.color = '#fff';
-        payBtn.style.cursor = 'pointer';
-        payBtn.style.boxShadow = '0 8px 20px rgba(255,107,82,.28)';
-        payBtn.textContent = '立即支付';
-      } else {
-        payBtn.style.background = '#d1d5db';
-        payBtn.style.color = '#fff';
-        payBtn.style.cursor = 'not-allowed';
-        payBtn.style.boxShadow = 'none';
-        payBtn.textContent = verified ? '请先勾选同意条款' : '请先完成行程核验';
-      }
-    }
+    // 底栏按钮静态化：始终显示「立即支付」且可点击（样式由 HTML 静态定义）
+    function updatePayState() {}
 
     function payOrder() {
-      const info = getVerifyInfo();
-      const agree = document.getElementById('agreeCheck');
-      if (!info || !info.passed) return;
-      if (!agree || !agree.checked) return;
       document.getElementById('paySuccessModal').classList.remove('hidden');
     }
 

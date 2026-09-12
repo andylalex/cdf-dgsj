@@ -50,12 +50,10 @@ background:
 .banner .cap .c3{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:3px 14px}
 
 /* 奢品顾问悬浮入口 */
-.advisor-fab{position:absolute;right:14px;bottom:22px;z-index:25;display:flex;align-items:center;gap:8px;border:0;background:transparent;padding:0;cursor:pointer}
+.advisor-fab{position:absolute;right:14px;bottom:22px;z-index:25;display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:transparent;padding:0;cursor:pointer}
 .advisor-fab__bubble{background:#fff;color:#a87e4f;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.12);border:1px solid #f0e3d2;white-space:nowrap}
 .advisor-fab__av{position:relative;flex:0 0 auto;line-height:0}
-.advisor-fab__avatar{width:54px;height:54px;border-radius:50%;object-fit:cover;display:block;border:2px solid #fff;box-shadow:0 8px 20px rgba(168,126,79,.45)}
-.advisor-fab__dot{position:absolute;right:-1px;bottom:-1px;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #fff}
-.advisor-fab:active .advisor-fab__av{transform:scale(.94)}
+.advisor-fab__avatar{width:54px;height:54px;border-radius:50%;object-fit:cover;display:block;border:2px solid #fff;box-shadow:0 8px 20px rgba(168,126,79,.45)}.advisor-fab:active .advisor-fab__av{transform:scale(.94)}
 
 /* 活动区 */
 .hero{background:#fff;text-align:center;padding:26px 20px 30px;flex:0 0 auto}
@@ -128,11 +126,10 @@ background:
 
   <!-- 奢品顾问悬浮入口 -->
   <button class="advisor-fab" onclick="location.href='U7-奢品顾问列表页.html'" aria-label="咨询奢品顾问">
-    <span class="advisor-fab__bubble">咨询奢品顾问</span>
     <span class="advisor-fab__av">
       <img class="advisor-fab__avatar" src="assets/generated/advisor1.png" alt="奢品顾问">
-      <span class="advisor-fab__dot"></span>
     </span>
+    <span class="advisor-fab__bubble">咨询奢品顾问</span>
   </button>
 
 </div>
