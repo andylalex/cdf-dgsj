@@ -326,7 +326,7 @@
       <div style="position:absolute;right:40px;top:-60px;width:120px;height:120px;border:1px solid rgba(212,180,140,.12);border-radius:50%" data-page-node-id="U7Ring3"></div>
 
       <div class="relative px-5 pt-2.5 pb-3" data-page-node-id="U7HeroInner">
-        <h2 class="mt-2.5 text-[20px] font-bold text-white leading-tight" data-page-node-id="U7HeroTitle">您的专属</h2>
+        <h2 class="mt-2.5 text-[20px] font-bold text-white leading-tight" data-page-node-id="U7HeroTitle">您的私享奢品顾问</h2>
         <p class="mt-0.5 text-[11px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证</p>
 
         <div class="mt-2.5 pt-2.5 flex items-stretch" style="border-top:1px solid rgba(212,180,140,.18)" data-page-node-id="U7HeroFeats">
@@ -355,7 +355,7 @@
     <div class="entry-bar" data-page-node-id="U7EntryBar">
       <a href="U12-奢品顾问消息列表.html" class="entry-btn" aria-label="消息" data-page-node-id="U7MsgEntry">
         <span class="entry-ic" style="background:rgba(224,46,36,.1);color:#E02E24" data-page-node-id="U7MsgIcWrap"><i class="fas fa-comment-dots" data-page-node-id="U7MsgIcon"></i></span>
-        <span class="entry-txt" data-page-node-id="U7MsgTxt">消息</span>
+        <span class="entry-txt" data-page-node-id="U7MsgTxt">顾问消息</span>
         <span class="entry-dot" data-page-node-id="U7MsgDot">3</span>
       </a>
       <a href="U6-意向单页.html" class="entry-btn" aria-label="意向单" data-page-node-id="U7IntentEntry">
@@ -422,9 +422,10 @@
     .adv-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
     .adv-left{display:flex;align-items:center;gap:4px;min-width:0;overflow:hidden}
     .adv-right{display:flex;align-items:center;gap:7px;flex-shrink:0}
+    .gc-wrap{position:relative;display:inline-flex;flex-shrink:0}
     .adv-right .gc{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .adv-right .od{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 1.5px #fff,0 1px 2px rgba(0,0,0,.2);flex-shrink:0}
-    .adv-right .od.off{background:#fbbf24}
+    .gc-wrap .od{position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 1.5px #fff,0 1px 2px rgba(0,0,0,.2);flex-shrink:0}
+    .gc-wrap .od.off{background:#fbbf24}
     .entry-bar{display:flex;gap:12px;padding:16px 16px 0}
     .entry-btn{flex:1;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-radius:14px;background:#fff;border:1px solid #f0eef0;box-shadow:0 1px 3px rgba(0,0,0,.04);position:relative;cursor:pointer;transition:background .18s;text-decoration:none}
     .entry-btn:active{background:#fafafa}
@@ -489,8 +490,10 @@
                 '<span class="adv-brand">' + esc(a.brand) + '</span>' +
               '</div>' +
               '<div class="adv-right">' +
-                '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
-                '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
+                '<span class="gc-wrap">' +
+                  '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
+                  '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
+                '</span>' +
               '</div>' +
             '</div>' +
             '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
