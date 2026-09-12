@@ -657,7 +657,8 @@ function edBindSelect(ov){
     }).join('')+'</div>';
   }
   function onMove(e){
-    hidePick();
+    /* 层级弹窗展开期间：冻结选区，移动鼠标不再隐藏弹窗 / 重置候选，便于从容点选层级 */
+    if(pickEl.style.display==='block')return;
     /* 图片原型：无 DOM 可探测，直接以光标为中心画一块区域 */
     if(current().kind==='image'){
       var ir=getImgRect();
@@ -678,7 +679,11 @@ function edBindSelect(ov){
     hover={cands:cands,pick:0};
     updateSelBox(0);
   }
-  function onLeave(){ selEl.style.display='none'; hover=null; hidePick(); }
+  function onLeave(){
+    /* 鼠标移出选区时，若层级弹窗正展开则保持不变，避免点选层级途中弹窗消失 */
+    if(pickEl.style.display==='block')return;
+    selEl.style.display='none'; hover=null; hidePick();
+  }
   function finishRect(){
     var rect, rid=window.ED.reloId||null;
     if(current().kind==='image'){
@@ -713,6 +718,7 @@ function edBindSelect(ov){
       }
       return;
     }
+    if(e.target&&e.target.closest&&e.target.closest('.box-pick'))return;   /* 点在弹窗空白/提示区：忽略，不结束选区 */
     if(!hover)return;
     if(hover.cands.length>1 && pickEl.style.display!=='block'){
       e.stopPropagation();
