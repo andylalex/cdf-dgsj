@@ -356,8 +356,14 @@
     };
 
     var SOURCES = {
-      store: { title: '海口国际免税城', sub: '', group: '门店' }
+      store: { title: '海口国际免税城', sub: '', group: '门店' },
+      '三亚国际免税城': { title: '三亚国际免税城', sub: '', group: '门店' }
     };
+    function storeOf(it) {
+      if (it.guide && it.guide.store) return it.guide.store;
+      if (SOURCES[it.source]) return SOURCES[it.source].title;
+      return '门店商品';
+    }
 
     function formatMoney(num) {
       return (num || 0).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -410,7 +416,7 @@
     }
 
     function renderGroup(source, items) {
-      var meta = SOURCES[source];
+      var meta = SOURCES[source] || { title: source, sub: '', group: '门店' };
       var checkedCount = items.filter(function (i) { return i.checked; }).length;
       var allChecked = checkedCount === items.length;
       var rows = items.map(function (it, gi) {
@@ -465,12 +471,14 @@
         empty.classList.remove('hidden');
       } else {
         empty.classList.add('hidden');
-        var groups = ['store'].filter(function (s) {
-          return list.items.some(function (it) { return it.source === s; });
+        var groups = [];
+        list.items.forEach(function (it) {
+          var key = storeOf(it);
+          if (groups.indexOf(key) === -1) groups.push(key);
         });
-        var parts = groups.map(function (s) {
-          var items = list.items.filter(function (it) { return it.source === s; });
-          return renderGroup(s, items);
+        var parts = groups.map(function (key) {
+          var items = list.items.filter(function (it) { return storeOf(it) === key; });
+          return renderGroup(key, items);
         });
         wrap.innerHTML = parts.join('');
       }
@@ -493,18 +501,19 @@
       var it = list.items[idx];
       if (!it) return;
       if (checked) {
-        list.items.forEach(function (o) { if (o.source !== it.source) o.checked = false; });
+        var key = storeOf(it);
+        list.items.forEach(function (o) { if (storeOf(o) !== key) o.checked = false; });
       }
       it.checked = checked;
       saveList(list); renderList();
     }
 
-    function toggleGroup(source, checked) {
+    function toggleGroup(storeName, checked) {
       var list = getList();
       if (checked) {
-        list.items.forEach(function (o) { o.checked = (o.source === source); });
+        list.items.forEach(function (o) { o.checked = (storeOf(o) === storeName); });
       } else {
-        list.items.forEach(function (o) { if (o.source === source) o.checked = false; });
+        list.items.forEach(function (o) { if (storeOf(o) === storeName) o.checked = false; });
       }
       saveList(list); renderList();
     }
