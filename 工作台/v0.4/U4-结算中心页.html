@@ -383,7 +383,7 @@
           <p class="text-[15px] font-semibold text-gray-800" data-page-node-id="U4ItemsTitle">商品清单</p>
           <span id="itemsCount" class="text-[12px] text-gray-400" data-page-node-id="U4ItemsCount">共 2 件</span>
         </div>
-        <div id="itemsList" class="space-y-3" data-page-node-id="U4ItemsList"><div class="flex gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0"><img src="assets/generated/product1.png" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0"><div class="flex-1 min-w-0"><p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5">编号 C016080</p><div class="flex items-center justify-between mt-2"><span class="text-[14px] font-bold text-coral-600">¥394.00</span><span class="text-[13px] text-gray-500">x1</span></div></div></div><div class="flex gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0"><img src="assets/generated/product2.png" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0"><div class="flex-1 min-w-0"><p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">迪奥真我香水 EDT</p><p class="text-[11px] text-gray-400 mt-0.5">编号 C017002</p><div class="flex items-center justify-between mt-2"><span class="text-[14px] font-bold text-coral-600">¥1,280.00</span><span class="text-[13px] text-gray-500">x1</span></div></div></div></div>
+                <div id="itemsList" class="space-y-4" data-page-node-id="U4ItemsList"></div>
       </div>
 
       <!-- 发票 / 优惠券 / 会员积分（无名称卡片） -->
@@ -499,8 +499,25 @@
       return '¥' + num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
+    const DEMO_ORDER = {
+      items: [
+        { img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', sku: 'C016080', price: 394, qty: 1, store: '三亚国际免税城', guide: { name: '江莹莹' } },
+        { img: 'assets/generated/product2.png', name: '迪奥真我香水 EDT', sku: 'C017002', price: 1280, qty: 1, store: '海口国际免税城', guide: { name: '符光亮' } }
+      ]
+    };
+
     function getOrder() {
-      try { return JSON.parse(localStorage.getItem('pendingOrderForUser')) || { items: [], total: 0 }; } catch(e) { return { items: [], total: 0 }; }
+      try {
+        const saved = JSON.parse(localStorage.getItem('pendingOrderForUser'));
+        if (saved && saved.items && saved.items.length) return saved;
+      } catch(e) {}
+      return DEMO_ORDER;
+    }
+
+    function storeOf(it) {
+      if (it.store) return it.store;
+      if (it.guide && it.guide.store) return it.guide.store;
+      return '海口国际免税城';
     }
 
     function render() {
@@ -509,23 +526,46 @@
       list.innerHTML = '';
       let count = 0;
       let subtotal = 0;
+      // 按门店分组渲染商品
+      const groups = {};
+      const storeKeys = [];
       order.items.forEach(it => {
-        count += it.qty;
-        subtotal += it.price * it.qty;
-        const row = document.createElement('div');
-        row.className = 'flex gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0';
-        row.innerHTML =
-          '<img src="' + it.img + '" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0">' +
-          '<div class="flex-1 min-w-0">' +
-            '<p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">' + it.name + '</p>' +
-            '<p class="text-[11px] text-gray-400 mt-0.5">编号 ' + it.sku + '</p>' +
-            '<p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>顾问 · ' + (it.guide ? it.guide.name : '顾问') + '</p>' +
-            '<div class="flex items-center justify-between mt-2">' +
-              '<span class="text-[14px] font-bold text-coral-600">' + formatMoney(it.price) + '</span>' +
-              '<span class="text-[13px] text-gray-500">x' + it.qty + '</span>' +
+        const key = storeOf(it);
+        if (!groups[key]) { groups[key] = []; storeKeys.push(key); }
+        groups[key].push(it);
+      });
+      storeKeys.forEach(store => {
+        const items = groups[store];
+        let gCount = 0, gSub = 0, rows = '';
+        items.forEach(it => {
+          count += it.qty;
+          subtotal += it.price * it.qty;
+          gCount += it.qty;
+          gSub += it.price * it.qty;
+          rows +=
+            '<div class="flex gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">' +
+              '<img src="' + it.img + '" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0">' +
+              '<div class="flex-1 min-w-0">' +
+                '<p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">' + it.name + '</p>' +
+                '<p class="text-[11px] text-gray-400 mt-0.5">编号 ' + it.sku + '</p>' +
+                '<p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>顾问 · ' + (it.guide ? it.guide.name : '顾问') + '</p>' +
+                '<div class="flex items-center justify-between mt-2">' +
+                  '<span class="text-[14px] font-bold text-coral-600">' + formatMoney(it.price) + '</span>' +
+                  '<span class="text-[13px] text-gray-500">x' + it.qty + '</span>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+        });
+        const card = document.createElement('div');
+        card.className = 'rounded-xl bg-gray-50 border border-gray-100 p-3';
+        card.innerHTML =
+          '<div class="flex items-center justify-between mb-2">' +
+            '<div class="flex items-center gap-1.5 text-[13px] font-semibold text-gray-800">' +
+              '<i class="fas fa-store text-coral-500 text-[12px]"></i>' + store +
             '</div>' +
-          '</div>';
-        list.appendChild(row);
+            '<span class="text-[11px] text-gray-400">' + gCount + ' 件 · ' + formatMoney(gSub) + '</span>' +
+          '</div>' + rows;
+        list.appendChild(card);
       });
       document.getElementById('itemsCount').textContent = '共 ' + count + ' 件';
       const discount = 500;        // 优惠券已使用

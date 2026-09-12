@@ -638,23 +638,27 @@ function edBindSelect(ov){
     hover.pick=idx; hover.el=c.el; hover.br=c.br;
   }
   function hidePick(){ pickEl.style.display='none'; pickEl.innerHTML=''; }
+  function escHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function showPick(){
     if(!hover||hover.cands.length<=1){ hidePick(); return; }
     var offX=frame.offsetLeft||0, offY=frame.offsetTop||0;
     var first=hover.cands[0];
     pickEl.style.display='block';
-    /* 弹窗默认出现在元素上方，若上方空间不足则放到下方 */
-    var top=first.br.top+offY-28-Math.min(hover.cands.length*24+30,180);
-    if(top<8)top=first.br.bottom+offY+8;
+    pickEl.style.maxHeight='240px';
+    pickEl.innerHTML='<div class="box-pick-hint">选择元素层级<span class="box-pick-keys"><kbd>↑</kbd><kbd>↓</kbd><kbd>Esc</kbd></span></div><div class="box-pick-list">'+hover.cands.map(function(c,i){
+      var indent='', depthClass='depth-'+Math.min(c.depth,5);
+      for(var k=0;k<c.depth;k++)indent+='<span class="depth-indent"></span>';
+      return '<div class="box-pick-item '+depthClass+(i===hover.pick?' on':'')+'" data-idx="'+i+'" title="'+escHtml(c.label)+'">'+indent+'<span class="pick-no">'+(i+1)+'</span><span class="pick-tag">'+escHtml(c.tag)+'</span><span class="pick-path">'+escHtml(c.label)+'</span></div>';
+    }).join('')+'</div>';
+    /* 渲染后按实测高度定位：优先贴元素上方，空间不足则翻到下方，并做上下边界收敛 */
+    var ph=pickEl.offsetHeight||180;
+    var top=first.br.top+offY-ph-10;
+    if(top<8) top=first.br.bottom+offY+10;
+    var maxTop=device.clientHeight-8-ph;
+    if(maxTop>8 && top>maxTop) top=maxTop;
+    if(top<8) top=8;
     pickEl.style.left=Math.max(8,first.br.left+offX)+'px';
     pickEl.style.top=top+'px';
-    pickEl.style.maxHeight='180px';
-    pickEl.innerHTML='<div class="box-pick-hint">点击选择层级（滚轮/方向键切换）</div><div class="box-pick-list">'+hover.cands.map(function(c,i){
-      var indent='', depthClass='depth-'+Math.min(c.depth,5);
-      for(var k=0;k<c.depth;k++)indent+='<span class="depth-indent">—</span>';
-      var tag='<span class="pick-tag">'+c.tag+'</span>';
-      return '<div class="box-pick-item '+depthClass+(i===hover.pick?' on':'')+'" data-idx="'+i+'" title="'+c.label.replace(/"/g,'&quot;')+'">'+indent+tag+(i+1)+'. '+c.label+'</div>';
-    }).join('')+'</div>';
   }
   function onMove(e){
     /* 层级弹窗展开期间：冻结选区，移动鼠标不再隐藏弹窗 / 重置候选，便于从容点选层级 */
