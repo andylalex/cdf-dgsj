@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>我的</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:#e9e9e9;font-family:"Noto Sans SC","PingFang SC","Helvetica Neue",Arial,sans-serif}
+  .phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;display:flex;flex-direction:column;position:relative;
+    background:linear-gradient(180deg,#c3d8f2 0%,#d0dff5 10%,#e2ecf9 26%,#eef3fa 44%,#f3f6fb 60%,#f5f7fb 100%)}
+  .phone-frame>*{min-height:0}
+
+  /* 顶部胶囊 */
+  .capsule{position:absolute;top:14px;right:14px;z-index:30;width:88px;height:32px;border-radius:16px;background:rgba(255,255,255,.92);
+    border:1px solid rgba(30,30,30,.85);display:flex;align-items:center;color:#1a1a1a}
+  .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .capsule .sep{width:1px;height:16px;background:rgba(30,30,30,.35)}
+
+  /* 星星装饰 */
+  .star{position:absolute;color:#fff;pointer-events:none;z-index:1;text-shadow:0 0 6px rgba(255,255,255,.9)}
+  .star.s1{left:5%;top:3%;font-size:14px;opacity:.95}
+  .star.s2{left:12%;top:9%;font-size:9px;opacity:.7}
+  .star.s3{left:38%;top:5%;font-size:10px;opacity:.8}
+  .star.s4{left:30%;top:13%;font-size:8px;opacity:.6}
+  .star.s5{left:55%;top:2%;font-size:12px;opacity:.85}
+  .star.s6{left:47%;top:10%;font-size:8px;opacity:.6}
+  .star.s7{left:68%;top:7%;font-size:9px;opacity:.65}
+  .star.s8{left:22%;top:22%;font-size:9px;opacity:.5}
+  .star.s9{left:88%;top:14%;font-size:10px;opacity:.6}
+
+  /* 滚动区 */
+  .scroll{flex:1;min-height:0;overflow-y:auto;position:relative;z-index:2;padding:56px 14px 16px}
+
+  /* 用户信息行 */
+  .user-row{display:flex;align-items:center;gap:12px}
+  .avatar{width:70px;height:70px;border-radius:50%;border:3px solid #fff;overflow:hidden;flex:0 0 auto;background:#fde9b8;box-shadow:0 2px 8px rgba(90,120,170,.25)}
+  .avatar svg{display:block;width:100%;height:100%}
+  .user-mid{flex:1 1 auto;min-width:0}
+  .user-name{font-size:25px;font-weight:800;color:#14161a;letter-spacing:.5px}
+  .cert{display:inline-flex;align-items:center;gap:4px;margin-top:6px;padding:2.5px 9px;border-radius:999px;background:#f0453a;color:#fff;font-size:11px;font-weight:600}
+  .cert i{font-size:10px}
+  .user-ops{display:flex;gap:20px;padding-right:4px}
+  .uop{display:flex;flex-direction:column;align-items:center;gap:4px;color:#23262b;cursor:pointer}
+  .uop i{font-size:21px;font-weight:500}
+  .uop span{font-size:12px;font-weight:500}
+
+  /* 会员卡 */
+  .vip-card{position:relative;margin-top:14px;border-radius:20px;background:rgba(255,255,255,.55);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 4px 16px rgba(120,150,195,.18);
+    border:1px solid rgba(255,255,255,.75);overflow:hidden}
+  .vip-deco{position:absolute;right:2px;top:-6px;width:150px;height:150px;pointer-events:none}
+  .vip-deco .vchar{position:absolute;right:12px;top:6px;font-size:104px;line-height:1;font-weight:900;font-style:italic;font-family:Georgia,"Times New Roman",serif;
+    background:linear-gradient(155deg,#f2f8ff 0%,#c2d4ea 34%,#8fa9cb 58%,#d9e7f8 82%,#aebfd8 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;transform:rotate(14deg);
+    filter:drop-shadow(0 3px 4px rgba(110,140,185,.35))}
+  .vip-deco .vring{position:absolute;right:6px;top:52px;width:126px;height:44px;border:3px solid rgba(255,255,255,.8);border-radius:50%;transform:rotate(-20deg);
+    box-shadow:0 2px 5px rgba(120,150,195,.25)}
+  .vip-deco .vglow{position:absolute;right:0;top:0;width:150px;height:150px;background:radial-gradient(circle at 70% 35%,rgba(255,255,255,.85),rgba(255,255,255,0) 62%)}
+  .vip-inner{position:relative;z-index:2;padding:12px 14px 12px}
+  .vip-benefit{font-size:11.5px;color:#5f6b80;font-weight:500}
+  .vip-main{display:flex;align-items:center;gap:7px;margin-top:9px}
+  .vip-main .lv-ic{font-size:20px;color:#8fb0da}
+  .vip-main .lv{font-size:22px;font-weight:800;color:#1c2430}
+  .vip-center{display:inline-flex;align-items:center;gap:3px;margin-left:6px;padding:3px 10px;border-radius:999px;border:1px solid rgba(70,90,120,.45);color:#39434f;font-size:11.5px;font-weight:600}
+  .vip-center i{font-size:9px}
+  .vip-tip{margin-top:9px;font-size:12.5px;color:#39434f;font-weight:500}
+  .vip-bar{margin-top:9px;height:6px;border-radius:3px;background:rgba(150,165,190,.35);width:56%;overflow:hidden}
+  .vip-bar .fill{width:55%;height:100%;border-radius:3px;background:linear-gradient(90deg,#9db4d4,#6f89ac)}
+  .vip-stats{position:relative;z-index:2;display:flex;gap:8px;padding:0 12px 12px}
+  .vstat{flex:1;background:rgba(255,255,255,.72);border-radius:12px;padding:10px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:0 1px 4px rgba(130,155,195,.14)}
+  .vstat .v{font-size:17px;font-weight:700;color:#39434f;display:flex;align-items:center;justify-content:center;height:22px}
+  .vstat .v i{font-size:17px;color:#5a6a82}
+  .vstat .k{font-size:11px;color:#6b7686}
+
+  /* 通用白卡 */
+  .card{margin-top:12px;background:#fff;border-radius:16px;padding:16px 12px;box-shadow:0 2px 10px rgba(130,155,195,.10)}
+  .row2{display:flex;align-items:center}
+  .row2 .cell{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;color:#23262b;font-size:15px;font-weight:600;cursor:pointer}
+  .row2 .cell i{font-size:16px}
+  .row2 .vsep{width:1px;height:20px;background:#eceef2}
+
+  /* 图标宫格 */
+  .grid4{display:flex}
+  .gcell{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;color:#23262b;cursor:pointer}
+  .gcell i{font-size:23px;font-weight:500}
+  .gcell span{font-size:13px;font-weight:500}
+
+  /* 五宫格 + 全部 */
+  .grid5-wrap{display:flex;align-items:center}
+  .grid5{flex:1;display:flex}
+  .gall{width:56px;display:flex;flex-direction:column;align-items:center;gap:5px;color:#23262b;cursor:pointer;border-left:1px solid #f0f1f4;padding-left:6px}
+  .gall .vt{writing-mode:vertical-lr;letter-spacing:4px;font-size:14px;font-weight:700}
+  .gall i{font-size:17px;color:#3a3f47}
+
+  /* 贝壳卡 */
+  .shell-head{display:flex;align-items:center}
+  .shell-head .tt{font-size:17px;font-weight:800;color:#14161a;display:flex;align-items:center;gap:4px}
+  .shell-head .tt .num{font-size:15px}
+  .shell-head .tt i{font-size:11px;color:#8b919b}
+  .shell-head .promo{margin-left:auto;font-size:11px;font-weight:700;font-style:italic;color:#f0453a}
+  .sign-row{display:flex;align-items:flex-start;gap:2px;margin-top:12px}
+  .sday{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;padding-top:4px}
+  .sday .am{font-size:9px;font-weight:800;color:#e8a23c;background:rgba(255,214,130,.35);border-radius:6px;padding:0 4px;line-height:13px;position:absolute;top:-4px;z-index:2}
+  .sday svg{width:26px;height:26px;display:block;filter:drop-shadow(0 1px 2px rgba(200,150,40,.35))}
+  .sday .d{font-size:9.5px;color:#8b919b}
+  .sday.hb .am{display:none}
+  .sign-btn{flex:0 0 auto;align-self:center;margin-left:8px;padding:9px 12px;border-radius:999px;border:0;cursor:pointer;
+    background:linear-gradient(90deg,#ffa53d,#ff5f2e);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.5px;box-shadow:0 3px 8px rgba(255,110,50,.35)}
+
+  /* 活动三卡 */
+  .promo3{display:flex;gap:8px;margin-top:12px}
+  .p3{flex:1;border-radius:12px;padding:11px 6px 12px;text-align:center;font-size:13.5px;font-weight:800;cursor:pointer;position:relative;overflow:hidden}
+  .p3 .em{display:block;font-size:15px;margin-top:3px}
+  .p3.a1{background:linear-gradient(160deg,#e3def9,#cfd4f6);color:#3f55c4}
+  .p3.a2{background:linear-gradient(160deg,#fff3c2,#ffe29a);color:#c2671a}
+  .p3.a3{background:linear-gradient(160deg,#ffdde3,#ffc9d4);color:#e0304e}
+
+  /* 底部 Tab 栏 */
+  .tabbar{flex:0 0 auto;display:flex;background:#fff;border-top:1px solid #eef0f3;padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8b919b;cursor:pointer}
+  .tab i,.tab .cdf{font-size:21px;height:24px;display:flex;align-items:center}
+  .tab .cdf{font-weight:900;font-size:19px;letter-spacing:-.5px;font-family:Arial,sans-serif}
+  .tab span{font-size:11px}
+  .tab.on{color:#e02e24;font-weight:600}
+</style>
+</head>
+<body>
+<div class="phone-frame">
+
+  <!-- 胶囊 -->
+  <div class="capsule">
+    <span class="half"><i class="fas fa-ellipsis"></i></span>
+    <span class="sep"></span>
+    <span class="half"><i class="fas fa-minus" style="font-size:11px"></i></span>
+    <span class="sep"></span>
+    <span class="half"><i class="far fa-circle" style="font-size:12px"></i></span>
+  </div>
+
+  <!-- 星星装饰 -->
+  <span class="star s1">&#10022;</span><span class="star s2">&#10022;</span><span class="star s3">&#10022;</span>
+  <span class="star s4">&#10022;</span><span class="star s5">&#10022;</span><span class="star s6">&#10022;</span>
+  <span class="star s7">&#10022;</span><span class="star s8">&#10022;</span><span class="star s9">&#10022;</span>
+
+  <!-- 滚动区 -->
+  <div class="scroll">
+
+    <!-- 用户信息 -->
+    <div class="user-row">
+      <span class="avatar">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect width="80" height="80" fill="#cfe3f6"/>
+          <ellipse cx="40" cy="34" rx="17" ry="16" fill="#ffe3c2"/>
+          <path d="M22 32c0-11 8-18 18-18s18 7 18 18c0 3-1 5-1 5 0-6-4-8-7-9 1 2 1 4 1 5-3-4-9-6-14-5-6 1-9 5-9 9 0 0-1-2-1-5 0 0-3 2-3 5 0 0-2-2-2-5z" fill="#f5c33b"/>
+          <path d="M23 30c1-9 8-15 17-15s16 6 17 15c-3-5-9-8-17-8s-14 3-17 8z" fill="#ffd35e"/>
+          <circle cx="33" cy="36" r="2.2" fill="#2b2b2b"/>
+          <circle cx="47" cy="36" r="2.2" fill="#2b2b2b"/>
+          <path d="M35 44c3 2.6 7 2.6 10 0" stroke="#c97b4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M14 80c2-14 12-20 26-20s24 6 26 20z" fill="#3f4a8c"/>
+          <path d="M34 62h12l-6 9z" fill="#fff"/>
+          <circle cx="25" cy="38" r="2.6" fill="#ffc4b5" opacity=".8"/>
+          <circle cx="55" cy="38" r="2.6" fill="#ffc4b5" opacity=".8"/>
+        </svg>
+      </span>
+      <div class="user-mid">
+        <p class="user-name">3***3</p>
+        <span class="cert"><i class="fas fa-shield-halved"></i>未实名认证</span>
+      </div>
+      <div class="user-ops">
+        <span class="uop"><i class="fas fa-location-dot"></i><span>地址</span></span>
+        <span class="uop"><i class="fas fa-headset"></i><span>客服</span></span>
+        <span class="uop"><i class="fas fa-gear"></i><span>设置</span></span>
+      </div>
+    </div>
+
+    <!-- 会员卡 -->
+    <div class="vip-card">
+      <div class="vip-deco">
+        <span class="vglow"></span>
+        <span class="vchar">V</span>
+        <span class="vring"></span>
+      </div>
+      <div class="vip-inner">
+        <p class="vip-benefit">1倍积分 · 免费停车 · 生日礼券</p>
+        <div class="vip-main">
+          <i class="fas fa-shield-halved lv-ic"></i>
+          <span class="lv">普通会员</span>
+          <span class="vip-center">会员中心 <i class="fas fa-chevron-right"></i></span>
+        </div>
+        <p class="vip-tip">您再消费5000元即可升级至银卡会员</p>
+        <div class="vip-bar"><div class="fill"></div></div>
+      </div>
+      <div class="vip-stats">
+        <div class="vstat"><span class="v">0</span><span class="k">积分</span></div>
+        <div class="vstat"><span class="v"><i class="fas fa-ticket" style="transform:rotate(-40deg)"></i></span><span class="k">优惠券</span></div>
+        <div class="vstat"><span class="v">7项</span><span class="k">专属权益</span></div>
+        <div class="vstat"><span class="v">&#165;-</span><span class="k">剩余免税额</span></div>
+      </div>
+    </div>
+
+    <!-- 浏览记录 / 商品收藏 -->
+    <div class="card row2">
+      <span class="cell"><i class="far fa-clock"></i>浏览记录</span>
+      <span class="vsep"></span>
+      <span class="cell"><i class="far fa-heart"></i>商品收藏</span>
+    </div>
+
+    <!-- 订单 / 预约 / 领券 / 帮助 -->
+    <div class="card grid4">
+      <span class="gcell"><i class="fas fa-clipboard-list"></i><span>我的订单</span></span>
+      <span class="gcell"><i class="fas fa-calendar-days"></i><span>我的预约</span></span>
+      <span class="gcell"><i class="fas fa-ticket"></i><span>领券中心</span></span>
+      <span class="gcell"><i class="fas fa-box-archive"></i><span>帮助中心</span></span>
+    </div>
+
+    <!-- 五宫格 + 全部 -->
+    <div class="card grid5-wrap">
+      <div class="grid5">
+        <span class="gcell"><i class="fas fa-user-tie"></i><span>专属导购</span></span>
+        <span class="gcell"><i class="fas fa-calendar-days"></i><span>返岛自提</span></span>
+        <span class="gcell"><i class="fas fa-route"></i><span>修改行程</span></span>
+        <span class="gcell"><i class="fas fa-receipt"></i><span>开发票</span></span>
+        <span class="gcell"><i class="fas fa-building"></i><span>关于中免</span></span>
+      </div>
+      <span class="gall"><span class="vt">全部</span><i class="fas fa-circle-arrow-right"></i></span>
+    </div>
+
+    <!-- 我的贝壳 -->
+    <div class="card">
+      <div class="shell-head">
+        <span class="tt">我的贝壳 <span class="num">11</span> <i class="fas fa-chevron-right"></i></span>
+        <span class="promo">连签10天抽海蓝之谜鎏金晚霜</span>
+      </div>
+      <div class="sign-row">
+        <div class="sday"><span class="am">+1</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.5C6.8 3.5 3 8.6 3 13.6c0 2.6 1.8 5.4 4.4 5.4h9.2c2.6 0 4.4-2.8 4.4-5.4 0-5-3.8-10.1-9-10.1z" fill="#f2bd4e"/><g stroke="#d99a2b" stroke-width="1.1" stroke-linecap="round"><path d="M12 6v11"/><path d="M8 7.5 9.5 17"/><path d="M16 7.5 14.5 17"/><path d="M4.8 11 7 16.5"/><path d="M19.2 11 17 16.5"/></g><path d="M6 19c1.8 1.2 4 1.8 6 1.8s4.2-.6 6-1.8c-.8 1.6-2.2 2.5-3.4 2.5H9.4C8.2 21.5 6.8 20.6 6 19z" fill="#e8a83c"/></svg>
+          <span class="d">第1天</span></div>
+        <div class="sday"><span class="am">+1</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.5C6.8 3.5 3 8.6 3 13.6c0 2.6 1.8 5.4 4.4 5.4h9.2c2.6 0 4.4-2.8 4.4-5.4 0-5-3.8-10.1-9-10.1z" fill="#f2bd4e"/><g stroke="#d99a2b" stroke-width="1.1" stroke-linecap="round"><path d="M12 6v11"/><path d="M8 7.5 9.5 17"/><path d="M16 7.5 14.5 17"/><path d="M4.8 11 7 16.5"/><path d="M19.2 11 17 16.5"/></g><path d="M6 19c1.8 1.2 4 1.8 6 1.8s4.2-.6 6-1.8c-.8 1.6-2.2 2.5-3.4 2.5H9.4C8.2 21.5 6.8 20.6 6 19z" fill="#e8a83c"/></svg>
+          <span class="d">第2天</span></div>
+        <div class="sday"><span class="am">+5</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.5C6.8 3.5 3 8.6 3 13.6c0 2.6 1.8 5.4 4.4 5.4h9.2c2.6 0 4.4-2.8 4.4-5.4 0-5-3.8-10.1-9-10.1z" fill="#f2bd4e"/><g stroke="#d99a2b" stroke-width="1.1" stroke-linecap="round"><path d="M12 6v11"/><path d="M8 7.5 9.5 17"/><path d="M16 7.5 14.5 17"/><path d="M4.8 11 7 16.5"/><path d="M19.2 11 17 16.5"/></g><path d="M6 19c1.8 1.2 4 1.8 6 1.8s4.2-.6 6-1.8c-.8 1.6-2.2 2.5-3.4 2.5H9.4C8.2 21.5 6.8 20.6 6 19z" fill="#e8a83c"/></svg>
+          <span class="d">第3天</span></div>
+        <div class="sday"><span class="am">+1</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.5C6.8 3.5 3 8.6 3 13.6c0 2.6 1.8 5.4 4.4 5.4h9.2c2.6 0 4.4-2.8 4.4-5.4 0-5-3.8-10.1-9-10.1z" fill="#f2bd4e"/><g stroke="#d99a2b" stroke-width="1.1" stroke-linecap="round"><path d="M12 6v11"/><path d="M8 7.5 9.5 17"/><path d="M16 7.5 14.5 17"/><path d="M4.8 11 7 16.5"/><path d="M19.2 11 17 16.5"/></g><path d="M6 19c1.8 1.2 4 1.8 6 1.8s4.2-.6 6-1.8c-.8 1.6-2.2 2.5-3.4 2.5H9.4C8.2 21.5 6.8 20.6 6 19z" fill="#e8a83c"/></svg>
+          <span class="d">第4天</span></div>
+        <div class="sday"><span class="am">+1</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.5C6.8 3.5 3 8.6 3 13.6c0 2.6 1.8 5.4 4.4 5.4h9.2c2.6 0 4.4-2.8 4.4-5.4 0-5-3.8-10.1-9-10.1z" fill="#f2bd4e"/><g stroke="#d99a2b" stroke-width="1.1" stroke-linecap="round"><path d="M12 6v11"/><path d="M8 7.5 9.5 17"/><path d="M16 7.5 14.5 17"/><path d="M4.8 11 7 16.5"/><path d="M19.2 11 17 16.5"/></g><path d="M6 19c1.8 1.2 4 1.8 6 1.8s4.2-.6 6-1.8c-.8 1.6-2.2 2.5-3.4 2.5H9.4C8.2 21.5 6.8 20.6 6 19z" fill="#e8a83c"/></svg>
+          <span class="d">第5天</span></div>
+        <div class="sday"><span class="am">+5</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.5C6.8 3.5 3 8.6 3 13.6c0 2.6 1.8 5.4 4.4 5.4h9.2c2.6 0 4.4-2.8 4.4-5.4 0-5-3.8-10.1-9-10.1z" fill="#f2bd4e"/><g stroke="#d99a2b" stroke-width="1.1" stroke-linecap="round"><path d="M12 6v11"/><path d="M8 7.5 9.5 17"/><path d="M16 7.5 14.5 17"/><path d="M4.8 11 7 16.5"/><path d="M19.2 11 17 16.5"/></g><path d="M6 19c1.8 1.2 4 1.8 6 1.8s4.2-.6 6-1.8c-.8 1.6-2.2 2.5-3.4 2.5H9.4C8.2 21.5 6.8 20.6 6 19z" fill="#e8a83c"/></svg>
+          <span class="d">第6天</span></div>
+        <div class="sday hb">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4.5" y="3.5" width="15" height="17" rx="2.5" fill="#f0453a"/><path d="M4.5 7.5c2.4 1.9 5 2.8 7.5 2.8s5.1-.9 7.5-2.8" stroke="#ffd08a" stroke-width="1.5" fill="none"/><circle cx="12" cy="11" r="1.5" fill="#ffd08a"/><path d="M8 20.5h8l-1-3.5H9z" fill="#d43530"/></svg>
+          <span class="d">第7天</span></div>
+        <button type="button" class="sign-btn">签到攒贝壳</button>
+      </div>
+    </div>
+
+    <!-- 活动三卡 -->
+    <div class="promo3">
+      <span class="p3 a1">关注公众号<span class="em">&#128227;</span></span>
+      <span class="p3 a2">加我薅羊毛<span class="em">&#128017;</span></span>
+      <span class="p3 a3">开心抽奖<span class="em">&#127873;</span></span>
+    </div>
+
+  </div>
+
+  <!-- 底部 Tab 栏 -->
+  <div class="tabbar">
+    <span class="tab"><i class="fas fa-house"></i><span>商城</span></span>
+    <span class="tab"><i class="far fa-gem"></i><span>品牌</span></span>
+    <span class="tab"><span class="cdf">cdf</span><span>免税店</span></span>
+    <span class="tab"><i class="fas fa-bag-shopping"></i><span>购物袋</span></span>
+    <span class="tab on"><i class="fas fa-user"></i><span>我的</span></span>
+  </div>
+
+</div>
+</body>
+</html>
