@@ -333,6 +333,17 @@
         <img src="assets/generated/brand_banner.png" class="w-full h-full object-cover" alt="伊菲丹超级面膜" data-page-node-id="U8BannerImg">
       </div>
 
+      <!-- 品牌信息卡 -->
+      <div class="px-4 pt-5" data-page-node-id="U8BrandSec">
+        <div class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-sm" data-page-node-id="U8BrandCard">
+          <img src="assets/generated/brand_logo.png" class="w-16 h-16 rounded-xl object-cover bg-gray-100 shrink-0" alt="伊菲丹" data-page-node-id="U8BrandLogo">
+          <div class="flex-1 min-w-0" data-page-node-id="U8BrandInfo">
+            <h2 class="text-[18px] font-bold text-gray-900" data-page-node-id="U8BrandName">伊菲丹</h2>
+            <p class="text-[13px] text-gray-500 mt-0.5" data-page-node-id="U8BrandMeta">法国 <span class="mx-1">|</span> 在售 <span class="text-brand font-semibold">57</span> 个单品</p>
+          </div>
+        </div>
+      </div>
+
       <!-- 横向导购列表 -->
       <div class="px-4 pt-4" data-page-node-id="U8GuideSec">
         <div class="flex items-center justify-between" data-page-node-id="U8GuideHead">
@@ -343,20 +354,6 @@
           <a href="U7-奢品顾问列表页.html" class="text-[12px] text-gray-400 active:text-gray-600 transition" data-page-node-id="U8GuideAll">全部<i class="fas fa-chevron-right text-[9px] ml-0.5" data-page-node-id="U8GuideAllCaret"></i></a>
         </div>
         <div id="guideList" class="flex gap-3 mt-3 overflow-x-auto hide-scrollbar" style="-webkit-overflow-scrolling:touch" data-page-node-id="U8GuideList"></div>
-      </div>
-
-      <!-- 品牌信息卡 -->
-      <div class="px-4 pt-5" data-page-node-id="U8BrandSec">
-        <div class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-sm" data-page-node-id="U8BrandCard">
-          <img src="assets/generated/brand_logo.png" class="w-16 h-16 rounded-xl object-cover bg-gray-100 shrink-0" alt="伊菲丹" data-page-node-id="U8BrandLogo">
-          <div class="flex-1 min-w-0" data-page-node-id="U8BrandInfo">
-            <h2 class="text-[18px] font-bold text-gray-900" data-page-node-id="U8BrandName">伊菲丹</h2>
-            <p class="text-[13px] text-gray-500 mt-0.5" data-page-node-id="U8BrandMeta">法国 <span class="mx-1">|</span> 在售 <span class="text-brand font-semibold">57</span> 个单品</p>
-          </div>
-          <button class="shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[12px] font-medium border" style="border-color:#E02E24;color:#E02E24;background:#fff" data-page-node-id="U8FollowBtn">
-            <i class="fas fa-plus text-[10px]" data-page-node-id="U8FollowIcon"></i>关注
-          </button>
-        </div>
       </div>
 
       <!-- 搜索 -->
@@ -480,16 +477,6 @@
         document.querySelectorAll('.filter-item').forEach(function(b) { b.classList.remove('active'); });
         this.classList.add('active');
       });
-    });
-
-    document.querySelector('[data-page-node-id="U8FollowBtn"]').addEventListener('click', function() {
-      this.classList.toggle('following');
-      var isFollowing = this.classList.contains('following');
-      this.innerHTML = isFollowing ? '<i class="fas fa-check text-[10px]" data-page-node-id="U8FollowIcon"></i>已关注' : '<i class="fas fa-plus text-[10px]" data-page-node-id="U8FollowIcon"></i>关注';
-      this.style.background = isFollowing ? '#fff' : '#fff';
-      this.style.color = isFollowing ? '#666' : '#E02E24';
-      this.style.borderColor = isFollowing ? '#ddd' : '#E02E24';
-      showToast(isFollowing ? '已关注伊菲丹' : '已取消关注');
     });
 
     window.addEventListener('DOMContentLoaded', function () {
