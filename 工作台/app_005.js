@@ -55,6 +55,22 @@ function setProtoOrder(orderedIds){
   PROTOTYPES.length=0; head.concat(tail).forEach(p=>PROTOTYPES.push(p));
   edPersistNav();
 }
+function setProtoGroupOrder(pid, n){
+  const p=PROTOTYPES.find(x=>x.id===pid); if(!p)return;
+  const g=p.group||UNCAT;
+  const same=PROTOTYPES.filter(x=>(x.group||UNCAT)===g).map(x=>x.id);
+  let cur=same.indexOf(pid); if(cur<0)return;
+  same.splice(cur,1);
+  n=Math.max(1,Math.min(n,same.length+1));
+  same.splice(n-1,0,pid);
+  const qi=same.slice(); const out=[];
+  PROTOTYPES.forEach(x=>{
+    if((x.group||UNCAT)===g){ const nid=qi.shift(); const t=PROTOTYPES.find(y=>y&&y.id===nid); if(t)out.push(t); }
+    else out.push(x);
+  });
+  PROTOTYPES.length=0; out.forEach(x=>PROTOTYPES.push(x));
+  edPersistNav();
+}
 function setProtoGroup(pid,g){ const p=PROTOTYPES.find(x=>x.id===pid); if(p){p.group=g; p.updated=edToday(); edSaveAll(); edPersistNav();} }
 function getVisibleProtos(){
   const kw=state.keyword.trim().toLowerCase();
@@ -78,6 +94,7 @@ function switchProto(d){
   selectPrototype(next.id);
 }
 function renderSidebar(){
+  const sl=document.getElementById('sideList'); const st=sl?sl.scrollTop:0;
   const kw=state.keyword.trim().toLowerCase();
   let html='';
   groups().forEach((list,gname)=>{
@@ -88,22 +105,24 @@ function renderSidebar(){
     });
     if(!items.length)return;
     html+='<div class="side-group"><div class="side-group-name" data-group="'+gname+'">'+gname+'</div>';
-    items.forEach(p=>{
+    items.forEach((p,gi)=>{
       const manage=window.ED&&window.ED.manage;
       const active=p.id===state.currentId?'active':'';
       const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>';
       const catOpts=(window.ED&&Array.isArray(window.ED.cats)?window.ED.cats:[]).map(function(c){
         return '<option value="'+c.replace(/"/g,'&quot;')+'"'+(c===p.group?' selected':'')+'>'+c+'</option>';
       }).join('');
-      const orderVal=PROTOTYPES.indexOf(p)+1;
+      const orderVal=gi+1;
       html+='<div class="side-item '+active+(manage?' manage':'')+'" data-id="'+p.id+'" data-group="'+p.group+'" role="button" tabindex="0">'+
         '<span class="side-ico">'+icon+'</span>'+
         '<span class="side-meta"><div class="side-name">'+p.name.replace(/^[A-Za-z]+\d+\s+/,'')+'</div>'+
         (manage
           ? '<div class="si-edit">'+
               '<select class="si-cat" data-id="'+p.id+'" title="选择分类">'+catOpts+'</select>'+
-              '<label class="si-ord" title="顺序值：数字越小越靠前（全局顺序）"><span class="si-ord-t">排序</span><input type="number" class="si-order" data-id="'+p.id+'" value="'+orderVal+'" min="1" step="1"></label>'+
-              '<span class="si-acts"><button class="si-del" data-del="'+p.id+'" title="删除该原型"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/></svg></button></span>'+
+              '<div class="si-edit-row">'+
+                '<label class="si-ord" title="组内顺序：数字越小越靠前"><span class="si-ord-t">排序</span><input type="number" class="si-order" data-id="'+p.id+'" value="'+orderVal+'" min="1" step="1"></label>'+
+                '<span class="si-acts"><button class="si-del" data-del="'+p.id+'" title="删除该原型"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/></svg></button></span>'+
+              '</div>'+
             '</div>'
           : '')+
         '</span>'+
@@ -124,12 +143,11 @@ function renderSidebar(){
     const ord=el.querySelector('.si-order');
     if(ord)ord.addEventListener('change',function(){
       let n=parseInt(ord.value,10); if(isNaN(n)||n<1)n=1;
-      const ids=PROTOTYPES.map(p=>p.id); const cur=ids.indexOf(id);
-      if(cur<0)return; ids.splice(cur,1); n=Math.min(n,ids.length+1); ids.splice(n-1,0,id);
-      setProtoOrder(ids); renderSidebar(); showToast('已调整排序值');
+      setProtoGroupOrder(id,n); renderSidebar(); showToast('已调整组内顺序：第 '+n+' 位');
     });
   });
   if(window.ED&&window.ED.manage){ if(window.edBindSidebarDrag)window.edBindSidebarDrag(); } else { if(window.edUnbindSidebarDrag)window.edUnbindSidebarDrag(); }
+  if(sl)sl.scrollTop=st;
 }
 $('sideSearch').addEventListener('input',e=>{state.keyword=e.target.value;renderSidebar();});
 $('guideBtn').addEventListener('click',()=>selectPrototype('__guide__'));
@@ -189,8 +207,13 @@ function selectPrototype(id){
       var pi2=$('protoImg'); if(pi2)pi2.style.display='none';
       var sb=$('slideBar'); if(sb)sb.hidden=true;
       if($('imgCaption'))$('imgCaption').hidden=true;
+      var pt0=$('pageTabs'); if(pt0)pt0.hidden=true;
       frame.style.display='';
-      if(p.srcdoc){frame.srcdoc=p.srcdoc;var fu=$('frameUrl');if(fu)fu.textContent='prototype://'+p.id;}
+      if(p.kind==='pages'){
+        if(pt0)pt0.hidden=false;
+        renderPageTabs();
+        showPage(0);
+      }else if(p.srcdoc){frame.srcdoc=p.srcdoc;var fu=$('frameUrl');if(fu)fu.textContent='prototype://'+p.id;}
       else if(p.url){frame.src=p.url;var fu2=$('frameUrl');if(fu2)fu2.textContent=p.url;}
     }
   }
@@ -198,6 +221,33 @@ function selectPrototype(id){
   if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);
   // 切换原型过渡动画（playPageTransition）已关闭，仅保留标注位置重算
   setTimeout(scheduleUpdatePositions,200);
+}
+/* 多 HTML 页原型（kind:'pages'）：在手机壳内切换多个真实 HTML 页，切换器为页面名称标签（左上角） */
+function renderPageTabs(){
+  var p=current(); if(!p||p.kind!=='pages')return;
+  var pages=p.pages||[];
+  var pt=$('pageTabs'); if(!pt)return;
+  pt.innerHTML='';
+  pages.forEach(function(pg,i){
+    var b=document.createElement('button');
+    b.type='button';
+    b.className='page-tab'+(i===0?' on':'');
+    b.textContent=pg.name;
+    b.dataset.idx=i;
+    b.addEventListener('click',function(){ showPage(i); });
+    pt.appendChild(b);
+  });
+}
+function showPage(idx){
+  var p=current(); if(!p||p.kind!=='pages')return;
+  var pages=p.pages||[]; if(!pages.length)return;
+  if(idx<0||idx>=pages.length)idx=0;
+  frame.src=pages[idx].url;
+  var fu=$('frameUrl'); if(fu)fu.textContent=p.name+' · '+pages[idx].name;
+  var pt=$('pageTabs');
+  if(pt){ Array.prototype.forEach.call(pt.children,function(b,i){ b.classList.toggle('on',i===idx); }); }
+  try{ closeHsPop(); }catch(e){}
+  renderHotspots();renderPRD();
 }
   /* 原型内部链接跳转 → 同步切换左右栏（左目录 + 右 PRD）；外部链接（basename 不匹配任一原型）不切换 */
   function frameHrefToProto(raw){

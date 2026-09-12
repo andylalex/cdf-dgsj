@@ -397,11 +397,14 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .side-item.manage{cursor:default;-webkit-user-select:none;user-select:none}
 .side-item.manage .si-drag{display:flex}
 .side-item.manage .si-drag:active{cursor:grabbing}
-/* 管理模式：分类下拉 + 排序值编辑控件（替代拖拽） */
-.side-item.manage .si-edit{display:flex;gap:6px;align-items:center;margin-top:5px;flex-wrap:nowrap}
-.side-item.manage .si-cat{flex:1;min-width:84px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,var(--x62));border-radius:6px;background:var(--x71);color:var(--text-1,var(--x25));max-width:160px}
+/* 管理模式：分类下拉 + 排序值编辑控件（替代拖拽），两行紧凑布局 */
+.side-item.manage .si-edit{display:flex;flex-direction:column;gap:5px;margin-top:6px}
+.side-item.manage .si-cat{width:100%;min-width:0;font-size:11px;line-height:1.4;padding:4px 7px;border:1px solid var(--border,var(--x62));border-radius:6px;background:var(--x71);color:var(--text-1,var(--x25));cursor:pointer}
+.side-item.manage .si-cat:hover{border-color:var(--accent)}
+.side-item.manage .si-edit-row{display:flex;align-items:center;gap:6px}
+.side-item.manage .si-edit-row .si-acts{margin-left:auto}
 .side-item.manage .si-ord{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--text-3,var(--x45));white-space:nowrap}
-.side-item.manage .si-order{width:46px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,var(--x62));border-radius:6px;background:var(--x71);color:var(--text-1,var(--x25));text-align:center;transition:border-color .15s,box-shadow .15s}
+.side-item.manage .si-order{width:44px;font-size:11px;line-height:1.4;padding:3px 5px;border:1px solid var(--border,var(--x62));border-radius:6px;background:var(--x71);color:var(--text-1,var(--x25));text-align:center;transition:border-color .15s,box-shadow .15s}
 .side-item.manage .si-order:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.18)}
 .side-item.dragging{opacity:.45;background:rgba(56,189,248,.08);border-color:var(--accent)!important;pointer-events:none}
 /* 拖拽位置提示线：固定蓝色，不依赖 CSS 变量，规避未定义导致不可见 */
@@ -906,9 +909,10 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .mng-pop .mng-fab.primary:hover{color:var(--x3);background:linear-gradient(135deg,var(--x43),var(--x35))}
 
 /* ---- 原型条目：管理模式态 ---- */
-.side-item.manage{background:rgba(56,189,248,.05);border:1px dashed rgba(56,189,248,.30);margin-bottom:4px}
-.side-item.manage:hover{background:rgba(56,189,248,.09)}
-.side-item.manage::after{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:repeating-linear-gradient(45deg,var(--accent),var(--accent) 3px,transparent 3px,transparent 6px);opacity:.5}
+.side-item.manage{background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.22);margin-bottom:5px}
+.side-item.manage:hover{background:rgba(56,189,248,.08)}
+.side-item.manage.active{background:rgba(56,189,248,.13);border-color:rgba(56,189,248,.55)}
+.side-item.manage::after{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:3px;background:repeating-linear-gradient(45deg,var(--accent),var(--accent) 3px,transparent 3px,transparent 6px);opacity:.35}
 .side-item .si-acts{display:flex;gap:5px;margin-left:5px;flex:none;opacity:0;transform:translateX(3px);transition:.14s}
 .side-item.manage .si-acts,.side-item:hover .si-acts{opacity:1;transform:none}
 .side-item .si-acts button{width:26px;height:26px;border-radius:8px;border:1px solid var(--line);background:var(--panel-3);
@@ -1153,6 +1157,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
           <span class="fb-url" id="frameUrl" data-page-node-id="ms91yNC8AQJ23yuONaWUuI">v0.4/G3-导购IM会话页.html</span>
         </div>
         <iframe id="protoFrame" title="交互原型" data-page-node-id="CNi08oVJMcbOL5OabJUgMX" src="v0.4/G3-导购IM会话页.html"></iframe>
+        <div class="page-tabs" id="pageTabs" hidden></div>
         <div class="img-scroll" id="imgScroll" data-page-node-id="imgScrollNode">
         <img id="protoImg" class="proto-img" alt="" data-page-node-id="protoImgNode">
         <div class="hotspot-layer" id="hotspotLayer" data-page-node-id="CKtLQEQdaGnbW6Yc1x1pgl"><div class="hs" data-id="g3-e2" data-type="element" style="left: 199.211px; top: 344.416px;"><div class="hs-pin">2</div></div><div class="hs" data-id="g3-e3" data-type="element" style="left: 0px; top: 389.36px; display: none;"><div class="hs-pin">3</div></div><div class="hs" data-id="g3-e4" data-type="element" style="left: 222.208px; top: 383.845px;"><div class="hs-pin">4</div></div><div class="hs" data-id="g3-r1" data-type="rule" style="left: 199.211px; top: 344.416px;"><div class="hs-pin">5</div></div></div>
@@ -1342,10 +1347,10 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 
 <div class="toast" id="toast" data-page-node-id="nYDdJ735lVkFrieBAMC6Eg">已载入本地编辑数据</div>
 
-<script src="prototypes-data.js?v=20260912a"></script>
+<script src="prototypes-data.js?v=20260912f"></script>
 <script></script>
-<script src="nav-data.js?v=20260912a"></script>
-<script src="app_005.js?v=20260912b"></script>
+<script src="nav-data.js?v=20260912g"></script>
+<script src="app_005.js?v=20260912e"></script>
 
 <script src="app_006.js?v=20260909p"></script>
 
@@ -1358,6 +1363,17 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   background:var(--panel);color:var(--text);border:1px solid var(--line);
   box-shadow:0 4px 14px rgba(15,23,42,.12);transition:transform .15s ease,background .2s ease;}
 .wb-theme-toggle:hover{transform:scale(1.08);}
+/* 多页原型切换器：位于手机壳左侧外部、上对齐、按钮竖排 */
+.page-tabs{position:absolute;top:0;right:100%;margin-right:14px;z-index:30;display:flex;flex-direction:column;gap:8px;
+  padding:7px;border-radius:12px;background:rgba(16,18,24,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  box-shadow:0 4px 16px rgba(0,0,0,.32)}
+.page-tabs[hidden]{display:none}
+.page-tab{flex:0 0 auto;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);
+  color:#E8EDF6;font-size:12px;line-height:1;padding:7px 12px;border-radius:8px;cursor:pointer;min-width:96px;text-align:center;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;transition:background .15s,border-color .15s,color .15s;white-space:nowrap}
+.page-tab:hover{background:rgba(255,255,255,.13)}
+.page-tab.on{background:#38BDF8;border-color:#38BDF8;color:#06222E;font-weight:600;
+  box-shadow:0 2px 10px rgba(56,189,248,.36)}
 </style>
 <script>
 (function(){
