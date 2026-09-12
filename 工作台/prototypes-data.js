@@ -83,7 +83,8 @@ const PROTOTYPES_V03=[
       { "name": "定制品牌馆", "url": "v0.4/U10-品牌馆页.html" },
       { "name": "付费品牌馆", "url": "v0.4/U8-品牌主页.html" },
       { "name": "商品详情", "url": "v0.4/U9-商品详情页.html" },
-      { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" }
+      { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" },
+      { "name": "我的", "url": "v0.4/U13-我的页.html" }
     ],
     "srcdoc": "",
     "status": "review",
@@ -91,7 +92,7 @@ const PROTOTYPES_V03=[
     "owner": "产品 · 梁伟业",
     "updated": "2026-09-12",
     "overview": {
-      "summary": "顾问入口：聚合品牌馆页、品牌主页、商品详情页、搜品牌页的二级入口，在手机壳内切换四个真实页面。",
+      "summary": "顾问入口：聚合品牌馆页、品牌主页、商品详情页、搜品牌页、我的页的二级入口，在手机壳内切换五个真实页面。",
       "path": "导购端 / 用户端 → 顾问入口",
       "users": "门店导购、C端用户",
       "permission": "功能权限：全员可见",
