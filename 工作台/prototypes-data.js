@@ -102,6 +102,28 @@ const PROTOTYPES_V03=[
     "hotspots": []
   },
   {
+    "id": "p_dgmsglist01",
+    "group": "用户端 · CDF中免海南",
+    "name": "顾问消息列表",
+    "device": "mobile",
+    "url": "v0.4/U12-奢品顾问消息列表.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-12",
+    "overview": {
+      "summary": "奢品顾问消息列表：用户端消息页集中展示各顾问会话，含未读角标与最近一条消息预览，点击进入对应顾问会话。",
+      "path": "用户端 → 顾问消息列表 → 顾问 IM 会话页",
+      "users": "C端用户",
+      "permission": "功能权限：全员可见；数据权限：仅当前用户自己的会话",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
+  {
     "id": "v04-u7",
     "group": "用户端 · CDF中免海南",
     "name": "U7 奢品顾问列表页",

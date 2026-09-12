@@ -1209,9 +1209,9 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 
 <div class="toast" id="toast" data-page-node-id="nYDdJ735lVkFrieBAMC6Eg">已载入本地编辑数据</div>
 
-<script src="prototypes-data.js?v=20260912h"></script>
+<script src="prototypes-data.js?v=20260912i"></script>
 
-<script src="nav-data.js?v=20260912h"></script>
+<script src="nav-data.js?v=20260912i"></script>
 <script>
 /* ============================================================
    一、原型数据：每个原型一份配置（单一数据源，同时驱动热点与 PRD）
@@ -2811,6 +2811,15 @@ function edLoadAll(){
     var _seed={}; PROTOTYPES.forEach(function(p){ _seed[p.id]=p; });   /* edApplyNavData 建的真源快照（name/group 以文件为准） */
     PROTOTYPES.length=0;
     d.protos.forEach(function(p){
+      /* 文件已把该条目升级为内置（如原「图片原型」改为「HTML 页」）时以文件为准，忽略缓存里的导入图片 */
+      var _src0=_seed[p.id];
+      if(_src0 && !_src0.__imported && p.__imported){
+        p.__imported=false;
+        p.kind=_src0.kind;
+        p.image=null; p.images=null;
+        if(_src0.url)p.url=_src0.url;
+        if(_src0.device)p.device=_src0.device;
+      }
       if(p.__imported){
         var it=window.ED.imported[p.id];
         if(it&&it.kind==='image'){

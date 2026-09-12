@@ -408,21 +408,22 @@
     .chip.active{background:#1a140e;color:#f3e7cd;border-color:#1a140e;font-weight:600}
     .adv-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
     .adv-card:active{transform:scale(.98)}
-    .adv-top{display:flex;align-items:center;gap:10px;padding:12px 12px 8px}
-    .adv-mid{flex:1 1 auto;min-width:0}
-    .adv-nm{font-size:14px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .adv-desc{font-size:11px;color:#9aa0a6;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .adv-av{position:relative;width:46px;height:46px;flex:0 0 auto}
-    .adv-av img{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block;background:#f0ece3}
-    .adv-av .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#4ade80;border:2px solid #fff}
-    .adv-av .od.off{background:#fbbf24}
-    .adv-av .gc{position:absolute;left:-4px;bottom:-3px;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff}
+    /* 头像撑满卡片宽度 */
+    .adv-cover{position:relative;width:100%;aspect-ratio:4/3;background:#f0ece3;overflow:hidden}
+    .adv-cover img{width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block}
+    .adv-cover .od{position:absolute;right:7px;bottom:7px;width:13px;height:13px;border-radius:50%;background:#4ade80;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
+    .adv-cover .od.off{background:#fbbf24}
+    .adv-cover .gc{position:absolute;left:7px;bottom:7px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
+    .adv-body{padding:9px 10px 11px}
+    .adv-row{display:flex;align-items:center;gap:6px}
+    .adv-nm{flex:1 1 auto;min-width:0;font-size:14px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .adv-desc{font-size:12px;line-height:1.5;color:#4e545c;margin-top:5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
     .adv-like{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;background:#f6f4ef;border:1px solid #ece6da;color:#8b7a5f;font-size:11px;font-weight:600;flex:0 0 auto;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
     .adv-like i{font-size:10px}
     .adv-like.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
-    .adv-tags{display:flex;flex-wrap:wrap;gap:5px;padding:0 12px}
+    .adv-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
     .adv-tag{display:inline-block;padding:2px 7px;border-radius:6px;background:#f8f4ec;color:#8a6f4d;font-size:10px;line-height:16px}
-    .adv-store{display:flex;align-items:center;gap:4px;padding:0 12px 12px;margin-top:8px;font-size:10px;color:#9aa0a6}
+    .adv-store{display:flex;align-items:center;gap:4px;margin-top:8px;font-size:10px;color:#9aa0a6}
   </style>
 
   <script data-page-node-id="U7Script">
@@ -463,20 +464,20 @@
         var idx = ADVISORS.indexOf(a);
         var tags = (a.tags || []).map(function (t) { return '<span class="adv-tag">' + esc(t) + '</span>'; }).join('');
         return '<div class="adv-card" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
-          '<div class="adv-top">' +
-            '<span class="adv-av">' +
-              '<img src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
-              '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
-              '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
-            '</span>' +
-            '<div class="adv-mid">' +
-              '<p class="adv-nm">' + esc(a.name) + '</p>' +
-              '<p class="adv-desc">' + esc(a.desc) + '</p>' +
-            '</div>' +
-            '<button type="button" class="adv-like" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
+          '<div class="adv-cover">' +
+            '<img src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
+            '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
+            '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
           '</div>' +
-          '<div class="adv-tags">' + tags + '</div>' +
-          '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
+          '<div class="adv-body">' +
+            '<div class="adv-row">' +
+              '<p class="adv-nm">' + esc(a.name) + '</p>' +
+              '<button type="button" class="adv-like" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
+            '</div>' +
+            '<p class="adv-desc">' + esc(a.desc) + '</p>' +
+            '<div class="adv-tags">' + tags + '</div>' +
+            '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
+          '</div>' +
         '</div>';
       }).join('');
       empty.classList.toggle('hidden', list.length > 0);
