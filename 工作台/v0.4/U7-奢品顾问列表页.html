@@ -223,7 +223,7 @@
     .to-\[\#e64e39\]{--tw-gradient-to:#e64e39 var(--tw-gradient-to-position)}
 
     body { font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif; }
-    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; overflow:hidden; background:#f2f3f5; }
+    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; overflow:hidden; background:#ffffff; }
     .phone-frame > * { min-height:0; }
     .phone-frame > * { min-height:0; }
     .hide-scrollbar::-webkit-scrollbar { display:none; }
@@ -242,7 +242,7 @@
   <title>用户端 - 意向单</title>
   <style data-page-node-id="U6Extra">
     html, body { height:100%; overflow:hidden; }
-    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; max-height:100dvh; overflow:hidden; background:#f2f3f5; }
+    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; max-height:100dvh; overflow:hidden; background:#ffffff; }
     .phone-frame > * { min-height:0; }
     .hide-scrollbar::-webkit-scrollbar { display:none; }
     .hide-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
@@ -291,8 +291,8 @@
     }
 </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
-<body class="bg-gray-200" data-page-node-id="U7Body" style="">
-  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#f5f2ec]" data-page-node-id="U7Frame">
+<body class="bg-white" data-page-node-id="U7Body" style="">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#ffffff]" data-page-node-id="U7Frame">
 
     <!-- 状态栏 -->
     <div class="bg-white px-5 pt-2 pb-1 flex items-center justify-between shrink-0 text-[13px] font-semibold text-black" data-page-node-id="U7Status">
@@ -325,20 +325,23 @@
       <div style="position:absolute;right:-12px;top:4px;width:170px;height:170px;border:1px solid rgba(212,180,140,.16);border-radius:50%" data-page-node-id="U7Ring2"></div>
       <div style="position:absolute;right:40px;top:-60px;width:120px;height:120px;border:1px solid rgba(212,180,140,.12);border-radius:50%" data-page-node-id="U7Ring3"></div>
 
-      <div class="relative px-5 pt-4 pb-5" data-page-node-id="U7HeroInner">
-        <p class="text-[11px] font-semibold" style="color:#c9a26b;letter-spacing:.42em" data-page-node-id="U7HeroBrand">CDF HAINAN DUTY FREE</p>
-      <div class="mt-3 flex items-center justify-end gap-2">
-        <a href="U6-意向单页.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium relative shrink-0" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" aria-label="意向单" data-page-node-id="U7IntentEntry">
-          <i class="fas fa-clipboard-list text-[12px]" data-page-node-id="U7IntentIcon"></i>
-          我的意向单
-          <span id="intentBadge" class="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-1 rounded-full bg-brand text-white text-[10px] font-bold flex items-center justify-center border border-white" data-page-node-id="U7IntentBadge">2</span>
-        </a>
-      </div>
-        <h2 class="mt-4 text-[26px] font-bold text-white leading-tight" data-page-node-id="U7HeroTitle">您的专属</h2>
-        <p class="text-[17px] italic mt-0.5" style="font-family:Georgia,'Times New Roman',serif;color:#d4b48c" data-page-node-id="U7HeroSub">Private Luxury Concierge</p>
-        <p class="mt-3 text-[12px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证</p>
+      <div class="relative px-5 pt-2.5 pb-3" data-page-node-id="U7HeroInner">
+      <div class="mt-2.5 flex items-center justify-between gap-2" data-page-node-id="U7EntryRow">
+          <a href="U12-奢品顾问消息列表.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium relative shrink-0" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" aria-label="消息" data-page-node-id="U7MsgEntry">
+            <i class="fas fa-comment-dots text-[12px]" data-page-node-id="U7MsgIcon"></i>
+            消息
+            <span class="absolute -top-1.5 -right-1.5 min-w-[14px] h-3.5 px-1 rounded-full bg-brand text-white text-[10px] font-bold flex items-center justify-center border border-white" data-page-node-id="U7MsgDot">3</span>
+          </a>
+          <a href="U6-意向单页.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium relative shrink-0" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" aria-label="意向单" data-page-node-id="U7IntentEntry">
+            <i class="fas fa-clipboard-list text-[12px]" data-page-node-id="U7IntentIcon"></i>
+            我的意向单
+            <span id="intentBadge" class="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-1 rounded-full bg-brand text-white text-[10px] font-bold flex items-center justify-center border border-white" data-page-node-id="U7IntentBadge">2</span>
+          </a>
+        </div>
+        <h2 class="mt-2.5 text-[20px] font-bold text-white leading-tight" data-page-node-id="U7HeroTitle">您的专属</h2>
+        <p class="mt-0.5 text-[11px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证</p>
 
-        <div class="mt-4 pt-4 flex items-stretch" style="border-top:1px solid rgba(212,180,140,.18)" data-page-node-id="U7HeroFeats">
+        <div class="mt-2.5 pt-2.5 flex items-stretch" style="border-top:1px solid rgba(212,180,140,.18)" data-page-node-id="U7HeroFeats">
           <div class="flex-1 text-center" data-page-node-id="U7Feat1">
             <p class="text-[9px]" style="color:#c9a26b" data-page-node-id="U7Feat1Star">✦</p>
             <p class="text-[13px] font-semibold text-white mt-1" data-page-node-id="U7Feat1Title">品牌认证</p>
@@ -406,9 +409,9 @@
     .shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
     .chip{padding:8px 18px;border-radius:999px;background:#fff;border:1px solid #e8e2d6;color:#4a4034;font-size:13px;white-space:nowrap;transition:all .2s;cursor:pointer}
     .chip.active{background:#1a140e;color:#f3e7cd;border-color:#1a140e;font-weight:600}
-    .adv-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+    .adv-card{background:transparent;border-radius:0;overflow:visible;box-shadow:none;cursor:pointer;transition:transform .2s ease}
     .adv-card:active{transform:scale(.98)}
-    .adv-cover{position:relative;width:100%;aspect-ratio:4/3;background:#f0ece3;overflow:hidden;border-radius:0}
+    .adv-cover{position:relative;width:100%;aspect-ratio:1/1;background:#f0ece3;overflow:hidden;border-radius:10px}
     .adv-cover img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
     .adv-cover .od{position:absolute;right:7px;bottom:7px;width:13px;height:13px;border-radius:50%;background:#4ade80;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
     .adv-cover .od.off{background:#fbbf24}
@@ -416,7 +419,7 @@
     .adv-like-cover{position:absolute;right:7px;top:7px;display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.08);color:#8b7a5f;font-size:10px;font-weight:600;cursor:pointer;transition:background .18s,color .18s,border-color .18s;z-index:2}
     .adv-like-cover i{font-size:9px}
     .adv-like-cover.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
-    .adv-body{padding:9px 10px 11px}
+    .adv-body{padding:8px 0 0}
     .adv-row{display:flex;align-items:center;gap:4px;overflow:hidden}
     .adv-nm{flex:0 1 auto;min-width:0;font-size:15px;font-weight:700;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .adv-sep{flex:0 0 auto;color:#d1d5db;font-size:13px}

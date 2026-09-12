@@ -109,6 +109,30 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .gsvc .it .t{font-size:14.5px;font-weight:600;color:#1b1d21}
 .gsvc .it .d{font-size:12.5px;color:#6b7280;line-height:1.55;margin-top:4px}
 .gsvc .cta{width:100%;margin-top:16px;height:44px;border:0;border-radius:999px;background:linear-gradient(92deg,#c9a06d,#a87e4f);color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
+
+/* 同步自 U10 奢品顾问组件 */
+/* 金牌奢品顾问（同 U9） */
+.guide-sec{background:transparent;border-radius:0;margin:0;padding:0}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 14px 7px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
+.guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
+.glist{display:flex;gap:14px;padding:2px 14px 6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.glist::-webkit-scrollbar{display:none}
+.gcard{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 auto;width:100px;cursor:pointer;transition:transform .14s}
+.gcard:active{transform:scale(.96)}
+.gcard .gav{position:relative;width:80px;height:80px;flex:0 0 auto}
+.gcard .gav img{width:80px;height:80px;border-radius:50%;object-fit:cover;display:block}
+.gcard .gav .od{position:absolute;right:1px;bottom:1px;width:16px;height:16px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:odpulse 2s infinite}
+.gcard .gav .gc{position:absolute;left:-4px;bottom:-4px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
+.gcard .gn{font-size:13px;font-weight:600;color:#1b1d21;white-space:nowrap;line-height:1;margin-top:2px}
+.gcard .gs{font-size:11px;color:#8b9099;white-space:normal;line-height:1.25;max-width:100px;margin-top:1px}
+.gcard--all .all-pill{width:100px;height:80px;border-radius:10px;background:#fff;border:1px solid var(--gold-line);color:#a87e4f;display:flex;align-items:center;justify-content:center;gap:4px;font-size:13px;font-weight:600;box-shadow:0 2px 6px rgba(168,126,79,.12)}
+.gcard--all .all-pill i{font-size:11px}
+.gcard--all .gn{font-size:12px;color:#a87e4f;font-weight:600}
+@keyframes odpulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 6px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.gwrap{background:#fff;margin:12px;border:1px solid var(--line);border-radius:16px;padding:14px 0 16px;box-shadow:0 2px 10px rgba(17,17,17,.04);flex:0 0 auto}
+.gwrap .guide-sec{margin:0}
 </style>
 </head>
 <body data-page-node-id="4lH86cCxLFtb95C94n3hHB">
@@ -160,12 +184,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
   <!-- 奢品顾问服务条 -->
       <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
         <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
-          <span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
-          <i class="fas fa-chevron-right arr" data-page-node-id="eYyPzYaV3zPkytOm1l1Z2Q"></i>
-        </div>
-        <div class="gsub" onclick="openGuideSvc()" data-page-node-id="U11GuideSub">
-          <i class="fas fa-gem" style="font-size:10px" data-page-node-id="U11GuideSubIc"></i>
-          <span data-page-node-id="U11GuideSubTx">咨询奢品顾问，享线下独家货源与专属礼遇</span>
+          <i class="fas fa-gem" style="color:var(--gold);font-size:15px" data-page-node-id="hGemU10"></i><span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">奢品顾问</span>
         </div>
         <div class="glist">
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="uuoAmIFkXbz4eEs9hUZLNQ-c">
@@ -193,7 +212,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="GN3kJd8pQmT5nB2sLcWy1f">王芳</div>
-            <div class="gs">琼海博鳌免税店</div>
+            <div class="gs">海口国际免税城</div>
           </div>
           <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-c">
             <div class="gav" data-page-node-id="AV4xKd9mQpT7nB2sLcWy1g-av">
@@ -202,7 +221,46 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
               <span class="gc"><i class="fas fa-comment-dots"></i></span>
             </div>
             <div class="gn" data-page-node-id="GN4kJd8pQmT5nB2sLcWy1h">陈晨</div>
-            <div class="gs">海口日月广场免税店</div>
+            <div class="gs">三亚国际免税城</div>
+          </div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
+            <div class="gav">
+              <img src="assets/generated/advisor5.png" alt="刘洋">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            </div>
+            <div class="gn">刘洋</div>
+            <div class="gs">海口国际免税城</div>
+          </div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
+            <div class="gav">
+              <img src="assets/generated/advisor6.png" alt="赵敏">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            </div>
+            <div class="gn">赵敏</div>
+            <div class="gs">三亚国际免税城</div>
+          </div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
+            <div class="gav">
+              <img src="assets/generated/advisor7.png" alt="孙琳">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            </div>
+            <div class="gn">孙琳</div>
+            <div class="gs">海口国际免税城</div>
+          </div>
+          <div class="gcard" onclick="location.href='U1-用户端IM会话页.html'">
+            <div class="gav">
+              <img src="assets/generated/advisor8.png" alt="周涛">
+              <span class="od"></span>
+              <span class="gc"><i class="fas fa-comment-dots"></i></span>
+            </div>
+            <div class="gn">周涛</div>
+            <div class="gs">三亚国际免税城</div>
+          </div>
+          <div class="gcard gcard--all" onclick="location.href='U7-奢品顾问列表页.html'">
+            <div class="all-pill">全部顾问 <i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
       </div>
