@@ -250,7 +250,8 @@
     </div>
 
     <!-- 我的业绩 hero 卡 -->
-    <div class="px-3 pt-3 shrink-0" data-page-node-id="4Wm01RHoizxqOnxum4Y97G">
+    <div id="scrollArea" class="flex-1 overflow-y-auto hide-scrollbar">
+    <div class="px-3 pt-3" data-page-node-id="4Wm01RHoizxqOnxum4Y97G">
       <div class="bg-coral-500 rounded-2xl p-4 text-white shadow-sm" data-page-node-id="T71OipRtnaTIHFZTQYCCXk">
         <div class="flex items-center justify-between" data-page-node-id="hjaJS39CsLdKk1dGQoj7jD">
           <p class="text-xs opacity-90" data-page-node-id="2nIv3KUEK6rUQORGtyWTJI">我的业绩（<span id="sumPeriodLabel" data-page-node-id="PZ0GiH5oVDUwoqyDd8Saua">上月</span>）</p>
@@ -268,7 +269,7 @@
     </div>
 
     <!-- 筛选 -->
-    <div class="px-3 py-3 bg-white border-b border-gray-100 shrink-0 space-y-3" data-page-node-id="IMkqlSKZmF9jCJhuhOprOR">
+    <div class="px-3 py-3 bg-white border-b border-gray-100 space-y-3" data-page-node-id="IMkqlSKZmF9jCJhuhOprOR">
       <div class="relative" data-page-node-id="B02RMbLfP0QZu2yotDB4oO">
         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs" data-page-node-id="86DvA8LzZnyh2JrgO7yNbG"></i>
         <input id="fSearch" type="text" placeholder="搜索订单号 / 客户名称 / 手机号" class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-8 pr-3 py-2 text-xs text-gray-700 outline-none" data-page-node-id="xpwpctGavHpXCrQJKV6B0V">
@@ -296,7 +297,8 @@
     </div>
 
     <!-- 订单列表 -->
-    <div id="orderList" class="flex-1 overflow-y-auto hide-scrollbar p-3 space-y-3" data-page-node-id="viYfyIix1iMupEPxjuqHFh"></div>
+    <div id="orderList" class="p-3 space-y-3" data-page-node-id="viYfyIix1iMupEPxjuqHFh"></div>
+    </div><!-- /scrollArea -->
 
   </div>
 
@@ -613,6 +615,7 @@
       } else { badgeT = '未完结'; }
       if (!mine && p.refund !== 'none') badgeT = '退款不计入 · 同事业绩';
       const paidItem = p.price;
+      const whText = (p.wh && p.wh.length) ? p.wh.map(function(w){return w.name + (w.qty>1 ? ' ×'+w.qty : '');}).join('，') : '—';
       const imgHtml = p.img ?
         '<img src="' + p.img + '" style="object-fit:cover" class="w-full h-full" alt="">' :
         '<i class="fas ' + p.icon + ' text-coral-600 text-xl"></i>';
@@ -634,6 +637,11 @@
             '<span>单价：' + fmt(p.price) + '</span>' +
             '<span>数量：' + p.qty + '</span>' +
             '<span class="font-bold text-gray-800">实付：' + fmt(paidItem) + '</span>' +
+          '</div>' +
+          '<div class="mt-2 flex items-center gap-1.5 text-xs text-gray-500">' +
+            '<i class="fas fa-warehouse text-gray-400 text-[10px] shrink-0"></i>' +
+            '<span class="shrink-0">出货仓库</span>' +
+            '<span class="font-medium text-gray-700 truncate">' + whText + '</span>' +
           '</div>' +
           (badgeT ? '<div class="mt-2 text-right"><span class="inline-block px-1.5 py-0.5 ' + badgeC + ' text-[10px] rounded">' + badgeT + '</span></div>' : '') +
         '</div>';
