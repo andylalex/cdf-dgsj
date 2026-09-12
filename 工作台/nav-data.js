@@ -14,6 +14,7 @@ window.NAV_DATA = {
       "kind": "pages",
       "pages": [
         { "name": "定制品牌馆", "url": "v0.4/U10-品牌馆页.html" },
+        { "name": "定制品牌馆2", "url": "v0.4/U10b-品牌馆页2.html" },
         { "name": "付费品牌馆", "url": "v0.4/U8-品牌主页.html" },
         { "name": "商品详情", "url": "v0.4/U9-商品详情页.html" },
         { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" },
@@ -51,15 +52,15 @@ window.NAV_DATA = {
       "__imported": false
     },
     {
-      "id": "v04-u4",
-      "name": "U4 结算中心页",
+      "id": "v04-u5",
+      "name": "U5 行程核验页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
     {
-      "id": "v04-u5",
-      "name": "U5 行程核验页",
+      "id": "v04-u4",
+      "name": "U4 结算中心页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false

@@ -230,9 +230,21 @@
     .type-tab.active { color:#ff6b52; border-bottom-color:#ff6b52; font-weight:600; }
     .toast { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,.7); color:#fff; padding:10px 16px; border-radius:10px; font-size:13px; z-index:70; }
   </style>
+  <style>
+    .u5-card { background:#f9fafb; border-radius:12px; }
+    .u5-input-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid #f3f4f6; }
+    .u5-trip-card { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 0; border-radius:12px; border:1px solid #e5e7eb; background:#f9fafb; }
+    .u5-trip-card.active { border-color:#ff6b52; background:#fff5f4; }
+    .u5-trip-card.active i { color:#ff6b52; }
+    .u5-trip-card.active span { color:#f05b42; }
+    .u5-tab { flex:1; text-align:center; padding:12px 0; font-size:15px; color:#6b7280; border-bottom:2px solid transparent; position:relative; }
+    .u5-tab.active { color:#111827; font-weight:600; }
+    .u5-tab.active::after { content:''; position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:24px; height:2px; background:#111827; border-radius:1px; }
+    .u5-link { color:#3b82f6; text-decoration:underline; text-decoration-color:#3b82f6; text-underline-offset:3px; }
+  </style>
 </head>
 <body class="bg-gray-200" data-page-node-id="U5Body">
-  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-[#f2f3f5]" data-page-node-id="U5Frame">
+  <div class="phone-frame shadow-2xl overflow-hidden flex flex-col bg-white" data-page-node-id="U5Frame">
 
     <!-- 状态栏 -->
     <div class="bg-white px-5 pt-2 pb-1 flex items-center justify-between shrink-0 text-[13px] font-semibold text-black" data-page-node-id="U5Status">
@@ -250,58 +262,106 @@
     </div>
 
     <!-- 顶栏 -->
-    <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative border-b border-gray-100" data-page-node-id="U5Header">
-      <a href="javascript:;" onclick="goBackPage()" aria-label="返回" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U5Back">
+    <div class="bg-white flex items-center justify-between px-4 py-3 shrink-0 relative border-b border-gray-100" data-page-node-id="U5Header">
+      <a href="javascript:;" onclick="goBackPage()" aria-label="返回" class="w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U5Back">
         <i class="fas fa-chevron-left text-gray-700 text-base"></i>
       </a>
-      <h1 class="text-base font-semibold text-gray-800" data-page-node-id="U5Title">离岛行程核验</h1>
+      <h1 class="text-base font-semibold text-gray-800 absolute left-1/2 -translate-x-1/2" data-page-node-id="U5Title">离岛行程核验</h1>
+      <div class="flex items-center gap-2" data-page-node-id="U5Capsule">
+        <span class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-600" data-page-node-id="U5CapMore"><i class="fas fa-ellipsis text-[12px]"></i></span>
+        <span class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-600" data-page-node-id="U5CapMin"><i class="fas fa-minus text-[10px]"></i></span>
+        <span class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-600" data-page-node-id="U5CapClose"><i class="far fa-circle text-[11px]"></i></span>
+      </div>
     </div>
 
     <!-- 内容区 -->
-    <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar" data-page-node-id="U5Content">
+    <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar bg-white" data-page-node-id="U5Content">
 
-      <!-- 状态提示 -->
-      <div class="bg-coral-50 px-4 py-3" data-page-node-id="U5Tip">
-        <p class="text-[12px] text-coral-600 leading-snug" data-page-node-id="U5TipText"><i class="fas fa-info-circle mr-1"></i>请填写真实离岛行程信息，核验通过后方可支付。海南免税购物需凭有效离岛凭证提货。</p>
+      <!-- 会员优选提示卡片 -->
+      <div class="mx-4 mt-3 u5-card p-4 flex items-center justify-between" data-page-node-id="U5MemberCard">
+        <div data-page-node-id="U5MemberText">
+          <p class="text-[14px] font-medium text-gray-800" data-page-node-id="U5MemberLine1">如您已离开海南</p>
+          <p class="text-[12px] text-gray-500 mt-0.5" data-page-node-id="U5MemberLine2">点击前往【会员优选】直接购买商品</p>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400 text-[12px]" data-page-node-id="U5MemberArrow"></i>
       </div>
 
-      <div class="p-4 space-y-3 pb-24" data-page-node-id="U5FormWrap">
-        <!-- 离岛方式 -->
-        <div class="bg-white rounded-2xl p-4 shadow-sm" data-page-node-id="U5Type">
-          <p class="text-[15px] font-semibold text-gray-800 mb-3" data-page-node-id="U5TypeTitle">离岛方式</p>
-          <div class="flex border-b border-gray-100" data-page-node-id="U5TypeTabs">
-            <div class="type-tab active" data-type="flight" onclick="selectType(this)" data-page-node-id="U5TypeFlight">飞机</div>
-            <div class="type-tab" data-type="train" onclick="selectType(this)" data-page-node-id="U5TypeTrain">火车</div>
-            <div class="type-tab" data-type="ship" onclick="selectType(this)" data-page-node-id="U5TypeShip">轮船</div>
+      <!-- 境内/境外 tab -->
+      <div class="flex border-b border-gray-100 mt-2" data-page-node-id="U5Tabs">
+        <div class="u5-tab active" data-page-node-id="U5TabIn">离岛至境内</div>
+        <div class="u5-tab" data-page-node-id="U5TabOut">离岛至境外</div>
+      </div>
+
+      <!-- 政策说明 -->
+      <div class="px-4 py-4" data-page-node-id="U5Notice">
+        <p class="text-[12px] text-gray-500 leading-relaxed" data-page-node-id="U5NoticeText">根据 <span class="text-coral-500" data-page-node-id="U5NoticeLink">《关于海南离岛旅客免税购物政策的公告》</span> 规定须如实填写您的个人资料及离岛信息。</p>
+      </div>
+
+      <!-- 个人信息 -->
+      <div class="px-4" data-page-node-id="U5InfoForm">
+        <div class="u5-input-row" data-page-node-id="U5RowName">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelName">姓名</span>
+          <span class="text-[14px] text-gray-900" data-page-node-id="U5ValueName">梁伟业</span>
+        </div>
+        <div class="u5-input-row" data-page-node-id="U5RowCountry">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelCountry">国家/地区</span>
+          <div class="flex items-center gap-1 text-[14px] text-gray-900" data-page-node-id="U5ValueCountry">
+            <span>中国</span>
+            <i class="fas fa-chevron-down text-[10px] text-gray-400 ml-0.5"></i>
           </div>
         </div>
+        <div class="u5-input-row" data-page-node-id="U5RowIdType">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelIdType">证件类型</span>
+          <div class="flex items-center gap-1 text-[14px] text-gray-900" data-page-node-id="U5ValueIdType">
+            <span>身份证</span>
+            <i class="fas fa-chevron-down text-[10px] text-gray-400 ml-0.5"></i>
+          </div>
+        </div>
+        <div class="u5-input-row" data-page-node-id="U5RowIdNo">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelIdNo">证件号</span>
+          <span class="text-[14px] text-gray-900" data-page-node-id="U5ValueIdNo">460003198210310017</span>
+        </div>
+        <div class="u5-input-row" data-page-node-id="U5RowPhone">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelPhone">手机号</span>
+          <div class="flex items-center gap-1 text-[14px] text-gray-900" data-page-node-id="U5ValuePhone">
+            <span class="text-gray-500">+86</span>
+            <i class="fas fa-chevron-right text-[10px] text-gray-300 mx-0.5"></i>
+            <span>135 1982 1031</span>
+          </div>
+        </div>
+      </div>
 
-        <!-- 表单 -->
-        <div class="bg-white rounded-2xl p-4 shadow-sm space-y-4" data-page-node-id="U5Form">
-          <div data-page-node-id="U5FieldNo">
-            <label class="form-label" data-page-node-id="U5LabelNo">航班号</label>
-            <input id="tripNo" type="text" placeholder="如 HU7281" class="form-input" data-page-node-id="U5InputNo">
+      <!-- 选择离岛方式 -->
+      <div class="px-4 mt-5 mb-2" data-page-node-id="U5TripTypeTitle">
+        <p class="text-[15px] font-semibold text-gray-900" data-page-node-id="U5TripTypeTitleText">选择离岛方式</p>
+      </div>
+      <div class="px-4 flex gap-2" data-page-node-id="U5TripType">
+        <div class="u5-trip-card active" data-type="flight" data-page-node-id="U5TripFlight">
+          <i class="fas fa-plane-departure text-[18px] text-coral-500" data-page-node-id="U5TripFlightIcon"></i>
+          <span class="text-[13px] font-medium text-coral-600" data-page-node-id="U5TripFlightText">飞机离岛</span>
+        </div>
+        <div class="u5-trip-card" data-type="train" data-page-node-id="U5TripTrain">
+          <i class="fas fa-train text-[18px] text-gray-500" data-page-node-id="U5TripTrainIcon"></i>
+          <span class="text-[13px] text-gray-600" data-page-node-id="U5TripTrainText">火车离岛</span>
+        </div>
+        <div class="u5-trip-card" data-type="ship" data-page-node-id="U5TripShip">
+          <i class="fas fa-ship text-[18px] text-gray-500" data-page-node-id="U5TripShipIcon"></i>
+          <span class="text-[13px] text-gray-600" data-page-node-id="U5TripShipText">轮渡离岛</span>
+        </div>
+      </div>
+
+      <!-- 离岛日期 / 航班号 -->
+      <div class="px-4 mt-4 pb-28" data-page-node-id="U5TripForm">
+        <div class="u5-input-row" data-page-node-id="U5RowDate">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelDate">离岛日期</span>
+          <div class="flex items-center gap-1 text-[14px] text-gray-400" data-page-node-id="U5ValueDate">
+            <span>请选择离岛时间</span>
+            <i class="fas fa-chevron-down text-[10px] ml-0.5"></i>
           </div>
-          <div data-page-node-id="U5FieldDate">
-            <label class="form-label" data-page-node-id="U5LabelDate">出发时间</label>
-            <input id="tripDate" type="datetime-local" class="form-input" data-page-node-id="U5InputDate">
-          </div>
-          <div data-page-node-id="U5FieldPort">
-            <label class="form-label" data-page-node-id="U5LabelPort">出发/到达机场</label>
-            <input id="tripPort" type="text" placeholder="如 海口美兰机场 → 北京首都机场" class="form-input" data-page-node-id="U5InputPort">
-          </div>
-          <div data-page-node-id="U5FieldName">
-            <label class="form-label" data-page-node-id="U5LabelName">旅客姓名</label>
-            <input id="tripName" type="text" placeholder="请与证件保持一致" class="form-input" data-page-node-id="U5InputName">
-          </div>
-          <div data-page-node-id="U5FieldIdcard">
-            <label class="form-label" data-page-node-id="U5LabelIdcard">身份证号</label>
-            <input id="tripIdcard" type="text" placeholder="请输入身份证号码" class="form-input" data-page-node-id="U5InputIdcard">
-          </div>
-          <div data-page-node-id="U5FieldPhone">
-            <label class="form-label" data-page-node-id="U5LabelPhone">手机号</label>
-            <input id="tripPhone" type="tel" placeholder="用于接收提货通知" class="form-input" data-page-node-id="U5InputPhone">
-          </div>
+        </div>
+        <div class="u5-input-row" data-page-node-id="U5RowFlightNo">
+          <span class="text-[14px] text-gray-700" data-page-node-id="U5LabelFlightNo">航班号</span>
+          <span class="text-[14px] text-gray-400" data-page-node-id="U5ValueFlightNo">例如：HU7819</span>
         </div>
       </div>
 
@@ -309,28 +369,13 @@
 
     <!-- 底部吸底栏 -->
     <div class="bg-white px-4 py-3 shrink-0 border-t border-gray-100 pb-safe" data-page-node-id="U5Footer">
-      <button onclick="confirmVerify()" class="w-full bg-coral-500 text-white py-3 rounded-full text-[15px] font-semibold active:scale-95 transition shadow-lg shadow-coral-500/30" data-page-node-id="U5FooterBtn">确认核验</button>
+      <button onclick="confirmVerify()" class="w-full bg-gray-300 text-white py-3 rounded-full text-[15px] font-semibold active:scale-95 transition" data-page-node-id="U5FooterBtn">确认</button>
+      <p class="text-center text-[13px] text-blue-500 mt-3 u5-link cursor-pointer" data-page-node-id="U5FaceVerify">切换为人脸核验获取离岛信息</p>
     </div>
 
   </div>
 
   <script>
-    const TYPE_LABELS = {
-      flight: { no: '航班号', port: '出发/到达机场', placeholder: '如 HU7281' },
-      train: { no: '车次', port: '出发/到达车站', placeholder: '如 Z202' },
-      ship: { no: '船次', port: '出发/到达港口', placeholder: '如 海峡号' }
-    };
-
-    function selectType(el) {
-      document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-      const type = el.dataset.type;
-      const cfg = TYPE_LABELS[type];
-      document.querySelector('[data-page-node-id="U5LabelNo"]').textContent = cfg.no;
-      document.querySelector('[data-page-node-id="U5LabelPort"]').textContent = cfg.port;
-      document.getElementById('tripNo').placeholder = cfg.placeholder;
-    }
-
     function showToast(text) {
       let t = document.getElementById('toast');
       if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; document.body.appendChild(t); }
@@ -339,26 +384,13 @@
       setTimeout(() => t.classList.add('hidden'), 1500);
     }
 
-    function getVerifyInfo() {
-      try { return JSON.parse(localStorage.getItem('tripVerifyInfo')) || null; } catch(e) { return null; }
-    }
-    function saveVerifyInfo(info) { localStorage.setItem('tripVerifyInfo', JSON.stringify(info)); }
-
     function confirmVerify() {
-      const type = document.querySelector('.type-tab.active').dataset.type;
-      const typeLabel = { flight: '飞机', train: '火车', ship: '轮船' }[type];
-      const flightNo = document.getElementById('tripNo').value.trim() || 'HU7281';
-      const date = document.getElementById('tripDate').value || '2026-09-10T14:30';
-      const port = document.getElementById('tripPort').value.trim() || '海口美兰机场 → 北京首都机场';
-      const name = document.getElementById('tripName').value.trim() || '张雅';
-      const idcard = document.getElementById('tripIdcard').value.trim() || '4601021990****0021';
-      const phone = document.getElementById('tripPhone').value.trim() || '13800008899';
-      const info = { type, typeLabel, flightNo, date, port, name, idcard, phone, passed: true };
-      saveVerifyInfo(info);
-      goBackAfterVerify();
+      showToast('行程核验已提交');
+      setTimeout(function() {
+        window.location.href = 'U4-结算中心页.html';
+      }, 800);
     }
 
-    // 顶部返回按钮：按来源动态返回（意向单进来的回意向单，结算中心进来的回结算中心）：优先用 from 参数，其次用 referrer 推断，最后退浏览器历史。
     function goBackPage() {
       var params = new URLSearchParams(window.location.search);
       var from = params.get('from');
@@ -373,25 +405,6 @@
       else if (window.history && window.history.length > 1) window.history.back();
       else window.location.href = 'U4-结算中心页.html';
     }
-
-    // 确认核验通过后进入结算中心（行程核验为结算的前置条件）
-    function goBackAfterVerify() {
-      window.location.href = 'U4-结算中心页.html';
-    }
-
-
-    window.addEventListener('DOMContentLoaded', function() {
-      const info = getVerifyInfo();
-      if (info) {
-        document.querySelector('.type-tab[data-type="' + info.type + '"]').click();
-        document.getElementById('tripNo').value = info.flightNo || '';
-        document.getElementById('tripDate').value = info.date || '';
-        document.getElementById('tripPort').value = info.port || '';
-        document.getElementById('tripName').value = info.name || '';
-        document.getElementById('tripIdcard').value = info.idcard || '';
-        document.getElementById('tripPhone').value = info.phone || '';
-      }
-    });
   </script>
 </body>
 </html>

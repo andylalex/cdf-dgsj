@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="tIwflmecn69eqEBXpwBtjT">
+<head data-page-node-id="kkTD3T78oz7HgNljaCi3JW">
+<meta charset="UTF-8" data-page-node-id="AYYmAq5YBk72XWdASvZYMe">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-page-node-id="UXjmHfyBPycclkHBRUSVjZ">
+<title>品牌馆2 - 奢品顾问悬浮入口</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="XoCyoxe4iNIM8BWAbHmN0v">
+<style>
+*,::after,::before{box-sizing:border-box}
+:root{--gold:#bc9578;--gold-line:#d8bb9d;--brand:#e01f26;--ink:#26282c;--ink3:#9aa1ab;--line:#eceef1}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#d8dae0;color:var(--ink);-webkit-font-smoothing:antialiased}
+.phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;background:#fff;display:flex;flex-direction:column;position:relative}
+.phone-frame>*{min-height:0}
+.hide-scrollbar::-webkit-scrollbar{display:none}
+.hide-scrollbar{scrollbar-width:none}
+.main{flex:1;min-height:0;overflow-y:auto;background:#fff;-webkit-overflow-scrolling:touch}
+
+/* 状态栏 / 导航 */
+.status-bar{padding:10px 20px 6px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;background:#fff;flex:0 0 auto}
+.status-bar .r{display:flex;align-items:center;gap:5px;font-size:11px;color:#26282c}
+.nav-bar{padding:4px 12px 8px;background:#fff;display:flex;align-items:center;position:relative;flex:0 0 auto}
+.nav-bar button{border:0;background:transparent;padding:0;color:#26282c;cursor:pointer}
+.nav-bar .ttl{position:absolute;left:0;right:0;text-align:center;font-size:16.5px;font-weight:500;pointer-events:none}
+.mini-caps{margin-left:auto;position:relative;z-index:2;display:flex;align-items:center;background:rgba(255,255,255,.85);border:1px solid #e3e4e8;border-radius:999px;padding:0 10px;height:30px;gap:10px;color:#26282c;font-size:15px;cursor:pointer}
+.mini-caps .sep{width:1px;height:16px;background:#e3e4e8}
+
+/* 品牌行 */
+.brand-bar{padding:8px 14px 10px;background:#fff;display:flex;align-items:center;border-bottom:1px solid #f1f2f4;flex:0 0 auto}
+.brand-bar button{border:0;background:transparent;padding:0;color:#26282c;cursor:pointer;font-size:18px}
+.brand-name{position:absolute;left:0;right:0;text-align:center;font-family:"Didot","Times New Roman",Georgia,serif;font-size:24px;letter-spacing:6px;font-weight:600;pointer-events:none}
+
+/* 分类 tabs */
+.cat-tabs{display:flex;background:#fff;padding:0 6px;flex:0 0 auto;border-bottom:1px solid #f4f5f7}
+.cat-tabs .t{flex:1;text-align:center;font-size:15px;color:#3c4048;padding:10px 0 11px;position:relative;cursor:pointer}
+.cat-tabs .t.on{color:#1b1d21;font-weight:600}
+.cat-tabs .t.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:5px;width:17px;height:3px;border-radius:2px;background:#1b1d21}
+
+/* banner */
+.banner{position:relative;aspect-ratio:10/9;overflow:hidden;flex:0 0 auto;
+background:
+ radial-gradient(46% 34% at 26% 30%, rgba(255,255,255,.75), rgba(255,255,255,0) 70%),
+ radial-gradient(40% 30% at 74% 22%, rgba(255,255,255,.5), rgba(255,255,255,0) 70%),
+ radial-gradient(60% 44% at 62% 72%, rgba(126,66,155,.55), rgba(126,66,155,0) 75%),
+ linear-gradient(168deg,#efe0f6 0%,#dfc3ee 34%,#c8a3e2 62%,#b184cf 100%)}
+.banner .bl{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);filter:blur(2px)}
+.banner .cap{position:absolute;left:0;right:0;top:20%;text-align:center;color:#fff;text-shadow:0 2px 14px rgba(90,40,120,.35)}
+.banner .cap .c1{font-family:"Didot","Times New Roman",Georgia,serif;font-size:34px;letter-spacing:8px;font-weight:600}
+.banner .cap .c2{font-size:13px;letter-spacing:3px;margin-top:8px;opacity:.95}
+.banner .cap .c3{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:3px 14px}
+
+/* 奢品顾问悬浮入口 */
+.advisor-fab{position:absolute;right:14px;bottom:22px;z-index:25;display:flex;align-items:center;gap:8px;border:0;background:transparent;padding:0;cursor:pointer}
+.advisor-fab__bubble{background:#fff;color:#a87e4f;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.12);border:1px solid #f0e3d2;white-space:nowrap}
+.advisor-fab__btn{position:relative;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#d8b483,#a87e4f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 8px 20px rgba(168,126,79,.45);flex:0 0 auto}
+.advisor-fab__btn .od{position:absolute;right:-1px;top:-1px;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #fff}
+.advisor-fab:active .advisor-fab__btn{transform:scale(.94)}
+
+/* 活动区 */
+.hero{background:#fff;text-align:center;padding:26px 20px 30px;flex:0 0 auto}
+.hero .h1{font-size:22px;font-weight:600;color:#1b1d21;letter-spacing:1px}
+.hero .h2{font-size:13px;color:#6b7280;margin-top:9px;letter-spacing:2px}
+.hero .go{display:inline-block;margin-top:16px;background:#111;color:#fff;font-size:14px;letter-spacing:4px;padding:10px 34px;border:0;border-radius:2px;cursor:pointer}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:20px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#dcdfe4;display:block;cursor:pointer}
+.dots i.on{background:#1b1d21}
+
+/* home indicator */
+.home-ind{flex:0 0 auto;background:#fff;padding:8px 0 9px;display:flex;justify-content:center}
+.home-ind span{width:120px;height:4px;border-radius:999px;background:#111;display:block}
+</style>
+</head>
+<body data-page-node-id="D8LxvvDjLxwt4VlCvYhHB2">
+<div class="phone-frame" data-page-node-id="DXRdzDFB6rtKvzgfKoTB4p">
+
+  <div class="status-bar" data-page-node-id="cwR9DMiVsgGMNHbztF0cyd">
+    <span data-page-node-id="1U85KgQqEBRoAihONd5cL9">10:35</span>
+    <span class="r" data-page-node-id="dezYJFjaY11BT2v9lyeRkD"><i class="fas fa-signal" data-page-node-id="uxFXWa5wv3kd6ZiuMsCEX7"></i><i class="fas fa-signal" data-page-node-id="jRD3KJZJpaDQ0nT1m3zjE3"></i> 5G <i class="fas fa-wifi" data-page-node-id="jtEWY3mWmIFXM2BGOfR4If"></i><i class="fas fa-battery-three-quarters" style="font-size:13px" data-page-node-id="KBxaGhvkOlC4fCIiCC5XhR"></i></span>
+  </div>
+
+  <div class="nav-bar" data-page-node-id="IVx25Jd81s0tMVszSLDJSG">
+    <button aria-label="返回" onclick="goBack()" data-page-node-id="zmGr3d4BYNWWpgwjCq1hAB"><i class="fas fa-chevron-left" style="font-size:19px" data-page-node-id="umzB2t3DSEmEwyOutIQe1A"></i></button>
+    <div class="ttl" data-page-node-id="A3AsXrrF8gACWo6r9ucrzi">中免海南</div>
+    <div class="mini-caps" data-page-node-id="cRJEDxYGD4Gnf0Whrqm7Sb"><i class="fas fa-ellipsis-h" data-page-node-id="BcansY547hLM9eisH560Tp"></i><span class="sep" data-page-node-id="66thQ3ymaAj2ZaIZKrVqTR"></span><i class="far fa-circle" style="font-size:13px" data-page-node-id="oKmZNRCwVL6MFSy3nAiHAe"></i></div>
+  </div>
+
+  <div class="brand-bar" data-page-node-id="FMbRq46eGkolP0xmUydErk">
+    <button aria-label="分类" data-page-node-id="qsVjtpRPvz2KUy67jdiHxh"><i class="fas fa-bars" data-page-node-id="l2wSjfpqa9j6xTq5ZvA9z6"></i></button>
+    <div class="brand-name" data-page-node-id="wVF1L5MZyQp7QdhD2Gcgqd">CHANEL</div>
+    <button aria-label="搜索" style="margin-left:auto;position:relative;z-index:2" onclick="location.href='U11-搜索品牌页.html'" data-page-node-id="QAGjrUEIr0uoa0d94T4Z72"><i class="fas fa-search" data-page-node-id="STo6GewnHTxCFH2GKt4kzv"></i></button>
+  </div>
+
+  <div class="cat-tabs" id="catTabs" data-page-node-id="xXgPJAMhT5ISJ3J6aJwqaT">
+    <span class="t on" data-page-node-id="V64VIRj3G1BhEtQWPvmn8Y">彩妆</span>
+    <span class="t" data-page-node-id="t1vBCLelwuFFOOv4xZJqmf">香水</span>
+    <span class="t" data-page-node-id="HloYFUPUu0bS1XYmnphgAj">护肤</span>
+    <span class="t" data-page-node-id="LGNm1uDBXDBZbKoI8PAbap">香奈儿一号</span>
+  </div>
+
+  <div class="main hide-scrollbar" style="background:#fff" data-page-node-id="VrXYrwwvqXnffo6Xchxk7r">
+
+    <!-- banner -->
+    <div class="banner" data-page-node-id="o3XDMARrgKBQS070OpAlYE">
+      <span class="bl" style="left:8%;top:16%;width:90px;height:90px" data-page-node-id="C9QKq6XF6nLSMqPi3Tge4R"></span>
+      <span class="bl" style="right:12%;top:40%;width:46px;height:46px;opacity:.6" data-page-node-id="0mm2NZkqR7LoU4F9onmF6o"></span>
+      <span class="bl" style="left:38%;bottom:26%;width:130px;height:130px;opacity:.25" data-page-node-id="oStOkJyITa4dnyz2qGIKbQ"></span>
+      <div class="cap" data-page-node-id="wvYgYMvv61ZGjDpRXwwGzs">
+        <div class="c1" data-page-node-id="LXgAbDGnlJLcRBmJNclTiU">CHANCL</div>
+        <div class="c2" data-page-node-id="hKI87UF5v1FopL8FiGaF8j">邂逅系列 全新香氛</div>
+        <div class="c3" data-page-node-id="HxvQbkdoLrvZDlz3ua88Zi">门店专柜同步有售</div>
+      </div>
+    </div>
+
+    <!-- 活动 slide -->
+    <div class="hero" data-page-node-id="pDWEhNnSJe6KwAn9k7oJMh">
+      <div class="h1" data-page-node-id="ICdyHvLWohVWuDKK7hMiDq">邂逅梦幻香氛层叠仪式</div>
+      <div class="h2" data-page-node-id="Bp8ORPg51PrBIpOxg7WFwY">全新用香体验</div>
+      <button class="go" data-page-node-id="cDaEhM3BmSWQgwZlNX13Yp">即刻探索</button>
+      <div class="dots" id="heroDots" data-page-node-id="FpWDBN2wPvCGm4m5D38YK5">
+        <i class="on" data-page-node-id="1iJatdqb2GgQv3yJD6cWni"></i><i data-page-node-id="O3ACog9fB2c4IAKiA88HQc"></i><i data-page-node-id="wc2jgFsFkTVBUw9JxZeTxh"></i><i data-page-node-id="76gVr3Uq20UqHOkIc1R3mm"></i><i data-page-node-id="dD965KcuquInDUWrf40TQv"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="home-ind" data-page-node-id="yrl1EsYaTsKT2zNWS178iq"><span data-page-node-id="6CswMbaEtgyADofiV5kNvZ"></span></div>
+
+  <!-- 奢品顾问悬浮入口 -->
+  <button class="advisor-fab" onclick="location.href='U7-奢品顾问列表页.html'" aria-label="奢品顾问">
+    <span class="advisor-fab__bubble">奢品顾问</span>
+    <span class="advisor-fab__btn"><i class="fas fa-gem"></i><span class="od"></span></span>
+  </button>
+
+</div>
+
+<script>
+  function goBack() { if (history.length > 1) { history.back(); } }
+
+  // 分类 tabs
+  var catTabs = document.getElementById('catTabs');
+  if (catTabs) {
+    catTabs.addEventListener('click', function (e) {
+      var t = e.target.closest('.t');
+      if (!t) return;
+      catTabs.querySelectorAll('.t').forEach(function (n) { n.classList.remove('on'); });
+      t.classList.add('on');
+    });
+  }
+
+  // 轮播点
+  var heroDots = document.getElementById('heroDots');
+  if (heroDots) {
+    heroDots.addEventListener('click', function (e) {
+      var d = e.target.closest('i');
+      if (!d) return;
+      heroDots.querySelectorAll('i').forEach(function (n) { n.classList.remove('on'); });
+      d.classList.add('on');
+    });
+  }
+</script>
+</body>
+</html>
