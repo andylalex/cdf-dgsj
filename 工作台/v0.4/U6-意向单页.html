@@ -533,7 +533,7 @@
       var total = checked.reduce(function (s, i) { return s + (i.price || 0) * (i.qty || 1); }, 0);
       var order = { id: list.id, time: '刚刚', items: checked, total: total, source: checked.length ? checked[0].source : 'store' };
       saveList(order);
-      window.location.href = 'U4-结算中心页.html';
+      window.location.href = 'U5-行程核验页.html?from=U6';
     }
 
     function showToast(text) {

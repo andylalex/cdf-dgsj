@@ -251,7 +251,7 @@
 
     <!-- 顶栏 -->
     <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative border-b border-gray-100" data-page-node-id="U5Header">
-      <a href="U4-结算中心页.html" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U5Back">
+      <a href="javascript:;" onclick="goBackPage()" aria-label="返回" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U5Back">
         <i class="fas fa-chevron-left text-gray-700 text-base"></i>
       </a>
       <h1 class="text-base font-semibold text-gray-800" data-page-node-id="U5Title">离岛行程核验</h1>
@@ -356,6 +356,38 @@
       const info = { type, typeLabel, flightNo, date, port, name, idcard, phone, passed: true };
       saveVerifyInfo(info);
       goBackAfterVerify();
+    }
+
+    // 顶部返回按钮：按来源动态返回（意向单进来的回意向单，结算中心进来的回结算中心）：优先用 from 参数，其次用 referrer 推断，最后退浏览器历史。
+    function goBackPage() {
+      var params = new URLSearchParams(window.location.search);
+      var from = params.get('from');
+      var target = null;
+      if (from === 'U6') target = 'U6-意向单页.html';
+      else if (from === 'U4') target = 'U4-结算中心页.html';
+      else if (document.referrer) {
+        var m = document.referrer.match(/([^\/]+\.html)(?:[?#]|$)/);
+        if (m) target = m[1];
+      }
+      if (target) window.location.href = target;
+      else if (window.history && window.history.length > 1) window.history.back();
+      else window.location.href = 'U4-结算中心页.html';
+    }
+
+    // 确认核验后动态返回上一级页面：优先用 from 参数，其次用 referrer 推断，最后退浏览器历史。
+    function goBackAfterVerify() {
+      var params = new URLSearchParams(window.location.search);
+      var from = params.get('from');
+      var target = null;
+      if (from === 'U6') target = 'U6-意向单页.html';
+      else if (from === 'U4') target = 'U4-结算中心页.html';
+      else if (document.referrer) {
+        var m = document.referrer.match(/([^\/]+\.html)(?:[?#]|$)/);
+        if (m) target = m[1];
+      }
+      if (target) window.location.href = target;
+      else if (window.history && window.history.length > 1) window.history.back();
+      else window.location.href = 'U4-结算中心页.html';
     }
 
     // 确认核验后动态返回上一级页面：优先用 from 参数，其次用 referrer 推断，最后退浏览器历史。
