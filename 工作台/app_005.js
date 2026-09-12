@@ -242,6 +242,7 @@ function showPage(idx){
   var p=current(); if(!p||p.kind!=='pages')return;
   var pages=p.pages||[]; if(!pages.length)return;
   if(idx<0||idx>=pages.length)idx=0;
+  state.pageIndex=idx;
   frame.src=pages[idx].url;
   var fu=$('frameUrl'); if(fu)fu.textContent=p.name+' · '+pages[idx].name;
   var pt=$('pageTabs');
@@ -430,8 +431,18 @@ function bindSlideGesture(){
 }
 bindSlideGesture();
 document.addEventListener('keydown',function(e){
+  var t=e.target;
+  if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
   if($('edModal').classList.contains('show'))return;
-  var p=current(); if(!isMultiImage(p))return;
+  var p=current();
+  /* 多 HTML 页原型（kind:'pages'）：↑/↓ 循环切换手机壳内的页面 */
+  if(p&&p.kind==='pages'){
+    var pn=(p.pages||[]).length; if(!pn)return;
+    if(e.key==='ArrowUp'){ e.preventDefault(); showPage(((state.pageIndex||0)-1+pn)%pn); }
+    else if(e.key==='ArrowDown'){ e.preventDefault(); showPage(((state.pageIndex||0)+1)%pn); }
+    return;
+  }
+  if(!isMultiImage(p))return;
   if(e.key==='ArrowLeft'){ slideGo(-1); }
   else if(e.key==='ArrowRight'){ slideGo(1); }
 });

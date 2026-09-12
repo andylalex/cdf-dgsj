@@ -243,19 +243,7 @@ const PROTOTYPES_V03=[
       }
     ],
     "hotspots": [
-      {
-        "id": "u6-e1",
-        "selector": "[data-page-node-id=\"U6TripCard\"]",
-        "type": "element",
-        "x": 50.053,
-        "y": 24.631,
-        "w": 92.068,
-        "h": 15.761,
-        "title": "行程核验",
-        "desc": "展示行程核验信息",
-        "num": 1
-      },
-      {
+{
         "id": "u6-e2",
         "selector": "div[class~=\"bg-white\"][class~=\"rounded-2xl\"][class~=\"p-4\"]:nth-of-type(1)",
         "type": "element",
@@ -265,25 +253,13 @@ const PROTOTYPES_V03=[
         "h": 41.972,
         "title": "门店商品清单",
         "desc": "展示电商商品，含买即赠/满赠标签，与门店分组不可合并结算。",
-        "num": 2
+        "num": 1
       },
-      {
-        "id": "u6-e3",
-        "selector": "div[class~=\"bg-white\"][class~=\"rounded-2xl\"][class~=\"p-4\"]:nth-of-type(3)",
-        "type": "element",
-        "x": 50.053,
-        "y": 119.078,
-        "w": 92.068,
-        "h": 58.72,
-        "title": "展示电商商品清单",
-        "desc": "电商商品不可与门店商品合并支付",
-        "num": 3
-      },
-      {
+{
         "type": "element",
         "title": "底栏",
         "desc": "显示已选商品数量、合计金额\n“去结算”按钮，点击后跳转到结算中心页面",
-        "num": 4,
+        "num": 2,
         "selector": "[data-page-node-id=\"U6Footer\"]",
         "x": 50.053,
         "y": 168.617,
