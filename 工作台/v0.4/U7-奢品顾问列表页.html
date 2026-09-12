@@ -327,12 +327,7 @@
 
       <div class="relative px-5 pt-4 pb-5" data-page-node-id="U7HeroInner">
         <p class="text-[11px] font-semibold" style="color:#c9a26b;letter-spacing:.42em" data-page-node-id="U7HeroBrand">CDF HAINAN DUTY FREE</p>
-      <div class="mt-3 flex items-center justify-between gap-2">
-        <button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-medium" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" data-page-node-id="U7StorePill">
-          <i class="fas fa-gem text-[10px]" data-page-node-id="U7StoreIcon"></i>
-          三亚国际免税城
-          <i class="fas fa-chevron-down text-[9px] ml-0.5" data-page-node-id="U7StoreCaret"></i>
-        </button>
+      <div class="mt-3 flex items-center justify-end gap-2">
         <a href="U6-意向单页.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium relative shrink-0" style="background:rgba(212,180,140,.14);color:#e8d5ae;border:1px solid rgba(212,180,140,.35)" aria-label="意向单" data-page-node-id="U7IntentEntry">
           <i class="fas fa-clipboard-list text-[12px]" data-page-node-id="U7IntentIcon"></i>
           我的意向单
@@ -341,7 +336,7 @@
       </div>
         <h2 class="mt-4 text-[26px] font-bold text-white leading-tight" data-page-node-id="U7HeroTitle">您的专属</h2>
         <p class="text-[17px] italic mt-0.5" style="font-family:Georgia,'Times New Roman',serif;color:#d4b48c" data-page-node-id="U7HeroSub">Private Luxury Concierge</p>
-        <p class="mt-3 text-[12px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证 · 营业时间 <span class="font-semibold" style="color:#e8d5ae" data-page-node-id="U7HeroTime">10:00-22:00</span></p>
+        <p class="mt-3 text-[12px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证</p>
 
         <div class="mt-4 pt-4 flex items-stretch" style="border-top:1px solid rgba(212,180,140,.18)" data-page-node-id="U7HeroFeats">
           <div class="flex-1 text-center" data-page-node-id="U7Feat1">
@@ -368,19 +363,6 @@
     <!-- 内容区 -->
     <div class="pb-10" data-page-node-id="U7Content">
 
-      <!-- 精品分类 -->
-      <div class="px-4 pt-5" data-page-node-id="U7CatSec">
-        <div class="flex items-center justify-between" data-page-node-id="U7CatHead">
-          <div class="flex items-center gap-2" data-page-node-id="U7CatTitleWrap">
-            <span class="w-1 h-4 rounded-full bg-brand" data-page-node-id="U7CatBar"></span>
-            <span class="text-[15px] font-bold text-gray-800" data-page-node-id="U7CatTitle">精品分类</span>
-            <span class="text-[11px] italic" style="font-family:Georgia,serif;color:#b0a284" data-page-node-id="U7CatEn">Categories</span>
-          </div>
-          <button class="text-[12px] text-gray-400 active:text-gray-600 transition" data-page-node-id="U7CatAll">查看全部<i class="fas fa-chevron-right text-[9px] ml-0.5" data-page-node-id="U7CatAllCaret"></i></button>
-        </div>
-        <div id="catBar" class="flex gap-2 mt-3 overflow-x-auto hide-scrollbar" style="-webkit-overflow-scrolling:touch" data-page-node-id="U7CatBar"></div>
-      </div>
-
       <!-- 精选品牌 -->
       <div class="px-4 pt-5" data-page-node-id="U7BrandSec">
         <div class="flex items-center justify-between" data-page-node-id="U7BrandHead">
@@ -402,7 +384,6 @@
             <span class="text-[15px] font-bold text-gray-800" data-page-node-id="U7ListTitle">资深奢品顾问</span>
             <span class="text-[13px] text-gray-500" data-page-node-id="U7ListCount"><span id="advisorCount" class="font-semibold text-gray-800" data-page-node-id="U7ListCountNum">8</span> 位</span>
           </div>
-          <span id="advisorCatLabel" class="text-[12px] font-semibold" style="color:#8a6f4d" data-page-node-id="U7ListCat">全部</span>
         </div>
         <div id="advisorGrid" class="grid grid-cols-2 gap-3 mt-3" data-page-node-id="U7Grid"></div>
         <div id="advisorEmpty" class="hidden text-center py-10" data-page-node-id="U7Empty">
@@ -427,37 +408,40 @@
     .chip.active{background:#1a140e;color:#f3e7cd;border-color:#1a140e;font-weight:600}
     .adv-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
     .adv-card:active{transform:scale(.98)}
-    .adv-status{position:absolute;left:10px;top:10px;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.5);color:#fff;font-size:10px;font-weight:500;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-    .adv-dot{width:6px;height:6px;border-radius:50%}
-    .adv-dot.on{background:#4ade80}
-    .adv-dot.off{background:#fbbf24}
-    .adv-fav{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.35);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-    .adv-fav.active{color:#E02E24}
+    .adv-top{display:flex;align-items:center;gap:10px;padding:12px 12px 8px}
+    .adv-mid{flex:1 1 auto;min-width:0}
+    .adv-nm{font-size:14px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .adv-desc{font-size:11px;color:#9aa0a6;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .adv-av{position:relative;width:46px;height:46px;flex:0 0 auto}
+    .adv-av img{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block;background:#f0ece3}
+    .adv-av .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#4ade80;border:2px solid #fff}
+    .adv-av .od.off{background:#fbbf24}
+    .adv-av .gc{position:absolute;left:-4px;bottom:-3px;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff}
+    .adv-like{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;background:#f6f4ef;border:1px solid #ece6da;color:#8b7a5f;font-size:11px;font-weight:600;flex:0 0 auto;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
+    .adv-like i{font-size:10px}
+    .adv-like.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
+    .adv-tags{display:flex;flex-wrap:wrap;gap:5px;padding:0 12px}
+    .adv-tag{display:inline-block;padding:2px 7px;border-radius:6px;background:#f8f4ec;color:#8a6f4d;font-size:10px;line-height:16px}
+    .adv-store{display:flex;align-items:center;gap:4px;padding:0 12px 12px;margin-top:8px;font-size:10px;color:#9aa0a6}
   </style>
 
   <script data-page-node-id="U7Script">
     var ADVISORS = [
-      { name: '林小婷', title: '美妆香氛顾问', cat: '美妆香氛', brand: '迪奥', img: 'assets/generated/advisor1.png', online: true,  years: '5年', rating: '4.9', store: '三亚国际免税城' },
-      { name: '陈佳琪', title: '珠宝腕表顾问', cat: '珠宝腕表', brand: '宝诗龙', img: 'assets/generated/advisor2.png', online: false, years: '6年', rating: '4.8', store: '三亚国际免税城' },
-      { name: '王子墨', title: '精品导购顾问', cat: '服饰箱包', brand: '巴黎世家', img: 'assets/generated/advisor3.png', online: true,  years: '4年', rating: '4.9', store: '海口国际免税城' },
-      { name: '赵文博', title: '皮具顾问', cat: '服饰箱包', brand: '博柏利', img: 'assets/generated/advisor4.png', online: true,  years: '8年', rating: '5.0', store: '三亚国际免税城' },
-      { name: '苏晚晴', title: '服饰顾问', cat: '服饰箱包', brand: '巴黎世家', img: 'assets/generated/advisor5.png', online: false, years: '3年', rating: '4.7', store: '海口国际免税城' },
-      { name: '许静文', title: '珠宝顾问', cat: '珠宝腕表', brand: '卡地亚', img: 'assets/generated/advisor6.png', online: true,  years: '7年', rating: '4.9', store: '三亚国际免税城' },
-      { name: '韩语嫣', title: '腕表顾问', cat: '珠宝腕表', brand: '宝诗龙', img: 'assets/generated/advisor7.png', online: true,  years: '6年', rating: '4.8', store: '三亚国际免税城' },
-      { name: '沈明轩', title: '香化顾问', cat: '美妆香氛', brand: '浪凡', img: 'assets/generated/advisor8.png', online: false, years: '2年', rating: '4.6', store: '海口国际免税城' }
+      { name: '林小婷', desc: '待人真诚，优质服务', tags: ['待人以诚', '秒回消息'], brand: '迪奥', img: 'assets/generated/advisor1.png', online: true,  likes: 328, store: '三亚国际免税城' },
+      { name: '陈佳琪', desc: '耐心细致，专业推荐', tags: ['专业选品'], brand: '宝诗龙', img: 'assets/generated/advisor2.png', online: false, likes: 214, store: '三亚国际免税城' },
+      { name: '王子墨', desc: '眼光独到，品味在线', tags: ['潮流穿搭', '有问必答'], brand: '巴黎世家', img: 'assets/generated/advisor3.png', online: true,  likes: 356, store: '海口国际免税城' },
+      { name: '赵文博', desc: '响应迅速，售后无忧', tags: ['服务周到'], brand: '博柏利', img: 'assets/generated/advisor4.png', online: true,  likes: 402, store: '三亚国际免税城' },
+      { name: '苏晚晴', desc: '温柔亲切，细致贴心', tags: ['贴心服务'], brand: '巴黎世家', img: 'assets/generated/advisor5.png', online: false, likes: 168, store: '海口国际免税城' },
+      { name: '许静文', desc: '专业严谨，值得信赖', tags: ['专业选品', '值得信赖'], brand: '卡地亚', img: 'assets/generated/advisor6.png', online: true,  likes: 289, store: '三亚国际免税城' },
+      { name: '韩语嫣', desc: '热情主动，耐心解答', tags: ['热情周到'], brand: '宝诗龙', img: 'assets/generated/advisor7.png', online: true,  likes: 233, store: '三亚国际免税城' },
+      { name: '沈明轩', desc: '亲和有礼，响应及时', tags: ['亲和有礼'], brand: '浪凡', img: 'assets/generated/advisor8.png', online: false, likes: 147, store: '海口国际免税城' }
     ];
-    var CATS = ['全部精品', '珠宝腕表', '服饰箱包', '美妆香氛'];
     var BRANDS = ['全部品牌', '巴黎世家', '宝诗龙', '博柏利', '卡地亚', '迪奥', '浪凡'];
-    var stateCat = '全部精品';
     var stateBrand = '全部品牌';
 
     function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
     function renderChips() {
-      var catBar = document.getElementById('catBar');
-      catBar.innerHTML = CATS.map(function (c) {
-        return '<button type="button" class="chip' + (c === stateCat ? ' active' : '') + '" onclick="setCat(\'' + c + '\')">' + c + '</button>';
-      }).join('');
       var brandBar = document.getElementById('brandBar');
       brandBar.innerHTML = BRANDS.map(function (b) {
         return '<button type="button" class="chip shrink-0' + (b === stateBrand ? ' active' : '') + '" onclick="setBrand(\'' + b + '\')">' + b + '</button>';
@@ -466,9 +450,7 @@
 
     function filteredAdvisors() {
       return ADVISORS.filter(function (a) {
-        var okCat = stateCat === '全部精品' || a.cat === stateCat;
-        var okBrand = stateBrand === '全部品牌' || a.brand === stateBrand;
-        return okCat && okBrand;
+        return stateBrand === '全部品牌' || a.brand === stateBrand;
       });
     }
 
@@ -477,31 +459,29 @@
       var grid = document.getElementById('advisorGrid');
       var empty = document.getElementById('advisorEmpty');
       document.getElementById('advisorCount').textContent = list.length;
-      document.getElementById('advisorCatLabel').textContent = stateCat === '全部精品' ? '全部' : stateCat;
       grid.innerHTML = list.map(function (a, i) {
         var idx = ADVISORS.indexOf(a);
-        return '<div class="adv-card relative" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
-          '<div class="relative">' +
-            '<img src="' + a.img + '" alt="' + esc(a.name) + '" class="w-full h-40 object-cover" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
-            '<span class="adv-status"><span class="adv-dot ' + (a.online ? 'on' : 'off') + '"></span>' + (a.online ? '营业在线' : '稍后回复') + '</span>' +
-            '<button type="button" class="adv-fav" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞"><i class="fas fa-thumbs-up"></i></button>' +
-          '</div>' +
-          '<div class="p-3">' +
-            '<div class="flex items-center justify-between">' +
-              '<p class="text-[14px] font-semibold text-gray-900">' + esc(a.name) + '</p>' +
+        var tags = (a.tags || []).map(function (t) { return '<span class="adv-tag">' + esc(t) + '</span>'; }).join('');
+        return '<div class="adv-card" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
+          '<div class="adv-top">' +
+            '<span class="adv-av">' +
+              '<img src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
+              '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
+              '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
+            '</span>' +
+            '<div class="adv-mid">' +
+              '<p class="adv-nm">' + esc(a.name) + '</p>' +
+              '<p class="adv-desc">' + esc(a.desc) + '</p>' +
             '</div>' +
-            '<p class="text-[11px] text-gray-400 mt-0.5">' + esc(a.title) + ' · ' + a.years + '经验</p>' +
-            '<div class="flex items-center justify-between mt-2">' +
-              '<span class="text-[10px] text-gray-400"><i class="fas fa-store mr-0.5"></i>' + esc(a.store) + '</span>' +
-              '<span class="text-[11px] font-semibold" style="color:#8a6f4d">去咨询 <i class="fas fa-chevron-right text-[8px]"></i></span>' +
-            '</div>' +
+            '<button type="button" class="adv-like" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
           '</div>' +
+          '<div class="adv-tags">' + tags + '</div>' +
+          '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
         '</div>';
       }).join('');
       empty.classList.toggle('hidden', list.length > 0);
     }
 
-    function setCat(c) { stateCat = c; renderChips(); renderAdvisors(); }
     function setBrand(b) { stateBrand = b; renderChips(); renderAdvisors(); }
 
     function openChat(idx) {
@@ -511,11 +491,14 @@
     }
 
     function toggleFav(btn) {
-      btn.classList.toggle('active');
+      var on = btn.classList.toggle('active');
+      var num = btn.querySelector('span');
+      var n = parseInt(num.textContent, 10) || 0;
+      num.textContent = on ? n + 1 : Math.max(0, n - 1);
       var card = btn.closest('.adv-card');
       var idx = parseInt(card.getAttribute('data-page-node-id').replace('U7Adv', ''), 10);
       var name = ADVISORS[idx] ? ADVISORS[idx].name : '';
-      showToast(btn.classList.contains('active') ? '已点赞顾问：' + name : '已取消点赞');
+      showToast(on ? '已点赞顾问：' + name : '已取消点赞');
     }
 
     function showToast(text) {
