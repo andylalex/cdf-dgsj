@@ -403,6 +403,13 @@
             </div>
             <span class="text-[12px] text-coral-600 font-medium" data-page-node-id="U4CouponValue">¥500 已使用</span>
           </div>
+          <div class="flex items-center justify-between py-2.5" data-page-node-id="U4RowGov">
+            <div class="flex items-center gap-2.5" data-page-node-id="U4GovLeft">
+              <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-500 shrink-0" data-page-node-id="U4GovIcon"><i class="fas fa-landmark text-[13px]"></i></div>
+              <span class="text-[13px] text-gray-800" data-page-node-id="U4GovLabel">政府消费券</span>
+            </div>
+            <span class="text-[12px] text-red-500 font-medium" data-page-node-id="U4GovValue">-¥300 已抵扣</span>
+          </div>
           <div class="flex items-center justify-between py-2.5" data-page-node-id="U4RowPoints">
             <div class="flex items-center gap-2.5" data-page-node-id="U4PointsLeft">
               <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600 shrink-0" data-page-node-id="U4PointsIcon"><i class="fas fa-coins text-[13px]"></i></div>
@@ -436,6 +443,10 @@
           <div class="flex items-center justify-between text-[13px]" data-page-node-id="U4SummaryTaxDiscount">
             <span class="text-gray-500" data-page-node-id="U4SummaryTaxDiscountLabel">行邮税优惠</span>
             <span id="summaryTaxDiscount" class="text-gray-800 font-medium" data-page-node-id="U4SummaryTaxDiscountVal">-¥0.00</span>
+          </div>
+          <div class="flex items-center justify-between text-[13px]" data-page-node-id="U4SummaryGov">
+            <span class="text-gray-500" data-page-node-id="U4SummaryGovLabel">政府消费券抵扣</span>
+            <span id="summaryGov" class="text-gray-800 font-medium" data-page-node-id="U4SummaryGovVal">-¥300.00</span>
           </div>
           <div class="flex items-center justify-between text-[13px] pt-2.5 border-t border-gray-100" data-page-node-id="U4SummaryTotalRow">
             <span class="text-gray-800 font-semibold" data-page-node-id="U4SummaryTotalLabel">应付合计</span>
@@ -569,12 +580,14 @@
       });
       document.getElementById('itemsCount').textContent = '共 ' + count + ' 件';
       const discount = 500;        // 优惠券已使用
+      const govDiscount = 300;     // 政府消费券抵扣
       const points = 0;            // 积分抵扣
       const tax = 0;               // 行邮税
       const taxDiscount = 0;       // 行邮税优惠
-      const total = Math.max(0, subtotal - discount - points + tax - taxDiscount);
+      const total = Math.max(0, subtotal - discount - govDiscount - points + tax - taxDiscount);
       document.getElementById('summarySubtotal').textContent = formatMoney(subtotal);
       document.getElementById('summaryDiscount').textContent = '-' + formatMoney(discount);
+      document.getElementById('summaryGov').textContent = '-' + formatMoney(govDiscount);
       document.getElementById('summaryPoints').textContent = '-' + formatMoney(points);
       document.getElementById('summaryTax').textContent = '+' + formatMoney(tax);
       document.getElementById('summaryTaxDiscount').textContent = '-' + formatMoney(taxDiscount);

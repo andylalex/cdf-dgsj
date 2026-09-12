@@ -320,6 +320,18 @@
     <!-- 内容区 -->
     <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-3 pb-24" data-page-node-id="U6Content">
 
+      <!-- 政府消费券领取入口 -->
+      <div class="rounded-2xl p-4 shadow-sm text-white flex items-center justify-between" data-page-node-id="U6GovCoupon" style="background:linear-gradient(135deg,#ff8a75,#e64e39)">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center"><i class="fas fa-ticket text-[18px]"></i></div>
+          <div>
+            <p class="text-[14px] font-semibold">海南政府消费券</p>
+            <p class="text-[11px] opacity-90 mt-0.5">满 1000 减 300 · 下单自动抵扣</p>
+          </div>
+        </div>
+        <button type="button" id="govCouponBtn" onclick="claimGovCoupon()" class="bg-white text-coral-600 text-[13px] font-semibold px-4 py-2 rounded-full active:scale-95 transition" data-page-node-id="U6GovBtn">立即领取</button>
+      </div>
+
       <!-- 分组清单 -->
       <div id="groupWrap" class="space-y-3" data-page-node-id="U6GroupWrap"><div class="bg-white rounded-2xl p-4 shadow-sm" data-source="store"><div class="group-head flex items-center gap-2.5 mb-3"><input type="checkbox" class="group-check w-5 h-5 rounded accent-coral-500 shrink-0" checked="" onchange="toggleGroup('store', this.checked)"><div class="flex-1 min-w-0"><p class="text-[15px] font-semibold text-gray-800">海口国际免税城</p></div><span class="group-count text-[12px] text-gray-400">共 1 件</span></div><div class="group-items space-y-3"><label class="item-row flex gap-3 items-start" data-idx="0"><input type="checkbox" class="item-check w-5 h-5 rounded accent-coral-500 shrink-0 mt-1" checked="" onchange="toggleItem(0, this.checked)"><img src="assets/generated/product1.png" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>顾问 · 顾问</p><div class="flex flex-wrap gap-1.5 mt-1.5"><span class="tag-gov">政府消费券</span></div><div class="mt-2 flex items-center justify-between gap-2"><span class="text-[14px] font-bold text-coral-600 shrink-0">¥394.00</span><div class="flex items-center gap-2 shrink-0"><div class="qty-stepper flex items-center"><button type="button" class="stepper-btn" onclick="changeQty(0, -1)" disabled="">-</button><input type="text" class="stepper-input" value="1" readonly=""><button type="button" class="stepper-btn" onclick="changeQty(0, 1)">+</button></div><button type="button" onclick="removeItem(0)" class="w-7 h-7 flex items-center justify-center text-gray-300 active:text-coral-500 transition"><i class="fas fa-trash-can text-[12px]"></i></button></div></div></div></label></div></div></div>
 
@@ -611,7 +623,23 @@
       renderList();
     });
 
-  </script>
+  
+    function claimGovCoupon() {
+      const btn = document.getElementById('govCouponBtn');
+      if (!btn || btn.dataset.claimed === '1') return;
+      btn.dataset.claimed = '1';
+      btn.textContent = '已领取';
+      btn.classList.add('opacity-70');
+      try { localStorage.setItem('govCouponClaimed', '1'); } catch (e) {}
+    }
+
+    try {
+      if (localStorage.getItem('govCouponClaimed') === '1') {
+        const b = document.getElementById('govCouponBtn');
+        if (b) { b.textContent = '已领取'; b.dataset.claimed = '1'; b.classList.add('opacity-70'); }
+      }
+    } catch (e) {}
+</script>
 
 
   <!-- 商品图片画廊弹窗（点击商品图片弹出；左右箭头置于页码前后；图片裁切遮挡 15%） -->
