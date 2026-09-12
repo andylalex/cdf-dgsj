@@ -44,7 +44,7 @@
   .cert i{font-size:10px}
   .user-ops{display:flex;gap:20px;padding-right:4px}
   .uop{display:flex;flex-direction:column;align-items:center;gap:4px;color:#23262b;cursor:pointer}
-  .uop i{font-size:21px;font-weight:500}
+  .uop i{font-size:21px;font-weight:900}
   .uop span{font-size:12px;font-weight:500}
 
   /* 会员卡 */
@@ -85,7 +85,7 @@
   /* 图标宫格 */
   .grid4{display:flex}
   .gcell{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;color:#23262b;cursor:pointer}
-  .gcell i{font-size:23px;font-weight:500}
+  .gcell i{font-size:23px;font-weight:900}
   .gcell span{font-size:13px;font-weight:500}
 
   /* 五宫格 + 全部 */
@@ -126,6 +126,10 @@
   .tab .cdf{font-weight:900;font-size:19px;letter-spacing:-.5px;font-family:Arial,sans-serif}
   .tab span{font-size:11px}
   .tab.on{color:#e02e24;font-weight:600}
+  /* 图标字重兜底：FA6 Free 只注册 solid(900) 与 regular(400) 两个字体面，
+     图标规则若被写成中间字重（如 500），浏览器会回退到 regular 子集导致 solid 图标丢字形显示为占位符 */
+  i.fas{font-weight:900}
+  i.far{font-weight:400}
 </style>
 </head>
 <body data-page-node-id="CqHRKG1C9lBExWnMgCOnEF">
