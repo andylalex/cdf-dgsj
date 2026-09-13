@@ -329,7 +329,7 @@
             <p class="text-[11px] opacity-90 mt-0.5">满 1000 减 300 · 下单自动抵扣</p>
           </div>
         </div>
-        <button type="button" id="govCouponBtn" onclick="claimGovCoupon()" class="bg-white text-coral-600 text-[13px] font-semibold px-4 py-2 rounded-full active:scale-95 transition" data-page-node-id="U6GovBtn">立即领取</button>
+        <button type="button" id="govCouponBtn" class="bg-white text-coral-600 text-[13px] font-semibold px-4 py-2 rounded-full active:scale-95 transition" data-page-node-id="U6GovBtn">立即领取</button>
       </div>
 
       <!-- 分组清单 -->
@@ -624,21 +624,6 @@
     });
 
   
-    function claimGovCoupon() {
-      const btn = document.getElementById('govCouponBtn');
-      if (!btn || btn.dataset.claimed === '1') return;
-      btn.dataset.claimed = '1';
-      btn.textContent = '已领取';
-      btn.classList.add('opacity-70');
-      try { localStorage.setItem('govCouponClaimed', '1'); } catch (e) {}
-    }
-
-    try {
-      if (localStorage.getItem('govCouponClaimed') === '1') {
-        const b = document.getElementById('govCouponBtn');
-        if (b) { b.textContent = '已领取'; b.dataset.claimed = '1'; b.classList.add('opacity-70'); }
-      }
-    } catch (e) {}
 </script>
 
 
