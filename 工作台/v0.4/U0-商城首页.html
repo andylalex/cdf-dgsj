@@ -208,7 +208,7 @@
   .banner-deco{position:absolute;right:-20px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08);z-index:1}
 
   /* 商品楼层（组合：左列会员专享 + 右列大牌好价/抄底捡漏） */
-  .mall-floor{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 10px;align-items:start}
+  .mall-floor{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:0 10px;align-items:start}
   .floor-left,.right-section{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
   .floor-left{padding:8px 6px;display:flex;flex-direction:column;gap:4px}
   .floor-right{display:flex;flex-direction:column;gap:4px}
