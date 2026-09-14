@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="U15Html">
+<head data-page-node-id="U15Head">
+  <meta charset="UTF-8" data-page-node-id="U15Meta">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="U15Viewport">
+  <title data-page-node-id="U15Title">订单列表</title>
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="U15FaCss">
+  <style data-page-node-id="U15Style">
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{height:100%;font-family:'Noto Sans SC','PingFang SC',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:#f5f5f5;color:#1a1a1a}
+    .phone-frame{max-width:414px;height:100dvh;overflow:hidden;margin:0 auto;background:#f5f5f5;display:flex;flex-direction:column}
+
+    /* 状态栏 */
+    .status-bar{flex:0 0 auto;height:44px;padding:10px 16px 0;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;color:#1a1a1a;background:#fff}
+    .status-bar .time{font-size:15px;letter-spacing:.5px}
+    .status-bar .icons{display:flex;align-items:center;gap:5px;font-size:12px}
+    .status-bar .icons i{font-size:13px}
+    .status-bar .battery{width:22px;height:11px;border:1px solid #1a1a1a;border-radius:2px;position:relative;display:flex;align-items:center;padding:1px}
+    .status-bar .battery::after{content:'';position:absolute;right:-3px;top:3px;width:2px;height:4px;background:#1a1a1a;border-radius:0 1px 1px 0}
+    .status-bar .battery i{width:65%;height:100%;background:#1a1a1a;border-radius:1px;display:block}
+
+    /* 顶部栏 */
+    .top-header{flex:0 0 auto;background:#fff;padding:6px 10px 10px;display:flex;align-items:center;gap:8px}
+    .top-header .back{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#1a1a1a;font-size:18px}
+    .search-box{flex:1;height:34px;background:#f3f4f6;border-radius:17px;display:flex;align-items:center;padding:0 12px;gap:6px}
+    .search-box i{color:#9ca3af;font-size:13px}
+    .search-box span{font-size:13px;color:#9ca3af}
+    .top-header .act{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#1a1a1a;font-size:17px;position:relative}
+    .top-header .act .act-label{position:absolute;bottom:-1px;font-size:8px;color:#6b7280}
+
+    /* 状态 tab */
+    .tabs{flex:0 0 auto;background:#fff;padding:0 6px;border-bottom:1px solid #f3f4f6;display:flex;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-ms-overflow-style:none}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab{flex-shrink:0;padding:10px 12px 9px;font-size:13px;color:#6b7280;position:relative;cursor:pointer}
+    .tab.on{color:#E02E24;font-weight:700}
+    .tab.on::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:18px;height:3px;background:#E02E24;border-radius:2px}
+
+    /* 滚动区 */
+    .scroll-area{flex:1;min-height:0;overflow-y:auto}
+
+    /* 订单卡片 */
+    .order-card{background:#fff;border-radius:12px;margin:10px 10px 0;overflow:hidden}
+    .store-hd{display:flex;align-items:center;padding:12px 12px 8px;gap:5px}
+    .store-hd .name{font-size:14px;font-weight:700;color:#1a1a1a}
+    .store-hd .tag{font-size:10px;font-weight:600;color:#E02E24;background:#fef2f2;border:1px solid #fee2e2;border-radius:4px;padding:1px 4px}
+    .store-hd .arrow{color:#9ca3af;font-size:10px}
+    .store-hd .status{margin-left:auto;font-size:14px;font-weight:600;color:#1a1a1a}
+
+    /* 商品行 */
+    .product-row{padding:10px 12px;display:flex;gap:10px}
+    .product-thumb{width:70px;height:70px;border-radius:8px;background:#f9fafb;overflow:hidden;flex-shrink:0}
+    .product-thumb img{width:100%;height:100%;object-fit:cover}
+    .product-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+    .product-main{display:flex;gap:8px}
+    .product-info{flex:1;min-width:0}
+    .product-name{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .product-spec{font-size:11px;color:#9ca3af;margin-top:2px}
+    .product-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+    .product-tag{font-size:9px;font-weight:600;color:#E02E24;background:#fff;border:1px solid #E02E24;border-radius:3px;padding:1px 3px}
+    .product-meta{flex-shrink:0;text-align:right;min-width:70px}
+    .product-state{font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
+    .product-qty{font-size:11px;color:#9ca3af;margin-bottom:4px}
+    .product-pay{font-size:10px;color:#9ca3af;white-space:nowrap}
+    .product-pay .amount{font-size:13px;font-weight:700;color:#1a1a1a;margin-left:1px}
+
+    /* 物流/退款状态行 */
+    .logistics-row{margin:0 12px 10px;padding:8px 10px;background:#f9fafb;border-radius:8px;display:flex;align-items:flex-start;gap:8px}
+    .logistics-row .label{font-size:12px;font-weight:700;color:#1a1a1a;flex-shrink:0}
+    .logistics-row .txt{font-size:11px;color:#6b7280;line-height:1.4;flex:1}
+    .logistics-row .refund-txt{font-size:11px;color:#6b7280}
+    .logistics-row .refund-txt .sum{font-weight:700;color:#1a1a1a}
+
+    /* 底部操作区 */
+    .bottom-actions{background:#fff;border-radius:12px;margin:10px 10px 0;padding:12px}
+    .actions-total{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:12px;font-size:13px;color:#6b7280}
+    .actions-total .count{color:#1a1a1a;font-weight:600}
+    .actions-total .sum{font-size:16px;font-weight:800;color:#1a1a1a}
+    .actions-btns{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+    .actions-btns .btn{padding:6px 12px;border-radius:14px;font-size:12px;font-weight:600;border:1px solid #d1d5db;color:#1a1a1a;background:#fff}
+    .actions-btns .btn.primary{background:#E02E24;border-color:#E02E24;color:#fff}
+
+    /* 订单信息 */
+    .order-info{background:#fff;border-radius:12px;margin:10px 10px 0;padding:0 12px}
+    .order-info-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 0;font-size:13px;font-weight:600;color:#1a1a1a;cursor:pointer}
+    .order-info-hd i{font-size:10px;color:#9ca3af;margin-left:4px}
+    .order-info-bd{display:none;padding-bottom:12px}
+    .order-info-bd.open{display:block}
+    .order-info-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#6b7280;margin-top:8px}
+    .order-info-row .no{font-family:Arial,sans-serif;letter-spacing:.5px}
+    .order-info-row .copy{font-size:11px;color:#E02E24;border:1px solid #E02E24;border-radius:10px;padding:1px 8px;background:#fff}
+    .spacer{height:20px;flex-shrink:0}
+  </style>
+</head>
+<body data-page-node-id="U15Body">
+<div class="phone-frame" data-page-node-id="U15PhoneFrame">
+
+  <!-- 状态栏 -->
+  <div class="status-bar" data-page-node-id="U15StatusBar">
+    <span class="time" data-page-node-id="U15StatusTime">9:41</span>
+    <div class="icons" data-page-node-id="U15StatusIcons">
+      <i class="fas fa-signal" data-page-node-id="U15Signal"></i>
+      <i class="fas fa-wifi" data-page-node-id="U15Wifi"></i>
+      <div class="battery" data-page-node-id="U15Battery"><i></i></div>
+    </div>
+  </div>
+
+  <!-- 顶部栏 -->
+  <header class="top-header" data-page-node-id="U15TopHeader">
+    <span class="back" data-page-node-id="U15Back" onclick="goBack()"><i class="fas fa-chevron-left" data-page-node-id="U15BackIcon"></i></span>
+    <div class="search-box" data-page-node-id="U15SearchBox">
+      <i class="fas fa-magnifying-glass" data-page-node-id="U15SearchIcon"></i>
+      <span data-page-node-id="U15SearchText">搜索订单</span>
+    </div>
+    <span class="act" data-page-node-id="U15Filter"><i class="fas fa-filter" data-page-node-id="U15FilterIcon"></i><span class="act-label" data-page-node-id="U15FilterLabel">筛选</span></span>
+    <span class="act" data-page-node-id="U15Delete"><i class="fas fa-trash-can" data-page-node-id="U15DeleteIcon"></i></span>
+    <span class="act" data-page-node-id="U15More"><i class="fas fa-ellipsis" data-page-node-id="U15MoreIcon"></i></span>
+    <span class="act" data-page-node-id="U15Scan"><i class="fas fa-qrcode" data-page-node-id="U15ScanIcon"></i></span>
+  </header>
+
+  <!-- 状态 tab -->
+  <nav class="tabs" data-page-node-id="U15Tabs">
+    <span class="tab on" data-page-node-id="U15TabAll" onclick="switchTab(this)">全部</span>
+    <span class="tab" data-page-node-id="U15TabPay" onclick="switchTab(this)">待付款</span>
+    <span class="tab" data-page-node-id="U15TabShip" onclick="switchTab(this)">待发货</span>
+    <span class="tab" data-page-node-id="U15TabReceive" onclick="switchTab(this)">待收货</span>
+    <span class="tab" data-page-node-id="U15TabUse" onclick="switchTab(this)">待使用</span>
+    <span class="tab" data-page-node-id="U15TabRefund" onclick="switchTab(this)">退款/售后</span>
+  </nav>
+
+  <main class="scroll-area" data-page-node-id="U15ScrollArea">
+
+    <!-- 订单卡片 -->
+    <section class="order-card" data-page-node-id="U15OrderCard1">
+      <div class="store-hd" data-page-node-id="U15StoreHd1">
+        <span class="name" data-page-node-id="U15StoreName1">cdf海口国际免税城</span>
+        <span class="tag" data-page-node-id="U15StoreTag1">会员优选</span>
+        <i class="fas fa-chevron-right arrow" data-page-node-id="U15StoreArrow1"></i>
+        <span class="status" data-page-node-id="U15OrderStatus1">待收货</span>
+      </div>
+
+      <div class="product-row" data-page-node-id="U15Product1">
+        <div class="product-thumb" data-page-node-id="U15Thumb1"><img src="assets/generated/a1.png" alt="商品" data-page-node-id="U15Pic1"></div>
+        <div class="product-body" data-page-node-id="U15Body1">
+          <div class="product-main" data-page-node-id="U15Main1">
+            <div class="product-info" data-page-node-id="U15Info1">
+              <div class="product-name" data-page-node-id="U15Name1">雅诗兰黛特润修护精华露护肤两只装</div>
+              <div class="product-spec" data-page-node-id="U15Spec1">50ml×2</div>
+              <div class="product-tags" data-page-node-id="U15Tags1">
+                <span class="product-tag" data-page-node-id="U15Tag1a">过敏退</span>
+                <span class="product-tag" data-page-node-id="U15Tag1b">破损无忧</span>
+                <span class="product-tag" data-page-node-id="U15Tag1c">支持7退</span>
+              </div>
+            </div>
+            <div class="product-meta" data-page-node-id="U15Meta1">
+              <div class="product-state" data-page-node-id="U15State1">待发货</div>
+              <div class="product-qty" data-page-node-id="U15Qty1">×1</div>
+              <div class="product-pay" data-page-node-id="U15Pay1">实付款 <span class="amount" data-page-node-id="U15Amount1">¥1388.00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="logistics-row" data-page-node-id="U15Log1">
+        <span class="label" data-page-node-id="U15LogLabel1">待取件</span>
+        <span class="txt" data-page-node-id="U15LogTxt1">取件码：123456 滨河一期1号楼下米乐便利店妈妈驿站</span>
+      </div>
+
+      <div class="product-row" data-page-node-id="U15Product2">
+        <div class="product-thumb" data-page-node-id="U15Thumb2"><img src="assets/generated/a3.png" alt="商品" data-page-node-id="U15Pic2"></div>
+        <div class="product-body" data-page-node-id="U15Body2">
+          <div class="product-main" data-page-node-id="U15Main2">
+            <div class="product-info" data-page-node-id="U15Info2">
+              <div class="product-name" data-page-node-id="U15Name2">雅诗兰黛持妆粉底液持久服帖不脱妆控油防水抗汗</div>
+              <div class="product-spec" data-page-node-id="U15Spec2">30ml</div>
+              <div class="product-tags" data-page-node-id="U15Tags2">
+                <span class="product-tag" data-page-node-id="U15Tag2a">不支持7退</span>
+              </div>
+            </div>
+            <div class="product-meta" data-page-node-id="U15Meta2">
+              <div class="product-state" data-page-node-id="U15State2">待收货</div>
+              <div class="product-qty" data-page-node-id="U15Qty2">×1</div>
+              <div class="product-pay" data-page-node-id="U15Pay2">实付款 <span class="amount" data-page-node-id="U15Amount2">¥311.25</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="logistics-row" data-page-node-id="U15Log2">
+        <span class="label" data-page-node-id="U15LogLabel2">运输中</span>
+        <span class="txt" data-page-node-id="U15LogTxt2">快件离开【郑州转运中心】已发往【石家庄转运中心】</span>
+      </div>
+
+      <div class="product-row" data-page-node-id="U15Product3">
+        <div class="product-thumb" data-page-node-id="U15Thumb3"><img src="assets/generated/b3.png" alt="商品" data-page-node-id="U15Pic3"></div>
+        <div class="product-body" data-page-node-id="U15Body3">
+          <div class="product-main" data-page-node-id="U15Main3">
+            <div class="product-info" data-page-node-id="U15Info3">
+              <div class="product-name" data-page-node-id="U15Name3">雅诗兰黛持妆粉底液持久服帖不脱妆控油防水抗汗</div>
+              <div class="product-spec" data-page-node-id="U15Spec3">50ml</div>
+              <div class="product-tags" data-page-node-id="U15Tags3">
+                <span class="product-tag" data-page-node-id="U15Tag3a">不支持7退</span>
+              </div>
+            </div>
+            <div class="product-meta" data-page-node-id="U15Meta3">
+              <div class="product-state" data-page-node-id="U15State3">已退款</div>
+              <div class="product-qty" data-page-node-id="U15Qty3">×1</div>
+              <div class="product-pay" data-page-node-id="U15Pay3">实付款 <span class="amount" data-page-node-id="U15Amount3">¥311.25</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="logistics-row" data-page-node-id="U15Log3">
+        <span class="label" data-page-node-id="U15LogLabel3">退款成功</span>
+        <span class="refund-txt" data-page-node-id="U15RefundTxt3">退款金额：<span class="sum" data-page-node-id="U15RefundSum3">¥311.25</span></span>
+      </div>
+    </section>
+
+    <!-- 底部合计与操作 -->
+    <section class="bottom-actions" data-page-node-id="U15BottomActions">
+      <div class="actions-total" data-page-node-id="U15ActionsTotal">
+        <span data-page-node-id="U15TotalLabel">共<span class="count" data-page-node-id="U15TotalCount">3</span>件</span>
+        <span data-page-node-id="U15TotalText">合计</span>
+        <span class="sum" data-page-node-id="U15TotalSum">¥1010.50</span>
+      </div>
+      <div class="actions-btns" data-page-node-id="U15ActionsBtns">
+        <button class="btn" data-page-node-id="U15BtnMore">更多</button>
+        <button class="btn" data-page-node-id="U15BtnInvoice">申请开票</button>
+        <button class="btn primary" data-page-node-id="U15BtnAftersale">申请售后</button>
+      </div>
+    </section>
+
+    <!-- 订单信息 -->
+    <section class="order-info" data-page-node-id="U15OrderInfo">
+      <div class="order-info-hd" data-page-node-id="U15OrderInfoHd" onclick="toggleInfo(this)">
+        <span data-page-node-id="U15OrderInfoTitle">订单信息</span>
+        <i class="fas fa-chevron-down" data-page-node-id="U15OrderInfoIcon"></i>
+      </div>
+      <div class="order-info-bd" data-page-node-id="U15OrderInfoBd">
+        <div class="order-info-row" data-page-node-id="U15OrderNoRow">
+          <span data-page-node-id="U15OrderNoLabel">订单编号</span>
+          <span class="no" data-page-node-id="U15OrderNo">235435697986899992</span>
+          <span class="copy" data-page-node-id="U15OrderCopy" onclick="copyNo()">复制</span>
+        </div>
+        <div class="order-info-row" data-page-node-id="U15OrderTimeRow">
+          <span data-page-node-id="U15OrderTimeLabel">下单时间</span>
+          <span data-page-node-id="U15OrderTime">2026-09-14 09:32:18</span>
+        </div>
+        <div class="order-info-row" data-page-node-id="U15OrderPayRow">
+          <span data-page-node-id="U15OrderPayLabel">支付方式</span>
+          <span data-page-node-id="U15OrderPayWay">微信支付</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacer" data-page-node-id="U15Spacer"></div>
+  </main>
+
+</div>
+<script data-page-node-id="U15Script">
+  function goBack(){
+    if(document.referrer && document.referrer.indexOf(location.hostname)!==-1){history.back();}else{location.href='index.html';}
+  }
+  function switchTab(el){
+    document.querySelectorAll('.tabs .tab').forEach(function(t){t.classList.remove('on');});
+    el.classList.add('on');
+  }
+  function toggleInfo(el){
+    var bd=el.nextElementSibling;
+    if(!bd) return;
+    var open=bd.classList.contains('open');
+    bd.classList.toggle('open',!open);
+    el.querySelector('i').className=open?'fas fa-chevron-down':'fas fa-chevron-up';
+  }
+  function copyNo(){
+    var no='235435697986899992';
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(no).catch(function(){});
+    }
+  }
+</script>
+</body>
+</html>

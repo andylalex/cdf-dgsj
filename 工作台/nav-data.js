@@ -18,7 +18,9 @@ window.NAV_DATA = {
         { "name": "付费品牌馆", "url": "v0.4/U8-品牌主页.html" },
         { "name": "商品详情", "url": "v0.4/U9-商品详情页.html" },
         { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" },
-        { "name": "我的", "url": "v0.4/U13-我的页.html" }
+        { "name": "我的", "url": "v0.4/U13-我的页.html" },
+        { "name": "消息中心", "url": "v0.4/U14-消息中心.html" },
+        { "name": "订单列表", "url": "v0.4/U15-订单列表页.html" }
       ],
       "__imported": false,
       "hotspots": []
@@ -33,6 +35,14 @@ window.NAV_DATA = {
     {
       "id": "v04-u14",
       "name": "U14 消息中心",
+      "group": "用户端 · CDF中免海南",
+      "device": "mobile",
+      "__imported": false
+    },
+
+    {
+      "id": "v04-u15",
+      "name": "U15 订单列表页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
