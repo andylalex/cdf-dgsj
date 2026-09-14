@@ -208,7 +208,7 @@
   .banner-deco{position:absolute;right:-20px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08);z-index:1}
 
   /* 商品楼层（组合：左列会员专享 + 右列大牌好价/抄底捡漏） */
-  .mall-floor{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 10px}
+  .mall-floor{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 10px;align-items:start}
   .floor-left,.right-section{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
   .floor-left{padding:8px 6px;display:flex;flex-direction:column;gap:4px}
   .floor-right{display:flex;flex-direction:column;gap:4px}
@@ -258,6 +258,13 @@
   .vip-wide-card .prod-price{display:flex;align-items:baseline;gap:2px;margin-top:2px}
   .vip-wide-card .prod-price .yen{font-size:9px;font-weight:700;color:#E02E24}
   .vip-wide-card .prod-price .num{font-size:12px;font-weight:800;color:#E02E24;letter-spacing:-.5px}
+
+  /* 会员专享田字格 */
+  .vip-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  /* 右列每行两个商品横排 */
+  .right-row{display:flex;gap:4px}
+  .right-row .side-card{flex:1;margin-bottom:0}
+  .right-row .side-card .prod-img{aspect-ratio:1/0.9}
   .side-card .prod-img img{width:100%;height:100%;object-fit:cover}
   .side-card .prod-info{padding:3px 5px}
   .side-card .prod-name{font-size:10px;color:#374151;line-height:1.3;height:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
@@ -364,34 +371,34 @@
           <span class="countdown" data-page-node-id="U0VipCountdown"><span class="box" data-page-node-id="U0VipH">11</span><span class="sep" data-page-node-id="U0VipSep1">:</span><span class="box" data-page-node-id="U0VipM">31</span><span class="sep" data-page-node-id="U0VipSep2">:</span><span class="box" data-page-node-id="U0VipS">14</span></span>
           <span class="fox" data-page-node-id="U0VipFox"><i class="fas fa-paw" data-page-node-id="U0VipFoxIcon"></i></span>
         </div>
-        <div class="vip-big-card" data-page-node-id="U0VipBigCard">
-          <div class="prod-img" data-page-node-id="U0VipBigImg"><img src="assets/generated/a1.png" alt="商品" data-page-node-id="U0VipBigPic"></div>
-          <div class="prod-info" data-page-node-id="U0VipBigInfo">
-            <p class="prod-name" data-page-node-id="U0VipBigName">CPB 光凝润采妆前霜 37ml</p>
-            <div class="prod-price" data-page-node-id="U0VipBigPrice"><span class="yen" data-page-node-id="U0VipBigYen">¥</span><span class="num" data-page-node-id="U0VipBigNum">239</span></div>
-          </div>
-        </div>
-        <div class="vip-mini-row" data-page-node-id="U0VipMiniRow">
-          <div class="mini-card" data-page-node-id="U0VipMini1">
-            <div class="prod-img" data-page-node-id="U0VipMiniImg1"><img src="assets/generated/a3.png" alt="商品" data-page-node-id="U0VipMiniPic1"></div>
-            <div class="prod-info" data-page-node-id="U0VipMiniInfo1">
-              <p class="prod-name" data-page-node-id="U0VipMiniName1">安热沙金灿倍护防晒乳</p>
-              <div class="prod-price" data-page-node-id="U0VipMiniPrice1"><span class="yen" data-page-node-id="U0VipMiniYen1">¥</span><span class="num" data-page-node-id="U0VipMiniNum1">129</span></div>
+        <div class="vip-grid" data-page-node-id="U0VipGrid">
+          <div class="mini-card" data-page-node-id="U0VipG1">
+            <div class="prod-img" data-page-node-id="U0VipG1Img"><img src="assets/generated/a1.png" alt="商品" data-page-node-id="U0VipG1Pic"></div>
+            <div class="prod-info" data-page-node-id="U0VipG1Info">
+              <p class="prod-name" data-page-node-id="U0VipG1Name">CPB 光凝润采妆前霜 37ml</p>
+              <div class="prod-price" data-page-node-id="U0VipG1Price"><span class="yen" data-page-node-id="U0VipG1Yen">¥</span><span class="num" data-page-node-id="U0VipG1Num">239</span></div>
             </div>
           </div>
-          <div class="mini-card" data-page-node-id="U0VipMini2">
-            <div class="prod-img" data-page-node-id="U0VipMiniImg2"><img src="assets/generated/a4.png" alt="商品" data-page-node-id="U0VipMiniPic2"></div>
-            <div class="prod-info" data-page-node-id="U0VipMiniInfo2">
-              <p class="prod-name" data-page-node-id="U0VipMiniName2">兰蔻菁纯眼霜两件套</p>
-              <div class="prod-price" data-page-node-id="U0VipMiniPrice2"><span class="yen" data-page-node-id="U0VipMiniYen2">¥</span><span class="num" data-page-node-id="U0VipMiniNum2">998</span></div>
+          <div class="mini-card" data-page-node-id="U0VipG2">
+            <div class="prod-img" data-page-node-id="U0VipG2Img"><img src="assets/generated/a3.png" alt="商品" data-page-node-id="U0VipG2Pic"></div>
+            <div class="prod-info" data-page-node-id="U0VipG2Info">
+              <p class="prod-name" data-page-node-id="U0VipG2Name">安热沙金灿倍护防晒乳</p>
+              <div class="prod-price" data-page-node-id="U0VipG2Price"><span class="yen" data-page-node-id="U0VipG2Yen">¥</span><span class="num" data-page-node-id="U0VipG2Num">129</span></div>
             </div>
           </div>
-        </div>
-        <div class="vip-wide-card" data-page-node-id="U0VipWide">
-          <div class="prod-img" data-page-node-id="U0VipWideImg"><img src="assets/generated/a2.png" alt="商品" data-page-node-id="U0VipWidePic"></div>
-          <div class="prod-info" data-page-node-id="U0VipWideInfo">
-            <p class="prod-name" data-page-node-id="U0VipWideName">PANDORA 玫瑰金链扣戒指</p>
-            <div class="prod-price" data-page-node-id="U0VipWidePrice"><span class="yen" data-page-node-id="U0VipWideYen">¥</span><span class="num" data-page-node-id="U0VipWideNum">680</span></div>
+          <div class="mini-card" data-page-node-id="U0VipG3">
+            <div class="prod-img" data-page-node-id="U0VipG3Img"><img src="assets/generated/a4.png" alt="商品" data-page-node-id="U0VipG3Pic"></div>
+            <div class="prod-info" data-page-node-id="U0VipG3Info">
+              <p class="prod-name" data-page-node-id="U0VipG3Name">兰蔻菁纯眼霜两件套</p>
+              <div class="prod-price" data-page-node-id="U0VipG3Price"><span class="yen" data-page-node-id="U0VipG3Yen">¥</span><span class="num" data-page-node-id="U0VipG3Num">998</span></div>
+            </div>
+          </div>
+          <div class="mini-card" data-page-node-id="U0VipG4">
+            <div class="prod-img" data-page-node-id="U0VipG4Img"><img src="assets/generated/a2.png" alt="商品" data-page-node-id="U0VipG4Pic"></div>
+            <div class="prod-info" data-page-node-id="U0VipG4Info">
+              <p class="prod-name" data-page-node-id="U0VipG4Name">PANDORA 玫瑰金链扣戒指</p>
+              <div class="prod-price" data-page-node-id="U0VipG4Price"><span class="yen" data-page-node-id="U0VipG4Yen">¥</span><span class="num" data-page-node-id="U0VipG4Num">680</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -403,18 +410,20 @@
             <span class="tt" data-page-node-id="U0HotTitle">大牌好价</span>
             <span class="tag" data-page-node-id="U0HotTag">大家都在买!</span>
           </div>
-          <div class="side-card" data-page-node-id="U0HotProd1">
-            <div class="prod-img" data-page-node-id="U0HotImg1"><img src="assets/generated/b1.png" alt="商品" data-page-node-id="U0HotPic1"></div>
-            <div class="prod-info" data-page-node-id="U0HotInfo1">
-              <p class="prod-name" data-page-node-id="U0HotName1">iPhone 15 Pro Max</p>
-              <div class="prod-price" data-page-node-id="U0HotPrice1"><span class="yen" data-page-node-id="U0HotYen1">¥</span><span class="num" data-page-node-id="U0HotNum1">8500</span></div>
+          <div class="right-row" data-page-node-id="U0HotRow">
+            <div class="side-card" data-page-node-id="U0HotProd1">
+              <div class="prod-img" data-page-node-id="U0HotImg1"><img src="assets/generated/b1.png" alt="商品" data-page-node-id="U0HotPic1"></div>
+              <div class="prod-info" data-page-node-id="U0HotInfo1">
+                <p class="prod-name" data-page-node-id="U0HotName1">iPhone 15 Pro Max</p>
+                <div class="prod-price" data-page-node-id="U0HotPrice1"><span class="yen" data-page-node-id="U0HotYen1">¥</span><span class="num" data-page-node-id="U0HotNum1">8500</span></div>
+              </div>
             </div>
-          </div>
-          <div class="side-card" data-page-node-id="U0HotProd2">
-            <div class="prod-img" data-page-node-id="U0HotImg2"><img src="assets/generated/b2.png" alt="商品" data-page-node-id="U0HotPic2"></div>
-            <div class="prod-info" data-page-node-id="U0HotInfo2">
-              <p class="prod-name" data-page-node-id="U0HotName2">轩尼诗 XO 干邑白兰地</p>
-              <div class="prod-price" data-page-node-id="U0HotPrice2"><span class="yen" data-page-node-id="U0HotYen2">¥</span><span class="num" data-page-node-id="U0HotNum2">2098.75</span></div>
+            <div class="side-card" data-page-node-id="U0HotProd2">
+              <div class="prod-img" data-page-node-id="U0HotImg2"><img src="assets/generated/b2.png" alt="商品" data-page-node-id="U0HotPic2"></div>
+              <div class="prod-info" data-page-node-id="U0HotInfo2">
+                <p class="prod-name" data-page-node-id="U0HotName2">轩尼诗 XO 干邑白兰地</p>
+                <div class="prod-price" data-page-node-id="U0HotPrice2"><span class="yen" data-page-node-id="U0HotYen2">¥</span><span class="num" data-page-node-id="U0HotNum2">2098.75</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -423,18 +432,20 @@
             <span class="tt" data-page-node-id="U0DealTitle">抄底捡漏</span>
             <span class="arrow" data-page-node-id="U0DealTag">清仓3折起 <i class="fas fa-chevron-right text-[9px]" data-page-node-id="U0DealTagIcon"></i></span>
           </div>
-          <div class="side-card" data-page-node-id="U0DealProd1">
-            <div class="prod-img" data-page-node-id="U0DealImg1"><img src="assets/generated/b3.png" alt="商品" data-page-node-id="U0DealPic1"></div>
-            <div class="prod-info" data-page-node-id="U0DealInfo1">
-              <p class="prod-name" data-page-node-id="U0DealName1">MAC 魅可柔感哑光唇膏</p>
-              <div class="prod-price" data-page-node-id="U0DealPrice1"><span class="yen" data-page-node-id="U0DealYen1">¥</span><span class="num" data-page-node-id="U0DealNum1">96</span></div>
+          <div class="right-row" data-page-node-id="U0DealRow">
+            <div class="side-card" data-page-node-id="U0DealProd1">
+              <div class="prod-img" data-page-node-id="U0DealImg1"><img src="assets/generated/b3.png" alt="商品" data-page-node-id="U0DealPic1"></div>
+              <div class="prod-info" data-page-node-id="U0DealInfo1">
+                <p class="prod-name" data-page-node-id="U0DealName1">MAC 魅可柔感哑光唇膏</p>
+                <div class="prod-price" data-page-node-id="U0DealPrice1"><span class="yen" data-page-node-id="U0DealYen1">¥</span><span class="num" data-page-node-id="U0DealNum1">96</span></div>
+              </div>
             </div>
-          </div>
-          <div class="side-card" data-page-node-id="U0DealProd2">
-            <div class="prod-img" data-page-node-id="U0DealImg2"><img src="assets/generated/b4.png" alt="商品" data-page-node-id="U0DealPic2"></div>
-            <div class="prod-info" data-page-node-id="U0DealInfo2">
-              <p class="prod-name" data-page-node-id="U0DealName2">雅诗兰黛智妍紧塑眼霜</p>
-              <div class="prod-price" data-page-node-id="U0DealPrice2"><span class="yen" data-page-node-id="U0DealYen2">¥</span><span class="num" data-page-node-id="U0DealNum2">543.4</span></div>
+            <div class="side-card" data-page-node-id="U0DealProd2">
+              <div class="prod-img" data-page-node-id="U0DealImg2"><img src="assets/generated/b4.png" alt="商品" data-page-node-id="U0DealPic2"></div>
+              <div class="prod-info" data-page-node-id="U0DealInfo2">
+                <p class="prod-name" data-page-node-id="U0DealName2">雅诗兰黛智妍紧塑眼霜</p>
+                <div class="prod-price" data-page-node-id="U0DealPrice2"><span class="yen" data-page-node-id="U0DealYen2">¥</span><span class="num" data-page-node-id="U0DealNum2">543.4</span></div>
+              </div>
             </div>
           </div>
         </div>

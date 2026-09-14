@@ -5,6 +5,11 @@ const PROTOTYPES=[];
 
 /* ---------- v0.4 门店导购升级原型包（本地文件） ---------- */
 const V04={
+  "U0": {
+    "url": "v0.4/U0-商城首页.html",
+    "device": "mobile",
+    "group": "用户端 · CDF中免海南"
+  },
   "U1": {
     "url": "v0.4/U1-用户端IM会话页.html",
     "device": "mobile",
@@ -73,6 +78,28 @@ const V04={
 };
 
 const PROTOTYPES_V03=[
+  {
+    "id": "v04-u0",
+    "group": "用户端 · CDF中免海南",
+    "name": "U0 商城首页",
+    "device": "mobile",
+    "url": "v0.4/U0-商城首页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-14",
+    "overview": {
+      "summary": "CDF中免海南商城首页，作为用户端统一入口，聚合品牌馆、商品、奢品顾问等频道。",
+      "path": "中免海南 APP / 小程序 → 商城首页",
+      "users": "C端用户",
+      "permission": "功能权限：全员可见；数据权限：不涉及",
+      "ports": "中免海南 APP（安卓、IOS、鸿蒙）、中免海南微信小程序、中免海南支付宝小程序、H5"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
   {
     "id": "p_mtobsr6sh8yw",
     "group": "用户端 · CDF中免海南",
