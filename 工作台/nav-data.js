@@ -6,7 +6,7 @@ window.NAV_DATA = {
     "管理后台 · PC"
   ],
   "protos": [
-    {
+{
       "id": "p_mtobsr6sh8yw",
       "name": "顾问入口",
       "group": "用户端 · CDF中免海南",
@@ -20,118 +20,110 @@ window.NAV_DATA = {
         { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" },
         { "name": "我的", "url": "v0.4/U13-我的页.html" },
         { "name": "消息中心", "url": "v0.4/U14-消息中心.html" },
-        { "name": "订单列表", "url": "v0.4/U15-订单列表页.html" }
+
       ],
       "__imported": false,
       "hotspots": []
     },
-    {
+{
       "id": "p_dgmsglist01",
       "name": "顾问消息列表",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "hotspots": []
     },
-    {
-      "id": "v04-u14",
-      "name": "U14 消息中心",
-      "group": "用户端 · CDF中免海南",
-      "device": "mobile",
-      "__imported": false
-    },
-
-    {
-      "id": "v04-u15",
-      "name": "U15 订单列表页",
-      "group": "用户端 · CDF中免海南",
-      "device": "mobile",
-      "__imported": false
-    },
-    {
+{
       "id": "v04-u7",
       "name": "U7 奢品顾问列表页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-u1",
       "name": "U1 用户端 IM 会话页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-u6",
       "name": "U6 意向单页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-u5",
       "name": "U5 行程核验页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-u4",
       "name": "U4 结算中心页",
       "group": "用户端 · CDF中免海南",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
+      "id": "v04-u15",
+      "name": "U15 订单列表页",
+      "group": "用户端 · CDF中免海南",
+      "device": "mobile",
+      "__imported": false
+    },
+{
       "id": "v04-g1",
       "name": "G1 导购工作台",
       "group": "导购端 · 繁星APP",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-g2",
       "name": "G2 消息会话列表",
       "group": "导购端 · 繁星APP",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-g3",
       "name": "G3 导购 IM 会话页",
       "group": "导购端 · 繁星APP",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-g4",
       "name": "G4 选择商品页",
       "group": "导购端 · 繁星APP",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-g8",
       "name": "G8 业绩管理（移动）",
       "group": "导购端 · 繁星APP",
       "device": "mobile",
       "__imported": false
     },
-    {
+{
       "id": "v04-m3",
       "name": "M3 PC 业绩管理",
       "group": "管理后台 · PC",
       "device": "desktop",
       "__imported": false
     },
-    {
+{
       "id": "v04-m4",
       "name": "M4 消息管理（客户继承）",
       "group": "管理后台 · PC",
       "device": "desktop",
       "__imported": false
     }
-  ],
+],
   "content": {
     "p_mtoe20mrkzx7": {
       "kind": "image",
