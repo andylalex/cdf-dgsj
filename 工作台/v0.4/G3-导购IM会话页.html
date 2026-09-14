@@ -264,6 +264,12 @@
     .pc-tip-txt{font-size:11px;color:#8a8f99;line-height:1.45}
     .pc-tip i{font-size:10px;color:#ff6b52}
     .pc-tip-btn{flex:0 0 auto;padding:6px 12px;border-radius:9px;background:#ff6b52;color:#fff;font-size:12px;font-weight:600;border:none}
+    /* ---- 方案B：底部信息带 ---- */
+    .pc-info-bar{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid #f3f4f6}
+    .pc-info-left{display:flex;align-items:center;gap:8px}
+    .pc-info-code{font-size:10px;color:#9ca3af;font-family:Arial,sans-serif;background:#f7f8fa;border-radius:4px;padding:1px 5px}
+    .pc-info-stock{font-size:10px;color:#6b7280;display:flex;align-items:center;gap:3px}
+    .pc-info-stock i{font-size:8px;color:#10b981}
     /* ---- 企业微信名片卡（大二维码，可长按识别） ---- */
     .wx-card{background:#fff;border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.06);overflow:hidden;display:flex;align-items:flex-start;gap:12px;padding:10px 12px}
     .wx-card-main{display:flex;align-items:flex-start;gap:10px;flex:1 1 auto;min-width:0}
@@ -356,14 +362,14 @@
                 <div class="flex-1 min-w-0" data-page-node-id="qDLowkgh9V4uGz2B41Cq12">
                   <p class="pc-name" data-page-node-id="LfLfOktj0bjT8mSGy4AFmr">浪凡光韵女士浓香水</p>
                   <p class="pc-spec">规格 50ml</p>
-                  <div class="mt-2 flex items-end justify-between gap-2">
-                    <span class="pc-price" data-page-node-id="cPg9EKzSljcpKKgU7gdFCV">¥394.00</span>
-                  </div>
                 </div>
               </div>
-              <div class="pc-meta mt-2 meta" data-page-node-id="LfMetaG3"><span class="font-mono code-pill" data-page-node-id="LfCodeG3">C016080</span><span class="stock-pill" data-page-node-id="LfStoreG3">门店库存 270</span><span class="stock-pill" data-page-node-id="LfWhG3">柜组库存 88</span></div>
               <div class="promo-box mt-2" data-page-node-id="LfPromoG3">
                 <span class="promo-pill promo-coupon" data-page-node-id="LfP1G3"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut" data-page-node-id="LfP2G3"><i class="fas fa-tag text-[9px]"></i>WJ-满10000元减500元</span>
+              </div>
+              <div class="pc-info-bar" data-page-node-id="LfInfoBarG3">
+                <div class="pc-info-left"><span class="pc-info-code" data-page-node-id="LfInfoCodeG3">编号 C016080</span><span class="pc-info-stock" data-page-node-id="LfInfoStockG3"><i class="fas fa-check-circle"></i>库存 270</span></div>
+                <span class="pc-price" data-page-node-id="LfInfoPriceG3">¥394.00</span>
               </div>
             </div>
             <div class="pc-tip justify-end" data-page-node-id="YJ1WffTrI60N4FPSBNehjc">
@@ -388,13 +394,12 @@
                 <div class="flex-1 min-w-0">
                   <p class="pc-name">浪凡光韵女士浓香水</p>
                   <p class="pc-spec">规格 50ml</p>
-                  <div class="mt-2 flex items-end justify-between gap-2">
-                    <span class="pc-price">¥394.00</span>
-                  </div>
                 </div>
               </div>
-              <div class="pc-meta mt-2 meta"><span class="font-mono code-pill">C016080</span><span class="stock-pill">门店库存 270</span><span class="stock-pill">柜组库存 88</span></div>
-              
+              <div class="pc-info-bar">
+                <div class="pc-info-left"><span class="pc-info-code">编号 C016080</span><span class="pc-info-stock"><i class="fas fa-check-circle"></i>库存 270</span></div>
+                <span class="pc-price">¥394.00</span>
+              </div>
             </div>
             <div class="pc-tip justify-end">
               <i class="fas fa-camera-retro"></i>
