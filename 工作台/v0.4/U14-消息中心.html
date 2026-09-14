@@ -34,8 +34,8 @@
   /* 顶部标题栏 */
   .msg-header{flex:0 0 auto;display:flex;align-items:center;justify-content:center;position:relative;height:48px;background:#fff;border-bottom:1px solid #f3f4f6;padding:0 12px}
   .msg-header h1{font-size:17px;font-weight:700;color:#1a1a1a}
-  .msg-actions{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:14px;color:#1a1a1a;font-size:20px;margin-top:8px}
-  .msg-actions i{cursor:pointer}
+  .header-actions-bar{display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:8px 12px;background:#fff;border-bottom:1px solid #f3f4f6;color:#1a1a1a;font-size:20px}
+  .header-actions-bar i{cursor:pointer}
   .msg-header .capsule{margin-left:auto;width:88px;height:32px;border-radius:16px;background:rgba(30,30,30,.82);display:flex;align-items:center;color:#fff}
   .msg-header .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
   .msg-header .capsule .sep{width:1px;height:18px;background:rgba(255,255,255,.35)}
@@ -144,12 +144,12 @@
       <span class="sep" data-page-node-id="U14CapsuleSep"></span>
       <span class="half" data-page-node-id="U14CapsuleDot"><i class="fas fa-dot-circle" data-page-node-id="U14CapsuleDotIcon"></i></span>
     </div>
-    <div class="msg-actions" data-page-node-id="U14Actions">
-      <i class="fas fa-bag-shopping" data-page-node-id="U14IconCart"></i>
-      <i class="fas fa-trash-can" data-page-node-id="U14IconDel"></i>
-      <i class="fas fa-gear" data-page-node-id="U14IconSet"></i>
-    </div>
   </header>
+  <div class="header-actions-bar" data-page-node-id="U14HeaderActions">
+    <i class="fas fa-bag-shopping" data-page-node-id="U14IconCart"></i>
+    <i class="fas fa-trash-can" data-page-node-id="U14IconDel"></i>
+    <i class="fas fa-gear" data-page-node-id="U14IconSet"></i>
+  </div>
 
   <main class="scroll-area" data-page-node-id="U14ScrollArea">
     <!-- 物流 + 提醒 双卡 -->
