@@ -94,6 +94,9 @@
   .msg-group-hd .g-ic{width:20px;height:20px;border-radius:50%;background:#fef2f2;color:#E02E24;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
   .msg-group-hd .g-ic.gray{background:#f3f4f6;color:#9ca3af}
   .msg-group-hd .g-name{font-size:13px;font-weight:700;color:#1a1a1a;flex:1}
+  .msg-group-hd .g-name.link{color:#E02E24;cursor:pointer}
+  .msg-group-hd .g-name.link:hover{opacity:.78}
+  .msg-row{cursor:pointer}
   .msg-group-hd .g-count{font-size:11px;color:#9ca3af}
   .msg-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0}
   .msg-row:first-of-type{padding-top:0}
@@ -241,10 +244,10 @@
         <div class="msg-group" data-page-node-id="U14GroupAdvisor">
           <div class="msg-group-hd" data-page-node-id="U14GroupAdvisorHd">
             <span class="g-ic" data-page-node-id="U14GroupAdvisorIc"><i class="fas fa-user-tie"></i></span>
-            <span class="g-name" data-page-node-id="U14GroupAdvisorName">奢品顾问</span>
+            <span class="g-name link" data-page-node-id="U14GroupAdvisorName" onclick="goPage('U7-奢品顾问列表页.html')">奢品顾问 <i class="fas fa-chevron-right" style="font-size:9px;margin-left:2px"></i></span>
             <span class="g-count" data-page-node-id="U14GroupAdvisorCount">3 条新消息</span>
           </div>
-          <div class="msg-row" data-page-node-id="U14AdvisorMsg1">
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg1" onclick="goPage('U1-用户端IM会话页.html')">
             <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg1Ic"><i class="fas fa-user-tie"></i></div>
             <div class="msg-row-body" data-page-node-id="U14AdvisorMsg1Body">
               <div class="msg-row-title" data-page-node-id="U14AdvisorMsg1Title">奢品顾问 林琳琳 <span class="msg-dot" data-page-node-id="U14AdvisorMsg1Dot"></span></div>
@@ -252,7 +255,7 @@
             </div>
             <span class="msg-row-time" data-page-node-id="U14AdvisorMsg1Time">10:24</span>
           </div>
-          <div class="msg-row" data-page-node-id="U14AdvisorMsg2">
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg2" onclick="goPage('U1-用户端IM会话页.html')">
             <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg2Ic"><i class="fas fa-user-tie"></i></div>
             <div class="msg-row-body" data-page-node-id="U14AdvisorMsg2Body">
               <div class="msg-row-title" data-page-node-id="U14AdvisorMsg2Title">奢品顾问 王悦</div>
@@ -260,7 +263,7 @@
             </div>
             <span class="msg-row-time" data-page-node-id="U14AdvisorMsg2Time">09:12</span>
           </div>
-          <div class="msg-row" data-page-node-id="U14AdvisorMsg3">
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg3" onclick="goPage('U1-用户端IM会话页.html')">
             <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg3Ic"><i class="fas fa-user-tie"></i></div>
             <div class="msg-row-body" data-page-node-id="U14AdvisorMsg3Body">
               <div class="msg-row-title" data-page-node-id="U14AdvisorMsg3Title">奢品顾问 赵敏</div>
@@ -312,6 +315,7 @@
   function goBack(){
     if(document.referrer && document.referrer.indexOf(location.hostname)!==-1){history.back();}else{location.href='index.html';}
   }
+  function goPage(url){location.href=url;}
   function toggleFold(el){
     var list=el.parentElement.nextElementSibling;
     if(!list) return;
