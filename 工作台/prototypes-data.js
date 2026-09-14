@@ -83,7 +83,7 @@ const V04={
 };
 
 const PROTOTYPES_V03=[
-  {
+{
     "id": "v04-u0",
     "group": "用户端 · CDF中免海南",
     "name": "U0 商城首页",
@@ -105,7 +105,7 @@ const PROTOTYPES_V03=[
     "states": [],
     "hotspots": []
   },
-  {
+{
     "id": "p_mtobsr6sh8yw",
     "group": "用户端 · CDF中免海南",
     "name": "顾问入口",
@@ -137,7 +137,7 @@ const PROTOTYPES_V03=[
     "states": [],
     "hotspots": []
   },
-  {
+{
     "id": "p_dgmsglist01",
     "group": "用户端 · CDF中免海南",
     "name": "顾问消息列表",
@@ -159,7 +159,7 @@ const PROTOTYPES_V03=[
     "states": [],
     "hotspots": []
   },
-  {
+{
     "id": "v04-u14",
     "group": "用户端 · CDF中免海南",
     "name": "U14 消息中心",
@@ -177,25 +177,7 @@ const PROTOTYPES_V03=[
     "states": [],
     "hotspots": []
   },
-  {
-    "id": "v04-u15",
-    "group": "用户端 · CDF中免海南",
-    "name": "U15 订单列表页",
-    "device": "mobile",
-    "url": "v0.4/U15-订单列表页.html",
-    "srcdoc": "",
-    "status": "review",
-    "version": "v0.4",
-    "owner": "产品 · 梁伟业",
-    "updated": "2026-09-14",
-    "overview": {
-      "summary": "用户端订单列表页：按状态 tab 展示订单，含门店/商品/物流/退款/订单信息。"
-    },
-    "flow": [],
-    "states": [],
-    "hotspots": []
-  },
-  {
+{
     "id": "v04-u7",
     "group": "用户端 · CDF中免海南",
     "name": "U7 奢品顾问列表页",
@@ -217,7 +199,7 @@ const PROTOTYPES_V03=[
     "states": [],
     "hotspots": []
   },
-  {
+{
     "id": "v04-u1",
     "group": "用户端 · CDF中免海南",
     "name": "U1 用户端 IM 会话页",
@@ -294,7 +276,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-u6",
     "group": "用户端 · CDF中免海南",
     "name": "U6 意向单页",
@@ -363,7 +345,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-u5",
     "group": "用户端 · CDF中免海南",
     "name": "U5 行程核验页",
@@ -450,7 +432,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-u4",
     "group": "用户端 · CDF中免海南",
     "name": "U4 结算中心页",
@@ -595,7 +577,25 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
+    "id": "v04-u15",
+    "group": "用户端 · CDF中免海南",
+    "name": "U15 订单列表页",
+    "device": "mobile",
+    "url": "v0.4/U15-订单列表页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-14",
+    "overview": {
+      "summary": "用户端订单列表页：按状态 tab 展示订单，含门店/商品/物流/退款/订单信息。"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
+{
     "id": "v04-g1",
     "group": "导购端 · 繁星APP",
     "name": "G1 导购工作台",
@@ -690,7 +690,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-g2",
     "group": "导购端 · 繁星APP",
     "name": "G2 消息会话列表",
@@ -755,7 +755,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-g3",
     "group": "导购端 · 繁星APP",
     "name": "G3 导购 IM 会话页",
@@ -847,7 +847,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-g4",
     "group": "导购端 · 繁星APP",
     "name": "G4 选择商品页",
@@ -951,7 +951,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-g8",
     "group": "导购端 · 繁星APP",
     "name": "G8 业绩管理（移动）",
@@ -1071,7 +1071,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-m3",
     "group": "管理后台 · PC",
     "name": "M3 PC 业绩管理",
@@ -1191,7 +1191,7 @@ const PROTOTYPES_V03=[
       }
     ]
   },
-  {
+{
     "id": "v04-m4",
     "group": "管理后台 · PC",
     "name": "M4 消息管理（客户继承）",
