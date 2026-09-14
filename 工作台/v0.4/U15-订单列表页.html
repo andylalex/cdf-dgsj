@@ -38,8 +38,11 @@
     /* 滚动区 */
     .scroll-area{flex:1;min-height:0;overflow-y:auto}
 
-    /* 订单卡片 */
-    .order-card{background:#fff;border-radius:12px;margin:10px 10px 0;overflow:hidden}
+    /* 订单卡片（合并卡片：含商品/物流/底部操作/订单信息） */
+    .order-wrap{background:#fff;border-radius:12px;margin:10px 10px 0;overflow:hidden}
+    .order-card{background:transparent;border-radius:0;margin:0;overflow:hidden}
+    .bottom-actions{background:transparent;border-radius:0;margin:0}
+    .order-info{background:transparent;border-radius:0;margin:0}
     .store-hd{display:flex;align-items:center;padding:12px 12px 8px;gap:5px}
     .store-hd .name{font-size:14px;font-weight:700;color:#1a1a1a}
     .store-hd .tag{font-size:10px;font-weight:600;color:#E02E24;background:#fef2f2;border:1px solid #fee2e2;border-radius:4px;padding:1px 4px}
@@ -131,6 +134,7 @@
 
   <main class="scroll-area" data-page-node-id="U15ScrollArea">
 
+    <div class="order-wrap" data-page-node-id="U15OrderWrap">
     <!-- 订单卡片 -->
     <section class="order-card" data-page-node-id="U15OrderCard1">
       <div class="store-hd" data-page-node-id="U15StoreHd1">
@@ -255,6 +259,7 @@
       </div>
     </section>
 
+    </div>
     <div class="spacer" data-page-node-id="U15Spacer"></div>
   </main>
 
