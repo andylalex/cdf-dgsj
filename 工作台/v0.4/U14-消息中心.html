@@ -86,6 +86,25 @@
   .fold-thumb{width:48px;height:48px;border-radius:8px;background:#f9fafb;overflow:hidden;flex-shrink:0}
   .fold-thumb img{width:100%;height:100%;object-fit:cover}
 
+  /* 互动卡片：子类分组 + 最多 5 条消息列表 */
+  .msg-group{border-bottom:1px solid #f3f4f6;padding:10px 0}
+  .msg-group:first-child{padding-top:0}
+  .msg-group:last-child{border-bottom:none;padding-bottom:0}
+  .msg-group-hd{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+  .msg-group-hd .g-ic{width:20px;height:20px;border-radius:50%;background:#fef2f2;color:#E02E24;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+  .msg-group-hd .g-ic.gray{background:#f3f4f6;color:#9ca3af}
+  .msg-group-hd .g-name{font-size:13px;font-weight:700;color:#1a1a1a;flex:1}
+  .msg-group-hd .g-count{font-size:11px;color:#9ca3af}
+  .msg-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0}
+  .msg-row:first-of-type{padding-top:0}
+  .msg-row-ic{width:36px;height:36px;border-radius:50%;background:#E02E24;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .msg-row-ic.gray{background:#f3f4f6;color:#9ca3af}
+  .msg-row-body{flex:1;min-width:0}
+  .msg-row-title{font-size:12px;font-weight:600;color:#1a1a1a;display:flex;align-items:center;gap:5px;line-height:1.3}
+  .msg-row-sub{font-size:11px;color:#6b7280;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .msg-row-time{font-size:10px;color:#9ca3af;flex-shrink:0;margin-left:2px;align-self:flex-start;white-space:nowrap}
+  .msg-dot{width:7px;height:7px;border-radius:50%;background:#E02E24;flex-shrink:0;display:inline-block}
+
   /* 底部 tabbar */
   .tabbar{flex:0 0 auto;display:flex;background:#fff;border-top:1px solid #f3f4f6;padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
   .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8b919b;cursor:pointer;position:relative}
@@ -218,19 +237,61 @@
         <span class="toggle" data-page-node-id="U14InteractionToggle" onclick="toggleFold(this)">收起 <i class="fas fa-chevron-up" data-page-node-id="U14InteractionToggleIcon"></i></span>
       </div>
       <div class="fold-list" data-page-node-id="U14InteractionList">
-        <div class="fold-item" data-page-node-id="U14InteractItem1">
-          <div class="fold-body" data-page-node-id="U14InteractBody1">
-            <div class="fold-title" data-page-node-id="U14InteractTitle1"><i class="fas fa-user-tie" style="font-size:11px;color:#E02E24;margin-right:4px" data-page-node-id="U14InteractIcon1"></i>导购推荐</div>
-            <div class="fold-sub" data-page-node-id="U14InteractSub1a">您关注的 SK-II 神仙水现在有专柜活动，买两件送小样套装，需要帮您预留吗？</div>
-            <div class="fold-sub" data-page-node-id="U14InteractSub1b">来自：专柜导购林琳琳</div>
+        <!-- 子类1：奢品顾问（最多 5 条） -->
+        <div class="msg-group" data-page-node-id="U14GroupAdvisor">
+          <div class="msg-group-hd" data-page-node-id="U14GroupAdvisorHd">
+            <span class="g-ic" data-page-node-id="U14GroupAdvisorIc"><i class="fas fa-user-tie"></i></span>
+            <span class="g-name" data-page-node-id="U14GroupAdvisorName">奢品顾问</span>
+            <span class="g-count" data-page-node-id="U14GroupAdvisorCount">3 条新消息</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg1">
+            <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg1Ic"><i class="fas fa-user-tie"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14AdvisorMsg1Body">
+              <div class="msg-row-title" data-page-node-id="U14AdvisorMsg1Title">奢品顾问 林琳琳 <span class="msg-dot" data-page-node-id="U14AdvisorMsg1Dot"></span></div>
+              <div class="msg-row-sub" data-page-node-id="U14AdvisorMsg1Sub">您关注的 SK-II 神仙水现在有专柜活动，买两件送小样套装，需要帮您预留吗？</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14AdvisorMsg1Time">10:24</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg2">
+            <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg2Ic"><i class="fas fa-user-tie"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14AdvisorMsg2Body">
+              <div class="msg-row-title" data-page-node-id="U14AdvisorMsg2Title">奢品顾问 王悦</div>
+              <div class="msg-row-sub" data-page-node-id="U14AdvisorMsg2Sub">雅诗兰黛小棕瓶新品到店，给您留了专属体验装，方便时来柜组领取。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14AdvisorMsg2Time">09:12</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg3">
+            <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg3Ic"><i class="fas fa-user-tie"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14AdvisorMsg3Body">
+              <div class="msg-row-title" data-page-node-id="U14AdvisorMsg3Title">奢品顾问 赵敏</div>
+              <div class="msg-row-sub" data-page-node-id="U14AdvisorMsg3Sub">您预约的 LV Capucines 已到货，可前往海口国际免税城 1F 精品区试背。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14AdvisorMsg3Time">昨天</span>
           </div>
         </div>
-        <div class="fold-item" data-page-node-id="U14InteractItem2">
-          <div class="fold-body" data-page-node-id="U14InteractBody2">
-            <div class="fold-title" data-page-node-id="U14InteractTitle2"><i class="fas fa-star" style="font-size:11px;color:#E02E24;margin-right:4px" data-page-node-id="U14InteractIcon2"></i>评价有礼</div>
-            <div class="fold-sub" data-page-node-id="U14InteractSub2a">您购买的 SK-II 神仙水已使用一段时间，分享使用心得可获积分奖励。</div>
+        <!-- 子类2：评价有礼（最多 5 条） -->
+        <div class="msg-group" data-page-node-id="U14GroupReview">
+          <div class="msg-group-hd" data-page-node-id="U14GroupReviewHd">
+            <span class="g-ic gray" data-page-node-id="U14GroupReviewIc"><i class="fas fa-star"></i></span>
+            <span class="g-name" data-page-node-id="U14GroupReviewName">评价有礼</span>
+            <span class="g-count" data-page-node-id="U14GroupReviewCount">2 条新消息</span>
           </div>
-          <div class="fold-thumb" data-page-node-id="U14InteractThumb2"><img src="assets/generated/b4.png" alt="商品" data-page-node-id="U14InteractPic2"></div>
+          <div class="msg-row" data-page-node-id="U14ReviewMsg1">
+            <div class="msg-row-ic gray" data-page-node-id="U14ReviewMsg1Ic"><i class="fas fa-star"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14ReviewMsg1Body">
+              <div class="msg-row-title" data-page-node-id="U14ReviewMsg1Title">评价有礼 <span class="msg-dot" data-page-node-id="U14ReviewMsg1Dot"></span></div>
+              <div class="msg-row-sub" data-page-node-id="U14ReviewMsg1Sub">您购买的 SK-II 神仙水已使用一段时间，分享使用心得可获 200 积分奖励。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14ReviewMsg1Time">昨天</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14ReviewMsg2">
+            <div class="msg-row-ic gray" data-page-node-id="U14ReviewMsg2Ic"><i class="fas fa-star"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14ReviewMsg2Body">
+              <div class="msg-row-title" data-page-node-id="U14ReviewMsg2Title">评价有礼</div>
+              <div class="msg-row-sub" data-page-node-id="U14ReviewMsg2Sub">完成海蓝之谜面霜评价，已发放 100 积分至您的会员账户。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14ReviewMsg2Time">04-02</span>
+          </div>
         </div>
       </div>
     </section>
