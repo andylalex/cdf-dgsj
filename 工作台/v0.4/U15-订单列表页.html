@@ -36,7 +36,12 @@
     .tab.on::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:18px;height:3px;background:#E02E24;border-radius:2px}
 
     /* 滚动区 */
-    .scroll-area{flex:1;min-height:0;overflow-y:auto}
+    .scroll-area{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
+    .scroll-area::-webkit-scrollbar{display:none}
+
+    /* 小程序右上角通用胶囊 */
+    .mini-caps{margin-left:auto;display:flex;align-items:center;background:rgba(255,255,255,.9);border:1px solid #e3e4e8;border-radius:999px;padding:0 10px;height:30px;gap:10px;color:#1a1a1a;font-size:15px;cursor:pointer}
+    .mini-caps .sep{width:1px;height:16px;background:#e3e4e8}
 
     /* 订单卡片（合并卡片：含商品/物流/底部操作/订单信息） */
     .order-wrap{background:#fff;border-radius:12px;margin:10px 10px 0;overflow:hidden}
@@ -116,10 +121,11 @@
       <i class="fas fa-magnifying-glass" data-page-node-id="U15SearchIcon"></i>
       <span data-page-node-id="U15SearchText">搜索订单</span>
     </div>
-    <span class="act" data-page-node-id="U15Filter"><i class="fas fa-filter" data-page-node-id="U15FilterIcon"></i><span class="act-label" data-page-node-id="U15FilterLabel">筛选</span></span>
-    <span class="act" data-page-node-id="U15Delete"><i class="fas fa-trash-can" data-page-node-id="U15DeleteIcon"></i></span>
-    <span class="act" data-page-node-id="U15More"><i class="fas fa-ellipsis" data-page-node-id="U15MoreIcon"></i></span>
-    <span class="act" data-page-node-id="U15Scan"><i class="fas fa-qrcode" data-page-node-id="U15ScanIcon"></i></span>
+    <div class="mini-caps" data-page-node-id="U15Capsule">
+      <i class="fas fa-ellipsis-h" data-page-node-id="U15CapsuleMore"></i>
+      <span class="sep" data-page-node-id="U15CapsuleSep"></span>
+      <i class="fas fa-dot-circle" data-page-node-id="U15CapsuleDot"></i>
+    </div>
   </header>
 
   <!-- 状态 tab -->
