@@ -36,14 +36,9 @@
   .msg-header h1{font-size:17px;font-weight:700;color:#1a1a1a}
   .header-actions-bar{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:6px 12px;background:#f5f5f5;border-bottom:1px solid #f0f0f0;color:#6b7280;font-size:15px}
   .header-actions-bar i{cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
-  .capsule{margin-left:auto;width:88px;height:32px;border-radius:16px;background:rgba(30,30,30,.82);display:flex;align-items:center;color:#fff}
-  .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
-  .capsule .sep{width:1px;height:18px;background:rgba(255,255,255,.35)}
-  /* 小程序右上角通用组件：状态栏右侧胶囊 */
-  .status-bar .capsule{flex:0 0 auto;margin-left:8px;width:88px;height:28px;border-radius:14px;background:rgba(30,30,30,.82);display:flex;align-items:center;color:#fff}
-  .status-bar .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
-  .status-bar .capsule .sep{width:1px;height:16px;background:rgba(255,255,255,.35)}
-  .status-bar .r{align-items:center}
+  .msg-header .capsule{margin-left:auto;width:88px;height:32px;border-radius:16px;background:rgba(30,30,30,.82);display:flex;align-items:center;color:#fff}
+  .msg-header .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .msg-header .capsule .sep{width:1px;height:18px;background:rgba(255,255,255,.35)}
 
   /* 顶部双卡 */
   .top-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
@@ -136,23 +131,19 @@
 <body data-page-node-id="U14Body">
 <div class="phone-frame" data-page-node-id="U14PhoneFrame">
 
-  <!-- 状态栏（含小程序右上角通用胶囊） -->
+  <!-- 状态栏 -->
   <div class="status-bar" data-page-node-id="U14StatusBar">
     <span class="t" data-page-node-id="U14StatusTime">9:41</span>
-    <span class="r" data-page-node-id="U14StatusIcons">
-      <i class="fas fa-signal" data-page-node-id="U14Signal"></i>
-      <i class="fas fa-wifi" data-page-node-id="U14Wifi"></i>
-      <i class="fas fa-battery-three-quarters" style="font-size:14px" data-page-node-id="U14Battery"></i>
-      <div class="capsule" data-page-node-id="U14Capsule">
-        <span class="half" data-page-node-id="U14CapsuleMore"><i class="fas fa-ellipsis-h" data-page-node-id="U14CapsuleMoreIcon"></i></span>
-        <span class="sep" data-page-node-id="U14CapsuleSep"></span>
-        <span class="half" data-page-node-id="U14CapsuleDot"><i class="fas fa-dot-circle" data-page-node-id="U14CapsuleDotIcon"></i></span>
-      </div>
-    </span>
+    <span class="r" data-page-node-id="U14StatusIcons"><i class="fas fa-signal" data-page-node-id="U14Signal"></i><i class="fas fa-wifi" data-page-node-id="U14Wifi"></i><i class="fas fa-battery-three-quarters" style="font-size:14px" data-page-node-id="U14Battery"></i></span>
   </div>
 
   <header class="msg-header" data-page-node-id="U14Header">
     <h1 data-page-node-id="U14Title">消息</h1>
+    <div class="capsule" data-page-node-id="U14Capsule">
+      <span class="half" data-page-node-id="U14CapsuleMore"><i class="fas fa-ellipsis-h" data-page-node-id="U14CapsuleMoreIcon"></i></span>
+      <span class="sep" data-page-node-id="U14CapsuleSep"></span>
+      <span class="half" data-page-node-id="U14CapsuleDot"><i class="fas fa-dot-circle" data-page-node-id="U14CapsuleDotIcon"></i></span>
+    </div>
   </header>
   <div class="header-actions-bar" data-page-node-id="U14HeaderActions">
     <i class="fas fa-check-double" title="全部已读" data-page-node-id="U14IconReadAll"></i>
