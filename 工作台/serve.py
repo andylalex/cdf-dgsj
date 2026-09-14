@@ -193,8 +193,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         super().end_headers()
 
-    def log_message(self, *args):
-        pass  # 静默
+    def log_message(self, fmt, *args):
+        try:
+            with open(os.path.join(ROOT, ".workbuddy", "serve_access.log"), "a", encoding="utf-8") as _lf:
+                _lf.write(self.address_string() + " - " + (fmt % args if args else fmt) + "\n")
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":

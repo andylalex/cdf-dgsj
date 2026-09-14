@@ -479,7 +479,7 @@
       var list = filteredAdvisors();
       var grid = document.getElementById('advisorGrid');
       var empty = document.getElementById('advisorEmpty');
-      document.getElementById('advisorCount').textContent = list.length;
+      var cnt = document.getElementById('advisorCount'); if (cnt) cnt.textContent = list.length;
       grid.innerHTML = list.map(function (a, i) {
         var idx = ADVISORS.indexOf(a);
         return '<div class="adv-card" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
