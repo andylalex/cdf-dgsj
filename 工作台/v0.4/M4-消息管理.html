@@ -533,7 +533,7 @@
       ],
       customers: {
         liu: [
-          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '那支口红能帮我留一下吗？' },
+          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '已为您预留迪奥 999 口红 1 支，到店报手机号即可取货～' },
           { id: 'c2', name: '马先生', phone: '138****6688', time: '07-22', unread: 0, avatarSeed: 'maman', lastMsg: '香水礼盒还有库存吗' }
         ],
         zhang: [
@@ -550,11 +550,13 @@
       },
       messages: {
         c1: [
-          { time: '2024-07-23 11:00', side: 'left', text: '那支口红能帮我留一下吗？' },
-          { time: '2024-07-23 11:05', side: 'left', text: '那支口红能帮我留一下吗？' },
-          { time: '2024-07-23 11:06', side: 'right', text: '可以的，请问是 999 还是 772？' },
-          { time: '2024-07-23 11:15', side: 'left', type: 'coupon', status: 'pending', amount: 500, threshold: 5000, scope: '香化类商品', rule: '限本单使用', expire: '2026-08-31 23:59' },
-          { time: '2024-07-23 14:52', side: 'left', type: 'order', status: 'pending', id: 'DD20260903001', items: [
+          { time: '2024-07-30 20:42', side: 'left', text: '你好，迪奥 999 口红门店还有货吗？想给朋友带一支' },
+          { time: '2024-07-30 20:43', side: 'right', text: '您好，我是中免导购刘洋～迪奥 999 门店现货充足，需要帮您预留吗？' },
+          { time: '2024-07-30 20:45', side: 'left', text: '那帮我留一支吧，我明天下午去海口国际免税城取' },
+          { time: '2024-07-30 20:46', type: 'auto', text: '【非营业时间自动回复】亲，当前为非营业时间（营业时间 09:00-22:00），您的消息已收到，我们将在明日上班后第一时间与您确认预留事宜，感谢理解～' },
+          { time: '2024-07-31 09:12', side: 'right', text: '早上好，已为您预留迪奥 999 口红 1 支，到店报手机号即可取货～' },
+          { time: '2024-07-31 09:15', side: 'left', type: 'coupon', status: 'pending', amount: 500, threshold: 5000, scope: '香化类商品', rule: '限本单使用', expire: '2026-08-31 23:59' },
+          { time: '2024-07-31 14:52', side: 'left', type: 'order', status: 'pending', id: 'DD20260903001', items: [
             { name: '浪凡光韵女士浓香水 50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', sourceLabel: '门店库存' },
             { name: '迪奥真我香水 EDT 100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', sourceLabel: '门店库存' }
           ]},
@@ -674,6 +676,16 @@
       }
       area.innerHTML = msgs.map(m => {
         const isRight = m.side === 'right';
+        if (m.type === 'auto') {
+          return `
+            <div class="msg-time-divider">${m.time}</div>
+            <div class="flex justify-center mb-3">
+              <div class="max-w-[82%] bg-gray-100 text-gray-500 text-[11px] leading-relaxed px-3 py-2 rounded-lg text-center">
+                <i class="fas fa-robot mr-1"></i>${escapeHtml(m.text)}
+              </div>
+            </div>
+          `;
+        }
         if (m.type === 'order') {
           const total = m.items.reduce((s, i) => s + i.price * i.qty, 0);
           const count = m.items.reduce((s, i) => s + i.qty, 0);
@@ -848,7 +860,8 @@
       renderCustomers(currentGuideId, e.target.value);
     });
 
-    document.getElementById('msgInput').addEventListener('keydown', e => {
+    const msgInputEl = document.getElementById('msgInput');
+    if (msgInputEl) msgInputEl.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendMessage();
