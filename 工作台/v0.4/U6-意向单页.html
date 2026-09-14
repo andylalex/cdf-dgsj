@@ -311,7 +311,7 @@
 
     <!-- 顶栏 -->
     <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative border-b border-gray-100" data-page-node-id="U6Header">
-      <a href="U1-用户端IM会话页.html" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U6Back">
+      <a href="javascript:goBackPage()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U6Back">
         <i class="fas fa-chevron-left text-gray-700 text-base" data-page-node-id="U6BackIcon"></i>
       </a>
       <h1 class="text-base font-semibold text-gray-800" data-page-node-id="U6Title">意向单</h1>
@@ -441,7 +441,7 @@
           '<img src="' + (it.img || 'assets/generated/product1.png') + '" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0 cursor-pointer" onclick="openItemGallery(' + idx + ');event.preventDefault();event.stopPropagation()" onerror="this.style.visibility=\'hidden\'">' +
           '<div class="flex-1 min-w-0">' +
             '<p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">' + it.name + '</p>' +
-            '<p class="text-[11px] text-gray-500 mt-0.5">商品码：' + (it.sku || '-') + '</p>' +
+            '<p class="text-[11px] text-gray-500 mt-0.5">编码：' + (it.sku || '-') + '</p>' +
             '<p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>' + guideText(it) + '</p>' +
             ((tags || proTags) ? '<div class="flex flex-wrap gap-1.5 mt-1.5">' + tags + proTags + '</div>' : '') +
             '<div class="mt-2 flex items-center justify-between gap-2">' +
@@ -554,6 +554,21 @@
       var order = { id: list.id, time: '刚刚', items: checked, total: total, source: checked.length ? checked[0].source : 'store' };
       saveList(order);
       window.location.href = 'U5-行程核验页.html?from=U6';
+    }
+
+    function goBackPage() {
+      var params = new URLSearchParams(window.location.search);
+      var from = params.get('from');
+      var target = null;
+      if (from === 'U1') target = 'U1-用户端IM会话页.html';
+      else if (from === 'U4') target = 'U4-结算中心页.html';
+      else if (document.referrer) {
+        var m = document.referrer.match(/([^\/]+\.html)(?:[?#]|$)/);
+        if (m) target = m[1];
+      }
+      if (target) window.location.href = target;
+      else if (window.history && window.history.length > 1) window.history.back();
+      else window.location.href = 'U1-用户端IM会话页.html';
     }
 
     function showToast(text) {
