@@ -153,6 +153,24 @@ const PROTOTYPES_V03=[
     "hotspots": []
   },
   {
+    "id": "v04-u14",
+    "group": "用户端 · CDF中免海南",
+    "name": "U14 消息中心",
+    "device": "mobile",
+    "url": "v0.4/U14-消息中心.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-14",
+    "overview": {
+      "summary": "用户端消息中心：聚合物流、提醒、优惠、互动四类消息，支持折叠与快速查看。"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
+  },
+  {
     "id": "v04-u7",
     "group": "用户端 · CDF中免海南",
     "name": "U7 奢品顾问列表页",

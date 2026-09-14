@@ -31,6 +31,13 @@ window.NAV_DATA = {
       "hotspots": []
     },
     {
+      "id": "v04-u14",
+      "name": "U14 消息中心",
+      "group": "用户端 · CDF中免海南",
+      "device": "mobile",
+      "__imported": false
+    },
+    {
       "id": "v04-u7",
       "name": "U7 奢品顾问列表页",
       "group": "用户端 · CDF中免海南",
