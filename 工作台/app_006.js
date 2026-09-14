@@ -491,6 +491,14 @@ function edOpen(id,rect){
   edSyncBlocks();
   $('edModal').classList.add('show');
   setTimeout(function(){ try{ $('edTitle').focus(); }catch(e){} },60);
+  /* 编辑说明弹窗内 Alt+Enter 保存（多行 textarea 内普通回车仍保留换行） */
+  var em=$('edModal');
+  em.onkeydown=function(e){
+    if(e.altKey && e.key==='Enter'){
+      e.preventDefault();
+      if($('edModal').classList.contains('show')) edSave();
+    }
+  };
 }
 function edClose(){ $('edModal').classList.remove('show'); window.ED.editId=null; window.ED.rect=null; }
 function edSave(){
@@ -738,7 +746,9 @@ function edBindSelect(ov){
     updateSelBox(idx); showPick();
   }
   function onKey(e){
-    if(!hover || hover.cands.length<=1 || current().kind==='image')return;
+    if(!hover || current().kind==='image')return;
+    if(e.key==='Enter'){ e.preventDefault(); finishRect(); return; }
+    if(hover.cands.length<=1)return;
     if(e.key==='ArrowUp'||e.key==='ArrowLeft'){ e.preventDefault(); updateSelBox((hover.pick-1+hover.cands.length)%hover.cands.length); showPick(); }
     else if(e.key==='ArrowDown'||e.key==='ArrowRight'){ e.preventDefault(); updateSelBox((hover.pick+1)%hover.cands.length); showPick(); }
   }
