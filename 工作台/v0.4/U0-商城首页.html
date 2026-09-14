@@ -207,25 +207,53 @@
   .banner-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;color:#E02E24;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:3}
   .banner-deco{position:absolute;right:-20px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08);z-index:1}
 
-  /* 商品楼层 */
-  .floor{padding:14px 12px 0}
-  .floor-title{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-  .floor-title .tt{font-size:17px;font-weight:800;color:#1f2937}
-  .floor-title .sub{font-size:12px;color:#9ca3af}
-  .floor-title .countdown{display:inline-flex;align-items:center;gap:3px;margin-left:auto}
-  .countdown .box{background:#1f2937;color:#fff;font-size:11px;font-weight:700;padding:2px 4px;border-radius:4px;min-width:20px;text-align:center}
-  .countdown .sep{color:#1f2937;font-weight:700}
-  .floor-title .more{font-size:12px;color:#9ca3af;display:flex;align-items:center;gap:2px;margin-left:auto}
+  /* 商品楼层（组合：左列会员专享 + 右列大牌好价/抄底捡漏） */
+  .mall-floor{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px}
+  .floor-left,.right-section{background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .floor-left{padding:12px 10px;display:flex;flex-direction:column;gap:8px}
+  .floor-right{display:flex;flex-direction:column;gap:8px}
+  .right-section{padding:10px}
 
-  .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-  .prod-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.04)}
-  .prod-img{aspect-ratio:1/1;background:#f9fafb;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .prod-img img{width:100%;height:100%;object-fit:cover}
-  .prod-info{padding:8px}
-  .prod-name{font-size:12px;color:#374151;line-height:1.35;height:32px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-  .prod-price{display:flex;align-items:baseline;gap:4px;margin-top:4px}
-  .prod-price .yen{font-size:10px;font-weight:700;color:#E02E24}
-  .prod-price .num{font-size:16px;font-weight:800;color:#E02E24;letter-spacing:-.5px}
+  .vip-title-row{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+  .vip-title-row .tt{font-size:17px;font-weight:800;color:#1f2937}
+  .vip-title-row .countdown{display:inline-flex;align-items:center;gap:2px;margin-left:auto}
+  .vip-title-row .countdown .box{background:#1f2937;color:#fff;font-size:11px;font-weight:700;padding:2px 3px;border-radius:4px;min-width:18px;text-align:center}
+  .vip-title-row .countdown .sep{color:#1f2937;font-weight:700;font-size:11px}
+  .vip-title-row .fox{width:22px;height:22px;border-radius:50%;background:#fff2ea;color:#ff6b35;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+  .rsec-title{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+  .rsec-title .tt{font-size:17px;font-weight:800;color:#1f2937}
+  .rsec-title .tag{font-size:11px;font-weight:600;color:#fff;background:#E02E24;border-radius:999px;padding:2px 6px}
+  .rsec-title .arrow{font-size:11px;font-weight:600;color:#E02E24;display:flex;align-items:center;gap:2px}
+
+  .vip-big-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #f3f4f6;flex:1;display:flex;flex-direction:column}
+  .vip-big-card .prod-img{height:178px;background:#f9fafb;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .vip-big-card .prod-img img{width:100%;height:100%;object-fit:cover}
+  .vip-big-card .prod-info{padding:8px}
+  .vip-big-card .prod-name{font-size:13px;color:#374151;line-height:1.35;height:18px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .vip-big-card .prod-price{display:flex;align-items:baseline;gap:3px;margin-top:4px}
+  .vip-big-card .prod-price .yen{font-size:10px;font-weight:700;color:#E02E24}
+  .vip-big-card .prod-price .num{font-size:18px;font-weight:800;color:#E02E24;letter-spacing:-.5px}
+
+  .vip-mini-row{display:flex;gap:6px}
+  .mini-card{flex:1;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #f3f4f6}
+  .mini-card .prod-img{aspect-ratio:1/1;background:#f9fafb;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .mini-card .prod-img img{width:100%;height:100%;object-fit:cover}
+  .mini-card .prod-info{padding:6px}
+  .mini-card .prod-name{font-size:11px;color:#374151;line-height:1.3;height:28px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .mini-card .prod-price{display:flex;align-items:baseline;gap:2px;margin-top:2px}
+  .mini-card .prod-price .yen{font-size:9px;font-weight:700;color:#E02E24}
+  .mini-card .prod-price .num{font-size:14px;font-weight:800;color:#E02E24;letter-spacing:-.5px}
+
+  .side-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #f3f4f6;margin-bottom:6px}
+  .side-card:last-child{margin-bottom:0}
+  .side-card .prod-img{aspect-ratio:1/0.95;background:#f9fafb;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .side-card .prod-img img{width:100%;height:100%;object-fit:cover}
+  .side-card .prod-info{padding:6px 8px}
+  .side-card .prod-name{font-size:12px;color:#374151;line-height:1.35;height:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .side-card .prod-price{display:flex;align-items:baseline;gap:2px;margin-top:2px}
+  .side-card .prod-price .yen{font-size:9px;font-weight:700;color:#E02E24}
+  .side-card .prod-price .num{font-size:15px;font-weight:800;color:#E02E24;letter-spacing:-.5px}
 
   .section-card{background:#fff;border-radius:14px;padding:12px;margin:10px 14px 0;box-shadow:0 2px 6px rgba(0,0,0,.03)}
   .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
@@ -317,82 +345,80 @@
       <span class="banner-btn" data-page-node-id="U0BannerBtn">抢<i class="fas fa-chevron-right text-[12px]" data-page-node-id="U0BannerArrow"></i></span>
     </div>
 
-    <!-- 会员专享楼层 -->
-    <section class="section-card" data-page-node-id="U0VipSection">
-      <div class="section-header" data-page-node-id="U0VipHeader">
-        <div class="left" data-page-node-id="U0VipLeft">
+    <!-- 商品楼层组合：左列会员专享 + 右列大牌好价/抄底捡漏 -->
+    <section class="mall-floor" data-page-node-id="U0MallFloor">
+      <!-- 左列：会员专享 -->
+      <div class="floor-left" data-page-node-id="U0FloorLeft">
+        <div class="vip-title-row" data-page-node-id="U0VipTitleRow">
           <span class="tt" data-page-node-id="U0VipTitle">会员专享</span>
           <span class="countdown" data-page-node-id="U0VipCountdown"><span class="box" data-page-node-id="U0VipH">11</span><span class="sep" data-page-node-id="U0VipSep1">:</span><span class="box" data-page-node-id="U0VipM">31</span><span class="sep" data-page-node-id="U0VipSep2">:</span><span class="box" data-page-node-id="U0VipS">14</span></span>
+          <span class="fox" data-page-node-id="U0VipFox"><i class="fas fa-paw" data-page-node-id="U0VipFoxIcon"></i></span>
         </div>
-        <span class="more" data-page-node-id="U0VipMore">更多 <i class="fas fa-chevron-right text-[10px]" data-page-node-id="U0VipMoreIcon"></i></span>
-      </div>
-      <div class="prod-grid" data-page-node-id="U0VipGrid">
-        <div class="prod-card" data-page-node-id="U0VipProd1">
-          <div class="prod-img" data-page-node-id="U0VipImg1"><img src="assets/generated/a1.png" alt="商品" data-page-node-id="U0VipPic1"></div>
-          <div class="prod-info" data-page-node-id="U0VipInfo1">
-            <p class="prod-name" data-page-node-id="U0VipName1">CPB 光凝润采妆前霜 37ml</p>
-            <div class="prod-price" data-page-node-id="U0VipPrice1"><span class="yen" data-page-node-id="U0VipYen1">¥</span><span class="num" data-page-node-id="U0VipNum1">239</span></div>
+        <div class="vip-big-card" data-page-node-id="U0VipBigCard">
+          <div class="prod-img" data-page-node-id="U0VipBigImg"><img src="assets/generated/a1.png" alt="商品" data-page-node-id="U0VipBigPic"></div>
+          <div class="prod-info" data-page-node-id="U0VipBigInfo">
+            <p class="prod-name" data-page-node-id="U0VipBigName">CPB 光凝润采妆前霜 37ml</p>
+            <div class="prod-price" data-page-node-id="U0VipBigPrice"><span class="yen" data-page-node-id="U0VipBigYen">¥</span><span class="num" data-page-node-id="U0VipBigNum">239</span></div>
           </div>
         </div>
-        <div class="prod-card" data-page-node-id="U0VipProd2">
-          <div class="prod-img" data-page-node-id="U0VipImg2"><img src="assets/generated/a2.png" alt="商品" data-page-node-id="U0VipPic2"></div>
-          <div class="prod-info" data-page-node-id="U0VipInfo2">
-            <p class="prod-name" data-page-node-id="U0VipName2">雅诗兰黛小棕瓶眼霜双支装</p>
-            <div class="prod-price" data-page-node-id="U0VipPrice2"><span class="yen" data-page-node-id="U0VipYen2">¥</span><span class="num" data-page-node-id="U0VipNum2">572</span></div>
+        <div class="vip-mini-row" data-page-node-id="U0VipMiniRow">
+          <div class="mini-card" data-page-node-id="U0VipMini1">
+            <div class="prod-img" data-page-node-id="U0VipMiniImg1"><img src="assets/generated/a3.png" alt="商品" data-page-node-id="U0VipMiniPic1"></div>
+            <div class="prod-info" data-page-node-id="U0VipMiniInfo1">
+              <p class="prod-name" data-page-node-id="U0VipMiniName1">安热沙金灿倍护防晒乳</p>
+              <div class="prod-price" data-page-node-id="U0VipMiniPrice1"><span class="yen" data-page-node-id="U0VipMiniYen1">¥</span><span class="num" data-page-node-id="U0VipMiniNum1">129</span></div>
+            </div>
+          </div>
+          <div class="mini-card" data-page-node-id="U0VipMini2">
+            <div class="prod-img" data-page-node-id="U0VipMiniImg2"><img src="assets/generated/a4.png" alt="商品" data-page-node-id="U0VipMiniPic2"></div>
+            <div class="prod-info" data-page-node-id="U0VipMiniInfo2">
+              <p class="prod-name" data-page-node-id="U0VipMiniName2">兰蔻菁纯眼霜两件套</p>
+              <div class="prod-price" data-page-node-id="U0VipMiniPrice2"><span class="yen" data-page-node-id="U0VipMiniYen2">¥</span><span class="num" data-page-node-id="U0VipMiniNum2">998</span></div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- 大牌好价楼层 -->
-    <section class="section-card" data-page-node-id="U0HotSection">
-      <div class="section-header" data-page-node-id="U0HotHeader">
-        <div class="left" data-page-node-id="U0HotLeft">
-          <span class="tt" data-page-node-id="U0HotTitle">大牌好价</span>
-          <span class="tag" data-page-node-id="U0HotTag">大家都在买!</span>
-        </div>
-        <span class="more" data-page-node-id="U0HotMore">更多 <i class="fas fa-chevron-right text-[10px]" data-page-node-id="U0HotMoreIcon"></i></span>
-      </div>
-      <div class="prod-grid" data-page-node-id="U0HotGrid">
-        <div class="prod-card" data-page-node-id="U0HotProd1">
-          <div class="prod-img" data-page-node-id="U0HotImg1"><img src="assets/generated/b1.png" alt="商品" data-page-node-id="U0HotPic1"></div>
-          <div class="prod-info" data-page-node-id="U0HotInfo1">
-            <p class="prod-name" data-page-node-id="U0HotName1">iPhone 15 Pro Max</p>
-            <div class="prod-price" data-page-node-id="U0HotPrice1"><span class="yen" data-page-node-id="U0HotYen1">¥</span><span class="num" data-page-node-id="U0HotNum1">8500</span></div>
+      <!-- 右列：大牌好价 + 抄底捡漏 -->
+      <div class="floor-right" data-page-node-id="U0FloorRight">
+        <div class="right-section" data-page-node-id="U0HotSection">
+          <div class="rsec-title" data-page-node-id="U0HotHeader">
+            <span class="tt" data-page-node-id="U0HotTitle">大牌好价</span>
+            <span class="tag" data-page-node-id="U0HotTag">大家都在买!</span>
+          </div>
+          <div class="side-card" data-page-node-id="U0HotProd1">
+            <div class="prod-img" data-page-node-id="U0HotImg1"><img src="assets/generated/b1.png" alt="商品" data-page-node-id="U0HotPic1"></div>
+            <div class="prod-info" data-page-node-id="U0HotInfo1">
+              <p class="prod-name" data-page-node-id="U0HotName1">iPhone 15 Pro Max</p>
+              <div class="prod-price" data-page-node-id="U0HotPrice1"><span class="yen" data-page-node-id="U0HotYen1">¥</span><span class="num" data-page-node-id="U0HotNum1">8500</span></div>
+            </div>
+          </div>
+          <div class="side-card" data-page-node-id="U0HotProd2">
+            <div class="prod-img" data-page-node-id="U0HotImg2"><img src="assets/generated/b2.png" alt="商品" data-page-node-id="U0HotPic2"></div>
+            <div class="prod-info" data-page-node-id="U0HotInfo2">
+              <p class="prod-name" data-page-node-id="U0HotName2">轩尼诗 XO 干邑白兰地</p>
+              <div class="prod-price" data-page-node-id="U0HotPrice2"><span class="yen" data-page-node-id="U0HotYen2">¥</span><span class="num" data-page-node-id="U0HotNum2">2098.75</span></div>
+            </div>
           </div>
         </div>
-        <div class="prod-card" data-page-node-id="U0HotProd2">
-          <div class="prod-img" data-page-node-id="U0HotImg2"><img src="assets/generated/b2.png" alt="商品" data-page-node-id="U0HotPic2"></div>
-          <div class="prod-info" data-page-node-id="U0HotInfo2">
-            <p class="prod-name" data-page-node-id="U0HotName2">轩尼诗 XO 干邑白兰地</p>
-            <div class="prod-price" data-page-node-id="U0HotPrice2"><span class="yen" data-page-node-id="U0HotYen2">¥</span><span class="num" data-page-node-id="U0HotNum2">2098.75</span></div>
+        <div class="right-section" data-page-node-id="U0DealSection">
+          <div class="rsec-title" data-page-node-id="U0DealHeader">
+            <span class="tt" data-page-node-id="U0DealTitle">抄底捡漏</span>
+            <span class="arrow" data-page-node-id="U0DealTag">清仓3折起 <i class="fas fa-chevron-right text-[9px]" data-page-node-id="U0DealTagIcon"></i></span>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 抄底捡漏楼层 -->
-    <section class="section-card" data-page-node-id="U0DealSection">
-      <div class="section-header" data-page-node-id="U0DealHeader">
-        <div class="left" data-page-node-id="U0DealLeft">
-          <span class="tt" data-page-node-id="U0DealTitle">抄底捡漏</span>
-          <span class="tag" data-page-node-id="U0DealTag">清仓3折起 <i class="fas fa-chevron-right text-[9px]" data-page-node-id="U0DealTagIcon"></i></span>
-        </div>
-        <span class="more" data-page-node-id="U0DealMore">更多 <i class="fas fa-chevron-right text-[10px]" data-page-node-id="U0DealMoreIcon"></i></span>
-      </div>
-      <div class="prod-grid" data-page-node-id="U0DealGrid">
-        <div class="prod-card" data-page-node-id="U0DealProd1">
-          <div class="prod-img" data-page-node-id="U0DealImg1"><img src="assets/generated/a3.png" alt="商品" data-page-node-id="U0DealPic1"></div>
-          <div class="prod-info" data-page-node-id="U0DealInfo1">
-            <p class="prod-name" data-page-node-id="U0DealName1">安热沙金灿倍护防晒乳</p>
-            <div class="prod-price" data-page-node-id="U0DealPrice1"><span class="yen" data-page-node-id="U0DealYen1">¥</span><span class="num" data-page-node-id="U0DealNum1">96</span></div>
+          <div class="side-card" data-page-node-id="U0DealProd1">
+            <div class="prod-img" data-page-node-id="U0DealImg1"><img src="assets/generated/b3.png" alt="商品" data-page-node-id="U0DealPic1"></div>
+            <div class="prod-info" data-page-node-id="U0DealInfo1">
+              <p class="prod-name" data-page-node-id="U0DealName1">MAC 魅可柔感哑光唇膏</p>
+              <div class="prod-price" data-page-node-id="U0DealPrice1"><span class="yen" data-page-node-id="U0DealYen1">¥</span><span class="num" data-page-node-id="U0DealNum1">96</span></div>
+            </div>
           </div>
-        </div>
-        <div class="prod-card" data-page-node-id="U0DealProd2">
-          <div class="prod-img" data-page-node-id="U0DealImg2"><img src="assets/generated/a4.png" alt="商品" data-page-node-id="U0DealPic2"></div>
-          <div class="prod-info" data-page-node-id="U0DealInfo2">
-            <p class="prod-name" data-page-node-id="U0DealName2">兰蔻菁纯眼霜两件套</p>
-            <div class="prod-price" data-page-node-id="U0DealPrice2"><span class="yen" data-page-node-id="U0DealYen2">¥</span><span class="num" data-page-node-id="U0DealNum2">543.4</span></div>
+          <div class="side-card" data-page-node-id="U0DealProd2">
+            <div class="prod-img" data-page-node-id="U0DealImg2"><img src="assets/generated/b4.png" alt="商品" data-page-node-id="U0DealPic2"></div>
+            <div class="prod-info" data-page-node-id="U0DealInfo2">
+              <p class="prod-name" data-page-node-id="U0DealName2">雅诗兰黛智妍紧塑眼霜</p>
+              <div class="prod-price" data-page-node-id="U0DealPrice2"><span class="yen" data-page-node-id="U0DealYen2">¥</span><span class="num" data-page-node-id="U0DealNum2">543.4</span></div>
+            </div>
           </div>
         </div>
       </div>
