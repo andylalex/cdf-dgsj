@@ -71,7 +71,7 @@
   /* 折叠卡片 */
   .fold-card{background:#fff;border-radius:12px;padding:10px 12px;margin:0 10px 8px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
   .fold-hd{display:flex;align-items:center;gap:4px;margin-bottom:8px}
-  .fold-hd i{font-size:12px;color:#E02E24;width:22px;height:22px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .fold-hd i{font-size:14px;color:#E02E24;width:18px;display:flex;align-items:center;justify-content:center}
   .fold-hd .name{font-size:14px;font-weight:700;color:#1a1a1a;flex:1}
   .fold-hd .badge{min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
   .fold-hd .toggle{font-size:11px;color:#9ca3af;display:flex;align-items:center;gap:2px}
@@ -82,19 +82,9 @@
   .fold-tag{font-size:10px;font-weight:600;color:#E02E24;background:#fef2f2;border:1px solid #fee2e2;border-radius:4px;padding:1px 4px;height:fit-content;flex-shrink:0}
   .fold-body{flex:1;min-width:0}
   .fold-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.35}
-  .fold-sub{font-size:11px;color:#6b7280;margin-top:3px;line-height:1.4}
+  .fold-sub{font-size:11px;color:#6b7280;margin-top:2px;line-height:1.35}
   .fold-thumb{width:48px;height:48px;border-radius:8px;background:#f9fafb;overflow:hidden;flex-shrink:0}
   .fold-thumb img{width:100%;height:100%;object-fit:cover}
-
-  /* 折叠卡片主标签 / 次标签层级 */
-  .fold-tag.primary{color:#fff;background:#E02E24;border:none;font-weight:600}
-
-  /* 顾问消息会话入口条目 */
-  .advisor-msg{align-items:center;cursor:pointer;transition:background .15s;margin:0 -6px;padding:8px 6px;border-radius:10px;border-bottom:none !important}
-  .advisor-msg:active{background:#fef2f2}
-  .adv-avt{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#E02E24,#c81f17);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 2px 6px rgba(224,46,36,.25)}
-  .adv-from{color:#E02E24;font-weight:600;margin-top:3px}
-  .adv-arrow{color:#c9ccd1;font-size:14px;flex-shrink:0;margin-left:2px}
 
   /* 底部 tabbar */
   .tabbar{flex:0 0 auto;display:flex;background:#fff;border-top:1px solid #f3f4f6;padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
@@ -210,7 +200,7 @@
         </div>
         <div class="fold-item" data-page-node-id="U14DiscountItem2">
           <div class="fold-tag" data-page-node-id="U14DiscountTag2">抽奖活动</div>
-          <div class="fold-tag primary" data-page-node-id="U14DiscountTag2b">会员优选</div>
+          <div class="fold-tag tag-red" data-page-node-id="U14DiscountTag2b" style="color:#fff;background:#E02E24;border:none">会员优选</div>
           <div class="fold-body" data-page-node-id="U14DiscountBody2">
             <div class="fold-title" data-page-node-id="U14DiscountTitle2">踏春趣万物“价”到，踏青好物一站式齐购</div>
             <div class="fold-sub" data-page-node-id="U14DiscountSub2">全场低至 3 折起，踏青好物一站式齐购</div>
@@ -228,14 +218,12 @@
         <span class="toggle" data-page-node-id="U14InteractionToggle" onclick="toggleFold(this)">收起 <i class="fas fa-chevron-up" data-page-node-id="U14InteractionToggleIcon"></i></span>
       </div>
       <div class="fold-list" data-page-node-id="U14InteractionList">
-        <div class="fold-item advisor-msg" data-page-node-id="U14InteractItem1" onclick="location.href='U12-奢品顾问消息列表.html'">
-          <div class="adv-avt" data-page-node-id="U14InteractAvt1"><i class="fas fa-user-tie" data-page-node-id="U14InteractIcon1"></i></div>
+        <div class="fold-item" data-page-node-id="U14InteractItem1">
           <div class="fold-body" data-page-node-id="U14InteractBody1">
-            <div class="fold-title" data-page-node-id="U14InteractTitle1">奢品顾问消息</div>
+            <div class="fold-title" data-page-node-id="U14InteractTitle1"><i class="fas fa-user-tie" style="font-size:11px;color:#E02E24;margin-right:4px" data-page-node-id="U14InteractIcon1"></i>导购推荐</div>
             <div class="fold-sub" data-page-node-id="U14InteractSub1a">您关注的 SK-II 神仙水现在有专柜活动，买两件送小样套装，需要帮您预留吗？</div>
-            <div class="fold-sub adv-from" data-page-node-id="U14InteractSub1b">奢品顾问***</div>
+            <div class="fold-sub" data-page-node-id="U14InteractSub1b">来自：专柜导购林琳琳</div>
           </div>
-          <i class="fas fa-chevron-right adv-arrow" data-page-node-id="U14InteractArrow1"></i>
         </div>
         <div class="fold-item" data-page-node-id="U14InteractItem2">
           <div class="fold-body" data-page-node-id="U14InteractBody2">
