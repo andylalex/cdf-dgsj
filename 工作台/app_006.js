@@ -155,17 +155,22 @@ function navExportCopy(){
 function navExportHide(){ var m=$('navExportModal'); if(m) m.classList.remove('show'); }
 /* ---------- 原型数据导出：把当前内存 PROTOTYPES（内置原型的 srcdoc / 标注 / PRD 等）序列化为 prototypes-data.js ---------- */
 function edBuildProtoText(){
-  /* 增量导出：仅输出与纯净基准（window.__PROTOTYPES_BASE，数据文件加载时拍快照）有差异的手动编辑字段，
-     生成 window.PROTOTYPES_EDITS 段。落盘时只把该段合并进 prototypes-data.js，
-     原文件 V04 / PROTOTYPES_V03 / push / DATA_MODELS 结构完全不动，满足「只增加编辑数据、其他保持一致」。 */
+  /* 增量导出：比较「localStorage 中的编辑态(ED_KEY)」与「纯净基准(__PROTOTYPES_BASE)」，仅输出有差异的字段。
+     优先以 localStorage 为编辑真源（编辑只在 localStorage 改动，内存快照时机不可靠），
+     localStorage 为空时回退到内存 PROTOTYPES。生成 window.PROTOTYPES_EDITS 段。 */
   var base={};
   (window.__PROTOTYPES_BASE||[]).forEach(function(o){ if(o&&o.id) base[o.id]=o; });
+  var cur={};
+  try{
+    var _s=localStorage.getItem(ED_KEY);
+    if(_s){ var _d=JSON.parse(_s); if(_d&&Array.isArray(_d.protos)){ _d.protos.forEach(function(p){ if(p&&p.id) cur[p.id]=p; }); } }
+  }catch(_){}
+  if(!Object.keys(cur).length){ PROTOTYPES.forEach(function(p){ cur[p.id]=p; }); }
   var allowed=['overview','flow','states','hotspots','note','status','name','group','device','url','srcdoc'];
   var edits=[];
-  PROTOTYPES.forEach(function(p){
-    if(p.__imported) return; /* 导入原型数据走 nav-data.js content，不在此文件 */
-    var b=base[p.id]||{};
-    var rec={id:p.id}, changed=false;
+  Object.keys(cur).forEach(function(id){
+    var p=cur[id], b=base[id]||{};
+    var rec={id:id}, changed=false;
     allowed.forEach(function(k){
       if(JSON.stringify(p[k])!==JSON.stringify(b[k])){ rec[k]=p[k]; changed=true; }
     });
@@ -378,17 +383,10 @@ function edAutoSave(){
       /* 左导航结构 → nav-data.js */
       var navText=edBuildNavText();
       await fetch('/api/save-nav',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'nav-data.js',text:navText})});
-      /* 原型编辑增量 → 读原 prototypes-data.js + 合并增量 → 写回（后端再校验完整性） */
+      /* 原型编辑增量 → 仅把增量段 seg 发给后端，由 serve.py 读磁盘原文件合并写回（绕开前端 fetch orig 受 origin 影响的问题） */
       var seg=edBuildProtoText();
       if(seg!==null){
-        var r=await fetch('prototypes-data.js',{cache:'no-store'});
-        if(r.ok){
-          var orig=await r.text();
-          var out=await mergeProtoEdits(orig, seg);
-          if(edProtoFileIsComplete(out)){
-            await fetch('/api/save-proto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'prototypes-data.js',text:out})});
-          }
-        }
+        await fetch('/api/save-proto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'prototypes-data.js',seg:seg})});
       }
     }catch(e){ /* 自动保存失败不影响编辑（localStorage 已兜底），静默 */ }
   }, 1000);
@@ -410,9 +408,13 @@ function edSyncNow(){
       await fetch('/api/save-nav',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'nav-data.js',text:navText})});
       var seg=edBuildProtoText();
       if(seg!==null){
-        var r=await fetch('prototypes-data.js',{cache:'no-store'});
-        if(r.ok){ var orig=await r.text(); var out=await mergeProtoEdits(orig, seg); if(edProtoFileIsComplete(out)){ await fetch('/api/save-proto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'prototypes-data.js',text:out})}); } }
+        await fetch('/api/save-proto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:'prototypes-data.js',seg:seg})});
       }
+      /* 诊断上报：记录 localStorage 是否含编辑、seg 是否生成，便于排查回写链路 */
+      try{
+        var _ls=!!localStorage.getItem(ED_KEY), _segLen=(seg||'').length;
+        fetch('/api/diag',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({src:'sync',lsHas:_ls,segLen:_segLen,baseLen:(window.__PROTOTYPES_BASE||[]).length,protoLen:PROTOTYPES.length})});
+      }catch(_){}
       showToast('已同步到本地文件（原型数据 + 左导航）');
     }catch(e){ showToast('同步失败：'+e.message); }
   })();

@@ -617,7 +617,7 @@
       const paidItem = p.price;
       const whText = (p.wh && p.wh.length) ? p.wh.map(function(w){return w.name + (w.qty>1 ? ' ×'+w.qty : '');}).join('，') : '—';
       const imgHtml = p.img ?
-        '<img src="' + p.img + '" style="object-fit:cover" class="w-full h-full" alt="">' :
+        '<img loading="lazy" src="' + p.img + '" style="object-fit:cover" class="w-full h-full" alt="">' :
         '<i class="fas ' + p.icon + ' text-coral-600 text-xl"></i>';
       return '' +
         '<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">' +
@@ -686,7 +686,7 @@
         const counter = o.counterGroup ? o.counterGroup.name + '（' + o.counterGroup.code + '）' : '--';
         const totalQty = o.products.reduce((s, x) => s + (x.qty || 1), 0);
         const imgHtml = p.img ?
-          '<img src="' + p.img + '" style="object-fit:cover" class="w-full h-full" alt="">' :
+          '<img loading="lazy" src="' + p.img + '" style="object-fit:cover" class="w-full h-full" alt="">' :
           '<i class="fas ' + (p.icon || 'fa-box') + ' text-coral-600 text-xl"></i>';
         return '' +
           '<button onclick="openOrderDetail(\'' + o.no + '\')" class="w-full text-left bg-white rounded-2xl p-4 border border-gray-100 shadow-sm active:scale-[.99] transition">' +

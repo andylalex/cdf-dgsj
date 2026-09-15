@@ -484,7 +484,7 @@
         var idx = ADVISORS.indexOf(a);
         return '<div class="adv-card" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
           '<div class="adv-cover">' +
-            '<img src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
+            '<img loading="lazy" src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
             '<button type="button" class="adv-like-cover' + (a.liked ? ' active' : '') + '" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞" data-page-node-id="U7Like' + idx + '"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
           '</div>' +
           '<div class="adv-body">' +

@@ -719,7 +719,7 @@
           const promos = (m.promos || []).map(p => `<span class="promo-pill promo-${p.t}"><i class="fas ${p.t === 'coupon' ? 'fa-ticket-alt' : 'fa-tag'} text-[9px]"></i>${escapeHtml(p.txt)}</span>`).join('');
           const imgBlock = m.noimg
             ? `<div class="w-20 h-20 rounded-xl bg-gray-100 shrink-0 flex flex-col items-center justify-center text-gray-400 gap-1"><i class="fas fa-image text-gray-300 text-base"></i><span class="text-xs">更新中</span></div>`
-            : `<img src="${m.img}" class="w-20 h-20 rounded-xl object-cover bg-gray-100 shrink-0 cursor-pointer" onerror="this.style.visibility='hidden'" onclick="openG3Gallery(['${m.img}']);event.stopPropagation()">`;
+            : `<img loading="lazy" src="${m.img}" class="w-20 h-20 rounded-xl object-cover bg-gray-100 shrink-0 cursor-pointer" onerror="this.style.visibility='hidden'" onclick="openG3Gallery(['${m.img}']);event.stopPropagation()">`;
           return `
             <div class="msg-time-divider">${m.time}</div>
             <div class="w-[320px] mb-3 bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100">

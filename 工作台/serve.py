@@ -21,6 +21,7 @@
 import http.server
 import json
 import os
+import re
 import sys
 import urllib.parse
 
@@ -31,6 +32,48 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8848
 ALLOWED_SAVE = {"prototypes-data.js", "nav-data.js"}
 IMPORTED_MARKER = "/* ===== 导入原型（编辑版"
 EDITS_MARKER = "/* ===== 左导航结构（编辑版"
+
+
+def merge_proto_edits(orig, seg):
+    """后端合并编辑增量段 seg（前端 edBuildProtoText 产出）到磁盘原文件 orig。
+    保留原文件 V04/PROTOTYPES_V03/DATA_MODELS 结构，仅叠加/覆盖 PROTOTYPES_EDITS 块。"""
+    block_re = re.compile(r'/\*\s*>>>\s*PROTOTYPES_EDITS_START[\s\S]*?<<<\s*PROTOTYPES_EDITS_END\s*<<<\s*\*/', re.S)
+    arr_re = re.compile(r'window\.PROTOTYPES_EDITS\s*=\s*(\[[\s\S]*?\])\s*;')
+
+    def extract_arr(s):
+        m = arr_re.search(s or "")
+        if not m:
+            return []
+        try:
+            return json.loads(m.group(1))
+        except Exception:
+            return []
+
+    existing = []
+    for b in block_re.findall(orig or ""):
+        existing += extract_arr(b)
+    incoming = extract_arr(seg) if seg else []
+    mp = {}
+    for it in existing:
+        if isinstance(it, dict) and it.get("id"):
+            mp[it["id"]] = it
+    for it in incoming:
+        if isinstance(it, dict) and it.get("id"):
+            mp[it["id"]] = it
+    merged = list(mp.values())
+    cleaned = block_re.sub("", orig or "")
+    cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
+    if not merged:
+        return cleaned.rstrip() + '\n'
+    block = ('\n\n/* >>> PROTOTYPES_EDITS_START （编辑版导出：整体替换为最新编辑增量；原文件其余结构保持不变） >>> */\n'
+             'window.PROTOTYPES_EDITS = ' + json.dumps(merged, ensure_ascii=False, indent=2) + ';\n'
+             '/* <<< PROTOTYPES_EDITS_END <<< */\n')
+    anchor = re.compile(r'window\.__PROTOTYPES_BASE\s*=')
+    if anchor.search(cleaned):
+        out = anchor.sub(lambda m: m.group(0) + block, cleaned, count=1)
+    else:
+        out = cleaned.rstrip() + block
+    return re.sub(r'\n{3,}', '\n\n', out)
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -142,8 +185,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     self._json(400, {"ok": False, "msg": "非法路径"})
                     return
                 text = data.get("text", "")
-                if not text.strip().startswith("window.NAV_DATA"):
-                    self._json(400, {"ok": False, "msg": "内容校验失败（必须以 window.NAV_DATA 开头）"})
+                # 允许前置注释（编辑版导出自带注释头）：只要文本内含 window.NAV_DATA 即视为合法
+                if "window.NAV_DATA" not in text:
+                    self._json(400, {"ok": False, "msg": "内容校验失败（缺少 window.NAV_DATA）"})
                     return
                 with open(target, "w", encoding="utf-8") as f:
                     f.write(text)
@@ -167,6 +211,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     self._json(400, {"ok": False, "msg": "非法路径"})
                     return
                 text = data.get("text", "")
+                seg = data.get("seg", "")
+                # 兼容 seg 模式：前端只发编辑增量段，由后端读磁盘原文件合并（避免前端因 origin 不同取到错误 orig）
+                if (not text.strip()) and seg.strip():
+                    try:
+                        with open(target, "r", encoding="utf-8") as _f:
+                            orig = _f.read()
+                    except Exception as _e:
+                        self._json(500, {"ok": False, "msg": "读取原文件失败：" + str(_e)})
+                        return
+                    out = merge_proto_edits(orig, seg)
+                    if not ("const V04" in out and "DATA_MODELS" in out and "PROTOTYPES_V03" in out):
+                        self._json(400, {"ok": False, "msg": "合并后内容不完整（缺少 const V04/DATA_MODELS/PROTOTYPES_V03）"})
+                        return
+                    with open(target, "w", encoding="utf-8") as f:
+                        f.write(out)
+                    self._json(200, {"ok": True, "bytes": len(out), "mode": "merged"})
+                    return
                 # 完整性闸门：必须包含完整原型数据结构，杜绝写入残缺文件导致丢失数据
                 if not ("const V04" in text and "DATA_MODELS" in text and "PROTOTYPES_V03" in text):
                     self._json(400, {"ok": False, "msg": "内容完整性校验失败（缺少 const V04/DATA_MODELS/PROTOTYPES_V03）"})
@@ -176,7 +237,19 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 self._json(200, {"ok": True, "bytes": len(text)})
             except Exception as e:
                 self._json(500, {"ok": False, "msg": str(e)})
-            return
+                return
+        if path == "/api/diag":
+            # 诊断接口：记录前端上报的中间状态（localStorage 是否含编辑、seg 长度等）到访问日志，便于排障
+            try:
+                _len = int(self.headers.get("Content-Length", 0) or 0)
+                _raw = self.rfile.read(_len) if _len else b""
+                try:
+                    self.log_message("DIAG %s", _raw.decode("utf-8", "replace")[:800])
+                except Exception:
+                    pass
+                self._json(200, {"ok": True})
+            except Exception:
+                return
         self.send_error(405)
 
     def _json(self, code, obj):
