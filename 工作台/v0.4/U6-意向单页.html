@@ -293,6 +293,27 @@
       border: solid #fff; border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
+
+    /* ===== 结算门店选择弹窗（点底栏「去结算」弹出：按门店列出结算商品数与合计金额，各带一个「去结算」按钮） ===== */
+    .ck-mask { position:fixed; inset:0; z-index:85; display:flex; align-items:flex-end; justify-content:center; background:rgba(0,0,0,.45); }
+    .ck-mask.hidden { display:none; }
+    .ck-sheet { width:100%; max-width:414px; background:#fff; border-radius:20px 20px 0 0; padding:16px 20px 20px; box-shadow:0 -12px 40px rgba(0,0,0,.14); animation:ckUp .24s ease; }
+    @keyframes ckUp { from{ transform:translateY(26px); opacity:.5; } to{ transform:translateY(0); opacity:1; } }
+    .ck-head { display:flex; align-items:center; justify-content:space-between; }
+    .ck-title { font-size:16px; font-weight:600; color:#1f2937; }
+    .ck-close { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#9aa0a6; background:#f4f4f6; border:none; }
+    .ck-sub { font-size:11.5px; color:#9aa0a6; margin-top:6px; line-height:1.45; }
+    .ck-list { margin-top:14px; max-height:52vh; overflow-y:auto; display:flex; flex-direction:column; gap:10px; }
+    .ck-row { display:flex; align-items:center; gap:10px; padding:13px 14px; border-radius:16px; background:#fafafa; border:1px solid #f1f1f3; }
+    .ck-info { flex:1 1 auto; min-width:0; }
+    .ck-store { font-size:14px; font-weight:600; color:#1f2937; line-height:1.25; }
+    .ck-meta { font-size:11.5px; color:#8b8f95; margin-top:5px; }
+    .ck-meta b { color:#e64e39; font-weight:700; }
+    .ck-amt-wrap { flex:0 0 auto; text-align:right; }
+    .ck-amt-label { font-size:10.5px; color:#9aa0a6; }
+    .ck-amt { font-size:15px; font-weight:700; color:#e64e39; margin-top:2px; }
+    .ck-go { flex:0 0 auto; padding:9px 16px; border-radius:999px; background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39); color:#fff; font-size:13.5px; font-weight:600; border:none; white-space:nowrap; box-shadow:0 6px 16px rgba(255,107,82,.28); }
+    .ck-go:active { transform:scale(.97); }
 </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body class="bg-gray-200" data-page-node-id="U6Body" style="">
@@ -341,12 +362,24 @@
         <p class="text-[12px] text-gray-500" data-page-node-id="U6FooterLabel">已选商品</p>
         <p class="text-[13px] font-semibold text-gray-800 mt-0.5" data-page-node-id="U6FooterCount">共 <span id="footerCount" class="text-coral-600" data-page-node-id="U6FooterCountNum">1</span> 件 · 合计 <span id="footerTotal" class="text-coral-600" data-page-node-id="ziDdRBsI3mGNVy8G4z1mbV">¥394.00</span></p>
       </div>
-      <button id="checkoutBtn" onclick="goCheckout()" class="btn-checkout px-8 py-3 rounded-full text-[15px] font-semibold transition" data-page-node-id="U6FooterBtn">去结算</button>
+      <button id="checkoutBtn" onclick="openCheckoutSheet()" class="btn-checkout px-8 py-3 rounded-full text-[15px] font-semibold transition" data-page-node-id="U6FooterBtn">去结算</button>
     </div>
 
   </div>
 
   <div id="toast" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 text-white px-4 py-2 rounded-lg text-[13px] z-[80] hidden" data-page-node-id="U6Toast">已从清单移除</div>
+
+  <!-- 结算门店选择弹窗：按门店列出结算商品数与合计金额，每个门店各带一个「去结算」按钮 -->
+  <div id="checkoutMask" class="ck-mask hidden" onclick="closeCheckoutSheet()" data-page-node-id="U6CkMask">
+    <div class="ck-sheet" onclick="event.stopPropagation()" data-page-node-id="U6CkSheet">
+      <div class="ck-head">
+        <p class="ck-title" data-page-node-id="U6CkTitle">选择结算门店</p>
+        <button type="button" class="ck-close" onclick="closeCheckoutSheet()" aria-label="关闭" data-page-node-id="U6CkClose"><i class="fas fa-times" data-page-node-id="U6CkCloseIcon"></i></button>
+      </div>
+      <p class="ck-sub" data-page-node-id="U6CkSub">门店商品需按门店分别结算，请选择本次结算的门店</p>
+      <div id="ckStoreList" class="ck-list" data-page-node-id="U6CkList"></div>
+    </div>
+  </div>
 
   <script data-page-node-id="U6Script">
 
@@ -521,21 +554,13 @@
       var list = getList();
       var it = list.items[idx];
       if (!it) return;
-      if (checked) {
-        var key = storeOf(it);
-        list.items.forEach(function (o) { if (storeOf(o) !== key) o.checked = false; });
-      }
       it.checked = checked;
       saveList(list); renderList();
     }
 
     function toggleGroup(storeName, checked) {
       var list = getList();
-      if (checked) {
-        list.items.forEach(function (o) { o.checked = (storeOf(o) === storeName); });
-      } else {
-        list.items.forEach(function (o) { if (storeOf(o) === storeName) o.checked = false; });
-      }
+      list.items.forEach(function (o) { if (storeOf(o) === storeName) o.checked = checked; });
       saveList(list); renderList();
     }
 
@@ -556,14 +581,50 @@
       showToast('已从清单移除');
     }
 
-    function goCheckout() {
+    // 底栏「去结算」→ 弹出结算门店选择（每个门店一行：结算商品数 + 合计金额 + 该门店自己的「去结算」按钮）
+    function openCheckoutSheet() {
       var list = getList();
       var checked = list.items.filter(function (i) { return i.checked; });
       if (!checked.length) { showToast('请先选择要结算的商品'); return; }
-      var total = checked.reduce(function (s, i) { return s + (i.price || 0) * (i.qty || 1); }, 0);
-      var order = { id: list.id, time: '刚刚', items: checked, total: total, source: checked.length ? checked[0].source : 'store' };
+      var stores = [];
+      checked.forEach(function (it) {
+        var k = storeOf(it);
+        if (stores.indexOf(k) === -1) stores.push(k);
+      });
+      var rows = stores.map(function (storeName) {
+        var items = checked.filter(function (it) { return storeOf(it) === storeName; });
+        var cnt = items.reduce(function (s, i) { return s + (i.qty || 1); }, 0);
+        var amt = items.reduce(function (s, i) { return s + (i.price || 0) * (i.qty || 1); }, 0);
+        return '<div class="ck-row" data-store="' + storeName + '">' +
+            '<div class="ck-info">' +
+              '<p class="ck-store">' + storeName + '</p>' +
+              '<p class="ck-meta">结算商品 <b>' + cnt + '</b> 件</p>' +
+            '</div>' +
+            '<div class="ck-amt-wrap">' +
+              '<p class="ck-amt-label">合计</p>' +
+              '<p class="ck-amt">¥' + formatMoney(amt) + '</p>' +
+            '</div>' +
+            '<button type="button" class="ck-go" onclick="checkoutStore(\'' + storeName + '\')">去结算</button>' +
+          '</div>';
+      }).join('');
+      document.getElementById('ckStoreList').innerHTML = rows;
+      document.getElementById('checkoutMask').classList.remove('hidden');
+    }
+
+    function closeCheckoutSheet() {
+      var el = document.getElementById('checkoutMask');
+      if (el) el.classList.add('hidden');
+    }
+
+    // 门店各自的「去结算」：只结算该门店已勾选商品，进入行程核验
+    function checkoutStore(storeName) {
+      var list = getList();
+      var items = list.items.filter(function (i) { return i.checked && storeOf(i) === storeName; });
+      if (!items.length) { showToast('该门店没有可结算的商品'); return; }
+      var total = items.reduce(function (s, i) { return s + (i.price || 0) * (i.qty || 1); }, 0);
+      var order = { id: list.id, time: '刚刚', items: items, total: total, store: storeName, source: items[0].source || 'store' };
       saveList(order);
-      window.location.href = 'U5-行程核验页.html?from=U6';
+      window.location.href = 'U5-行程核验页.html?from=U6&store=' + encodeURIComponent(storeName);
     }
 
     function goBackPage() {
