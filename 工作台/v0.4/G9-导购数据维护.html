@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css">
+<html lang="zh-CN" data-page-node-id="hZvI0HIqLBnnhrsW9AocYk">
+<head data-page-node-id="J31d5FloydBFLXKRLoxlhl">
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="uBAwJhVo3iks8aBUFB7A2p">
   <style>
 
 *,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }
@@ -152,12 +152,16 @@
 .hide-scrollbar::-webkit-scrollbar{display:none}
 .hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
 
+/* box-sizing reset — 修复横向滚动 */
+*,*::before,*::after{box-sizing:border-box}
+html,body{width:100%;overflow-x:hidden}
+
 /* font-awesome weight fix */
 i.fas{font-weight:900}
 i.far{font-weight:400}
 
 body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;background:#e5e7eb}
-.phone-frame{max-width:414px;margin:0 auto;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;background:#f2f3f5}
+.phone-frame{max-width:414px;width:100%;margin:0 auto;height:100vh;height:100dvh;overflow:hidden;overflow-x:hidden;display:flex;flex-direction:column;background:#f2f3f5}
 .phone-frame>*{min-height:0}
 
 /* form */
@@ -196,6 +200,17 @@ body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;ba
 .upload-action{font-size:14px;color:#3b82f6;cursor:pointer;font-weight:500}
 .upload-action:active{opacity:.7}
 
+/* custom brand dropdown */
+.brand-trigger{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:160px;padding:10px 12px 10px 14px;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;font-size:15px;color:#111827;cursor:pointer}
+.brand-trigger:active{background:#f3f4f6}
+.brand-caret{font-size:11px;color:#9ca3af;transition:transform .2s}
+.brand-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:200px;max-height:240px;overflow-y:auto;background:#fff;border:1px solid #f3f4f6;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.12);padding:6px;z-index:50}
+.brand-menu.hide-scrollbar::-webkit-scrollbar{display:none}
+.brand-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;font-size:15px;color:#374151;cursor:pointer}
+.brand-item:hover,.brand-item.active{background:#eff6ff;color:#2563eb}
+.brand-item .bi-check{color:#2563eb;font-size:13px;opacity:0}
+.brand-item.active .bi-check{opacity:1}
+
 /* save bar */
 .save-bar{padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));background:#fff;border-top:1px solid #f3f4f6}
 .save-btn{width:100%;height:46px;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#2563eb);color:#fff;font-size:16px;font-weight:600;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.35)}
@@ -205,140 +220,175 @@ body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;ba
 #toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.75);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
 #toast.show{opacity:1}
 </style>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" data-page-node-id="UvBV3r5d1hXUwIw3XrtmBK">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="tW0YBlojBuKUcqkvu8YNYO">
   <title>导购数据维护</title>
 </head>
-<body>
-  <div class="phone-frame shadow-2xl">
+<body data-page-node-id="zh8n2Qr7yplNSB8qGLbd1l">
+  <div class="phone-frame shadow-2xl" data-page-node-id="xCeJ7S0OpiCi4wKcIt8gtL">
 
     <!-- 状态栏 -->
-    <div class="bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0">
-      <span class="text-[14px] font-semibold tracking-tight">9:41</span>
-      <div class="flex items-center gap-1.5 text-black">
-        <span class="text-[10px] font-semibold">5G</span>
-        <i class="fas fa-signal text-[11px]"></i>
-        <i class="fas fa-wifi text-[11px]"></i>
-        <i class="fas fa-battery-three-quarters text-[15px]"></i>
+    <div class="bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0" data-page-node-id="sEG5HK65bOQF7nP9JzdDtx">
+      <span class="text-[14px] font-semibold tracking-tight" data-page-node-id="GskTCibGjraUJvWNAzaYl3">9:41</span>
+      <div class="flex items-center gap-1.5 text-black" data-page-node-id="dLTh5yoMk91nxEcXgXKjCI">
+        <span class="text-[10px] font-semibold" data-page-node-id="PhcnlYomMWCqCocodLyvRV">5G</span>
+        <i class="fas fa-signal text-[11px]" data-page-node-id="J8i1kwYF9Z2zsWUsfAVoqA"></i>
+        <i class="fas fa-wifi text-[11px]" data-page-node-id="GJpHljL8rgMrNwxEbrBzHY"></i>
+        <i class="fas fa-battery-three-quarters text-[15px]" data-page-node-id="0f4bUy9eQNrGtY4FEvP1f7"></i>
       </div>
     </div>
 
     <!-- 顶部 -->
-    <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center justify-center shrink-0 relative">
-      <button onclick="goBack()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition text-gray-700">
-        <i class="fas fa-chevron-left text-lg"></i>
+    <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center relative shrink-0" data-page-node-id="iDyTQZnyFrQHdRFxEsmrP3">
+      <button onclick="goBack()" class="flex items-center justify-center w-9 h-9 -ml-1 rounded-full active:bg-gray-100 transition text-gray-700 shrink-0" data-page-node-id="HtFrBgaFETCcgxiD9ENOPp">
+        <i class="fas fa-chevron-left text-lg" data-page-node-id="mnZDEgBmqh9DX5uOrXVNv2"></i>
       </button>
-      <h1 class="text-base font-semibold text-gray-800">导购数据维护</h1>
+      <h1 class="flex-1 text-center text-base font-semibold text-gray-800 pr-9" data-page-node-id="q3kfnW6jOAfcyv2qFTRWD1">导购数据维护</h1>
     </div>
 
     <!-- 滚动内容 -->
-    <div id="scrollArea" class="flex-1 overflow-y-auto hide-scrollbar bg-white">
-      <div class="divide-y divide-gray-100">
+    <div id="scrollArea" class="flex-1 overflow-y-auto hide-scrollbar bg-white" data-page-node-id="Kaqbuxc4zzCsCGmeli1W7l">
+      <div class="divide-y divide-gray-100" data-page-node-id="5D3VREpiF3gfSsoLaAwNDG">
 
         <!-- 工号 -->
-        <div class="form-row flex items-center justify-between gap-4">
-          <span class="form-label">工号</span>
-          <span class="form-value">68680001</span>
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="d9aA8mR2A5EFiEzcThyuw5">
+          <span class="form-label" data-page-node-id="PB3quftBrJ0o0PwyLSUCGp">工号</span>
+          <span class="form-value" data-page-node-id="v6OrBauZs0b3VgUl0RsozQ">68680001</span>
         </div>
 
         <!-- 姓名 -->
-        <div class="form-row flex items-center justify-between gap-4">
-          <span class="form-label">姓名</span>
-          <span class="form-value">张伟</span>
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="5ENMGbCiUgAmkhDWGg2PsK">
+          <span class="form-label" data-page-node-id="7J4Ppd6VGGnq7FAGqAUwWx">姓名</span>
+          <span class="form-value" data-page-node-id="0xnmPDqpWUcssvDbHDcFso">张伟</span>
         </div>
 
         <!-- EOP组织 -->
-        <div class="form-row flex items-start justify-between gap-4">
-          <span class="form-label pt-2.5">EOP组织</span>
-          <span class="form-value leading-relaxed">cdf三亚国际免税城 (6868)/A区一层香化 (686804)/香化一组 (68680401)</span>
+        <div class="form-row flex items-start justify-between gap-4" data-page-node-id="xMjA32ZZzWHK7YGcjScBuO">
+          <span class="form-label pt-2.5" data-page-node-id="I2srUhsywj8z5febp6giML">EOP组织</span>
+          <span class="form-value leading-relaxed" data-page-node-id="iU2upJlOcGMl6dBITyqbG0">cdf三亚国际免税城 (6868)/A区一层香化 (686804)/香化一组 (68680401)</span>
         </div>
 
         <!-- 品牌 -->
-        <div class="form-row flex items-center justify-between gap-4">
-          <span class="form-label"><span class="form-required">*</span>品牌</span>
-          <div class="relative">
-            <select id="brandSelect" class="form-input form-select text-right bg-white pr-8">
-              <option value="雅诗兰黛">雅诗兰黛</option>
-              <option value="兰蔻">兰蔻</option>
-              <option value="SK-II">SK-II</option>
-              <option value="海蓝之谜">海蓝之谜</option>
-              <option value="迪奥">迪奥</option>
-            </select>
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="yJ8b87eilZqrg80XDWINFB">
+          <span class="form-label" data-page-node-id="HPNOaZtu435VTt2AsBEGu5"><span class="form-required" data-page-node-id="q9e2pHrdeZDlImwRPEjhFC">*</span>品牌</span>
+          <div class="relative" data-page-node-id="1gZZWgbOrC68p1aKjSVACL">
+            <div id="brandTrigger" class="brand-trigger" onclick="toggleBrandMenu()">
+              <span id="brandText" data-page-node-id="EWuWE5nCmaYr2b0UQddoRU">雅诗兰黛</span>
+              <i class="fas fa-chevron-down brand-caret"></i>
+            </div>
+            <div id="brandMenu" class="brand-menu hidden hide-scrollbar"></div>
           </div>
         </div>
 
         <!-- 标签 -->
-        <div class="form-row flex-col">
-          <span class="form-label mb-3">标签</span>
-          <div class="tag-chips" id="tagBox">
-            <span class="tag-chip">护肤专家 <i class="fas fa-times" onclick="removeTag(this)"></i></span>
-            <span class="tag-chip">会员顾问 <i class="fas fa-times" onclick="removeTag(this)"></i></span>
-            <span class="tag-chip">2342 <i class="fas fa-times" onclick="removeTag(this)"></i></span>
-            <input id="tagInput" type="text" class="tag-input" placeholder="输入后回车添加" onkeydown="onTagKey(event)">
+        <div class="form-row flex-col" data-page-node-id="rvd2CpcXaa98QAJkWoYKqf">
+          <span class="form-label mb-3" data-page-node-id="Y2FZMlskOekQFET0B4IMPC">标签</span>
+          <div class="tag-chips" id="tagBox" data-page-node-id="CPDBUaTCfI7i9PDBOidQgx">
+            <span class="tag-chip" data-page-node-id="dL63mzOOHwgNkMyVTNxg1R">护肤专家 <i class="fas fa-times" onclick="removeTag(this)" data-page-node-id="8VCcn14THpsZlmTfQFDB3p"></i></span>
+            <span class="tag-chip" data-page-node-id="WBD1gJaZu6pfqOTknXHU49">会员顾问 <i class="fas fa-times" onclick="removeTag(this)" data-page-node-id="gWrzMYUhFOQssq7mIFhAEk"></i></span>
+            <span class="tag-chip" data-page-node-id="AsBuSfAt5FNFDusWswc0Sp">2342 <i class="fas fa-times" onclick="removeTag(this)" data-page-node-id="DyHqPSBOJoofYOAG15Ny1s"></i></span>
+            <input id="tagInput" type="text" class="tag-input" placeholder="输入后回车添加" onkeydown="onTagKey(event)" data-page-node-id="mZLeGqwaueXRDGR21LufIH">
           </div>
         </div>
 
         <!-- 导购一句话介绍 -->
-        <div class="form-row flex-col">
-          <span class="form-label mb-3">导购一句话介绍</span>
+        <div class="form-row flex-col" data-page-node-id="vv7bXPfNljCE4dz61TKD8g">
+          <span class="form-label mb-3" data-page-node-id="2h9dxsF9oo83SmtRBgjg5r">导购一句话介绍</span>
           <textarea id="introText" class="form-textarea" placeholder="请输入导购一句话介绍">专注雅诗兰黛护肤，帮你找到适合自己的保养方案</textarea>
         </div>
 
         <!-- 在线状态 -->
-        <div class="form-row flex items-center justify-between gap-4">
-          <span class="form-label">在线状态</span>
-          <label class="switch-wrap">
-            <input type="checkbox" id="onlineSwitch">
-            <span class="switch-track"></span>
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="WRAzunXAQ4yTtkHKFBoPNo">
+          <span class="form-label" data-page-node-id="OHTSEc5gmxnNBTLBFHo0y9">在线状态</span>
+          <label class="switch-wrap" data-page-node-id="sNkltRCC7UhJ6SSL2aI98N">
+            <input type="checkbox" id="onlineSwitch" data-page-node-id="ZcKkiUKOSY9uPasix7ABSr">
+            <span class="switch-track" data-page-node-id="ufVXcTuQ69dFhRUbI1YHyN"></span>
           </label>
         </div>
 
         <!-- 头像 -->
-        <div class="form-row flex-col">
-          <span class="form-label mb-3">头像</span>
-          <div class="upload-row">
-            <div class="upload-thumb round w-20 h-20" onclick="pickFile('avatarFile')">
-              <img id="avatarImg" src="assets/avatars/default.svg" alt="" class="hidden">
-              <i id="avatarPlaceholder" class="fas fa-user placeholder"></i>
+        <div class="form-row flex-col" data-page-node-id="6Q8lpSfQdaNuTOpLXTKIKg">
+          <span class="form-label mb-3" data-page-node-id="QlFfAdm5PMyxGVSPcynxu9">头像</span>
+          <div class="upload-row" data-page-node-id="QzbvE9HDo1DNvPdleRcBHV">
+            <div class="upload-thumb round w-20 h-20" onclick="pickFile('avatarFile')" data-page-node-id="Q38eVkpxx31tbtrEXnmGzi">
+              <img id="avatarImg" src="assets/avatars/default.svg" alt="" class="hidden" data-page-node-id="B4ipeeUrVxWY6OtiCzmcel">
+              <i id="avatarPlaceholder" class="fas fa-user placeholder" data-page-node-id="aMLFFwTojlS4APMCwTX9oO"></i>
             </div>
-            <span class="upload-action" onclick="pickFile('avatarFile')">更换头像</span>
-            <input id="avatarFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this,'avatarImg','avatarPlaceholder')">
+            <span class="upload-action" onclick="pickFile('avatarFile')" data-page-node-id="k5HvKDrnn5mqFQBGRha6gq">更换头像</span>
+            <input id="avatarFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this,'avatarImg','avatarPlaceholder')" data-page-node-id="x7XGN5dCGuMPUlF3d1eHK9">
           </div>
         </div>
 
         <!-- 形象照 -->
-        <div class="form-row flex-col pb-5">
-          <span class="form-label mb-3">形象照</span>
-          <div class="upload-row">
-            <div class="upload-thumb rounded-lg w-[88px] h-[88px]" onclick="pickFile('photoFile')">
-              <img id="photoImg" src="" alt="" class="hidden">
-              <i id="photoPlaceholder" class="fas fa-image placeholder"></i>
+        <div class="form-row flex-col pb-5" data-page-node-id="MsmSUfBAhIjUHc4UyGNlWI">
+          <span class="form-label mb-3" data-page-node-id="6HICs2T6amLfke4Ja6IACG">形象照</span>
+          <div class="upload-row" data-page-node-id="zOnAgrUBFECHeIwYqWTlln">
+            <div class="upload-thumb rounded-lg w-[88px] h-[88px]" onclick="pickFile('photoFile')" data-page-node-id="9Cihkianmf1Ax6KWcQxQ4V">
+              <img id="photoImg" src="" alt="" class="hidden" data-page-node-id="YEJKYIED4OBHuAFY3zP9DE">
+              <i id="photoPlaceholder" class="fas fa-image placeholder" data-page-node-id="RPNNhELVbr0YrT0ExWKU4z"></i>
             </div>
-            <span class="upload-action" onclick="pickFile('photoFile')">更换形象照</span>
-            <input id="photoFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this,'photoImg','photoPlaceholder')">
+            <span class="upload-action" onclick="pickFile('photoFile')" data-page-node-id="3VpArta9MRe1wxijE7dut7">更换形象照</span>
+            <input id="photoFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this,'photoImg','photoPlaceholder')" data-page-node-id="Ap5qDwDpNsuf1uatnSSoAH">
           </div>
         </div>
 
       </div>
 
       <!-- 底部留白，避免被保存栏遮挡 -->
-      <div class="h-20"></div>
+      <div class="h-20" data-page-node-id="2snk1CBkT40FPoh1Jj5iwl"></div>
     </div>
 
     <!-- 保存栏 -->
-    <div class="save-bar shrink-0">
-      <button class="save-btn" onclick="saveProfile()">保存</button>
+    <div class="save-bar shrink-0" data-page-node-id="qHEsBXdHfAqbGDKnjhxa1a">
+      <button class="save-btn" onclick="saveProfile()" data-page-node-id="aq5whuAgUeDWmZlpSBpHML">保存</button>
     </div>
 
   </div>
 
-  <div id="toast">保存成功</div>
+  <div id="toast" data-page-node-id="ovz97qv8iRSGCxhFDcjLNn">保存成功</div>
 
   <script>
     function goBack(){
       if(document.referrer && document.referrer.indexOf(location.hostname)!==-1){ history.back(); return; }
       location.href='G1-工作台.html';
     }
+
+    var BRANDS=['雅诗兰黛','兰蔻','SK-II','海蓝之谜','迪奥'];
+    var brandCurrent='雅诗兰黛';
+    function renderBrandMenu(){
+      var menu=document.getElementById('brandMenu');
+      menu.innerHTML=BRANDS.map(function(b){
+        var on=(b===brandCurrent);
+        return '<div class="brand-item'+(on?' active':'')+'" onclick="selectBrand(\''+b+'\')"><span>'+escHtml(b)+'</span><i class="fas fa-check bi-check"></i></div>';
+      }).join('');
+    }
+    function toggleBrandMenu(){
+      var menu=document.getElementById('brandMenu');
+      var caret=document.getElementById('brandTrigger').querySelector('.brand-caret');
+      if(menu.classList.contains('hidden')){
+        renderBrandMenu();
+        menu.classList.remove('hidden');
+        if(caret) caret.style.transform='rotate(180deg)';
+      }else{
+        closeBrandMenu();
+      }
+    }
+    function closeBrandMenu(){
+      var menu=document.getElementById('brandMenu');
+      menu.classList.add('hidden');
+      var caret=document.getElementById('brandTrigger').querySelector('.brand-caret');
+      if(caret) caret.style.transform='';
+    }
+    function selectBrand(b){
+      brandCurrent=b;
+      document.getElementById('brandText').textContent=b;
+      closeBrandMenu();
+    }
+    document.addEventListener('click',function(e){
+      var trigger=document.getElementById('brandTrigger');
+      if(!trigger) return;
+      if(!trigger.parentElement.contains(e.target)) closeBrandMenu();
+    });
 
     function pickFile(id){ document.getElementById(id).click(); }
 
