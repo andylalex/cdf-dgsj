@@ -645,10 +645,14 @@
       setTx('U4PointsValue', pt.used > 0 ? '已用 ' + pt.used.toLocaleString('zh-CN') + ' 积分抵 ¥' + pt.val : '可用 1,200 积分');
     }
 
+    // 柜组名称统一为简单中文品牌名（含旧数据兼容）
+    const BOOTH_ALIAS = { 'Cartier 精品柜组': '卡地亚', 'Dior 精品柜组': '迪奥' };
+    function fixBooth(b) { return BOOTH_ALIAS[b] || b || ''; }
+
     const DEMO_ORDER = {
       items: [
-        { img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', sku: 'C016080', price: 394, qty: 1, store: '三亚国际免税城', guide: { name: '江莹莹', booth: 'Cartier 精品柜组' } },
-        { img: 'assets/generated/product2.png', name: '迪奥真我香水 EDT', sku: 'C017002', price: 1280, qty: 1, store: '海口国际免税城', guide: { name: '符光亮', booth: 'Dior 精品柜组' } }
+        { img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', sku: 'C016080', price: 394, qty: 1, store: '三亚国际免税城', guide: { name: '江莹莹', booth: '卡地亚' } },
+        { img: 'assets/generated/product2.png', name: '迪奥真我香水 EDT', sku: 'C017002', price: 1280, qty: 1, store: '海口国际免税城', guide: { name: '符光亮', booth: '迪奥' } }
       ]
     };
 
@@ -689,7 +693,7 @@
           gCount += it.qty;
           gSub += it.price * it.qty;
           const gName = (it.guide && it.guide.name) ? it.guide.name : '顾问';
-          const gBooth = (it.guide && it.guide.booth) ? it.guide.booth : '';
+          const gBooth = fixBooth(it.guide && it.guide.booth);
           rows +=
             '<div class="flex gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">' +
               '<img loading="lazy" src="' + it.img + '" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0">' +

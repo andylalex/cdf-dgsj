@@ -387,8 +387,8 @@
       id: 'DD20260903001',
       time: '14:52',
       items: [
-        { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', images: ['assets/generated/product1.png', 'assets/generated/product1_detail.png'], source: 'store', guide: { name: '李婷', store: '三亚国际免税城', booth: 'Cartier 精品柜组' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] },
-        { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', images: ['assets/generated/product2.png', 'assets/generated/product2_detail.png'], source: 'store', guide: { name: '王芳', store: '海口国际免税城', booth: 'Dior 精品柜组' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] }
+        { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', images: ['assets/generated/product1.png', 'assets/generated/product1_detail.png'], source: 'store', guide: { name: '李婷', store: '三亚国际免税城', booth: '卡地亚' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] },
+        { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', images: ['assets/generated/product2.png', 'assets/generated/product2_detail.png'], source: 'store', guide: { name: '王芳', store: '海口国际免税城', booth: '迪奥' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] }
       ]
     };
 
@@ -462,10 +462,14 @@
       return '<span class="tag-promo">' + tag + '</span>';
     }
 
+    // 柜组名称统一为简单中文品牌名（含旧数据兼容）
+    var BOOTH_ALIAS = { 'Cartier 精品柜组': '卡地亚', 'Dior 精品柜组': '迪奥' };
+    function fixBooth(b) { return BOOTH_ALIAS[b] || b || ''; }
+
     // 顾问信息文案：{柜组名称}专柜顾问 {姓名}（无柜组时降级为「专柜顾问 {姓名}」）
     function guideText(it) {
       var g = it.guide || {};
-      return (g.booth || '') + '专柜顾问 ' + (g.name || '顾问');
+      return fixBooth(g.booth) + '专柜顾问 ' + (g.name || '顾问');
     }
 
     function renderGroup(source, items) {
