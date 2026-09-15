@@ -91,15 +91,9 @@
   .gcell i{font-size:23px;font-weight:900}
   .gcell span{font-size:13px;font-weight:500}
 
-  /* 灰度版：奢品顾问 + 意向单 合并入口（未读数合并） */
-  .combine-card{display:flex;align-items:center;gap:12px;margin-top:12px;background:#fff;border-radius:16px;padding:13px 14px;box-shadow:0 2px 10px rgba(130,155,195,.10);text-decoration:none;cursor:pointer}
-  .combine-card .cc-ic{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#fdf1dc,#f5e2c0);color:#b8905a;display:flex;align-items:center;justify-content:center;font-size:17px;flex:0 0 auto}
-  .combine-card .cc-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
-  .combine-card .cc-t{font-size:15px;font-weight:700;color:#14161a;display:flex;align-items:center;gap:6px}
-  .combine-card .cc-tag{font-size:10px;font-weight:600;color:#b8905a;background:#fdf6ea;border:1px solid #f0e2cb;border-radius:4px;padding:0 5px;line-height:15px}
-  .combine-card .cc-s{font-size:12px;color:#8b919b}
-  .combine-card .cc-badge{min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#e02e24;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:1.5px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.18)}
-  .combine-card .cc-ar{font-size:12px;color:#c3c8cf;flex:0 0 auto}
+  /* 宫格内带角标的图标（奢品顾问） */
+  .gcell .gv{position:relative;display:inline-flex;align-items:center;justify-content:center}
+  .gcell .gbadge{position:absolute;top:-6px;right:-14px;min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:#e02e24;color:#fff;font-size:10px;font-weight:700;line-height:16px;text-align:center;border:1.5px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.18);font-family:inherit}
 
   /* 五宫格 + 全部 */
   .grid5-wrap{display:flex;align-items:center}
@@ -218,22 +212,13 @@
       </div>
     </div>
 
-    <!-- 灰度版：奢品顾问 + 意向单 合并入口，未读数合并 -->
-    <a href="U12-奢品顾问消息列表.html" class="combine-card" data-page-node-id="U13CombineCard">
-      <span class="cc-ic" data-page-node-id="U13CcIc"><i class="fas fa-user-tie" data-page-node-id="U13CcIcon"></i></span>
-      <span class="cc-body" data-page-node-id="U13CcBody">
-        <span class="cc-t" data-page-node-id="U13CcTitle">奢品顾问<span class="cc-tag" data-page-node-id="U13CcTag">灰度</span></span>
-        <span class="cc-s" data-page-node-id="U13CcSub">顾问消息 · 我的意向单</span>
-      </span>
-      <span class="cc-badge" id="combineBadge" data-page-node-id="U13CcBadge">5</span>
-      <i class="fas fa-chevron-right cc-ar" data-page-node-id="U13CcArrow"></i>
-    </a>
-
-    <!-- 浏览记录 / 商品收藏 -->
+    <!-- 浏览记录 / 商品收藏 / 意向单 -->
     <div class="card row2" data-page-node-id="F50NLy4wmxPlyJTcBCJFID">
       <span class="cell" data-page-node-id="34oz3en5t5D2HjCcyZ11xD"><i class="far fa-clock" data-page-node-id="ZfSQ7wBrqv4eFlANgJ9QZn"></i>浏览记录</span>
       <span class="vsep" data-page-node-id="dRVyhTrSF5Ub9O6uXqF9LN"></span>
       <span class="cell" data-page-node-id="piyvaCL5DUzDx56XtjfYVO"><i class="far fa-heart" data-page-node-id="fwh9fPddhCtiJWeWSrfAIM"></i>商品收藏</span>
+      <span class="vsep" data-page-node-id="U13RowSep2"></span>
+      <a href="U6-意向单页.html" class="cell" data-page-node-id="U13IntentCell"><span class="cell-ic" data-page-node-id="U13IntentIc"><i class="fas fa-clipboard-check" data-page-node-id="U13IntentIcon"></i></span><span class="badge" id="intentCellBadge" data-page-node-id="U13IntentBadge">2</span>意向单</a>
     </div>
 
     <!-- 订单 / 预约 / 领券 / 帮助 -->
@@ -247,6 +232,10 @@
     <!-- 五宫格 + 全部 -->
     <div class="card grid5-wrap" data-page-node-id="6HtoH1vzS7DibVRO1e2q4L">
       <div class="grid5" data-page-node-id="r0Gb3i7MJfWbVWcITFgja6">
+        <a href="U12-奢品顾问消息列表.html" class="gcell" data-page-node-id="U13AdvisorCell">
+          <span class="gv" data-page-node-id="U13AdvisorIcWrap"><i class="fas fa-user-tie" data-page-node-id="U13AdvisorIcon"></i><span class="gbadge" id="advisorBadge" data-page-node-id="U13AdvisorBadge">3</span></span>
+          <span data-page-node-id="U13AdvisorTxt">奢品顾问</span>
+        </a>
         <span class="gcell" data-page-node-id="x84W6yCKUdJjqtmWWtEF5F"><i class="fas fa-calendar-days" data-page-node-id="bttrTPXsPAtuvWGZstU0Eb"></i><span data-page-node-id="AAzHNvlkotf3k1wHRGsFuj">返岛自提</span></span>
         <span class="gcell" data-page-node-id="8Wi28gJ9npUALHoFJoyujA"><i class="fas fa-route" data-page-node-id="UFT7RofeaznhqLrBHGW4mN"></i><span data-page-node-id="LkYFfUYcwdbDpsD2a6S0Xj">修改行程</span></span>
         <span class="gcell" data-page-node-id="FgcpZyfwjTRfAE9mHW20pu"><i class="fas fa-receipt" data-page-node-id="f1u2MS5z3mERIoAa8e3uBR"></i><span data-page-node-id="klFisFx5DKKwpVxq04reTD">开发票</span></span>
@@ -306,8 +295,9 @@
   </div>
 
 </div>  <script>
-    /* 灰度版：奢品顾问入口与意向单入口合并后，未读数合并展示
-       = 顾问消息未读数 + 意向单内商品件数 */
+    /* 我的页数量角标：
+       奢品顾问 = 顾问消息未读数（对齐 U12 顾问消息列表）
+       意向单   = 意向单内商品件数（读 pendingOrderForUser） */
     (function () {
       var GUIDE_UNREAD = 3; // 顾问消息未读（对齐 U12 顾问消息列表）
       function intentCount() {
@@ -319,11 +309,13 @@
         } catch (e) {}
         return 2;
       }
-      var badge = document.getElementById('combineBadge');
-      if (!badge) return;
-      var n = GUIDE_UNREAD + intentCount();
-      if (n > 0) { badge.textContent = n > 99 ? '99+' : n; }
-      else { badge.style.display = 'none'; }
+      function setBadge(el, n) {
+        if (!el) return;
+        if (n > 0) { el.textContent = n > 99 ? '99+' : n; }
+        else { el.style.display = 'none'; }
+      }
+      setBadge(document.getElementById('advisorBadge'), GUIDE_UNREAD);
+      setBadge(document.getElementById('intentCellBadge'), intentCount());
     })();
   </script>
 
