@@ -402,19 +402,18 @@
     const ME = '林小婷';
     const fmt = n => '¥' + Number(n).toLocaleString('zh-CN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     const RULE = { r15last:'15天·末次归因', r1first:'加购1天·首次归因', r7last:'7天·末次归因' };
-    // 离岛信息：离岛方式映射
-    const TRIP_MODE = { flight:'飞机', train:'火车', ferry:'渡轮' };
-    // 离岛信息：交通编号图标映射（航班号 / 车次 / 渡轮号）
+    // 离岛信息：离岛方式+编号合并文案（如「航班 HU7301」）
+    const TRIP_MODE = { flight:'航班', train:'火车', ferry:'渡轮' };
+    // 离岛信息：离岛方式图标映射（航班 / 火车 / 渡轮）
     const TRIP_NO_ICON = { flight:'fa-plane-departure', train:'fa-train', ferry:'fa-ship' };
-    // 动态渲染离岛信息：姓名 / 离岛方式 / 电话 / 航班号 / 证件号 / 离岛时间
+    // 动态渲染离岛信息：姓名 / 离岛方式+编号 / 电话 / 证件号 / 离岛时间
     function renderTripInfo(t) {
       if (!t) return '<div class="text-sm text-gray-400 py-1">暂无离岛信息</div>';
       const leaveDateTime = t.date + (t.leaveTime ? ' ' + t.leaveTime : '');
       return '<div class="grid grid-cols-2 gap-y-3 gap-x-2">' +
         '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-user text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (t.name || '--') + '</span></div>' +
-        '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-plane text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (TRIP_MODE[t.mode] || '--') + '</span></div>' +
-        '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-phone text-gray-400 text-xs shrink-0"></i><span class="font-medium text-coral-600 text-sm truncate">' + (t.phone || '--') + '</span></div>' +
-        '<div class="flex items-center gap-2 min-w-0"><i class="fas ' + (TRIP_NO_ICON[t.mode] || 'fa-plane-departure') + ' text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (t.flightNo || '--') + '</span></div>' +
+        '<div class="flex items-center gap-2 min-w-0"><i class="fas ' + (TRIP_NO_ICON[t.mode] || 'fa-plane-departure') + ' text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (TRIP_MODE[t.mode] || '--') + ' ' + (t.flightNo || '--') + '</span></div>' +
+        '<div class="flex items-center gap-2 col-span-2 min-w-0"><i class="fas fa-phone text-gray-400 text-xs shrink-0"></i><span class="font-medium text-coral-600 text-sm truncate">' + (t.phone || '--') + '</span></div>' +
         '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-id-card text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (t.idNo || '--') + '</span></div>' +
         '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-clock text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + leaveDateTime + '</span></div>' +
       '</div>';
