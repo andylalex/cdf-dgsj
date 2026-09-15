@@ -265,6 +265,24 @@
       border: solid #fff; border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
+
+    /* ===== 发票 / 优惠券 / 政府消费券 / 积分：整行可点击 + 右侧箭头 + 选择弹窗 ===== */
+    .opt-hit { cursor:pointer; transition:background .15s ease; }
+    .opt-hit:active { background:#f7f8fa; }
+    .opt-far { display:flex; align-items:center; gap:4px; font-size:12px; flex:0 0 auto; }
+    .opt-far-gray { color:#9ca3af; }
+    .opt-far-coral { color:#e02e24; font-weight:500; }
+    .opt-far-red { color:#ef4444; font-weight:500; }
+    .opt-chev { font-size:10px; color:#c9ccd1; flex:0 0 auto; }
+    .opt-row { display:flex; align-items:flex-start; gap:10px; padding:12px 4px; cursor:pointer; border-bottom:1px solid #f3f4f6; transition:background .15s ease; }
+    .opt-row:last-child { border-bottom:none; }
+    .opt-row:active { background:#fafafa; }
+    .opt-radio { width:18px; height:18px; border-radius:50%; border:1.5px solid #d9d9d9; background:#fff; flex:0 0 auto; position:relative; margin-top:1px; transition:background .15s ease, border-color .15s ease; }
+    .opt-row.sel .opt-radio { border-color:#ff6b52; background:#ff6b52; }
+    .opt-row.sel .opt-radio::after { content:""; position:absolute; left:5px; top:5px; width:6px; height:6px; border-radius:50%; background:#fff; }
+    .opt-name { display:block; font-size:13.5px; font-weight:500; color:#1f2937; line-height:1.3; }
+    .opt-desc { display:block; font-size:11px; color:#9ca3af; margin-top:3px; line-height:1.35; }
+    .opt-row-val { flex:0 0 auto; margin-left:auto; font-size:13px; font-weight:700; color:#ff6b52; padding-top:1px; }
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body class="bg-gray-200" data-page-node-id="U4Body" style="">
@@ -389,33 +407,45 @@
       <!-- 发票 / 优惠券 / 会员积分（无名称卡片） -->
       <div class="bg-white rounded-2xl p-4 shadow-sm" data-page-node-id="U4Coupon">
         <div class="divide-y divide-gray-100" data-page-node-id="U4CouponList">
-          <div class="flex items-center justify-between py-2.5" data-page-node-id="U4RowInvoice">
+          <div class="flex items-center justify-between py-2.5 opt-hit" onclick="openOpt('invoice')" data-page-node-id="U4RowInvoice">
             <div class="flex items-center gap-2.5" data-page-node-id="U4InvoiceLeft">
               <div class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-500 shrink-0" data-page-node-id="U4InvoiceIcon"><i class="fas fa-receipt text-[13px]"></i></div>
               <span class="text-[13px] text-gray-800" data-page-node-id="U4InvoiceLabel">发票</span>
             </div>
-            <span class="text-[12px] text-gray-400" data-page-node-id="U4InvoiceValue">电子发票</span>
+            <span class="opt-far opt-far-gray" data-page-node-id="U4InvoiceWrap">
+              <span id="U4InvoiceValue" data-page-node-id="U4InvoiceValue">电子发票</span>
+              <i class="fas fa-chevron-right opt-chev" data-page-node-id="U4InvoiceChev"></i>
+            </span>
           </div>
-          <div class="flex items-center justify-between py-2.5" data-page-node-id="U4RowCoupon">
+          <div class="flex items-center justify-between py-2.5 opt-hit" onclick="openOpt('coupon')" data-page-node-id="U4RowCoupon">
             <div class="flex items-center gap-2.5" data-page-node-id="U4CouponLeft">
               <div class="w-8 h-8 rounded-lg bg-coral-50 flex items-center justify-center text-coral-500 shrink-0" data-page-node-id="U4CouponIcon"><i class="fas fa-ticket text-[13px]"></i></div>
               <span class="text-[13px] text-gray-800" data-page-node-id="U4CouponLabel">优惠券</span>
             </div>
-            <span class="text-[12px] text-coral-600 font-medium" data-page-node-id="U4CouponValue">¥500 已使用</span>
+            <span class="opt-far opt-far-coral" data-page-node-id="U4CouponWrap">
+              <span id="U4CouponValue" data-page-node-id="U4CouponValue">¥500 已使用</span>
+              <i class="fas fa-chevron-right opt-chev" data-page-node-id="U4CouponChev"></i>
+            </span>
           </div>
-          <div class="flex items-center justify-between py-2.5" data-page-node-id="U4RowGov">
+          <div class="flex items-center justify-between py-2.5 opt-hit" onclick="openOpt('gov')" data-page-node-id="U4RowGov">
             <div class="flex items-center gap-2.5" data-page-node-id="U4GovLeft">
               <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-500 shrink-0" data-page-node-id="U4GovIcon"><i class="fas fa-landmark text-[13px]"></i></div>
               <span class="text-[13px] text-gray-800" data-page-node-id="U4GovLabel">政府消费券</span>
             </div>
-            <span class="text-[12px] text-red-500 font-medium" data-page-node-id="U4GovValue">-¥300 已抵扣</span>
+            <span class="opt-far opt-far-red" data-page-node-id="U4GovWrap">
+              <span id="U4GovValue" data-page-node-id="U4GovValue">-¥300 已抵扣</span>
+              <i class="fas fa-chevron-right opt-chev" data-page-node-id="U4GovChev"></i>
+            </span>
           </div>
-          <div class="flex items-center justify-between py-2.5" data-page-node-id="U4RowPoints">
+          <div class="flex items-center justify-between py-2.5 opt-hit" onclick="openOpt('points')" data-page-node-id="U4RowPoints">
             <div class="flex items-center gap-2.5" data-page-node-id="U4PointsLeft">
               <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600 shrink-0" data-page-node-id="U4PointsIcon"><i class="fas fa-coins text-[13px]"></i></div>
               <span class="text-[13px] text-gray-800" data-page-node-id="U4PointsLabel">会员积分</span>
             </div>
-            <span class="text-[12px] text-gray-400" data-page-node-id="U4PointsValue">可用 1,200 积分</span>
+            <span class="opt-far opt-far-gray" data-page-node-id="U4PointsWrap">
+              <span id="U4PointsValue" data-page-node-id="U4PointsValue">可用 1,200 积分</span>
+              <i class="fas fa-chevron-right opt-chev" data-page-node-id="U4PointsChev"></i>
+            </span>
           </div>
         </div>
       </div>
@@ -474,6 +504,20 @@
 
   </div>
 
+  <!-- 发票 / 优惠券 / 政府消费券 / 会员积分 选择弹窗（点击对应行打开） -->
+  <div id="optModal" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/60" onclick="closeOptModal()" data-page-node-id="U4OptModal">
+    <div class="w-full max-w-[414px] bg-white rounded-t-2xl overflow-hidden" onclick="event.stopPropagation()" data-page-node-id="U4OptPanel">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100" data-page-node-id="U4OptHead">
+        <span id="optTitle" class="text-[15px] font-semibold text-gray-800" data-page-node-id="U4OptTitle">选择</span>
+        <button type="button" onclick="closeOptModal()" class="w-7 h-7 flex items-center justify-center text-gray-400" data-page-node-id="U4OptClose"><i class="fas fa-xmark text-[15px]" data-page-node-id="U4OptCloseIcon"></i></button>
+      </div>
+      <div id="optList" class="px-4 py-1 hide-scrollbar overflow-y-auto" style="max-height:56vh;" data-page-node-id="U4OptList"></div>
+      <div class="px-4 py-3 border-t border-gray-100 pb-safe" data-page-node-id="U4OptFoot">
+        <button type="button" onclick="closeOptModal()" class="w-full bg-coral-500 text-white py-3 rounded-full text-[15px] font-semibold active:scale-95 transition" data-page-node-id="U4OptDone">确定</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 自提时间选择弹窗 -->
   <div id="timeModal" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/60" onclick="closeTimeModal()" data-page-node-id="U4TimeModal">
     <div class="w-full max-w-[414px] bg-white rounded-t-2xl overflow-hidden" onclick="event.stopPropagation()" data-page-node-id="U4TimePanel">
@@ -508,6 +552,97 @@
   <script>
     function formatMoney(num) {
       return '¥' + num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    /* ---------- 发票 / 优惠券 / 政府消费券 / 积分：可点击行 + 选择弹窗 ---------- */
+    const OPT_DATA = {
+      invoice: {
+        title: '选择发票类型',
+        items: [
+          { name: '电子发票', desc: '订单完成后 24 小时内推送至预留手机号/邮箱' },
+          { name: '纸质发票', desc: '随商品一同提货，提货时向柜台领取' },
+          { name: '不开发票', desc: '本次订单不提供发票' }
+        ]
+      },
+      coupon: {
+        title: '选择优惠券',
+        items: [
+          { name: '满减券', desc: '全场通用 · 有效期至 2026-09-30', val: 500 },
+          { name: '新人礼券', desc: '限首单使用 · 有效期至 2026-09-30', val: 100 },
+          { name: '不使用优惠券', desc: '本单不抵扣优惠券', val: 0 }
+        ]
+      },
+      gov: {
+        title: '选择政府消费券',
+        items: [
+          { name: '海南省政府消费券 300 元档', desc: '已领取 · 海口国际免税城可用', val: 300 },
+          { name: '海南省政府消费券 100 元档', desc: '已领取 · 三亚国际免税城可用', val: 100 },
+          { name: '不使用政府消费券', desc: '本单不抵扣政府消费券', val: 0 }
+        ]
+      },
+      points: {
+        title: '使用会员积分',
+        items: [
+          { name: '使用 1,000 积分抵 ¥10', desc: '当前可用 1,200 积分', val: 10, used: 1000 },
+          { name: '使用 500 积分抵 ¥5', desc: '当前可用 1,200 积分', val: 5, used: 500 },
+          { name: '不使用积分', desc: '本次不消耗积分', val: 0, used: 0 }
+        ]
+      }
+    };
+    const optState = { invoice: 0, coupon: 0, gov: 0, points: 2 };
+    let optType = '';
+
+    function optVal(type) {
+      const d = OPT_DATA[type];
+      if (!d) return 0;
+      const it = d.items[optState[type]];
+      return it && it.val ? it.val : 0;
+    }
+
+    function openOpt(type) {
+      const d = OPT_DATA[type];
+      if (!d) return;
+      optType = type;
+      document.getElementById('optTitle').textContent = d.title;
+      const cur = optState[type];
+      document.getElementById('optList').innerHTML = d.items.map(function (it, i) {
+        let right = '';
+        if (it.val > 0) right = '<span class="opt-row-val">' + (type === 'points' ? '抵 ¥' + it.val : '-¥' + it.val) + '</span>';
+        return '<div class="opt-row' + (i === cur ? ' sel' : '') + '" onclick="pickOpt(' + i + ')" data-opt-index="' + i + '">' +
+            '<span class="opt-radio"></span>' +
+            '<span style="flex:1 1 auto;min-width:0">' +
+              '<span class="opt-name">' + it.name + '</span>' +
+              (it.desc ? '<span class="opt-desc">' + it.desc + '</span>' : '') +
+            '</span>' + right +
+          '</div>';
+      }).join('');
+      document.getElementById('optModal').classList.remove('hidden');
+    }
+
+    function closeOptModal() {
+      document.getElementById('optModal').classList.add('hidden');
+    }
+
+    function pickOpt(i) {
+      optState[optType] = i;
+      closeOptModal();
+      syncOptRows();
+      render();
+    }
+
+    // 行右侧文案随选择联动
+    function syncOptRows() {
+      const setTx = function (id, tx) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = tx;
+      };
+      setTx('U4InvoiceValue', OPT_DATA.invoice.items[optState.invoice].name);
+      const cp = OPT_DATA.coupon.items[optState.coupon];
+      setTx('U4CouponValue', cp.val > 0 ? '¥' + cp.val + ' 已使用' : '未使用');
+      const gv = OPT_DATA.gov.items[optState.gov];
+      setTx('U4GovValue', gv.val > 0 ? '-¥' + gv.val + ' 已抵扣' : '未使用');
+      const pt = OPT_DATA.points.items[optState.points];
+      setTx('U4PointsValue', pt.used > 0 ? '已用 ' + pt.used.toLocaleString('zh-CN') + ' 积分抵 ¥' + pt.val : '可用 1,200 积分');
     }
 
     const DEMO_ORDER = {
@@ -581,9 +716,9 @@
         list.appendChild(card);
       });
       document.getElementById('itemsCount').textContent = '共 ' + count + ' 件';
-      const discount = 500;        // 优惠券已使用
-      const govDiscount = 300;     // 政府消费券抵扣
-      const points = 0;            // 积分抵扣
+      const discount = optVal('coupon');      // 优惠券（弹窗选择）
+      const govDiscount = optVal('gov');      // 政府消费券抵扣（弹窗选择）
+      const points = optVal('points');        // 积分抵扣（弹窗选择）
       const tax = 0;               // 行邮税
       const taxDiscount = 0;       // 行邮税优惠
       const total = Math.max(0, subtotal - discount - govDiscount - points + tax - taxDiscount);
@@ -688,6 +823,7 @@
 
     window.addEventListener('DOMContentLoaded', function() {
       selectPickup('island');
+      syncOptRows();
       render();
     });
   </script>
