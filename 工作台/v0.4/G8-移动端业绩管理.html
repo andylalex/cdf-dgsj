@@ -345,12 +345,8 @@
               <span class="font-medium text-gray-800" id="detailTime">--</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-gray-500">奢品顾问</span>
-              <span class="font-medium text-gray-800" id="detailSalesperson">--</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-500">所属柜组</span>
-              <span class="font-medium text-gray-800 text-right truncate" id="detailCounter">--</span>
+              <span class="text-gray-500">提货方式</span>
+              <span class="font-medium text-gray-800" id="detailPickupWay">--</span>
             </div>
           </div>
         </div>
@@ -402,49 +398,19 @@
     const ME = '林小婷';
     const fmt = n => '¥' + Number(n).toLocaleString('zh-CN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     const RULE = { r15last:'15天·末次归因', r1first:'加购1天·首次归因', r7last:'7天·末次归因' };
-    // 离岛信息：离岛方式 / 编号标签（航班号/车次/渡轮号）映射
+    // 离岛信息：离岛方式映射
     const TRIP_MODE = { flight:'飞机', train:'火车', ferry:'渡轮' };
-    const TRIP_NO_LABEL = { flight:'航班号', train:'车次', ferry:'渡轮号' };
-    const tripRow = (label, value) =>
-      (value ? '<div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">' + label + '</span><span class="font-medium text-gray-800 break-all text-right">' + value + '</span></div>' : '');
     // 动态渲染离岛信息：图标化基础信息 + 展开全部
     function renderTripInfo(t) {
       if (!t) return '<div class="text-sm text-gray-400 py-1">暂无离岛信息</div>';
-      const overseas = t.country && t.country !== '中国大陆';
-      const region = overseas ? '境外' : '境内';
       const leaveDateTime = t.date + (t.leaveTime ? ' ' + t.leaveTime : '');
-      let base = '<div class="grid grid-cols-2 gap-y-3 gap-x-2">' +
+      return '<div class="grid grid-cols-2 gap-y-3 gap-x-2">' +
         '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-user text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (t.name || '--') + '</span></div>' +
-        '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-id-card text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (t.idNo || '--') + '</span></div>' +
-        '<div class="flex items-center gap-2 col-span-2 min-w-0"><i class="fas fa-phone text-gray-400 text-xs shrink-0"></i><span class="font-medium text-coral-600 text-sm truncate">' + (t.phone || '--') + '</span></div>' +
         '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-plane text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (TRIP_MODE[t.mode] || '--') + '</span></div>' +
+        '<div class="flex items-center gap-2 col-span-2 min-w-0"><i class="fas fa-phone text-gray-400 text-xs shrink-0"></i><span class="font-medium text-coral-600 text-sm truncate">' + (t.phone || '--') + '</span></div>' +
+        '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-id-card text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + (t.idNo || '--') + '</span></div>' +
         '<div class="flex items-center gap-2 min-w-0"><i class="fas fa-clock text-gray-400 text-xs shrink-0"></i><span class="font-medium text-gray-800 text-sm truncate">' + leaveDateTime + '</span></div>' +
       '</div>';
-      let more = '';
-      more += tripRow('国家/地区', t.country);
-      more += tripRow('证件类型', t.idType);
-      more += tripRow('境内/境外', region);
-      if (overseas) more += tripRow('购票证件号', t.idNo);
-      more += tripRow(TRIP_NO_LABEL[t.mode] || '航班号', t.flightNo);
-      more += tripRow('离岛日期', t.date);
-      if (t.mode === 'ferry') more += tripRow('离岛港口', t.port);
-      if (t.mode === 'train') more += tripRow('乘车地点', t.station);
-      const moreHtml = more ? '<div id="tripMore" class="hidden mt-3 pt-3 border-t border-gray-200 space-y-2">' + more + '</div>' : '';
-      return base + moreHtml +
-        '<button type="button" onclick="toggleTripMore(this)" class="mt-3 w-full flex items-center justify-center gap-1 text-xs text-coral-600 pt-2 border-t border-gray-100">' +
-          '<span class="trip-toggle-label">展开全部</span><i class="fas fa-chevron-down trip-toggle-icon"></i>' +
-        '</button>';
-    }
-    // 展开/收起离岛信息（同一时间仅一个详情弹窗，使用固定 id 即可）
-    function toggleTripMore(btn) {
-      const more = document.getElementById('tripMore');
-      if (!more) return;
-      const open = !more.classList.contains('hidden');
-      more.classList.toggle('hidden');
-      const label = btn.querySelector('.trip-toggle-label');
-      const icon = btn.querySelector('.trip-toggle-icon');
-      if (open) { label.textContent = '展开全部'; icon.classList.replace('fa-chevron-up', 'fa-chevron-down'); }
-      else { label.textContent = '收起'; icon.classList.replace('fa-chevron-down', 'fa-chevron-up'); }
     }
     const STATUS_CLS = {
       '待支付':'bg-coral-100 text-coral-600', '待发货':'bg-blue-100 text-blue-600',
@@ -463,6 +429,7 @@
         status: { text: '已取消' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-spray-can', img:'assets/generated/a1.png', name:'祖玛珑香水(鼠尾草与海盐香型)', spec:'100毫升', qty:1, price:1100, code:'C030083', store:'海口国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1}]}
@@ -474,6 +441,7 @@
         status: { text: '已取消' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-clock', img:'assets/generated/a2.png', name:'斯沃琪表Originals系列石英', spec:'LB170E', qty:1, price:200, code:'E457209', store:'海口国际免税城', group:'香化二组（68680402）', guide:'林小婷', refund:'none', attrRule:'r1first' , wh:[{name:'海口美兰机场免税仓',qty:1}]}
@@ -485,6 +453,7 @@
         status: { text: '已取消' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-pump-soap', img:'assets/generated/a3.png', name:'兰蔻保湿水凝面膜', spec:'100ml', qty:1, price:54.6, code:'C000247', store:'海口国际免税城', group:'香化三组（68680403）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1}]}
@@ -496,6 +465,7 @@
         status: { text: '已完成' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-clock', img:'assets/generated/a4.png', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, code:'L27934', store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'林小婷', refund:'none', attrRule:'r7last' , wh:[{name:'海口美兰机场免税仓',qty:1}]}
@@ -507,6 +477,7 @@
         status: { text: '已退款' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-gem', img:'assets/generated/a5.png', name:"宝格丽 divas' dream 项链", spec:'玫瑰金白贝母', qty:2, price:57000, code:'B00001', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
@@ -518,6 +489,7 @@
         status: { text: '已完成' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '邮寄到家',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-spray-can', img:'assets/generated/a6.png', name:'迪奥真我香水 50ml', spec:'浓香', qty:2, price:19600, code:'C030001', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
@@ -530,6 +502,7 @@
         status: { text: '已完成' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-ring', img:'assets/generated/a8.png', name:'Cartier 戒指 18K', spec:'18K玫瑰金', qty:2, price:24000, code:'C00003', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
@@ -542,6 +515,7 @@
         status: { text: '已完成' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-pump-soap', img:'assets/generated/b1.png', name:'雅诗兰黛护肤套装', spec:'清爽型', qty:2, price:13600, code:'C030005', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]}
@@ -553,6 +527,7 @@
         status: { text: '已完成' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '返岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-spray-can', img:'assets/generated/b2.png', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:6400, code:'C030006', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last' , wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}]},
@@ -565,6 +540,7 @@
         status: { text: '已退款' },
         salesperson: 'K0908',
         pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
         counterGroup: { code: '70480601', name: 'JoMalone祖玛龙-L2' },
         products: [
           { icon:'fa-gem', img:'assets/generated/b4.png', name:"宝格丽 divas' dream 项链", spec:'玫瑰金白贝母', qty:1, price:28500, code:'B00002', store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'林小婷', refund:'full', attrRule:'r15last' , wh:[{name:'海口美兰机场免税仓',qty:1}]}
@@ -621,7 +597,7 @@
         '<i class="fas ' + p.icon + ' text-coral-600 text-xl"></i>';
       return '' +
         '<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">' +
-          '<p class="text-xs text-coral-600 mb-2">营业员：' + salesperson + '</p>' +
+          '<p class="text-xs text-coral-600 mb-2">浪琴专柜 姓名：' + salesperson + '</p>' +
           '<div class="flex gap-3">' +
             '<div class="w-20 h-20 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 overflow-hidden">' + imgHtml + '</div>' +
             '<div class="flex-1 min-w-0 flex flex-col justify-between">' +
@@ -782,8 +758,7 @@
       const d = orderMap[orderNo];
       document.getElementById('detailOrderNo').textContent = orderNo;
       document.getElementById('detailTime').textContent = d.time;
-      document.getElementById('detailSalesperson').textContent = d.salesperson || '--';
-      document.getElementById('detailCounter').textContent = d.counterGroup ? (d.counterGroup.name + '（' + d.counterGroup.code + '）') : '--';
+      document.getElementById('detailPickupWay').textContent = d.pickupWay || (d.pickupPoint ? '离岛自提' : '邮寄到家');
       const status = d.status.text;
       document.getElementById('detailStatusBig').textContent = status;
       document.getElementById('detailStatusBig').className = 'text-base font-bold ' + (STATUS_CLS[status] ? STATUS_CLS[status].split(' ')[1] : 'text-gray-800');
