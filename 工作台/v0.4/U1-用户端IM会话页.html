@@ -323,10 +323,9 @@
     .sheet-item .si-s{font-size:11px;color:#9ca3af;margin-top:3px}
     .sheet-item .si-p{font-size:13px;font-weight:700;color:#ff6b52;flex:0 0 auto}
 
-    /* ---- 名片终端区分（小程序 / App） ---- */
-    .wx-term{display:inline-flex;background:#f2f3f5;border-radius:999px;padding:2px;margin-left:auto;flex:0 0 auto}
-    .wx-term button{border:0;background:transparent;font-size:10px;color:#8a8f99;padding:3px 9px;border-radius:999px;line-height:1.2}
-    .wx-term button.on{background:#fff;color:#111827;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+    /* ---- 名片终端标识（静态标签，替代原切换 tab） ---- */
+    .wx-card-head{display:flex;align-items:center;gap:6px}
+    .wx-term-tag{flex:0 0 auto;font-size:9px;line-height:1.5;color:#8a8f99;background:#f2f3f5;border-radius:4px;padding:0 5px}
     .wx-qr-save{margin-top:6px;border:1px solid #ff6b52;background:#fff5f2;color:#ff6b52;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;max-width:96px;line-height:1.25}
     .wx-qr-save:active{background:#ffece8}
 
@@ -455,7 +454,7 @@
       </div>
 
 
-      <!-- 企业微信名片卡片 -->
+      <!-- 企业微信名片卡片 · 小程序端（可长按识别） -->
       <div class="flex gap-2.5" data-page-node-id="u1WxCard">
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="u1WxAvatar">
         <div class="max-w-[85%] w-full" data-page-node-id="u1WxWrap">
@@ -463,7 +462,10 @@
             <div class="wx-card-main">
               <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-gray-100 shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="u1WxImg">
               <div class="wx-card-body">
-                <p class="wx-card-name">林小婷</p>
+                <div class="wx-card-head" data-page-node-id="u1WxHead">
+                  <p class="wx-card-name" data-page-node-id="u1WxName">林小婷</p>
+                  <span class="wx-term-tag" data-page-node-id="u1WxTagMp">小程序</span>
+                </div>
                 <p class="wx-card-role">奢品顾问</p>
                 <div class="wx-info" data-page-node-id="u1WxFoot">
               <div class="wx-info-row"><span class="wx-info-k">门店</span><span class="wx-info-v" data-page-node-id="u1WxStore">海口日月广场免税店</span></div>
@@ -475,14 +477,39 @@
             <div class="wx-qr-wrap">
               <img src="assets/generated/qr_wx_advisor.png" class="wx-qr" alt="企业微信二维码" data-page-node-id="u1WxQrImg">
               <p class="wx-qr-hint" id="wxQrHint" data-page-node-id="u1WxHint"><i class="fas fa-hand-pointer" data-page-node-id="u1WxHintIc"></i>长按识别二维码，添加顾问企业微信</p>
-              <button type="button" class="wx-qr-save hidden" id="wxQrSave" onclick="saveQrToAlbum()" data-page-node-id="u1WxSave">保存到相册</button>
-              <div class="wx-term" data-page-node-id="u1WxTerm">
-                <button type="button" class="on" data-term="miniapp" onclick="setWxTerm('miniapp')" data-page-node-id="u1WxTermMp">小程序</button>
-                <button type="button" data-term="app" onclick="setWxTerm('app')" data-page-node-id="u1WxTermApp">App</button>
-              </div>
             </div>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="u1WxTime">刚刚</span>
+        </div>
+      </div>
+
+      <!-- 企业微信名片卡片 · App 端（无法长按，引导保存） -->
+      <div class="flex gap-2.5" data-page-node-id="u1WxCardApp">
+        <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="u1WxAvatarApp">
+        <div class="max-w-[85%] w-full" data-page-node-id="u1WxWrapApp">
+          <div class="wx-card" data-page-node-id="u1WxBoxApp">
+            <div class="wx-card-main">
+              <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-gray-100 shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="u1WxImgApp">
+              <div class="wx-card-body">
+                <div class="wx-card-head" data-page-node-id="u1WxHeadApp">
+                  <p class="wx-card-name" data-page-node-id="u1WxNameApp">林小婷</p>
+                  <span class="wx-term-tag" data-page-node-id="u1WxTagApp">App</span>
+                </div>
+                <p class="wx-card-role">奢品顾问</p>
+                <div class="wx-info" data-page-node-id="u1WxFootApp">
+                  <div class="wx-info-row"><span class="wx-info-k">门店</span><span class="wx-info-v" data-page-node-id="u1WxStoreApp">海口日月广场免税店</span></div>
+                  <div class="wx-info-row"><span class="wx-info-k">柜组</span><span class="wx-info-v">Cartier 精品柜组</span></div>
+                  <div class="wx-info-row"><span class="wx-info-k">工号</span><span class="wx-info-v">C2008</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="wx-qr-wrap">
+              <img src="assets/generated/qr_wx_advisor.png" class="wx-qr" alt="企业微信二维码" data-page-node-id="u1WxQrImgApp">
+              <p class="wx-qr-hint" data-page-node-id="u1WxHintApp"><i class="fas fa-circle-info" data-page-node-id="u1WxHintAppIc"></i>App 内无法长按识别，请先保存二维码</p>
+              <button type="button" class="wx-qr-save" onclick="saveQrToAlbum()" data-page-node-id="u1WxSaveApp">保存到相册</button>
+            </div>
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="u1WxTimeApp">刚刚</span>
         </div>
       </div>
 
@@ -759,21 +786,7 @@
       }, 700);
     }
 
-    // ===== 企业微信名片：区分终端（小程序可长按识别 / App 需引导保存） =====
-    function setWxTerm(t) {
-      document.querySelectorAll('.wx-term button').forEach(function (b) {
-        b.classList.toggle('on', b.getAttribute('data-term') === t);
-      });
-      var hint = document.getElementById('wxQrHint');
-      var save = document.getElementById('wxQrSave');
-      if (t === 'app') {
-        if (hint) hint.innerHTML = '<i class="fas fa-circle-info"></i>App 内无法长按识别，请先保存二维码';
-        if (save) save.classList.remove('hidden');
-      } else {
-        if (hint) hint.innerHTML = '<i class="fas fa-hand-pointer"></i>长按识别二维码，添加顾问企业微信';
-        if (save) save.classList.add('hidden');
-      }
-    }
+    // ===== 企业微信名片：小程序端与 App 端各一张卡片，静态区分（无切换 tab） =====
     function saveQrToAlbum() {
       showToast('二维码已保存到相册，请打开微信「扫一扫」添加');
     }
@@ -828,7 +841,6 @@
       if (chat) chat.scrollTop = chat.scrollHeight;
       onInputChange();
       renderLike();
-      setWxTerm('miniapp');
       autoConsultOnEnter();
       var input = document.getElementById('U1Input');
       if (input) {
