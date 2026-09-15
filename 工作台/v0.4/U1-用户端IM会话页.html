@@ -288,10 +288,10 @@
     .wx-modal-qr{width:180px;height:180px;display:block;border-radius:12px;background:#fff;-webkit-touch-callout:default}
 
     /* ---- 点赞顾问药丸按钮 ---- */
-    .like-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:9999px;font-size:12px;font-weight:600;border:1.5px solid #e5e7eb;background:#f3f4f6;color:#9ca3af;transition:all .2s ease;cursor:pointer}
-    .like-pill:active{transform:scale(.97)}
-    .like-pill.sent{border-color:#ffb3c1;background:#fff5f7;color:#ff6b8a}
-    .like-pill.liked{border-color:#ff6b8a;background:#ff6b8a;color:#fff}
+    .like-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:9999px;font-size:12px;font-weight:600;border:1.5px solid #d1d5db;background:transparent;color:#9ca3af;transition:all .2s ease;cursor:not-allowed}
+    .like-pill:disabled{cursor:not-allowed;opacity:.7}
+    .like-pill.sent{border-color:#ff6b8a;background:transparent;color:#ff6b8a;cursor:pointer}
+    .like-pill.liked{border-color:#ff6b8a;background:#ff6b8a;color:#fff;cursor:pointer}
     .like-pill .lf-ic{width:16px;height:16px;display:block}
     .like-pill .lf-tx{line-height:1;white-space:nowrap}
 
@@ -643,6 +643,7 @@
       var path = icon && icon.querySelector('path');
       b.classList.toggle('sent', likeSent && !likeLiked);
       b.classList.toggle('liked', likeLiked);
+      b.disabled = !likeSent;
       if (path) path.setAttribute('fill', likeLiked ? 'currentColor' : 'none');
     }
     function toggleLike() {
