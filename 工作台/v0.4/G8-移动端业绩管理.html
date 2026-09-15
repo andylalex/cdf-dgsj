@@ -595,15 +595,6 @@
 
     // 详情：单个商品行（图片 + 名称/规格/编码 + 单价/数量/实付）
     function productRow(p, isCompleted, salesperson) {
-      const mine = p.guide === ME;
-      let badgeT = '', badgeC = 'bg-gray-100 text-gray-400';
-      if (isCompleted) {
-        if (p.refund === 'none') {
-          badgeC = mine ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400';
-          badgeT = mine ? '计入' : '同事业绩';
-        } else { badgeT = '退款不计入'; }
-      } else { badgeT = '未完结'; }
-      if (!mine && p.refund !== 'none') badgeT = '退款不计入 · 同事业绩';
       const paidItem = p.price;
       const whText = (p.wh && p.wh.length) ? p.wh.map(function(w){return w.name + (w.qty>1 ? ' ×'+w.qty : '');}).join('，') : '—';
       const imgHtml = p.img ?
@@ -633,7 +624,6 @@
             '<span class="shrink-0">出货仓库</span>' +
             '<span class="font-medium text-gray-700 truncate">' + whText + '</span>' +
           '</div>' +
-          (badgeT ? '<div class="mt-2 text-right"><span class="inline-block px-1.5 py-0.5 ' + badgeC + ' text-[10px] rounded">' + badgeT + '</span></div>' : '') +
         '</div>';
     }
 

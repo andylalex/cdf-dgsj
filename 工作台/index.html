@@ -2875,6 +2875,10 @@ function edLoadAll(){
       }
       PROTOTYPES.push(p);
     });
+    /* 保护：数据文件新增、但旧 localStorage 快照里不存在的原型（如新加的 G9 导购数据维护）补回，
+       避免因浏览器缓存了 G9 之前的旧编辑快照而丢失新页面入口 */
+    var _keptIds={}; PROTOTYPES.forEach(function(_x){ _keptIds[_x.id]=true; });
+    Object.keys(_seed).forEach(function(_id){ if(!_keptIds[_id]){ PROTOTYPES.push(_seed[_id]); } });
     return true;
   }catch(e){ return false; }
 }
