@@ -1115,6 +1115,16 @@ function edBind(){
     frame.addEventListener('load',function(){
       if(window.ED.boxMode)edExitBox();
       if(window.ED.editId)edClose();
+      /* G9 在工作台展示区：撑满手机壳宽度 + 隐藏滚动条（仅视觉，保留滚动能力） */
+      try{
+        var _src=(frame.getAttribute('src')||''); if(_src.indexOf('G9')!==-1){
+          var _d=frame.contentDocument; if(_d&&_d.head){
+            var _st=_d.createElement('style');
+            _st.textContent='::-webkit-scrollbar{display:none!important}*{scrollbar-width:none!important}.phone-frame{max-width:none!important;width:100%!important}#scrollArea{overflow-x:hidden!important}';
+            _d.head.appendChild(_st);
+          }
+        }
+      }catch(e){}
     });
   }catch(e){}
   document.addEventListener('keydown',function(e){

@@ -287,12 +287,13 @@
     /* 名片弹窗预览 */
     .wx-modal-qr{width:180px;height:180px;display:block;border-radius:12px;background:#fff;-webkit-touch-callout:default}
 
-    /* ---- 左侧悬浮点赞按钮 ---- */
-    .like-fab{position:absolute;left:8px;bottom:132px;z-index:70;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:62px;height:64px;border-radius:16px;background:rgba(255,255,255,.96);border:1px solid #ffd0c5;color:#ff8a9b;box-shadow:0 8px 20px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:all .2s ease;cursor:pointer}
-    .like-fab:active{transform:scale(.94)}
-    .like-fab.liked{background:#ff6b52;border-color:#ff6b52;color:#fff;box-shadow:0 10px 24px rgba(255,107,82,.4)}
-    .like-fab .lf-ic{width:22px;height:22px;display:block}
-    .like-fab .lf-tx{font-size:10px;font-weight:600;line-height:1;white-space:nowrap}
+    /* ---- 点赞顾问药丸按钮 ---- */
+    .like-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:9999px;font-size:12px;font-weight:600;border:1.5px solid #e5e7eb;background:#f3f4f6;color:#9ca3af;transition:all .2s ease;cursor:pointer}
+    .like-pill:active{transform:scale(.97)}
+    .like-pill.sent{border-color:#ffb3c1;background:#fff5f7;color:#ff6b8a}
+    .like-pill.liked{border-color:#ff6b8a;background:#ff6b8a;color:#fff}
+    .like-pill .lf-ic{width:16px;height:16px;display:block}
+    .like-pill .lf-tx{line-height:1;white-space:nowrap}
 
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}
@@ -446,6 +447,14 @@
 
     <!-- 底部输入 -->
     <div class="bg-white border-t border-gray-100 shrink-0" data-page-node-id="U1Footer">
+      <div class="px-3 pt-2 pb-1" data-page-node-id="U1LikeWrap">
+        <button id="U1LikeFab" onclick="toggleLike()" class="like-pill" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
+          <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+          </svg>
+          <span class="lf-tx" data-page-node-id="U1LikeText">点赞顾问</span>
+        </button>
+      </div>
       <div class="input-bar flex items-center gap-2 p-3" data-page-node-id="U1FooterInner">
         <button id="U1ListBtn" onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
           <i class="fas fa-clipboard-list text-[19px]"></i>
@@ -474,14 +483,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 左侧悬浮点赞按钮 -->
-      <button id="U1LikeFab" onclick="toggleLike(this)" class="like-fab" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
-        <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
-        </svg>
-        <span class="lf-tx" data-page-node-id="U1LikeText">点赞顾问</span>
-      </button>
     </div>
 
   <!-- 图片发送：隐藏的文件选择器 -->
@@ -562,6 +563,8 @@
       input.value = '';
       onInputChange();
       closeToolPanel();
+      likeSent = true;
+      if (!likeLiked) renderLike();
     }
 
     function escHtml(s) {
@@ -622,6 +625,7 @@
       var chat = document.getElementById('chat');
       if (chat) chat.scrollTop = chat.scrollHeight;
       onInputChange();
+      renderLike();
       var input = document.getElementById('U1Input');
       if (input) {
         input.addEventListener('focus', function() { closeToolPanel(); });
@@ -631,12 +635,20 @@
       }
     });
 
-    function toggleLike(btn) {
+    var likeSent = false, likeLiked = false;
+    function renderLike() {
+      var b = document.getElementById('U1LikeFab');
+      if (!b) return;
       var icon = document.getElementById('U1LikeIcon');
       var path = icon && icon.querySelector('path');
-      var liked = btn.classList.toggle('liked');
-      if (path) path.setAttribute('fill', liked ? 'currentColor' : 'none');
-      showToast(liked ? '已点赞顾问' : '已取消点赞');
+      b.classList.toggle('sent', likeSent && !likeLiked);
+      b.classList.toggle('liked', likeLiked);
+      if (path) path.setAttribute('fill', likeLiked ? 'currentColor' : 'none');
+    }
+    function toggleLike() {
+      likeLiked = !likeLiked;
+      renderLike();
+      showToast(likeLiked ? '已点赞顾问' : '已取消点赞');
     }
     function showToast(text) {
       var t = document.getElementById('toast');
