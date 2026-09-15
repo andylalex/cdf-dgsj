@@ -406,6 +406,25 @@
     </div>
   </div>
 
+  <!-- 顾问二维码弹窗：长按识别添加 -->
+  <div id="advisorQrModal" class="fixed inset-0" style="z-index:80;display:none;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:0 24px" onclick="if(event.target===this)closeAdvisorQr()" data-page-node-id="U7QrModal">
+    <div style="width:100%;max-width:300px;background:#fff;border-radius:20px;overflow:hidden;text-align:center" data-page-node-id="U7QrPanel">
+      <div style="position:relative;padding:20px 20px 14px;background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%)" data-page-node-id="U7QrHead">
+        <button onclick="closeAdvisorQr()" style="position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.16);border:none;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer" data-page-node-id="U7QrClose"><i class="fas fa-times" data-page-node-id="U7QrCloseIcon"></i></button>
+        <img id="qrAdvisorImg" src="" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center top;display:block;margin:0 auto;border:2px solid rgba(212,180,140,.6);background:#f0ece3" data-page-node-id="U7QrAvatar">
+        <p id="qrAdvisorName" style="margin:10px 0 0;font-size:16px;font-weight:700;color:#fff" data-page-node-id="U7QrName">--</p>
+        <p id="qrAdvisorMeta" style="margin:4px 0 0;font-size:11px;color:#b8a684" data-page-node-id="U7QrMeta">--</p>
+      </div>
+      <div style="padding:16px 20px 20px" data-page-node-id="U7QrBody">
+        <div style="display:inline-block;padding:10px;border-radius:14px;background:#faf9f7;border:1px solid #f0ece3" data-page-node-id="U7QrCodeWrap">
+          <img src="assets/generated/qr_wx_advisor.png" alt="顾问微信二维码" style="width:176px;height:176px;display:block;border-radius:8px;background:#fff" data-page-node-id="U7QrCode">
+        </div>
+        <p style="margin:14px 0 0;font-size:14px;font-weight:600;color:#1f2937" data-page-node-id="U7QrTip">长按识别二维码，添加顾问微信</p>
+        <p style="margin:4px 0 0;font-size:11px;color:#9ca3af" data-page-node-id="U7QrTipSub">添加后可享 1V1 专属推荐服务</p>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 text-white px-4 py-2 rounded-lg text-[13px] z-[80] hidden" data-page-node-id="U7Toast"></div>
 
   <style>
@@ -451,7 +470,7 @@
       { name: '符光亮', tag: '人气导购', quote: '极致服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a1.jpg', online: true,  likes: 328, store: '海口国际免税城' },
       { name: '张琪',   tag: '贴心顾问', quote: '真诚服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a2.png', online: false, likes: 214, store: '海口国际免税城' },
       { name: '郑小曼', tag: '贴心顾问', quote: '用心倾听，积极相应，诚挚服务。', brand: '卡地亚', img: 'assets/generated/u7_a3.png', online: true,  likes: 356, store: '海口国际免税城' },
-      { name: '江莹莹', tag: '贴心顾问', quote: '真诚服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a4.png', online: true,  likes: 402, store: '海口国际免税城' },
+      { name: '江莹莹', tag: '贴心顾问', quote: '真诚服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a4.png', online: true,  likes: 402, store: '海口国际免税城', qr: true },
       { name: '苏晚晴', tag: '贴心服务', quote: '温柔亲切，细致贴心', brand: '巴黎世家', img: 'assets/generated/advisor5.png', online: false, likes: 168, store: '海口国际免税城' },
       { name: '许静文', tag: '专业选品', quote: '专业严谨，值得信赖', brand: '卡地亚', img: 'assets/generated/advisor6.png', online: true,  likes: 289, store: '三亚国际免税城' },
       { name: '韩语嫣', tag: '热情周到', quote: '热情主动，耐心解答', brand: '宝诗龙', img: 'assets/generated/advisor7.png', online: true,  likes: 233, store: '三亚国际免税城' },
@@ -482,7 +501,8 @@
       var cnt = document.getElementById('advisorCount'); if (cnt) cnt.textContent = list.length;
       grid.innerHTML = list.map(function (a, i) {
         var idx = ADVISORS.indexOf(a);
-        return '<div class="adv-card" onclick="openChat(' + idx + ')" data-page-node-id="U7Adv' + idx + '">' +
+        var isQr = !!a.qr;
+        return '<div class="adv-card" onclick="' + (isQr ? 'openAdvisorQr(' + idx + ')' : 'openChat(' + idx + ')') + '" data-page-node-id="U7Adv' + idx + '">' +
           '<div class="adv-cover">' +
             '<img loading="lazy" src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
             '<button type="button" class="adv-like-cover' + (a.liked ? ' active' : '') + '" onclick="event.stopPropagation();toggleFav(this)" aria-label="点赞" data-page-node-id="U7Like' + idx + '"><i class="fas fa-thumbs-up"></i><span>' + a.likes + '</span></button>' +
@@ -495,10 +515,10 @@
                 '<span class="adv-brand">' + esc(a.brand) + '</span>' +
               '</div>' +
               '<div class="adv-right">' +
-                '<span class="gc-wrap">' +
+                (isQr ? '' : '<span class="gc-wrap">' +
                   '<span class="gc"><i class="fas fa-comment-dots"></i></span>' +
                   '<span class="od' + (a.online ? '' : ' off') + '"></span>' +
-                '</span>' +
+                '</span>') +
               '</div>' +
             '</div>' +
             '<div class="adv-store"><i class="fas fa-store"></i>' + esc(a.store) + '</div>' +
@@ -516,6 +536,25 @@
       var a = ADVISORS[idx];
       try { localStorage.setItem('currentAdvisor', JSON.stringify(a)); } catch (e) {}
       window.location.href = 'U1-用户端IM会话页.html';
+    }
+
+    // 顾问二维码弹窗：展示顾问信息 + 长按识别添加
+    function openAdvisorQr(idx) {
+      var a = ADVISORS[idx];
+      if (!a) return;
+      var m = document.getElementById('advisorQrModal');
+      var img = document.getElementById('qrAdvisorImg');
+      var nm = document.getElementById('qrAdvisorName');
+      var mt = document.getElementById('qrAdvisorMeta');
+      if (img) { img.src = a.img; img.alt = a.name; }
+      if (nm) nm.textContent = a.name;
+      if (mt) mt.textContent = (a.tag ? a.tag + ' · ' : '') + a.brand + ' · ' + a.store;
+      if (m) m.style.display = 'flex';
+    }
+
+    function closeAdvisorQr() {
+      var m = document.getElementById('advisorQrModal');
+      if (m) m.style.display = 'none';
     }
 
     function toggleFav(btn) {
