@@ -271,14 +271,10 @@
     /* 来源标签 */
     .tag-gov{display:inline-flex;align-items:center;font-size:11px;line-height:1;padding:2px 7px;border-radius:6px;background:#fff1f0;color:#e02e24;border:1px solid #ffccc7;font-weight:500;}
     .tag-promo{display:inline-flex;align-items:center;font-size:11px;line-height:1;padding:2px 7px;border-radius:6px;background:#fff7e6;color:#d48806;border:1px solid #ffe7ba;font-weight:500;}
-    /* 门店各自的政府消费券领取入口 */
-    .store-coupon{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px;padding:8px 10px;border-radius:10px;background:linear-gradient(135deg,#fff5f2,#ffece8);border:1px solid #ffd9d1}
-    .store-coupon .sc-left{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#c9452c;min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .store-coupon .sc-left i{font-size:12px;flex:0 0 auto}
-    .store-coupon .sc-btn{flex:0 0 auto;padding:4px 12px;border-radius:999px;background:#ff6b52;color:#fff;font-size:12px;font-weight:600;border:none}
-    .store-coupon.claimed{background:#f7f8fa;border-color:#eceef2}
-    .store-coupon.claimed .sc-left{color:#9aa0a6}
-    .store-coupon.claimed .sc-btn{background:#eceef2;color:#9aa0a6}
+    /* 门店分组右上角：政府消费券领取按钮（替换原「共 N 件」） */
+    .store-coupon-btn{flex:0 0 auto;align-self:flex-start;padding:4px 10px;border-radius:999px;background:linear-gradient(135deg,#ff7a63,#e64e39);color:#fff;font-size:11px;font-weight:600;line-height:16px;letter-spacing:.01em;border:none;white-space:nowrap;box-shadow:0 2px 6px rgba(230,78,57,.22)}
+    .store-coupon-btn:active{opacity:.86}
+    .store-coupon-btn.claimed{background:#eef0f3;color:#9aa0a6;box-shadow:none}
     .item-row{transition:opacity .18s ease;}
     .item-row.removing{opacity:0;}
     /* 自定义勾选框 */
@@ -328,7 +324,7 @@
     <!-- 内容区 -->
     <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-3 pb-24" data-page-node-id="U6Content">
 
-      <!-- 分组清单（每个门店各自带政府消费券领取入口） -->
+      <!-- 分组清单（每个门店分组卡右上角带政府消费券领取按钮） -->
       <div id="groupWrap" class="space-y-3" data-page-node-id="U6GroupWrap"></div>
 
       <!-- 空状态 -->
@@ -470,17 +466,13 @@
         '</label>';
       }).join('');
       return '<div class="bg-white rounded-2xl p-4 shadow-sm" data-source="' + source + '">' +
-        '<div class="group-head flex items-center gap-2.5 mb-3">' +
-          '<input type="checkbox" class="group-check w-5 h-5 rounded accent-coral-500 shrink-0" ' + (allChecked ? 'checked' : '') + ' onchange="toggleGroup(\'' + source + '\', this.checked)">' +
+        '<div class="group-head flex items-start gap-2.5 mb-3">' +
+          '<input type="checkbox" class="group-check w-5 h-5 rounded accent-coral-500 shrink-0 mt-0.5" ' + (allChecked ? 'checked' : '') + ' onchange="toggleGroup(\'' + source + '\', this.checked)">' +
           '<div class="flex-1 min-w-0">' +
             '<p class="text-[15px] font-semibold text-gray-800">' + meta.title + '</p>' +
             (meta.sub ? '<p class="text-[11px] text-gray-400 mt-0.5">' + meta.sub + '</p>' : '') +
           '</div>' +
-          '<span class="group-count text-[12px] text-gray-400">共 ' + items.length + ' 件</span>' +
-        '</div>' +
-        '<div class="store-coupon" data-store="' + source + '">' +
-          '<span class="sc-left"><i class="fas fa-ticket"></i>海南政府消费券 · ' + meta.title + ' 领取入口</span>' +
-          '<button type="button" class="sc-btn" onclick="claimStoreCoupon(\'' + source + '\', this)">立即领取</button>' +
+          '<button type="button" class="store-coupon-btn" data-store="' + source + '" onclick="claimStoreCoupon(\'' + source + '\', this)">领取政府消费券</button>' +
         '</div>' +
         '<div class="group-items space-y-3">' + rows + '</div>' +
       '</div>';
@@ -594,12 +586,10 @@
       setTimeout(function () { el.classList.add('hidden'); }, 1600);
     }
 
-    // 门店各自的政府消费券领取入口
+    // 门店各自的政府消费券领取按钮（分组卡右上角，点后按钮自身置为「已领取」）
     function claimStoreCoupon(store, btn) {
-      var box = btn ? btn.parentElement : null;
-      if (box && box.classList.contains('claimed')) return;
-      if (box) box.classList.add('claimed');
-      if (btn) btn.textContent = '已领取';
+      if (btn && btn.classList.contains('claimed')) return;
+      if (btn) { btn.classList.add('claimed'); btn.textContent = '已领取'; }
       showToast('已领取「' + store + '」政府消费券');
     }
 
