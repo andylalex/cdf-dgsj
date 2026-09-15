@@ -317,9 +317,6 @@
         <button class="p-2 hover:bg-gray-100 rounded-full transition" onclick="goBack()" aria-label="返回" data-page-node-id="U1Back">
           <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="HGuyrzrRWjb3INltlJzl3K"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" data-page-node-id="Waqm6Y4HA8ohNRigtmQkNg"></path></svg>
         </button>
-        <button class="p-2 hover:bg-gray-100 rounded-full transition text-gray-600" onclick="showToast('已点赞')" aria-label="点赞" data-page-node-id="U1LikeBtn">
-          <i class="fas fa-heart text-[18px] text-coral-500" data-page-node-id="U1LikeIcon"></i>
-        </button>
         <img src="assets/avatars/linxiaoting.svg" class="w-10 h-10 rounded-full bg-gray-100" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
         <div data-page-node-id="U1HeaderInfo">
           <h1 class="text-base font-semibold text-gray-900" data-page-node-id="U1HeaderName">林小婷 · 奢品顾问</h1>
@@ -443,6 +440,12 @@
 
     <!-- 底部输入 -->
     <div class="bg-white border-t border-gray-100 shrink-0" data-page-node-id="U1Footer">
+      <div class="flex items-center justify-center py-2" data-page-node-id="U1LikeWrap">
+        <button onclick="showToast('已点赞')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pink-50 text-pink-500 text-xs font-medium active:scale-95 transition" data-page-node-id="U1LikeBtn">
+          <i class="fas fa-heart" data-page-node-id="U1LikeIcon"></i>
+          <span data-page-node-id="U1LikeText">点赞顾问</span>
+        </button>
+      </div>
       <div class="input-bar flex items-center gap-2 p-3" data-page-node-id="U1FooterInner">
         <button id="U1ListBtn" onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
           <i class="fas fa-clipboard-list text-[19px]"></i>
@@ -468,14 +471,6 @@
           <div class="tool-cell" onclick="showToast('拍摄功能敬请期待')" data-page-node-id="U1ToolCamera">
             <div class="tool-ic" data-page-node-id="U1ToolCameraIc"><i class="fas fa-camera" data-page-node-id="U1ToolCameraIcon"></i></div>
             <span class="tool-txt" data-page-node-id="U1ToolCameraTxt">拍摄</span>
-          </div>
-          <div class="tool-cell" onclick="showToast('位置功能敬请期待')" data-page-node-id="U1ToolLoc">
-            <div class="tool-ic" data-page-node-id="U1ToolLocIc"><i class="fas fa-location-dot" data-page-node-id="U1ToolLocIcon"></i></div>
-            <span class="tool-txt" data-page-node-id="U1ToolLocTxt">位置</span>
-          </div>
-          <div class="tool-cell" onclick="showToast('名片功能敬请期待')" data-page-node-id="U1ToolCard">
-            <div class="tool-ic" data-page-node-id="U1ToolCardIc"><i class="fas fa-id-card" data-page-node-id="U1ToolCardIcon"></i></div>
-            <span class="tool-txt" data-page-node-id="U1ToolCardTxt">名片</span>
           </div>
         </div>
       </div>
