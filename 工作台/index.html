@@ -1437,6 +1437,20 @@ function selectPrototype(id){
   }
   document.getElementById('protoFrame').addEventListener('load', bindFrameInternalNav);
 
+    /* G9 在工作台展示区：撑满手机壳宽度 + 隐藏滚动条（仅视觉，保留滚动能力） */
+    function applyG9FrameTweaks(){
+      var fr=document.getElementById('protoFrame'); if(!fr) return;
+      var src=(fr.getAttribute('src')||''); if(src.indexOf('G9')===-1) return;
+      try{
+        var d=fr.contentDocument; if(!d||!d.head) return;
+        var st=d.createElement('style');
+        st.textContent='::-webkit-scrollbar{display:none!important}*{scrollbar-width:none!important}.phone-frame{max-width:none!important;width:100%!important}#scrollArea{overflow-x:hidden!important}';
+        d.head.appendChild(st);
+      }catch(e){}
+    }
+    document.getElementById('protoFrame').addEventListener('load', applyG9FrameTweaks);
+
+
 /* 多 HTML 页原型（kind:'pages'）：在手机壳内切换多个真实 HTML 页，切换器为页面名称标签（左上角） */
 function renderPageTabs(){
   var p=current(); if(!p||p.kind!=='pages')return;
