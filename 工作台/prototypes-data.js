@@ -65,6 +65,11 @@ const V04={
     "device": "mobile",
     "group": "导购端 · 繁星APP"
   },
+  "G9": {
+    "url": "v0.4/G9-导购数据维护.html",
+    "device": "mobile",
+    "group": "导购端 · 繁星APP"
+  },
   "M3": {
     "url": "v0.4/M3-PC业绩管理.html",
     "device": "desktop",
@@ -1052,6 +1057,28 @@ const PROTOTYPES_V03=[
         "num": 4
       }
     ]
+  },
+{
+    "id": "v04-g9",
+    "group": "导购端 · 繁星APP",
+    "name": "G9 导购数据维护",
+    "device": "mobile",
+    "url": "v0.4/G9-导购数据维护.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-15",
+    "overview": {
+      "summary": "导购维护个人基础资料、品牌、标签、一句话介绍、在线状态、头像及形象照。",
+      "path": "中免商户通 → 我的 → 导购数据维护",
+      "users": "门店导购",
+      "permission": "功能权限：当前登录导购可编辑；数据权限：仅自己的资料",
+      "ports": "中免商户通APP"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
   },
 {
     "id": "v04-m3",
