@@ -273,6 +273,25 @@
     .wx-card .wx-qr-wrap{flex:0 0 auto;padding:0}
     .wx-card .wx-qr{width:96px;height:96px;border-radius:10px}
     .wx-card .wx-qr-hint{font-size:10px;margin-top:6px;text-align:center;line-height:1.25;max-width:96px}
+    /* hover 补齐（本页编译产物未含） */
+    .hover\:bg-gray-100:hover{background-color:#f3f4f6}
+    .hover\:border-gray-300:hover{border-color:#d1d5db}
+    .hover\:text-gray-700:hover{color:#374151}
+
+    /* 继承客户弹窗 */
+    #inheritModal{z-index:70;background:rgba(17,24,39,.45);padding:24px}
+    #inheritPanel{width:520px;max-width:100%;background:#fff;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.22);display:flex;flex-direction:column;max-height:86vh}
+    .im-guide{display:flex;align-items:center;gap:12px;padding:12px 20px;cursor:pointer;border-bottom:1px solid #f3f4f6;transition:background .15s}
+    .im-guide:last-child{border-bottom:0}
+    .im-guide:hover{background:#f9fafb}
+    .im-guide.sel{background:#fff5f2}
+    .im-radio{width:18px;height:18px;border-radius:50%;border:1.5px solid #d1d5db;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;transition:all .15s}
+    .im-radio i{opacity:0;transition:opacity .15s}
+    .im-guide.sel .im-radio{background:#E02E24;border-color:#E02E24}
+    .im-guide.sel .im-radio i{opacity:1}
+    .im-tag{display:inline-flex;align-items:center;padding:1px 6px;border-radius:5px;font-size:11px;line-height:1.5;background:#f4f5f7;color:#8a8f99}
+    .im-btn-primary{background:#E02E24;color:#fff;transition:opacity .15s}
+    .im-btn-primary[disabled]{opacity:.45;cursor:not-allowed}
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body class="bg-[#f5f6f8] text-gray-800" data-page-node-id="htxdAIqDjr9qYLFzlB5Teq" style="">
@@ -350,7 +369,7 @@
               </div>
             </div>
             <div class="px-4 pb-3 flex justify-end" data-page-node-id="kP9FHM4hAY1z7lZmriY8ls">
-              <button onclick="event.stopPropagation(); inheritCustomers('liu')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号" data-page-node-id="vaxtrfeCBJoRnjO7TuuC4h">
+              <button onclick="event.stopPropagation(); openInheritModal('liu')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="选择接收客户的导购" data-page-node-id="vaxtrfeCBJoRnjO7TuuC4h">
                 <i class="fas fa-user-exchange" data-page-node-id="MU7DLIEXqBJnlLzh8vytey"></i> 继承客户
               </button>
             </div>
@@ -371,7 +390,7 @@
               </div>
             </div>
             <div class="px-4 pb-3 flex justify-end" data-page-node-id="BElggHjfl4B79JNn4kMKw7">
-              <button onclick="event.stopPropagation(); inheritCustomers('zhang')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号" data-page-node-id="32D6fdepHnUsU5JFD49CW6">
+              <button onclick="event.stopPropagation(); openInheritModal('zhang')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="选择接收客户的导购" data-page-node-id="32D6fdepHnUsU5JFD49CW6">
                 <i class="fas fa-user-exchange" data-page-node-id="FSEbwrwepGSTYaC92zOF9J"></i> 继承客户
               </button>
             </div>
@@ -392,7 +411,7 @@
               </div>
             </div>
             <div class="px-4 pb-3 flex justify-end" data-page-node-id="Sm9uZq7DMMPPGcA4v4ehei">
-              <button onclick="event.stopPropagation(); inheritCustomers('li')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号" data-page-node-id="vqDiprZEV3OHFvsKkQA7qE">
+              <button onclick="event.stopPropagation(); openInheritModal('li')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="选择接收客户的导购" data-page-node-id="vqDiprZEV3OHFvsKkQA7qE">
                 <i class="fas fa-user-exchange" data-page-node-id="46GEGaql7xl4PR81w2EPtP"></i> 继承客户
               </button>
             </div>
@@ -413,7 +432,7 @@
               </div>
             </div>
             <div class="px-4 pb-3 flex justify-end" data-page-node-id="sJwC9ZeXbdOrkjKneSmO0a">
-              <button onclick="event.stopPropagation(); inheritCustomers('wang')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号" data-page-node-id="UGuhyRC9bRdzuhJgFVLV4z">
+              <button onclick="event.stopPropagation(); openInheritModal('wang')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="选择接收客户的导购" data-page-node-id="UGuhyRC9bRdzuhJgFVLV4z">
                 <i class="fas fa-user-exchange" data-page-node-id="mcDcdyHumraoY89evtxLIM"></i> 继承客户
               </button>
             </div>
@@ -434,7 +453,7 @@
               </div>
             </div>
             <div class="px-4 pb-3 flex justify-end" data-page-node-id="Uacy376nzsvhnOyDnb8WMx">
-              <button onclick="event.stopPropagation(); inheritCustomers('zhao')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号" data-page-node-id="s8isTkRHrna5SeeIkzRgjx">
+              <button onclick="event.stopPropagation(); openInheritModal('zhao')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="选择接收客户的导购" data-page-node-id="s8isTkRHrna5SeeIkzRgjx">
                 <i class="fas fa-user-exchange" data-page-node-id="xZyHN36dSZtRp7IUidGxbk"></i> 继承客户
               </button>
             </div>
@@ -550,6 +569,33 @@
     </main>
   </div>
 
+  <!-- 继承客户弹窗：选择接收客户的导购 -->
+  <div id="inheritModal" class="hidden fixed inset-0 flex items-center justify-center" onclick="inheritMaskClick(event)">
+    <div id="inheritPanel">
+      <div class="px-5 py-4 border-b border-gray-100 flex items-start justify-between">
+        <div class="min-w-0">
+          <p class="text-[15px] font-semibold text-gray-800">继承客户</p>
+          <p class="text-xs text-gray-400 mt-1" id="inheritSubtitle">选择接收客户的导购</p>
+        </div>
+        <button type="button" onclick="closeInheritModal()" class="w-7 h-7 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 transition shrink-0" aria-label="关闭"><i class="fas fa-times text-sm"></i></button>
+      </div>
+      <div class="px-5 py-3 border-b border-gray-100">
+        <div class="search-wrap">
+          <i class="fas fa-search"></i>
+          <input type="text" id="inheritSearch" class="search-input" placeholder="搜索导购姓名/工号/品牌">
+        </div>
+      </div>
+      <div id="inheritList" class="flex-1 overflow-y-auto hide-scrollbar min-h-0"></div>
+      <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between gap-3">
+        <span class="text-[11px] text-gray-400">继承后客户会话与归属将转移至所选导购</span>
+        <div class="flex items-center gap-2 shrink-0">
+          <button type="button" onclick="closeInheritModal()" class="px-4 h-8 text-xs rounded border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-700 transition">取消</button>
+          <button type="button" id="inheritConfirm" onclick="confirmInherit()" disabled class="im-btn-primary px-4 h-8 text-xs rounded font-medium">确认继承</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 操作提示 Toast -->
   <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[60] hidden bg-gray-900/90 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg" data-page-node-id="fPMHmRiKPQiHGVHYrIcPno"></div>
 
@@ -646,7 +692,7 @@
               </div>
             </div>
             <div class="px-4 pb-3 flex justify-end">
-              <button onclick="event.stopPropagation(); inheritCustomers('${g.id}')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="将该导购的客户继承至当前账号">
+              <button onclick="event.stopPropagation(); openInheritModal('${g.id}')" class="inline-flex items-center gap-1 text-[11px] text-coral-600 border border-coral-200 bg-coral-50 hover:bg-coral-100 rounded-full px-3 py-1 transition" title="选择接收客户的导购">
                 <i class="fas fa-user-exchange"></i> 继承客户
               </button>
             </div>
@@ -882,12 +928,112 @@
       t._timer = setTimeout(() => t.classList.add('hidden'), 2600);
     }
 
-    // 继承客户：将指定导购名下的客户继承至当前管理员账号（原型演示）
-    function inheritCustomers(id) {
-      const g = data.guides.find(x => x.id === id);
-      if (!g) return;
-      showToast(`已发起继承「${g.name}」的客户，处理中…`);
+    // 继承客户：弹窗选择接收客户的导购（原型演示）
+    let inheritFromId = null;
+    let inheritTargetId = null;
+
+    function guideCustomerCount(id) {
+      return (data.customers[id] || []).length;
     }
+
+    function openInheritModal(fromId) {
+      const from = data.guides.find(x => x.id === fromId);
+      if (!from) return;
+      inheritFromId = fromId;
+      inheritTargetId = null;
+      const cnt = guideCustomerCount(fromId);
+      document.getElementById('inheritSubtitle').textContent =
+        '将「' + from.name + '」名下的 ' + cnt + ' 位客户继承给指定导购';
+      document.getElementById('inheritSearch').value = '';
+      renderInheritGuides('');
+      document.getElementById('inheritConfirm').disabled = true;
+      document.getElementById('inheritModal').classList.remove('hidden');
+    }
+
+    function closeInheritModal() {
+      document.getElementById('inheritModal').classList.add('hidden');
+    }
+
+    function inheritMaskClick(e) {
+      if (e.target === e.currentTarget) closeInheritModal();
+    }
+
+    function renderInheritGuides(filter) {
+      const list = document.getElementById('inheritList');
+      const term = String(filter || '').trim().toLowerCase();
+      const targets = data.guides.filter(g => g.id !== inheritFromId &&
+        (g.name.includes(term) || g.code.includes(term) || g.brand.includes(term)));
+      if (targets.length === 0) {
+        list.innerHTML = '<div class="p-6 text-center text-xs text-gray-400">未找到可继承的导购</div>';
+        return;
+      }
+      list.innerHTML = targets.map(g => {
+        const sel = g.id === inheritTargetId ? ' sel' : '';
+        const ava = 'assets/avatars/' + g.avatarSeed + '.svg';
+        return '<div class="im-guide' + sel + '" onclick="pickInheritTarget(\'' + g.id + '\')">' +
+            '<img src="' + ava + '" class="avatar" alt="" onerror="this.onerror=null;this.src=\'assets/avatars/_default.svg\'">' +
+            '<div class="flex-1 min-w-0">' +
+              '<div class="flex items-center gap-2">' +
+                '<span class="text-sm font-medium text-gray-800">' + g.name + '</span>' +
+                '<span class="im-tag">' + g.brand + '</span>' +
+              '</div>' +
+              '<div class="text-xs text-gray-400 mt-1">工号 ' + g.code + ' · 当前 ' + guideCustomerCount(g.id) + ' 位客户</div>' +
+            '</div>' +
+            '<div class="im-radio"><i class="fas fa-check"></i></div>' +
+          '</div>';
+      }).join('');
+    }
+
+    function pickInheritTarget(id) {
+      inheritTargetId = id;
+      renderInheritGuides(document.getElementById('inheritSearch').value);
+      document.getElementById('inheritConfirm').disabled = false;
+    }
+
+    function nowStamp() {
+      const d = new Date();
+      const p = n => String(n).padStart(2, '0');
+      return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+    }
+
+    function confirmInherit() {
+      if (!inheritFromId || !inheritTargetId) return;
+      const from = data.guides.find(x => x.id === inheritFromId);
+      const to = data.guides.find(x => x.id === inheritTargetId);
+      const moved = (data.customers[inheritFromId] || []).slice();
+      closeInheritModal();
+      if (!from || !to || moved.length === 0) {
+        showToast('「' + (from ? from.name : '') + '」名下暂无客户可继承');
+        return;
+      }
+      const stamp = nowStamp();
+      moved.forEach(c => {
+        c.time = stamp.slice(5, 10);
+        c.lastMsg = '您好，接下来由「' + to.name + '」继续为您服务～';
+        if (!data.messages[c.id]) data.messages[c.id] = [];
+        data.messages[c.id].push({
+          time: stamp,
+          side: 'right',
+          text: '您好，由于「' + from.name + '」工作变更，接下来将由我（' + to.name + '）继续为您服务。感谢您一直以来对我们的支持。'
+        });
+      });
+      data.customers[inheritTargetId] = (data.customers[inheritTargetId] || []).concat(moved);
+      data.customers[inheritFromId] = [];
+      currentGuideId = inheritTargetId;
+      currentCustomerId = moved[0].id;
+      renderGuides(document.getElementById('guideSearch').value);
+      renderCustomers(currentGuideId, document.getElementById('customerSearch').value);
+      renderMessages(currentCustomerId);
+      showToast('已将「' + from.name + '」的 ' + moved.length + ' 位客户继承给「' + to.name + '」');
+    }
+
+    const inheritSearchEl = document.getElementById('inheritSearch');
+    if (inheritSearchEl) {
+      inheritSearchEl.addEventListener('input', e => renderInheritGuides(e.target.value));
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeInheritModal();
+    });
 
     // 初始化
     renderGuides();
