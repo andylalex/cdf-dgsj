@@ -223,7 +223,7 @@
     .to-\[\#e64e39\]{--tw-gradient-to:#e64e39 var(--tw-gradient-to-position)}
 
     body { font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif; }
-    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; overflow:hidden; background:#ffffff; }
+    .phone-frame { position:relative; max-width:414px; margin:0 auto; height:100vh; height:100dvh; overflow:hidden; background:#ffffff; }
     .phone-frame > * { min-height:0; }
     .phone-frame > * { min-height:0; }
     .hide-scrollbar::-webkit-scrollbar { display:none; }
@@ -242,7 +242,7 @@
   <title>用户端 - 意向单</title>
   <style data-page-node-id="U6Extra">
     html, body { height:100%; overflow:hidden; }
-    .phone-frame { max-width:414px; margin:0 auto; height:100vh; height:100dvh; max-height:100dvh; overflow:hidden; background:#ffffff; }
+    .phone-frame { position:relative; max-width:414px; margin:0 auto; height:100vh; height:100dvh; max-height:100dvh; overflow:hidden; background:#ffffff; }
     .phone-frame > * { min-height:0; }
     .hide-scrollbar::-webkit-scrollbar { display:none; }
     .hide-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
@@ -315,16 +315,6 @@
         <i class="fas fa-chevron-left text-gray-700 text-base" data-page-node-id="U7BackIcon"></i>
       </button>
       <h1 class="text-base font-semibold text-gray-800 tracking-widest" data-page-node-id="U7Title">奢 品 顾 问</h1>
-      <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-0.5" data-page-node-id="U7HeaderRight">
-        <a href="U12-奢品顾问消息列表.html" class="hdr-ic" aria-label="顾问消息" data-page-node-id="U7MsgEntry">
-          <i class="fas fa-comment-dots" data-page-node-id="U7MsgIcon"></i>
-          <span class="hdr-dot" data-page-node-id="U7MsgDot">3</span>
-        </a>
-        <a href="U6-意向单页.html" class="hdr-ic" aria-label="我的意向单" data-page-node-id="U7IntentEntry">
-          <i class="fas fa-clipboard-list" data-page-node-id="U7IntentIcon"></i>
-          <span class="hdr-dot" id="intentBadge" data-page-node-id="U7IntentBadge">2</span>
-        </a>
-      </div>
     </div>
 
     <!-- 滚动区：深棕金头部 + 内容一起滚动（顶栏固定，头部随页滚走） -->
@@ -345,7 +335,7 @@
         </div>
         <p class="mt-2.5" style="color:#cbb896;font-size:13.5px;line-height:1.6" data-page-node-id="U7HeroMeta">1V1 从线上咨询到门店陪同选购，全程专属服务</p>
         <p class="hero-sub" data-page-node-id="U7HeroSub">顾问能帮您做什么</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:11px" data-page-node-id="U7HeroAbilities">
+        <div class="hero-grid" data-page-node-id="U7HeroAbilities">
           <span class="hero-tag" data-page-node-id="U7HeroAb1">穿搭造型建议</span>
           <span class="hero-tag" data-page-node-id="U7HeroAb2">节日礼品挑选</span>
           <span class="hero-tag" data-page-node-id="U7HeroAb3">精选好物推荐</span>
@@ -375,7 +365,7 @@
     </div>
 
     <!-- 内容区 -->
-    <div class="pb-10" data-page-node-id="U7Content">
+    <div class="pb-10" style="padding-bottom:148px" data-page-node-id="U7Content">
 
       <!-- 精选品牌 -->
       <div class="px-4 pt-5" data-page-node-id="U7BrandSec">
@@ -419,6 +409,18 @@
       </div>
 
     </div>
+    </div>
+
+    <!-- 右侧悬浮入口：顾问消息 / 我的意向单（图标 + 文字 + 未读数） -->
+    <div class="side-float" data-page-node-id="U7SideFloat">
+      <a href="U12-奢品顾问消息列表.html" class="sf-btn" aria-label="顾问消息" data-page-node-id="U7MsgEntry">
+        <span class="sf-ic" data-page-node-id="U7MsgIcWrap"><i class="fas fa-comment-dots" data-page-node-id="U7MsgIcon"></i><em class="sf-dot" data-page-node-id="U7MsgDot">3</em></span>
+        <span class="sf-tx" data-page-node-id="U7MsgTxt">消息</span>
+      </a>
+      <a href="U6-意向单页.html" class="sf-btn" aria-label="我的意向单" data-page-node-id="U7IntentEntry">
+        <span class="sf-ic" data-page-node-id="U7IntentIcWrap"><i class="fas fa-clipboard-list" data-page-node-id="U7IntentIcon"></i><em class="sf-dot" id="intentBadge" data-page-node-id="U7IntentBadge">2</em></span>
+        <span class="sf-tx" data-page-node-id="U7IntentTxt">意向单</span>
+      </a>
     </div>
   </div>
 
@@ -467,13 +469,20 @@
     .gc-wrap .od{position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 1.5px #fff,0 1px 2px rgba(0,0,0,.2);flex-shrink:0}
     .gc-wrap .od.off{background:#fbbf24}
     /* 顶栏右侧入口（消息 / 意向单） */
-    .hdr-ic{position:relative;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#374151;font-size:16px;text-decoration:none}
-    .hdr-ic:active{background:#f3f4f6}
-    .hdr-dot{position:absolute;top:1px;right:0;min-width:15px;height:15px;padding:0 3px;border-radius:999px;background:#E02E24;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff}
+    /* 右侧悬浮入口（顾问消息 / 我的意向单）：图标 + 文字 + 未读数 */
+    .side-float{position:absolute;right:12px;bottom:26px;display:flex;flex-direction:column;gap:10px;z-index:40}
+    .sf-btn{position:relative;width:54px;padding:9px 0 7px;border-radius:16px;background:#ffffff;border:1px solid #f0e9df;box-shadow:0 6px 18px rgba(48,36,22,.18);display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;transition:transform .16s ease}
+    .sf-btn:active{transform:scale(.94)}
+    .sf-ic{position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:22px;font-size:16px;color:#b8905a;line-height:1}
+    .sf-tx{font-size:10px;font-weight:600;color:#5f646c;line-height:1;letter-spacing:.02em}
+    .sf-dot{position:absolute;top:-7px;right:-8px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:9.5px;font-weight:700;font-style:normal;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff}
     /* 顾问能力标签（hero 副标题） */
     .hero-sub{margin-top:15px;display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#c9a26b;letter-spacing:.06em;line-height:18px}
     .hero-sub::before{content:"";display:block;width:14px;height:1px;background:rgba(201,162,107,.65);flex:0 0 auto}
-    .hero-tag{display:inline-flex;align-items:center;font-size:12.5px;line-height:20px;color:#e0cfa9;background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.26);border-radius:999px;padding:4px 12px}
+    /* 能力标签：2×2 等宽网格，排列整齐（文字统一居中、等高） */
+    .hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:11px;width:100%;max-width:330px}
+    .hero-tag{display:flex;align-items:center;justify-content:center;height:34px;padding:0 8px;font-size:12.5px;line-height:1;color:#e0cfa9;background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.26);border-radius:999px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hero-tag i{font-size:11px;margin-right:5px;flex:0 0 auto}
     .adv-nm{flex:0 1 auto;min-width:0;font-size:15px;font-weight:700;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .adv-sep{flex:0 0 auto;color:#d1d5db;font-size:13px}
     .adv-brand{flex:0 1 auto;min-width:0;font-size:13px;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
