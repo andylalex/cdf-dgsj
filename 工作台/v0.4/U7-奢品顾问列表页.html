@@ -309,12 +309,22 @@
       </div>
     </div>
 
-    <!-- 顶栏：返回 + 奢品顾问 -->
+    <!-- 顶栏：返回 + 标题 + 右侧「消息 / 意向单」入口 -->
     <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative border-b border-gray-100 z-20" data-page-node-id="U7Header">
       <button onclick="history.back()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U7Back">
         <i class="fas fa-chevron-left text-gray-700 text-base" data-page-node-id="U7BackIcon"></i>
       </button>
       <h1 class="text-base font-semibold text-gray-800 tracking-widest" data-page-node-id="U7Title">奢 品 顾 问</h1>
+      <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-0.5" data-page-node-id="U7HeaderRight">
+        <a href="U12-奢品顾问消息列表.html" class="hdr-ic" aria-label="顾问消息" data-page-node-id="U7MsgEntry">
+          <i class="fas fa-comment-dots" data-page-node-id="U7MsgIcon"></i>
+          <span class="hdr-dot" data-page-node-id="U7MsgDot">3</span>
+        </a>
+        <a href="U6-意向单页.html" class="hdr-ic" aria-label="我的意向单" data-page-node-id="U7IntentEntry">
+          <i class="fas fa-clipboard-list" data-page-node-id="U7IntentIcon"></i>
+          <span class="hdr-dot" id="intentBadge" data-page-node-id="U7IntentBadge">2</span>
+        </a>
+      </div>
     </div>
 
     <!-- 滚动区：深棕金头部 + 内容一起滚动（顶栏固定，头部随页滚走） -->
@@ -333,7 +343,13 @@
             <span data-page-node-id="U7LocText">海口市</span>
           </div>
         </div>
-        <p class="mt-0.5 text-[11px]" style="color:#b8a684" data-page-node-id="U7HeroMeta">品牌官方认证</p>
+        <p class="mt-1" style="color:#c9b691;font-size:11.5px;line-height:1.5" data-page-node-id="U7HeroMeta">品牌官方认证 · 1V1 专属服务，顾问能为您做</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px" data-page-node-id="U7HeroAbilities">
+          <span class="hero-tag" data-page-node-id="U7HeroAb1">穿搭造型建议</span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb2">节日礼品挑选</span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb3">精选好物推荐</span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb4">独家系列解读</span>
+        </div>
 
         <div class="mt-2.5 pt-2.5 flex items-stretch" style="border-top:1px solid rgba(212,180,140,.18)" data-page-node-id="U7HeroFeats">
           <div class="flex-1 text-center" data-page-node-id="U7Feat1">
@@ -357,22 +373,21 @@
       </div>
     </div>
 
-    <!-- 消息 / 意向单 入口 -->
-    <div class="entry-bar" data-page-node-id="U7EntryBar">
-      <a href="U12-奢品顾问消息列表.html" class="entry-btn" aria-label="消息" data-page-node-id="U7MsgEntry">
-        <span class="entry-ic" style="background:rgba(224,46,36,.1);color:#E02E24" data-page-node-id="U7MsgIcWrap"><i class="fas fa-comment-dots" data-page-node-id="U7MsgIcon"></i></span>
-        <span class="entry-txt" data-page-node-id="U7MsgTxt">顾问消息</span>
-        <span class="entry-dot" data-page-node-id="U7MsgDot">3</span>
-      </a>
-      <a href="U6-意向单页.html" class="entry-btn" aria-label="意向单" data-page-node-id="U7IntentEntry">
-        <span class="entry-ic" style="background:rgba(201,162,107,.14);color:#c9a26b" data-page-node-id="U7IntentIcWrap"><i class="fas fa-clipboard-list" data-page-node-id="U7IntentIcon"></i></span>
-        <span class="entry-txt" data-page-node-id="U7IntentTxt">我的意向单</span>
-        <span id="intentBadge" class="entry-dot" data-page-node-id="U7IntentBadge">2</span>
-      </a>
-    </div>
-
     <!-- 内容区 -->
     <div class="pb-10" data-page-node-id="U7Content">
+
+      <!-- 门店筛选 -->
+      <div class="px-4 pt-5" data-page-node-id="U7StoreSec">
+        <div class="flex items-center justify-between" data-page-node-id="U7StoreHead">
+          <div class="flex items-center gap-2" data-page-node-id="U7StoreTitleWrap">
+            <span class="w-1 h-4 rounded-full bg-brand" data-page-node-id="U7StoreBar"></span>
+            <span class="text-[15px] font-bold text-gray-800" data-page-node-id="U7StoreTitle">所在门店</span>
+            <span class="text-[11px] italic" style="font-family:Georgia,serif;color:#b0a284" data-page-node-id="U7StoreEn">Store</span>
+          </div>
+          <span class="text-[12px] text-gray-400" data-page-node-id="U7StoreCount">共 <span id="advisorCount">0</span> 位</span>
+        </div>
+        <div id="storeBar" class="flex gap-2 mt-3 overflow-x-auto hide-scrollbar" style="-webkit-overflow-scrolling:touch" data-page-node-id="U7StoreBar"></div>
+      </div>
 
       <!-- 精选品牌 -->
       <div class="px-4 pt-5" data-page-node-id="U7BrandSec">
@@ -399,6 +414,7 @@
         <div id="advisorEmpty" class="hidden text-center py-10" data-page-node-id="U7Empty">
           <i class="fas fa-user-tie text-gray-300 text-3xl" data-page-node-id="U7EmptyIcon"></i>
           <p class="text-[13px] text-gray-400 mt-2" data-page-node-id="U7EmptyText">该筛选下暂无顾问，换个条件试试</p>
+          <button type="button" onclick="resetFilter()" style="margin-top:12px;font-size:12px;font-weight:600;color:#c9a26b;background:none;border:none" data-page-node-id="U7EmptyReset">重置筛选</button>
         </div>
       </div>
 
@@ -450,12 +466,12 @@
     .adv-right .gc{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#e2caa0,#b8935e);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .gc-wrap .od{position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 1.5px #fff,0 1px 2px rgba(0,0,0,.2);flex-shrink:0}
     .gc-wrap .od.off{background:#fbbf24}
-    .entry-bar{display:flex;gap:12px;padding:16px 16px 0}
-    .entry-btn{flex:1;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-radius:14px;background:#fff;border:1px solid #f0eef0;box-shadow:0 1px 3px rgba(0,0,0,.04);position:relative;cursor:pointer;transition:background .18s;text-decoration:none}
-    .entry-btn:active{background:#fafafa}
-    .entry-ic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
-    .entry-txt{font-size:14px;font-weight:600;color:#1f2937}
-    .entry-dot{position:absolute;top:9px;right:12px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+    /* 顶栏右侧入口（消息 / 意向单） */
+    .hdr-ic{position:relative;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#374151;font-size:16px;text-decoration:none}
+    .hdr-ic:active{background:#f3f4f6}
+    .hdr-dot{position:absolute;top:1px;right:0;min-width:15px;height:15px;padding:0 3px;border-radius:999px;background:#E02E24;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff}
+    /* 顾问能力标签（hero 副标题） */
+    .hero-tag{display:inline-flex;align-items:center;font-size:10.5px;line-height:16px;color:#e0cfa9;background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.26);border-radius:999px;padding:2px 9px}
     .adv-nm{flex:0 1 auto;min-width:0;font-size:15px;font-weight:700;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .adv-sep{flex:0 0 auto;color:#d1d5db;font-size:13px}
     .adv-brand{flex:0 1 auto;min-width:0;font-size:13px;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -477,7 +493,9 @@
       { name: '沈明轩', tag: '亲和有礼', quote: '亲和有礼，响应及时', brand: '浪凡', img: 'assets/generated/advisor8.png', online: false, likes: 147, store: '海口国际免税城' }
     ];
     var BRANDS = ['全部品牌', '巴黎世家', '宝诗龙', '博柏利', '卡地亚', '迪奥', '浪凡'];
+    var STORES = ['全部门店', '海口国际免税城', '三亚国际免税城'];
     var stateBrand = '全部品牌';
+    var stateStore = '全部门店';
 
     function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
@@ -488,9 +506,19 @@
       }).join('');
     }
 
+    function renderStoreChips() {
+      var bar = document.getElementById('storeBar');
+      if (!bar) return;
+      bar.innerHTML = STORES.map(function (s) {
+        return '<button type="button" class="chip shrink-0' + (s === stateStore ? ' active' : '') + '" onclick="setStore(\'' + s + '\')">' + s + '</button>';
+      }).join('');
+    }
+
     function filteredAdvisors() {
       return ADVISORS.filter(function (a) {
-        return stateBrand === '全部品牌' || a.brand === stateBrand;
+        var okStore = stateStore === '全部门店' || a.store === stateStore;
+        var okBrand = stateBrand === '全部品牌' || a.brand === stateBrand;
+        return okStore && okBrand;
       });
     }
 
@@ -531,6 +559,8 @@
     }
 
     function setBrand(b) { stateBrand = b; renderChips(); renderAdvisors(); }
+    function setStore(s) { stateStore = s; renderStoreChips(); renderAdvisors(); }
+    function resetFilter() { stateStore = '全部门店'; stateBrand = '全部品牌'; renderStoreChips(); renderChips(); renderAdvisors(); }
 
     function openChat(idx) {
       var a = ADVISORS[idx];
@@ -589,6 +619,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', function () {
+      renderStoreChips();
       renderChips();
       renderAdvisors();
       updateIntentBadge();

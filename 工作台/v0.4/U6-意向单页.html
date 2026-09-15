@@ -271,6 +271,14 @@
     /* 来源标签 */
     .tag-gov{display:inline-flex;align-items:center;font-size:11px;line-height:1;padding:2px 7px;border-radius:6px;background:#fff1f0;color:#e02e24;border:1px solid #ffccc7;font-weight:500;}
     .tag-promo{display:inline-flex;align-items:center;font-size:11px;line-height:1;padding:2px 7px;border-radius:6px;background:#fff7e6;color:#d48806;border:1px solid #ffe7ba;font-weight:500;}
+    /* 门店各自的政府消费券领取入口 */
+    .store-coupon{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px;padding:8px 10px;border-radius:10px;background:linear-gradient(135deg,#fff5f2,#ffece8);border:1px solid #ffd9d1}
+    .store-coupon .sc-left{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#c9452c;min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .store-coupon .sc-left i{font-size:12px;flex:0 0 auto}
+    .store-coupon .sc-btn{flex:0 0 auto;padding:4px 12px;border-radius:999px;background:#ff6b52;color:#fff;font-size:12px;font-weight:600;border:none}
+    .store-coupon.claimed{background:#f7f8fa;border-color:#eceef2}
+    .store-coupon.claimed .sc-left{color:#9aa0a6}
+    .store-coupon.claimed .sc-btn{background:#eceef2;color:#9aa0a6}
     .item-row{transition:opacity .18s ease;}
     .item-row.removing{opacity:0;}
     /* 自定义勾选框 */
@@ -320,19 +328,8 @@
     <!-- 内容区 -->
     <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-3 pb-24" data-page-node-id="U6Content">
 
-      <!-- 政府消费券领取入口 -->
-      <div class="rounded-2xl p-4 shadow-sm text-white flex items-center justify-between" data-page-node-id="U6GovCoupon" style="background:linear-gradient(135deg,#ff8a75,#e64e39)">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center"><i class="fas fa-ticket text-[18px]"></i></div>
-          <div>
-            <p class="text-[14px] font-semibold">海南政府消费券</p>
-          </div>
-        </div>
-        <button type="button" id="govCouponBtn" class="bg-white text-coral-600 text-[13px] font-semibold px-4 py-2 rounded-full active:scale-95 transition" data-page-node-id="U6GovBtn">立即领取</button>
-      </div>
-
-      <!-- 分组清单 -->
-      <div id="groupWrap" class="space-y-3" data-page-node-id="U6GroupWrap"><div class="bg-white rounded-2xl p-4 shadow-sm" data-source="store"><div class="group-head flex items-center gap-2.5 mb-3"><input type="checkbox" class="group-check w-5 h-5 rounded accent-coral-500 shrink-0" checked="" onchange="toggleGroup('store', this.checked)"><div class="flex-1 min-w-0"><p class="text-[15px] font-semibold text-gray-800">海口国际免税城</p></div><span class="group-count text-[12px] text-gray-400">共 1 件</span></div><div class="group-items space-y-3"><label class="item-row flex gap-3 items-start" data-idx="0"><input type="checkbox" class="item-check w-5 h-5 rounded accent-coral-500 shrink-0 mt-1" checked="" onchange="toggleItem(0, this.checked)"><img loading="lazy" src="assets/generated/product1.png" alt="" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0" onerror="this.style.visibility='hidden'"><div class="flex-1 min-w-0"><p class="text-[13px] font-medium text-gray-800 leading-tight line-clamp-2">浪凡光韵女士浓香水</p><p class="text-[11px] text-gray-400 mt-0.5"><i class="fas fa-user-tag mr-1"></i>顾问 · 顾问</p><div class="flex flex-wrap gap-1.5 mt-1.5"><span class="tag-gov">政府消费券</span></div><div class="mt-2 flex items-center justify-between gap-2"><span class="text-[14px] font-bold text-coral-600 shrink-0">¥394.00</span><div class="flex items-center gap-2 shrink-0"><div class="qty-stepper flex items-center"><button type="button" class="stepper-btn" onclick="changeQty(0, -1)" disabled="">-</button><input type="text" class="stepper-input" value="1" readonly=""><button type="button" class="stepper-btn" onclick="changeQty(0, 1)">+</button></div><button type="button" onclick="removeItem(0)" class="w-7 h-7 flex items-center justify-center text-gray-300 active:text-coral-500 transition"><i class="fas fa-trash-can text-[12px]"></i></button></div></div></div></label></div></div></div>
+      <!-- 分组清单（每个门店各自带政府消费券领取入口） -->
+      <div id="groupWrap" class="space-y-3" data-page-node-id="U6GroupWrap"></div>
 
       <!-- 空状态 -->
       <div id="emptyTip" class="hidden text-center py-10 bg-white rounded-2xl shadow-sm" data-page-node-id="U6Empty">
@@ -391,6 +388,20 @@
       return it;
     }
 
+    // 加入意向单规则：同一门店 + 同一商品，只保留最后一个顾问（后加入者覆盖先加入者）
+    function dedupeSameStoreSameSku(items) {
+      var out = [];
+      for (var i = items.length - 1; i >= 0; i--) {
+        var key = storeOf(items[i]) + '||' + (items[i].sku || items[i].name);
+        var dup = false;
+        for (var j = 0; j < out.length; j++) {
+          if (storeOf(out[j]) + '||' + (out[j].sku || out[j].name) === key) { dup = true; break; }
+        }
+        if (!dup) out.unshift(items[i]);
+      }
+      return out;
+    }
+
     function getList() {
       // 默认展示 5 个 demo 商品：仅在「从未保存过」或「清单已空」时回退到 demo，
       // 保证打开页面默认就是这 5 个商品。
@@ -398,17 +409,17 @@
       try { raw = localStorage.getItem('pendingOrderForUser'); } catch (e) {}
       if (raw === null) {
         var demo = JSON.parse(JSON.stringify(DEMO_LIST));
-        demo.items = demo.items.map(normItem);
+        demo.items = dedupeSameStoreSameSku(demo.items.map(normItem));
         return demo;
       }
       var saved = null;
       try { saved = JSON.parse(raw); } catch (e) {}
       if (!saved || !Array.isArray(saved.items) || saved.items.length === 0) {
         var demo2 = JSON.parse(JSON.stringify(DEMO_LIST));
-        demo2.items = demo2.items.map(normItem);
+        demo2.items = dedupeSameStoreSameSku(demo2.items.map(normItem));
         return demo2;
       }
-      saved.items = saved.items.map(normItem);
+      saved.items = dedupeSameStoreSameSku(saved.items.map(normItem));
       return saved;
     }
 
@@ -466,6 +477,10 @@
             (meta.sub ? '<p class="text-[11px] text-gray-400 mt-0.5">' + meta.sub + '</p>' : '') +
           '</div>' +
           '<span class="group-count text-[12px] text-gray-400">共 ' + items.length + ' 件</span>' +
+        '</div>' +
+        '<div class="store-coupon" data-store="' + source + '">' +
+          '<span class="sc-left"><i class="fas fa-ticket"></i>海南政府消费券 · ' + meta.title + ' 领取入口</span>' +
+          '<button type="button" class="sc-btn" onclick="claimStoreCoupon(\'' + source + '\', this)">立即领取</button>' +
         '</div>' +
         '<div class="group-items space-y-3">' + rows + '</div>' +
       '</div>';
@@ -577,6 +592,15 @@
       el.textContent = text;
       el.classList.remove('hidden');
       setTimeout(function () { el.classList.add('hidden'); }, 1600);
+    }
+
+    // 门店各自的政府消费券领取入口
+    function claimStoreCoupon(store, btn) {
+      var box = btn ? btn.parentElement : null;
+      if (box && box.classList.contains('claimed')) return;
+      if (box) box.classList.add('claimed');
+      if (btn) btn.textContent = '已领取';
+      showToast('已领取「' + store + '」政府消费券');
     }
 
     // ===== 商品图片画廊（点击商品图片弹出；底部页码 + 左右箭头置于页码前后；图片裁切遮挡 15%） =====
