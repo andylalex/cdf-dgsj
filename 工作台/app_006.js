@@ -1120,7 +1120,7 @@ function edBind(){
         var _src=(frame.getAttribute('src')||''); if(_src.indexOf('G9')!==-1){
           var _d=frame.contentDocument; if(_d&&_d.head){
             var _st=_d.createElement('style');
-            _st.textContent='::-webkit-scrollbar{display:none!important}*{scrollbar-width:none!important}.phone-frame{max-width:none!important;width:100%!important}#scrollArea{overflow-x:hidden!important}';
+            _st.textContent='::-webkit-scrollbar{display:none!important}*{scrollbar-width:none!important}.phone-frame{max-width:none!important;width:100%!important}#scrollArea{overflow-x:hidden!important}html,body{margin:0!important;padding:0!important}';
             _d.head.appendChild(_st);
           }
         }

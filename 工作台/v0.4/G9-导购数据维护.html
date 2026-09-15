@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="hZvI0HIqLBnnhrsW9AocYk">
-<head data-page-node-id="J31d5FloydBFLXKRLoxlhl">
+<html lang="zh-CN" data-page-node-id="hZvI0HIqLBnnhrsW9AocYk" data-dm-ref="1"><head data-page-node-id="J31d5FloydBFLXKRLoxlhl">
   <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="uBAwJhVo3iks8aBUFB7A2p">
   <style>
 
@@ -154,7 +153,8 @@
 
 /* box-sizing reset — 修复横向滚动 */
 *,*::before,*::after{box-sizing:border-box}
-html,body{width:100%;overflow-x:hidden}
+/* margin/padding reset — 清除浏览器默认 8px，确保手机壳内 phone-frame 真正贴满 */
+html,body{margin:0;padding:0;width:100%;overflow-x:hidden}
 
 /* font-awesome weight fix */
 i.fas{font-weight:900}
@@ -223,8 +223,8 @@ body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;ba
   <meta charset="UTF-8" data-page-node-id="UvBV3r5d1hXUwIw3XrtmBK">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="tW0YBlojBuKUcqkvu8YNYO">
   <title>导购数据维护</title>
-</head>
-<body data-page-node-id="zh8n2Qr7yplNSB8qGLbd1l">
+<style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
+<body data-page-node-id="zh8n2Qr7yplNSB8qGLbd1l" style="">
   <div class="phone-frame shadow-2xl" data-page-node-id="xCeJ7S0OpiCi4wKcIt8gtL">
 
     <!-- 状态栏 -->
@@ -240,10 +240,10 @@ body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;ba
 
     <!-- 顶部 -->
     <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center relative shrink-0" data-page-node-id="iDyTQZnyFrQHdRFxEsmrP3">
-      <button type="button" onclick="goBack()" style="background:none;border:none;outline:none" class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 text-gray-700" data-page-node-id="HtFrBgaFETCcgxiD9ENOPp">
+      <button type="button" onclick="goBack()" style="background: none; border: none;" class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 text-gray-700" data-page-node-id="HtFrBgaFETCcgxiD9ENOPp">
         <i class="fas fa-chevron-left text-lg" data-page-node-id="mnZDEgBmqh9DX5uOrXVNv2"></i>
       </button>
-      <h1 class="flex-1 text-center text-base font-semibold text-gray-800" data-page-node-id="q3kfnW6jOAfcyv2qFTRWD1">导购数据维护</h1>
+      <h1 class="flex-1 text-center text-base font-semibold text-gray-800" data-page-node-id="q3kfnW6jOAfcyv2qFTRWD1" style="text-align: center;">导购数据维护</h1>
     </div>
 
     <!-- 滚动内容 -->
@@ -272,11 +272,11 @@ body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;ba
         <div class="form-row flex items-center justify-between gap-4" data-page-node-id="yJ8b87eilZqrg80XDWINFB">
           <span class="form-label" data-page-node-id="HPNOaZtu435VTt2AsBEGu5"><span class="form-required" data-page-node-id="q9e2pHrdeZDlImwRPEjhFC">*</span>品牌</span>
           <div class="relative" data-page-node-id="1gZZWgbOrC68p1aKjSVACL">
-            <div id="brandTrigger" class="brand-trigger" onclick="toggleBrandMenu()">
+            <div id="brandTrigger" class="brand-trigger" onclick="toggleBrandMenu()" data-page-node-id="Y63zSrAawK5CzEe4e5YBur">
               <span id="brandText" data-page-node-id="EWuWE5nCmaYr2b0UQddoRU">雅诗兰黛</span>
-              <i class="fas fa-chevron-down brand-caret"></i>
+              <i class="fas fa-chevron-down brand-caret" data-page-node-id="pDa5eOy0guL1zSRA3mlH0b"></i>
             </div>
-            <div id="brandMenu" class="brand-menu hidden hide-scrollbar"></div>
+            <div id="brandMenu" class="brand-menu hidden hide-scrollbar" data-page-node-id="7QQqWamZH776LM4krtIHB1"></div>
           </div>
         </div>
 
@@ -433,5 +433,6 @@ body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;ba
       setTimeout(function(){ toast.classList.remove('show'); },1800);
     }
   </script>
-</body>
-</html>
+
+
+</body></html>
