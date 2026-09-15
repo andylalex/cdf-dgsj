@@ -272,7 +272,9 @@
 </div>
 <script data-page-node-id="U15Script">
   function goBack(){
-    if(document.referrer && document.referrer.indexOf(location.hostname)!==-1){history.back();}else{location.href='index.html';}
+    if(history.length > 1){ history.back(); return; }
+    if(document.referrer && document.referrer.indexOf(location.hostname) !== -1){ location.href = document.referrer; return; }
+    location.href = 'index.html';
   }
   function switchTab(el){
     document.querySelectorAll('.tabs .tab').forEach(function(t){t.classList.remove('on');});
