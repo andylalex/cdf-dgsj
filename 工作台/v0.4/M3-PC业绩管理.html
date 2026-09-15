@@ -219,6 +219,8 @@
     .coral-gradient { background: linear-gradient(135deg, #ff8a75 0%, #ff6b52 50%, #e64e39 100%); }
     .sidebar-active { background: #fff5f2; color: #ff6b52; border-right: 3px solid #ff6b52; }
     .table-row:hover { background: #fff8f7; }
+    #orderTableWrapM3 th, #orderTableWrapM3 td { padding-left: 0.9rem; padding-right: 0.9rem; }
+    .min-w-\[1120px\]{min-width:1120px}
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body class="bg-[#f5f6f8] text-gray-800" data-page-node-id="6ASQXkDeReJZV7eKCtYPc6" style="">
@@ -339,22 +341,25 @@
             </button>
           </div>
 
-          <table class="w-full text-sm text-left" data-page-node-id="E6O3bpsExThS6AAeZsYXOF">
+          <div class="overflow-x-auto" data-page-node-id="orderTableWrapM3">
+          <table class="w-full min-w-[1120px] text-sm text-left" data-page-node-id="E6O3bpsExThS6AAeZsYXOF">
             <thead class="bg-gray-50 text-gray-500" data-page-node-id="wKm9XCCTHIMBcLFrFZdWAH">
               <tr data-page-node-id="cmRRp26MZ8FssgT3WRmyNx">
-                <th class="px-5 py-3 font-medium" data-page-node-id="kRTC4dFuOoPtZa3DQiw5t1">订单号</th>
-                <th class="px-5 py-3 font-medium" data-page-node-id="0Ij8h3S4iUZZQbR0jV2ebz">用户手机号</th>
-                <th class="px-5 py-3 font-medium" data-page-node-id="NesH4nRtSIWSiBIZVvD11c">订单金额</th>
+                <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="kRTC4dFuOoPtZa3DQiw5t1">订单号</th>
+                <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="0Ij8h3S4iUZZQbR0jV2ebz">客户</th>
+                <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="NesH4nRtSIWSiBIZVvD11c">订单金额</th>
                 <th class="px-5 py-3 font-medium" data-page-node-id="FGOqxQn6wYuaobDPUlJ3OT" style="">顾问业绩（计入）</th>
-                <th class="px-5 py-3 font-medium" data-page-node-id="11HeuqaEiFEtTfiur0eAVH">订单时间</th>
-              <th class="px-5 py-3 font-medium" data-page-node-id="tripColHdrM3">离岛信息</th>
-              <th class="px-5 py-3 font-medium" data-page-node-id="grpColHdrM3">所属柜组</th>
-                <th class="px-5 py-3 font-medium" data-page-node-id="XHS1xYsk4hZ3BOisOX0zey">订单状态</th>
-                <th class="px-5 py-3 font-medium text-right" data-page-node-id="f21hdzAKpLVq9WRFutkrO8">操作</th>
+                <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="11HeuqaEiFEtTfiur0eAVH">下单时间</th>
+              <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="tripColHdrM3">离岛信息</th>
+              <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="pickupColHdrM3">提货</th>
+              <th class="px-5 py-3 font-medium" data-page-node-id="grpColHdrM3">柜组</th>
+                <th class="px-5 py-3 font-medium whitespace-nowrap" data-page-node-id="XHS1xYsk4hZ3BOisOX0zey">订单状态</th>
+                <th class="px-5 py-3 font-medium text-right whitespace-nowrap" data-page-node-id="f21hdzAKpLVq9WRFutkrO8">操作</th>
               </tr>
             </thead>
-            <tbody id="orderTableBody" class="divide-y divide-gray-100" data-page-node-id="ZlgTESq31Ex3I4jJUCymUE"><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811001</td><td class="px-5 py-4 text-gray-500">138****8888</td><td class="px-5 py-4 font-medium text-gray-800">¥42,680</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">林小婷</span> <span class="text-gray-500">¥43,680</span> <span class="text-[11px] text-gray-400">未完结</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 14:52</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded">待发货</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811001')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811002</td><td class="px-5 py-4 text-gray-500">139****6666</td><td class="px-5 py-4 font-medium text-gray-800">¥1,460</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">海口日月广场免税店</span> · <span class="text-gray-700 font-medium">香化二组（68680402）</span> · <span class="text-gray-700 font-medium">王小丽</span> <span class="text-gray-500">¥1,560</span> <span class="text-[11px] text-gray-400">未完结</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 13:28</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-coral-100 text-coral-600 text-xs rounded">待支付</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811002')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811003</td><td class="px-5 py-4 text-gray-500">137****5555</td><td class="px-5 py-4 font-medium text-gray-800">¥1,980</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">张美琪</span> <span class="text-gray-500">¥1,100</span> <span class="text-[11px] text-gray-400">未完结</span></div><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">王小丽</span> <span class="text-gray-500">¥1,080</span> <span class="text-[11px] text-gray-400">未完结</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 11:15</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-purple-100 text-purple-600 text-xs rounded">待收货</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811003')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811004</td><td class="px-5 py-4 text-gray-500">136****3333</td><td class="px-5 py-4 font-medium text-gray-800">¥15,500</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">海口日月广场免税店</span> · <span class="text-gray-700 font-medium">香化三组（68680403）</span> · <span class="text-gray-700 font-medium">刘佳怡</span> <span class="text-coral-600 font-bold">¥16,800</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 10:42</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-green-100 text-green-600 text-xs rounded">已完成</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811004')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811005</td><td class="px-5 py-4 text-gray-500">135****2222</td><td class="px-5 py-4 font-medium text-gray-800">¥28,500</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">林小婷</span> <span class="text-gray-500">¥28,500</span> <span class="text-[11px] text-gray-400">未完结</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 09:30</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 text-xs rounded">已退款</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811005')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811006</td><td class="px-5 py-4 text-gray-500">138****1234</td><td class="px-5 py-4 font-medium text-gray-800">¥5,000</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">林小婷</span> <span class="text-coral-600 font-bold">¥3,500</span></div><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">张美琪</span> <span class="text-gray-400 line-through">¥1,800</span> <span class="text-[11px] text-gray-400">退款不计入</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 08:20</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-green-100 text-green-600 text-xs rounded">已完成</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811006')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr><tr class="table-row transition"><td class="px-5 py-4 font-medium text-gray-800">ORD20260811007</td><td class="px-5 py-4 text-gray-500">137****9999</td><td class="px-5 py-4 font-medium text-gray-800">¥22,100</td><td class="px-5 py-4"><div class="text-xs leading-5"><span class="text-gray-700 font-medium">三亚国际免税城</span> · <span class="text-gray-700 font-medium">香化一组（68680401）</span> · <span class="text-gray-700 font-medium">林小婷</span> <span class="text-coral-600 font-bold">¥12,000</span></div><div class="text-xs leading-5"><span class="text-gray-700 font-medium">海口日月广场免税店</span> · <span class="text-gray-700 font-medium">香化三组（68680403）</span> · <span class="text-gray-700 font-medium">刘佳怡</span> <span class="text-coral-600 font-bold">¥10,100</span></div></td><td class="px-5 py-4 text-gray-500">2026-08-11 07:50</td><td class="px-5 py-4"><span class="px-2 py-0.5 bg-green-100 text-green-600 text-xs rounded">已完成</span></td><td class="px-5 py-4 text-right"><button onclick="openOrderDetail('ORD20260811007')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td></tr></tbody>
+            <tbody id="orderTableBody" class="divide-y divide-gray-100" data-page-node-id="ZlgTESq31Ex3I4jJUCymUE"></tbody>
           </table>
+          </div>
 
           <!-- 分页 -->
           <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between" data-page-node-id="C2dToZj185WKJbbEKgu2sJ">
@@ -379,10 +384,7 @@
       <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10" data-page-node-id="HfZBtmYmD5sHvQ9a32p62R">
         <div data-page-node-id="y6dTVaaWQdufHhAEp4OZEi">
           <p class="font-bold text-gray-800" data-page-node-id="oFrqhM33QAG0GQHr4Yimg4">订单详情</p>
-          <div class="flex items-center gap-1.5 mt-0.5" data-page-node-id="CxeL0ChJ7ecCNYU8pxNuA3">
-            <p class="text-xs text-gray-400" id="detailOrderNo" data-page-node-id="pn6KZW9oDCkYIWfYzGGc8H">ORD20260811001</p>
-            <button id="copyOrderBtn" onclick="copyOrderNo()" class="text-gray-400 hover:text-coral-600 transition" title="复制订单号" data-page-node-id="8TypHk99COoMbR5j2fCNtW"><i class="fas fa-copy text-xs" data-page-node-id="Nb2VrS9LbB2ZYxT9nID5ov"></i></button>
-          </div>
+          <p class="text-xs text-gray-400 mt-0.5" data-page-node-id="CxeL0ChJ7ecCNYU8pxNuA3">订单编号、下单时间、离岛旅客与金额明细</p>
         </div>
         <button onclick="closeOrderDetail()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition" data-page-node-id="frwAFiolAVwvVFkaDeGwuY">
           <i class="fas fa-times text-sm" data-page-node-id="NcrjdA8NrH7Zti6wspbGYo"></i>
@@ -400,9 +402,41 @@
           </div>
         </div>
 
-        <!-- 商品信息 -->
-        <div data-page-node-id="PMrZhTV4WCtdVIQBYYtHsG">
-          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="27NfQrGIM47EkiWNkdgWBh">商品信息（<span id="detailProductCount" data-page-node-id="KsJYt5UlMN3260JUicotfP">1</span>）</h3>
+        <!-- 离岛旅客信息 -->
+        <div data-page-node-id="tripInfoBlockM3">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="u0B8qfDNtIPVhnv7bgthnm">离岛旅客信息</h3>
+          <div id="tripInfo" class="rounded-xl bg-gray-50 p-4 text-sm" data-page-node-id="BpGTmaNcDC2tWvNGVVRnbc"></div>
+        </div>
+
+        <!-- 订单信息 -->
+        <div data-page-node-id="orderInfoBlockM3">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="orderInfoTitleM3">订单信息</h3>
+          <div class="rounded-xl bg-gray-50 p-4 space-y-3 text-sm" data-page-node-id="orderInfoBodyM3">
+            <div class="flex items-center justify-between" data-page-node-id="oLn1qMFSiK4uwbGvpzhxcA">
+              <span class="text-gray-500">订单编号</span>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-800 break-all text-right" id="detailOrderNo">--</span>
+                <button id="copyOrderBtn" onclick="copyOrderNo()" class="text-gray-400 hover:text-coral-600 transition shrink-0" title="复制订单号"><i class="fas fa-copy text-xs"></i></button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="svKFnMkwdq7hLYaZ0A8btO">
+              <span class="text-gray-500">下单时间</span>
+              <span class="font-medium text-gray-800" id="detailTime">--</span>
+            </div>
+            <div class="flex items-center justify-between" data-page-node-id="pickupWayRowM3">
+              <span class="text-gray-500">提货方式</span>
+              <span class="font-medium text-gray-800" id="detailPickupWay">--</span>
+            </div>
+            <div class="flex items-start justify-between gap-3" data-page-node-id="pickupAddrRowM3">
+              <span class="text-gray-500 shrink-0">提货地址</span>
+              <span class="font-medium text-gray-800 text-right leading-snug" id="detailPickupAddr">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 商品列表 -->
+        <div data-page-node-id="productBlockM3">
+          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="27NfQrGIM47EkiWNkdgWBh">商品列表（<span id="detailProductCount" data-page-node-id="KsJYt5UlMN3260JUicotfP">1</span>）</h3>
           <div id="detailProducts" class="space-y-2" data-page-node-id="DUQZZ9N5tvha8UP052LpiW"></div>
         </div>
 
@@ -412,67 +446,36 @@
           <div id="detailPerf" class="space-y-2" data-page-node-id="gEmI3byxCrmRUeGuCrQxO6"></div>
         </div>
 
-        <!-- 用户信息 -->
-        <div class="grid grid-cols-2 gap-4" data-page-node-id="wyNAcAx7XiBPhPJOdPFfkx">
-          <div data-page-node-id="dKdl6fo3pDHrWLL75GrjkW">
-            <p class="text-xs text-gray-500 mb-1" data-page-node-id="IgAuSX7pAF2izFJpNF8aKF">用户名称</p>
-            <p id="detailUser" class="text-sm font-medium text-gray-800" data-page-node-id="SPSXT7XYMpwBAtDa923NCf">陈女士</p>
-          </div>
-          <div data-page-node-id="38Fvtv3xv9GKwYL6lY1tVZ">
-            <p class="text-xs text-gray-500 mb-1" data-page-node-id="F7VyuHiSXJnrhAj0IjDKkm">用户手机号</p>
-            <p id="detailPhone" class="text-sm font-medium text-gray-800" data-page-node-id="d1wFPyIrGkoe6lExsdDLQc">138****8888</p>
-          </div>
-          <div data-page-node-id="iHpNA0JKZSS0EULGPE8M2q">
-            <p class="text-xs text-gray-500 mb-1" data-page-node-id="JqDfSBHsDtxSLUMNDEAXYW">订单时间</p>
-            <p id="detailTime" class="text-sm font-medium text-gray-800" data-page-node-id="6fh2WGWGLT2YKHDkTi9Kfr">2026-08-11 14:52:18</p>
-          </div>
-          <div data-page-node-id="2XGFT0pC7IoCnYQHZjK13K">
-            <p class="text-xs text-gray-500 mb-1" data-page-node-id="T9oj9gIDgoRGsGSlMsCxcy">所属柜组</p>
-            <p id="detailCounter" class="text-sm font-medium text-gray-800" data-page-node-id="v5BD9nVGRpxLuQ422LwLnd">--</p>
-          </div>
-        </div>
-
-        <!-- 离岛信息 -->
-        <div data-page-node-id="suXBPeJEpiKcnDmIykpZaZ">
-          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="u0B8qfDNtIPVhnv7bgthnm">离岛信息</h3>
-          <div id="tripInfo" class="rounded-xl bg-gray-50 p-3 space-y-2 text-sm" data-page-node-id="BpGTmaNcDC2tWvNGVVRnbc"><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">姓名</span><span class="font-medium text-gray-800 break-all text-right">陈女士</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">证件号</span><span class="font-medium text-gray-800 break-all text-right">4601**********0023</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">手机号</span><span class="font-medium text-gray-800 break-all text-right">138****8888</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">离岛方式</span><span class="font-medium text-gray-800 break-all text-right">飞机</span></div><div id="tripMore" class="hidden mt-2 pt-2 border-t border-gray-200 space-y-2"><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">国家/地区</span><span class="font-medium text-gray-800 break-all text-right">中国大陆</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">证件类型</span><span class="font-medium text-gray-800 break-all text-right">身份证</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">境内/境外</span><span class="font-medium text-gray-800 break-all text-right">境内</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">航班号</span><span class="font-medium text-gray-800 break-all text-right">HU7301</span></div><div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">离岛日期</span><span class="font-medium text-gray-800 break-all text-right">2026-08-15</span></div></div><button type="button" onclick="toggleTripMore(this)" class="mt-2 w-full flex items-center justify-center gap-1 text-xs text-coral-600 pt-2 border-t border-gray-200"><span class="trip-toggle-label">展开全部</span><i class="fas fa-chevron-down trip-toggle-icon"></i></button></div>
-        </div>
-
         <!-- 金额明细 -->
         <div data-page-node-id="0pPMBh229nb8O7WdMCGfbm">
           <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="0gKssbXPye0yerHtJa7CZg">金额明细</h3>
-          <div class="space-y-2 text-sm" data-page-node-id="rXor9BHpAXoRK9dxv3c9bx">
+          <div class="space-y-2 text-sm rounded-xl bg-gray-50 p-4" data-page-node-id="rXor9BHpAXoRK9dxv3c9bx">
             <div class="flex items-center justify-between" data-page-node-id="TO0OBhi7NcQLZWCSRsPcED">
               <span class="text-gray-500" data-page-node-id="L70rDIG32QGqypG8AfmqkY">商品总价</span>
-              <span id="amtSubtotal" class="font-medium text-gray-800" data-page-node-id="m0OaRBCU9coQQ1nsh11rug">¥42,900</span>
+              <span id="amtSubtotal" class="font-medium text-gray-800" data-page-node-id="m0OaRBCU9coQQ1nsh11rug">¥0</span>
             </div>
             <div class="flex items-center justify-between" data-page-node-id="2eoWcb5XMQuItUVhKUWhZ0">
               <span class="text-gray-500" data-page-node-id="oQjYCM4UMPfOUcTjtoU2KP">折扣优惠</span>
               <span id="amtDiscount" class="font-medium text-coral-600" data-page-node-id="Hf6kMdHcK2TxmNt5ATfM4C">-¥0</span>
             </div>
-            <div class="flex items-center justify-between" data-page-node-id="vA7A49RSP8FSpK4tTtS0vd">
-              <span class="text-gray-500" data-page-node-id="vpgrJCP0yXEXIwtROUgGUS">平台满减</span>
-              <span id="amtPlatform" class="font-medium text-coral-600" data-page-node-id="zFEDvwdbIN8DCXAcmbQTbi">-¥500</span>
-            </div>
             <div class="flex items-center justify-between" data-page-node-id="MwLoBuSAE1dLnAt1pocrUV">
-              <span class="text-gray-500" data-page-node-id="r0bpfTsrIKmdwsBnGRSzlb">商城优惠券</span>
-              <span id="amtCoupon" class="font-medium text-coral-600" data-page-node-id="iiNgIsQgIyANnhEoz8aCAz">-¥500</span>
+              <span class="text-gray-500" data-page-node-id="r0bpfTsrIKmdwsBnGRSzlb">优惠券金额</span>
+              <span id="amtCoupon" class="font-medium text-coral-600" data-page-node-id="iiNgIsQgIyANnhEoz8aCAz">-¥0</span>
             </div>
             <div class="flex items-center justify-between" data-page-node-id="AVUj6B03LOaDRfb1Ci4Crm">
               <span class="text-gray-500" data-page-node-id="6Jr6qGLnRZfh7c7hNhDXWB">积分抵扣</span>
               <span id="amtPoint" class="font-medium text-coral-600" data-page-node-id="DHwbnsWl8hX08FX2WjwRru">-¥0</span>
             </div>
-            <div class="flex items-center justify-between" data-page-node-id="mRY3w1oYbovdX4eQPnM6IH">
-              <span class="text-gray-500" data-page-node-id="v7pWcq8p1DLYjeFEE3C5HY">运费</span>
-              <span id="amtShip" class="font-medium text-gray-800" data-page-node-id="6gQCmgMG8c35FRzK3MwtkI">¥0</span>
+            <div class="flex items-center justify-between" data-page-node-id="subsidyRowM3">
+              <span class="text-gray-500">超级补贴</span>
+              <span id="amtPlatform" class="font-medium text-coral-600">-¥0</span>
             </div>
             <div class="border-t border-gray-100 pt-2 flex items-center justify-between" data-page-node-id="5ToaKuGvHgB4SgTzk86Bhv">
               <span class="font-bold text-gray-800" data-page-node-id="PMIptHLgLdmREAcWWR7MHB">实付金额</span>
-              <span id="amtPaid" class="font-bold text-coral-600 text-lg" data-page-node-id="k2GAsSg2lxREwZhcVwUKtO">¥41,900</span>
+              <span id="amtPaid" class="font-bold text-coral-600 text-lg" data-page-node-id="k2GAsSg2lxREwZhcVwUKtO">¥0</span>
             </div>
           </div>
         </div>
-
       </div>
       <div class="px-6 py-4 border-t border-gray-100 flex justify-end" data-page-node-id="kPw6gmEj9yTh0cx6kmmZRr">
         <button onclick="closeOrderDetail()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-2 rounded-xl text-sm font-medium transition" data-page-node-id="d2KcTkbMkNb93rZaQ9yHtN">关闭</button>
@@ -491,48 +494,21 @@
     // 归因规则（不同门店/柜组可能适用不同的导购归因规则）
     const RULE = { r15last:'15天·末次归因', r1first:'加购1天·首次归因', r7last:'7天·末次归因' };
 
-    // 离岛信息：离岛方式 / 编号标签（航班号/车次/渡轮号）映射
-    const TRIP_MODE = { flight:'飞机', train:'火车', ferry:'渡轮' };
-    const TRIP_NO_LABEL = { flight:'航班号', train:'车次', ferry:'渡轮号' };
+    // 离岛信息：离岛方式映射（航班 / 火车 / 渡轮）——口径与移动端业绩管理一致
+    const TRIP_MODE = { flight:'航班', train:'火车', ferry:'渡轮' };
     const tripRow = (label, value) =>
       (value ? '<div class="flex justify-between gap-3"><span class="text-gray-500 shrink-0">' + label + '</span><span class="font-medium text-gray-800 break-all text-right">' + value + '</span></div>' : '');
-    // 动态渲染离岛信息：默认展示 姓名/证件号/手机号/离岛方式；点击展开全部（含境内/境外、境外购票证件号等）
+    // 离岛旅客信息：姓名 / 离岛方式（含编号） / 电话 / 证件号 / 离岛时间（字段与移动端业绩管理一致）
     function renderTripInfo(t) {
       if (!t) return '<div class="text-sm text-gray-400 py-1">暂无离岛信息</div>';
-      const overseas = t.country && t.country !== '中国大陆';
-      const region = overseas ? '境外' : '境内';
-      // 默认展示
-      let base = '';
-      base += tripRow('姓名', t.name);
-      base += tripRow('证件号', t.idNo);
-      base += tripRow('手机号', t.phone);
-      base += tripRow('离岛方式', TRIP_MODE[t.mode] || '--');
-      // 展开后追加
-      let more = '';
-      more += tripRow('国家/地区', t.country);
-      more += tripRow('证件类型', t.idType);
-      more += tripRow('境内/境外', region);
-      if (overseas) more += tripRow('购票证件号', t.idNo);
-      more += tripRow(TRIP_NO_LABEL[t.mode] || '航班号', t.flightNo);
-      more += tripRow('离岛日期', t.date);
-      if (t.mode === 'ferry') more += tripRow('离岛港口', t.port);
-      if (t.mode === 'train') more += tripRow('乘车地点', t.station);
-      const moreHtml = more ? '<div id="tripMore" class="hidden mt-2 pt-2 border-t border-gray-200 space-y-2">' + more + '</div>' : '';
-      return base + moreHtml +
-        '<button type="button" onclick="toggleTripMore(this)" class="mt-2 w-full flex items-center justify-center gap-1 text-xs text-coral-600 pt-2 border-t border-gray-200">' +
-          '<span class="trip-toggle-label">展开全部</span><i class="fas fa-chevron-down trip-toggle-icon"></i>' +
-        '</button>';
-    }
-    // 展开/收起离岛信息（同一时间仅一个详情弹窗，使用固定 id 即可）
-    function toggleTripMore(btn) {
-      const more = document.getElementById('tripMore');
-      if (!more) return;
-      const open = !more.classList.contains('hidden');
-      more.classList.toggle('hidden');
-      const label = btn.querySelector('.trip-toggle-label');
-      const icon = btn.querySelector('.trip-toggle-icon');
-      if (open) { label.textContent = '展开全部'; icon.classList.replace('fa-chevron-up', 'fa-chevron-down'); }
-      else { label.textContent = '收起'; icon.classList.replace('fa-chevron-down', 'fa-chevron-up'); }
+      const leaveDateTime = t.date + (t.leaveTime ? ' ' + t.leaveTime : '');
+      return '<div class="space-y-2">' +
+        tripRow('姓名', t.name) +
+        tripRow('离岛方式', (TRIP_MODE[t.mode] || '--') + (t.flightNo ? ' ' + t.flightNo : '')) +
+        tripRow('电话', t.phone) +
+        tripRow('证件号', t.idNo) +
+        tripRow('离岛时间', leaveDateTime) +
+      '</div>';
     }
 
     // 订单数据：每个商品可独立归属 门店/柜组/导购(guide)，带退款状态(refund) 与 归因规则(attrRule)
@@ -544,68 +520,89 @@
         user:'陈女士', phone:'138****8888', time:'2026-08-11 14:52:18',
         status:{text:'待发货', cls:'bg-blue-100 text-blue-600'},
         amount:42680,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
+        pickupAddr: '三亚凤凰国际机场 T1 航站楼 免税品提货点',
         products:[
-          { icon:'fa-ring', name:'Cartier LOVE 手镯 18K玫瑰金', spec:'17号', qty:2, price:42900, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
-          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:780, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-ring', name:'Cartier LOVE 手镯 18K玫瑰金', spec:'17号', qty:2, price:42900, code:'C00001', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:780, code:'C030006', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
         ],
-        discount:0, platform:500, coupon:500, point:0, ship:0, trip:{ name:'陈女士', country:'中国大陆', idType:'身份证', idNo:'4601**********0023', phone:'138****8888', mode:'flight', flightNo:'HU7301', date:'2026-08-15' }
+        discount:0, platform:500, coupon:500, point:0, ship:0, trip:{ name:'陈女士', country:'中国大陆', idType:'身份证', idNo:'460106********0023', phone:'138****8888', mode:'flight', flightNo:'HU7301', date:'2026-08-15', leaveTime:'16:51:00' }
       },
       'ORD20260811002': {
         user:'王小姐', phone:'139****6666', time:'2026-08-11 13:28:05',
         status:{text:'待支付', cls:'bg-coral-100 text-coral-600'},
         amount:1460,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
+        pickupAddr: '三亚凤凰国际机场 T1 航站楼 免税品提货点',
         products:[
-          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'王小丽', refund:'none', attrRule:'r1first', wh:[{name:'海口美兰机场免税仓',qty:2}]}
+          { icon:'fa-spray-can', name:'香奈儿可可小姐香水 50ml', spec:'经典浓香', qty:2, price:1560, code:'C030006', store:'海口日月广场免税店', group:'香化二组（68680402）', guide:'王小丽', refund:'none', attrRule:'r1first', wh:[{name:'海口美兰机场免税仓',qty:2}]}
         ],
-        discount:0, platform:100, coupon:0, point:0, ship:0, trip:{ name:'王小姐', country:'中国大陆', idType:'身份证', idNo:'1101**********1520', phone:'139****6666', mode:'train', flightNo:'C7301', station:'海口东站', date:'2026-08-16' }
+        discount:0, platform:100, coupon:0, point:0, ship:0, trip:{ name:'王小姐', country:'中国大陆', idType:'身份证', idNo:'110105********1520', phone:'139****6666', mode:'train', flightNo:'C7301', station:'海口东站', date:'2026-08-16', leaveTime:'16:51:00' }
       },
       'ORD20260811003': {
         user:'李先生', phone:'137****5555', time:'2026-08-11 11:15:42',
         status:{text:'待收货', cls:'bg-purple-100 text-purple-600'},
         amount:1980,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
+        pickupAddr: '三亚凤凰国际机场 T1 航站楼 免税品提货点',
         products:[
-          { icon:'fa-pump-soap', name:'海蓝之谜精粹水 150ml', spec:'修护精萃', qty:2, price:1100, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
-          { icon:'fa-pump-soap', name:'雅诗兰黛小棕瓶 50ml', spec:'修护精华', qty:2, price:1080, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'王小丽', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-pump-soap', name:'海蓝之谜精粹水 150ml', spec:'修护精萃', qty:2, price:1100, code:'C000201', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-pump-soap', name:'雅诗兰黛小棕瓶 50ml', spec:'修护精华', qty:2, price:1080, code:'C000202', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'王小丽', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
         ],
-        discount:0, platform:200, coupon:0, point:0, ship:0, trip:{ name:'李先生', country:'中国大陆', idType:'身份证', idNo:'3701**********4512', phone:'137****5555', mode:'flight', flightNo:'CZ6799', date:'2026-08-15' }
+        discount:0, platform:200, coupon:0, point:0, ship:0, trip:{ name:'李先生', country:'中国大陆', idType:'身份证', idNo:'370102********4512', phone:'137****5555', mode:'flight', flightNo:'CZ6799', date:'2026-08-15', leaveTime:'16:51:00' }
       },
       'ORD20260811004': {
         user:'张女士', phone:'136****3333', time:'2026-08-11 10:42:30',
         status:{text:'已完成', cls:'bg-green-100 text-green-600'},
         amount:15500,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
+        pickupAddr: '海口秀英港 离岛免税提货点',
         products:[
-          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r7last', wh:[{name:'海口美兰机场免税仓',qty:1}]}
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:16800, code:'L27934', store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r7last', wh:[{name:'海口美兰机场免税仓',qty:1}]}
         ],
-        discount:0, platform:800, coupon:500, point:0, ship:0, trip:{ name:'张女士', country:'中国香港', idType:'港澳居民来往内地通行证', idNo:'H123456(7)', phone:'136****3333', mode:'ferry', flightNo:'HN001', port:'海口秀英港', date:'2026-08-17' }
+        discount:0, platform:800, coupon:500, point:0, ship:0, trip:{ name:'张女士', country:'中国香港', idType:'港澳居民来往内地通行证', idNo:'460105********1728', phone:'136****3333', mode:'ferry', flightNo:'HN001', port:'海口秀英港', date:'2026-08-17', leaveTime:'16:00:00' }
       },
       'ORD20260811005': {
         user:'刘先生', phone:'135****2222', time:'2026-08-11 09:30:11',
         status:{text:'已退款', cls:'bg-gray-100 text-gray-500'},
         amount:28500,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
+        pickupAddr: '三亚凤凰国际机场 T1 航站楼 免税品提货点',
         products:[
-          { icon:'fa-gem', name:'宝格丽 divas\' dream 项链', spec:'玫瑰金白贝母', qty:2, price:28500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-gem', name:'宝格丽 divas\' dream 项链', spec:'玫瑰金白贝母', qty:2, price:28500, code:'B00002', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'full', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
         ],
-        discount:0, platform:0, coupon:0, point:0, ship:0, trip:{ name:'刘先生', country:'中国大陆', idType:'身份证', idNo:'5101**********3028', phone:'135****2222', mode:'flight', flightNo:'MU5301', date:'2026-08-15' }
+        discount:0, platform:0, coupon:0, point:0, ship:0, trip:{ name:'刘先生', country:'中国大陆', idType:'身份证', idNo:'510107********3028', phone:'135****2222', mode:'flight', flightNo:'MU5301', date:'2026-08-15', leaveTime:'16:00:00' }
       },
       'ORD20260811006': {
         user:'赵女士', phone:'138****1234', time:'2026-08-11 08:20:36',
         status:{text:'已完成', cls:'bg-green-100 text-green-600'},
         amount:5000,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '邮寄到家',
+        pickupAddr: '北京市朝阳区建国路 88 号 SOHO 现代城 B 座 1802',
         products:[
-          { icon:'fa-spray-can', name:'迪奥真我香水 50ml', spec:'浓香', qty:2, price:3500, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
-          { icon:'fa-pump-soap', name:'兰蔻小黑瓶精华 50ml', spec:'修护', qty:2, price:1800, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'full', attrRule:'r1first', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-spray-can', name:'迪奥真我香水 50ml', spec:'浓香', qty:2, price:3500, code:'C030001', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-pump-soap', name:'兰蔻小黑瓶精华 50ml', spec:'修护', qty:2, price:1800, code:'C030003', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'张美琪', refund:'full', attrRule:'r1first', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
         ],
-        discount:0, platform:300, coupon:0, point:0, ship:0, trip:{ name:'赵女士', country:'中国台湾', idType:'台湾居民来往大陆通行证', idNo:'01234567(8)', phone:'138****1234', mode:'train', flightNo:'D7201', station:'三亚站', date:'2026-08-18' }
+        discount:0, platform:300, coupon:0, point:0, ship:0, trip:{ name:'赵女士', country:'中国台湾', idType:'台湾居民来往大陆通行证', idNo:'350102********0826', phone:'138****1234', mode:'train', flightNo:'D7201', station:'三亚站', date:'2026-08-18', leaveTime:'16:00:00' }
       },
       'ORD20260811007': {
         user:'孙女士', phone:'137****9999', time:'2026-08-11 07:50:02',
         status:{text:'已完成', cls:'bg-green-100 text-green-600'},
         amount:22100,
+        pickupPoint: '三亚机场国内出发厅T1/T2',
+        pickupWay: '离岛自提',
+        pickupAddr: '三亚凤凰岛国际邮轮港 免税品提货点',
         products:[
-          { icon:'fa-ring', name:'Cartier 戒指 18K玫瑰金', spec:'玫瑰金', qty:2, price:12000, store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
-          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:10100, store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r1first', wh:[{name:'海口美兰机场免税仓',qty:1}]}
+          { icon:'fa-ring', name:'Cartier 戒指 18K玫瑰金', spec:'玫瑰金', qty:2, price:12000, code:'C00003', store:'三亚国际免税城', group:'香化一组（68680401）', guide:'林小婷', refund:'none', attrRule:'r15last', wh:[{name:'三亚海棠湾免税仓',qty:1},{name:'电商履约中心仓',qty:1}] },
+          { icon:'fa-clock', name:'浪琴名匠系列机械男表', spec:'L2.793.4', qty:1, price:10100, code:'L27934', store:'海口日月广场免税店', group:'香化三组（68680403）', guide:'刘佳怡', refund:'none', attrRule:'r1first', wh:[{name:'海口美兰机场免税仓',qty:1}]}
         ],
-        discount:0, platform:500, coupon:0, point:0, ship:0, trip:{ name:'孙女士', country:'日本', idType:'护照', idNo:'E12345678', phone:'137****9999', mode:'ferry', flightNo:'HN002', port:'三亚凤凰岛码头', date:'2026-08-16' }
+        discount:0, platform:500, coupon:0, point:0, ship:0, trip:{ name:'孙女士', country:'日本', idType:'护照', idNo:'320106********6610', phone:'137****9999', mode:'ferry', flightNo:'HN002', port:'三亚凤凰岛码头', date:'2026-08-16', leaveTime:'16:00:00' }
       }
     };
 
@@ -617,23 +614,6 @@
              '<span class="text-gray-700 font-medium">' + group + '</span> · ' +
              '<span class="text-gray-700 font-medium">' + guide + '</span> ' +
              amtHtml + (noteHtml ? ' ' + noteHtml : '');
-    }
-
-    // 订单详情：单个商品的导购业绩行（与列表「导购业绩」列同构）
-    function productPerfLine(p, isCompleted) {
-      let amtHtml, note = '';
-      if (isCompleted) {
-        if (p.refund === 'none') {
-          amtHtml = '<span class="text-coral-600 font-bold">' + fmt(p.price) + '</span>';
-        } else {
-          amtHtml = '<span class="text-gray-400 line-through">' + fmt(p.price) + '</span>';
-          note = '<span class="text-[11px] text-gray-400">退款不计入</span>';
-        }
-      } else {
-        amtHtml = '<span class="text-gray-500">' + fmt(p.price) + '</span>';
-        note = '<span class="text-[11px] text-gray-400">未完结</span>';
-      }
-      return '<span class="text-xs leading-5">' + perfLine(p.store, p.group, p.guide, amtHtml, note) + '</span>';
     }
 
     // 列表「导购业绩（计入）」列：按导购聚合，每行展示 门店·柜组·导购·业绩金额；金额始终显示
@@ -706,18 +686,24 @@
       tbody.innerHTML = '';
       list.forEach(r => {
         const o = r.o, no = r.no;
+        const t = o.trip || {};
+        const tripIcon = ({flight:'fa-plane-departure',train:'fa-train',ferry:'fa-ship'})[t.mode] || 'fa-plane-departure';
+        const tripText = (TRIP_MODE[t.mode] || '--') + (t.flightNo ? ' ' + t.flightNo : '');
+        const tripTime = t.date ? (t.date + (t.leaveTime ? ' ' + t.leaveTime : '')) : '--';
+        const groups = [...new Set(o.products.map(p => p.group))];
         const tr = document.createElement('tr');
         tr.className = 'table-row transition';
         tr.innerHTML =
-          '<td class="px-5 py-4 font-medium text-gray-800">' + no + '</td>' +
-          '<td class="px-5 py-4 text-gray-500">' + o.phone + '</td>' +
-          '<td class="px-5 py-4 font-medium text-gray-800">' + fmt(o.amount) + '</td>' +
+          '<td class="px-5 py-4 font-medium text-gray-800 whitespace-nowrap">' + no + '</td>' +
+          '<td class="px-5 py-4 text-gray-800 whitespace-nowrap">' + o.user + '</td>' +
+          '<td class="px-5 py-4 font-medium text-gray-800 whitespace-nowrap">' + fmt(o.amount) + '</td>' +
           '<td class="px-5 py-4">' + perfCell(o) + '</td>' +
-          '<td class="px-5 py-4 text-gray-500">' + o.time.slice(0,16) + '</td>' +
-          (function(){ const t=o.trip||{}; const mode=TRIP_MODE[t.mode]||'--'; const icon=({flight:'fa-plane',train:'fa-train',ferry:'fa-ship'})[t.mode]||'fa-plane'; const date=t.date||'--'; return '<td class="px-5 py-4"><div class="flex items-center gap-1.5 text-gray-600 whitespace-nowrap"><i class="fas '+icon+' text-gray-400 text-xs"></i><span class="font-medium text-gray-700">'+mode+'</span><span class="text-gray-400 text-xs">'+date+'</span></div></td>'; })() +
-          (function(){ const gs=[...new Set(o.products.map(p=>p.group))]; return '<td class="px-5 py-4 text-gray-600 text-xs leading-5">'+(gs.length?gs.join('<br>'):'--')+'</td>'; })() +
+          '<td class="px-5 py-4 text-gray-500 whitespace-nowrap">' + o.time + '</td>' +
+          '<td class="px-5 py-4 whitespace-nowrap"><div class="flex items-center gap-1.5 text-gray-600"><i class="fas ' + tripIcon + ' text-gray-400 text-xs"></i><span class="font-medium text-gray-700">' + tripText + '</span></div><div class="text-[11px] text-gray-400 mt-0.5">' + tripTime + '</div></td>' +
+          '<td class="px-5 py-4 text-gray-600 text-xs leading-5">' + (o.pickupPoint || '--') + '</td>' +
+          '<td class="px-5 py-4 text-gray-600 text-xs leading-5">' + (groups.length ? groups.join('<br>') : '--') + '</td>' +
           '<td class="px-5 py-4"><span class="px-2 py-0.5 ' + o.status.cls + ' text-xs rounded">' + o.status.text + '</span></td>' +
-          '<td class="px-5 py-4 text-right"><button onclick="openOrderDetail(\'' + no + '\')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition">查看详情</button></td>';
+          '<td class="px-5 py-4 text-right"><button onclick="openOrderDetail(\'' + no + '\')" class="text-coral-600 hover:text-coral-700 text-xs font-medium border border-coral-200 hover:bg-coral-50 px-3 py-1.5 rounded-lg transition whitespace-nowrap">查看详情</button></td>';
         tbody.appendChild(tr);
       });
       renderTotal(list);
@@ -746,10 +732,12 @@
     function openOrderDetail(orderNo) {
       const d = orderDetails[orderNo];
       document.getElementById('detailOrderNo').textContent = orderNo;
-      document.getElementById('detailUser').textContent = d.user;
-      document.getElementById('detailPhone').textContent = d.phone;
       document.getElementById('detailTime').textContent = d.time;
+      document.getElementById('detailPickupWay').textContent = d.pickupWay || (d.pickupPoint ? '离岛自提' : '邮寄到家');
+      document.getElementById('detailPickupAddr').textContent = d.pickupAddr || d.pickupPoint || '--';
+      // 离岛旅客信息
       document.getElementById('tripInfo').innerHTML = renderTripInfo(d.trip);
+
       const status = d.status.text;
       const stCls = d.status.cls.split(' ');
       const stBg = stCls[0] || 'bg-gray-100';
@@ -758,36 +746,41 @@
       sb.textContent = status;
       sb.className = 'text-base font-bold ' + stTx;
       document.getElementById('detailStatusIcon').className = 'w-11 h-11 rounded-full flex items-center justify-center ' + stBg;
-      // 所属柜组（商品级 group 聚合）
-      const groups = [...new Set(d.products.map(p => p.group))];
-      document.getElementById('detailCounter').textContent = groups.length ? groups.join(' / ') : '--';
 
-      const isCompleted = d.status.text === '已完成';
+      // 商品列表（字段对齐移动端：柜组·顾问 / 名称 / 规格 / 商品编码 / 单价·数量·实付 / 出货仓库）
+      const isCompleted = status === '已完成';
       const box = document.getElementById('detailProducts');
       box.innerHTML = '';
       let hasRefund = false;
       d.products.forEach(p => {
         if (p.refund !== 'none') hasRefund = true;
         const el = document.createElement('div');
-        el.className = 'flex items-start gap-3 bg-gray-50 rounded-xl p-3';
+        el.className = 'flex items-start gap-3 bg-gray-50 rounded-xl p-4';
         el.innerHTML =
           '<div class="w-14 h-14 rounded-lg bg-coral-50 flex items-center justify-center text-coral-600 shrink-0"><i class="fas ' + p.icon + ' text-lg"></i></div>' +
-          '<div class="flex-1"><p class="font-medium text-gray-800 text-sm">' + p.name + '</p>' +
-          '<p class="text-xs text-gray-500 mt-1">规格：' + p.spec + ' · 数量：×' + p.qty + '</p>' +
-          '<div class="mt-1.5">' + productPerfLine(p, isCompleted) + '</div>' +
-          (p.wh && p.wh.length ?
-            '<div class="mt-1.5">' +
-              '<div class="flex items-center gap-1.5 text-[11px] text-gray-500"><i class="fas fa-warehouse"></i><span>出货仓库</span></div>' +
-              '<div class="mt-1 space-y-1">' +
-                p.wh.map(w => '<div class="flex items-center justify-between gap-2 bg-coral-50 text-coral-600 rounded-md px-2 py-1"><span class="text-[11px] truncate">'+w.name+'</span><b class="text-[11px] font-bold shrink-0">×'+w.qty+'</b></div>').join('') +
-              '</div>' +
-            '</div>'
-          : '') + '</div>';
+          '<div class="flex-1 min-w-0">' +
+            '<p class="text-xs text-coral-600 mb-1">' + p.group + ' · ' + p.guide + '</p>' +
+            '<p class="font-medium text-gray-800 text-sm">' + p.name + '</p>' +
+            '<p class="text-xs text-gray-500 mt-1">规格：' + p.spec + ' · 商品编码：' + (p.code || '--') + '</p>' +
+            '<div class="mt-2 pt-2 border-t border-gray-100 flex items-center gap-4 text-xs text-gray-500">' +
+              '<span>单价 ' + fmt(p.price) + '</span>' +
+              '<span>数量 ×' + p.qty + '</span>' +
+              '<span class="font-bold text-gray-800">实付 ' + fmt(p.price) + '</span>' +
+            '</div>' +
+            (p.wh && p.wh.length ?
+              '<div class="mt-2">' +
+                '<div class="flex items-center gap-1.5 text-xs text-gray-500"><i class="fas fa-warehouse text-gray-400 text-[11px]"></i><span>出货仓库</span></div>' +
+                '<div class="mt-1 space-y-1">' +
+                  p.wh.map(w => '<div class="flex items-center justify-between gap-2 bg-coral-50 text-coral-600 rounded-md px-2 py-1"><span class="text-[11px] truncate">' + w.name + '</span><b class="text-[11px] font-bold shrink-0">×' + w.qty + '</b></div>').join('') +
+                '</div>' +
+              '</div>'
+              : '') +
+          '</div>';
         box.appendChild(el);
       });
       document.getElementById('detailProductCount').textContent = d.products.length;
 
-      // 导购业绩归因汇总：仅已完成订单中未退款商品计入（样式对齐 G8 我的业绩归因）
+      // 导购业绩归因（平台视角保留，口径与移动端一致）
       const counted = {};
       if (isCompleted) {
         d.products.forEach(p => { if (p.refund === 'none') counted[p.guide] = (counted[p.guide] || 0) + p.price; });
@@ -814,14 +807,14 @@
         }
       }
 
+      // 金额明细（字段对齐移动端：商品总价 / 折扣优惠 / 优惠券金额 / 积分抵扣 / 超级补贴 / 实付金额）
       const subtotal = d.products.reduce((s, p) => s + p.price, 0);
-      const paid = subtotal - d.discount - d.platform - d.coupon - d.point + d.ship;
+      const paid = subtotal - d.discount - d.coupon - d.point - d.platform + d.ship;
       document.getElementById('amtSubtotal').textContent = fmt(subtotal);
       document.getElementById('amtDiscount').textContent = '-' + fmt(d.discount);
-      document.getElementById('amtPlatform').textContent = '-' + fmt(d.platform);
       document.getElementById('amtCoupon').textContent = '-' + fmt(d.coupon);
       document.getElementById('amtPoint').textContent = '-' + fmt(d.point);
-      document.getElementById('amtShip').textContent = fmt(d.ship);
+      document.getElementById('amtPlatform').textContent = '-' + fmt(d.platform);
       document.getElementById('amtPaid').textContent = fmt(paid);
 
       document.getElementById('detailStatusSub').textContent = (status === '已完成')
