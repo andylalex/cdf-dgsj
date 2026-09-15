@@ -256,6 +256,15 @@
     .pc-info-code{font-size:10px;color:#9ca3af;font-family:Arial,sans-serif;padding:0}
     .pc-info-stock{font-size:10px;color:#6b7280;display:flex;align-items:center;gap:3px}
     .pc-info-stock i{font-size:8px;color:#10b981}
+    /* ---- IM 底栏 ---- */
+    .input-bar{transition:transform .18s ease}
+    .tool-panel{display:none;background:#fff;border-top:1px solid #f3f4f6;padding:16px 12px 24px}
+    .tool-panel.open{display:block}
+    .tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 12px}
+    .tool-cell{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+    .tool-ic{width:52px;height:52px;border-radius:16px;background:#f7f8fa;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:22px}
+    .tool-cell:active .tool-ic{background:#f3f4f6}
+    .tool-txt{font-size:11px;color:#6b7280}
     /* ---- 企业微信名片卡（大二维码，可长按识别） ---- */
     .wx-card{background:#fff;border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.06);overflow:hidden;display:flex;align-items:flex-start;gap:12px;padding:10px 12px}
     .wx-card-main{display:flex;align-items:flex-start;gap:10px;flex:1 1 auto;min-width:0}
@@ -430,21 +439,42 @@
     </div>
 
     <!-- 底部输入 -->
-    <div class="bg-white border-t border-gray-100 p-3 shrink-0" data-page-node-id="U1Footer">
-      <div class="flex items-center gap-2" data-page-node-id="U1FooterInner">
-                <button id="U1ListBtn" onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
+    <div class="bg-white border-t border-gray-100 shrink-0" data-page-node-id="U1Footer">
+      <div class="input-bar flex items-center gap-2 p-3" data-page-node-id="U1FooterInner">
+        <button id="U1ListBtn" onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
           <i class="fas fa-clipboard-list text-[19px]"></i>
           <span id="U1ListBadge" class="hidden absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-coral-500 text-white text-[10px] leading-4 text-center" data-page-node-id="U1ListBadge">0</span>
         </button>
-        <button onclick="sendImage()" class="p-2 text-gray-400 hover:text-coral-500 transition" data-page-node-id="U1ImageBtn">
-          <i class="fas fa-image text-[19px]" data-page-node-id="U1ImageIcon"></i>
-        </button>
         <div class="flex-1 bg-gray-100 rounded-full px-4 py-2.5" data-page-node-id="U1InputWrap">
-          <input type="text" placeholder="回复顾问..." class="w-full bg-transparent text-sm outline-none text-gray-700" data-page-node-id="U1Input">
+          <input id="U1Input" type="text" placeholder="回复顾问..." class="w-full bg-transparent text-sm outline-none text-gray-700" data-page-node-id="U1Input" oninput="onInputChange()">
         </div>
-        <button class="bg-coral-500 hover:bg-coral-600 text-white p-2.5 rounded-full transition shadow-lg shadow-coral-500/30" data-page-node-id="U1SendBtn">
+        <button id="U1PlusBtn" onclick="toggleToolPanel()" class="p-2 text-gray-500 hover:text-coral-500 transition" data-page-node-id="U1PlusBtn">
+          <i class="fas fa-plus text-[22px]" data-page-node-id="U1PlusIcon"></i>
+        </button>
+        <button id="U1SendBtn" onclick="sendText()" class="hidden bg-coral-500 hover:bg-coral-600 text-white p-2.5 rounded-full transition shadow-lg shadow-coral-500/30" data-page-node-id="U1SendBtn">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="ujlpkJJj6vjAxWUximF2Gx"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" data-page-node-id="xwrf730lySwk6s7CFqHLeY"></path></svg>
         </button>
+      </div>
+      <!-- 功能面板 -->
+      <div id="toolPanel" class="tool-panel" data-page-node-id="U1ToolPanel">
+        <div class="tool-grid" data-page-node-id="U1ToolGrid">
+          <div class="tool-cell" onclick="sendImage()" data-page-node-id="U1ToolImage">
+            <div class="tool-ic" data-page-node-id="U1ToolImageIc"><i class="fas fa-image" data-page-node-id="U1ToolImageIcon"></i></div>
+            <span class="tool-txt" data-page-node-id="U1ToolImageTxt">发送图片</span>
+          </div>
+          <div class="tool-cell" onclick="showToast('拍摄功能敬请期待')" data-page-node-id="U1ToolCamera">
+            <div class="tool-ic" data-page-node-id="U1ToolCameraIc"><i class="fas fa-camera" data-page-node-id="U1ToolCameraIcon"></i></div>
+            <span class="tool-txt" data-page-node-id="U1ToolCameraTxt">拍摄</span>
+          </div>
+          <div class="tool-cell" onclick="showToast('位置功能敬请期待')" data-page-node-id="U1ToolLoc">
+            <div class="tool-ic" data-page-node-id="U1ToolLocIc"><i class="fas fa-location-dot" data-page-node-id="U1ToolLocIcon"></i></div>
+            <span class="tool-txt" data-page-node-id="U1ToolLocTxt">位置</span>
+          </div>
+          <div class="tool-cell" onclick="showToast('名片功能敬请期待')" data-page-node-id="U1ToolCard">
+            <div class="tool-ic" data-page-node-id="U1ToolCardIc"><i class="fas fa-id-card" data-page-node-id="U1ToolCardIcon"></i></div>
+            <span class="tool-txt" data-page-node-id="U1ToolCardTxt">名片</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -485,6 +515,60 @@
     function sendImage() {
       var input = document.getElementById('imageInput');
       if (input) input.click();
+    }
+
+    function onInputChange() {
+      var input = document.getElementById('U1Input');
+      var plus = document.getElementById('U1PlusBtn');
+      var send = document.getElementById('U1SendBtn');
+      var hasText = input && input.value.trim().length > 0;
+      if (plus) plus.classList.toggle('hidden', hasText);
+      if (send) send.classList.toggle('hidden', !hasText);
+    }
+
+    function toggleToolPanel() {
+      var panel = document.getElementById('toolPanel');
+      var input = document.getElementById('U1Input');
+      if (!panel) return;
+      var open = panel.classList.contains('open');
+      panel.classList.toggle('open', !open);
+      if (!open && input) input.focus();
+      scrollToBottom();
+    }
+
+    function closeToolPanel() {
+      var panel = document.getElementById('toolPanel');
+      if (panel) panel.classList.remove('open');
+    }
+
+    function sendText() {
+      var input = document.getElementById('U1Input');
+      var chat = document.getElementById('chat');
+      if (!input || !chat) return;
+      var text = input.value.trim();
+      if (!text) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'flex gap-2.5 flex-row-reverse';
+      wrap.innerHTML =
+        '<img src="assets/avatars/chen.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src=\'assets/avatars/_default.svg\'">' +
+        '<div class="max-w-[80%]">' +
+          '<div class="bg-coral-500 text-white msg-bubble shadow-md px-3.5 py-2.5 text-[14px] leading-snug">' + escHtml(text) + '</div>' +
+          '<span class="text-[10px] text-gray-400 mt-1 mr-1 text-right block">' + nowTime() + '</span>' +
+        '</div>';
+      chat.appendChild(wrap);
+      chat.scrollTop = chat.scrollHeight;
+      input.value = '';
+      onInputChange();
+      closeToolPanel();
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function scrollToBottom() {
+      var chat = document.getElementById('chat');
+      if (chat) setTimeout(function(){ chat.scrollTop = chat.scrollHeight; }, 80);
     }
     function onImageSelected(input) {
       var file = input.files && input.files[0];
@@ -535,6 +619,14 @@
       updateListBadge();
       var chat = document.getElementById('chat');
       if (chat) chat.scrollTop = chat.scrollHeight;
+      onInputChange();
+      var input = document.getElementById('U1Input');
+      if (input) {
+        input.addEventListener('focus', function() { closeToolPanel(); });
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendText(); }
+        });
+      }
     });
 
     function showToast(text) {
