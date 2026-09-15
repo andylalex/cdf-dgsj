@@ -292,6 +292,15 @@
     /* 名片弹窗预览 */
     .wx-modal-qr{width:180px;height:180px;display:block;border-radius:12px;background:#fff;-webkit-touch-callout:default}
 
+    /* ---- + 功能面板（与底栏连体，展开推高底栏） ---- */
+    .tool-panel{display:none;background:#fff;border-top:1px solid #f3f4f6;padding:16px 12px 20px}
+    .tool-panel.open{display:block}
+    .tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 12px}
+    .tool-cell{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;background:none;border:none;padding:0;font:inherit;text-decoration:none;color:inherit}
+    .tool-ic{width:52px;height:52px;border-radius:16px;background:#fff5f4;display:flex;align-items:center;justify-content:center;color:#ff6b52;font-size:22px}
+    .tool-cell:active .tool-ic{background:#ffe8e3}
+    .tool-txt{font-size:11px;color:#6b7280}
+
 
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
@@ -441,43 +450,40 @@
 
         </div>
 <!-- 底部输入 -->
-    <div class="bg-white border-t border-gray-100 p-3 shrink-0 w-full pb-safe mt-auto relative z-20" data-page-node-id="footer">
-      <div class="flex items-center gap-2" data-page-node-id="footerInner">
-        <button onclick="togglePlusPanel()" class="p-2 text-gray-400 hover:text-coral-500 transition" data-page-node-id="plusBtn">
+    <div class="bg-white border-t border-gray-100 shrink-0 w-full pb-safe mt-auto relative z-20" data-page-node-id="footer">
+      <div class="flex items-center gap-2 p-3" data-page-node-id="footerInner">
+        <div class="flex-1 bg-gray-100 rounded-full px-4 py-2.5" data-page-node-id="inputWrap">
+          <input id="g3Input" type="text" placeholder="回复顾客..." class="w-full bg-transparent text-sm outline-none text-gray-700" data-page-node-id="input" oninput="onInputChange()">
+        </div>
+        <button id="plusBtn" onclick="toggleToolPanel()" class="p-2 text-gray-400 hover:text-coral-500 transition" data-page-node-id="plusBtn">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="TZxTghNp1HaiAwJV0VZIWz"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" data-page-node-id="1lgT4kFMF5TkmZO2pmzXvW"></path></svg>
         </button>
-        <div class="flex-1 bg-gray-100 rounded-full px-4 py-2.5" data-page-node-id="inputWrap">
-          <input type="text" placeholder="回复顾客..." class="w-full bg-transparent text-sm outline-none text-gray-700" data-page-node-id="input">
-        </div>
-        <button class="bg-coral-500 hover:bg-coral-600 text-white p-2.5 rounded-full transition shadow-lg shadow-coral-500/30" data-page-node-id="sendBtn">
+        <button id="sendBtn" onclick="sendText()" class="hidden bg-coral-500 hover:bg-coral-600 text-white p-2.5 rounded-full transition shadow-lg shadow-coral-500/30" data-page-node-id="sendBtn">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="L6FYryXGIQfwN0YtTxSMdP"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" data-page-node-id="rjI6iaSxiysEYXTlB1Ps0m"></path></svg>
         </button>
       </div>
-    </div>
-
-  <!-- + 面板 -->
-  <div id="plusPanel" class="fixed inset-0 z-50 flex items-end justify-center bg-black/40 hidden" onclick="if(event.target===this)closePlusPanel()" data-page-node-id="plusPanel">
-    <div class="bg-white w-full max-w-[414px] rounded-t-2xl overflow-hidden shadow-2xl" data-page-node-id="plusInner">
-      <div class="px-5 py-4 flex items-center justify-between border-b border-gray-100" data-page-node-id="plusHead">
-        <p class="font-semibold text-gray-900 text-sm" data-page-node-id="plusTitle">快捷功能</p>
-        <button onclick="closePlusPanel()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition" data-page-node-id="plusClose"><i class="fas fa-times" data-page-node-id="XR6E7qgof20NtEWXqGwxu2"></i></button>
-      </div>
-      <div class="p-4 flex gap-2" data-page-node-id="plusGrid">
-        <a href="G4-选择商品.html" onclick="closePlusPanel()" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="openList">
-          <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="openListIcon"><i class="fas fa-gift text-base" data-page-node-id="STkgmBCWXzRGJBOwKDQsfO"></i></div>
-          <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="openListLabel" style="">推荐商品</span>
-        </a>
-        <button onclick="closePlusPanel(); openNameCardModal();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="nameCard">
-          <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="nameCardIcon"><i class="fas fa-id-card text-base" data-page-node-id="GjrN94Y84weKd4trApEErD"></i></div>
-          <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="nameCardLabel">名片</span>
-        </button>
-        <button onclick="closePlusPanel(); sendImage();" class="flex flex-col items-center justify-center gap-1 py-2.5 px-0.5 rounded-xl border border-coral-200 bg-coral-50 hover:bg-coral-100 transition flex-1 min-w-0" data-page-node-id="sendImage">
-          <div class="w-8 h-8 rounded-full bg-coral-500 text-white flex items-center justify-center" data-page-node-id="sendImageIcon"><i class="fas fa-image text-base" data-page-node-id="sendImageFa"></i></div>
-          <span class="text-[11px] font-semibold text-coral-700" data-page-node-id="sendImageLabel">图片发送</span>
-        </button>
+      <!-- + 功能面板（与底栏连体，展开推高底栏） -->
+      <div id="toolPanel" class="tool-panel" data-page-node-id="plusPanel">
+        <div class="tool-grid" data-page-node-id="plusGrid">
+          <a href="G4-选择商品.html" class="tool-cell" data-page-node-id="openList">
+            <div class="tool-ic" data-page-node-id="openListIcon"><i class="fas fa-gift" data-page-node-id="STkgmBCWXzRGJBOwKDQsfO"></i></div>
+            <span class="tool-txt" data-page-node-id="openListLabel">推荐商品</span>
+          </a>
+          <button onclick="openNameCardModal()" class="tool-cell" data-page-node-id="nameCard">
+            <div class="tool-ic" data-page-node-id="nameCardIcon"><i class="fas fa-id-card" data-page-node-id="GjrN94Y84weKd4trApEErD"></i></div>
+            <span class="tool-txt" data-page-node-id="nameCardLabel">发名片</span>
+          </button>
+          <button onclick="sendImage()" class="tool-cell" data-page-node-id="sendImage">
+            <div class="tool-ic" data-page-node-id="sendImageIcon"><i class="fas fa-image" data-page-node-id="sendImageFa"></i></div>
+            <span class="tool-txt" data-page-node-id="sendImageLabel">发送图片</span>
+          </button>
+          <button onclick="showToast('拍摄功能敬请期待')" class="tool-cell" data-page-node-id="toolCamera">
+            <div class="tool-ic"><i class="fas fa-camera"></i></div>
+            <span class="tool-txt">拍摄</span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
   <!-- 图片发送：隐藏的文件选择器 -->
   <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="onImageSelected(this)" data-page-node-id="bPJjfARpROxi3fEbizcRam">
@@ -531,8 +537,50 @@
   </template>
 
   <script>
-    function togglePlusPanel() { document.getElementById('plusPanel').classList.toggle('hidden'); }
-    function closePlusPanel() { document.getElementById('plusPanel').classList.add('hidden'); }
+    function toggleToolPanel() {
+      var panel = document.getElementById('toolPanel');
+      if (panel) panel.classList.toggle('open');
+    }
+    function closeToolPanel() {
+      var panel = document.getElementById('toolPanel');
+      if (panel) panel.classList.remove('open');
+    }
+    function onInputChange() {
+      var input = document.getElementById('g3Input');
+      var plus = document.getElementById('plusBtn');
+      var send = document.getElementById('sendBtn');
+      var has = !!(input && input.value.trim());
+      if (plus) plus.classList.toggle('hidden', has);
+      if (send) send.classList.toggle('hidden', !has);
+      if (has) closeToolPanel();
+    }
+    function sendText() {
+      var input = document.getElementById('g3Input');
+      if (!input) return;
+      var text = input.value.trim();
+      if (!text) return;
+      var chat = document.getElementById('chat');
+      if (chat) {
+        var wrap = document.createElement('div');
+        wrap.className = 'flex gap-2.5 flex-row-reverse';
+        wrap.innerHTML =
+          '<img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src=\'assets/avatars/_default.svg\'">' +
+          '<div class="max-w-[85%]">' +
+            '<div class="bg-white msg-bubble shadow-md px-3.5 py-3 border border-coral-100">' +
+              '<p class="text-sm text-gray-700 leading-relaxed">' + escHtml(text) + '</p>' +
+            '</div>' +
+            '<span class="text-[10px] text-gray-400 mt-1 mr-1 text-right block">' + nowTime() + '</span>' +
+          '</div>';
+        chat.appendChild(wrap);
+        chat.scrollTop = chat.scrollHeight;
+      }
+      input.value = '';
+      onInputChange();
+      closeToolPanel();
+    }
+    function escHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
     function openNameCardModal() { document.getElementById('nameCardModal').classList.remove('hidden'); }
     function closeNameCardModal() { document.getElementById('nameCardModal').classList.add('hidden'); }
     function sendNameCard() {
@@ -637,7 +685,14 @@
 
     window.addEventListener('DOMContentLoaded', function() {
       var chat = document.getElementById('chat');
-      chat.scrollTop = chat.scrollHeight;
+      if (chat) chat.scrollTop = chat.scrollHeight;
+      var input = document.getElementById('g3Input');
+      if (input) {
+        input.addEventListener('focus', closeToolPanel);
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendText(); }
+        });
+      }
     });
   </script>
 
