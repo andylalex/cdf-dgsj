@@ -462,11 +462,10 @@
       return '<span class="tag-promo">' + tag + '</span>';
     }
 
+    // 顾问信息文案：{柜组名称}专柜顾问 {姓名}（无柜组时降级为「专柜顾问 {姓名}」）
     function guideText(it) {
       var g = it.guide || {};
-      var txt = '顾问 · ' + (g.name || '顾问');
-      if (g.booth) txt += ' · ' + g.booth;
-      return txt;
+      return (g.booth || '') + '专柜顾问 ' + (g.name || '顾问');
     }
 
     function renderGroup(source, items) {
