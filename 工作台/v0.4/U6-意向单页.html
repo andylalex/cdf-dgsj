@@ -354,8 +354,8 @@
       id: 'DD20260903001',
       time: '14:52',
       items: [
-        { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', images: ['assets/generated/product1.png', 'assets/generated/product1_detail.png'], source: 'store', guide: { name: '李婷', store: '三亚国际免税城' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] },
-        { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', images: ['assets/generated/product2.png', 'assets/generated/product2_detail.png'], source: 'store', guide: { name: '王芳', store: '海口国际免税城' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] }
+        { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, qty: 1, img: 'assets/generated/product1.png', images: ['assets/generated/product1.png', 'assets/generated/product1_detail.png'], source: 'store', guide: { name: '李婷', store: '三亚国际免税城', booth: 'Cartier 精品柜组' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] },
+        { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, qty: 1, img: 'assets/generated/product2.png', images: ['assets/generated/product2.png', 'assets/generated/product2_detail.png'], source: 'store', guide: { name: '王芳', store: '海口国际免税城', booth: 'Dior 精品柜组' }, tags: ['政府消费券'], promos: ['WJ-满10000元减500元'] }
       ]
     };
 
@@ -375,7 +375,8 @@
 
     function normItem(it) {
       it.source = it.source === 'ecommerce' ? 'ecommerce' : 'store';
-      if (!it.guide || !it.guide.name) it.guide = { name: '顾问', store: '' };
+      if (!it.guide || !it.guide.name) it.guide = { name: '顾问', store: '', booth: '' };
+      if (typeof it.guide.booth !== 'string') it.guide.booth = '';
       if (!Array.isArray(it.tags)) it.tags = it.source === 'store' ? ['政府消费券'] : [];
       if (!Array.isArray(it.promos)) it.promos = [];
       if (!Array.isArray(it.images) || !it.images.length) it.images = [it.img || 'assets/generated/product1.png'];
@@ -430,7 +431,9 @@
 
     function guideText(it) {
       var g = it.guide || {};
-      return '顾问 · ' + (g.name || '顾问');
+      var txt = '顾问 · ' + (g.name || '顾问');
+      if (g.booth) txt += ' · ' + g.booth;
+      return txt;
     }
 
     function renderGroup(source, items) {

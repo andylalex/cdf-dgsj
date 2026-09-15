@@ -212,13 +212,11 @@
       </div>
     </div>
 
-    <!-- 浏览记录 / 商品收藏 / 意向单 -->
+    <!-- 浏览记录 / 商品收藏 -->
     <div class="card row2" data-page-node-id="F50NLy4wmxPlyJTcBCJFID">
       <span class="cell" data-page-node-id="34oz3en5t5D2HjCcyZ11xD"><i class="far fa-clock" data-page-node-id="ZfSQ7wBrqv4eFlANgJ9QZn"></i>浏览记录</span>
       <span class="vsep" data-page-node-id="dRVyhTrSF5Ub9O6uXqF9LN"></span>
       <span class="cell" data-page-node-id="piyvaCL5DUzDx56XtjfYVO"><i class="far fa-heart" data-page-node-id="fwh9fPddhCtiJWeWSrfAIM"></i>商品收藏</span>
-      <span class="vsep" data-page-node-id="U13RowSep2"></span>
-      <a href="U6-意向单页.html" class="cell" data-page-node-id="U13IntentCell"><span class="cell-ic" data-page-node-id="U13IntentIc"><i class="fas fa-clipboard-check" data-page-node-id="U13IntentIcon"></i></span><span class="badge" id="intentCellBadge" data-page-node-id="U13IntentBadge">2</span>意向单</a>
     </div>
 
     <!-- 订单 / 预约 / 领券 / 帮助 -->
@@ -296,26 +294,15 @@
 
 </div>  <script>
     /* 我的页数量角标：
-       奢品顾问 = 顾问消息未读数（对齐 U12 顾问消息列表）
-       意向单   = 意向单内商品件数（读 pendingOrderForUser） */
+       奢品顾问 = 顾问消息未读数（对齐 U12 顾问消息列表） */
     (function () {
       var GUIDE_UNREAD = 3; // 顾问消息未读（对齐 U12 顾问消息列表）
-      function intentCount() {
-        try {
-          var l = JSON.parse(localStorage.getItem('pendingOrderForUser') || 'null');
-          if (l && l.items && l.items.length) {
-            return l.items.reduce(function (s, i) { return s + (i.qty || 1); }, 0);
-          }
-        } catch (e) {}
-        return 2;
-      }
       function setBadge(el, n) {
         if (!el) return;
         if (n > 0) { el.textContent = n > 99 ? '99+' : n; }
         else { el.style.display = 'none'; }
       }
       setBadge(document.getElementById('advisorBadge'), GUIDE_UNREAD);
-      setBadge(document.getElementById('intentCellBadge'), intentCount());
     })();
   </script>
 
