@@ -832,7 +832,7 @@
         appendUserConsultCard(it);
       }, 400);
       setTimeout(function () {
-        appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：穿搭造型建议、节日礼品挑选、精选好物推荐、独家系列解读。这款「' +
+        appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读<br><br>您咨询的这款「' +
           escHtml(it.name) + '」我先帮您确认实时库存与活动价，稍等片刻～');
       }, 1500);
       if (isOffHours() || q.get('night') === '1') {
