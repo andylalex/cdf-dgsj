@@ -311,7 +311,7 @@
 
     <!-- 顶栏：返回 + 标题 + 右侧「消息 / 意向单」入口 -->
     <div class="bg-white flex items-center justify-center px-4 py-3 shrink-0 relative border-b border-gray-100 z-20" data-page-node-id="U7Header">
-      <button onclick="history.back()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U7Back">
+      <button onclick="goBack()" aria-label="返回" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full active:bg-gray-100 transition" data-page-node-id="U7Back">
         <i class="fas fa-chevron-left text-gray-700 text-base" data-page-node-id="U7BackIcon"></i>
       </button>
       <h1 class="text-base font-semibold text-gray-800 tracking-widest" data-page-node-id="U7Title">奢 品 顾 问</h1>
@@ -499,6 +499,16 @@
   </style>
 
   <script data-page-node-id="U7Script">
+    // 返回按钮：动态返回上一页（有历史则回退，否则回来源页，最后回原型首页）
+    function goBack() {
+      if (window.history && window.history.length > 1) { history.back(); return; }
+      try {
+        var ref = document.referrer;
+        if (ref && new URL(ref).origin === location.origin) { location.href = ref; return; }
+      } catch (e) {}
+      location.href = 'index.html';
+    }
+
     var ADVISORS = [
       { name: '符光亮', tag: '人气导购', quote: '极致服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a1.jpg', online: true,  likes: 328, store: '海口国际免税城' },
       { name: '张琪',   tag: '贴心顾问', quote: '真诚服务好每一位顾客', brand: '卡地亚', img: 'assets/generated/u7_a2.png', online: false, likes: 214, store: '海口国际免税城' },
