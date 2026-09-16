@@ -602,7 +602,7 @@
   <script>
     const data = {
       guides: [
-        { id: 'liu', name: '刘洋', brand: '迪奥', code: '68680005', time: '07-30', unread: 2, avatarSeed: 'liu' },
+        { id: 'liu', name: '林小婷', brand: '迪奥', code: '68680005', time: '07-30', unread: 2, avatarSeed: 'liu' },
         { id: 'zhang', name: '张伟', brand: '雅诗兰黛', code: '68680001', time: '07-23', unread: 3, avatarSeed: 'zhang' },
         { id: 'li', name: '李娜', brand: '纪梵希', code: '68680002', time: '07-21', unread: 1, avatarSeed: 'li' },
         { id: 'wang', name: '王强', brand: '兰蔻', code: '68680003', time: '07-22', unread: 0, avatarSeed: 'wang' },
@@ -610,7 +610,7 @@
       ],
       customers: {
         liu: [
-          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '已为您预留迪奥 999 口红 1 支，到店报手机号即可取货～' },
+          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '您好，我是您的奢品顾问林小婷～' },
           { id: 'c2', name: '马先生', phone: '138****6688', time: '07-22', unread: 0, avatarSeed: 'maman', lastMsg: '【非营业时间自动回复】您的消息已收到，将在上班后第一时间联系您～' }
         ],
         zhang: [
@@ -627,14 +627,10 @@
       },
       messages: {
         c1: [
-          { time: '2024-07-30 20:42', side: 'left', text: '你好，迪奥 999 口红门店还有货吗？想给朋友带一支' },
-          { time: '2024-07-30 20:43', side: 'right', text: '您好，我是中免导购刘洋～迪奥 999 门店现货充足，需要帮您预留吗？' },
-          { time: '2024-07-30 20:45', side: 'left', text: '那帮我留一支吧，我明天下午去海口国际免税城取' },
-          { time: '2024-07-30 20:46', type: 'auto', text: '【非营业时间自动回复】亲，当前为非营业时间（营业时间 09:00-22:00），您的消息已收到，我们将在明日上班后第一时间与您确认预留事宜，感谢理解～' },
-          { time: '2024-07-31 09:12', side: 'right', text: '早上好，已为您预留迪奥 999 口红 1 支，到店报手机号即可取货～' },
-          { time: '2024-07-31 09:15', side: 'left', type: 'product', img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', spec: '规格 50ml', price: 394.00, code: 'C016080', storeStock: 270, groupStock: 88, promos: [{t:'coupon',txt:'政府消费券'},{t:'fullcut',txt:'WJ-满10000元减500元'}] },
-          { time: '2024-07-31 09:16', side: 'left', type: 'product', img: '', name: '浪凡光韵女士浓香水', spec: '规格 50ml', price: 394.00, code: 'C016080', storeStock: 270, groupStock: 88, noimg: true },
-          { time: '2024-07-31 09:20', side: 'left', type: 'namecard', name: '刘洋', role: '奢品顾问', store: '海口国际免税城', group: '迪奥精品柜组', empNo: '68680005' },
+          { time: '2024-07-31 14:45', side: 'left', text: '我想咨询这款商品，麻烦帮我看看～' },
+          { time: '2024-07-31 14:46', side: 'right', type: 'product', img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', spec: '', price: 394.00, code: 'C016080', storeStock: 270, groupStock: 88, promos: [{t:'coupon',txt:'政府消费券'},{t:'fullcut',txt:'WJ-满10000元减500元'}] },
+          { time: '2024-07-31 14:47', side: 'right', text: '您好，我是您的奢品顾问林小婷～可以为您提供：\n1.穿搭造型建议\n2.节日礼品挑选\n3.精选好物推荐\n4.独家系列解读\n您咨询的这款「卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米」我先帮您确认实时库存与活动价，稍等片刻～' },
+          { time: '2024-07-31 22:30', side: 'right', text: '您好，现在是非营业时间（每日 09:00–22:00），您的消息我已收到，将在明日上班后第一时间回复您，请您稍候，感谢理解～' }
         ],
         c2: [
           { time: '2024-07-22 15:30', side: 'left', text: '香水礼盒还有库存吗' },
@@ -757,25 +753,28 @@
             <div class="msg-time-divider">${m.time}</div>
             <div class="flex justify-center mb-3">
               <div class="max-w-[82%] bg-gray-100 text-gray-500 text-[11px] leading-relaxed px-3 py-2 rounded-lg text-center">
-                <i class="fas fa-robot mr-1"></i>${escapeHtml(m.text)}
+                <i class="fas fa-robot mr-1"></i>${escapeHtml(m.text).replace(/\n/g, '<br>')}
               </div>
             </div>
           `;
         }
         if (m.type === 'product') {
+          const isRight = m.side === 'right';
           const promos = (m.promos || []).map(p => `<span class="promo-pill promo-${p.t}"><i class="fas ${p.t === 'coupon' ? 'fa-ticket-alt' : 'fa-tag'} text-[9px]"></i>${escapeHtml(p.txt)}</span>`).join('');
           const imgBlock = m.noimg
             ? `<div class="w-20 h-20 rounded-xl bg-gray-100 shrink-0 flex flex-col items-center justify-center text-gray-400 gap-1"><i class="fas fa-image text-gray-300 text-base"></i><span class="text-xs">更新中</span></div>`
             : `<img loading="lazy" src="${m.img}" class="w-20 h-20 rounded-xl object-cover bg-gray-100 shrink-0 cursor-pointer" onerror="this.style.visibility='hidden'" onclick="openG3Gallery(['${m.img}']);event.stopPropagation()">`;
           return `
             <div class="msg-time-divider">${m.time}</div>
-            <div class="w-[320px] mb-3 bg-white rounded-2xl rounded-bl-md shadow-md overflow-hidden border border-coral-100">
-              <div class="p-3">
-                <div class="flex gap-3">${imgBlock}<div class="flex-1 min-w-0"><p class="pc-name">${escapeHtml(m.name)}</p><p class="pc-spec">${escapeHtml(m.spec || '')}</p><div class="mt-2 flex items-end justify-between gap-2"><span class="pc-price">¥${Number(m.price).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div></div></div>
-                <div class="pc-meta mt-2 meta"><span class="font-mono code-pill">${escapeHtml(m.code || '')}</span><span class="stock-pill">门店库存 ${m.storeStock}</span><span class="stock-pill">柜组库存 ${m.groupStock}</span></div>
-                ${promos ? `<div class="promo-box mt-2">${promos}</div>` : ''}
+            <div class="flex ${isRight ? 'justify-end' : 'justify-start'}">
+              <div class="w-[320px] mb-3 bg-white rounded-2xl ${isRight ? 'rounded-br-md border-coral-300' : 'rounded-bl-md border-coral-100'} shadow-md overflow-hidden border">
+                <div class="p-3">
+                  <div class="flex gap-3">${imgBlock}<div class="flex-1 min-w-0"><p class="pc-name">${escapeHtml(m.name)}</p><p class="pc-spec">${escapeHtml(m.spec || '')}</p><div class="mt-2 flex items-end justify-between gap-2"><span class="pc-price">¥${Number(m.price).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div></div></div>
+                  <div class="pc-meta mt-2 meta"><span class="font-mono code-pill">${escapeHtml(m.code || '')}</span><span class="stock-pill">门店库存 ${m.storeStock}</span><span class="stock-pill">柜组库存 ${m.groupStock}</span></div>
+                  ${promos ? `<div class="promo-box mt-2">${promos}</div>` : ''}
+                </div>
+                <div class="pc-tip justify-end"><i class="fas fa-camera-retro"></i><span class="pc-tip-txt">多拍实物照/视频分享给顾客提高下单意向哦</span></div>
               </div>
-              <div class="pc-tip justify-end"><i class="fas fa-camera-retro"></i><span class="pc-tip-txt">多拍实物照/视频分享给顾客提高下单意向哦</span></div>
             </div>
           `;
         }
@@ -808,7 +807,7 @@
         return `
           <div class="msg-time-divider">${m.time}</div>
           <div class="flex ${isRight ? 'justify-end' : 'justify-start'} mb-3">
-            <div class="max-w-[70%] ${isRight ? 'bubble-right' : 'bubble-left'} px-3.5 py-2 text-sm shadow-sm">${escapeHtml(m.text)}</div>
+            <div class="max-w-[70%] ${isRight ? 'bubble-right' : 'bubble-left'} px-3.5 py-2 text-sm shadow-sm">${escapeHtml(m.text).replace(/\n/g, '<br>')}</div>
           </div>
         `;
       }).join('');
