@@ -254,6 +254,19 @@ window.NAV_DATA={
       "status": "review"
     },
     {
+      "id": "v04-u16",
+      "name": "U16 订单详情页",
+      "group": "用户端 · CDF中免海南",
+      "device": "mobile",
+      "__imported": false,
+      "overview": {
+        "summary": "用户端订单详情页（离岛自提·已取消态）：金棕主题状态卡、取货人信息、订单编号、商品列表与发票/优惠券/积分补款行。"
+      },
+      "flow": [],
+      "states": [],
+      "status": "review"
+    },
+    {
       "id": "v04-g1",
       "name": "G1 导购工作台",
       "group": "导购端 · 繁星APP",
