@@ -337,16 +337,13 @@
 .status-bar{background:transparent;color:#f0e6d8;}
 .status-bar .text-black{color:#f0e6d8 !important;}
 .status-bar .text-black *{color:#f0e6d8 !important;}
-#U1TopWrap{background:#000000 !important;border-bottom:1px solid rgba(212,180,140,.25) !important;flex-shrink:0;}
+#U1TopWrap{background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%) !important;border-bottom:1px solid rgba(212,180,140,.25) !important;flex-shrink:0;}
 #U1Header *{color:#f0e6d8 !important;}
 #U1Header .text-gray-400{color:rgba(212,180,140,.7) !important;}
 #U1Header .text-coral-600{color:rgba(212,180,140,.9) !important;}
 #U1Header img{border:2px solid rgba(212,180,140,.6);}
 #U1Header button:hover{background:rgba(212,180,140,.15) !important;}
-.like-pill.hd{background:transparent;border:1px solid #6b7280;color:#6b7280;opacity:.6;cursor:not-allowed}
-.like-pill.hd:disabled{background:transparent;opacity:.5;border:1px solid #4b5563;color:#4b5563;cursor:not-allowed}
-.like-pill.hd.sent{background:rgba(212,180,140,.1);border:1px solid rgba(212,180,140,.55);color:rgba(212,180,140,.95);cursor:pointer;opacity:1}
-.like-pill.hd.liked{background:linear-gradient(135deg,#c9a06e 0%,#a67c52 100%);border:1px solid #a67c52;color:#fff;cursor:pointer;opacity:1}
+.like-pill.hd{background:rgba(212,180,140,.12) !important;border:1px solid rgba(212,180,140,.4) !important;color:rgba(212,180,140,.9) !important;}
 #U1PlusBtn:hover{color:#a67c52 !important;}
 #chat{background:#faf7f2 !important;}
 .msg-bubble{background:#fff;border:1px solid rgba(212,180,140,.18);box-shadow:0 1px 3px rgba(51,39,27,.06);}
@@ -373,7 +370,7 @@
   <div class="phone-frame relative shadow-2xl overflow-hidden flex flex-col" data-page-node-id="U1NewFrame">
 <!-- 状态栏 -->
 
-<div id="U1TopWrap" style="background:#000000;border-bottom:1px solid rgba(212,180,140,.25);flex-shrink:0;">
+<div id="U1TopWrap" style="background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%);border-bottom:1px solid rgba(212,180,140,.25);flex-shrink:0;">
 <div class="status-bar px-5 pt-2 pb-1 flex items-center justify-between shrink-0" style="background:transparent;color:#f0e6d8;">
   <span class="text-[14px] font-semibold tracking-tight" style="color:#f0e6d8;">9:41</span>
   <div class="flex items-center gap-1.5" style="color:#f0e6d8;">
@@ -400,8 +397,8 @@
           <span>海口国际免税城 · 雅诗兰黛专柜 1F</span>
         </button>
       </div>
-      <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
-        <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
+      <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问" style="background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.4);color:rgba(212,180,140,.9);">
+        <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true" style="color:rgba(212,180,140,.9);">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
         </svg>
         <span class="lf-tx" data-page-node-id="U1LikeText">点赞</span>
