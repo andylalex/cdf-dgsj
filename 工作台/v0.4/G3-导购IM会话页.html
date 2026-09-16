@@ -266,10 +266,15 @@
     .pc-tip-btn{flex:0 0 auto;padding:6px 12px;border-radius:9px;background:#ff6b52;color:#fff;font-size:12px;font-weight:600;border:none}
     /* ---- 方案B：底部信息带 ---- */
     .pc-info-bar{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid #f3f4f6}
-    .pc-info-left{display:flex;align-items:center;gap:8px}
+    .pc-info-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;row-gap:3px}
     .pc-info-code{font-size:10px;color:#9ca3af;font-family:Arial,sans-serif;padding:0}
     .pc-info-stock{font-size:10px;color:#6b7280;display:flex;align-items:center;gap:3px}
     .pc-info-stock i{font-size:8px;color:#10b981}
+    /* ---- 发货门店 / 低库存（<3 件才高亮提示，对齐用户端商品卡） ---- */
+    .pc-info-store{font-size:10px;color:#6b7280;display:inline-flex;align-items:center;gap:3px}
+    .pc-info-store i{font-size:8px;color:#9ca3af}
+    .pc-info-stock.low{background:#fff1f2;color:#e11d48;padding:1px 6px;border-radius:5px}
+    .pc-info-stock.low i{color:#e11d48;font-size:8px}
     /* ---- 企业微信名片卡（大二维码，可长按识别） ---- */
     .wx-card{background:#fff;border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.06);overflow:hidden;display:flex;align-items:flex-start;gap:12px;padding:10px 12px}
     .wx-card-main{display:flex;align-items:flex-start;gap:10px;flex:1 1 auto;min-width:0}
@@ -378,7 +383,7 @@
                 <span class="promo-pill promo-coupon" data-page-node-id="LfP1G3"><i class="fas fa-ticket-alt text-[9px]"></i>政府消费券</span><span class="promo-pill promo-fullcut" data-page-node-id="LfP2G3"><i class="fas fa-tag text-[9px]"></i>WJ-满10000元减500元</span>
               </div>
               <div class="pc-info-bar" data-page-node-id="LfInfoBarG3">
-                <div class="pc-info-left"><span class="pc-info-stock" data-page-node-id="LfInfoStockG3"><i class="fas fa-check-circle"></i>库存 270</span></div>
+                <div class="pc-info-left"><span class="pc-info-store" data-page-node-id="LfInfoStoreG3"><i class="fas fa-store"></i>海口国际免税城发货</span><span class="pc-info-stock" data-stock="270" data-page-node-id="LfInfoStockG3"><i class="fas fa-check-circle"></i>库存 270</span></div>
                 <span class="pc-price" data-page-node-id="LfInfoPriceG3">¥394.00</span>
               </div>
             </div>
@@ -408,7 +413,7 @@
                 </div>
               </div>
               <div class="pc-info-bar">
-                <div class="pc-info-left"><span class="pc-info-stock"><i class="fas fa-check-circle"></i>库存 270</span></div>
+                <div class="pc-info-left"><span class="pc-info-store" data-page-node-id="LfInfoStoreG3b"><i class="fas fa-store"></i>海口国际免税城发货</span><span class="pc-info-stock" data-stock="2" data-page-node-id="LfInfoStockG3b"><i class="fas fa-check-circle"></i>库存 270</span></div>
                 <span class="pc-price">¥394.00</span>
               </div>
             </div>
@@ -683,7 +688,24 @@
       document.getElementById('imgLightbox').classList.add('hidden');
     }
 
+    // 商品卡库存标签：库存 < 3 件走高亮警示（仅剩 N 件），否则常规展示（库存 N）
+    function stockTagHtml(n) {
+      if (isNaN(n)) return '';
+      if (n < 3) return '<i class="fas fa-triangle-exclamation"></i>仅剩 ' + n + ' 件';
+      return '<i class="fas fa-check-circle"></i>库存 ' + n;
+    }
+    function syncStockTags(root) {
+      var nodes = (root || document).querySelectorAll('.pc-info-stock[data-stock]');
+      Array.prototype.forEach.call(nodes, function (el) {
+        var n = parseInt(el.getAttribute('data-stock'), 10);
+        if (isNaN(n)) return;
+        el.className = n < 3 ? 'pc-info-stock low' : 'pc-info-stock';
+        el.innerHTML = stockTagHtml(n);
+      });
+    }
+
     window.addEventListener('DOMContentLoaded', function() {
+      syncStockTags();
       var chat = document.getElementById('chat');
       if (chat) chat.scrollTop = chat.scrollHeight;
       var input = document.getElementById('g3Input');
