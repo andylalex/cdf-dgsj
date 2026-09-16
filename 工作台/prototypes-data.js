@@ -123,8 +123,7 @@ const PROTOTYPES_V03=[
       { "name": "商品详情", "url": "v0.4/U9-商品详情页.html" },
       { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" },
       { "name": "我的", "url": "v0.4/U13-我的页.html" },
-      { "name": "消息中心", "url": "v0.4/U14-消息中心.html" },
-      { "name": "订单详情", "url": "v0.4/U16-订单详情页.html" }
+      { "name": "消息中心", "url": "v0.4/U14-消息中心.html" }
     ],
     "srcdoc": "",
     "status": "review",

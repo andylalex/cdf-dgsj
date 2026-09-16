@@ -104,13 +104,13 @@
 </div>
 
 <script>
-  // 动态返回上一页：优先回退到来源页，无历史则回原型首页
+  // 动态返回上一页：优先回退浏览器历史（= 上一页）；无历史再退来源页，最后回原型首页
   function goBack() {
+    if (window.history && window.history.length > 1) { history.back(); return; }
     try {
       var ref = document.referrer;
       if (ref && new URL(ref).origin === location.origin) { location.href = ref; return; }
     } catch (e) {}
-    if (history.length > 1) { history.back(); return; }
     location.href = 'index.html';
   }
 </script>
