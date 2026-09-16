@@ -294,6 +294,9 @@
     .like-pill.liked{border-color:#ff6b8a;background:#ff6b8a;color:#fff;cursor:pointer}
     .like-pill .lf-ic{width:16px;height:16px;display:block}
     .like-pill .lf-tx{line-height:1;white-space:nowrap}
+    /* 顶栏内的紧凑尺寸 */
+    .like-pill.hd{padding:5px 10px;font-size:11px;gap:4px}
+    .like-pill.hd .lf-ic{width:13px;height:13px}
 
     /* ---- 商品卡：门店发货 / 低库存（<3 件才显示库存） ---- */
     .pc-info-store{font-size:10px;color:#6b7280;display:inline-flex;align-items:center;gap:3px}
@@ -359,7 +362,7 @@
         </button>
         <img src="assets/avatars/linxiaoting.svg" class="w-10 h-10 rounded-full bg-gray-100" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
         <div data-page-node-id="U1HeaderInfo">
-          <h1 class="text-base font-semibold text-gray-900" data-page-node-id="U1HeaderName">林小婷 · 奢品顾问</h1>
+          <h1 class="text-base font-semibold text-gray-900" data-page-node-id="U1HeaderName">林小婷</h1>
           <p class="text-[11px] text-gray-400 mt-0.5" data-page-node-id="U1HeaderFloor">雅诗兰黛专柜 · 1F</p>
           <button onclick="openStoreNav()" class="flex items-center gap-1 text-[11px] text-coral-600 mt-0.5 font-medium" data-page-node-id="U1HeaderStore">
             <i class="fas fa-map-marker-alt"></i>
@@ -368,9 +371,17 @@
           </button>
         </div>
       </div>
-      <button class="p-2 hover:bg-gray-100 rounded-full transition" data-page-node-id="U1More">
+      <div class="flex items-center gap-1 shrink-0" data-page-node-id="U1HeaderRight">
+        <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
+          <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+          </svg>
+          <span class="lf-tx" data-page-node-id="U1LikeText">点赞</span>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition" data-page-node-id="U1More">
         <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="6OnX4REvaFPP5sEnSpUVtm"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" data-page-node-id="bNzxYCCiOTjul86cnAtSI6"></path></svg>
-      </button>
+        </button>
+      </div>
     </div>
 
     <!-- 聊天区 -->
@@ -514,14 +525,6 @@
 
     <!-- 底部输入 -->
     <div class="bg-gray-50 shrink-0" data-page-node-id="U1Footer">
-      <div class="px-3 pt-2 pb-1" data-page-node-id="U1LikeWrap">
-        <button id="U1LikeFab" onclick="toggleLike()" class="like-pill" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
-          <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
-          </svg>
-          <span class="lf-tx" data-page-node-id="U1LikeText">点赞顾问</span>
-        </button>
-      </div>
       <div class="input-bar flex items-center gap-2 p-3 bg-white" data-page-node-id="U1FooterInner">
         <button id="U1ListBtn" onclick="location.href='U6-意向单页.html'" class="relative p-2 text-coral-500 hover:text-coral-600 transition" data-page-node-id="U1ListBtn">
           <i class="fas fa-clipboard-list text-[19px]"></i>
