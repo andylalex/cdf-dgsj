@@ -331,6 +331,30 @@
     .wx-qr-save{margin-top:6px;border:1px solid #ff6b52;background:#fff5f2;color:#ff6b52;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;max-width:96px;line-height:1.25}
     .wx-qr-save:active{background:#ffece8}
 
+
+/* ===== U7 奢品顾问风格覆盖 ===== */
+.phone-frame{background:linear-gradient(180deg,#faf6f0 0%,#f5efe7 100%);}
+.status-bar{background:#211810;color:#f0e6d8;}
+.status-bar .text-black{color:#f0e6d8 !important;}
+.status-bar .text-black *{color:#f0e6d8 !important;}
+#U1Header{background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%) !important;border-bottom:1px solid rgba(212,180,140,.25) !important;}
+#U1Header *{color:#f0e6d8 !important;}
+#U1Header .text-gray-400{color:rgba(212,180,140,.7) !important;}
+#U1Header .text-coral-600{color:rgba(212,180,140,.9) !important;}
+#U1Header img{border:2px solid rgba(212,180,140,.6);box-shadow:0 0 0 2px rgba(212,180,140,.2);}
+#U1Header button:hover{background:rgba(212,180,140,.15) !important;}
+.like-pill.hd{background:rgba(212,180,140,.12) !important;border:1px solid rgba(212,180,140,.4) !important;color:rgba(212,180,140,.9) !important;}
+#chat{background:#faf7f2 !important;}
+.msg-bubble{background:#fff;border:1px solid rgba(212,180,140,.18);box-shadow:0 1px 3px rgba(51,39,27,.06);}
+#chat .bg-coral-500,#chat .bg-coral-600{background:linear-gradient(135deg,#c9a06e 0%,#a67c52 100%) !important;color:#fff !important;}
+#chat .text-gray-500,#chat .text-gray-400{color:rgba(51,39,27,.45) !important;}
+#chat .text-gray-900,#chat .text-gray-800{color:#2c2218 !important;}
+#chat .text-coral-600,#chat .text-coral-500{color:#a67c52 !important;}
+.consult-card{background:#fff;border:1px solid rgba(212,180,140,.25);}
+.cc-t{color:#2c2218 !important;}
+.cc-s{color:rgba(51,39,27,.5) !important;}
+.cc-p{color:#a67c52 !important;}
+
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}
     /* 意向单卡片：商品行分隔线，避免间距重叠 */
@@ -344,36 +368,39 @@
 <body class="bg-gray-100" data-page-node-id="U1NewBody" style="">
   <div class="phone-frame relative shadow-2xl overflow-hidden flex flex-col" data-page-node-id="U1NewFrame">
 <!-- 状态栏 -->
-<div class="status-bar bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0">
-  <span class="text-[14px] font-semibold tracking-tight">9:41</span>
-  <div class="flex items-center gap-1.5 text-black">
-    <span class="text-[10px] font-semibold">5G</span>
-    <i class="fas fa-signal text-[11px]"></i>
-    <i class="fas fa-wifi text-[11px]"></i>
-    <i class="fas fa-battery-three-quarters text-[15px]"></i>
+<div class="status-bar px-5 pt-2 pb-1 flex items-center justify-between shrink-0" style="background:#211810;color:#f0e6d8;">
+  <span class="text-[14px] font-semibold tracking-tight" style="color:#f0e6d8;">9:41</span>
+  <div class="flex items-center gap-1.5" style="color:#f0e6d8;">
+    <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4a9eff;vertical-align:middle;"></span>
+    <span class="text-[10px] font-semibold" style="color:#f0e6d8;">8K</span>
+    <i class="fas fa-location-dot text-[11px]" style="color:#f0e6d8;"></i>
+    <i class="fas fa-signal text-[11px]" style="color:#f0e6d8;"></i>
+    <i class="fas fa-wifi text-[11px]" style="color:#f0e6d8;"></i>
+    <i class="fas fa-battery-three-quarters text-[15px]" style="color:#f0e6d8;"></i>
+    <span class="text-[10px] font-semibold" style="color:#f0e6d8;">90</span>
   </div>
 </div>
 
 <!-- 顶部 -->
-    <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0" data-page-node-id="U1Header">
-      <div class="flex items-center gap-3" data-page-node-id="U1HeaderLeft">
-        <button class="p-2 hover:bg-gray-100 rounded-full transition" onclick="goBack()" aria-label="返回" data-page-node-id="U1Back">
-          <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="HGuyrzrRWjb3INltlJzl3K"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" data-page-node-id="Waqm6Y4HA8ohNRigtmQkNg"></path></svg>
+    <div class="px-4 py-3 flex items-center justify-center relative shrink-0" data-page-node-id="U1Header" style="background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%);border-bottom:1px solid rgba(212,180,140,.25);">
+      <div class="absolute left-3 top-1/2 -translate-y-1/2" data-page-node-id="U1HeaderLeft">
+        <button class="p-2 rounded-full transition" onclick="goBack()" aria-label="返回" data-page-node-id="U1Back" style="color:#f0e6d8;">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:#f0e6d8;" data-page-node-id="HGuyrzrRWjb3INltlJzl3K"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" data-page-node-id="Waqm6Y4HA8ohNRigtmQkNg"></path></svg>
         </button>
-        <img src="assets/avatars/linxiaoting.svg" class="w-10 h-10 rounded-full bg-gray-100" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
-        <div data-page-node-id="U1HeaderInfo">
-          <h1 class="text-base font-semibold text-gray-900" data-page-node-id="U1HeaderName">林小婷</h1>
-          <p class="text-[11px] text-gray-400 mt-0.5" data-page-node-id="U1HeaderFloor">雅诗兰黛专柜 · 1F</p>
-          <button onclick="openStoreNav()" class="flex items-center gap-1 text-[11px] text-coral-600 mt-0.5 font-medium" data-page-node-id="U1HeaderStore">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>海口国际免税城</span>
-            <i class="fas fa-directions text-[10px]"></i>
-          </button>
-        </div>
       </div>
-      <div class="flex items-center gap-1 shrink-0" data-page-node-id="U1HeaderRight">
-        <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
-          <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
+      <div class="flex flex-col items-center gap-0.5" data-page-node-id="U1HeaderInfo">
+        <img src="assets/avatars/linxiaoting.svg" class="w-11 h-11 rounded-full" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" style="border:2px solid rgba(212,180,140,.6);box-shadow:0 0 0 2px rgba(212,180,140,.2);" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
+        <h1 class="text-[15px] font-semibold" style="color:#f0e6d8;letter-spacing:.04em;" data-page-node-id="U1HeaderName">林小婷</h1>
+        <p class="text-[11px]" style="color:rgba(212,180,140,.7);" data-page-node-id="U1HeaderFloor">雅诗兰黛专柜 · 1F</p>
+        <button onclick="openStoreNav()" class="flex items-center gap-1 text-[11px] font-medium" style="color:rgba(212,180,140,.9);" data-page-node-id="U1HeaderStore">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>海口国际免税城</span>
+          <i class="fas fa-directions text-[10px]"></i>
+        </button>
+      </div>
+      <div class="absolute right-3 top-1/2 -translate-y-1/2 shrink-0" data-page-node-id="U1HeaderRight">
+        <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问" style="background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.4);color:rgba(212,180,140,.9);">
+          <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true" style="color:rgba(212,180,140,.9);">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
           </svg>
           <span class="lf-tx" data-page-node-id="U1LikeText">点赞</span>
@@ -384,6 +411,20 @@
     <!-- 聊天区 -->
     <div id="chat" class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4 bg-gray-50" data-page-node-id="U1Chat">
       <div class="text-center text-xs text-gray-400" data-page-node-id="U1TimeDivider">今天 14:45</div>
+
+      <div id="U1HeroBanner" style="background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%);border-radius:12px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;border:1px solid rgba(212,180,140,.25);">
+        <img src="assets/avatars/linxiaoting.svg" style="width:44px;height:44px;border-radius:50%;border:2px solid rgba(212,180,140,.6);flex-shrink:0;" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
+        <div style="flex:1;min-width:0;">
+          <p style="font-size:14px;font-weight:600;color:#f0e6d8;letter-spacing:.04em;margin:0;">奢 品 顾 问</p>
+          <p style="font-size:11px;color:rgba(212,180,140,.7);margin:2px 0 0;">林小婷 · 雅诗兰黛专柜 1F</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">
+          <span style="font-size:10px;color:rgba(212,180,140,.85);background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.3);border-radius:20px;padding:2px 8px;text-align:center;">穿搭建议</span>
+          <span style="font-size:10px;color:rgba(212,180,140,.85);background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.3);border-radius:20px;padding:2px 8px;text-align:center;">礼品挑选</span>
+        </div>
+      </div>
+
+      
 
       <!-- 用户商品咨询卡（默认第一条对话） -->
       <div class="flex gap-2.5 flex-row-reverse" id="U1ConsultDef" data-page-node-id="U1ConsultDef">
