@@ -385,6 +385,22 @@
     <div id="chat" class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4 bg-gray-50" data-page-node-id="U1Chat">
       <div class="text-center text-xs text-gray-400" data-page-node-id="U1TimeDivider">今天 14:45</div>
 
+      <!-- 用户商品咨询卡（默认第一条对话） -->
+      <div class="flex gap-2.5 flex-row-reverse" id="U1ConsultDef" data-page-node-id="U1ConsultDef">
+        <img src="assets/avatars/chen.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
+        <div class="max-w-[85%] w-full">
+          <div class="consult-card">
+            <img src="assets/generated/product1.png" alt="" onerror="this.style.visibility='hidden'">
+            <div class="flex-1 min-w-0">
+              <p class="cc-t">浪凡光韵女士浓香水</p>
+              <p class="cc-s">编号 C016080 · ¥394.00</p>
+              <p class="cc-q">我想咨询这款商品，麻烦帮我看看～</p>
+            </div>
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 mr-1 text-right block">14:44</span>
+        </div>
+      </div>
+
       <!-- 顾问说明 -->
       <div class="flex gap-2.5" data-page-node-id="U1GuideMsg">
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="npoLEGWDtBXXx6RPQeDSWN">
@@ -734,7 +750,7 @@
             '<img src="' + it.img + '" alt="" onerror="this.style.visibility=\'hidden\'">' +
             '<div class="flex-1 min-w-0">' +
               '<p class="cc-t">' + escHtml(it.name) + '</p>' +
-              '<p class="cc-s">编号 ' + escHtml(it.sku) + ' · ' + escHtml(it.spec) + ' · ¥' + formatMoney(it.price) + '</p>' +
+              '<p class="cc-s">编号 ' + escHtml(it.sku) + ' · ¥' + formatMoney(it.price) + '</p>' +
               '<p class="cc-q">我想咨询这款商品，麻烦帮我看看～</p>' +
             '</div>' +
           '</div>' +
