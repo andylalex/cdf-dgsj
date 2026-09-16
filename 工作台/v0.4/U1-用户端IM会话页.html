@@ -248,8 +248,8 @@
     .pc-meta .code-pill,.pc-meta .stock-pill{background:#fff}
     .pc-tip{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid #f5f6f8;background:#fffaf9}
     .pc-tip-txt{font-size:11px;color:#8a8f99;line-height:1.45}
-    .pc-tip i{font-size:10px;color:#ff6b52}
-    .pc-tip-btn{flex:0 0 auto;padding:6px 12px;border-radius:9px;background:#ff6b52;color:#fff;font-size:12px;font-weight:600;border:none}
+    .pc-tip i{font-size:10px;color:rgba(212,180,140,.9)}
+    .pc-tip-btn{flex:0 0 auto;padding:6px 12px;border-radius:9px;background:linear-gradient(135deg,#c9a06e 0%,#a67c52 100%);color:#fff;font-size:12px;font-weight:600;border:none;box-shadow:0 2px 8px rgba(166,124,82,.3)}
     /* ---- 方案B：底部信息带 ---- */
     .pc-info-bar{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid #f3f4f6}
     .pc-info-left{display:flex;align-items:center;gap:8px}
@@ -334,7 +334,7 @@
 
 /* ===== U7 奢品顾问风格覆盖 ===== */
 .phone-frame{background:linear-gradient(180deg,#faf6f0 0%,#f5efe7 100%);}
-.status-bar{background:#211810;color:#f0e6d8;}
+.status-bar{background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%);color:#f0e6d8;}
 .status-bar .text-black{color:#f0e6d8 !important;}
 .status-bar .text-black *{color:#f0e6d8 !important;}
 #U1Header{background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%) !important;border-bottom:1px solid rgba(212,180,140,.25) !important;}
@@ -344,6 +344,7 @@
 #U1Header img{border:2px solid rgba(212,180,140,.6);}
 #U1Header button:hover{background:rgba(212,180,140,.15) !important;}
 .like-pill.hd{background:rgba(212,180,140,.12) !important;border:1px solid rgba(212,180,140,.4) !important;color:rgba(212,180,140,.9) !important;}
+#U1PlusBtn:hover{color:#a67c52 !important;}
 #chat{background:#faf7f2 !important;}
 .msg-bubble{background:#fff;border:1px solid rgba(212,180,140,.18);box-shadow:0 1px 3px rgba(51,39,27,.06);}
 #chat .bg-coral-500,#chat .bg-coral-600{background:linear-gradient(135deg,#c9a06e 0%,#a67c52 100%) !important;color:#fff !important;}
@@ -368,7 +369,7 @@
 <body class="bg-gray-100" data-page-node-id="U1NewBody" style="">
   <div class="phone-frame relative shadow-2xl overflow-hidden flex flex-col" data-page-node-id="U1NewFrame">
 <!-- 状态栏 -->
-<div class="status-bar px-5 pt-2 pb-1 flex items-center justify-between shrink-0" style="background:#211810;color:#f0e6d8;">
+<div class="status-bar px-5 pt-2 pb-1 flex items-center justify-between shrink-0" style="background:linear-gradient(135deg,#33271b 0%,#211810 52%,#120d08 100%);color:#f0e6d8;">
   <span class="text-[14px] font-semibold tracking-tight" style="color:#f0e6d8;">9:41</span>
   <div class="flex items-center gap-1.5" style="color:#f0e6d8;">
     <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4a9eff;vertical-align:middle;"></span>
@@ -389,7 +390,10 @@
       <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" style="border:2px solid rgba(212,180,140,.6);" data-page-node-id="hYDY2aEeGov7YATnaM62wW">
       <div class="flex-1 min-w-0" data-page-node-id="U1HeaderInfo">
         <h1 class="text-[14px] font-semibold" style="color:#f0e6d8;" data-page-node-id="U1HeaderName">林小婷</h1>
-        <p class="text-[11px]" style="color:rgba(212,180,140,.7);" data-page-node-id="U1HeaderFloor">雅诗兰黛专柜 · 1F</p>
+        <button onclick="openStoreNav()" class="flex items-center gap-1 text-[11px] font-medium mt-0.5" style="color:rgba(212,180,140,.85);" data-page-node-id="U1HeaderStore">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>海口国际免税城 · 雅诗兰黛专柜 1F</span>
+        </button>
       </div>
       <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问" style="background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.4);color:rgba(212,180,140,.9);">
         <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true" style="color:rgba(212,180,140,.9);">
