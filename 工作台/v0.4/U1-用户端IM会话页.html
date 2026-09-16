@@ -825,8 +825,11 @@
       try { q = new URLSearchParams(location.search); } catch (e) { return; }
       if (!q || q.get('from') !== 'product') return;
       var it = CONSULT_ITEMS[2]; // 商品详情页当前浏览商品
+      // 由商品详情页进入时，商品咨询卡由脚本动态发送 → 隐藏静态的默认第一条咨询卡，避免重复
+      var defCard = document.getElementById('U1ConsultDef');
+      if (defCard) defCard.style.display = 'none';
       setTimeout(function () {
-        appendUserText('您好，我在商品详情页看到这款，想咨询一下：' + escHtml(it.name));
+        appendUserConsultCard(it);
       }, 400);
       setTimeout(function () {
         appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：穿搭造型建议、节日礼品挑选、精选好物推荐、独家系列解读。这款「' +
