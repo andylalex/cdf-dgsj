@@ -343,7 +343,10 @@
 #U1Header .text-coral-600{color:rgba(212,180,140,.9) !important;}
 #U1Header img{border:2px solid rgba(212,180,140,.6);}
 #U1Header button:hover{background:rgba(212,180,140,.15) !important;}
-.like-pill.hd{background:rgba(212,180,140,.12) !important;border:1px solid rgba(212,180,140,.4) !important;color:rgba(212,180,140,.9) !important;}
+/* 顶栏点赞按钮三态区分 */
+.like-pill.hd:disabled{background:transparent !important;border:1.5px solid #6b5d4a !important;color:#6b5d4a !important;opacity:.55;cursor:not-allowed}
+.like-pill.hd.sent{background:rgba(212,180,140,.12) !important;border:1px solid rgba(212,180,140,.4) !important;color:rgba(212,180,140,.9) !important;opacity:1;cursor:pointer}
+.like-pill.hd.liked{background:linear-gradient(135deg,#d8b98a,#a67c52) !important;border:1px solid #a67c52 !important;color:#fff !important;opacity:1;cursor:pointer}
 #U1PlusBtn:hover{color:#a67c52 !important;}
 #chat{background:#faf7f2 !important;}
 .msg-bubble{background:#fff;border:1px solid rgba(212,180,140,.18);box-shadow:0 1px 3px rgba(51,39,27,.06);}
@@ -397,8 +400,8 @@
           <span>海口国际免税城 · 雅诗兰黛专柜 1F</span>
         </button>
       </div>
-      <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问" style="background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.4);color:rgba(212,180,140,.9);">
-        <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true" style="color:rgba(212,180,140,.9);">
+      <button id="U1LikeFab" onclick="toggleLike()" class="like-pill hd" data-page-node-id="U1LikeBtn" aria-label="点赞顾问">
+        <svg id="U1LikeIcon" class="lf-ic" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
         </svg>
         <span class="lf-tx" data-page-node-id="U1LikeText">点赞</span>
