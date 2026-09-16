@@ -336,10 +336,10 @@
         <p class="mt-2.5" style="color:#cbb896;font-size:13.5px;line-height:1.6" data-page-node-id="U7HeroMeta">1V1 从线上咨询到门店陪同选购，全程专属服务</p>
         <p class="hero-sub" data-page-node-id="U7HeroSub">顾问能帮您做什么</p>
         <div class="hero-grid" data-page-node-id="U7HeroAbilities">
-          <span class="hero-tag" data-page-node-id="U7HeroAb1">穿搭造型建议</span>
-          <span class="hero-tag" data-page-node-id="U7HeroAb2">节日礼品挑选</span>
-          <span class="hero-tag" data-page-node-id="U7HeroAb3">精选好物推荐</span>
-          <span class="hero-tag" data-page-node-id="U7HeroAb4">独家系列解读</span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb1"><span class="ab-num">01</span><span class="ab-tx">穿搭造型建议</span></span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb2"><span class="ab-num">02</span><span class="ab-tx">节日礼品挑选</span></span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb3"><span class="ab-num">03</span><span class="ab-tx">精选好物推荐</span></span>
+          <span class="hero-tag" data-page-node-id="U7HeroAb4"><span class="ab-num">04</span><span class="ab-tx">独家系列解读</span></span>
         </div>
 
         <div class="mt-5 pt-4 flex items-stretch" style="border-top:1px solid rgba(212,180,140,.18)" data-page-node-id="U7HeroFeats">
@@ -479,10 +479,17 @@
     /* 顾问能力标签（hero 副标题） */
     .hero-sub{margin-top:15px;display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#c9a26b;letter-spacing:.06em;line-height:18px}
     .hero-sub::before{content:"";display:block;width:14px;height:1px;background:rgba(201,162,107,.65);flex:0 0 auto}
-    /* 能力标签：2×2 等宽网格，排列整齐（文字统一居中、等高） */
-    .hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:11px;width:100%;max-width:330px}
-    .hero-tag{display:flex;align-items:center;justify-content:center;height:34px;padding:0 8px;font-size:12.5px;line-height:1;color:#e0cfa9;background:rgba(212,180,140,.12);border:1px solid rgba(212,180,140,.26);border-radius:999px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hero-tag i{font-size:11px;margin-right:5px;flex:0 0 auto}
+    /* 顾问能力：2×2 艺术编号卡 */
+    .hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:13px;width:100%;max-width:340px}
+    .hero-tag{position:relative;display:flex;align-items:center;gap:10px;min-height:50px;padding:11px 13px;font-size:13px;line-height:1.35;color:#ecdcbf;background:linear-gradient(135deg,rgba(212,180,140,.14),rgba(212,180,140,.05));border:1px solid rgba(212,180,140,.28);border-radius:14px;text-align:left;white-space:normal;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.07);animation:abRise .5s ease both}
+    .hero-tag::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#e8d2a8,#a67c52);opacity:.85}
+    .hero-tag:nth-child(1){animation-delay:.04s}
+    .hero-tag:nth-child(2){animation-delay:.10s}
+    .hero-tag:nth-child(3){animation-delay:.16s}
+    .hero-tag:nth-child(4){animation-delay:.22s}
+    .hero-tag .ab-num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Times New Roman',serif;font-size:12px;font-weight:700;letter-spacing:.5px;color:#1c140b;background:linear-gradient(135deg,#e8d2a8,#c9a06e);box-shadow:0 2px 6px rgba(166,124,82,.35)}
+    .hero-tag .ab-tx{flex:1 1 auto;min-width:0}
+    @keyframes abRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     .adv-nm{flex:0 1 auto;min-width:0;font-size:15px;font-weight:700;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .adv-sep{flex:0 0 auto;color:#d1d5db;font-size:13px}
     .adv-brand{flex:0 1 auto;min-width:0;font-size:13px;color:#6b7280;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
