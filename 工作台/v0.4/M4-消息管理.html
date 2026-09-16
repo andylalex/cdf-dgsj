@@ -610,7 +610,7 @@
       ],
       customers: {
         liu: [
-          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '您好，我是您的奢品顾问林小婷～' },
+          { id: 'c1', name: '徐女士', phone: '187****2190', time: '07-30', unread: 2, avatarSeed: 'xulady', lastMsg: '我想咨询这款商品，麻烦帮我看看～' },
           { id: 'c2', name: '马先生', phone: '138****6688', time: '07-22', unread: 0, avatarSeed: 'maman', lastMsg: '【非营业时间自动回复】您的消息已收到，将在上班后第一时间联系您～' }
         ],
         zhang: [
@@ -627,9 +627,12 @@
       },
       messages: {
         c1: [
-          { time: '2024-07-31 14:45', side: 'left', text: '我想咨询这款商品，麻烦帮我看看～' },
-          { time: '2024-07-31 14:46', side: 'right', type: 'product', img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', spec: '', price: 394.00, code: 'C016080', storeStock: 270, groupStock: 88, promos: [{t:'coupon',txt:'政府消费券'},{t:'fullcut',txt:'WJ-满10000元减500元'}] },
-          { time: '2024-07-31 14:47', side: 'right', text: '您好，我是您的奢品顾问林小婷～可以为您提供：\n1.穿搭造型建议\n2.节日礼品挑选\n3.精选好物推荐\n4.独家系列解读\n您咨询的这款「卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米」我先帮您确认实时库存与活动价，稍等片刻～' },
+          { time: '2024-07-31 14:44', side: 'left', type: 'consult', img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', code: 'C016080', price: 394.00, query: '我想咨询这款商品，麻烦帮我看看～' },
+          { time: '2024-07-31 14:46', side: 'right', text: '您好，我是您的奢品顾问林小婷～可以为您提供：\n1.穿搭造型建议\n2.节日礼品挑选\n3.精选好物推荐\n4.独家系列解读\n您咨询的这款「卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米」我先帮您确认实时库存与活动价，稍等片刻～' },
+          { time: '2024-07-31 14:55', side: 'right', type: 'product', img: 'assets/generated/product1.png', name: '浪凡光韵女士浓香水', spec: '规格 50ml', price: 394.00, code: 'C016080', shipFrom: '海口国际免税城', lowStock: 2, promos: [{t:'coupon',txt:'政府消费券'},{t:'fullcut',txt:'WJ-满10000元减500元'}] },
+          { time: '2024-07-31 14:55', side: 'right', type: 'product', noimg: true, name: '浪凡光韵女士浓香水', spec: '规格 50ml', price: 394.00, code: 'C016080' },
+          { time: '2024-07-31 14:56', side: 'right', type: 'namecard', name: '林小婷', role: '奢品顾问', store: '海口日月广场免税店', group: 'Cartier 精品柜组', empNo: 'C2008', hint: '长按识别二维码，添加顾问企业微信' },
+          { time: '2024-07-31 14:56', side: 'right', type: 'namecard', name: '林小婷', role: '奢品顾问', store: '海口日月广场免税店', group: 'Cartier 精品柜组', empNo: 'C2008', hint: '保存图片后识别，添加顾问企业微信', app: true },
           { time: '2024-07-31 22:30', side: 'right', text: '您好，现在是非营业时间（每日 09:00–22:00），您的消息我已收到，将在明日上班后第一时间回复您，请您稍候，感谢理解～' }
         ],
         c2: [
@@ -761,6 +764,13 @@
         if (m.type === 'product') {
           const isRight = m.side === 'right';
           const promos = (m.promos || []).map(p => `<span class="promo-pill promo-${p.t}"><i class="fas ${p.t === 'coupon' ? 'fa-ticket-alt' : 'fa-tag'} text-[9px]"></i>${escapeHtml(p.txt)}</span>`).join('');
+          let metaHtml = '';
+          if (m.shipFrom) {
+            const low = (m.lowStock != null) ? `<span class="font-medium text-orange-500">仅剩 ${m.lowStock} 件</span>` : '';
+            metaHtml = `<div class="pc-meta mt-2 meta"><span class="text-gray-500"><i class="fas fa-store mr-1"></i>${escapeHtml(m.shipFrom)}发货</span>${low}</div>`;
+          } else if (m.storeStock != null || m.groupStock != null) {
+            metaHtml = `<div class="pc-meta mt-2 meta"><span class="font-mono code-pill">${escapeHtml(m.code || '')}</span><span class="stock-pill">门店库存 ${m.storeStock}</span><span class="stock-pill">柜组库存 ${m.groupStock}</span></div>`;
+          }
           const imgBlock = m.noimg
             ? `<div class="w-20 h-20 rounded-xl bg-gray-100 shrink-0 flex flex-col items-center justify-center text-gray-400 gap-1"><i class="fas fa-image text-gray-300 text-base"></i><span class="text-xs">更新中</span></div>`
             : `<img loading="lazy" src="${m.img}" class="w-20 h-20 rounded-xl object-cover bg-gray-100 shrink-0 cursor-pointer" onerror="this.style.visibility='hidden'" onclick="openG3Gallery(['${m.img}']);event.stopPropagation()">`;
@@ -770,7 +780,7 @@
               <div class="w-[320px] mb-3 bg-white rounded-2xl ${isRight ? 'rounded-br-md border-coral-300' : 'rounded-bl-md border-coral-100'} shadow-md overflow-hidden border">
                 <div class="p-3">
                   <div class="flex gap-3">${imgBlock}<div class="flex-1 min-w-0"><p class="pc-name">${escapeHtml(m.name)}</p><p class="pc-spec">${escapeHtml(m.spec || '')}</p><div class="mt-2 flex items-end justify-between gap-2"><span class="pc-price">¥${Number(m.price).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div></div></div>
-                  <div class="pc-meta mt-2 meta"><span class="font-mono code-pill">${escapeHtml(m.code || '')}</span><span class="stock-pill">门店库存 ${m.storeStock}</span><span class="stock-pill">柜组库存 ${m.groupStock}</span></div>
+                  ${metaHtml}
                   ${promos ? `<div class="promo-box mt-2">${promos}</div>` : ''}
                 </div>
                 <div class="pc-tip justify-end"><i class="fas fa-camera-retro"></i><span class="pc-tip-txt">多拍实物照/视频分享给顾客提高下单意向哦</span></div>
@@ -797,7 +807,28 @@
                 </div>
                 <div class="wx-qr-wrap">
                   <img src="assets/generated/qr_wx_advisor.png" class="wx-qr" alt="企业微信二维码">
-                  <p class="wx-qr-hint"><i class="fas fa-hand-pointer"></i>长按识别二维码，添加我的企业微信</p>
+                  <p class="wx-qr-hint"><i class="fas ${m.app ? 'fa-circle-info' : 'fa-hand-pointer'}"></i>${escapeHtml(m.hint || '长按识别二维码，添加我的企业微信')}</p>
+                  ${m.app ? `<button type="button" class="mt-2 w-full text-center text-[11px] text-white py-1.5 rounded-lg" style="background:linear-gradient(135deg,#c9a06e,#a67c52)">保存到相册</button>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        if (m.type === 'consult') {
+          const isRight = m.side === 'right';
+          const custAvatar = (customer && customer.avatarSeed) ? `assets/avatars/${customer.avatarSeed}.svg` : 'assets/avatars/_default.svg';
+          return `
+            <div class="msg-time-divider">${m.time}</div>
+            <div class="flex ${isRight ? 'justify-end' : 'justify-start'}">
+              <div class="w-[270px] mb-3 bg-white rounded-2xl ${isRight ? 'rounded-br-md' : 'rounded-bl-md'} shadow-md overflow-hidden border ${isRight ? 'border-coral-300' : 'border-gray-100'}">
+                <div class="p-3 flex gap-3">
+                  <img src="${m.img}" class="w-16 h-16 rounded-lg object-cover bg-gray-100 shrink-0" alt="" onerror="this.style.visibility='hidden'">
+                  <div class="flex-1 min-w-0">
+                    <p class="pc-name">${escapeHtml(m.name)}</p>
+                    <p class="pc-spec">编号 ${escapeHtml(m.code || '')} · ¥${Number(m.price).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    <p class="text-[12px] text-gray-500 mt-1.5 leading-snug">${escapeHtml(m.query || '')}</p>
+                  </div>
                 </div>
               </div>
             </div>
