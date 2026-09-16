@@ -80,11 +80,6 @@ const V04={
     "device": "desktop",
     "group": "管理后台 · PC"
   },
-  "U15": {
-    "url": "v0.4/U15-订单列表页.html",
-    "device": "mobile",
-    "group": "用户端 · CDF中免海南"
-  },
   "U16": {
     "url": "v0.4/U16-订单详情页.html",
     "device": "mobile",
@@ -129,7 +124,6 @@ const PROTOTYPES_V03=[
       { "name": "搜品牌", "url": "v0.4/U11-搜索品牌页.html" },
       { "name": "我的", "url": "v0.4/U13-我的页.html" },
       { "name": "消息中心", "url": "v0.4/U14-消息中心.html" },
-      { "name": "订单列表", "url": "v0.4/U15-订单列表页.html" },
       { "name": "订单详情", "url": "v0.4/U16-订单详情页.html" }
     ],
     "srcdoc": "",
@@ -570,24 +564,6 @@ const PROTOTYPES_V03=[
         "id": "hs_mtqw0ramryri"
       }
     ]
-  },
-{
-    "id": "v04-u15",
-    "group": "用户端 · CDF中免海南",
-    "name": "U15 订单列表页",
-    "device": "mobile",
-    "url": "v0.4/U15-订单列表页.html",
-    "srcdoc": "",
-    "status": "review",
-    "version": "v0.4",
-    "owner": "产品 · 梁伟业",
-    "updated": "2026-09-14",
-    "overview": {
-      "summary": "用户端订单列表页：按状态 tab 展示订单，含门店/商品/物流/退款/订单信息。"
-    },
-    "flow": [],
-    "states": [],
-    "hotspots": []
   },
 {
     "id": "v04-u16",

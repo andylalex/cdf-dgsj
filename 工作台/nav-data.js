@@ -241,19 +241,6 @@ window.NAV_DATA={
       "status": "review"
     },
     {
-      "id": "v04-u15",
-      "name": "U15 订单列表页",
-      "group": "用户端 · CDF中免海南",
-      "device": "mobile",
-      "__imported": false,
-      "overview": {
-        "summary": "用户端订单列表页：按状态 tab 展示订单，含门店/商品/物流/退款/订单信息。"
-      },
-      "flow": [],
-      "states": [],
-      "status": "review"
-    },
-    {
       "id": "v04-u16",
       "name": "U16 订单详情页",
       "group": "用户端 · CDF中免海南",
