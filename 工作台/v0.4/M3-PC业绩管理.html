@@ -395,7 +395,6 @@
           </div>
           <div>
             <p id="detailStatusBig" class="text-base font-bold text-gray-800">--</p>
-            <p id="detailStatusSub" class="text-xs text-gray-400 mt-0.5">--</p>
           </div>
         </div>
 
@@ -437,12 +436,6 @@
           <div id="detailProducts" class="space-y-2" data-page-node-id="DUQZZ9N5tvha8UP052LpiW"></div>
         </div>
 
-        <!-- 导购业绩归因 -->
-        <div data-page-node-id="iigpiqX3EKHqyFde4UYHAL">
-          <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="js06ugzvNFYIeAcffWOhyG">导购业绩归因</h3>
-          <div id="detailPerf" class="space-y-2" data-page-node-id="gEmI3byxCrmRUeGuCrQxO6"></div>
-        </div>
-
         <!-- 金额明细 -->
         <div data-page-node-id="0pPMBh229nb8O7WdMCGfbm">
           <h3 class="text-sm font-bold text-gray-800 mb-3" data-page-node-id="0gKssbXPye0yerHtJa7CZg">金额明细</h3>
@@ -482,11 +475,6 @@
 
   <script>
     const fmt = n => '¥' + n.toLocaleString('zh-CN');
-    // 订单状态副标题说明（已完成时由 JS 动态替换为实付金额+件数）
-    const STATUS_SUB = {
-      '待支付':'等待客户付款', '待发货':'商品待出库', '待收货':'客户离岛提货中',
-      '已完成':'', '已退款':'订单已全额退款', '已关闭':'订单已关闭'
-    };
 
     // 归因规则（不同门店/柜组可能适用不同的导购归因规则）
     const RULE = { r15last:'15天·末次归因', r1first:'加购1天·首次归因', r7last:'7天·末次归因' };
@@ -776,33 +764,6 @@
       });
       document.getElementById('detailProductCount').textContent = d.products.length;
 
-      // 导购业绩归因（平台视角保留，口径与移动端一致）
-      const counted = {};
-      if (isCompleted) {
-        d.products.forEach(p => { if (p.refund === 'none') counted[p.guide] = (counted[p.guide] || 0) + p.price; });
-      }
-      const perfBox = document.getElementById('detailPerf');
-      perfBox.innerHTML = '';
-      if (!isCompleted) {
-        perfBox.innerHTML = '<p class="text-xs text-gray-400">本单状态为「' + d.status.text + '」，整单不计入任何导购业绩。</p>';
-      } else if (Object.keys(counted).length === 0) {
-        perfBox.innerHTML = '<p class="text-xs text-gray-400">本单已完成，但商品均已退款 / 非本人归因，无导购业绩计入。</p>';
-      } else {
-        Object.keys(counted).forEach(g => {
-          const row = document.createElement('div');
-          row.className = 'flex items-center justify-between bg-coral-50 rounded-xl px-3 py-2.5';
-          row.innerHTML = '<span class="text-xs text-gray-600">' + g + ' 业绩（计入）</span>' +
-                          '<span class="text-base font-bold text-coral-600">' + fmt(counted[g]) + '</span>';
-          perfBox.appendChild(row);
-        });
-        if (hasRefund) {
-          const note = document.createElement('p');
-          note.className = 'text-xs text-gray-400 mt-1';
-          note.textContent = '注：本订单含退款商品，对应导购业绩已扣除。';
-          perfBox.appendChild(note);
-        }
-      }
-
       // 金额明细（字段对齐移动端：商品总价 / 折扣优惠 / 优惠券金额 / 积分抵扣 / 超级补贴 / 实付金额）
       const subtotal = d.products.reduce((s, p) => s + p.price, 0);
       const paid = subtotal - d.discount - d.coupon - d.point - d.platform + d.ship;
@@ -812,10 +773,6 @@
       document.getElementById('amtPoint').textContent = '-' + fmt(d.point);
       document.getElementById('amtPlatform').textContent = '-' + fmt(d.platform);
       document.getElementById('amtPaid').textContent = fmt(paid);
-
-      document.getElementById('detailStatusSub').textContent = (status === '已完成')
-        ? ('实付 ' + fmt(paid) + ' · 共 ' + d.products.length + ' 件')
-        : (STATUS_SUB[status] || '');
 
       document.getElementById('orderDetailModal').classList.remove('hidden');
     }
