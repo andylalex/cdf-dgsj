@@ -310,7 +310,9 @@
     load: function () {
       if (_loading) return _loading;
       _loading = Promise.resolve().then(function () {
-        _nav = parseInlineNav();
+        // 结构层优先读外部单一源 data/wb-nav.js（window.WB_NAV）；
+        // 缺失时回退内联 #wb-nav，保证兼容性
+        _nav = (window.WB_NAV ? normNav(window.WB_NAV) : parseInlineNav());
         return loadContent(v(CONTENT_URL));
       }).then(function (ok) {
         var raw = isObj(window.PROTO_DATA) ? window.PROTO_DATA : {};

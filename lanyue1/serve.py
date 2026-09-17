@@ -15,7 +15,7 @@
 GET  /api/health      -> {"ok":true,"build":"20260917.03"}
 GET  /api/version     -> version.json 原文（no-store，前端用它探测服务在线）
 GET  /api/scan        -> {"files":[{"name","path","size","type"}]}  扫描 v0.4/
-POST /api/save-nav    -> {"nav":{...}}       同步写回 index.html 与 admin.html 的 #wb-nav
+POST /api/save-nav    -> {"nav":{...}}       写回 data/wb-nav.js（index.html / admin.html 均 <script src> 加载）
 POST /api/save-proto  -> {"items":{...},"models":{...}}  写回 data/prototypes.js
 POST /api/upload      -> {"name":"x.png","b64":"..."}    写图片到 assets/brand/
 
@@ -91,7 +91,7 @@ def _writable(abs_path):
     if not abs_path:
         return False
     rel = os.path.relpath(abs_path, ROOT).replace("\\", "/")
-    if rel in ("index.html", "admin.html", "data/prototypes.js"):
+    if rel in ("index.html", "admin.html", "data/prototypes.js", "data/wb-nav.js"):
         return True
     if rel.startswith("assets/brand/") and "/" not in rel[len("assets/brand/"):]:
         return True
@@ -237,37 +237,20 @@ def api_save_nav(nav):
         return 400, {"ok": False, "msg": "nav 必须是对象"}
     if not isinstance(nav.get("items"), list):
         return 400, {"ok": False, "msg": "nav.items 必须是数组"}
-    txt = json.dumps(nav, ensure_ascii=False)
-
-    src, new = {}, {}
-    for fn in NAV_FILES:
-        p = _safe_rel(fn)
-        if not p or not _writable(p) or not os.path.isfile(p):
-            return 404, {"ok": False, "msg": "找不到可写文件：" + fn}
-        s = _read(p)
-        if not NAV_RE.search(s):
-            return 400, {"ok": False, "msg": fn + " 里没有 #wb-nav 块"}
-        src[fn] = s
-        new[fn] = NAV_RE.sub(lambda m: m.group(1) + txt + m.group(3), s, count=1)
-
-    # 逐字节一致性预检：两份产物的 nav 块必须完全一致，否则一个字节都不写
-    blocks = {fn: _nav_block_text(new[fn]) for fn in NAV_FILES}
-    if len(set(blocks.values())) != 1:
-        return 500, {"ok": False, "msg": "两份 HTML 的 #wb-nav 生成结果不一致，已中止写入"}
-
-    written = {}
-    for fn in NAV_FILES:
-        p = _safe_rel(fn)
-        _write_atomic(p, new[fn])
-        written[fn] = len(new[fn])
-
-    # 写后复核
-    back = {fn: _nav_block_text(_read(_safe_rel(fn))) for fn in NAV_FILES}
-    if len(set(back.values())) != 1 or back.get("index.html") != txt:
-        return 500, {"ok": False, "msg": "写后复核失败：两份 HTML 的 #wb-nav 不一致（备份在 .workbuddy/backups）"}
-
+    # 结构层单一权威源：data/wb-nav.js（index.html / admin.html 通过 <script src> 加载，
+    # 从结构上根除双 HTML 导航漂移）
+    text = (
+        "/* 结构层唯一权威源 —— 由管理模式经 serve.py 回写 data/wb-nav.js；"
+        "左导航数据集中存放，index.html / admin.html 均通过 <script src> 加载，杜绝双文件漂移 */\n"
+        "window.WB_NAV = " + json.dumps(nav, ensure_ascii=False, indent=1) + ";\n"
+    )
+    p = _safe_rel("data/wb-nav.js")
+    if not p or not _writable(p):
+        return 403, {"ok": False, "msg": "不允许写入 data/wb-nav.js"}
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    _write_atomic(p, text)
     build = bump_build("save-nav")
-    return 200, {"ok": True, "build": build, "files": written, "items": len(nav.get("items", []))}
+    return 200, {"ok": True, "build": build, "file": "data/wb-nav.js", "items": len(nav.get("items", []))}
 
 
 def api_save_proto(items, models, generated=None):

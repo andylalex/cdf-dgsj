@@ -3,11 +3,11 @@
 <head data-page-node-id="btvPzLrLGED9nFNF9ShAVT">
 <meta charset="UTF-8" data-page-node-id="NMa6ga9s8qWOsmstB3PhG2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="4cH8CeBwgo111dAj0sqBqN">
-<meta name="wb-build" content="20260917.30" data-page-node-id="bP5f2DciWSiKvktAzIdRVt">
+<meta name="wb-build" content="20260917.36" data-page-node-id="bP5f2DciWSiKvktAzIdRVt">
 <meta name="description" content="蓝月 · 产品原型工作台：原型预览 + 需求澄清 + 研发视图" data-page-node-id="LLczTP2IVKroCAiOk8FqlJ">
 <title>蓝月 · 产品原型工作台（管理模式）</title>
-<link rel="stylesheet" href="assets/css/base.css?v=20260917.30" data-page-node-id="YOarWeiHbCGMqFKhWWlrKL">
-<link rel="stylesheet" href="assets/css/workbench.css?v=20260917.30" data-page-node-id="bb80EVkzR6lObKfyq91FnK">
+<link rel="stylesheet" href="assets/css/base.css?v=20260917.36" data-page-node-id="YOarWeiHbCGMqFKhWWlrKL">
+<link rel="stylesheet" href="assets/css/workbench.css?v=20260917.36" data-page-node-id="bb80EVkzR6lObKfyq91FnK">
 </head>
 <body data-page-node-id="rh3j8t06HUC23NLqtYwart">
 
@@ -263,157 +263,16 @@
 </div>
 <button id="wbThemeToggle" class="wb-theme-toggle" title="切换浅色 / 深色" aria-label="切换主题" data-page-node-id="CWZsallWhYpTyQX3ZyeGI5">🌑</button>
 
-<!-- ===== 导航数据：内联，首屏直出，杜绝 js 缓存问题 ===== -->
-<script id="wb-nav" type="application/json">
-{
-  "v": 3,
-  "brand": {
-    "name": "蓝月",
-    "sub": "LANYUE PROTOTYPE WORKBENCH"
-  },
-  "cats": [
-    "用户端 · CDF中免海南",
-    "导购端 · 繁星APP",
-    "管理后台 · PC"
-  ],
-  "items": [
-    {
-      "id": "p_mtobsr6sh8yw",
-      "group": "用户端 · CDF中免海南",
-      "order": 0,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "p_dgmsglist01",
-      "group": "用户端 · CDF中免海南",
-      "order": 1,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u7",
-      "group": "用户端 · CDF中免海南",
-      "order": 2,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u1",
-      "group": "用户端 · CDF中免海南",
-      "order": 3,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u6",
-      "group": "用户端 · CDF中免海南",
-      "order": 4,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u5",
-      "group": "用户端 · CDF中免海南",
-      "order": 5,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u4",
-      "group": "用户端 · CDF中免海南",
-      "order": 6,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u16",
-      "group": "用户端 · CDF中免海南",
-      "order": 7,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-g1",
-      "group": "导购端 · 繁星APP",
-      "order": 8,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-g2",
-      "group": "导购端 · 繁星APP",
-      "order": 9,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-g3",
-      "group": "导购端 · 繁星APP",
-      "order": 10,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-g4",
-      "group": "导购端 · 繁星APP",
-      "order": 11,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-g8",
-      "group": "导购端 · 繁星APP",
-      "order": 12,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-g9",
-      "group": "导购端 · 繁星APP",
-      "order": 13,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-m3",
-      "group": "管理后台 · PC",
-      "order": 14,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-m4",
-      "group": "管理后台 · PC",
-      "order": 15,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u3",
-      "group": "用户端 · CDF中免海南",
-      "order": 8,
-      "icon": "",
-      "badge": ""
-    },
-    {
-      "id": "v04-u17",
-      "group": "用户端 · CDF中免海南",
-      "order": 9,
-      "icon": "",
-      "badge": ""
-    }
-  ]
-}
-</script>
+<!-- ===== 导航数据：集中存放于 data/wb-nav.js（serve.py 单一回写），两页面同源加载 ===== -->
+<script src="data/wb-nav.js?v=20260917.36"></script>
 
-<script src="assets/js/core.js?v=20260917.30"></script>
-<script src="assets/js/cache.js?v=20260917.30"></script>
-<script src="assets/js/data.js?v=20260917.30"></script>
-<script src="assets/js/sidebar.js?v=20260917.30"></script>
-<script src="assets/js/stage.js?v=20260917.30"></script>
-<script src="assets/js/panel.js?v=20260917.30"></script>
-<script src="assets/js/app.js?v=20260917.30"></script>
-<script src="assets/js/editor.js?v=20260917.30"></script>
+<script src="assets/js/core.js?v=20260917.36"></script>
+<script src="assets/js/cache.js?v=20260917.36"></script>
+<script src="assets/js/data.js?v=20260917.36"></script>
+<script src="assets/js/sidebar.js?v=20260917.36"></script>
+<script src="assets/js/stage.js?v=20260917.36"></script>
+<script src="assets/js/panel.js?v=20260917.36"></script>
+<script src="assets/js/app.js?v=20260917.36"></script>
+<script src="assets/js/editor.js?v=20260917.36"></script>
 </body>
 </html>

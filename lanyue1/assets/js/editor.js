@@ -119,7 +119,7 @@
       var ok = rs.every(function (r) { return r !== false; });
       if (ok) {
         markDirty(false);
-        if (!silent) toast('已保存：index.html / admin.html / data/prototypes.js');
+        if (!silent) toast('已保存：data/wb-nav.js / data/prototypes.js');
       } else {
         refreshDirty();
       }
