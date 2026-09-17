@@ -114,7 +114,9 @@
     tour: false,
     tourIdx: 0,
     tourFilter: 'all',
-    tourList: []
+    tourList: [],
+    buf: false,         // false: #protoFrame 为 active；true: #protoFrameB 为 active（双缓冲）
+    curSrc: ''          // 当前已显示（swap 后）的 iframe src，用于去重
   };
   var _hsRefs = [];          // [{el, rg, h}] 位置重算用
   var _frameScrollBound = false;
@@ -131,21 +133,20 @@
     tourStop();
     closeHsPop();
 
-    var dev = $('device'), f = $('protoFrame'), imgScroll = $('imgScroll'),
+    var dev = $('device'), stack = $('frameStack'), imgScroll = $('imgScroll'),
         img = $('protoImg'), tabs = $('pageTabs'), bar = $('slideBar'), cap = $('imgCaption');
 
     if (dev) dev.style.display = '';
     setDevice((proto && proto.device) || 'mobile');
 
-    if (S.kind === 'images') {
-      if (f) { f.style.display = 'none'; }
+      if (S.kind === 'images') {
+        if (stack) stack.style.display = 'none';
       if (tabs) { tabs.hidden = true; tabs.innerHTML = ''; }
       if (imgScroll) imgScroll.hidden = false;
       if (img) { img.style.display = 'block'; img.hidden = false; }
       if (dev) dev.classList.add('img-mode');
       fitImageStage();
       showSlide(0);
-      playTransition((proto && proto.name) || '');
     } else {
       if (dev) dev.classList.remove('img-mode');
       if (dev) dev.style.width = '';
@@ -153,7 +154,7 @@
       if (img) { img.style.display = 'none'; }
       if (bar) bar.hidden = true;
       if (cap) cap.hidden = true;
-      if (f) f.style.display = '';
+      if (stack) stack.style.display = '';
 
       var url = '';
       if (S.kind === 'pages') {
@@ -176,7 +177,6 @@
           setUrlText(url);
         }
       }
-      playTransition((S.proto && S.proto.name) || '');
     }
     renderHotspots();
   }
@@ -215,26 +215,36 @@
     if (el.classList.contains('is-error')) { el.classList.remove('is-error'); el.innerHTML = ''; }
     el.hidden = true;
   }
+  /* 双缓冲 iframe：始终有一个后台帧在加载新页，加载完瞬间 swap 显隐，切页不露白屏、无任何过渡 */
+  function frameA() { return document.getElementById('protoFrame'); }
+  function frameB() { return document.getElementById('protoFrameB'); }
+  function activeFrame() { return S.buf ? frameB() : frameA(); }
+  function bufFrame() { return S.buf ? frameA() : frameB(); }
+  function swapFrames() {
+    S.buf = !S.buf;
+    var a = activeFrame(), b = bufFrame();
+    if (a) a.style.visibility = 'visible';
+    if (b) { b.style.visibility = 'hidden'; try { b.removeAttribute('srcdoc'); } catch (e) {} }
+    S.curSrc = a ? (a.dataset.src || '') : '';
+  }
   /* 直载目标页 + 失败自动重试：消除云端偶发 502/超时导致的黑屏。
      同源下 contentDocument 可访问 → 检测浏览器错误页判定失败并重试；
      全失败则显示浅色「加载失败·重试」UI，绝不再卡黑屏。 */
   function setFrameSrc(url, force) {
-    var f = $('protoFrame');
-    if (!f) { loading(false); return; }
+    var buf = bufFrame();
+    if (!buf) { loading(false); return; }
     var src = url ? v(url) : '';
-    if (!src) {
-      f.dataset.src = '';
+    if (!src) {                                  // 清空：隐藏当前显示帧内容
+      var a = activeFrame();
+      if (a) { a.dataset.src = ''; try { a.removeAttribute('srcdoc'); a.removeAttribute('src'); } catch (e) {} }
+      S.curSrc = '';
       loading(false);
-      try { f.removeAttribute('srcdoc'); f.removeAttribute('src'); } catch (e) {}
       return;
     }
-    var curAttr = f.getAttribute('src') || '';
-    if (!force && f.dataset.src === src && curAttr && curAttr !== 'about:blank') {
-      loading(false); return;
-    }
-    f.dataset.src = src;
-    loading(true);
-    _loadWithRetry(f, src, 0);
+    if (!force && S.curSrc === src) { loading(false); return; }   // 已是当前显示页，跳过去重
+    buf.dataset.src = src;
+    loading(true);                              // 后台帧加载，不显示任何遮罩
+    _loadWithRetry(buf, src, 0);
   }
   function _loadWithRetry(f, src, attempt) {
     if (f.dataset.src !== src) return;                 // 已切到别的原型
@@ -247,6 +257,7 @@
         if (attempt < 2) { window.setTimeout(function () { _loadWithRetry(f, src, attempt + 1); }, 600); }
         else { showFrameError(f, src); }
       } else {
+        swapFrames();                           // 新页就绪 → 瞬间切换显隐，无白屏、无过渡
         loading(false);
         bindFrameScroll(); renderHotspots(); if (S.tour) renderTourStep();
       }
@@ -292,7 +303,7 @@
     };
   }
   function bindFrameScroll() {
-    var f = $('protoFrame');
+    var f = activeFrame();
     if (!f) return;
     var upd = updatePositions;
     try {
@@ -302,9 +313,6 @@
       _frameScrollBound = true;
     } catch (e) { _frameScrollBound = false; }   // 跨域 / file:// 静默
   }
-
-  /* 切页动画已移除（v0.4 需求）：切页即时切换，不再显示 logo 过渡层 */
-  function playTransition(name) { /* no-op */ }
 
   /* ------------------------------------------------------------
      5. 二级导航（页面切换器）
@@ -391,7 +399,7 @@
   }
 
   function reload() {
-    var f = $('protoFrame');
+    var f = activeFrame();
     if (!f) return;
     var src = f.dataset.src || (S.proto && S.proto.url) || '';
     if (!src) return;
@@ -399,7 +407,7 @@
   }
 
   function open() {
-    var f = $('protoFrame');
+    var f = activeFrame();
     var url = (f && f.dataset.src) || (S.proto && S.proto.url) || '';
     if (S.kind === 'images') {
       var imgs = imgList(S.proto);
@@ -428,7 +436,7 @@
      7. 热点标注
      ------------------------------------------------------------ */
   function frameOffset() {
-    var f = $('protoFrame');
+    var f = activeFrame();
     if (!f) return { x: 0, y: 0 };
     return { x: f.offsetLeft || 0, y: f.offsetTop || 0 };
   }
@@ -463,7 +471,7 @@
     var off = frameOffset();
     if (h.selector) {
       try {
-        var f = $('protoFrame');
+        var f = activeFrame();
         var idoc = f && f.contentDocument;
         var el = idoc && idoc.querySelector(h.selector);
         if (el) {
@@ -480,7 +488,7 @@
     if (!h.fixed) {
       var st = 0;
       try {
-        var fw = $('protoFrame') && $('protoFrame').contentWindow;
+        var fw = activeFrame() && activeFrame().contentWindow;
         st = fw ? (fw.scrollY || fw.pageYOffset || 0) : 0;
       } catch (e) { st = 0; }
       py -= st;
@@ -763,7 +771,7 @@
   function scrollIntoView(h, pos) {
     if (!h || h.fixed) return;
     try {
-      var f = $('protoFrame');
+      var f = activeFrame();
       var idoc = f && f.contentDocument, iwin = f && f.contentWindow;
       if (!idoc || !iwin) return;
       var margin = 84;

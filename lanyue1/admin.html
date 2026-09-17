@@ -3,11 +3,11 @@
 <head data-page-node-id="btvPzLrLGED9nFNF9ShAVT">
 <meta charset="UTF-8" data-page-node-id="NMa6ga9s8qWOsmstB3PhG2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="4cH8CeBwgo111dAj0sqBqN">
-<meta name="wb-build" content="20260917.27" data-page-node-id="bP5f2DciWSiKvktAzIdRVt">
+<meta name="wb-build" content="20260917.29" data-page-node-id="bP5f2DciWSiKvktAzIdRVt">
 <meta name="description" content="蓝月 · 产品原型工作台：原型预览 + 需求澄清 + 研发视图" data-page-node-id="LLczTP2IVKroCAiOk8FqlJ">
 <title>蓝月 · 产品原型工作台（管理模式）</title>
-<link rel="stylesheet" href="assets/css/base.css?v=20260917.27" data-page-node-id="YOarWeiHbCGMqFKhWWlrKL">
-<link rel="stylesheet" href="assets/css/workbench.css?v=20260917.27" data-page-node-id="bb80EVkzR6lObKfyq91FnK">
+<link rel="stylesheet" href="assets/css/base.css?v=20260917.29" data-page-node-id="YOarWeiHbCGMqFKhWWlrKL">
+<link rel="stylesheet" href="assets/css/workbench.css?v=20260917.29" data-page-node-id="bb80EVkzR6lObKfyq91FnK">
 </head>
 <body data-page-node-id="rh3j8t06HUC23NLqtYwart">
 
@@ -108,7 +108,10 @@
             <span class="fb-dot" style="background:var(--x26)" data-page-node-id="PDfvavymTOSGo3Ebe6zgtQ"></span>
             <span class="fb-url" id="frameUrl" data-page-node-id="gaityPZ9XePWELqaXnFvzi">—</span>
           </div>
-          <iframe id="protoFrame" title="交互原型" data-page-node-id="gEPp1dmhTcQurbmbEgW1Qx"></iframe>
+          <div class="frame-stack" id="frameStack">
+            <iframe id="protoFrame" title="交互原型" data-page-node-id="gEPp1dmhTcQurbmbEgW1Qx"></iframe>
+            <iframe id="protoFrameB" title="交互原型(缓冲)" style="visibility:hidden"></iframe>
+          </div>
           <div class="page-tabs" id="pageTabs" hidden data-page-node-id="gILpaO684uVpfoJm8AlETN"></div>
           <div class="img-scroll" id="imgScroll" hidden data-page-node-id="sBliUpixG3rQLUtVGD1fZU">
             <img id="protoImg" class="proto-img" alt="" data-src="assets/brand/placeholder.png" data-page-node-id="x6EQaIXF2I8m77sCirqdPQ">
@@ -118,11 +121,6 @@
           <div class="spot-mask" id="spotMask" data-page-node-id="OZm2EWKpuvA4ZUG3THEq4D"><div class="spot-hole" id="spotHole" data-page-node-id="we34hDHYzvzqh7hsMZGIu2"></div></div>
           <div class="hs-pop" id="hsPop" data-page-node-id="wPDGHuFuHWfcIZh1QxWoaK"></div>
           <div class="stage-loading" id="stageLoading" hidden data-page-node-id="PKjCdI53kSXqfQHdODZAA8"><span class="ld-dot" data-page-node-id="F12C67k6Q6TvdxdOklLm7c"></span><span class="ld-dot" data-page-node-id="Hqe5M220QBA6zP9n4jggMp"></span><span class="ld-dot" data-page-node-id="YA2SKyqx7l8rbpTqXzC2KG"></span></div>
-          <div class="page-transition" id="pageTransition" aria-hidden="true" data-page-node-id="StG1zgXfKT03nyPWxT9riA">
-            <div class="pt-ring" id="ptRing" data-page-node-id="HwEfHqeJcbkAPXSDiODvvH"></div>
-            <img class="pt-logo" id="ptLogo" alt="蓝月" data-src="assets/brand/mark.jpg" data-page-node-id="6ZU8vH2wpCldIkH8i9btgL">
-            <div class="pt-text" id="ptText" data-page-node-id="TJTGob3es04AgjWahYjbeW">蓝月 · 原型工作台</div>
-          </div>
           <div class="tour-card" id="tourCard" hidden data-page-node-id="YZO3cWnyDJOhz3lYZxgVw7">
             <button class="tour-exit" id="tourExit" data-page-node-id="oTFnqszpKX7gVoe36gC5Yf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" data-page-node-id="2U3m9mClqsxI3b3ZtwiM79"><path d="M18 6 6 18M6 6l12 12" data-page-node-id="ZA2T8PQ4TNeEuLHGHPEbdk"></path></svg></button>
             <div class="tour-head" data-page-node-id="KinBnWQ9mvqIuDhmVSiKry">
@@ -268,13 +266,13 @@
 <!-- ===== 导航数据：内联，首屏直出，杜绝 js 缓存问题 ===== -->
 <script id="wb-nav" type="application/json">{"v": 3, "brand": {"name": "蓝月", "sub": "LANYUE PROTOTYPE WORKBENCH"}, "cats": ["用户端 · CDF中免海南", "导购端 · 繁星APP", "管理后台 · PC"], "items": [{"id": "p_mtobsr6sh8yw", "group": "用户端 · CDF中免海南", "order": 0, "icon": "", "badge": ""}, {"id": "p_dgmsglist01", "group": "用户端 · CDF中免海南", "order": 1, "icon": "", "badge": ""}, {"id": "v04-u7", "group": "用户端 · CDF中免海南", "order": 2, "icon": "", "badge": ""}, {"id": "v04-u1", "group": "用户端 · CDF中免海南", "order": 3, "icon": "", "badge": ""}, {"id": "v04-u6", "group": "用户端 · CDF中免海南", "order": 4, "icon": "", "badge": ""}, {"id": "v04-u5", "group": "用户端 · CDF中免海南", "order": 5, "icon": "", "badge": ""}, {"id": "v04-u4", "group": "用户端 · CDF中免海南", "order": 6, "icon": "", "badge": ""}, {"id": "v04-u16", "group": "用户端 · CDF中免海南", "order": 7, "icon": "", "badge": ""}, {"id": "v04-g1", "group": "导购端 · 繁星APP", "order": 8, "icon": "", "badge": ""}, {"id": "v04-g2", "group": "导购端 · 繁星APP", "order": 9, "icon": "", "badge": ""}, {"id": "v04-g3", "group": "导购端 · 繁星APP", "order": 10, "icon": "", "badge": ""}, {"id": "v04-g4", "group": "导购端 · 繁星APP", "order": 11, "icon": "", "badge": ""}, {"id": "v04-g8", "group": "导购端 · 繁星APP", "order": 12, "icon": "", "badge": ""}, {"id": "v04-g9", "group": "导购端 · 繁星APP", "order": 13, "icon": "", "badge": ""}, {"id": "v04-m3", "group": "管理后台 · PC", "order": 14, "icon": "", "badge": ""}, {"id": "v04-m4", "group": "管理后台 · PC", "order": 15, "icon": "", "badge": ""}]}</script>
 
-<script src="assets/js/core.js?v=20260917.27"></script>
-<script src="assets/js/cache.js?v=20260917.27"></script>
-<script src="assets/js/data.js?v=20260917.27"></script>
-<script src="assets/js/sidebar.js?v=20260917.27"></script>
-<script src="assets/js/stage.js?v=20260917.27"></script>
-<script src="assets/js/panel.js?v=20260917.27"></script>
-<script src="assets/js/app.js?v=20260917.27"></script>
-<script src="assets/js/editor.js?v=20260917.27"></script>
+<script src="assets/js/core.js?v=20260917.29"></script>
+<script src="assets/js/cache.js?v=20260917.29"></script>
+<script src="assets/js/data.js?v=20260917.29"></script>
+<script src="assets/js/sidebar.js?v=20260917.29"></script>
+<script src="assets/js/stage.js?v=20260917.29"></script>
+<script src="assets/js/panel.js?v=20260917.29"></script>
+<script src="assets/js/app.js?v=20260917.29"></script>
+<script src="assets/js/editor.js?v=20260917.29"></script>
 </body>
 </html>

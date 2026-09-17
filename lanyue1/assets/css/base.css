@@ -423,23 +423,6 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 /* 右栏悬浮展开时为舞台预留右侧空间，避免内容被圆角工具栏遮挡 */
 .layout:not(.collapse-right) .stage{padding-right:calc(var(--right-w,320px) + 40px)}
 .stage::-webkit-scrollbar{width:0;height:0;display:none}
-/* 页面切换 · 蓝月 logo 过渡遮罩（在设备框内） */
-.page-transition{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;
-  background:radial-gradient(circle at 50% 46%, var(--x18) 0%, var(--x8) 56%, var(--x4) 100%);
-  opacity:0;visibility:hidden;overflow:hidden;pointer-events:none;border-radius:inherit;}
-.page-transition .pt-glow{position:absolute;width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle, rgba(45,212,191,.55) 0%, rgba(56,189,248,.2) 38%, rgba(56,189,248,0) 72%);
-  filter:blur(5px);will-change:transform,opacity;transform:scale(.3);}
-.page-transition .pt-ring{position:absolute;width:156px;height:156px;border-radius:50%;
-  border:1.5px dashed rgba(45,212,191,.55);will-change:transform,opacity;transform:scale(.7);}
-.page-transition .pt-ring::after{content:'';position:absolute;inset:-18px;border-radius:50%;
-  border:1px solid rgba(56,189,248,.18);}
-.page-transition .pt-logo{position:relative;width:96px;height:96px;will-change:transform,opacity;
-  border-radius:50%;object-fit:cover;object-position:center;
-  filter:drop-shadow(0 8px 28px rgba(45,212,191,.55)) drop-shadow(0 0 14px rgba(45,212,191,.35));
-  -webkit-mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 42%, rgba(0,0,0,0) 68%);
-  mask-image:radial-gradient(circle at center, rgba(0,0,0,1) 42%, rgba(0,0,0,0) 68%);}
-.page-transition .pt-text{position:absolute;bottom:16%;font-size:12px;letter-spacing:.32em;color:var(--x42);opacity:0;will-change:transform,opacity;}
 .device{
   position:relative;background:var(--x62);border-radius:13px;overflow:visible;
   box-shadow:0 0 0 1px rgba(255,255,255,.2),0 0 0 1px var(--x29),0 24px 70px rgba(0,0,0,.55),0 4px 16px rgba(0,0,0,.4),0 0 16px rgba(255,255,255,.12),0 0 64px rgba(255,255,255,.18);
@@ -459,8 +442,10 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   display:flex;align-items:center;padding:0 10px;font-size:11px;color:var(--x44);font-family:var(--mono);
   white-space:nowrap;overflow:hidden;
 }
-#protoFrame{flex:1;width:100%;border:none;background:var(--x62);display:block}
-.device.mobile #protoFrame{border-radius:26px}
+/* 双缓冲 iframe：active 显示、buffer 后台加载新页，加载完成瞬间 swap —— 切页无白屏、无过渡 */
+.frame-stack{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden}
+#protoFrame,#protoFrameB{position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent}
+.device.mobile #protoFrame,.device.mobile #protoFrameB{border-radius:26px}
 .proto-img{flex:1;width:100%;min-height:0;object-fit:contain;background:var(--x62);display:none}
 .device.mobile .proto-img{border-radius:26px}
 /* 图片 / 幻灯片原型：复用与手机相同的外壳（8px 深色边框 + 34px 圆角 + 投影），但不强制 414px 宽度，

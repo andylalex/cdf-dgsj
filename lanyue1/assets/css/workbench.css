@@ -92,7 +92,7 @@
 .stage-loading{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:6px;
   background:rgba(17,22,31,.62);border-radius:inherit}
 .stage-loading[hidden]{display:none}
-#protoFrame{background:#fff} /* dark 下避免 about:blank 透出深色背景 = 黑屏 */
+#protoFrame,#protoFrameB{background:transparent} /* 双缓冲：透明，切页瞬间透出 device 背景，无白屏 */
 /* 加载失败态（非黑屏）：浅色提示 + 重试按钮 */
 .stage-loading.is-error{background:var(--panel-2);flex-direction:column;color:var(--text-2)}
 .stage-loading.is-error .ld-dot{display:none}
