@@ -241,6 +241,19 @@ window.NAV_DATA={
       "status": "review"
     },
     {
+      "id": "v04-u17",
+      "name": "U17 支付成功页",
+      "group": "用户端 · CDF中免海南",
+      "device": "mobile",
+      "__imported": false,
+      "overview": {
+        "summary": "用户支付成功页：展示支付结果、订单编号、支付金额、导购归因与后续操作（查看订单 / 继续逛逛）。"
+      },
+      "flow": [],
+      "states": [],
+      "status": "review"
+    },
+    {
       "id": "v04-u16",
       "name": "U16 订单详情页",
       "group": "用户端 · CDF中免海南",

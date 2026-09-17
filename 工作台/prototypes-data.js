@@ -84,6 +84,11 @@ const V04={
     "url": "v0.4/U16-订单详情页.html",
     "device": "mobile",
     "group": "用户端 · CDF中免海南"
+  },
+  "U17": {
+    "url": "v0.4/U17-支付成功页.html",
+    "device": "mobile",
+    "group": "用户端 · CDF中免海南"
   }
 };
 
@@ -563,6 +568,24 @@ const PROTOTYPES_V03=[
         "id": "hs_mtqw0ramryri"
       }
     ]
+  },
+{
+    "id": "v04-u17",
+    "group": "用户端 · CDF中免海南",
+    "name": "U17 支付成功页",
+    "device": "mobile",
+    "url": "v0.4/U17-支付成功页.html",
+    "srcdoc": "",
+    "status": "review",
+    "version": "v0.4",
+    "owner": "产品 · 梁伟业",
+    "updated": "2026-09-17",
+    "overview": {
+      "summary": "用户支付成功页：展示支付结果、订单编号、支付金额、导购归因与后续操作（查看订单 / 继续逛逛）。"
+    },
+    "flow": [],
+    "states": [],
+    "hotspots": []
   },
 {
     "id": "v04-u16",
