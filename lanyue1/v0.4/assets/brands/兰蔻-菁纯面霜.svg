@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5f5"/>
+      <stop offset="100%" stop-color="#ffe8e0"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff5e6"/>
+      <stop offset="50%" stop-color="#ffd9b3"/>
+      <stop offset="100%" stop-color="#e6b88a"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d4a574"/>
+      <stop offset="100%" stop-color="#c49a6c"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#bg)"/>
+  
+        <ellipse cx="100" cy="75" rx="40" ry="12" fill="url(#body)"/>
+        <path d="M60 75 L60 125 Q60 145 100 145 Q140 145 140 125 L140 75 Z" fill="url(#body)"/>
+        <ellipse cx="100" cy="125" rx="40" ry="12" fill="#d4a574"/>
+        <rect x="60" y="50" width="80" height="22" rx="6" fill="url(#cap)"/>
+        <rect x="55" y="55" width="90" height="8" rx="4" fill="#c49a6c"/>
+  <text x="100" y="185" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#666" text-anchor="middle" font-weight="500">菁纯面霜</text>
+</svg>

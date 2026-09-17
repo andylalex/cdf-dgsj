@@ -328,8 +328,6 @@
 
     /* ---- 名片信息区（终端标识标签已按需求移除，仅保留名称行布局） ---- */
     .wx-card-head{display:flex;align-items:center;gap:6px}
-    .wx-qr-save{margin-top:6px;border:1px solid #a67c52;background:rgba(212,180,140,.12);color:#a67c52;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;max-width:96px;line-height:1.25}
-    .wx-qr-save:active{background:#ffece8}
 
 
 /* ===== U7 奢品顾问风格覆盖 ===== */
@@ -358,6 +356,14 @@
 .cc-t{color:#2c2218 !important;}
 .cc-s{color:rgba(51,39,27,.5) !important;}
 .cc-p{color:#a67c52 !important;}
+
+/* 商品咨询弹窗：分类 tab + 小程序打开按钮（U1 金棕主题） */
+.sheet-tabs{display:flex;gap:8px;margin-bottom:12px}
+.sheet-tab{flex:1;padding:9px 0;text-align:center;font-size:13px;font-weight:600;color:#9ca3af;background:#f5f5f5;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:all .15s}
+.sheet-tab.active{color:#a67c52;background:rgba(212,180,140,.14);border-color:rgba(212,180,140,.5)}
+.sheet-empty{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0}
+.wx-mini-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 14px;border:1px solid #a67c52;background:rgba(212,180,140,.12);color:#a67c52;font-size:12px;font-weight:600;border-radius:999px;cursor:pointer}
+.wx-mini-btn:active{background:rgba(212,180,140,.22)}
 
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}
@@ -437,7 +443,7 @@
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="npoLEGWDtBXXx6RPQeDSWN">
         <div class="max-w-[85%]" data-page-node-id="U1GuideMsgWrap">
           <div class="bg-white msg-bubble shadow-md px-3.5 py-3 border border-coral-100" data-page-node-id="U1GuideBubble">
-            <p class="text-sm text-gray-700 leading-relaxed" data-page-node-id="9zwgBz5fZzP4oTXPa0Xn5I">您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读<br><br>您咨询的这款「卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米」我先帮您确认实时库存与活动价，稍等片刻～</p>
+            <p class="text-sm text-gray-700 leading-relaxed" data-page-node-id="9zwgBz5fZzP4oTXPa0Xn5I">您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读</p>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="U1GuideMsgTime">14:46</span>
         </div>
@@ -476,6 +482,17 @@
           <span class="text-[10px] text-gray-400 mt-1 ml-1">14:55</span>
         </div>
       </div>
+      <!-- 顾问补充说明：发货与价格提示（导购发布） -->
+      <div class="flex gap-2.5" data-page-node-id="U1ShipNote">
+        <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
+        <div class="max-w-[85%]" data-page-node-id="U1ShipNoteWrap">
+          <div class="bg-white msg-bubble shadow-md px-3.5 py-3 border border-coral-100">
+            <p class="text-sm text-gray-700 leading-relaxed">温馨提示：以上这款商品由海口国际免税城发货，线上展示价格与门店实际价格可能存在差异，最终以门店结算为准～</p>
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="U1ShipNoteTime">14:56</span>
+        </div>
+      </div>
+
       <!-- 推荐商品卡片 2（无主图，占位更新中） -->
       <div class="flex gap-2.5" data-page-node-id="prodCardMsgU1b">
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
@@ -558,9 +575,9 @@
             <div class="wx-qr-wrap">
               <img src="assets/generated/qr_wx_advisor.png" class="wx-qr" alt="企业微信二维码" data-page-node-id="u1WxQrImgApp">
               <p class="wx-qr-hint" data-page-node-id="u1WxHintApp"><i class="fas fa-circle-info" data-page-node-id="u1WxHintAppIc"></i>保存图片后识别，添加顾问企业微信</p>
-              <button type="button" class="wx-qr-save" onclick="saveQrToAlbum()" data-page-node-id="u1WxSaveApp">保存到相册</button>
             </div>
           </div>
+          <button type="button" onclick="showToast('正在打开微信小程序…')" class="wx-mini-btn" data-page-node-id="u1WxMiniOpen"><i class="fas fa-mobile-screen-button"></i>小程序打开</button>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="u1WxTimeApp">刚刚</span>
         </div>
       </div>
@@ -570,7 +587,7 @@
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
         <div class="max-w-[85%]" data-page-node-id="U1AutoReplyWrap">
           <div class="bg-white msg-bubble shadow-md px-3.5 py-3 border border-coral-100">
-            <p class="text-sm text-gray-700 leading-relaxed">您好，现在是非营业时间（每日 09:00–22:00），您的消息我已收到，将在明日上班后第一时间回复您，请您稍候，感谢理解～</p>
+            <p class="text-sm text-gray-700 leading-relaxed">您好，现在是非营业时间（每日 09:00–22:00），您的消息我已收到，顾问看到后会第一时间回复您，请您稍候，感谢理解～</p>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="U1AutoReplyTime">刚刚</span>
         </div>
@@ -620,6 +637,10 @@
       <div class="sheet-hd" data-page-node-id="consultHd">
         <span class="t" data-page-node-id="consultTitle">选择要咨询的商品</span>
         <button type="button" class="x" aria-label="关闭" onclick="closeConsultSheet()" data-page-node-id="consultClose"><i class="fas fa-times" data-page-node-id="consultCloseIc"></i></button>
+      </div>
+      <div class="sheet-tabs" data-page-node-id="consultTabs">
+        <button type="button" class="sheet-tab active" data-tab="离岛免税" onclick="switchConsultTab(this)">离岛免税</button>
+        <button type="button" class="sheet-tab" data-tab="会员优选" onclick="switchConsultTab(this)">会员优选</button>
       </div>
       <div id="consultList" data-page-node-id="consultList"></div>
     </div>
@@ -742,10 +763,13 @@
 
     // ===== 商品咨询（用户可主动咨询商品） =====
     var CONSULT_ITEMS = [
-      { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, img: 'assets/generated/product1.png', store: '海口国际免税城' },
-      { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, img: 'assets/generated/product2.png', store: '海口国际免税城' },
-      { sku: 'W69010Z4', name: '卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米', spec: '精钢', price: 35100.00, img: 'assets/generated/a6.png', store: '三亚国际免税城' }
+      { sku: 'C016080', name: '浪凡光韵女士浓香水', spec: '50ml', price: 394.00, img: 'assets/generated/product1.png', store: '海口国际免税城', cat: '离岛免税' },
+      { sku: 'C017002', name: '迪奥真我香水 EDT', spec: '100ml', price: 1280.00, img: 'assets/generated/product2.png', store: '海口国际免税城', cat: '离岛免税' },
+      { sku: 'W69010Z4', name: '卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米', spec: '精钢', price: 35100.00, img: 'assets/generated/a6.png', store: '三亚国际免税城', cat: '离岛免税' },
+      { sku: 'V202511', name: '会员尊享护肤礼盒', spec: '限量', price: 899.00, img: 'assets/generated/product1.png', store: '会员优选', cat: '会员优选' },
+      { sku: 'V202588', name: '积分兑礼 · 香氛随行套装', spec: '套装', price: 0, img: 'assets/generated/product2.png', store: '会员优选', cat: '会员优选' }
     ];
+    var CONSULT_TAB = '离岛免税';
 
     function appendUserText(text) {
       var chat = document.getElementById('chat');
@@ -805,16 +829,30 @@
     function renderConsultList() {
       var box = document.getElementById('consultList');
       if (!box) return;
+      var has = CONSULT_ITEMS.some(function (it) { return it.cat === CONSULT_TAB; });
+      if (!has) {
+        box.innerHTML = '<p class="sheet-empty">该分类暂无可咨询商品</p>';
+        return;
+      }
       box.innerHTML = CONSULT_ITEMS.map(function (it, i) {
+        if (it.cat !== CONSULT_TAB) return '';
+        var priceTxt = it.price > 0 ? ('¥' + formatMoney(it.price)) : '积分兑换';
         return '<div class="sheet-item" onclick="sendConsult(' + i + ')">' +
           '<img src="' + it.img + '" alt="" onerror="this.style.visibility=\'hidden\'">' +
           '<div class="flex-1 min-w-0">' +
             '<p class="si-t">' + escHtml(it.name) + '</p>' +
-            '<p class="si-s">编号 ' + escHtml(it.sku) + ' · ' + escHtml(it.spec) + '</p>' +
+            '<p class="si-s">编号 ' + escHtml(it.sku) + '</p>' +
           '</div>' +
-          '<span class="si-p">¥' + formatMoney(it.price) + '</span>' +
+          '<span class="si-p">' + priceTxt + '</span>' +
         '</div>';
       }).join('');
+    }
+
+    function switchConsultTab(el) {
+      document.querySelectorAll('.sheet-tab').forEach(function (t) { t.classList.remove('active'); });
+      el.classList.add('active');
+      CONSULT_TAB = el.getAttribute('data-tab');
+      renderConsultList();
     }
 
     function openConsultSheet() {
@@ -842,10 +880,6 @@
     }
 
     // ===== 企业微信名片：小程序端与 App 端各一张卡片，静态区分（无切换 tab） =====
-    function saveQrToAlbum() {
-      showToast('二维码已保存到相册，请打开微信「扫一扫」添加');
-    }
-
     // ===== 从商品详情进入 IM：自动发文案 + 顾问自动回复 + 非营业时间文案 =====
     function isOffHours(d) {
       var h = (d || new Date()).getHours();
@@ -863,12 +897,11 @@
         appendUserConsultCard(it);
       }, 400);
       setTimeout(function () {
-        appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读<br><br>您咨询的这款「' +
-          escHtml(it.name) + '」我先帮您确认实时库存与活动价，稍等片刻～');
+        appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读');
       }, 1500);
       if (isOffHours() || q.get('night') === '1') {
         setTimeout(function () {
-          appendGuideText('【非营业时间自动回复】您好，当前为非营业时间（顾问服务时间 每日 09:00-22:00），您的消息我已收到，明早营业后会第一时间回复您。如有紧急需求可直接留言～');
+          appendGuideText('【非营业时间自动回复】您好，当前为非营业时间（顾问服务时间 每日 09:00-22:00），您的消息我已收到，顾问看到后会第一时间回复您。如有紧急需求可直接留言～');
         }, 2600);
       }
     }

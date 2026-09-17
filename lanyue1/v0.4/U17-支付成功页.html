@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="U17PageRoot">
+<head data-page-node-id="U17Head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>结算成功</title>
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="U17FaCss">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html, body { height:100%; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#eef0f3; color:#1f2937; }
+
+    .phone-frame { position:relative; width:414px; max-width:100%; height:100dvh; margin:0 auto; background:#f5f6f8; overflow:hidden; display:flex; flex-direction:column; }
+
+    /* 顶部栏 */
+    .topbar { flex-shrink:0; height:52px; display:flex; align-items:center; justify-content:center; position:relative; background:#fff; border-bottom:1px solid #eef0f3; }
+    .topbar-title { font-size:16px; font-weight:600; color:#1f2937; }
+    .topbar-close { position:absolute; right:12px; top:50%; transform:translateY(-50%); width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:16px; cursor:pointer; border:none; background:none; }
+    .topbar-close:active { color:#6b7280; }
+
+    /* 主体 */
+    .screen { flex:1 1 auto; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 28px; text-align:center; background:linear-gradient(180deg,#ffffff 0%,#fafbfc 100%); }
+
+    .success-icon { width:84px; height:84px; border-radius:50%; background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39); display:flex; align-items:center; justify-content:center; color:#fff; font-size:40px; box-shadow:0 14px 30px rgba(255,107,82,.32); margin-bottom:22px; }
+    .success-title { font-size:22px; font-weight:700; color:#111827; letter-spacing:.5px; margin-bottom:10px; }
+    .success-sub { font-size:13px; line-height:1.6; color:#9ca3af; max-width:268px; margin-bottom:18px; }
+    .success-meta { display:flex; align-items:center; gap:7px; background:#fff5f4; border:1px solid #ffe0db; color:#e64e39; font-size:12px; padding:8px 14px; border-radius:999px; margin-bottom:30px; }
+
+    /* 操作区 */
+    .actions { width:100%; max-width:340px; display:flex; flex-direction:column; gap:12px; }
+    .btn { width:100%; height:50px; border-radius:14px; font-size:15px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; border:none; transition:transform .12s ease,box-shadow .12s ease; }
+    .btn:active { transform:scale(.98); }
+    .btn i { font-size:15px; }
+    .btn-primary { background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39); color:#fff; box-shadow:0 8px 20px rgba(255,107,82,.28); }
+    .btn-ghost { background:#fff; color:#ff6b52; border:1px solid #ffd0c5; }
+  </style>
+</head>
+<body>
+  <div class="phone-frame" data-page-node-id="U17Frame">
+    <div class="topbar" data-page-node-id="U17Topbar">
+      <span class="topbar-title" data-page-node-id="U17TopTitle">支付成功</span>
+      <button class="topbar-close" onclick="location.href='U15-订单列表页.html'" data-page-node-id="U17Close" aria-label="关闭"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="screen" data-page-node-id="U17Screen">
+      <div class="success-icon" data-page-node-id="U17Icon"><i class="fas fa-check"></i></div>
+      <h1 class="success-title" data-page-node-id="U17Title">结算成功</h1>
+      <p class="success-sub" data-page-node-id="U17Sub">订单已提交，我们将尽快为你安排发货与离岛提货</p>
+      <div class="success-meta" data-page-node-id="U17Meta"><i class="fas fa-circle-info"></i> 可在「我的 - 订单」中查看物流与提货进度</div>
+
+      <div class="actions" data-page-node-id="U17Actions">
+        <button class="btn btn-ghost" onclick="location.href='U6-意向单页.html'" data-page-node-id="U17BtnIntent"><i class="fas fa-list-check"></i> 返回意向单</button>
+        <button class="btn btn-primary" onclick="location.href='U15-订单列表页.html'" data-page-node-id="U17BtnOrder"><i class="fas fa-receipt"></i> 查看订单</button>
+        <button class="btn btn-ghost" onclick="location.href='U1-用户端IM会话页.html'" data-page-node-id="U17BtnChat"><i class="fas fa-comment-dots"></i> 返回顾问对话</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

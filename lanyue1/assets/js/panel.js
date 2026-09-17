@@ -111,7 +111,7 @@
   /* ======================================================================
    * 1. 常量
    * ==================================================================== */
-  var PANES = ['overview', 'flow', 'element', 'rule', 'field', 'model', 'accept'];
+  var PANES = ['overview', 'flow', 'element', 'model', 'accept'];
 
   var TYPE_META = {
     element: { cls: 'element', label: '界面组件' },
