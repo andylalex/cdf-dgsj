@@ -1,0 +1,213 @@
+/* ============================================================
+   workbench.css —— v3 新增能力的补充样式
+   铁律：风格与 base.css 一致，颜色一律走 base.css 的 CSS 变量，
+        支持 [data-theme="light"] 主题切换；零外网依赖。
+   ============================================================ */
+
+/* ---------- 右栏：7 个 tab 换行，避免挤压 ---------- */
+.prd-tabs{flex-wrap:wrap;row-gap:4px}
+.prd-tab{padding:6px 9px}
+.prd-tab .n{margin-left:5px}
+
+/* 空状态（panel.js 契约） */
+.wb-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:24px 16px;text-align:center;
+  border:1px dashed var(--line);border-radius:10px}
+.wb-empty__t{font-size:12.5px;color:var(--text-2);font-weight:500}
+.wb-empty__d{font-size:11.5px;color:var(--text-3);line-height:1.6;max-width:280px}
+
+/* 角标 */
+.wb-badge{display:inline-block;min-width:16px;padding:0 5px;border-radius:999px;
+  font-family:var(--mono);font-size:10px;line-height:16px;text-align:center;
+  background:var(--x20);color:var(--x47)}
+.wb-badge[data-tone="new"]{background:var(--accent-dim);color:var(--accent)}
+.wb-badge[data-tone="warn"]{background:rgba(245,181,68,.16);color:var(--c-rule)}
+.wb-badge[data-tone="done"]{background:rgba(52,211,153,.14);color:var(--ok)}
+
+/* 分组区块标题（右栏分区用） */
+.wb-sec{margin-bottom:16px}
+.wb-sec-h{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.6px;
+  color:var(--text-3);margin-bottom:8px;text-transform:uppercase}
+.wb-sec-h::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.wb-sec.is-warn .wb-sec-h{color:var(--c-rule)}
+.wb-sec.is-warn .wb-sec-h::after{background:rgba(245,181,68,.28)}
+
+/* 流程步骤条 */
+.wb-flow{margin:0;padding:0;list-style:none;position:relative}
+.wb-flow li{position:relative;padding:0 0 14px 26px}
+.wb-flow li::before{content:"";position:absolute;left:8px;top:14px;bottom:0;width:1px;background:var(--line)}
+.wb-flow li:last-child{padding-bottom:0}
+.wb-flow li:last-child::before{display:none}
+.wb-flow .f-no{position:absolute;left:0;top:2px;width:17px;height:17px;border-radius:50%;
+  background:var(--accent-dim);color:var(--accent);border:1px solid rgba(56,189,248,.35);
+  font-family:var(--mono);font-size:10px;line-height:15px;text-align:center}
+.wb-flow .f-t{font-size:12.5px;color:var(--text);font-weight:600;margin-bottom:2px}
+.wb-flow .f-d{font-size:12px;color:var(--text-2);line-height:1.65}
+.wb-flow.is-exception .f-no{background:rgba(245,181,68,.14);color:var(--c-rule);border-color:rgba(245,181,68,.32)}
+
+/* 状态徽章 */
+.wb-states{display:flex;flex-wrap:wrap;gap:6px}
+.wb-state{padding:3px 10px;border-radius:999px;font-size:11.5px;
+  background:var(--panel-3);color:var(--text-2);border:1px solid var(--line)}
+.wb-state b{color:var(--text);font-weight:600}
+
+/* 接口表 */
+.wb-tbl-wrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:var(--radius-sm)}
+.wb-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.wb-tbl th,.wb-tbl td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line-soft)}
+.wb-tbl th{background:var(--panel-2);color:var(--text-3);font-weight:600;font-size:11px;white-space:nowrap}
+.wb-tbl tr:last-child td{border-bottom:none}
+.wb-tbl td.mono{font-family:var(--mono);font-size:11px;color:var(--text-2)}
+.wb-method{display:inline-block;padding:1px 7px;border-radius:5px;font-family:var(--mono);
+  font-size:10.5px;font-weight:700;letter-spacing:.4px}
+.wb-method[data-m="GET"]{background:rgba(52,211,153,.14);color:var(--ok)}
+.wb-method[data-m="POST"]{background:rgba(56,189,248,.14);color:var(--accent)}
+.wb-method[data-m="PUT"]{background:rgba(245,181,68,.14);color:var(--c-rule)}
+.wb-method[data-m="DELETE"]{background:rgba(248,113,113,.14);color:var(--danger)}
+
+/* 验收勾选（panel.js 契约） */
+.acc-bar{display:block;flex:1;height:4px;border-radius:3px;background:var(--panel-3);overflow:hidden}
+.acc-bar i{display:block;height:100%;background:var(--ok);transition:width .25s}
+.acc-item{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;margin-bottom:7px;border-radius:8px;
+  background:var(--panel-2);border:1px solid var(--line-soft);cursor:pointer;font-size:12.5px;line-height:1.6}
+.acc-item:hover{border-color:var(--x34)}
+.acc-box{flex:none;width:15px;height:15px;margin-top:2px;border-radius:4px;border:1px solid var(--x36);
+  display:grid;place-items:center;font-size:10px;color:transparent}
+.acc-item.on .acc-box{background:var(--ok);border-color:var(--ok);color:var(--x4)}
+.acc-txt{font-size:12.5px;color:var(--text);line-height:1.6}
+.acc-item.on .acc-txt{color:var(--text-3);text-decoration:line-through}
+
+/* 验收勾选 */
+.wb-check{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;margin-bottom:7px;
+  border:1px solid var(--line-soft);border-radius:var(--radius-sm);background:var(--panel-2);cursor:pointer}
+.wb-check:hover{border-color:var(--line)}
+.wb-check .ck-box{flex:none;width:16px;height:16px;border-radius:4px;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;color:transparent;font-size:11px}
+.wb-check.is-checked .ck-box{background:var(--accent);border-color:var(--accent);color:#06222E}
+.wb-check.is-checked .ck-tx{color:var(--text-3);text-decoration:line-through}
+.wb-check .ck-tx{font-size:12.5px;color:var(--text);line-height:1.6}
+.wb-progress{height:3px;border-radius:2px;background:var(--panel-3);overflow:hidden;margin:0 0 12px}
+.wb-progress i{display:block;height:100%;background:var(--accent);transition:width .2s ease}
+
+/* ---------- 舞台加载态 ---------- */
+.stage-loading{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:rgba(17,22,31,.62);border-radius:inherit}
+.stage-loading[hidden]{display:none}
+#protoFrame{background:#fff} /* dark 下避免 about:blank 透出深色背景 = 黑屏 */
+/* 加载失败态（非黑屏）：浅色提示 + 重试按钮 */
+.stage-loading.is-error{background:var(--panel-2);flex-direction:column;color:var(--text-2)}
+.stage-loading.is-error .ld-dot{display:none}
+.frame-err{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:0 20px}
+.frame-err-t{font-size:13px;font-weight:600;color:var(--text)}
+.frame-err-d{font-size:11.5px;color:var(--text-3);line-height:1.6}
+.frame-retry{margin-top:2px}
+.ld-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.35;
+  animation:wbBlink 1s infinite ease-in-out}
+.ld-dot:nth-child(2){animation-delay:.15s}
+.ld-dot:nth-child(3){animation-delay:.3s}
+@keyframes wbBlink{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+
+/* ---------- 新版本提示条 ---------- */
+.wb-update-bar{position:fixed;top:0;left:0;right:0;z-index:99998;display:flex;align-items:center;
+  justify-content:center;gap:12px;padding:9px 16px;font-size:12.5px;color:#fff;
+  background:linear-gradient(90deg,#0369A1,#0EA5E9);box-shadow:0 2px 14px rgba(2,132,199,.4)}
+.wb-update-bar[hidden]{display:none}
+.wb-update-bar .ed-btn{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35);color:#fff;padding:4px 12px}
+.wb-update-bar .ed-btn:hover{background:rgba(255,255,255,.28);border-color:#fff;color:#fff}
+.wb-update-bar .ed-btn.ghost{background:transparent;border-color:transparent;color:rgba(255,255,255,.8)}
+
+/* ---------- 弹窗增强 ---------- */
+.ed-card.lg{width:min(720px,100%)}
+.ed-btn.sm{padding:4px 10px;font-size:11.5px;border-radius:7px}
+.ed-btn.ghost{background:transparent;border-color:transparent;color:var(--text-3)}
+.ed-btn.ghost:hover{background:var(--panel-3);color:var(--text)}
+.ed-row .ed-btn.sm{margin-top:5px}
+.ed-row.inline{display:flex;gap:8px;align-items:center}
+.ed-row.inline label{margin-bottom:0;flex:none;width:64px}
+.ed-row.inline input,.ed-row.inline select{flex:1}
+
+/* 分段控件（导入来源切换） */
+.segmented{display:inline-flex;border:1px solid var(--x29);border-radius:8px;overflow:hidden}
+.segmented button{padding:6px 14px;font-size:12px;background:transparent;color:var(--x45);
+  border:none;cursor:pointer;font-family:inherit}
+.segmented button+button{border-left:1px solid var(--x29)}
+.segmented button.on{background:var(--accent-dim);color:var(--accent);font-weight:600}
+
+/* 弹窗内 mini tab */
+.ed-tabs-mini{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line-soft);margin-bottom:12px}
+.ed-tabs-mini button{padding:6px 11px;font-size:12px;background:transparent;border:none;
+  border-bottom:2px solid transparent;color:var(--text-3);cursor:pointer;font-family:inherit}
+.ed-tabs-mini button:hover{color:var(--text)}
+.ed-tabs-mini button.on{color:var(--text);border-bottom-color:var(--accent);font-weight:600}
+.ed-pane .wb-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.ed-pane .wb-row input,.ed-pane .wb-row select{flex:1;background:var(--x9);border:1px solid var(--x29);
+  border-radius:8px;color:var(--x53);font-size:12.5px;padding:6px 9px;font-family:inherit}
+.ed-pane .wb-row textarea{flex:1;min-height:56px;background:var(--x9);border:1px solid var(--x29);
+  border-radius:8px;color:var(--x53);font-size:12.5px;padding:6px 9px;font-family:inherit;resize:vertical}
+.ed-pane .wb-row .wb-x{flex:none;padding:4px 9px;background:transparent;border:1px solid var(--x29);
+  border-radius:7px;color:var(--x45);cursor:pointer;font-size:11px}
+.ed-pane .wb-row .wb-x:hover{border-color:var(--danger);color:var(--danger)}
+.ed-pane .wb-add{width:100%;padding:6px;border:1px dashed var(--x29);border-radius:8px;
+  background:transparent;color:var(--accent);font-size:12px;cursor:pointer;margin-bottom:12px}
+.ed-pane .wb-add:hover{background:rgba(56,189,248,.08)}
+.ed-pane .wb-lab{font-size:11px;color:var(--text-3);margin:12px 0 6px}
+.ed-pane .wb-lab:first-child{margin-top:0}
+.ed-pane .wb-json{min-height:220px;font-family:var(--mono);font-size:11.5px;line-height:1.55}
+.ed-pane .wb-err{color:var(--danger);font-size:11.5px;margin-top:6px;min-height:16px}
+
+/* 分类管理列表项 */
+.cat-list .cat-row{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:6px;
+  border:1px solid var(--line-soft);border-radius:var(--radius-sm);background:var(--panel-2)}
+.cat-list .cat-row input{flex:1;background:var(--x9);border:1px solid var(--x29);border-radius:7px;
+  color:var(--x53);font-size:12.5px;padding:5px 8px;font-family:inherit}
+.cat-list .cat-row .ct-handle{cursor:grab;color:var(--text-3);font-size:13px;padding:0 2px}
+
+/* ---------- 管理模式 ---------- */
+.is-admin .si-drag{display:flex}
+.si-drag{display:none;align-items:center;justify-content:center;width:14px;flex:none;
+  cursor:grab;color:var(--text-3);font-size:11px;letter-spacing:-1px}
+.si-drag:hover{color:var(--accent)}
+.is-admin .side-item{cursor:default}
+.side-foot-extra{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.side-foot-extra button{width:100%;border:1px dashed var(--x29);background:transparent;
+  color:var(--accent);font-size:12px;padding:7px;border-radius:9px;cursor:pointer}
+.side-foot-extra button:hover{background:rgba(56,189,248,.1)}
+.side-foot-extra button.is-dirty{background:var(--accent);border-color:var(--accent);color:#06222E;font-weight:600}
+.side-foot-extra button.ghost{color:var(--text-3);border-style:solid}
+.side-foot-extra button.ghost:hover{color:var(--accent)}
+
+/* 左导航拖拽占位提示 */
+.side-item.drop-before{box-shadow:inset 0 2px 0 var(--accent)}
+.side-item.drop-after{box-shadow:inset 0 -2px 0 var(--accent)}
+.side-item.dragging{opacity:.4}
+
+/* ---------- 目录页补充 ---------- */
+.cat-grid .cat-card{cursor:pointer}
+.cat-card .cat-enter svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+
+/* ---------- 浅色主题适配 ---------- */
+[data-theme="light"] .wb-update-bar{background:linear-gradient(90deg,#0369A1,#0284C7)}
+[data-theme="light"] .stage-loading{background:rgba(255,255,255,.72)}
+[data-theme="light"] .cat-list .cat-row,[data-theme="light"] .wb-check{background:var(--panel-2)}
+
+/* ---------- 降低动效 ---------- */
+@media (prefers-reduced-motion:reduce){
+  .ld-dot{animation:none;opacity:.6}
+  .prd-pane{animation:none}
+}
+
+
+/* ---------- 右栏：异常流程配色（panel.js 契约） ---------- */
+.ov-label.exc{color:var(--c-rule)}
+.flow-node.exc .flow-dot{color:var(--c-rule);background:var(--c-rule-dim);border-color:rgba(245,181,68,.35)}
+.flow-node.exc .flow-txt b{color:var(--c-rule)}
+
+/* ---------- 管理模式：侧栏底部操作区（editor.js 注入） ---------- */
+.side-extra{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.side-extra[hidden]{display:none}
+.side-extra .ed-btn{width:100%;text-align:center}
+.is-admin .side-foot{padding-top:10px;border-top:1px solid var(--line-soft)}
+
+/* ---------- 右栏头部"编辑此原型"入口（管理模式可见） ---------- */
+.prd-head{position:relative}
+.prd-edit-btn{position:absolute;top:12px;right:12px}
+.prd-edit-btn[hidden]{display:none}

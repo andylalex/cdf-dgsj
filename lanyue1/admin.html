@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" data-page-node-id="HlDAUl9TSNizArlCK0Rz0f">
+<head data-page-node-id="btvPzLrLGED9nFNF9ShAVT">
+<meta charset="UTF-8" data-page-node-id="NMa6ga9s8qWOsmstB3PhG2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="4cH8CeBwgo111dAj0sqBqN">
+<meta name="wb-build" content="20260917.27" data-page-node-id="bP5f2DciWSiKvktAzIdRVt">
+<meta name="description" content="蓝月 · 产品原型工作台：原型预览 + 需求澄清 + 研发视图" data-page-node-id="LLczTP2IVKroCAiOk8FqlJ">
+<title>蓝月 · 产品原型工作台（管理模式）</title>
+<link rel="stylesheet" href="assets/css/base.css?v=20260917.27" data-page-node-id="YOarWeiHbCGMqFKhWWlrKL">
+<link rel="stylesheet" href="assets/css/workbench.css?v=20260917.27" data-page-node-id="bb80EVkzR6lObKfyq91FnK">
+</head>
+<body data-page-node-id="rh3j8t06HUC23NLqtYwart">
+
+<!-- ================= 原型目录视图（默认首页） ================= -->
+<div id="catalogView" style="display:none" data-page-node-id="hMHDPTmF0M5iBu4EYPCzJI">
+  <nav class="cat-nav" data-page-node-id="AZOW5Vw7Bu8r3LJbz3dZ9C">
+    <div class="cat-brand" data-page-node-id="p3ijerGCGoFWlVENf2JtXv">
+      <div class="cat-mark" data-page-node-id="7rPF6rqUytr9EV3abMwUAq"><img id="catMarkImg" alt="蓝月" data-src="assets/brand/mark.jpg" data-page-node-id="y7tliM3V21D8T3W3KQlX6A"></div>
+      <div class="cat-title" data-page-node-id="BeAgJN6N8TED6CvGkTnEUs"><span id="catBrandName" data-page-node-id="SmegSKHxqRV3b1ygarPbzY">蓝月</span><small data-page-node-id="aDYqNCd7VNg9xpgvzkjXBq">LANYUE PROTOTYPE WORKBENCH</small></div>
+    </div>
+    <div class="cat-meta" data-page-node-id="6i2tjqz1WYbe8b5fIPtSBZ">
+      <span class="cat-stat" data-page-node-id="R3BSZp4HP52sfEQ57PaalC">模块 <b id="catNavMod" data-page-node-id="9lxQvZbVW1RIAWHbBDciIO">1</b></span>
+      <span class="cat-stat" data-page-node-id="69SBldP7K1p5Fj30QtYOWj">原型 <b id="catNavProto" data-page-node-id="EycWBlUREMysKIrdi3Xvlf">0</b></span>
+      <span class="cat-stat" data-page-node-id="23tJCeYxl6ETC9kTk1QlSH">标注 <b id="catNavAnno" data-page-node-id="tPRaPqcNU3GyKjGNddZmFi">0</b></span>
+    </div>
+  </nav>
+  <section class="cat-hero" data-page-node-id="DFBzRmi1ye6m5eIFAHRKuP">
+    <div class="cat-badge" data-page-node-id="xbZsAokgFiJBPOEKMoq2bB"><span class="cat-dot" data-page-node-id="oaxnhBb4KkUbTpuxc1sFig"></span><span id="catHeroBadge" data-page-node-id="IDTPYfOP2wGFDDzJPuqMrG">蓝月 LANYUE · 产品原型评审平台</span></div>
+    <h1 id="catHeroTitle" data-page-node-id="C6c5IlXx9fsUYqSVdQqrQZ">蓝月</h1>
+    <p id="catHeroDesc" data-page-node-id="A5kr5lz0wJ87I5WwkUftq1">原型即文档，走查即评审。左侧原型目录 · 中间交互原型 · 右侧 PRD 说明。</p>
+    <div class="cat-hero-stats" data-page-node-id="HpXrkiMxjsq8zYM89au5BM">
+      <div class="cat-hs" data-page-node-id="eDA7wCJqCwTG8tBpDrtA6O"><div class="cat-num accent" id="catHeroMod" data-page-node-id="qtJem8O3sWC08As7Ib8ZUy">1</div><div class="cat-lbl" data-page-node-id="AxjNJSijh2m6zsGEi4r4Ev">业务模块</div></div>
+      <div class="cat-hs" data-page-node-id="tZCz4Y5bbhUqfm1jfbJhoO"><div class="cat-num" id="catHeroProto" data-page-node-id="ryCJ6xOorjP6fWYyNI1I6X">0</div><div class="cat-lbl" data-page-node-id="Oq4Fg9yRmDy03CgtwHmiFf">交互原型</div></div>
+      <div class="cat-hs" data-page-node-id="Oaaz26d4Pg79fp91tclPOW"><div class="cat-num" id="catHeroAnno" data-page-node-id="rajIRYRLrmm0oKFezd0VPB">0</div><div class="cat-lbl" data-page-node-id="5CHsG0pALal6YrQsRKaA3P">热点标注</div></div>
+    </div>
+  </section>
+  <section class="cat-section" data-page-node-id="HFEMpSTCorCj5ihC9siNvE">
+    <div class="cat-sec-head" data-page-node-id="qgfKaT47TxjdjTs5EJbAlw"><h2 data-page-node-id="OMeDCN9BG1riVkvltPeZM3">业务模块</h2><span class="cat-hint" data-page-node-id="A6FMFCxeYpIdWvgqqLgH8j">点击模块卡片进入对应工作台 · 更多模块规划中</span></div>
+    <div class="cat-grid" id="catGrid" data-page-node-id="QmZBxgfPLENJIZ9iF4jTQ3"></div>
+  </section>
+  <footer class="cat-footer" data-page-node-id="CCRE2kOopdMTFL9TUfA06W">
+    <div class="cat-tip" data-page-node-id="wdXGVb7IzzwIVKmCBiiJQA">蓝月 LANYUE · 让每一次产品评审都高效聚焦</div>
+    <div class="cat-brand" data-page-node-id="UKTvWNWxG8gJmalt9gKx1a">蓝月产品原型工作台 · 原型即文档，走查即评审</div>
+  </footer>
+</div>
+
+<!-- ================= 顶栏 ================= -->
+<header class="topbar" data-page-node-id="PrOQDHcKYRCo4ub5tyAXBy">
+  <button class="back-to-catalog" id="backToCatalog" title="返回原型目录" data-page-node-id="jcjvb1FLRtRQxRD3uOy98c">
+    <svg viewBox="0 0 24 24" data-page-node-id="V6xWDfAJ8wbFFMwFYCBIKJ"><path d="M19 12H5M11 18l-6-6 6-6" data-page-node-id="Jpdj2HJlsO6gEjIxZCDlxr"></path></svg>目录
+  </button>
+  <div class="brand" data-page-node-id="wi2igjrpVKYvhWl21bXXFa">
+    <div class="brand-mark" data-page-node-id="KUFsOPEFHaq2GV1HP47Yr1"><img id="brandMarkImg" alt="蓝月" data-src="assets/brand/mark.jpg" data-page-node-id="8xcna1hBq1baVfVLj74uOc"></div>
+    <div class="brand-name" data-page-node-id="e4Meqk0UypC4FacbKQDcGN"><span id="brandName" data-page-node-id="U9hE2F23YgrmEtvsGvMFBp">蓝月</span><small data-page-node-id="5b6QbqyZ6b79arS3zbB5wH">LANYUE PROTOTYPE WORKBENCH</small></div>
+  </div>
+  <div class="top-tools" data-page-node-id="DKD1Ns1cztSLjl5RCl34gV">
+    <div class="seg" id="deviceSeg" title="模拟设备宽度" data-page-node-id="THYC7Dhl11ucjuiMZS9bWl">
+      <button data-device="desktop" title="桌面" data-page-node-id="RCEcl4mIUqHZ8alIEh5QRW"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="GOMw7Td6vc8eVYf3mGIFCR"><rect x="2" y="4" width="20" height="13" rx="2" data-page-node-id="BEZGmSC5mA00zUnBeQpRbF"></rect><path d="M8 21h8M12 17v4" data-page-node-id="t6ZmoEmmjWlXBCLQ6qKxgl"></path></svg>桌面</button>
+      <button data-device="tablet" title="平板" data-page-node-id="HQCXAI6pq4LzbJ4y4TGCMz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="uDMLBlaNSz2abShaf1at3I"><rect x="5" y="2" width="14" height="20" rx="2" data-page-node-id="rJT0BjFhOBEZKJ3OddpAXE"></rect><path d="M11 18h2" data-page-node-id="uRDm5s4gPhnCseTGuiSs5j"></path></svg>平板</button>
+      <button data-device="mobile" class="on" title="手机" data-page-node-id="0ZSqVcANanXkaWyAsbc6Ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="ISjrfNciprUe3u8g9G0JE3"><rect x="7" y="2" width="10" height="20" rx="2" data-page-node-id="FlXCJFeEPELA0SBIaMNmm5"></rect><path d="M11 18h2" data-page-node-id="su0cqXaOnx4PtedDScRhzf"></path></svg>手机</button>
+    </div>
+    <button class="tbtn on" id="annoToggle" title="显示 / 隐藏 热点标注" data-page-node-id="fW08UGQZYuyu3V4CG3y8mY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="mxoEMw11E9lBfcbhnYpKdB"><path d="M12 22s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12z" data-page-node-id="iZGYQu9N8VkYA9zoXQsHF8"></path><circle cx="12" cy="10" r="2.6" data-page-node-id="QVg2l89X2oYghew1YFwaK9"></circle></svg>标注</button>
+    <button class="tbtn primary" id="tourStart" title="开始 / 结束 走查模式" data-page-node-id="NA1TF6HYpalHj63AjT7Nus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="BTKdnma3OiTSeXbzGf3GgB"><polygon points="6 4 20 12 6 20 6 4" data-page-node-id="XkvVyL5AsCsjgB2q43yl2O"></polygon></svg>走查<kbd data-page-node-id="0ETydRMguG4UGiOxBAg86v">C</kbd></button>
+    <button class="tbtn" id="panelToggle" title="一键隐藏 / 显示左右栏（快捷键 \）" data-page-node-id="Vtz8VDT32QVUjF2HEvPP6q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="ZYOGC6xEP0qB9mbGRX9jEy"><rect x="3" y="3" width="18" height="18" rx="2" data-page-node-id="vQauVnpTRVRvH94E5pqFNa"></rect><path d="M9 3v18M15 3v18" data-page-node-id="8Y4NyjmVFmwhhkORLhYEHe"></path></svg></button>
+    <button class="tbtn" id="frameRefresh" title="重载原型" data-page-node-id="dD3ryQZqtgDK9iHFCZPqxX"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="OpxgveGzMb71usdGUBT0Ep"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5" data-page-node-id="t2SlsBWVJS6DAHHpzoJ2mj"></path></svg></button>
+    <button class="tbtn" id="frameOpen" title="新窗口打开" data-page-node-id="skYHGCQl8bBzYQkXPnpkHD"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="X9eoxjJaVWUPVLg0E9lrHp"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" data-page-node-id="34bRWNExO9tEQ2c9sOPN44"></path></svg></button>
+    <!-- WB-EXTRA-TOOLS -->
+  </div>
+</header>
+
+<!-- ================= 三栏 ================= -->
+<div class="layout" data-page-node-id="xO0or42k995yqCE9yXtBxv">
+  <!-- 左：原型目录 -->
+  <aside class="sidebar" data-page-node-id="p3Wssc9BMQJ28A5S4WBzaf">
+    <div class="side-head" data-page-node-id="nYbHiX737oG0dDt6DdLQox">
+      <div class="side-title" data-page-node-id="5CDzpkocrKyMLKWPe1GwPS"><span data-page-node-id="eQskDmq3ayFsEyO5Jyw4qK">原型目录</span><span id="protoTotal" data-page-node-id="uGODD7nL3dX8L28xEtRFhX">0 个页面</span></div>
+      <div class="search-box" data-page-node-id="LsGGTiSaL9LUusFwYvVoHl">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="DBKdoQ1AF44OhYcBLGtidX"><circle cx="11" cy="11" r="7" data-page-node-id="HhBeI0OBGJ3MuVCO12PueC"></circle><path d="m20 20-3.2-3.2" data-page-node-id="HfI9A2slXAlikJkgyjNwPG"></path></svg>
+        <input id="sideSearch" placeholder="搜索页面 / 字段 / 规则…" data-page-node-id="cuziYWkmfGAetsF6Ep7CmO">
+      </div>
+    </div>
+    <div class="side-list" id="sideList" data-page-node-id="DU9Xce9XbH4jH2qkQ8YdAg"></div>
+    <div class="side-foot" data-page-node-id="Z5de02QAEBkiGrxs8u5l3R">
+      <div class="side-kbd-list" id="sideKbdList" data-page-node-id="lRA3vFmwD6yi5u3GEqhbOC">
+        <div class="side-kbd-row" data-page-node-id="tsrL4UyufchIV5aMYpAgQ0"><kbd data-page-node-id="EONO5SIdvbBKZ1A3ZpRCUL">Alt</kbd><span class="plus" data-page-node-id="sosdskowEtRC1EI5KFH2Ka">+</span><kbd data-page-node-id="e8Vp825tPn9fZl0bqE3EH1">↑</kbd><span data-page-node-id="qZ8Y7U1aKbt4ph9zy4G1Wk">切换上一个原型</span></div>
+        <div class="side-kbd-row" data-page-node-id="lU3ynzgmzNWPK98YetxAep"><kbd data-page-node-id="jHrrjkGb3rPMomjejrEYn2">Alt</kbd><span class="plus" data-page-node-id="66vdED0NmWrfMJKrSBDjSD">+</span><kbd data-page-node-id="fkhm0MGjLhgBQnyfYCmUBD">↓</kbd><span data-page-node-id="x4JfQVQJLkcu9UVXpunimE">切换下一个原型</span></div>
+        <div class="side-kbd-row" data-page-node-id="sjenerKrUirGHQdK3AZCHC"><kbd data-page-node-id="caWAUfs9rBxmqz8c92QmEG">C</kbd><span data-page-node-id="iHljxIeo0hwSFi1lJGA7n1">开始 / 结束 走查模式</span></div>
+      </div>
+      <button class="side-kbd-more" id="kbdMoreBtn" data-page-node-id="EATTBgaKQi0aO0eHPaYJ8A">查看全部快捷键</button>
+      <!-- WB-SIDE-EXTRA -->
+    </div>
+  </aside>
+
+  <!-- 中：原型舞台 -->
+  <section class="stage-col" data-page-node-id="5NAcO2VkJZnmhB05HTpFBz">
+    <div class="stage" id="stage" data-page-node-id="9HtPoolv53sIs0NuwjwFHQ">
+      <div class="preview-stack" data-page-node-id="wECw8SZnt06boQimDS0fqX">
+        <div class="slide-bar vertical" id="slideBar" hidden data-page-node-id="dVWZ3iTcvJkDvx9Omm3lth">
+          <button class="slide-nav" id="slidePrev" title="上一张" data-page-node-id="nGVdJJd4FUp5oDT4tArSkT"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="o2nqN5u4HmLPb7suFx3D0A"><path d="M6 14l6-6 6 6" data-page-node-id="D1QLBtLksydtb4wo6136nh"/></svg></button>
+          <div class="slide-dots" id="slideDots" data-page-node-id="KysxTshlRkjyNJ3YQRu7N5"></div>
+          <button class="slide-nav" id="slideNext" title="下一张" data-page-node-id="Ddg0FkB5OT68Edq0y1gLLd"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="4zNroD4PxGChrylgm4BeNP"><path d="M6 10l6 6 6-6" data-page-node-id="HjjjXA0eG76fS3K7zrnFkd"/></svg></button>
+        </div>
+        <div class="img-caption" id="imgCaption" hidden data-page-node-id="h3cjA3a9SL9BHgGVh6xdUO"></div>
+        <div class="device mobile" id="device" data-page-node-id="arIImITYBVTBdrkK0W0g2g">
+          <div class="device-frame-bar" data-page-node-id="bXBSUZw6SuPWXdYAiZRr1u">
+            <span class="fb-dot" style="background:var(--x59)" data-page-node-id="j0H8UILbd0nwDq1WNChGNl"></span>
+            <span class="fb-dot" style="background:var(--x58)" data-page-node-id="4urrojASVIno2qPkytqX8l"></span>
+            <span class="fb-dot" style="background:var(--x26)" data-page-node-id="PDfvavymTOSGo3Ebe6zgtQ"></span>
+            <span class="fb-url" id="frameUrl" data-page-node-id="gaityPZ9XePWELqaXnFvzi">—</span>
+          </div>
+          <iframe id="protoFrame" title="交互原型" data-page-node-id="gEPp1dmhTcQurbmbEgW1Qx"></iframe>
+          <div class="page-tabs" id="pageTabs" hidden data-page-node-id="gILpaO684uVpfoJm8AlETN"></div>
+          <div class="img-scroll" id="imgScroll" hidden data-page-node-id="sBliUpixG3rQLUtVGD1fZU">
+            <img id="protoImg" class="proto-img" alt="" data-src="assets/brand/placeholder.png" data-page-node-id="x6EQaIXF2I8m77sCirqdPQ">
+          </div>
+          <div class="hotspot-layer" id="hotspotLayer" data-page-node-id="kMTZ96fcB7ovStCVLuS9fm"></div>
+          <div class="hotspot-fixed-layer" id="hotspotFixedLayer" data-page-node-id="cA6kHft3CeNaNoMfSS2LnE"></div>
+          <div class="spot-mask" id="spotMask" data-page-node-id="OZm2EWKpuvA4ZUG3THEq4D"><div class="spot-hole" id="spotHole" data-page-node-id="we34hDHYzvzqh7hsMZGIu2"></div></div>
+          <div class="hs-pop" id="hsPop" data-page-node-id="wPDGHuFuHWfcIZh1QxWoaK"></div>
+          <div class="stage-loading" id="stageLoading" hidden data-page-node-id="PKjCdI53kSXqfQHdODZAA8"><span class="ld-dot" data-page-node-id="F12C67k6Q6TvdxdOklLm7c"></span><span class="ld-dot" data-page-node-id="Hqe5M220QBA6zP9n4jggMp"></span><span class="ld-dot" data-page-node-id="YA2SKyqx7l8rbpTqXzC2KG"></span></div>
+          <div class="page-transition" id="pageTransition" aria-hidden="true" data-page-node-id="StG1zgXfKT03nyPWxT9riA">
+            <div class="pt-ring" id="ptRing" data-page-node-id="HwEfHqeJcbkAPXSDiODvvH"></div>
+            <img class="pt-logo" id="ptLogo" alt="蓝月" data-src="assets/brand/mark.jpg" data-page-node-id="6ZU8vH2wpCldIkH8i9btgL">
+            <div class="pt-text" id="ptText" data-page-node-id="TJTGob3es04AgjWahYjbeW">蓝月 · 原型工作台</div>
+          </div>
+          <div class="tour-card" id="tourCard" hidden data-page-node-id="YZO3cWnyDJOhz3lYZxgVw7">
+            <button class="tour-exit" id="tourExit" data-page-node-id="oTFnqszpKX7gVoe36gC5Yf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" data-page-node-id="2U3m9mClqsxI3b3ZtwiM79"><path d="M18 6 6 18M6 6l12 12" data-page-node-id="ZA2T8PQ4TNeEuLHGHPEbdk"></path></svg></button>
+            <div class="tour-head" data-page-node-id="KinBnWQ9mvqIuDhmVSiKry">
+              <span class="type-chip" id="tourChip" data-page-node-id="YEahqnx5pTWSmE4vWHD4EG"></span>
+              <div class="tour-progress" data-page-node-id="AOeDk1Gcb1sYzG1ir0Tvg0"><div class="tour-bar" data-page-node-id="KI9iTF94iAeK01AQdhHT8M"><i id="tourBar" data-page-node-id="5UbvKcBNfKXYUZGeWRrf0M"></i></div><span id="tourCount" data-page-node-id="OwU0fia5tv54MnYAGEoga9"></span></div>
+              <div class="tour-filter" id="tourFilter" style="display:none" data-page-node-id="WIiBJZ0d45PNQTRoC8jzE9">
+                <button type="button" data-f="all" class="on" data-page-node-id="ne4hhOv1aPzF0HzFSa139x">全部</button>
+                <button type="button" data-f="element" data-page-node-id="ZQzCOwB2YrJbnGcOiGHGY3">仅组件</button>
+              </div>
+            </div>
+            <div class="tour-title" id="tourTitle" data-page-node-id="BeRlIkG5uGUxFIUQyOE0Ei"></div>
+            <div class="tour-body" id="tourBody" data-page-node-id="qCz18pVmBmI7C0oCdSCXsQ"></div>
+            <div class="tour-foot" data-page-node-id="zE2vqDaaNffNPFipcSfPMN">
+              <button class="tour-btn" id="tourPrev" data-page-node-id="Z3LacNhNdXmvR5YfHofIo3">上一步</button>
+              <button class="tour-btn" id="tourNext" data-page-node-id="RApHhJygUPWqJoIPCO5Ivb">下一步</button>
+              <span class="sp" data-page-node-id="eCRXr6K0tNAGGTyauQgWzl"></span>
+              <button class="tour-btn primary" id="tourDone" data-page-node-id="ggQOQRSxPapng2op5BGeEs">完成走查</button>
+            </div>
+          </div>
+          <div class="guide-view" id="guideView" hidden data-page-node-id="dFb4vnqTyU6Og3GdPSRtta"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 右：PRD 说明 -->
+  <aside class="prd-panel" data-page-node-id="sxl6tNZ08v3P3vlINF9e1A">
+    <div class="prd-head" data-page-node-id="ehA4pPD69auB1iGuZwDI2l">
+      <div class="prd-kicker" data-page-node-id="9882ZUcyCxcVAKdicM8HuC">
+        <span id="prdGroup" data-page-node-id="sTGphtnZ2taeRsbPPhv9cG">PRD</span>
+        <span class="status-pill review" id="prdStatus" data-page-node-id="nQ1G1jM5X6bAD3A5gYGriP">已评审</span>
+      </div>
+      <div class="prd-title" id="prdTitle" data-page-node-id="xrQPAFcSuHbDahXat1x8Sz">—</div>
+      <div class="prd-meta" data-page-node-id="Aksc07FZO4ze0pl3rCQ5He">
+        <span data-page-node-id="iYQ8q3l3cW45POlRzlqnK0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="4kPvGAtUaD9K42urzxWU9G"><path d="M12 8v4l3 2" data-page-node-id="dWio5W6ePBTpFSzkGhTUMj"></path><circle cx="12" cy="12" r="9" data-page-node-id="9OiYBL8DMaCgsdzdPgBcQ9"></circle></svg><span id="prdUpdated" data-page-node-id="4CDKfM5611V8FgxNxJyV3u">—</span></span>
+        <span data-page-node-id="qvDkiFlemVPblYKrOxFlsE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="QeXNe2apkqKjexVZ68H2iA"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" data-page-node-id="1BnS71LIGWjcnlRttun9EC"></path><circle cx="12" cy="7" r="4" data-page-node-id="fAFtJ0X9znCABHi46EnF40"></circle></svg><span id="prdOwner" data-page-node-id="1qBFUPqaE8w3MFZaAdohcT">—</span></span>
+        <span data-page-node-id="4A3TPsDQPAeYeCvKC7bKxA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="zSrKwlGXW6KRcc5NiK4nAm"><path d="M21 6H3M21 12H3M21 18H3" data-page-node-id="XBCuG5IRBdv0tR7GKVjejf"></path></svg><span id="prdHsCount" data-page-node-id="MsPRrK3VqW9kLGmBDglkHW">0 项标注</span></span>
+      </div>
+      <button type="button" id="prdEditBtn" class="ed-btn sm prd-edit-btn" hidden>编辑此原型</button>
+    </div>
+    <div class="prd-tabs" id="prdTabs" data-page-node-id="yeiwtoymrTtxS99AJGkVmA">
+      <button class="prd-tab" data-pane="overview" data-page-node-id="rvUjDjTn8gJr4KRVNdhaog">概述</button>
+      <button class="prd-tab" data-pane="flow" data-page-node-id="DNHLoGn8XKxoScXJ0ehOEW">流程<span class="n" id="nFlow" data-page-node-id="3ayPWCDDEvTBdCJAEX3FQT">0</span></button>
+      <button class="prd-tab on" data-pane="element" data-page-node-id="TzztrUwDJ4UYhEsMOb6guX">组件<span class="n" id="nElement" data-page-node-id="6GeSnFBtacwcVp3AiToEwh">0</span></button>
+      <button class="prd-tab" data-pane="rule" data-page-node-id="lELKjKGuCyC9btAoB5Wlfv">规则<span class="n" id="nRule" data-page-node-id="iPKIJbxa1iEmvakr18RCXb">0</span></button>
+      <button class="prd-tab" data-pane="field" data-page-node-id="P16Hm0ELJkOZ2kGmG0fugg">字段<span class="n" id="nField" data-page-node-id="b9At3V3ZZFcoBknbBHSPB4">0</span></button>
+      <button class="prd-tab" data-pane="model" data-page-node-id="5HFmSFFZy1ZmRQslEek6nK">数据<span class="n" id="nModel" data-page-node-id="uQzJ1BQx0JtVbfqk8yFuNu">0</span></button>
+      <button class="prd-tab" data-pane="accept" data-page-node-id="5QcHmusXAbwqsefOslHf7v">验收<span class="n" id="nAccept" data-page-node-id="4M8tKJYCV6hsow8iWaDhBd">0</span></button>
+    </div>
+    <div class="prd-body" id="prdBody" data-page-node-id="GrK1H6lQ5p5UFrF4jYyDjk"></div>
+  </aside>
+
+  <button class="collapse-handle left" id="handleLeft" title="收起目录" data-page-node-id="gOl79x8YewDcwBTtgoNq0D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="GOp7WlxRjsH3u8cWhIU81K"><path d="m15 18-6-6 6-6" data-page-node-id="tqWUcyem5Ui4gbGQOoxYGj"></path></svg></button>
+  <button class="collapse-handle right" id="handleRight" title="收起PRD" data-page-node-id="Jk6Ud7cdhxVY6jXWakvy8N"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="vbRFLGCnnp6MHffZdXK1mg"><path d="m9 18 6-6-6-6" data-page-node-id="bvVY4mRb6CbOsng2S9gBNp"></path></svg></button>
+  <div class="vdivider left" id="divLeft" title="拖拽调整目录宽度" data-page-node-id="CKuW6i7hR63EcCZburDlco"></div>
+  <div class="vdivider right" id="divRight" title="拖拽调整PRD宽度" data-page-node-id="pFDBbvymtBKatFegrWqhU5"></div>
+</div>
+
+<!-- ================= 弹窗 ================= -->
+<div class="ed-modal" id="shortcutModal" data-page-node-id="UU8fF0QLKNfJdtF1vuuyvJ">
+  <div class="ed-card" data-page-node-id="WUJ1sIiBq6F0clfOmG8MtU">
+    <h3 data-page-node-id="G72KXpV8voh5CIy2jHOJQn">键盘快捷键</h3>
+    <p class="ed-sub" data-page-node-id="NwZMMZBPGohbZ37al1uha1">使用键盘快速操作工作台</p>
+    <div class="kbd-all" id="kbdAllList" data-page-node-id="rtOas94JAuDdakaw4h8BKy"></div>
+    <div class="ed-foot" data-page-node-id="M8O7oqjVimUeHv2nhTl2TB"><span class="sp" data-page-node-id="gtWDJgwtMFlKGq3KWt6yoj"></span><button class="ed-btn primary" id="kbdCloseBtn" data-page-node-id="NGA32IjJCkrefSlJoEI7s2">关闭</button></div>
+  </div>
+</div>
+
+<div class="ed-modal" id="impModal" data-page-node-id="x1GvbjxtLhEibhqtCL6IiE">
+  <div class="ed-card" data-page-node-id="RBroVVu7igw511YN1leEE6">
+    <h3 id="impTitle" data-page-node-id="KdxjrYHu5G9WYJlLGIr3OB">导入本地 HTML 原型</h3>
+    <p class="ed-sub" data-page-node-id="t0okX0wAqhIeGNryBtIzRM">填写名称、选择分类与设备类型后导入</p>
+    <div class="ed-row" data-page-node-id="S0G85nsI1hC4mOsDBge0CV"><label data-page-node-id="0Uwf15p9mKh21BBzpra0Pw">来源</label>
+      <div class="segmented" id="impSourceSeg" data-page-node-id="LVxUSacAwO1mJFzmHOjEPv">
+        <button type="button" data-src="file" class="on" data-page-node-id="CPAXKUINdD1a9NC3cqYo8e">本地文件</button>
+        <button type="button" data-src="dir" data-page-node-id="GkTX4mOt6ZB329W4FmTWTQ">从 v0.4 目录选</button>
+      </div>
+    </div>
+    <div class="ed-row" id="impFileRow" data-page-node-id="TcrQyzy4wxhFufUzNULPOc"><label data-page-node-id="TMZ9sN5rD712WkcBDbr7JG">文件</label><div class="imp-file" id="impFileName" data-page-node-id="WlznyUElOFzpfdNM4QS5S4">—</div><button class="ed-btn sm" id="impPickBtn" data-page-node-id="mJ9FAIFyx5cPIsZ961cGk7">选择文件…</button><input type="file" id="impFileInput" accept=".html,.htm,.png,.jpg,.jpeg,.webp,.gif" hidden data-page-node-id="V0hwolWJkzwV0Ey5NfEUAA"></div>
+    <div class="ed-row" id="impDirRow" style="display:none" data-page-node-id="m6yka8TV70BmtEVFDqndqo"><label data-page-node-id="koLjVsdk5TWu0p20ckjuE7">目录文件</label><select id="impDirSelect" data-page-node-id="TlKC8Dhna8QYMyGBd6bgaJ"></select><button class="ed-btn sm" id="impDirReload" data-page-node-id="kNrgICRM6ZAyODhHkiVFQ6">刷新</button></div>
+    <div class="ed-row" data-page-node-id="KLRRsd7F0EkIPxBUikeXvI"><label data-page-node-id="mFyu23od9vClEvtib87fZv">名称</label><input id="impName" placeholder="原型显示名（默认取文件名）" data-page-node-id="YLzAUBm4kk9BhEetJ1QeXb"></div>
+    <div class="ed-row" data-page-node-id="H2KxJMDGFGtrVYSl13RDtv"><label data-page-node-id="FsTnWUwEaEbkZiL0N4hHwM">分类</label>
+      <select id="impCat" data-page-node-id="DpMeDuP7oob7uw53LHEo3J"></select>
+      <input class="imp-group-new" id="impCatNew" placeholder="输入新分类名" style="display:none" data-page-node-id="Fv4ZcNb83yeQGv4ybeHkoY">
+    </div>
+    <div class="ed-row" data-page-node-id="u0SqrrMMmBfsh8JCq6REzd"><label data-page-node-id="H4xENVe24D4QcM3KOf2eH6">设备类型</label>
+      <select id="impDevice" data-page-node-id="9lsYMt8Q60BawkyffzcWL6"><option value="mobile" data-page-node-id="gAnf54XbNpWZxDpQRrf2OC">手机</option><option value="desktop" data-page-node-id="ZjevfrvmBktEiRMNtNECYB">桌面</option><option value="tablet" data-page-node-id="EOlwEBlUo4FsPsbMtsCwY6">平板</option></select>
+    </div>
+    <div class="ed-row" id="impThumbRow" data-page-node-id="krvCEzUCmimAwNASpYxrXo"><label data-page-node-id="46GN7Vv03iTD99KeddeFDs">预览图</label><div class="imp-file" id="impThumbName" data-page-node-id="rLq1JA5iJMF0ccy2Cna3ad">—（可选，图片稿专用）</div><button class="ed-btn sm" id="impThumbBtn" data-page-node-id="fucNFLfq7XarMiatP0GzLo">选择图片…</button><input type="file" id="impThumbInput" accept="image/*" hidden data-page-node-id="lapHjImzkhd981vREUKRhR"></div>
+    <div class="ed-foot" data-page-node-id="C7eYhXMWZ9YXc9CyWH9F8K">
+      <span class="sp" data-page-node-id="asKUAyJrBRspGR1jutpICL"></span>
+      <button class="ed-btn" id="impCancel" data-page-node-id="9bjEvjeH3AUwuUGwJCDSV9">取消</button>
+      <button class="ed-btn primary" id="impConfirm" data-page-node-id="kUaSLKPe0NdBv5crOajcVu">导入</button>
+    </div>
+  </div>
+</div>
+
+<div class="ed-modal" id="catModal" data-page-node-id="MkJZpe33xzb8ctV82ODlgR">
+  <div class="ed-card" data-page-node-id="5SSuutsCQHL6XqXYi3xEGy">
+    <h3 data-page-node-id="jeJvCAKQ5sHntb3wbUXsx3">分类管理</h3>
+    <p class="ed-sub" data-page-node-id="QHnLcOnvHRVN4aoYZqtHX0">拖拽排序；重命名 / 删除（原型迁移到「未分类」）；底部可新增分类</p>
+    <div class="cat-list" id="catList" data-page-node-id="5kJz96Hn78tKHQPqMDm4YE"></div>
+    <div class="ed-row" data-page-node-id="I8wxZ6jsFZVg0GTx6Rw8vh"><label data-page-node-id="cwfxDixoGVPrSYEuHIVK0e">新增分类</label><input class="imp-group-new" id="catNewName" placeholder="输入新分类名后点「添加」" data-page-node-id="nshHVyxHNybWHCPWXXFmxQ"></div>
+    <div class="ed-foot" data-page-node-id="IMmaiKnEjFwe7fpgdELU1T">
+      <button class="ed-btn" id="catAdd" data-page-node-id="mZ2rpi8pMsEctG1IJlHeqE">添加</button>
+      <span class="sp" data-page-node-id="sCU0f7JMjEKDqUUlgVfzxW"></span>
+      <button class="ed-btn primary" id="catClose" data-page-node-id="evLGs8kqu77BeFSrTTTWvR">完成</button>
+    </div>
+  </div>
+</div>
+
+<!-- 原型编辑弹窗（管理模式） -->
+<div class="ed-modal" id="editModal" data-page-node-id="ND8U5lwoGW5mh8WREzs0g7">
+  <div class="ed-card lg" data-page-node-id="PBhHCaYClnGwlvfHCYxh37">
+    <h3 data-page-node-id="EWTWhLap37VKXDTN9IMfjL">编辑原型信息</h3>
+    <p class="ed-sub" id="editSub" data-page-node-id="tixBu1ectsblJaEepkAxEw">—</p>
+    <div class="ed-tabs-mini" id="editTabs" data-page-node-id="ZdRf1CAXOfautwhNof98Gn">
+      <button type="button" data-t="base" class="on" data-page-node-id="6rnLlgKHWN4LAtkf2ABxHZ">基本信息</button>
+      <button type="button" data-t="pages" data-page-node-id="9VKPMdH0x25QYv6Xw3G9aT">子页切换器</button>
+      <button type="button" data-t="overview" data-page-node-id="t7rBG0Z7hdToE5oJ2JOahv">方案概述</button>
+      <button type="button" data-t="flow" data-page-node-id="jFWSrSUS6LWkfmBRVOBKKm">流程与异常</button>
+      <button type="button" data-t="accept" data-page-node-id="5t5etsLNcR98mUOh0X9wht">验收标准</button>
+      <button type="button" data-t="json" data-page-node-id="FoyTYBA1ZzQ4a8r2jD1kcI">JSON</button>
+    </div>
+    <div class="ed-pane" id="editPane" data-page-node-id="HKIDL6PaIplRDt6D2DJ8xD"></div>
+    <div class="ed-foot" data-page-node-id="7F0Zg8Zb70OCCZiDjOhTIg">
+      <button class="ed-btn danger" id="editDelete" data-page-node-id="DxLj0QFiGRZOcO1sZ0Ez9T">删除原型</button>
+      <span class="sp" data-page-node-id="eE8i0HoHxpac0riBI7nstg"></span>
+      <button class="ed-btn" id="editCancel" data-page-node-id="GPGuSf6oXvokOVPM7D43Lj">取消</button>
+      <button class="ed-btn primary" id="editSave" data-page-node-id="mTHKtnmZlTXlEhfMQ2Xe3Z">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" data-page-node-id="0SdUxHIBQEPbuN8fZotaHV"></div>
+<div class="wb-update-bar" id="wbUpdateBar" hidden data-page-node-id="5EJSOF6Etl9KrUe3tcHHLI">
+  <span id="wbUpdateText" data-page-node-id="ygLTiafkCGjY4OqwmXpklM">发现新版本</span>
+  <button class="ed-btn sm" id="wbUpdateReload" data-page-node-id="KNMZDlAy9FPU3Hz4uk3NBB">立即刷新</button>
+  <button class="ed-btn sm ghost" id="wbUpdateLater" data-page-node-id="925csSJu25nsJierIU1oxB">稍后</button>
+</div>
+<button id="wbThemeToggle" class="wb-theme-toggle" title="切换浅色 / 深色" aria-label="切换主题" data-page-node-id="CWZsallWhYpTyQX3ZyeGI5">🌑</button>
+
+<!-- ===== 导航数据：内联，首屏直出，杜绝 js 缓存问题 ===== -->
+<script id="wb-nav" type="application/json">{"v": 3, "brand": {"name": "蓝月", "sub": "LANYUE PROTOTYPE WORKBENCH"}, "cats": ["用户端 · CDF中免海南", "导购端 · 繁星APP", "管理后台 · PC"], "items": [{"id": "p_mtobsr6sh8yw", "group": "用户端 · CDF中免海南", "order": 0, "icon": "", "badge": ""}, {"id": "p_dgmsglist01", "group": "用户端 · CDF中免海南", "order": 1, "icon": "", "badge": ""}, {"id": "v04-u7", "group": "用户端 · CDF中免海南", "order": 2, "icon": "", "badge": ""}, {"id": "v04-u1", "group": "用户端 · CDF中免海南", "order": 3, "icon": "", "badge": ""}, {"id": "v04-u6", "group": "用户端 · CDF中免海南", "order": 4, "icon": "", "badge": ""}, {"id": "v04-u5", "group": "用户端 · CDF中免海南", "order": 5, "icon": "", "badge": ""}, {"id": "v04-u4", "group": "用户端 · CDF中免海南", "order": 6, "icon": "", "badge": ""}, {"id": "v04-u16", "group": "用户端 · CDF中免海南", "order": 7, "icon": "", "badge": ""}, {"id": "v04-g1", "group": "导购端 · 繁星APP", "order": 8, "icon": "", "badge": ""}, {"id": "v04-g2", "group": "导购端 · 繁星APP", "order": 9, "icon": "", "badge": ""}, {"id": "v04-g3", "group": "导购端 · 繁星APP", "order": 10, "icon": "", "badge": ""}, {"id": "v04-g4", "group": "导购端 · 繁星APP", "order": 11, "icon": "", "badge": ""}, {"id": "v04-g8", "group": "导购端 · 繁星APP", "order": 12, "icon": "", "badge": ""}, {"id": "v04-g9", "group": "导购端 · 繁星APP", "order": 13, "icon": "", "badge": ""}, {"id": "v04-m3", "group": "管理后台 · PC", "order": 14, "icon": "", "badge": ""}, {"id": "v04-m4", "group": "管理后台 · PC", "order": 15, "icon": "", "badge": ""}]}</script>
+
+<script src="assets/js/core.js?v=20260917.27"></script>
+<script src="assets/js/cache.js?v=20260917.27"></script>
+<script src="assets/js/data.js?v=20260917.27"></script>
+<script src="assets/js/sidebar.js?v=20260917.27"></script>
+<script src="assets/js/stage.js?v=20260917.27"></script>
+<script src="assets/js/panel.js?v=20260917.27"></script>
+<script src="assets/js/app.js?v=20260917.27"></script>
+<script src="assets/js/editor.js?v=20260917.27"></script>
+</body>
+</html>

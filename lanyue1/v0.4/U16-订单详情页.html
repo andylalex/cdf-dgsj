@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="U16Html">
+<head data-page-node-id="U16Head">
+  <meta charset="UTF-8" data-page-node-id="U16Meta">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="U16Viewport">
+  <title data-page-node-id="U16Title">订单详情</title>
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="U16FaCss">
+  <style data-page-node-id="U16Style">
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{height:100%;font-family:'Noto Sans SC','PingFang SC',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:#f5f5f5;color:#1a1a1a}
+    .phone-frame{max-width:414px;height:100dvh;overflow:hidden;margin:0 auto;background:#f5f5f5;display:flex;flex-direction:column;position:relative}
+
+    :root{--gold:#b8860f;--gold-deep:#9c6f1c;--gold-bg1:#fbf3e4;--gold-bg2:#f4e9d2}
+
+    /* 状态栏 */
+    .status-bar{flex:0 0 auto;height:44px;padding:10px 16px 0;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;color:#1a1a1a;background:#fff}
+    .status-bar .time{font-size:15px;letter-spacing:.5px}
+    .status-bar .icons{display:flex;align-items:center;gap:5px;font-size:12px}
+    .status-bar .icons i{font-size:13px}
+    .status-bar .battery{width:22px;height:11px;border:1px solid #1a1a1a;border-radius:2px;position:relative;display:flex;align-items:center;padding:1px}
+    .status-bar .battery::after{content:'';position:absolute;right:-3px;top:3px;width:2px;height:4px;background:#1a1a1a;border-radius:0 1px 1px 0}
+    .status-bar .battery i{width:65%;height:100%;background:#1a1a1a;border-radius:1px;display:block}
+
+    /* 顶部栏（小程序样式：返回 + 居中标题 + 胶囊） */
+    .top-header{flex:0 0 auto;background:#fff;padding:8px 12px 12px;display:flex;align-items:center}
+    .top-header .back{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#1a1a1a;font-size:20px;cursor:pointer}
+    .top-header .hd-title{flex:1;text-align:center;font-size:17px;font-weight:600;color:#1a1a1a}
+    .mini-caps{flex-shrink:0;display:flex;align-items:center;background:rgba(255,255,255,.9);border:1px solid #e3e4e8;border-radius:999px;padding:0 11px;height:32px;gap:10px;color:#1a1a1a;font-size:15px;cursor:pointer}
+    .mini-caps .sep{width:1px;height:18px;background:#e3e4e8}
+
+    /* 滚动区 */
+    .scroll-area{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
+    .scroll-area::-webkit-scrollbar{display:none}
+
+    /* 通用白卡 */
+    .card{background:#fff;border-radius:12px;margin:10px 10px 0;overflow:hidden}
+
+    /* 状态卡（金棕主题） */
+    .status-card{border-radius:12px;margin:10px 10px 0;overflow:hidden;background:linear-gradient(180deg,var(--gold-bg1) 0%,var(--gold-bg2) 100%);padding:0 16px 18px}
+    .status-card .strip{height:6px;background:var(--gold);margin:0 -16px 18px}
+    .status-main{display:flex;align-items:center;gap:12px;cursor:pointer}
+    .status-main .s-ic{font-size:26px;color:var(--gold)}
+    .status-main .s-txt{font-size:21px;font-weight:700;color:var(--gold)}
+    .status-main .s-arrow{font-size:14px;color:var(--gold);margin-left:2px}
+    .status-sub{margin-top:10px;font-size:14px;color:#a8946a}
+
+    /* 取货人信息 */
+    .pickup-row{display:flex;align-items:center;gap:10px;font-size:15px;color:#1a1a1a;padding:4px 0}
+    .pickup-row .name{font-weight:700}
+    .info-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:14px;color:#374151;line-height:1.5}
+    .info-row .i-ic{width:18px;text-align:center;font-size:15px;color:#6b7280;flex-shrink:0;margin-top:1px}
+    .info-row .i-label{flex-shrink:0}
+    .info-row .i-val{flex:1;min-width:0;word-break:break-all}
+
+    /* 订单编号卡 */
+    .no-row{display:flex;align-items:center;gap:8px;padding:14px 12px;font-size:13px}
+    .no-row .no-label{color:#6b7280;flex-shrink:0}
+    .no-row .no-val{flex:1;min-width:0;font-family:Arial,sans-serif;letter-spacing:.3px;color:#1a1a1a;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .no-row .copy-btn{flex-shrink:0;font-size:12px;color:#374151;background:#f3f4f6;border-radius:4px;padding:3px 8px;cursor:pointer}
+    .no-row .chev{flex-shrink:0;color:#9ca3af;font-size:12px;cursor:pointer}
+    .contact-row{border-top:1px solid #f3f4f6;padding:13px 0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;color:#1a1a1a;cursor:pointer}
+    .contact-row i{color:var(--gold);font-size:16px}
+
+    /* 商品列表卡 */
+    .list-title{font-size:16px;font-weight:700;color:#1a1a1a;padding:14px 12px 4px}
+    .item-row{display:flex;gap:10px;padding:12px}
+    .item-thumb{width:78px;height:78px;border-radius:6px;background:#f9fafb;overflow:hidden;flex-shrink:0}
+    .item-thumb img{width:100%;height:100%;object-fit:cover}
+    .item-body{flex:1;min-width:0;display:flex;flex-direction:column}
+    .item-head{display:flex;align-items:flex-start;gap:6px}
+    .store-tag{flex-shrink:0;font-size:11px;font-weight:600;color:#fff;background:var(--gold);border-radius:4px;padding:2px 5px;margin-top:1px}
+    .item-name{font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.4}
+    .item-mid{display:flex;align-items:baseline;margin-top:8px}
+    .item-spec{font-size:13px;color:#6b7280}
+    .item-pay{margin-left:auto;text-align:right;white-space:nowrap}
+    .item-pay .pay-label{font-size:12px;color:#6b7280}
+    .item-pay .pay-amt{font-size:17px;font-weight:800;color:var(--gold)}
+    .item-pay .pay-origin{font-size:11px;color:#9ca3af;text-decoration:line-through;margin-left:6px}
+    .item-foot{margin-top:8px}
+    .refund-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#6b7280;background:#f3f4f6;border-radius:4px;padding:5px 9px;cursor:pointer}
+    .refund-tag i{font-size:10px;color:#9ca3af}
+    .item-advisor{margin-top:8px;display:flex;align-items:center;gap:6px;font-size:12px;color:#9c6f1c}
+    .item-advisor i{font-size:12px;color:var(--gold)}
+
+    /* 简单行卡（发票/优惠券） */
+    .simple-row{display:flex;align-items:center;justify-content:space-between;padding:16px 12px;font-size:15px;color:#1a1a1a}
+    .simple-row .r-val{font-size:14px;color:#6b7280}
+    .simple-row .r-val .r-amt{color:#1a1a1a}
+
+    .spacer{height:24px;flex-shrink:0}
+
+    /* 底部 home 条 */
+    .home-bar{flex:0 0 auto;background:#f5f5f5;padding:8px 0 10px;display:flex;justify-content:center}
+    .home-bar .bar{width:134px;height:5px;border-radius:3px;background:#111}
+  </style>
+</head>
+<body data-page-node-id="U16Body">
+<div class="phone-frame" id="U16PhoneFrame" data-page-node-id="U16PhoneFrame">
+
+  <!-- 状态栏 -->
+  <div class="status-bar" id="U16StatusBar" data-page-node-id="U16StatusBar">
+    <span class="time" id="U16StatusTime" data-page-node-id="U16StatusTime">9:41</span>
+    <div class="icons" id="U16StatusIcons" data-page-node-id="U16StatusIcons">
+      <i class="fas fa-signal" id="U16Signal" data-page-node-id="U16Signal"></i>
+      <i class="fas fa-wifi" id="U16Wifi" data-page-node-id="U16Wifi"></i>
+      <div class="battery" id="U16Battery" data-page-node-id="U16Battery"><i></i></div>
+    </div>
+  </div>
+
+  <!-- 顶部栏 -->
+  <header class="top-header" id="U16TopHeader" data-page-node-id="U16TopHeader">
+    <span class="back" id="U16Back" data-page-node-id="U16Back" onclick="goBack()"><i class="fas fa-chevron-left" id="U16BackIcon" data-page-node-id="U16BackIcon"></i></span>
+    <div class="hd-title" id="U16HdTitle" data-page-node-id="U16HdTitle">已取消</div>
+    <div class="mini-caps" id="U16Capsule" data-page-node-id="U16Capsule">
+      <i class="fas fa-ellipsis-h" id="U16CapsuleMore" data-page-node-id="U16CapsuleMore"></i>
+      <span class="sep" id="U16CapsuleSep" data-page-node-id="U16CapsuleSep"></span>
+      <i class="fas fa-dot-circle" id="U16CapsuleDot" data-page-node-id="U16CapsuleDot"></i>
+    </div>
+  </header>
+
+  <main class="scroll-area" id="U16ScrollArea" data-page-node-id="U16ScrollArea">
+
+    <!-- 订单状态卡 -->
+    <section class="status-card" id="U16StatusCard" data-page-node-id="U16StatusCard">
+      <div class="strip" id="U16StatusStrip" data-page-node-id="U16StatusStrip"></div>
+      <div class="status-main" id="U16StatusMain" data-page-node-id="U16StatusMain">
+        <i class="fas fa-box s-ic" id="U16StatusIcon" data-page-node-id="U16StatusIcon"></i>
+        <span class="s-txt" id="U16StatusText" data-page-node-id="U16StatusText">已取消</span>
+        <i class="fas fa-chevron-right s-arrow" id="U16StatusArrow" data-page-node-id="U16StatusArrow"></i>
+      </div>
+      <div class="status-sub" id="U16StatusSub" data-page-node-id="U16StatusSub">已取消</div>
+    </section>
+
+    <!-- 取货人信息卡 -->
+    <section class="card" id="U16PickupCard" data-page-node-id="U16PickupCard" style="padding:10px 12px 12px">
+      <div class="pickup-row" id="U16PickupRow" data-page-node-id="U16PickupRow">
+        <span class="name" id="U16PickupName" data-page-node-id="U16PickupName">*珊</span>
+        <span id="U16PickupPhone" data-page-node-id="U16PickupPhone">176******96</span>
+      </div>
+      <div class="info-row" id="U16IdRow" data-page-node-id="U16IdRow">
+        <i class="fas fa-address-card i-ic" id="U16IdIcon" data-page-node-id="U16IdIcon"></i>
+        <span class="i-val" id="U16IdVal" data-page-node-id="U16IdVal">2**************520</span>
+      </div>
+      <div class="info-row" id="U16DepartRow" data-page-node-id="U16DepartRow">
+        <i class="fas fa-suitcase-rolling i-ic" id="U16DepartIcon" data-page-node-id="U16DepartIcon"></i>
+        <span class="i-label" id="U16DepartLabel" data-page-node-id="U16DepartLabel">离岛信息：</span>
+        <span class="i-val" id="U16DepartVal" data-page-node-id="U16DepartVal">2026-09-30 17:00 / CTG0002</span>
+      </div>
+      <div class="info-row" id="U16AddrRow" data-page-node-id="U16AddrRow">
+        <i class="fas fa-location-dot i-ic" id="U16AddrIcon" data-page-node-id="U16AddrIcon"></i>
+        <span class="i-label" id="U16AddrLabel" data-page-node-id="U16AddrLabel">自提地址：</span>
+        <span class="i-val" id="U16AddrVal" data-page-node-id="U16AddrVal">海南省三亚市天涯区三亚凤凰国际机场T1/T2航站楼国内出发厅110登机口旁</span>
+      </div>
+    </section>
+
+    <!-- 订单编号 + 联系我们 -->
+    <section class="card" id="U16NoCard" data-page-node-id="U16NoCard">
+      <div class="no-row" id="U16NoRow" data-page-node-id="U16NoRow">
+        <span class="no-label" id="U16NoLabel" data-page-node-id="U16NoLabel">订单编号</span>
+        <span class="no-val" id="U16NoVal" data-page-node-id="U16NoVal">701826091415175041412601</span>
+        <span class="copy-btn" id="U16CopyBtn" data-page-node-id="U16CopyBtn" onclick="copyNo()">复制</span>
+        <i class="fas fa-chevron-down chev" id="U16NoChev" data-page-node-id="U16NoChev"></i>
+      </div>
+      <div class="contact-row" id="U16ContactRow" data-page-node-id="U16ContactRow">
+        <i class="fas fa-headset" id="U16ContactIcon" data-page-node-id="U16ContactIcon"></i>
+        <span id="U16ContactText" data-page-node-id="U16ContactText">联系我们</span>
+      </div>
+    </section>
+
+    <!-- 离岛自提商品列表 -->
+    <section class="card" id="U16GoodsCard" data-page-node-id="U16GoodsCard">
+      <div class="list-title" id="U16ListTitle" data-page-node-id="U16ListTitle">离岛自提商品列表</div>
+      <div class="item-row" id="U16ItemRow" data-page-node-id="U16ItemRow">
+        <div class="item-thumb" id="U16ItemThumb" data-page-node-id="U16ItemThumb"><img loading="lazy" src="assets/generated/b3.png" alt="商品" id="U16ItemPic" data-page-node-id="U16ItemPic"></div>
+        <div class="item-body" id="U16ItemBody" data-page-node-id="U16ItemBody">
+          <div class="item-head" id="U16ItemHead" data-page-node-id="U16ItemHead">
+            <span class="store-tag" id="U16StoreTag" data-page-node-id="U16StoreTag">cdf海口国际免税城</span>
+            <span class="item-name" id="U16ItemName" data-page-node-id="U16ItemName">卡地亚猎豹香水 女士淡香水</span>
+          </div>
+          <div class="item-mid" id="U16ItemMid" data-page-node-id="U16ItemMid">
+            <span class="item-spec" id="U16ItemSpec" data-page-node-id="U16ItemSpec">x1 50ml</span>
+            <div class="item-pay" id="U16ItemPay" data-page-node-id="U16ItemPay">
+              <span class="pay-label" id="U16PayLabel" data-page-node-id="U16PayLabel">实付</span><span class="pay-amt" id="U16PayAmt" data-page-node-id="U16PayAmt">¥660.00</span><span class="pay-origin" id="U16PayOrigin" data-page-node-id="U16PayOrigin">¥660.00</span>
+            </div>
+          </div>
+          <div class="item-foot" id="U16ItemFoot" data-page-node-id="U16ItemFoot">
+            <span class="refund-tag" id="U16RefundTag" data-page-node-id="U16RefundTag">支持7天无理由退货<i class="fas fa-chevron-down" id="U16RefundChev" data-page-node-id="U16RefundChev"></i></span>
+          </div>
+          <div class="item-advisor" id="U16Advisor" data-page-node-id="U16Advisor">
+            <i class="fas fa-user-tie" id="U16AdvisorIcon" data-page-node-id="U16AdvisorIcon"></i>
+            <span id="U16AdvisorText" data-page-node-id="U16AdvisorText">卡地亚专柜 王芳</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 申请发票 -->
+    <section class="card" id="U16InvoiceCard" data-page-node-id="U16InvoiceCard">
+      <div class="simple-row" id="U16InvoiceRow" data-page-node-id="U16InvoiceRow">
+        <span id="U16InvoiceLabel" data-page-node-id="U16InvoiceLabel">申请发票</span>
+        <span class="r-val" id="U16InvoiceVal" data-page-node-id="U16InvoiceVal">否</span>
+      </div>
+    </section>
+
+    <!-- 使用优惠券 -->
+    <section class="card" id="U16CouponCard" data-page-node-id="U16CouponCard">
+      <div class="simple-row" id="U16CouponRow" data-page-node-id="U16CouponRow">
+        <span id="U16CouponLabel" data-page-node-id="U16CouponLabel">使用优惠券</span>
+        <span class="r-val" id="U16CouponVal" data-page-node-id="U16CouponVal">否</span>
+      </div>
+    </section>
+
+    <!-- 退货积分补款 -->
+    <section class="card" id="U16PointsCard" data-page-node-id="U16PointsCard">
+      <div class="simple-row" id="U16PointsRow" data-page-node-id="U16PointsRow">
+        <span id="U16PointsLabel" data-page-node-id="U16PointsLabel">退货积分补款</span>
+        <span class="r-val" id="U16PointsVal" data-page-node-id="U16PointsVal">积分补款金额：<span class="r-amt" id="U16PointsAmt" data-page-node-id="U16PointsAmt">¥ 0</span></span>
+      </div>
+    </section>
+
+    <div class="spacer" id="U16Spacer" data-page-node-id="U16Spacer"></div>
+  </main>
+
+  <!-- 底部 home 条 -->
+  <div class="home-bar" id="U16HomeBar" data-page-node-id="U16HomeBar">
+    <div class="bar" id="U16HomeBarInner" data-page-node-id="U16HomeBarInner"></div>
+  </div>
+
+</div>
+<script data-page-node-id="U16Script">
+  function goBack(){
+    if(history.length > 1){ history.back(); return; }
+    if(document.referrer && document.referrer.indexOf(location.hostname) !== -1){ location.href = document.referrer; return; }
+    location.href = 'U15-订单列表页.html';
+  }
+  function copyNo(){
+    var no='701826091415175041412601';
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(no).catch(function(){});
+    }
+  }
+</script>
+</body>
+</html>

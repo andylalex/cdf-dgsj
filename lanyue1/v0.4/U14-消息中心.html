@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="U14Root">
+<head data-page-node-id="U14Head">
+<meta charset="UTF-8" data-page-node-id="U14MetaCharset">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" data-page-node-id="U14MetaViewport">
+<title>消息中心</title>
+<link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="U14FaCss">
+<style data-page-node-id="U14InlineStyle">
+  *,:after,:before{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{font-family:"Noto Sans SC","PingFang SC","Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#1a1a1a}
+  a{text-decoration:none;color:inherit}
+  img{display:block;max-width:100%}
+  button{border:none;background:none;font:inherit;cursor:pointer}
+
+  /* 图标字重兜底 */
+  i.fas{font-weight:900}
+  i.far{font-weight:400}
+
+  /* phone-frame */
+  .phone-frame{max-width:414px;margin:0 auto;height:100dvh;overflow:hidden;display:flex;flex-direction:column;position:relative;background:#f5f5f5}
+  .phone-frame>*{min-height:0}
+
+  /* 滚动区 */
+  .scroll-area{flex:1;min-height:0;overflow-y:auto;position:relative;scrollbar-width:none;-ms-overflow-style:none}
+  .scroll-area::-webkit-scrollbar{display:none}
+
+  /* 状态栏 */
+  .status-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 18px 4px;color:#1a1a1a}
+  .status-bar .t{font-size:15px;font-weight:600;letter-spacing:.2px}
+  .status-bar .r{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
+  .status-bar .r i{font-size:12px}
+
+  /* 顶部标题栏 */
+  .msg-header{flex:0 0 auto;display:flex;align-items:center;justify-content:center;position:relative;height:48px;background:#fff;border-bottom:1px solid #f3f4f6;padding:0 12px}
+  .msg-header h1{font-size:17px;font-weight:700;color:#1a1a1a}
+  .msg-header .back{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#1a1a1a;font-size:15px}
+  .msg-header .back:active{background:#f3f4f6}
+  .header-actions-bar{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:6px 12px;background:#f5f5f5;border-bottom:1px solid #f0f0f0;color:#6b7280;font-size:15px}
+  .header-actions-bar i{cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  .msg-header .capsule{margin-left:auto;width:88px;height:32px;border-radius:16px;background:rgba(30,30,30,.82);display:flex;align-items:center;color:#fff}
+  .msg-header .capsule .half{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .msg-header .capsule .sep{width:1px;height:18px;background:rgba(255,255,255,.35)}
+
+  /* 顶部双卡 */
+  .top-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
+  .top-card{background:#fff;border-radius:12px;padding:8px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .card-hd{display:flex;align-items:center;gap:4px;margin-bottom:6px}
+  .card-hd i{font-size:14px;color:#E02E24;width:18px;display:flex;align-items:center;justify-content:center}
+  .card-hd .name{font-size:14px;font-weight:700;color:#1a1a1a}
+  .card-hd .badge{min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+  .sub-hd{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+  .sub-hd .count{font-weight:400;font-size:12px;color:#6b7280;margin-left:2px}
+
+  .log-item{display:flex;align-items:center;gap:6px;padding:6px;background:#f9fafb;border-radius:8px;margin-bottom:4px}
+  .log-item:last-child{margin-bottom:0}
+  .log-thumb{width:40px;height:40px;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+  .log-thumb img{width:100%;height:100%;object-fit:cover}
+  .log-info{flex:1;min-width:0}
+  .log-info .line1{font-size:12px;font-weight:600;color:#1a1a1a;display:flex;align-items:center;gap:4px}
+  .log-info .line2{font-size:10px;color:#6b7280;margin-top:2px;display:flex;align-items:center;gap:2px}
+  .log-code{font-family:Arial,sans-serif;font-weight:700;color:#E02E24}
+  .log-detail{font-size:10px;color:#6b7280;display:flex;align-items:center;gap:2px}
+
+  .remind-item{display:flex;align-items:flex-start;gap:6px;padding:6px;background:#f9fafb;border-radius:8px;margin-bottom:4px}
+  .remind-item:last-child{margin-bottom:0}
+  .remind-body{flex:1;min-width:0}
+  .remind-pay .pay-top{display:flex;align-items:baseline;gap:4px}
+  .remind-pay .pay-amount{font-size:16px;font-weight:800;color:#E02E24;letter-spacing:-.5px}
+  .remind-pay .pay-label{font-size:12px;font-weight:600;color:#1a1a1a}
+  .remind-pay .pay-time{font-size:10px;color:#E02E24;margin-top:2px}
+  .remind-pay .pay-sub{font-size:10px;color:#6b7280;margin-top:2px;display:flex;align-items:center;gap:2px}
+  .remind-thumb{width:40px;height:40px;border-radius:6px;background:#fff;overflow:hidden;flex-shrink:0}
+  .remind-thumb img{width:100%;height:100%;object-fit:cover}
+  .pickup-code{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:1px}
+  .pickup-addr{font-size:10px;color:#6b7280;margin-top:2px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pickup-time{font-size:10px;color:#E02E24;margin-top:2px}
+  .pickup-tags{display:flex;align-items:center;gap:4px;margin-top:4px}
+  .tag-red{font-size:9px;font-weight:600;color:#fff;background:#E02E24;border-radius:4px;padding:1px 4px}
+  .tag-outline{font-size:9px;font-weight:600;color:#E02E24;background:#fef2f2;border:1px solid #fee2e2;border-radius:4px;padding:1px 4px}
+
+  /* 折叠卡片 */
+  .fold-card{background:#fff;border-radius:12px;padding:10px 12px;margin:0 10px 8px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .fold-hd{display:flex;align-items:center;gap:4px;margin-bottom:8px}
+  .fold-hd i{font-size:14px;color:#E02E24;width:18px;display:flex;align-items:center;justify-content:center}
+  .fold-hd .name{font-size:14px;font-weight:700;color:#1a1a1a;flex:1}
+  .fold-hd .badge{min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .fold-hd .toggle{font-size:11px;color:#9ca3af;display:flex;align-items:center;gap:2px}
+  .fold-list{}
+  .fold-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #f3f4f6}
+  .fold-item:last-child{border-bottom:none;padding-bottom:0}
+  .fold-item:first-child{padding-top:0}
+  .fold-tag{font-size:10px;font-weight:600;color:#E02E24;background:#fef2f2;border:1px solid #fee2e2;border-radius:4px;padding:1px 4px;height:fit-content;flex-shrink:0}
+  .fold-body{flex:1;min-width:0}
+  .fold-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.35}
+  .fold-sub{font-size:11px;color:#6b7280;margin-top:2px;line-height:1.35}
+  .fold-thumb{width:48px;height:48px;border-radius:8px;background:#f9fafb;overflow:hidden;flex-shrink:0}
+  .fold-thumb img{width:100%;height:100%;object-fit:cover}
+
+  /* 互动卡片：子类分组 + 最多 5 条消息列表 */
+  .msg-group{border-bottom:1px solid #f3f4f6;padding:10px 0}
+  .msg-group:first-child{padding-top:0}
+  .msg-group:last-child{border-bottom:none;padding-bottom:0}
+  .msg-group-hd{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+  .msg-group-hd .g-ic{width:20px;height:20px;border-radius:50%;background:#fef2f2;color:#E02E24;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+  .msg-group-hd .g-ic.gray{background:#f3f4f6;color:#9ca3af}
+  .msg-group-hd .g-name{font-size:13px;font-weight:700;color:#1a1a1a;flex:1}
+  .msg-group-hd .g-name.link{color:#E02E24;cursor:pointer}
+  .msg-group-hd .g-name.link:hover{opacity:.78}
+  .msg-row{cursor:pointer}
+  .msg-group-hd .g-count{font-size:11px;color:#9ca3af}
+  .msg-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0}
+  .msg-row:first-of-type{padding-top:0}
+  .msg-row-ic{width:36px;height:36px;border-radius:50%;background:#E02E24;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .msg-row-ic.gray{background:#f3f4f6;color:#9ca3af}
+  .msg-row-body{flex:1;min-width:0}
+  .msg-row-title{font-size:12px;font-weight:600;color:#1a1a1a;display:flex;align-items:center;gap:5px;line-height:1.3}
+  .msg-row-sub{font-size:11px;color:#6b7280;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .msg-row-time{font-size:10px;color:#9ca3af;flex-shrink:0;margin-left:2px;align-self:flex-start;white-space:nowrap}
+  .msg-dot{width:7px;height:7px;border-radius:50%;background:#E02E24;flex-shrink:0;display:inline-block}
+
+  /* 底部 tabbar */
+  .tabbar{flex:0 0 auto;display:flex;background:#fff;border-top:1px solid #f3f4f6;padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8b919b;cursor:pointer;position:relative}
+  .tab i,.tab .cdf{font-size:21px;height:24px;display:flex;align-items:center}
+  .tab .cdf{font-weight:900;font-size:19px;letter-spacing:-.5px;font-family:Arial,sans-serif;color:#E02E24}
+  .tab span{font-size:11px}
+  .tab.on{color:#E02E24;font-weight:600}
+  .tab-badge{position:absolute;top:-1px;right:22px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E02E24;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+</style>
+</head>
+<body data-page-node-id="U14Body">
+<div class="phone-frame" data-page-node-id="U14PhoneFrame">
+
+  <!-- 状态栏 -->
+  <div class="status-bar" data-page-node-id="U14StatusBar">
+    <span class="t" data-page-node-id="U14StatusTime">9:41</span>
+    <span class="r" data-page-node-id="U14StatusIcons"><i class="fas fa-signal" data-page-node-id="U14Signal"></i><i class="fas fa-wifi" data-page-node-id="U14Wifi"></i><i class="fas fa-battery-three-quarters" style="font-size:14px" data-page-node-id="U14Battery"></i></span>
+  </div>
+
+  <header class="msg-header" data-page-node-id="U14Header">
+    <button class="back" aria-label="返回" onclick="goBack()" data-page-node-id="U14Back"><i class="fas fa-chevron-left" data-page-node-id="U14BackIcon"></i></button>
+    <h1 data-page-node-id="U14Title">消息</h1>
+    <div class="capsule" data-page-node-id="U14Capsule">
+      <span class="half" data-page-node-id="U14CapsuleMore"><i class="fas fa-ellipsis-h" data-page-node-id="U14CapsuleMoreIcon"></i></span>
+      <span class="sep" data-page-node-id="U14CapsuleSep"></span>
+      <span class="half" data-page-node-id="U14CapsuleDot"><i class="fas fa-dot-circle" data-page-node-id="U14CapsuleDotIcon"></i></span>
+    </div>
+  </header>
+  <div class="header-actions-bar" data-page-node-id="U14HeaderActions">
+    <i class="fas fa-check-double" title="全部已读" data-page-node-id="U14IconReadAll"></i>
+    <i class="fas fa-trash-can" data-page-node-id="U14IconDel"></i>
+    <i class="fas fa-gear" data-page-node-id="U14IconSet"></i>
+  </div>
+
+  <main class="scroll-area" data-page-node-id="U14ScrollArea">
+    <!-- 物流 + 提醒 双卡 -->
+    <section class="top-cards" data-page-node-id="U14TopCards">
+      <!-- 物流 -->
+      <div class="top-card" data-page-node-id="U14LogisticsCard">
+        <div class="card-hd" data-page-node-id="U14LogisticsHeader">
+          <i class="fas fa-truck-fast" data-page-node-id="U14LogisticsIcon"></i>
+          <span class="name" data-page-node-id="U14LogisticsName">物流</span>
+          <span class="badge" data-page-node-id="U14LogisticsBadge">20</span>
+        </div>
+        <div class="sub-hd" data-page-node-id="U14PickupTitle">待取件 <span class="count">3件</span></div>
+        <div class="log-item" data-page-node-id="U14PickupItem1">
+          <div class="log-thumb" data-page-node-id="U14PickupThumb1"><img loading="lazy" src="assets/generated/a1.png" alt="商品" data-page-node-id="U14PickupPic1"></div>
+          <div class="log-info" data-page-node-id="U14PickupInfo1">
+            <div class="line1" data-page-node-id="U14PickupLine11">取件码 <span class="log-code" data-page-node-id="U14PickupCode1">4564322</span></div>
+            <div class="line2" data-page-node-id="U14PickupLine12"><i class="fas fa-truck" data-page-node-id="U14PickupIcon1"></i> 物流详情</div>
+          </div>
+        </div>
+        <div class="log-item" data-page-node-id="U14PickupItem2">
+          <div class="log-thumb" data-page-node-id="U14PickupThumb2"><img loading="lazy" src="assets/generated/a3.png" alt="商品" data-page-node-id="U14PickupPic2"></div>
+          <div class="log-info" data-page-node-id="U14PickupInfo2">
+            <div class="line1" data-page-node-id="U14PickupLine21">取件码 <span class="log-code" data-page-node-id="U14PickupCode2">4564322</span></div>
+            <div class="line2" data-page-node-id="U14PickupLine22"><i class="fas fa-truck" data-page-node-id="U14PickupIcon2"></i> 物流详情</div>
+          </div>
+        </div>
+        <div class="sub-hd" data-page-node-id="U14DeliveryTitle">配送中 <span class="count">2件</span></div>
+        <div class="log-item" data-page-node-id="U14DeliveryItem1">
+          <div class="log-thumb" data-page-node-id="U14DeliveryThumb1"><img loading="lazy" src="assets/generated/b3.png" alt="商品" data-page-node-id="U14DeliveryPic1"></div>
+          <div class="log-info" data-page-node-id="U14DeliveryInfo1">
+            <div class="line1" data-page-node-id="U14DeliveryLine11">预计 2026/04/05 送达</div>
+            <div class="line2" data-page-node-id="U14DeliveryLine12"><i class="fas fa-truck" data-page-node-id="U14DeliveryIcon1"></i> 物流详情</div>
+          </div>
+        </div>
+        <div class="log-item" data-page-node-id="U14DeliveryItem2">
+          <div class="log-thumb" data-page-node-id="U14DeliveryThumb2"><img loading="lazy" src="assets/generated/a2.png" alt="商品" data-page-node-id="U14DeliveryPic2"></div>
+          <div class="log-info" data-page-node-id="U14DeliveryInfo2">
+            <div class="line1" data-page-node-id="U14DeliveryLine21">预计明天送达</div>
+            <div class="line2" data-page-node-id="U14DeliveryLine22"><i class="fas fa-truck" data-page-node-id="U14DeliveryIcon2"></i> 物流详情</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提醒 -->
+      <div class="top-card" data-page-node-id="U14RemindCard">
+        <div class="card-hd" data-page-node-id="U14RemindHeader">
+          <i class="fas fa-bell" data-page-node-id="U14RemindIcon"></i>
+          <span class="name" data-page-node-id="U14RemindName">提醒</span>
+          <span class="badge" data-page-node-id="U14RemindBadge">20</span>
+        </div>
+        <div class="sub-hd" data-page-node-id="U14PayTitle">待支付 <span class="count">¥125.50</span></div>
+        <div class="remind-item remind-pay" data-page-node-id="U14PayItem">
+          <div class="remind-body" data-page-node-id="U14PayBody">
+            <div class="pay-top" data-page-node-id="U14PayTop"><span class="pay-label" data-page-node-id="U14PayLabel">待支付</span><span class="pay-amount" data-page-node-id="U14PayAmount">¥125.50</span></div>
+            <div class="pay-time" data-page-node-id="U14PayTime">剩余支付时间 14:30</div>
+            <div class="pay-sub" data-page-node-id="U14PaySub"><i class="fas fa-circle" style="font-size:6px;color:#E02E24" data-page-node-id="U14PayDot"></i> 雅诗兰黛特润修护...</div>
+          </div>
+          <div class="remind-thumb" data-page-node-id="U14PayThumb"><img loading="lazy" src="assets/generated/a4.png" alt="商品" data-page-node-id="U14PayPic"></div>
+        </div>
+        <div class="sub-hd" data-page-node-id="U14PickupRemindTitle">提货提醒</div>
+        <div class="remind-item" data-page-node-id="U14PickupRemindItem">
+          <div class="remind-body" data-page-node-id="U14PickupRemindBody">
+            <div class="pickup-code" data-page-node-id="U14PickupCodeA">A1B2C3D4</div>
+            <div class="pickup-addr" data-page-node-id="U14PickupAddr">三亚凤凰机场 T1 航站楼 3 号柜组柜台柜台柜台柜台</div>
+            <div class="pickup-time" data-page-node-id="U14PickupTime">预约时间 2025-03-25 14:00-15:00</div>
+            <div class="pickup-tags" data-page-node-id="U14PickupTags">
+              <span class="tag-outline" data-page-node-id="U14PickupTagService"><i class="fas fa-location-dot" style="font-size:8px" data-page-node-id="U14PickupTagIcon"></i> 线下服务</span>
+              <span class="tag-red" data-page-node-id="U14PickupTagVip">会员优选</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 优惠 -->
+    <section class="fold-card" data-page-node-id="U14DiscountCard">
+      <div class="fold-hd" data-page-node-id="U14DiscountHeader">
+        <i class="fas fa-gift" data-page-node-id="U14DiscountIcon"></i>
+        <span class="name" data-page-node-id="U14DiscountName">优惠</span>
+        <span class="badge" data-page-node-id="U14DiscountBadge">20</span>
+        <span class="toggle" data-page-node-id="U14DiscountToggle" onclick="toggleFold(this)">收起 <i class="fas fa-chevron-up" data-page-node-id="U14DiscountToggleIcon"></i></span>
+      </div>
+      <div class="fold-list" data-page-node-id="U14DiscountList">
+        <div class="fold-item" data-page-node-id="U14DiscountItem1">
+          <div class="fold-tag" data-page-node-id="U14DiscountTag1">活动预告</div>
+          <div class="fold-tag" data-page-node-id="U14DiscountTag1b">跨境臻选</div>
+          <div class="fold-body" data-page-node-id="U14DiscountBody1">
+            <div class="fold-title" data-page-node-id="U14DiscountTitle1">618 大促即将开启</div>
+            <div class="fold-sub" data-page-node-id="U14DiscountSub1">全场低至 3 折起，踏青好物一站式齐购</div>
+          </div>
+        </div>
+        <div class="fold-item" data-page-node-id="U14DiscountItem2">
+          <div class="fold-tag" data-page-node-id="U14DiscountTag2">抽奖活动</div>
+          <div class="fold-tag tag-red" data-page-node-id="U14DiscountTag2b" style="color:#fff;background:#E02E24;border:none">会员优选</div>
+          <div class="fold-body" data-page-node-id="U14DiscountBody2">
+            <div class="fold-title" data-page-node-id="U14DiscountTitle2">踏春趣万物“价”到，踏青好物一站式齐购</div>
+            <div class="fold-sub" data-page-node-id="U14DiscountSub2">全场低至 3 折起，踏青好物一站式齐购</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 互动 -->
+    <section class="fold-card" data-page-node-id="U14InteractionCard">
+      <div class="fold-hd" data-page-node-id="U14InteractionHeader">
+        <i class="fas fa-comment-dots" data-page-node-id="U14InteractionIcon"></i>
+        <span class="name" data-page-node-id="U14InteractionName">互动</span>
+        <span class="badge" data-page-node-id="U14InteractionBadge">5</span>
+        <span class="toggle" data-page-node-id="U14InteractionToggle" onclick="toggleFold(this)">收起 <i class="fas fa-chevron-up" data-page-node-id="U14InteractionToggleIcon"></i></span>
+      </div>
+      <div class="fold-list" data-page-node-id="U14InteractionList">
+        <!-- 子类1：奢品顾问（最多 5 条） -->
+        <div class="msg-group" data-page-node-id="U14GroupAdvisor">
+          <div class="msg-group-hd" data-page-node-id="U14GroupAdvisorHd">
+            <span class="g-ic" data-page-node-id="U14GroupAdvisorIc"><i class="fas fa-user-tie"></i></span>
+            <span class="g-name link" data-page-node-id="U14GroupAdvisorName" onclick="goPage('U12-奢品顾问消息列表.html')">奢品顾问 <i class="fas fa-chevron-right" style="font-size:9px;margin-left:2px"></i></span>
+            <span class="g-count" data-page-node-id="U14GroupAdvisorCount">3 条新消息</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg1" onclick="goPage('U1-用户端IM会话页.html')">
+            <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg1Ic"><i class="fas fa-user-tie"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14AdvisorMsg1Body">
+              <div class="msg-row-title" data-page-node-id="U14AdvisorMsg1Title">奢品顾问 林琳琳 <span class="msg-dot" data-page-node-id="U14AdvisorMsg1Dot"></span></div>
+              <div class="msg-row-sub" data-page-node-id="U14AdvisorMsg1Sub">您关注的 SK-II 神仙水现在有专柜活动，买两件送小样套装，需要帮您预留吗？</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14AdvisorMsg1Time">10:24</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg2" onclick="goPage('U1-用户端IM会话页.html')">
+            <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg2Ic"><i class="fas fa-user-tie"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14AdvisorMsg2Body">
+              <div class="msg-row-title" data-page-node-id="U14AdvisorMsg2Title">奢品顾问 王悦</div>
+              <div class="msg-row-sub" data-page-node-id="U14AdvisorMsg2Sub">雅诗兰黛小棕瓶新品到店，给您留了专属体验装，方便时来柜组领取。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14AdvisorMsg2Time">09:12</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14AdvisorMsg3" onclick="goPage('U1-用户端IM会话页.html')">
+            <div class="msg-row-ic" data-page-node-id="U14AdvisorMsg3Ic"><i class="fas fa-user-tie"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14AdvisorMsg3Body">
+              <div class="msg-row-title" data-page-node-id="U14AdvisorMsg3Title">奢品顾问 赵敏</div>
+              <div class="msg-row-sub" data-page-node-id="U14AdvisorMsg3Sub">您预约的 LV Capucines 已到货，可前往海口国际免税城 1F 精品区试背。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14AdvisorMsg3Time">昨天</span>
+          </div>
+        </div>
+        <!-- 子类2：评价有礼（最多 5 条） -->
+        <div class="msg-group" data-page-node-id="U14GroupReview">
+          <div class="msg-group-hd" data-page-node-id="U14GroupReviewHd">
+            <span class="g-ic gray" data-page-node-id="U14GroupReviewIc"><i class="fas fa-star"></i></span>
+            <span class="g-name" data-page-node-id="U14GroupReviewName">评价有礼</span>
+            <span class="g-count" data-page-node-id="U14GroupReviewCount">2 条新消息</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14ReviewMsg1">
+            <div class="msg-row-ic gray" data-page-node-id="U14ReviewMsg1Ic"><i class="fas fa-star"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14ReviewMsg1Body">
+              <div class="msg-row-title" data-page-node-id="U14ReviewMsg1Title">评价有礼 <span class="msg-dot" data-page-node-id="U14ReviewMsg1Dot"></span></div>
+              <div class="msg-row-sub" data-page-node-id="U14ReviewMsg1Sub">您购买的 SK-II 神仙水已使用一段时间，分享使用心得可获 200 积分奖励。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14ReviewMsg1Time">昨天</span>
+          </div>
+          <div class="msg-row" data-page-node-id="U14ReviewMsg2">
+            <div class="msg-row-ic gray" data-page-node-id="U14ReviewMsg2Ic"><i class="fas fa-star"></i></div>
+            <div class="msg-row-body" data-page-node-id="U14ReviewMsg2Body">
+              <div class="msg-row-title" data-page-node-id="U14ReviewMsg2Title">评价有礼</div>
+              <div class="msg-row-sub" data-page-node-id="U14ReviewMsg2Sub">完成海蓝之谜面霜评价，已发放 100 积分至您的会员账户。</div>
+            </div>
+            <span class="msg-row-time" data-page-node-id="U14ReviewMsg2Time">04-02</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="height:20px" data-page-node-id="U14BottomSpacer"></div>
+  </main>
+
+  <nav class="tabbar" data-page-node-id="U14Tabbar">
+    <span class="tab" data-page-node-id="U14TabHome"><i class="fas fa-house" data-page-node-id="U14TabHomeIcon"></i><span data-page-node-id="U14TabHomeText">商城</span></span>
+    <span class="tab on" data-page-node-id="U14TabMsg"><i class="fas fa-comment" data-page-node-id="U14TabMsgIcon"></i><span data-page-node-id="U14TabMsgText">消息</span></span>
+    <span class="tab" data-page-node-id="U14TabCdf"><span class="cdf" data-page-node-id="U14TabCdfIcon">cdf</span><span data-page-node-id="U14TabCdfText">免税店</span></span>
+    <span class="tab" data-page-node-id="U14TabCart"><i class="fas fa-bag-shopping" data-page-node-id="U14TabCartIcon"></i><span class="tab-badge" data-page-node-id="U14TabCartBadge">1</span><span data-page-node-id="U14TabCartText">购物袋</span></span>
+    <span class="tab" data-page-node-id="U14TabMe"><i class="fas fa-user" data-page-node-id="U14TabMeIcon"></i><span data-page-node-id="U14TabMeText">我的</span></span>
+  </nav>
+
+</div>
+<script data-page-node-id="U14Script">
+  // 动态返回上一页：有历史则回退，否则回来源页，最后回原型首页
+  function goBack(){
+    if(window.history && window.history.length > 1){history.back();return;}
+    try{
+      var ref=document.referrer;
+      if(ref && new URL(ref).origin===location.origin){location.href=ref;return;}
+    }catch(e){}
+    location.href='index.html';
+  }
+  function goPage(url){location.href=url;}
+  function toggleFold(el){
+    var list=el.parentElement.nextElementSibling;
+    if(!list) return;
+    var hidden=list.style.display==='none';
+    list.style.display=hidden?'':'none';
+    el.innerHTML=hidden?'收起 <i class="fas fa-chevron-up"></i>':'展开 <i class="fas fa-chevron-down"></i>';
+  }
+</script>
+</body>
+</html>

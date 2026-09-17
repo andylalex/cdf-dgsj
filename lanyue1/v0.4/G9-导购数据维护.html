@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="hZvI0HIqLBnnhrsW9AocYk" data-dm-ref="1"><head data-page-node-id="J31d5FloydBFLXKRLoxlhl">
+  <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="uBAwJhVo3iks8aBUFB7A2p">
+  <style>
+
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }
+
+/* ---- 常用 Tailwind 类补齐 ---- */
+.hidden{display:none}
+.fixed{position:fixed}
+.absolute{position:absolute}
+.relative{position:relative}
+.inset-0{top:0;right:0;bottom:0;left:0}
+.z-50{z-index:50}
+.z-10{z-index:10}
+.flex{display:flex}
+.inline-flex{display:inline-flex}
+.flex-col{flex-direction:column}
+.flex-row{flex-direction:row}
+.items-center{align-items:center}
+.items-start{align-items:flex-start}
+.justify-center{justify-content:center}
+.justify-between{justify-content:space-between}
+.flex-1{flex:1 1 0%}
+.flex-shrink-0{flex-shrink:0}
+.shrink-0{flex-shrink:0}
+.w-full{width:100%}
+.h-full{height:100%}
+.max-w-\[414px\]{max-width:414px}
+.min-h-0{min-height:0}
+.min-w-0{min-width:0}
+.w-9{width:2.25rem}
+.h-9{height:2.25rem}
+.w-20{width:5rem}
+.h-20{height:5rem}
+.w-\[72px\]{width:72px}
+.h-\[72px\]{height:72px}
+.w-\[88px\]{width:88px}
+.h-\[88px\]{height:88px}
+.w-11{width:2.75rem}
+.h-6{height:1.5rem}
+.w-11{width:2.75rem}
+.rounded-full{border-radius:9999px}
+.rounded-lg{border-radius:0.5rem}
+.rounded-xl{border-radius:0.75rem}
+.rounded-2xl{border-radius:1rem}
+.rounded{border-radius:0.25rem}
+.border{border-width:1px}
+.border-b{border-bottom-width:1px}
+.border-gray-100{border-color:#f3f4f6}
+.border-gray-200{border-color:#e5e7eb}
+.border-blue-200{border-color:#bfdbfe}
+.bg-white{background-color:#fff}
+.bg-gray-50{background-color:#f9fafb}
+.bg-gray-100{background-color:#f3f4f6}
+.bg-gray-200{background-color:#e5e7eb}
+.bg-gray-300{background-color:#d1d5db}
+.bg-blue-500{background-color:#3b82f6}
+.bg-blue-600{background-color:#2563eb}
+.bg-blue-50{background-color:#eff6ff}
+.bg-black\/60{background-color:rgba(0,0,0,.6)}
+.bg-black\/75{background-color:rgba(0,0,0,.75)}
+.text-white{color:#fff}
+.text-black{color:#000}
+.text-gray-400{color:#9ca3af}
+.text-gray-500{color:#6b7280}
+.text-gray-600{color:#4b5563}
+.text-gray-700{color:#374151}
+.text-gray-800{color:#1f2937}
+.text-gray-900{color:#111827}
+.text-blue-500{color:#3b82f6}
+.text-blue-600{color:#2563eb}
+.text-red-500{color:#ef4444}
+.text-\[10px\]{font-size:10px;line-height:1.4}
+.text-\[11px\]{font-size:11px;line-height:1.4}
+.text-\[12px\]{font-size:12px;line-height:1.4}
+.text-\[13px\]{font-size:13px;line-height:1.4}
+.text-\[14px\]{font-size:14px;line-height:1.25rem}
+.text-\[15px\]{font-size:15px;line-height:1.4}
+.text-\[16px\]{font-size:16px;line-height:1.4}
+.text-\[18px\]{font-size:18px;line-height:1.4}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.font-medium{font-weight:500}
+.font-semibold{font-weight:600}
+.font-bold{font-weight:700}
+.text-right{text-align:right}
+.leading-5{line-height:1.25rem}
+.leading-relaxed{line-height:1.625}
+.tracking-tight{letter-spacing:-0.025em}
+.p-0{padding:0}
+.p-2{padding:0.5rem}
+.p-3{padding:0.75rem}
+.p-4{padding:1rem}
+.px-3{padding-left:0.75rem;padding-right:0.75rem}
+.px-4{padding-left:1rem;padding-right:1rem}
+.px-5{padding-left:1.25rem;padding-right:1.25rem}
+.py-1{padding-top:0.25rem;padding-bottom:0.25rem}
+.py-2{padding-top:0.5rem;padding-bottom:0.5rem}
+.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}
+.py-3{padding-top:0.75rem;padding-bottom:0.75rem}
+.py-4{padding-top:1rem;padding-bottom:1rem}
+.pt-2{padding-top:0.5rem}
+.pt-2\.5{padding-top:0.625rem}
+.pb-2{padding-bottom:0.5rem}
+.pb-3{padding-bottom:0.75rem}
+.pb-4{padding-bottom:1rem}
+.pb-5{padding-bottom:1.25rem}
+.pb-24{padding-bottom:6rem}
+.pb-safe{padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px))}
+.pl-3{padding-left:0.75rem}
+.pr-3{padding-right:0.75rem}
+.mt-1{margin-top:0.25rem}
+.mt-2{margin-top:0.5rem}
+.mt-3{margin-top:0.75rem}
+.mt-4{margin-top:1rem}
+.mb-1{margin-bottom:0.25rem}
+.mb-2{margin-bottom:0.5rem}
+.mb-3{margin-bottom:0.75rem}
+.mb-4{margin-bottom:1rem}
+.ml-1{margin-left:0.25rem}
+.ml-2{margin-left:0.5rem}
+.ml-auto{margin-left:auto}
+.mr-1{margin-right:0.25rem}
+.mr-2{margin-right:0.5rem}
+.mx-auto{margin-left:auto;margin-right:auto}
+.gap-1{gap:0.25rem}
+.gap-2{gap:0.5rem}
+.gap-3{gap:0.75rem}
+.gap-4{gap:1rem}
+.gap-1\.5{gap:0.375rem}
+.space-y-0{--tw-space-y-reverse:0;margin-top:calc(0px*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0px*var(--tw-space-y-reverse))}
+.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem*var(--tw-space-y-reverse))}
+.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem*calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem*var(--tw-space-y-reverse))}
+.divide-y>:not([hidden])~:not([hidden]){border-top-width:1px}
+.divide-gray-100>:not([hidden])~:not([hidden]){border-color:#f3f4f6}
+.overflow-hidden{overflow:hidden}
+.overflow-y-auto{overflow-y:auto}
+.outline-none{outline:2px solid transparent;outline-offset:2px}
+.resize-none{resize:none}
+.cursor-pointer{cursor:pointer}
+.object-cover{object-fit:cover}
+.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}
+.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}
+.duration-200{transition-duration:.2s}
+.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
+.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
+.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}
+.focus\:ring-blue-200:focus{--tw-ring-color:#bfdbfe}
+.select-none{-webkit-user-select:none;user-select:none}
+.hide-scrollbar::-webkit-scrollbar{display:none}
+.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+
+/* box-sizing reset — 修复横向滚动 */
+*,*::before,*::after{box-sizing:border-box}
+/* margin/padding reset — 清除浏览器默认 8px，确保手机壳内 phone-frame 真正贴满 */
+html,body{margin:0;padding:0;width:100%;overflow-x:hidden}
+
+/* font-awesome weight fix */
+i.fas{font-weight:900}
+i.far{font-weight:400}
+
+body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;background:#e5e7eb}
+.phone-frame{max-width:414px;width:100%;margin:0 auto;height:100vh;height:100dvh;overflow:hidden;overflow-x:hidden;display:flex;flex-direction:column;background:#f2f3f5}
+.phone-frame>*{min-height:0}
+
+/* form */
+.form-row{padding:16px 16px;background:#fff}
+.form-label{font-size:15px;line-height:1.4;color:#1f2937;font-weight:500}
+.form-required{color:#ef4444;margin-left:2px}
+.form-value{font-size:15px;line-height:1.4;color:#6b7280;text-align:right;word-break:break-all}
+.form-input{width:100%;font-size:15px;line-height:1.4;color:#111827;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;padding:10px 12px;outline:none}
+.form-input:focus{border-color:#bfdbfe;box-shadow:0 0 0 2px rgba(59,130,246,.15)}
+.form-input::placeholder{color:#9ca3af}
+.form-select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 12px center;padding-right:30px}
+.form-textarea{width:100%;min-height:72px;font-size:14px;line-height:1.5;color:#111827;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;padding:10px 12px;outline:none;resize:none}
+.form-textarea:focus{border-color:#bfdbfe;box-shadow:0 0 0 2px rgba(59,130,246,.15)}
+
+/* tag chips */
+.tag-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tag-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:#eff6ff;color:#2563eb;font-size:13px;font-weight:500}
+.tag-chip i{font-size:10px;color:#3b82f6;cursor:pointer;padding:2px}
+.tag-input{flex:1;min-width:96px;border:none;background:transparent;font-size:14px;color:#111827;outline:none;padding:6px 0}
+.tag-input::placeholder{color:#9ca3af}
+
+/* switch */
+.switch-wrap{display:inline-flex;align-items:center;cursor:pointer}
+.switch-wrap input{display:none}
+.switch-track{width:44px;height:24px;border-radius:999px;background:#d1d5db;position:relative;transition:background .2s}
+.switch-track::after{content:'';position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.15);transition:transform .2s}
+.switch-wrap input:checked+.switch-track{background:#3b82f6}
+.switch-wrap input:checked+.switch-track::after{transform:translateX(20px)}
+
+/* upload */
+.upload-row{display:flex;align-items:center;gap:16px}
+.upload-thumb{position:relative;overflow:hidden;background:#f3f4f6;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.upload-thumb.round{border-radius:50%}
+.upload-thumb img{width:100%;height:100%;object-fit:cover}
+.upload-thumb .placeholder{color:#9ca3af;font-size:24px}
+.upload-action{font-size:14px;color:#3b82f6;cursor:pointer;font-weight:500}
+.upload-action:active{opacity:.7}
+
+/* custom brand dropdown */
+.brand-trigger{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:160px;padding:10px 12px 10px 14px;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;font-size:15px;color:#111827;cursor:pointer}
+.brand-trigger:active{background:#f3f4f6}
+.brand-caret{font-size:11px;color:#9ca3af;transition:transform .2s}
+.brand-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:200px;max-height:240px;overflow-y:auto;background:#fff;border:1px solid #f3f4f6;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.12);padding:6px;z-index:50}
+.brand-menu.hide-scrollbar::-webkit-scrollbar{display:none}
+.brand-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;font-size:15px;color:#374151;cursor:pointer}
+.brand-item:hover,.brand-item.active{background:#eff6ff;color:#2563eb}
+.brand-item .bi-check{color:#2563eb;font-size:13px;opacity:0}
+.brand-item.active .bi-check{opacity:1}
+
+/* save bar */
+.save-bar{padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));background:#fff;border-top:1px solid #f3f4f6}
+.save-btn{width:100%;height:46px;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#2563eb);color:#fff;font-size:16px;font-weight:600;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.35)}
+.save-btn:active{transform:translateY(1px);opacity:.95}
+
+/* toast */
+#toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.75);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+#toast.show{opacity:1}
+</style>
+  <meta charset="UTF-8" data-page-node-id="UvBV3r5d1hXUwIw3XrtmBK">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="tW0YBlojBuKUcqkvu8YNYO">
+  <title>导购数据维护</title>
+<style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
+<body data-page-node-id="zh8n2Qr7yplNSB8qGLbd1l" style="">
+  <div class="phone-frame shadow-2xl" data-page-node-id="xCeJ7S0OpiCi4wKcIt8gtL">
+
+    <!-- 状态栏 -->
+    <div class="bg-white text-black px-5 pt-2 pb-1 flex items-center justify-between shrink-0" data-page-node-id="sEG5HK65bOQF7nP9JzdDtx">
+      <span class="text-[14px] font-semibold tracking-tight" data-page-node-id="GskTCibGjraUJvWNAzaYl3">9:41</span>
+      <div class="flex items-center gap-1.5 text-black" data-page-node-id="dLTh5yoMk91nxEcXgXKjCI">
+        <span class="text-[10px] font-semibold" data-page-node-id="PhcnlYomMWCqCocodLyvRV">5G</span>
+        <i class="fas fa-signal text-[11px]" data-page-node-id="J8i1kwYF9Z2zsWUsfAVoqA"></i>
+        <i class="fas fa-wifi text-[11px]" data-page-node-id="GJpHljL8rgMrNwxEbrBzHY"></i>
+        <i class="fas fa-battery-three-quarters text-[15px]" data-page-node-id="0f4bUy9eQNrGtY4FEvP1f7"></i>
+      </div>
+    </div>
+
+    <!-- 顶部 -->
+    <div class="bg-white px-4 py-3 border-b border-gray-100 flex items-center relative shrink-0" data-page-node-id="iDyTQZnyFrQHdRFxEsmrP3">
+      <button type="button" onclick="goBack()" style="background: none; border: none;" class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 text-gray-700" data-page-node-id="HtFrBgaFETCcgxiD9ENOPp">
+        <i class="fas fa-chevron-left text-lg" data-page-node-id="mnZDEgBmqh9DX5uOrXVNv2"></i>
+      </button>
+      <h1 class="flex-1 text-center text-base font-semibold text-gray-800" data-page-node-id="q3kfnW6jOAfcyv2qFTRWD1" style="text-align: center;">导购数据维护</h1>
+    </div>
+
+    <!-- 滚动内容 -->
+    <div id="scrollArea" class="flex-1 overflow-y-auto overflow-x-hidden hide-scrollbar bg-white" data-page-node-id="Kaqbuxc4zzCsCGmeli1W7l">
+      <div class="divide-y divide-gray-100" data-page-node-id="5D3VREpiF3gfSsoLaAwNDG">
+
+        <!-- 工号 -->
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="d9aA8mR2A5EFiEzcThyuw5">
+          <span class="form-label" data-page-node-id="PB3quftBrJ0o0PwyLSUCGp">工号</span>
+          <span class="form-value" data-page-node-id="v6OrBauZs0b3VgUl0RsozQ">68680001</span>
+        </div>
+
+        <!-- 姓名 -->
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="5ENMGbCiUgAmkhDWGg2PsK">
+          <span class="form-label" data-page-node-id="7J4Ppd6VGGnq7FAGqAUwWx">姓名</span>
+          <span class="form-value" data-page-node-id="0xnmPDqpWUcssvDbHDcFso">张伟</span>
+        </div>
+
+        <!-- EOP组织 -->
+        <div class="form-row flex items-start justify-between gap-4" data-page-node-id="xMjA32ZZzWHK7YGcjScBuO">
+          <span class="form-label pt-2.5" data-page-node-id="I2srUhsywj8z5febp6giML">EOP组织</span>
+          <span class="form-value leading-relaxed" data-page-node-id="iU2upJlOcGMl6dBITyqbG0">cdf三亚国际免税城 (6868)/A区一层香化 (686804)/香化一组 (68680401)</span>
+        </div>
+
+        <!-- 品牌 -->
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="yJ8b87eilZqrg80XDWINFB">
+          <span class="form-label" data-page-node-id="HPNOaZtu435VTt2AsBEGu5"><span class="form-required" data-page-node-id="q9e2pHrdeZDlImwRPEjhFC">*</span>品牌</span>
+          <div class="relative" data-page-node-id="1gZZWgbOrC68p1aKjSVACL">
+            <div id="brandTrigger" class="brand-trigger" onclick="toggleBrandMenu()" data-page-node-id="Y63zSrAawK5CzEe4e5YBur">
+              <span id="brandText" data-page-node-id="EWuWE5nCmaYr2b0UQddoRU">雅诗兰黛</span>
+              <i class="fas fa-chevron-down brand-caret" data-page-node-id="pDa5eOy0guL1zSRA3mlH0b"></i>
+            </div>
+            <div id="brandMenu" class="brand-menu hidden hide-scrollbar" data-page-node-id="7QQqWamZH776LM4krtIHB1"></div>
+          </div>
+        </div>
+
+        <!-- 标签 -->
+        <div class="form-row flex-col" data-page-node-id="rvd2CpcXaa98QAJkWoYKqf">
+          <span class="form-label mb-3" data-page-node-id="Y2FZMlskOekQFET0B4IMPC">标签</span>
+          <div class="tag-chips" id="tagBox" data-page-node-id="CPDBUaTCfI7i9PDBOidQgx">
+            <span class="tag-chip" data-page-node-id="dL63mzOOHwgNkMyVTNxg1R">护肤专家 <i class="fas fa-times" onclick="removeTag(this)" data-page-node-id="8VCcn14THpsZlmTfQFDB3p"></i></span>
+            <span class="tag-chip" data-page-node-id="WBD1gJaZu6pfqOTknXHU49">会员顾问 <i class="fas fa-times" onclick="removeTag(this)" data-page-node-id="gWrzMYUhFOQssq7mIFhAEk"></i></span>
+            <span class="tag-chip" data-page-node-id="AsBuSfAt5FNFDusWswc0Sp">2342 <i class="fas fa-times" onclick="removeTag(this)" data-page-node-id="DyHqPSBOJoofYOAG15Ny1s"></i></span>
+            <input id="tagInput" type="text" class="tag-input" placeholder="输入后回车添加" onkeydown="onTagKey(event)" data-page-node-id="mZLeGqwaueXRDGR21LufIH">
+          </div>
+        </div>
+
+        <!-- 导购一句话介绍 -->
+        <div class="form-row flex-col" data-page-node-id="vv7bXPfNljCE4dz61TKD8g">
+          <span class="form-label mb-3" data-page-node-id="2h9dxsF9oo83SmtRBgjg5r">导购一句话介绍</span>
+          <textarea id="introText" class="form-textarea" placeholder="请输入导购一句话介绍">专注雅诗兰黛护肤，帮你找到适合自己的保养方案</textarea>
+        </div>
+
+        <!-- 在线状态 -->
+        <div class="form-row flex items-center justify-between gap-4" data-page-node-id="WRAzunXAQ4yTtkHKFBoPNo">
+          <span class="form-label" data-page-node-id="OHTSEc5gmxnNBTLBFHo0y9">在线状态</span>
+          <label class="switch-wrap" data-page-node-id="sNkltRCC7UhJ6SSL2aI98N">
+            <input type="checkbox" id="onlineSwitch" data-page-node-id="ZcKkiUKOSY9uPasix7ABSr">
+            <span class="switch-track" data-page-node-id="ufVXcTuQ69dFhRUbI1YHyN"></span>
+          </label>
+        </div>
+
+        <!-- 头像 -->
+        <div class="form-row flex-col" data-page-node-id="6Q8lpSfQdaNuTOpLXTKIKg">
+          <span class="form-label mb-3" data-page-node-id="QlFfAdm5PMyxGVSPcynxu9">头像</span>
+          <div class="upload-row" data-page-node-id="QzbvE9HDo1DNvPdleRcBHV">
+            <div class="upload-thumb round w-20 h-20" onclick="pickFile('avatarFile')" data-page-node-id="Q38eVkpxx31tbtrEXnmGzi">
+              <img id="avatarImg" src="assets/avatars/default.svg" alt="" class="hidden" data-page-node-id="B4ipeeUrVxWY6OtiCzmcel">
+              <i id="avatarPlaceholder" class="fas fa-user placeholder" data-page-node-id="aMLFFwTojlS4APMCwTX9oO"></i>
+            </div>
+            <span class="upload-action" onclick="pickFile('avatarFile')" data-page-node-id="k5HvKDrnn5mqFQBGRha6gq">更换头像</span>
+            <input id="avatarFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this,'avatarImg','avatarPlaceholder')" data-page-node-id="x7XGN5dCGuMPUlF3d1eHK9">
+          </div>
+        </div>
+
+        <!-- 形象照 -->
+        <div class="form-row flex-col pb-5" data-page-node-id="MsmSUfBAhIjUHc4UyGNlWI">
+          <span class="form-label mb-3" data-page-node-id="6HICs2T6amLfke4Ja6IACG">形象照</span>
+          <div class="upload-row" data-page-node-id="zOnAgrUBFECHeIwYqWTlln">
+            <div class="upload-thumb rounded-lg w-[88px] h-[88px]" onclick="pickFile('photoFile')" data-page-node-id="9Cihkianmf1Ax6KWcQxQ4V">
+              <img id="photoImg" src="" alt="" class="hidden" data-page-node-id="YEJKYIED4OBHuAFY3zP9DE">
+              <i id="photoPlaceholder" class="fas fa-image placeholder" data-page-node-id="RPNNhELVbr0YrT0ExWKU4z"></i>
+            </div>
+            <span class="upload-action" onclick="pickFile('photoFile')" data-page-node-id="3VpArta9MRe1wxijE7dut7">更换形象照</span>
+            <input id="photoFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this,'photoImg','photoPlaceholder')" data-page-node-id="Ap5qDwDpNsuf1uatnSSoAH">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 底部留白，避免被保存栏遮挡 -->
+      <div class="h-20" data-page-node-id="2snk1CBkT40FPoh1Jj5iwl"></div>
+    </div>
+
+    <!-- 保存栏 -->
+    <div class="save-bar shrink-0" data-page-node-id="qHEsBXdHfAqbGDKnjhxa1a">
+      <button class="save-btn" onclick="saveProfile()" data-page-node-id="aq5whuAgUeDWmZlpSBpHML">保存</button>
+    </div>
+
+  </div>
+
+  <div id="toast" data-page-node-id="ovz97qv8iRSGCxhFDcjLNn">保存成功</div>
+
+  <script>
+    function goBack(){
+      if(document.referrer && document.referrer.indexOf(location.hostname)!==-1){ history.back(); return; }
+      location.href='G1-工作台.html';
+    }
+
+    var BRANDS=['雅诗兰黛','兰蔻','SK-II','海蓝之谜','迪奥'];
+    var brandCurrent='雅诗兰黛';
+    function renderBrandMenu(){
+      var menu=document.getElementById('brandMenu');
+      menu.innerHTML=BRANDS.map(function(b){
+        var on=(b===brandCurrent);
+        return '<div class="brand-item'+(on?' active':'')+'" onclick="selectBrand(\''+b+'\')"><span>'+escHtml(b)+'</span><i class="fas fa-check bi-check"></i></div>';
+      }).join('');
+    }
+    function toggleBrandMenu(){
+      var menu=document.getElementById('brandMenu');
+      var caret=document.getElementById('brandTrigger').querySelector('.brand-caret');
+      if(menu.classList.contains('hidden')){
+        renderBrandMenu();
+        menu.classList.remove('hidden');
+        if(caret) caret.style.transform='rotate(180deg)';
+      }else{
+        closeBrandMenu();
+      }
+    }
+    function closeBrandMenu(){
+      var menu=document.getElementById('brandMenu');
+      menu.classList.add('hidden');
+      var caret=document.getElementById('brandTrigger').querySelector('.brand-caret');
+      if(caret) caret.style.transform='';
+    }
+    function selectBrand(b){
+      brandCurrent=b;
+      document.getElementById('brandText').textContent=b;
+      closeBrandMenu();
+    }
+    document.addEventListener('click',function(e){
+      var trigger=document.getElementById('brandTrigger');
+      if(!trigger) return;
+      if(!trigger.parentElement.contains(e.target)) closeBrandMenu();
+    });
+
+    function pickFile(id){ document.getElementById(id).click(); }
+
+    function previewFile(input, imgId, placeholderId){
+      var file=input.files[0];
+      if(!file) return;
+      var reader=new FileReader();
+      reader.onload=function(e){
+        var img=document.getElementById(imgId);
+        var ph=document.getElementById(placeholderId);
+        img.src=e.target.result;
+        img.classList.remove('hidden');
+        ph.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function onTagKey(e){
+      if(e.key!=='Enter') return;
+      e.preventDefault();
+      var input=e.target;
+      var v=input.value.trim();
+      if(!v) return;
+      var box=document.getElementById('tagBox');
+      var chip=document.createElement('span');
+      chip.className='tag-chip';
+      chip.innerHTML=escHtml(v)+' <i class="fas fa-times" onclick="removeTag(this)"></i>';
+      box.insertBefore(chip,input);
+      input.value='';
+    }
+
+    function removeTag(el){ el.parentElement.remove(); }
+
+    function escHtml(s){
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function saveProfile(){
+      var toast=document.getElementById('toast');
+      toast.textContent='保存成功';
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); },1800);
+    }
+  </script>
+
+
+</body></html>
