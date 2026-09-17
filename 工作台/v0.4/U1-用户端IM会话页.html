@@ -328,8 +328,6 @@
 
     /* ---- 名片信息区（终端标识标签已按需求移除，仅保留名称行布局） ---- */
     .wx-card-head{display:flex;align-items:center;gap:6px}
-    .wx-qr-save{margin-top:6px;border:1px solid #a67c52;background:rgba(212,180,140,.12);color:#a67c52;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;max-width:96px;line-height:1.25}
-    .wx-qr-save:active{background:#ffece8}
 
 
 /* ===== U7 奢品顾问风格覆盖 ===== */
@@ -437,7 +435,7 @@
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'" data-page-node-id="npoLEGWDtBXXx6RPQeDSWN">
         <div class="max-w-[85%]" data-page-node-id="U1GuideMsgWrap">
           <div class="bg-white msg-bubble shadow-md px-3.5 py-3 border border-coral-100" data-page-node-id="U1GuideBubble">
-            <p class="text-sm text-gray-700 leading-relaxed" data-page-node-id="9zwgBz5fZzP4oTXPa0Xn5I">您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读<br><br>您咨询的这款「卡地亚 Ballon Bleu 蓝气球系列腕表 28毫米」我先帮您确认实时库存与活动价，稍等片刻～</p>
+            <p class="text-sm text-gray-700 leading-relaxed" data-page-node-id="9zwgBz5fZzP4oTXPa0Xn5I">您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读</p>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="U1GuideMsgTime">14:46</span>
         </div>
@@ -558,7 +556,6 @@
             <div class="wx-qr-wrap">
               <img src="assets/generated/qr_wx_advisor.png" class="wx-qr" alt="企业微信二维码" data-page-node-id="u1WxQrImgApp">
               <p class="wx-qr-hint" data-page-node-id="u1WxHintApp"><i class="fas fa-circle-info" data-page-node-id="u1WxHintAppIc"></i>保存图片后识别，添加顾问企业微信</p>
-              <button type="button" class="wx-qr-save" onclick="saveQrToAlbum()" data-page-node-id="u1WxSaveApp">保存到相册</button>
             </div>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="u1WxTimeApp">刚刚</span>
@@ -842,10 +839,6 @@
     }
 
     // ===== 企业微信名片：小程序端与 App 端各一张卡片，静态区分（无切换 tab） =====
-    function saveQrToAlbum() {
-      showToast('二维码已保存到相册，请打开微信「扫一扫」添加');
-    }
-
     // ===== 从商品详情进入 IM：自动发文案 + 顾问自动回复 + 非营业时间文案 =====
     function isOffHours(d) {
       var h = (d || new Date()).getHours();
@@ -863,8 +856,7 @@
         appendUserConsultCard(it);
       }, 400);
       setTimeout(function () {
-        appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读<br><br>您咨询的这款「' +
-          escHtml(it.name) + '」我先帮您确认实时库存与活动价，稍等片刻～');
+        appendGuideText('您好，我是您的奢品顾问林小婷～可以为您提供：<br>1.穿搭造型建议<br>2.节日礼品挑选<br>3.精选好物推荐<br>4.独家系列解读');
       }, 1500);
       if (isOffHours() || q.get('night') === '1') {
         setTimeout(function () {
