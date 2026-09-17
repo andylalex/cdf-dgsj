@@ -537,18 +537,6 @@
     </div>
   </div>
 
-  <!-- 支付成功弹窗 -->
-  <div id="paySuccessModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-8" data-page-node-id="U4PaySuccessModal">
-    <div class="bg-white rounded-2xl w-full max-w-[300px] p-5 text-center shadow-2xl" data-page-node-id="U4PaySuccessPanel">
-      <div class="w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center mx-auto mb-3" data-page-node-id="U4PaySuccessIcon">
-        <i class="fas fa-check text-xl" data-page-node-id="pC7FT8fZ3USqoyCjrVCRJi"></i>
-      </div>
-      <p class="text-[16px] font-semibold text-gray-800 mb-1" data-page-node-id="U4PaySuccessTitle">支付成功</p>
-      <p class="text-[13px] text-gray-500 leading-snug" data-page-node-id="U4PaySuccessDesc">订单已生成，可在订单中心查看</p>
-      <button onclick="goBackToChat()" class="mt-4 w-full bg-coral-500 text-white py-3 rounded-xl text-[15px] font-semibold active:scale-95 transition" data-page-node-id="U4PaySuccessBtn">返回会话</button>
-    </div>
-  </div>
-
   <script>
     function formatMoney(num) {
       return '¥' + num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -740,11 +728,7 @@
     function updatePayState() {}
 
     function payOrder() {
-      document.getElementById('paySuccessModal').classList.remove('hidden');
-    }
-
-    function goBackToChat() {
-      window.location.href = 'U1-用户端IM会话页.html';
+      window.location.href = 'U17-支付成功页.html';
     }
 
     function selectPickup(value) {
