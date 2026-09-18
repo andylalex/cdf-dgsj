@@ -298,6 +298,28 @@
     .like-pill.hd{padding:5px 10px;font-size:11px;gap:4px}
     .like-pill.hd .lf-ic{width:13px;height:13px}
 
+    /* ---- 点赞烟花动效（爱心四周迸发小烟花） ---- */
+    .like-spark-layer{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+    .like-spark{position:absolute;width:6px;height:6px;border-radius:50%;opacity:0;left:0;top:0;will-change:transform,opacity;animation:likeSparkFly .8s cubic-bezier(.16,.84,.44,1) forwards}
+    @keyframes likeSparkFly{
+      0%{opacity:0;transform:translate(-50%,-50%) scale(.25)}
+      15%{opacity:1;transform:translate(calc(-50% + var(--tx) * .28),calc(-50% + var(--ty) * .28)) scale(1.05)}
+      100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(var(--sc, .3))}
+    }
+    .like-spark.star{border-radius:0;clip-path:polygon(50% 0%,61% 35%,100% 50%,61% 65%,50% 100%,39% 65%,0% 50%,39% 35%)}
+    .like-spark-ring{position:absolute;width:14px;height:14px;border-radius:50%;border:2px solid rgba(226,202,160,.9);opacity:0;left:0;top:0;animation:likeSparkRing .66s ease-out forwards}
+    @keyframes likeSparkRing{
+      0%{opacity:.9;transform:translate(-50%,-50%) scale(.3)}
+      100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}
+    }
+    .like-pill.liked .lf-ic{animation:likeHeartPop .56s cubic-bezier(.2,1.5,.4,1)}
+    @keyframes likeHeartPop{
+      0%{transform:scale(1)}
+      32%{transform:scale(1.42)}
+      66%{transform:scale(.9)}
+      100%{transform:scale(1)}
+    }
+
     /* ---- 商品卡：门店发货 / 低库存（<3 件才显示库存） ---- */
     .pc-info-store{font-size:10px;color:#6b7280;display:inline-flex;align-items:center;gap:3px}
     .pc-info-store i{font-size:8px;color:#9ca3af}
@@ -958,7 +980,59 @@
     function toggleLike() {
       likeLiked = !likeLiked;
       renderLike();
+      if (likeLiked) burstLikeSparks();
       showToast(likeLiked ? '已点赞顾问' : '已取消点赞');
+    }
+
+    // 点赞：爱心四周迸发多个小烟花粒子 + 扩散光环
+    function burstLikeSparks() {
+      var btn = document.getElementById('U1LikeFab');
+      if (!btn) return;
+      var r = btn.getBoundingClientRect();
+      var cx = r.left + r.width / 2;
+      var cy = r.top + r.height / 2;
+      var layer = document.getElementById('likeSparkLayer');
+      if (!layer) {
+        layer = document.createElement('div');
+        layer.id = 'likeSparkLayer';
+        layer.className = 'like-spark-layer';
+        document.body.appendChild(layer);
+      }
+      var palette = ['#e2caa0', '#d8b98a', '#c9a06e', '#e8d3ab', '#f5e6c8', '#a67c52', '#ff8fa5'];
+      var count = 12;
+      for (var i = 0; i < count; i++) {
+        var p = document.createElement('span');
+        // 每 3 个里有 1 个是四角星，其余为圆点
+        p.className = 'like-spark' + (i % 3 === 0 ? ' star' : '');
+        var ang = (i / count) * Math.PI * 2 + (Math.random() * 0.5 - 0.25);
+        var dist = 24 + Math.random() * 22;
+        var size = (i % 3 === 0 ? 7 : 4) + Math.random() * 2.5;
+        p.style.left = cx + 'px';
+        p.style.top = cy + 'px';
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.background = palette[(i * 3 + Math.floor(Math.random() * 2)) % palette.length];
+        p.style.boxShadow = '0 0 6px rgba(226,202,160,.75)';
+        p.style.setProperty('--tx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+        p.style.setProperty('--ty', (Math.sin(ang) * dist).toFixed(1) + 'px');
+        p.style.setProperty('--sc', (0.2 + Math.random() * 0.35).toFixed(2));
+        p.style.animationDelay = (i % 4) * 0.035 + 's';
+        layer.appendChild(p);
+        (function (node) {
+          setTimeout(function () { if (node.parentNode) node.parentNode.removeChild(node); }, 950);
+        })(p);
+      }
+      // 扩散光环
+      var ring = document.createElement('span');
+      ring.className = 'like-spark-ring';
+      ring.style.left = cx + 'px';
+      ring.style.top = cy + 'px';
+      layer.appendChild(ring);
+      setTimeout(function () { if (ring.parentNode) ring.parentNode.removeChild(ring); }, 760);
+      // 粒子清空后移除容器
+      setTimeout(function () {
+        if (layer.parentNode && layer.childNodes.length === 0) layer.parentNode.removeChild(layer);
+      }, 1100);
     }
     function showToast(text) {
       var t = document.getElementById('toast');

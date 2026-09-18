@@ -12,11 +12,18 @@
 
     .phone-frame { position:relative; width:414px; max-width:100%; height:100dvh; margin:0 auto; background:#f5f6f8; overflow:hidden; display:flex; flex-direction:column; }
 
+    /* 系统状态栏 */
+    .status-bar { flex:0 0 auto; height:44px; padding:10px 16px 0; display:flex; align-items:center; justify-content:space-between; font-size:14px; font-weight:600; color:#1a1a1a; background:#fff; }
+    .status-bar .time { font-size:15px; letter-spacing:.5px; }
+    .status-bar .icons { display:flex; align-items:center; gap:5px; font-size:12px; }
+    .status-bar .icons i { font-size:13px; }
+    .status-bar .battery { width:22px; height:11px; border:1px solid #1a1a1a; border-radius:2px; position:relative; display:flex; align-items:center; padding:1px; }
+    .status-bar .battery::after { content:''; position:absolute; right:-3px; top:3px; width:2px; height:4px; background:#1a1a1a; border-radius:0 1px 1px 0; }
+    .status-bar .battery i { width:65%; height:100%; background:#1a1a1a; border-radius:1px; display:block; }
+
     /* 顶部栏 */
     .topbar { flex-shrink:0; height:52px; display:flex; align-items:center; justify-content:center; position:relative; background:#fff; border-bottom:1px solid #eef0f3; }
     .topbar-title { font-size:16px; font-weight:600; color:#1f2937; }
-    .topbar-close { position:absolute; right:12px; top:50%; transform:translateY(-50%); width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:16px; cursor:pointer; border:none; background:none; }
-    .topbar-close:active { color:#6b7280; }
 
     /* 主体 */
     .screen { flex:1 1 auto; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 28px; text-align:center; background:linear-gradient(180deg,#ffffff 0%,#fafbfc 100%); }
@@ -37,9 +44,17 @@
 </head>
 <body>
   <div class="phone-frame" data-page-node-id="U17Frame">
+    <div class="status-bar" data-page-node-id="U17StatusBar">
+      <span class="time" data-page-node-id="U17StatusTime">9:41</span>
+      <div class="icons" data-page-node-id="U17StatusIcons">
+        <i class="fas fa-signal" data-page-node-id="U17Signal"></i>
+        <i class="fas fa-wifi" data-page-node-id="U17Wifi"></i>
+        <div class="battery" data-page-node-id="U17Battery"><i></i></div>
+      </div>
+    </div>
+
     <div class="topbar" data-page-node-id="U17Topbar">
       <span class="topbar-title" data-page-node-id="U17TopTitle">支付成功</span>
-      <button class="topbar-close" onclick="location.href='U15-订单列表页.html'" data-page-node-id="U17Close" aria-label="关闭"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="screen" data-page-node-id="U17Screen">
