@@ -611,7 +611,7 @@
         <img src="assets/avatars/linxiaoting.svg" class="w-9 h-9 rounded-full bg-white shadow-sm shrink-0" alt="" onerror="this.onerror=null;this.src='assets/avatars/_default.svg'">
         <div class="max-w-[85%]" data-page-node-id="U1AutoReplyWrap">
           <div class="bg-white msg-bubble shadow-md px-3.5 py-3 border border-coral-100">
-            <p class="text-sm text-gray-700 leading-relaxed">您好，现在是非营业时间（每日 09:00–22:00），您的消息我已收到，顾问看到后会第一时间回复您，请您稍候，感谢理解～</p>
+            <p class="text-sm text-gray-700 leading-relaxed">您好，现在是非营业时间（每日 09:00–22:00营业），您的消息我看到后会第一时间回复您，请您稍候，感谢理解～</p>
           </div>
           <span class="text-[10px] text-gray-400 mt-1 ml-1" data-page-node-id="U1AutoReplyTime">刚刚</span>
         </div>
@@ -925,7 +925,7 @@
       }, 1500);
       if (isOffHours() || q.get('night') === '1') {
         setTimeout(function () {
-          appendGuideText('【非营业时间自动回复】您好，当前为非营业时间（顾问服务时间 每日 09:00-22:00），您的消息我已收到，顾问看到后会第一时间回复您。如有紧急需求可直接留言～');
+          appendGuideText('【非营业时间自动回复】您好，现在是非营业时间（每日 09:00–22:00营业），您的消息我看到后会第一时间回复您，请您稍候，感谢理解～');
         }, 2600);
       }
     }
