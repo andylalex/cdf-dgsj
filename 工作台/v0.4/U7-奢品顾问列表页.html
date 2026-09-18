@@ -460,6 +460,17 @@
     .adv-like-cover{position:absolute;right:7px;bottom:7px;display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);color:#8b7a5f;font-size:10px;font-weight:600;cursor:default;transition:background .18s,color .18s,border-color .18s;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,.12)}
     .adv-like-cover i{font-size:9px}
     .adv-like-cover.active{background:#fdecea;border-color:#f7cdc8;color:#E02E24}
+    /* 人气榜前三名：点赞徽章荣誉化（金银铜 + 排名序号 + 光晕） */
+    .adv-like-cover.rank-1{background:linear-gradient(135deg,#ffeab0 0%,#e8b64c 46%,#bd8a26 100%);border-color:rgba(255,255,255,.6);color:#fff;padding:4px 9px 4px 5px;box-shadow:0 2px 10px rgba(189,138,38,.55),inset 0 1px 0 rgba(255,255,255,.55)}
+    .adv-like-cover.rank-2{background:linear-gradient(135deg,#fafcff 0%,#ccd6e0 48%,#a4b0bd 100%);border-color:rgba(255,255,255,.6);color:#fff;padding:4px 9px 4px 5px;box-shadow:0 2px 8px rgba(140,152,166,.45),inset 0 1px 0 rgba(255,255,255,.6)}
+    .adv-like-cover.rank-3{background:linear-gradient(135deg,#f6d4ab 0%,#d0904f 48%,#a4662a 100%);border-color:rgba(255,255,255,.55);color:#fff;padding:4px 9px 4px 5px;box-shadow:0 2px 8px rgba(164,102,42,.45),inset 0 1px 0 rgba(255,255,255,.5)}
+    .adv-like-cover .like-rank{display:inline-flex;align-items:center;justify-content:center;min-width:12px;height:12px;border-radius:999px;background:rgba(255,255,255,.94);font-size:8px;font-weight:800;font-style:normal;line-height:1;flex:0 0 auto}
+    .adv-like-cover.rank-1 .like-rank{color:#8a6417}
+    .adv-like-cover.rank-2 .like-rank{color:#697585}
+    .adv-like-cover.rank-3 .like-rank{color:#8b5520}
+    .adv-like-cover.rank-1 i{font-size:10px;text-shadow:0 1px 2px rgba(120,86,15,.45)}
+    .adv-like-cover.rank-2 i{font-size:9.5px;text-shadow:0 1px 2px rgba(90,102,116,.4)}
+    .adv-like-cover.rank-3 i{font-size:9.5px;text-shadow:0 1px 2px rgba(110,66,22,.4)}
     .adv-body{padding:8px 0 0}
     .adv-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
     .adv-left{display:flex;align-items:center;gap:4px;min-width:0;overflow:hidden}
@@ -551,7 +562,7 @@
         var okStore = stateStore === '全部门店' || a.store === stateStore;
         var okBrand = stateBrand === '全部品牌' || a.brand === stateBrand;
         return okStore && okBrand;
-      });
+      }).sort(function (a, b) { return b.likes - a.likes; }); // 人气榜：点赞数由大到小
     }
 
     function renderAdvisors() {
@@ -562,10 +573,13 @@
       grid.innerHTML = list.map(function (a, i) {
         var idx = ADVISORS.indexOf(a);
         var isQr = !!a.qr;
+        var rankCls = i < 3 ? ' rank-' + (i + 1) : '';
         return '<div class="adv-card" onclick="' + (isQr ? 'openAdvisorQr(' + idx + ')' : 'openChat(' + idx + ')') + '" data-page-node-id="U7Adv' + idx + '">' +
           '<div class="adv-cover">' +
             '<img loading="lazy" src="' + a.img + '" alt="' + esc(a.name) + '" onerror="this.style.background=\'#e8e2d6\';this.removeAttribute(\'src\')">' +
-            '<span class="adv-like-cover" aria-label="点赞数" data-page-node-id="U7Like' + idx + '"><i class="fas fa-heart"></i><span>' + a.likes + '</span></span>' +
+            '<span class="adv-like-cover' + rankCls + '" aria-label="点赞数第' + (i + 1) + '名" data-page-node-id="U7Like' + idx + '">' +
+              (i < 3 ? '<b class="like-rank">' + (i + 1) + '</b>' : '') +
+              '<i class="fas fa-heart"></i><span>' + a.likes + '</span></span>' +
           '</div>' +
           '<div class="adv-body">' +
             '<div class="adv-row">' +
