@@ -57,7 +57,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
 /* 金牌奢品顾问（同 U9） */
 .guide-sec{background:#fdf9f4;border-radius:12px;margin:0 0 8px;padding:14px 0 15px}
-.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 12px 5px;font-size:15.5px;color:#26282c;font-weight:600;cursor:default}
 .guide-sec .gsub{display:flex;align-items:center;gap:5px;padding:0 12px 11px;font-size:12px;color:#a2907a;cursor:pointer}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
@@ -99,25 +99,10 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 .home-ind{flex:0 0 auto;background:#fff;padding:8px 0 9px;display:flex;justify-content:center}
 .home-ind span{width:120px;height:4px;border-radius:999px;background:#111;display:block}
 
-/* 奢品顾问服务说明弹窗 */
-.gsvc-mask{position:absolute;inset:0;background:rgba(17,17,17,.45);z-index:30;display:none;align-items:flex-end}
-.gsvc-mask.show{display:flex}
-.gsvc{background:#fff;border-radius:16px 16px 0 0;width:100%;padding:18px 16px calc(16px + env(safe-area-inset-bottom));animation:up .22s ease}
-@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
-.gsvc .x{position:absolute;right:14px;top:14px;border:0;background:transparent;color:#9aa1ab;font-size:17px;cursor:pointer;padding:4px}
-.gsvc .hd{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:#1b1d21;padding-right:40px}
-.gsvc .hd i{color:var(--gold)}
-.gsvc .sub{font-size:12px;color:#9aa1ab;margin-top:6px}
-.gsvc .it{display:flex;gap:12px;margin-top:14px;background:#fdf9f4;border:1px solid #f3e9dc;border-radius:12px;padding:13px}
-.gsvc .it .ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px}
-.gsvc .it .t{font-size:14.5px;font-weight:600;color:#1b1d21}
-.gsvc .it .d{font-size:12.5px;color:#6b7280;line-height:1.55;margin-top:4px}
-.gsvc .cta{width:100%;margin-top:16px;height:44px;border:0;border-radius:999px;background:linear-gradient(92deg,#c9a06d,#a87e4f);color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
-
 /* 同步自 U10 奢品顾问组件 */
 /* 金牌奢品顾问（同 U9） */
 .guide-sec{background:transparent;border-radius:0;margin:0;padding:0}
-.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 14px 7px;font-size:15.5px;color:#26282c;font-weight:600;cursor:pointer}
+.guide-sec .hd{display:flex;align-items:center;gap:8px;padding:0 14px 7px;font-size:15.5px;color:#26282c;font-weight:600;cursor:default}
 .guide-sec .hd .t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .guide-sec .hd .arr{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;background:#f3ece2;color:#a98a5c;font-size:11px;display:flex;align-items:center;justify-content:center}
 .guide-rail{display:flex;gap:9px;padding:0 12px;overflow-x:auto}
@@ -193,7 +178,7 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     <div class="gwrap">
   <!-- 奢品顾问服务条 -->
       <div class="guide-sec" data-page-node-id="GDzOL4z53J5WZmHcaaNeWH">
-        <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF" onclick="openGuideSvc()">
+        <div class="hd" data-page-node-id="fBgq1DFbgUU8kugwlwgNWF">
           <i class="fas fa-gem" style="color:var(--gold);font-size:15px" data-page-node-id="hGemU10"></i><span class="t" data-page-node-id="clD7R8V2MHZczkNJZwTlsD">PRADA奢品顾问</span>
         </div>
         <div class="glist">
@@ -327,37 +312,6 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
 
   <div class="home-ind" data-page-node-id="hbMugqZwtjGuVOuNgLqo39"><span data-page-node-id="4ZmUEo16C8CzeNplOsPpeY"></span></div>
 
-  <!-- 奢品顾问服务说明弹窗 -->
-  <div class="gsvc-mask" id="gsvcMask" onclick="closeGuideSvc(event)" data-page-node-id="7rhHF3v2QiBAQITXFrCpR3">
-    <div class="gsvc" onclick="event.stopPropagation()" data-page-node-id="oQ5gEHXmtYsH4LRISbuCxn">
-      <button class="x" aria-label="关闭" onclick="closeGuideSvc()" data-page-node-id="65hzsGCQN7wR59k2WkCMxM"><i class="fas fa-times" data-page-node-id="YINfUm2M0NhqYdwURHLPi9"></i></button>
-      <div class="hd" data-page-node-id="iA71Qhy1urRU9kLvOVvEKw"><i class="fas fa-user-tie" data-page-node-id="lZk6c9o0NMdRRFPi3WrL4s"></i>专业奢品顾问服务</div>
-      <div class="sub" data-page-node-id="YTJS2iOkX3kOEXlhiV80Vf">门店金牌奢品顾问专属服务，为您的每一次选购保驾护航</div>
-      <div class="it" data-page-node-id="ACsMeM6yDwAcPlkj8YEShX">
-        <div class="ic" data-page-node-id="97kxxJbAh5ESxUUbokv7tm"><i class="fas fa-headset" data-page-node-id="kUjTB9idTKW71d6TRMlRlc"></i></div>
-        <div data-page-node-id="kOJBtR1AXLXnJSTb8hBrzk">
-          <div class="t" data-page-node-id="xyyBrG3YFC6ddNBVNuPWt2">专业奢品顾问服务</div>
-          <div class="d" data-page-node-id="ubJaDpvVKDQcOXSs3vsQ4D">美妆行业资深奢品顾问在线服务,即时解答美妆相关问题并给出定制化专业指导。</div>
-        </div>
-      </div>
-      <div class="it" data-page-node-id="kRzNEwCOSovRw9GCIO5E7w">
-        <div class="ic" data-page-node-id="PRe8agF5lT1CAMDGcahHVf"><i class="fas fa-hands-helping" data-page-node-id="4PCGdkoGpuYLOeaW2jMYHp"></i></div>
-        <div data-page-node-id="BPhpknXjQNnvYPnZQCJIXF">
-          <div class="t" data-page-node-id="6GFDTYZFuaWYpCVBe2VtdH">商品选购手把手</div>
-          <div class="d" data-page-node-id="5NfCcuPLiTyCMTP0GoPFei">提供最详细全面的商品信息,并根据您的个人特质和使用需求给出合适的选购建议。</div>
-        </div>
-      </div>
-      <div class="it" data-page-node-id="oKA9vKRxZ2zHQSRSDs5aBX">
-        <div class="ic" data-page-node-id="I4CDsoTq7I3HF4VP9TN4y5"><i class="fas fa-bullhorn" data-page-node-id="kyE1LI1BGMQBkSs0PwhrkT"></i></div>
-        <div data-page-node-id="EMZ9mAtETPBsYoVVgCYxlK">
-          <div class="t" data-page-node-id="xcxZobGMWsbMr9cW1ReLhF">门店活动早知道</div>
-          <div class="d" data-page-node-id="A09FHVJAt91iRHcaJNSBUP">提前了解线下门店优惠活动信息,助您规划美妆购买最优攻略</div>
-        </div>
-      </div>
-      <button class="cta" onclick="location.href='U7-奢品顾问列表页.html'" data-page-node-id="FbGEKVSw0fKQLO2lvrCBdq">全部顾问</button>
-    </div>
-  </div>
-
 </div>
 
 <script>
@@ -396,12 +350,6 @@ body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-syste
     });
   }
 
-  // 奢品顾问服务说明弹窗
-  function openGuideSvc() { document.getElementById('gsvcMask').classList.add('show'); }
-  function closeGuideSvc(e) {
-    if (e && e.target && e.target.closest && e.target.closest('.gsvc') && e.type === 'click') return;
-    document.getElementById('gsvcMask').classList.remove('show');
-  }
 </script>
 </body>
 </html>
