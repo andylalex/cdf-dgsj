@@ -314,6 +314,31 @@
     .ck-amt { font-size:15px; font-weight:700; color:#e64e39; margin-top:2px; }
     .ck-go { flex:0 0 auto; padding:9px 16px; border-radius:999px; background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39); color:#fff; font-size:13.5px; font-weight:600; border:none; white-space:nowrap; box-shadow:0 6px 16px rgba(255,107,82,.28); }
     .ck-go:active { transform:scale(.97); }
+
+    /* ===== 政府消费券领取弹窗（点分组卡右上角「领取政府消费券」弹出，列出可领券） ===== */
+    .cp-mask { position:fixed; inset:0; z-index:86; display:flex; align-items:flex-end; justify-content:center; background:rgba(0,0,0,.45); }
+    .cp-mask.hidden { display:none; }
+    .cp-sheet { width:100%; max-width:414px; background:#fff; border-radius:20px 20px 0 0; padding:16px 20px 20px; box-shadow:0 -12px 40px rgba(0,0,0,.14); animation:ckUp .24s ease; }
+    .cp-head { display:flex; align-items:center; justify-content:space-between; }
+    .cp-title { font-size:16px; font-weight:600; color:#1f2937; }
+    .cp-close { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#9aa0a6; background:#f4f4f6; border:none; }
+    .cp-list { margin-top:14px; max-height:58vh; overflow-y:auto; display:flex; flex-direction:column; gap:12px; }
+    .coupon { display:flex; border-radius:14px; overflow:hidden; background:#fff; border:1px solid #ffe0d8; box-shadow:0 4px 14px rgba(230,78,57,.08); }
+    .coupon-l { flex:0 0 92px; background:linear-gradient(160deg,#ff7a63,#e64e39); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px 6px; }
+    .coupon-l .amt { font-size:22px; font-weight:800; line-height:1; }
+    .coupon-l .amt small { font-size:12px; font-weight:600; margin-right:1px; }
+    .coupon-l .cond { font-size:10px; margin-top:7px; opacity:.94; text-align:center; line-height:1.3; }
+    .coupon-r { flex:1 1 auto; min-width:0; padding:11px 12px; display:flex; flex-direction:column; }
+    .coupon-t { font-size:13.5px; font-weight:700; color:#1f2937; line-height:1.3; }
+    .coupon-line { font-size:11px; color:#8b8f95; margin-top:5px; line-height:1.45; }
+    .coupon-foot { margin-top:auto; padding-top:9px; display:flex; align-items:flex-end; gap:10px; }
+    .coupon-left { flex:1 1 auto; min-width:0; }
+    .coupon-bar { height:5px; border-radius:3px; background:#ffe6e0; overflow:hidden; }
+    .coupon-bar i { display:block; height:100%; background:linear-gradient(90deg,#ff8a75,#e64e39); }
+    .coupon-lefttxt { font-size:10px; color:#e64e39; margin-top:4px; }
+    .coupon-btn { flex:0 0 auto; padding:7px 16px; border-radius:999px; border:none; background:linear-gradient(135deg,#ff8a75,#ff6b52,#e64e39); color:#fff; font-size:12.5px; font-weight:600; box-shadow:0 5px 14px rgba(255,107,82,.3); white-space:nowrap; }
+    .coupon-btn:active { transform:scale(.97); }
+    .coupon-btn.done { background:#eef0f3; color:#9aa0a6; box-shadow:none; }
 </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body class="bg-gray-200" data-page-node-id="U6Body" style="">
@@ -378,6 +403,17 @@
       </div>
       <p class="ck-sub" data-page-node-id="U6CkSub">门店商品需按门店分别结算，请选择本次结算的门店</p>
       <div id="ckStoreList" class="ck-list" data-page-node-id="U6CkList"></div>
+    </div>
+  </div>
+
+  <!-- 政府消费券领取弹窗：点分组卡右上角「领取政府消费券」弹出，列出可领券 -->
+  <div id="couponMask" class="cp-mask hidden" onclick="closeCouponSheet()" data-page-node-id="U6CpMask">
+    <div class="cp-sheet" onclick="event.stopPropagation()" data-page-node-id="U6CpSheet">
+      <div class="cp-head">
+        <p class="cp-title" data-page-node-id="U6CpTitle">选择政府消费券</p>
+        <button type="button" class="cp-close" onclick="closeCouponSheet()" aria-label="关闭" data-page-node-id="U6CpClose"><i class="fas fa-times" data-page-node-id="U6CpCloseIcon"></i></button>
+      </div>
+      <div id="couponList" class="cp-list" data-page-node-id="U6CpList"></div>
     </div>
   </div>
 
@@ -511,7 +547,7 @@
             '<p class="text-[15px] font-semibold text-gray-800">' + meta.title + '</p>' +
             (meta.sub ? '<p class="text-[11px] text-gray-400 mt-0.5">' + meta.sub + '</p>' : '') +
           '</div>' +
-          '<button type="button" class="store-coupon-btn" data-store="' + source + '" onclick="claimStoreCoupon(\'' + source + '\', this)">领取政府消费券</button>' +
+          '<button type="button" class="store-coupon-btn" data-store="' + source + '" onclick="openCouponSheet(\'' + source + '\')">领取政府消费券</button>' +
         '</div>' +
         '<div class="group-items space-y-3">' + rows + '</div>' +
       '</div>';
@@ -653,11 +689,63 @@
       setTimeout(function () { el.classList.add('hidden'); }, 1600);
     }
 
-    // 门店各自的政府消费券领取按钮（分组卡右上角，点后按钮自身置为「已领取」）
-    function claimStoreCoupon(store, btn) {
-      if (btn && btn.classList.contains('claimed')) return;
+    // ===== 政府消费券（分组卡右上角「领取政府消费券」→ 弹窗选择券 → 领取） =====
+    var GOV_COUPONS = {
+      sanya: [
+        { city: '三亚', amount: 1650, threshold: 20000, stores: 'cdf三亚国际免税城、cdf中免海南商城-离岛免税频道', valid: '2026.09.17-2026.09.19', left: 51, soldout: false },
+        { city: '三亚', amount: 300, threshold: 3000, stores: 'cdf三亚国际免税城', valid: '2026.09.17-2026.09.19', left: 0, soldout: true }
+      ],
+      haikou: [
+        { city: '海口', amount: 1000, threshold: 12000, stores: 'cdf海口国际免税城、cdf中免海南商城-离岛免税频道', valid: '2026.09.17-2026.09.19', left: 68, soldout: false },
+        { city: '海口', amount: 200, threshold: 2000, stores: 'cdf海口国际免税城', valid: '2026.09.17-2026.09.19', left: 0, soldout: true }
+      ]
+    };
+
+    function openCouponSheet(store) {
+      var list = (store === '三亚国际免税城') ? GOV_COUPONS.sanya : GOV_COUPONS.haikou;
+      var box = document.getElementById('couponList');
+      if (!box) return;
+      box.setAttribute('data-store', store);
+      box.innerHTML = list.map(function (c, i) {
+        var leftPct = c.soldout ? 0 : c.left;
+        var btn = c.soldout
+          ? '<button type="button" class="coupon-btn done" disabled>已领完</button>'
+          : '<button type="button" class="coupon-btn" onclick="claimCoupon(' + i + ')">立即领取</button>';
+        return '<div class="coupon">' +
+            '<div class="coupon-l">' +
+              '<span class="amt"><small>¥</small>' + c.amount + '</span>' +
+              '<span class="cond">满' + c.threshold + '元可用</span>' +
+            '</div>' +
+            '<div class="coupon-r">' +
+              '<p class="coupon-t">' + c.city + '政府消费券' + c.amount + '元</p>' +
+              '<p class="coupon-line">适用门店: ' + c.stores + '</p>' +
+              '<p class="coupon-line">有效期: ' + c.valid + '</p>' +
+              '<div class="coupon-foot">' +
+                '<div class="coupon-left">' +
+                  '<div class="coupon-bar"><i style="width:' + leftPct + '%"></i></div>' +
+                  '<p class="coupon-lefttxt">剩余' + leftPct + '%</p>' +
+                '</div>' +
+                btn +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      }).join('');
+      document.getElementById('couponMask').classList.remove('hidden');
+    }
+
+    function closeCouponSheet() {
+      var el = document.getElementById('couponMask');
+      if (el) el.classList.add('hidden');
+    }
+
+    // 领取券 → 关闭弹窗 + 分组卡右上角按钮置为「已领取」
+    function claimCoupon(i) {
+      var box = document.getElementById('couponList');
+      var store = box ? box.getAttribute('data-store') : '';
+      var btn = document.querySelector('.store-coupon-btn[data-store="' + store + '"]');
       if (btn) { btn.classList.add('claimed'); btn.textContent = '已领取'; }
-      showToast('已领取「' + store + '」政府消费券');
+      closeCouponSheet();
+      showToast('政府消费券领取成功，可在结算时使用');
     }
 
     // ===== 商品图片画廊（点击商品图片弹出；底部页码 + 左右箭头置于页码前后；图片裁切遮挡 15%） =====
