@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-page-node-id="U4PageRoot" data-dm-ref="1"><head data-page-node-id="U4Head">
+  <meta charset="UTF-8" data-page-node-id="U4MetaCharset">
   <link rel="stylesheet" href="assets/font-awesome/all-embedded.css" data-page-node-id="7mhPnqPNGgSX47JIvYLmua">
   <style>
 
@@ -283,6 +284,30 @@
     .opt-name { display:block; font-size:13.5px; font-weight:500; color:#1f2937; line-height:1.3; }
     .opt-desc { display:block; font-size:11px; color:#9ca3af; margin-top:3px; line-height:1.35; }
     .opt-row-val { flex:0 0 auto; margin-left:auto; font-size:13px; font-weight:700; color:#ff6b52; padding-top:1px; }
+
+    /* ===== 我的行程弹窗（点击行程信息卡片展开） ===== */
+    .trip-open { cursor:pointer; transition:background .15s ease; }
+    .trip-open:active { background:#f7f8fa; }
+    .trip-tab { position:relative; font-size:15px; font-weight:600; color:#9ca3af; padding-bottom:7px; background:none; border:none; transition:color .15s ease; }
+    .trip-tab.active { color:#1a1a1a; }
+    .trip-tab.active::after { content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:26px; height:2px; border-radius:2px; background:#1a1a1a; }
+    .trip-quota-box { flex:1 1 0; min-width:0; border-radius:10px; padding:14px 8px; text-align:center; }
+    .trip-quota-box.used { background:#ececee; }
+    .trip-quota-box.used .trip-quota-num { color:#bcbcc0; }
+    .trip-quota-box.used .trip-quota-lab { color:#bcbcc0; }
+    .trip-quota-box.left { background:#17171a; }
+    .trip-quota-box.left .trip-quota-num { color:#ffffff; }
+    .trip-quota-box.left .trip-quota-lab { color:#ffffff; }
+    .trip-quota-num { display:block; font-size:22px; font-weight:700; line-height:1.15; letter-spacing:-.5px; }
+    .trip-quota-lab { display:block; font-size:11px; margin-top:4px; }
+    .trip-tips-body .trip-tip-h:first-child { margin-top:0; }
+    .trip-tip-h { font-size:13px; font-weight:600; color:#1f2937; margin-top:12px; }
+    .trip-tip-p { font-size:12.5px; color:#4b5563; line-height:1.75; margin-top:5px; }
+    .trip-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 2px; border-bottom:1px solid #f3f4f6; }
+    .trip-row:last-child { border-bottom:none; }
+    .trip-lab { font-size:13px; color:#9ca3af; flex:0 0 auto; }
+    .trip-val { font-size:13px; font-weight:500; color:#1f2937; text-align:right; }
+    .trip-edit-btn { display:block; text-align:center; margin-top:14px; padding:11px 0; border-radius:999px; border:1px solid #ffd0c9; background:#fff5f3; color:#e02e24; font-size:13.5px; font-weight:600; }
   </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
 <body class="bg-gray-200" data-page-node-id="U4Body" style="">
@@ -315,13 +340,13 @@
     <div id="content" class="flex-1 min-h-0 overflow-y-auto hide-scrollbar p-4 space-y-3 pb-24" data-page-node-id="U4Content">
 
       <!-- 行程核验入口（与 U6 意向单页同一套样式 · 静态数据） -->
-      <div id="tripCard" class="bg-white rounded-2xl p-3 shadow-sm" data-page-node-id="U4Verify">
+      <div id="tripCard" class="trip-open bg-white rounded-2xl p-3 shadow-sm" onclick="openTripModal()" data-page-node-id="U4Verify">
         <div class="flex items-start gap-2.5">
           <div class="w-8 h-8 rounded-full bg-coral-50 text-coral-500 flex items-center justify-center shrink-0"><i class="fas fa-plane-departure text-[14px]"></i></div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between gap-2">
               <p class="text-[13px] font-semibold text-gray-800">行程信息</p>
-              <a href="U5-行程核验页.html?from=U4" class="text-gray-400 text-[15px] shrink-0"><i class="fas fa-chevron-right"></i></a>
+              <a href="U5-行程核验页.html?from=U4" onclick="event.stopPropagation()" class="text-gray-400 text-[15px] shrink-0" data-page-node-id="U4TripMore"><i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="mt-1 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
               <div class="flex items-center gap-1.5 min-w-0"><span class="text-gray-400 shrink-0">姓名</span><span class="text-gray-700 font-medium truncate">张女士</span></div>
@@ -413,7 +438,7 @@
               <span class="text-[13px] text-gray-800" data-page-node-id="U4InvoiceLabel">发票</span>
             </div>
             <span class="opt-far opt-far-gray" data-page-node-id="U4InvoiceWrap">
-              <span id="U4InvoiceValue" data-page-node-id="U4InvoiceValue">电子发票</span>
+              <span id="U4InvoiceValue" data-page-node-id="U4InvoiceValue">不开发票</span>
               <i class="fas fa-chevron-right opt-chev" data-page-node-id="U4InvoiceChev"></i>
             </span>
           </div>
@@ -537,6 +562,84 @@
     </div>
   </div>
 
+  <!-- 我的行程弹窗（点击行程信息卡片展开） -->
+  <div id="tripModal" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/60" onclick="closeTripModal()" data-page-node-id="U4TripModal">
+    <div class="w-full max-w-[414px] bg-[#f2f3f5] rounded-t-2xl overflow-hidden flex flex-col" style="max-height:88vh;" onclick="event.stopPropagation()" data-page-node-id="U4TripPanel">
+      <div class="bg-white flex items-center justify-center px-4 py-3 relative shrink-0 border-b border-gray-100" data-page-node-id="U4TripHead">
+        <span class="text-[16px] font-semibold text-gray-800" data-page-node-id="U4TripTitle">我的行程</span>
+        <button type="button" onclick="closeTripModal()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-gray-400" data-page-node-id="U4TripClose"><i class="fas fa-xmark text-[16px]" data-page-node-id="U4TripCloseIc"></i></button>
+      </div>
+      <div class="overflow-y-auto hide-scrollbar p-3" style="flex:1 1 auto;min-height:0;" data-page-node-id="U4TripBody">
+
+        <div class="bg-white rounded-xl p-4" data-page-node-id="U4TripCard">
+          <div class="flex items-center justify-center gap-12 mb-3" data-page-node-id="U4TripTabs">
+            <button type="button" id="tripTabPerson" onclick="switchTripTab('person')" class="trip-tab" data-page-node-id="U4TripTabPerson">提货人及行程</button>
+            <button type="button" id="tripTabQuota" onclick="switchTripTab('quota')" class="trip-tab active" data-page-node-id="U4TripTabQuota">额度查询</button>
+          </div>
+
+          <div id="tripPaneQuota" data-page-node-id="U4TripPaneQuota">
+            <p class="text-center text-[14px] font-semibold text-gray-800" data-page-node-id="U4TripQuotaTitle">离岛免税消费额度查询结果</p>
+            <p class="text-center text-[11px] text-gray-400 mt-1.5" id="tripQuotaRange" data-page-node-id="U4TripQuotaRange">自 2026-01-01 00:00 起至 2026-09-18 09:42:14</p>
+            <div class="flex gap-3 mt-3" data-page-node-id="U4TripQuotaCards">
+              <div class="trip-quota-box used" data-page-node-id="U4TripQuotaUsed">
+                <span class="trip-quota-num">¥399</span>
+                <span class="trip-quota-lab">已使用免税额度</span>
+              </div>
+              <div class="trip-quota-box left" data-page-node-id="U4TripQuotaLeft">
+                <span class="trip-quota-num">¥999601</span>
+                <span class="trip-quota-lab">剩余免税额度</span>
+              </div>
+            </div>
+
+            <p class="text-center text-[14px] font-semibold text-gray-800 mt-5" data-page-node-id="U4TripLimitTitle">离岛免税限购查询结果</p>
+            <div class="mt-3 rounded-lg overflow-hidden border border-gray-200" data-page-node-id="U4TripLimitTable">
+              <div class="flex bg-gray-50 text-[12px] text-gray-500 font-medium" data-page-node-id="U4TripLimitHead">
+                <span class="flex-1 text-center py-2.5" data-page-node-id="U4TripLimitH1">商品品种</span>
+                <span class="flex-1 text-center py-2.5" data-page-node-id="U4TripLimitH2">每人每次离岛限购数</span>
+                <span class="flex-1 text-center py-2.5" data-page-node-id="U4TripLimitH3">剩余可购买数</span>
+              </div>
+              <div class="flex bg-white text-[13px] text-gray-800" style="border-top:1px solid #f3f4f6;" data-page-node-id="U4TripLimitRow1">
+                <span class="flex-1 text-center py-3 font-medium" data-page-node-id="U4TripLimitR1a">手机</span>
+                <span class="flex-1 text-center py-3" data-page-node-id="U4TripLimitR1b">12件</span>
+                <span class="flex-1 text-center py-3" data-page-node-id="U4TripLimitR1c">11件</span>
+              </div>
+              <div class="flex bg-white text-[13px] text-gray-800" style="border-top:1px solid #f3f4f6;" data-page-node-id="U4TripLimitRow2">
+                <span class="flex-1 text-center py-3 font-medium" data-page-node-id="U4TripLimitR2a">化妆品</span>
+                <span class="flex-1 text-center py-3" data-page-node-id="U4TripLimitR2b">1000件</span>
+                <span class="flex-1 text-center py-3" data-page-node-id="U4TripLimitR2c">1000件</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="tripPanePerson" class="hidden" data-page-node-id="U4TripPanePerson">
+            <div data-page-node-id="U4TripPersonList">
+              <div class="trip-row" data-page-node-id="U4TripP1"><span class="trip-lab">提货人</span><span class="trip-val">张女士</span></div>
+              <div class="trip-row" data-page-node-id="U4TripP2"><span class="trip-lab">身份证</span><span class="trip-val">460100**********0023</span></div>
+              <div class="trip-row" data-page-node-id="U4TripP3"><span class="trip-lab">航班号</span><span class="trip-val">HU7301</span></div>
+              <div class="trip-row" data-page-node-id="U4TripP4"><span class="trip-lab">离岛时间</span><span class="trip-val">2026-09-10 14:30</span></div>
+              <div class="trip-row" data-page-node-id="U4TripP5"><span class="trip-lab">手机号</span><span class="trip-val">138****6688</span></div>
+            </div>
+            <a href="U5-行程核验页.html?from=U4" class="trip-edit-btn" data-page-node-id="U4TripEdit">修改行程信息</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-4 mt-3" data-page-node-id="U4TripTips">
+          <p class="text-center text-[14px] font-semibold text-gray-800" data-page-node-id="U4TripTipsTitle">温馨提示</p>
+          <div class="h-px bg-gray-100 my-3" data-page-node-id="U4TripTipsDivider"></div>
+          <div class="trip-tips-body" data-page-node-id="U4TripTipsBody">
+            <p class="trip-tip-h" data-page-node-id="U4TripTip1H">1、购物次数</p>
+            <p class="trip-tip-p" data-page-node-id="U4TripTip1P">离岛旅客不限购物次数。</p>
+            <p class="trip-tip-h" data-page-node-id="U4TripTip2H">2、限购额度</p>
+            <p class="trip-tip-p" data-page-node-id="U4TripTip2P">离岛旅客每年每人免税购物额度为10万元人民币，不限次数，此外，单价10万元以上的商品，每年每次不限购买数量，并在扣减未使用的免税额度后缴纳进境物品进口税，最高扣减免税额度为10万元。</p>
+            <p class="trip-tip-p" data-page-node-id="U4TripTip2Ps">（PS.同一旅客在同一年度内乘飞机、火车和轮船免税购物金额合计计算）</p>
+            <p class="trip-tip-h" data-page-node-id="U4TripTip3H">3、限购数量</p>
+            <p class="trip-tip-p" data-page-node-id="U4TripTip3P">单次限购数量：化妆品30件，手机4件，酒类1500ml，其他品类不限件数。超出免税限量的部分，照章征收进境物品进口税。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     function formatMoney(num) {
       return '¥' + num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -577,7 +680,7 @@
         ]
       }
     };
-    const optState = { invoice: 0, coupon: 0, gov: 0, points: 2 };
+    const optState = { invoice: 2, coupon: 0, gov: 0, points: 2 };
     let optType = '';
 
     function optVal(type) {
@@ -809,10 +912,39 @@
       closeTimeModal();
     }
 
+    /* ---------- 我的行程弹窗（点击行程信息卡片展开） ---------- */
+    function openTripModal() {
+      renderTripRange();
+      document.getElementById('tripModal').classList.remove('hidden');
+    }
+
+    function closeTripModal() {
+      document.getElementById('tripModal').classList.add('hidden');
+    }
+
+    function switchTripTab(name) {
+      document.getElementById('tripPaneQuota').classList.toggle('hidden', name !== 'quota');
+      document.getElementById('tripPanePerson').classList.toggle('hidden', name !== 'person');
+      document.getElementById('tripTabQuota').classList.toggle('active', name === 'quota');
+      document.getElementById('tripTabPerson').classList.toggle('active', name === 'person');
+    }
+
+    // 额度查询时间区间：自当年 01-01 00:00 起 至 当前时刻
+    function renderTripRange() {
+      const el = document.getElementById('tripQuotaRange');
+      if (!el) return;
+      const d = new Date();
+      const p = n => ('0' + n).slice(-2);
+      const end = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' +
+                  p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+      el.textContent = '自 ' + d.getFullYear() + '-01-01 00:00 起至 ' + end;
+    }
+
     window.addEventListener('DOMContentLoaded', function() {
       selectPickup('island');
       syncOptRows();
       render();
+      renderTripRange();
     });
   </script>
 
